@@ -17,4 +17,4 @@ def user_credentials(name, authentication_status, username):
         rows = [dict(row) for row in rows_raw]
         return rows
     rows = run_query(f"SELECT * FROM `company-data-driven.global.projects` LIMIT 10")
-    st.write(rows)
+    st.table(rows)
