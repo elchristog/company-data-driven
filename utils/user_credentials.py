@@ -16,5 +16,5 @@ def user_credentials(name, authentication_status, username):
         rows_raw = query_job.result()
         rows = [dict(row) for row in rows_raw]
         return rows
-    rows = run_query(f"SELECT * FROM `company-data-driven.global.projects` LIMIT 10")
+    rows = run_query(f"SELECT u.id AS user_id, u.username, u.status, u.project_id, r.id AS role_id, r.name AS role_name   FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.roles` AS r ON ra.role_id = r.id WHERE username = '{username}';")
     st.table(rows)
