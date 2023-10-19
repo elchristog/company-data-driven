@@ -1,0 +1,17 @@
+credentials:
+  usernames:
+    cdgonzalezr:
+      email: elchristog@gmail.com
+      name: Christian Gonzalez
+      password: $2b$12$4AWFIxVL40AYHNdxrEbUQ.bvqTqbJV0tLLtY4myqWTklf4fhNKSZa
+    amartinezcu:
+      email: jeimy855@gmail.com
+      name: Alejandra Martinez
+      password: $2b$12$4AWFIxVL40AYHNdxrEbUQ.bvqTqbJV0tLLtY4myqWTklf4fhNKSZa
+cookie:
+  expiry_days: 30
+  key: some_signature_key # Must be string
+  name: some_cookie_name
+preauthorized:
+  emails:
+  - melsby@gmail.com
