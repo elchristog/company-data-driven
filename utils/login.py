@@ -19,7 +19,6 @@ def login():
     
         if st.session_state["authentication_status"]:
             # st.write(f'# {st.secrets["PROJECT_NAME"]} {st.secrets["PROJECT_ICON"]}')
-            st.markdown(""" ### Your tasks """)
             st.write("---") 
             authenticator.logout('Logout', 'main')
         elif st.session_state["authentication_status"] is False:
