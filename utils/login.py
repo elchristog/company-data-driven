@@ -3,7 +3,7 @@ import streamlit_authenticator as stauth
 import yaml
 
 from yaml.loader import SafeLoader
-
+import utils.user_credentials as uc
 
 def login():
     with open('config.yaml') as file:
@@ -18,7 +18,7 @@ def login():
         name, authentication_status, username = authenticator.login('Login', 'main')
     
         if st.session_state["authentication_status"]:
-            user_credentials(name, authentication_status, username)
+            uc.user_credentials(name, authentication_status, username)
             st.write("---") 
             authenticator.logout('Logout', 'main')
         elif st.session_state["authentication_status"] is False:
