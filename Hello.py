@@ -8,8 +8,7 @@ def run():
     st.set_page_config(page_title="Company data driven", page_icon="💺", layout="centered", initial_sidebar_state="expanded")
 
     with st.sidebar:
-      # Create a menu
-      st.image("cell-tower.png", width=100, use_column_width=False)
+      # st.image("cell-tower.png", width=100, use_column_width=False)
       menu = st.sidebar.radio("Menu", ["Home", "Proyectos NO rentables", "Proyectos rentables", "Oportunidades"])
       st.write("---") 
 
