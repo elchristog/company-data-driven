@@ -21,7 +21,7 @@ def login():
             # st.write(f'# {st.secrets["PROJECT_NAME"]} {st.secrets["PROJECT_ICON"]}')
             st.markdown(""" ### Your tasks """)
             st.write("---") 
-            authenticator.logout('Logout', 'main', key='unique_key')
+            authenticator.logout('Logout', 'main')
         elif st.session_state["authentication_status"] is False:
             st.error('Username/password is incorrect')
         elif st.session_state["authentication_status"] is None:
