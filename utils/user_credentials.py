@@ -17,6 +17,35 @@ def user_credentials(name, authentication_status, username):
         rows = [dict(row) for row in rows_raw]
         return rows
     rows = run_query(f"SELECT u.id AS user_id, u.username, u.status, u.project_id, r.id AS role_id, r.name AS role_name   FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.roles` AS r ON ra.role_id = r.id WHERE username = '{username}';")
+
+    if len(rows) == 1:
+        user_id = rows[0].get('user_id')
+        status = rows[0].get('status')
+        project_id = rows[0].get('project_id')
+        role_id = rows[0].get('role_id')
+        role_name = rows[0].get('role_name')
+    else:
+        user_id = rows[0].get('user_id')
+        status = rows[0].get('status')
+        project_id = rows[0].get('project_id')
+
+        user_ids = []
+        statuses = []
+        project_ids = []
+        role_id = []
+        role_name = []
+
+        for row in rows:
+                user_ids.append(row.get('user_id'))
+                statuses.append(row.get('status'))
+                project_ids.append(row.get('project_id'))
+                role_id.append(row.get('role_id'))
+                role_name.append(row.get('role_name'))
+
     st.table(rows)
 
-    # esta activo el man y si esta mas de una vez chequeo que este en un solo proyecto y tarer todos sus roles
+
+
+
+
+        
