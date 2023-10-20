@@ -7,7 +7,7 @@ def architect(user_id, role_id):
         # st.set_page_config(page_title="Company data driven", page_icon="💺", layout="centered", initial_sidebar_state="expanded")
 
         with st.sidebar:
-            st.image("http://enfermeraenestadosunidos.com/wp-content/uploads/2023/08/enfermera_en_estados_unidos_logo_rn.webp", width=100, use_column_width=False)
+            st.image("http://enfermeraenestadosunidos.com/wp-content/uploads/2023/08/enfermera_en_estados_unidos_logo_rn.webp", width=50, use_column_width=False)
             menu = st.sidebar.radio("Enfermera en estados unidos", ["Home", "Proyectos NO rentables", "Proyectos rentables", "Oportunidades"])
             st.write("---") 
 
