@@ -42,10 +42,25 @@ def user_credentials(name, authentication_status, username):
                 role_id.append(row.get('role_id'))
                 role_name.append(row.get('role_name'))
     st.write(status)
-    if status != 'inactive':
+    if status != 'active':
             st.error('User is inactive')
     else:
         st.table(rows)
+        if all(element == user_ids[0] for element in user_ids):
+             pass
+        else:
+            st.error('User has multiple ids')
+
+        if all(element == statuses[0] for element in statuses):
+             pass
+        else:
+            st.error('User has multiple status')
+
+        if all(element == project_ids[0] for element in project_ids):
+             pass
+        else:
+            st.error('User has multiple projects')
+             
         # project_handler(user_id, status, project_id, role_id, role_name)
 
 
