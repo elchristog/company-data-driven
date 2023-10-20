@@ -8,7 +8,7 @@ def architect(user_id, role_id):
 
         with st.sidebar:
             # st.image("cell-tower.png", width=100, use_column_width=False)
-            menu = st.sidebar.radio("Menu", ["Home", "Proyectos NO rentables", "Proyectos rentables", "Oportunidades"])
+            menu = st.sidebar.radio("Enfermera en estados unidos", ["Home", "Proyectos NO rentables", "Proyectos rentables", "Oportunidades"])
             st.write("---") 
 
         # Display the selected page
