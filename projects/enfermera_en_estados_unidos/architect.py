@@ -4,7 +4,7 @@ def architect(user_id, role_id):
     # admin
     if role_id == 1:
             
-        st.set_page_config(page_title="Company data driven", page_icon="💺", layout="centered", initial_sidebar_state="expanded")
+        # st.set_page_config(page_title="Company data driven", page_icon="💺", layout="centered", initial_sidebar_state="expanded")
 
         with st.sidebar:
             # st.image("cell-tower.png", width=100, use_column_width=False)
