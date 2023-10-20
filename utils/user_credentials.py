@@ -42,7 +42,11 @@ def user_credentials(name, authentication_status, username):
                 role_id.append(row.get('role_id'))
                 role_name.append(row.get('role_name'))
 
-    st.table(rows)
+        if status != 'active':
+             st.error('User is inactive')
+        else:
+            st.table(rows)
+            # project_handler(user_id, status, project_id, role_id, role_name)
 
 
 
