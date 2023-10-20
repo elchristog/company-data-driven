@@ -41,7 +41,7 @@ def user_credentials(name, authentication_status, username):
                 project_ids.append(row.get('project_id'))
                 role_id.append(row.get('role_id'))
                 role_name.append(row.get('role_name'))
-
+        st.write(status)
         if status != 'active':
              st.error('User is inactive')
         else:
