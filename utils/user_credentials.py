@@ -1,5 +1,7 @@
 import streamlit as st
 
+import utils.project_handler as ph
+
 from google.oauth2 import service_account
 from google.cloud import bigquery
 
@@ -61,8 +63,7 @@ def user_credentials(name, authentication_status, username):
             else:
                 st.error('User has multiple projects')
              
-        # project_handler(user_id, status, project_id, role_id, role_name)
-        # st.write(status)
+        ph.project_handler(user_id, status, project_id, role_id, role_name)
 
 
 
