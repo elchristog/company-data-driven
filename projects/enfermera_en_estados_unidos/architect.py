@@ -9,7 +9,6 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             st.write("---") 
 
         if menu == "Home":
-            st.write("---") 
             st.write("# " + project_title + project_icon)
             st.markdown(
                 """
