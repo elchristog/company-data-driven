@@ -9,6 +9,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             st.write("---") 
 
         if menu == "Home":
+            st.write("---") 
             st.write("# " + project_title + project_icon)
             st.markdown(
                 """
@@ -20,6 +21,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 - Check out [streamlit.io](https://streamlit.io)
             """
             )   
+            st.write("---") 
 
     # customer
     if role_id == 6:
