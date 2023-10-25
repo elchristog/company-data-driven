@@ -1,5 +1,5 @@
 import streamlit as st
-import modules.title_and_paragraph as tap
+import modules.title_and_paragraph.title_and_paragraph as tap
 
 def architect(user_id, role_id, project_id, project_name, project_title, project_icon, project_logo_url):
     # admin
