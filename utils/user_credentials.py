@@ -43,8 +43,6 @@ def user_credentials(name, authentication_status, username):
                 project_ids.append(row.get('project_id'))
                 role_id.append(row.get('role_id'))
                 role_name.append(row.get('role_name'))
-
-    st.set_page_config(page_title="Company data driven", page_icon="💺", layout="centered", initial_sidebar_state="expanded")
     
     if status != 'active':
             st.error('User is inactive')
