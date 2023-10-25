@@ -26,10 +26,19 @@ def user_credentials(name, authentication_status, username):
         project_id = rows[0].get('project_id')
         role_id = rows[0].get('role_id')
         role_name = rows[0].get('role_name')
+        project_icon = rows[0].get('icon')
+        project_logo_url = rows[0].get('logo_url')
+        project_name = rows[0].get('name')
+        project_title = rows[0].get('title')
+
     else:
         user_id = rows[0].get('user_id')
         status = rows[0].get('status')
         project_id = rows[0].get('project_id')
+        project_icon = rows[0].get('icon')
+        project_logo_url = rows[0].get('logo_url')
+        project_name = rows[0].get('name')
+        project_title = rows[0].get('title')
 
         user_ids = []
         statuses = []
@@ -63,7 +72,7 @@ def user_credentials(name, authentication_status, username):
             else:
                 st.error('User has multiple projects')
              
-        ph.project_handler(user_id, project_id, role_id, role_name)
+        ph.project_handler(user_id, project_id, role_id, role_name, project_name, project_title, project_icon, project_logo_url)
 
 
 
