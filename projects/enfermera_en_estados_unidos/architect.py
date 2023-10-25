@@ -5,11 +5,11 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
     if role_id == 1:
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
-            menu = st.sidebar.radio("Enfermera en estados unidos", ["Home", "Proyectos NO rentables", "Proyectos rentables", "Oportunidades"])
+            menu = st.sidebar.radio(project_title, ["Home", "Proyectos NO rentables", "Proyectos rentables", "Oportunidades"])
             st.write("---") 
 
         if menu == "Home":
-            st.write("# Welcome to Streamlit! 👋")
+            st.write("# " + project_title + project_icon)
             st.markdown(
                 """
                 Streamlit is an open-source app framework built specifically for
