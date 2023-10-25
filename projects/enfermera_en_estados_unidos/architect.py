@@ -5,7 +5,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
     if role_id == 1:
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
-            menu = st.sidebar.radio(project_title, ["Home", "Proyectos NO rentables", "Proyectos rentables", "Oportunidades"])
+            menu = st.sidebar.radio(project_title, ["Home", "Trafico y SEO", "Whatsapp", "Trip Wire"])
             st.write("---") 
 
         if menu == "Home":
