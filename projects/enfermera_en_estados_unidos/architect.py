@@ -1,4 +1,5 @@
 import streamlit as st
+import modules.title_and_paragraph as tap
 
 def architect(user_id, role_id, project_id, project_name, project_title, project_icon, project_logo_url):
     # admin
@@ -9,18 +10,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             st.write("---") 
 
         if menu == "Home":
-            st.write("# " + project_title + project_icon)
-            st.markdown(
-                """
-                Streamlit is an open-source app framework built specifically for
-                Machine Learning and Data Science projects.
-                **👈 Select a demo from the sidebar** to see some examples
-                of what Streamlit can do!
-                ### Want to learn more?
-                - Check out [streamlit.io](https://streamlit.io)
-            """
-            )   
-            st.write("---") 
+            tap(project_title+project_icon, "texto de prueba")
 
     # customer
     if role_id == 6:
