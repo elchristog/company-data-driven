@@ -17,8 +17,6 @@ def login():
         )
         name, authentication_status, username = authenticator.login('Login', 'main')
         if st.session_state["authentication_status"]:
-            st.set_page_config(page_title="Company data driven", page_icon="💺", layout="centered", initial_sidebar_state="expanded")
-
             uc.user_credentials(name, authentication_status, username)
             st.write("---") 
             authenticator.logout('Logout', 'main')
