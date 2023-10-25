@@ -4,7 +4,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
     # admin
     if role_id == 1:
         with st.sidebar:
-            st.image("http://enfermeraenestadosunidos.com/wp-content/uploads/2023/08/enfermera_en_estados_unidos_logo_rn.webp", width=50, use_column_width=False)
+            st.image(project_logo_url, width=50, use_column_width=False)
             menu = st.sidebar.radio("Enfermera en estados unidos", ["Home", "Proyectos NO rentables", "Proyectos rentables", "Oportunidades"])
             st.write("---") 
 
