@@ -1,6 +1,6 @@
 import streamlit as st
 
-def architect(user_id, role_id):
+def architect(user_id, role_id, project_id):
     # admin
     if role_id == 1:
         with st.sidebar:
