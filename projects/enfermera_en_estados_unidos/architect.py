@@ -1,5 +1,5 @@
 import streamlit as st
-import modules.title_and_paragraph.title_and_paragraph as tap
+import modules.title_and_paragraph as tap
 
 def architect(user_id, role_id, project_id, project_name, project_title, project_icon, project_logo_url):
     # admin
@@ -10,7 +10,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             st.write("---") 
 
         if menu == "Home":
-            tap(project_title + project_icon, "texto de prueba")
+            tap.title_and_paragraph(project_title + project_icon, "texto de prueba")
 
     # customer
     if role_id == 6:
