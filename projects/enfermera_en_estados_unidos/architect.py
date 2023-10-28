@@ -1,7 +1,7 @@
 import streamlit as st
 import modules.title_and_paragraph as tap
 
-def architect(user_id, role_id, project_id, project_name, project_title, project_icon, project_logo_url):
+def architect(user_id, role_id, project_id, project_name, project_title, project_icon, project_logo_url, client):
     # admin
     if role_id == 1:
         with st.sidebar:

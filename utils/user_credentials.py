@@ -72,7 +72,7 @@ def user_credentials(name, authentication_status, username):
             else:
                 st.error('User has multiple projects')
              
-        ph.project_handler(user_id, project_id, role_id, role_name, project_name, project_title, project_icon, project_logo_url)
+        ph.project_handler(user_id, project_id, role_id, role_name, project_name, project_title, project_icon, project_logo_url, client)
 
 
 
