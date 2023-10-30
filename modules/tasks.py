@@ -62,8 +62,8 @@ def tasks_visualizer(user_id, project_name, client, divider):
 
 
 def tasks_achievements(user_id, project_name, tasks, client, divider):
-    if len(tasks) <1:
-        st.success("Your achievements will be available when be assigned tasks")
+    if len(uc.run_query(f"SELECT id  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND finished_date IS NOT NULL LIMIT 1", client)) < 1:
+        st.success("Your achievements will be available when you finish your first task")
     else:
         year_fulfillment = uc.run_query(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND canceled_date IS NULL GROUP BY year ORDER BY year DESC LIMIT 2", client)
         month_fulfillment = uc.run_query(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, EXTRACT(MONTH FROM commit_finish_date) AS month, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND canceled_date IS NULL GROUP BY year, month ORDER BY year DESC, month DESC LIMIT 2", client)
