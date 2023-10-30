@@ -132,7 +132,10 @@ def task_creation(role_id, project_id, client, divider):
         )
         if selected_username is not None:
             selected_user_id = users_ids[users_username.index(selected_username)]
-            st.write(selected_user_id)
+            task_input = st.text_input("Describe the task:")
+            commitment_date_input = st.date_input("Select a commitment date:")
+
+            st.write(commitment_date_input)
 
 
 
