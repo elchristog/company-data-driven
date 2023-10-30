@@ -1,5 +1,6 @@
 import streamlit as st
 import modules.title_and_paragraph as tap
+import modules.tasks as t
 
 def architect(user_id, role_id, project_id, project_name, project_title, project_icon, project_logo_url, client):
     # admin
@@ -11,6 +12,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         if menu == "Home":
             tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios")
+            t.tasks_visualizer(user_id, project_name, client)
 
     # customer
     if role_id == 6:
