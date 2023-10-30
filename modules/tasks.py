@@ -105,9 +105,8 @@ def tips_tasks_ia(tasks, divider):
 
 
 
-def task_creation(user_id, client, divider):
+def task_creation(user_id, project_id, client, divider):
     rows = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {user_id};", client)
-    st.table(rows)
     role_ids = []
     role_names = []
     for row in rows:
@@ -120,8 +119,8 @@ def task_creation(user_id, client, divider):
         )
     if selected_role is not None:
         selected_role_id = role_ids[role_names.index(selected_role)]
-        st.write(selected_role_id)
-        pass
+        rows_users = uc.run_query(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = {selected_role_id};", client)
+        st.table(rows_users)
 
 
 
