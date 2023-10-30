@@ -14,7 +14,7 @@ import utils.user_credentials as uc
 #     return rows
 
 def tasks_visualizer(user_id, project_name, client):
-    rows = uc.run_query(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.enfermera_en_estados_unidos.tasks` WHERE responsible_user_id = 1 AND status IN ('to_start', 'on_execution', 'delayed');") #finished, canceled, unfulfilled
+    rows = uc.run_query(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.enfermera_en_estados_unidos.tasks` WHERE responsible_user_id = 1 AND status IN ('to_start', 'on_execution', 'delayed');", client) #finished, canceled, unfulfilled
     if len(rows) == 0:
         st.success('You have no pending tasks, very good!', icon="😎")
     else:
