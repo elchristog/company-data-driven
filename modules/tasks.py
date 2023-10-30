@@ -87,6 +87,7 @@ def tasks_achievements(user_id, project_name, client, divider):
 
 
 def tips_tasks_ia(tasks, divider):
+    st.write(tasks)
     st.write(isinstance(tasks, collections.abc.Mapping))
     if tasks is not None and isinstance(tasks, collections.abc.Mapping) :
         if len(tips_tasks_ia) > 0:
