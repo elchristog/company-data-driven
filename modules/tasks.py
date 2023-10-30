@@ -105,14 +105,7 @@ def tips_tasks_ia(tasks, divider):
 
 
 
-
-# if username == st.secrets["ADMIN_USER"]:
-#     st.write("---") 
-#     st.markdown(""" ### Task creation """)
-
-
-
-
-
-
-# st.write("---") 
+def task_creation(divider):
+    st.write('pedo')
+    if divider == 1:
+        st.write("---") 
