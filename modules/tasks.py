@@ -98,7 +98,7 @@ def tips_tasks_ia(tasks, divider):
             ],
         max_tokens = 200  # ajusta según el tamaño de tu artículo, maximo 4000
         )
-        st.write(tips_tasks_ia(response.choices[0].message['content'].strip()))
+        st.write(response.choices[0].message['content'].strip())
     if divider == 1:
         st.write("---") 
 
