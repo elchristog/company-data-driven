@@ -154,7 +154,10 @@ def task_creation(role_id, project_id, project_name, client, divider):
 
 
 def task_deletion(role_id, project_id, project_name, client, divider):
-    rows = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id > {role_id} ORDER BY id DESC;", client)
+    if role_id == 1:
+        rows = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;", client)
+    else:
+        rows = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id > {role_id} ORDER BY id DESC;", client)
     role_ids = []
     role_names = []
     for row in rows:
