@@ -106,7 +106,7 @@ def tips_tasks_ia(tasks, divider):
 
 
 
-def task_creation(role_id, project_id, project_name, client, divider):
+def task_creation(user_id, role_id, project_id, project_name, client, divider):
     rows = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;", client)
     role_ids = []
     role_names = []
@@ -145,7 +145,7 @@ def task_creation(role_id, project_id, project_name, client, divider):
                     today = datetime.date.today()
                     today_str = today.strftime("%Y-%m-%d")
                     max_id =  uc.run_query(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.tasks`", client)[0].get('max_id')
-                    uc.run_query(f"INSERT INTO `company-data-driven.{project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{today_str}', '{task_input}', {selected_user_id}, '{commitment_date_input}', 'to_start', {role_id})", client)
+                    uc.run_query(f"INSERT INTO `company-data-driven.{project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{today_str}', '{task_input}', {selected_user_id}, '{commitment_date_input}', 'to_start', {user_id})", client)
                     st.success('Task created!', icon="😎")
                     st.rerun()
 
@@ -155,7 +155,7 @@ def task_creation(role_id, project_id, project_name, client, divider):
 
 
 
-def task_deletion(role_id, project_id, project_name, client, divider):
+def task_deletion(user_id, role_id, project_id, project_name, client, divider):
     if role_id == 1:
         rows = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;", client)
     else:
@@ -201,5 +201,13 @@ def task_deletion(role_id, project_id, project_name, client, divider):
             )
             if selected_task_description is not None:
                 selected_task_id = user_tasks_ids[user_tasks_descriptions.index(selected_task_description)]
-                st.write(selected_task_id)
+                today = datetime.date.today()
+                today_str = today.strftime("%Y-%m-%d")
+                uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = 'canceled', canceled_date = '{today_str}', task_cancelator_id = {user_id} WHERE id = {selected_task_id};", client)
+                st.success('Task created!', icon="😎")
+                st.rerun()
+
+    if divider == 1:
+        st.write("---") 
+
 
