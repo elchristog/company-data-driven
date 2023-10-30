@@ -206,7 +206,7 @@ def task_deletion(user_id, role_id, project_id, project_name, client, divider):
                     today = datetime.date.today()
                     today_str = today.strftime("%Y-%m-%d")
                     uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = 'canceled', canceled_date = '{today_str}', task_cancelator_id = {user_id} WHERE id = {selected_task_id};", client)
-                    st.fail('Task deleted!', icon="😎")
+                    st.error('Task deleted!', icon="😎")
                     st.rerun()
 
     if divider == 1:
