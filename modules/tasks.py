@@ -1,17 +1,6 @@
 import streamlit as st
 import utils.user_credentials as uc
 
-############ tasks #######
-# credentials = service_account.Credentials.from_service_account_info(
-#     st.secrets["gcp_service_account"]
-# )
-# client = bigquery.Client(credentials=credentials)
-# # @st.cache_data(ttl=600) # Uses st.cache_data to only rerun when the query changes or after 10 min.
-# def run_query(query):
-#     query_job = client.query(query)
-#     rows_raw = query_job.result()
-#     rows = [dict(row) for row in rows_raw]
-#     return rows
 
 def tasks_visualizer(user_id, project_name, client):
     rows = uc.run_query(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed');", client) #finished, canceled, unfulfilled
@@ -35,30 +24,30 @@ def tasks_visualizer(user_id, project_name, client):
             options=descriptions,
             index=None
         )
-        # if selected_task is not None:
-        #     selected_task_status = actual_statuses[descriptions.index(selected_task)]
-        #     if selected_task_status == 'on_execution':
-        #         selected_status = st.selectbox(
-        #         label="Select the new status",
-        #         options= ['finished'],
-        #         index=None
-        #     )
-        #     else:
-        #         selected_status = st.selectbox(
-        #             label="Select the new status",
-        #             options= ['on_execution'],
-        #             index=None
-        #         )
-        #     update_task_status_button = st.button("Update status")
-        #     def update_task_status(task_id, new_status, today_str):
-        #         if new_status == 'on_execution':
-        #             uc.run_query(f"UPDATE `hacer-storytelling.hacer_storytelling.tasks` SET status = '{new_status}', on_execution_date = '{today_str}' WHERE id = {task_id}")
-        #         if new_status == 'finished':
-        #             uc.run_query(f"UPDATE `hacer-storytelling.hacer_storytelling.tasks` SET status = '{new_status}', finished_date = '{today_str}' WHERE id = {task_id}")
-        #     if update_task_status_button:
-        #         selected_task_id = ids[descriptions.index(selected_task)]
-        #         update_task_status(selected_task_id, selected_status, today_str)
-        #         st.rerun()
+        if selected_task is not None:
+            selected_task_status = actual_statuses[descriptions.index(selected_task)]
+            if selected_task_status == 'on_execution':
+                selected_status = st.selectbox(
+                label="Select the new status",
+                options= ['finished'],
+                index=None
+            )
+            else:
+                selected_status = st.selectbox(
+                    label="Select the new status",
+                    options= ['on_execution'],
+                    index=None
+                )
+            update_task_status_button = st.button("Update status")
+            def update_task_status(task_id, new_status, today_str):
+                if new_status == 'on_execution':
+                    uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', on_execution_date = '{today_str}' WHERE id = {task_id}")
+                if new_status == 'finished':
+                    uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', finished_date = '{today_str}' WHERE id = {task_id}")
+            # if update_task_status_button:
+            #     selected_task_id = ids[descriptions.index(selected_task)]
+            #     update_task_status(selected_task_id, selected_status, today_str)
+            #     st.rerun()
 
 
 
