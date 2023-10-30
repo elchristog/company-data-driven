@@ -1,7 +1,7 @@
 import streamlit as st
 import datetime
 import openai
-import collections
+import numpy as np
 
 import utils.user_credentials as uc
 
@@ -88,8 +88,8 @@ def tasks_achievements(user_id, project_name, client, divider):
 
 def tips_tasks_ia(tasks, divider):
     st.write(tasks)
-    st.write(isinstance(tasks, collections.abc.Mapping))
-    if tasks is not None and isinstance(tasks, collections.abc.Mapping) :
+    st.write(isinstance(tasks, np.ndarray))
+    if tasks is not None and isinstance(tasks, np.ndarray) :
         if len(tips_tasks_ia) > 0:
             ia_tips_button = st.button("🤖 Help me to prioritize!")     
             if ia_tips_button:       
