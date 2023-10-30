@@ -87,7 +87,7 @@ def tasks_achievements(user_id, project_name, client, divider):
 
 def tips_tasks_ia(tasks, divider):
     if len(tips_tasks_ia) > 0:
-        ia_tips_button = st.button("🤖 Help me!")     
+        ia_tips_button = st.button("🤖 Help me to prioritize!")     
         if ia_tips_button:       
             st.success('Tips to prioritize your tasks using the Eisenhower method:', icon="🤖")            
             input_prompt = f"Help me to priorize my tasks using the Eisenhower Matrix methodology, find yourself the urgency and importance and give me just the results, solve it and giveme the tasks priorized with tips, be specific, return just the list of the task prioritized and one tip of each one, use less than 200 tokens: “ {tasks} ”:"
