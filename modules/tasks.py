@@ -134,8 +134,14 @@ def task_creation(role_id, project_id, project_name, client, divider):
             selected_user_id = users_ids[users_username.index(selected_username)]
             task_input = st.text_input("Describe the task:")
             commitment_date_input = st.date_input("Select a commitment date:")
+            if selected_user_id is None or task_input is None or commitment_date_input is None:
+                st.error("Please fill in all of the required fields.")
+            else:
+                today = datetime.date.today()
+                today_str = today.strftime("%Y-%m-%d")
+                uc.run_query(f"INSERT INTO `company-data-driven.{project_name}.tasks` (id, creation_date, description, responsible_user_id, responsible_user_id, status, task_creator_id) VALUES(
+SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.tasks`, {today_str}, {task_input}, {selected_user_id}, 'to_start', {role_id})", client)
 
-            st.write(commitment_date_input)
 
 
 
