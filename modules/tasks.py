@@ -43,9 +43,9 @@ def tasks_visualizer(user_id, project_name, client):
             update_task_status_button = st.button("Update status")
             def update_task_status(task_id, new_status, today_str):
                 if new_status == 'on_execution':
-                    uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', on_execution_date = '{today_str}' WHERE id = {task_id}")
+                    uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', on_execution_date = '{today_str}' WHERE id = {task_id}", client)
                 if new_status == 'finished':
-                    uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', finished_date = '{today_str}' WHERE id = {task_id}")
+                    uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', finished_date = '{today_str}' WHERE id = {task_id}", client)
             if update_task_status_button:
                 today = datetime.date.today()
                 today_str = today.strftime("%Y-%m-%d")
