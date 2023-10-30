@@ -19,22 +19,22 @@ def tasks_visualizer(user_id, project_name, client):
         st.success('You have no pending tasks, very good!', icon="😎")
     else:
         st.table(rows)
-        # descriptions = []
-        # ids = []
-        # actual_statuses = []
-        # for row in rows:
-        #     description = row.get('description')
-        #     id = row.get('id')
-        #     actual_status = row.get('status')
-        #     if description is not None:
-        #         descriptions.append(description)
-        #         ids.append(id)
-        #         actual_statuses.append(actual_status)
-        # selected_task = st.selectbox(
-        #     label="Select one task",
-        #     options=descriptions,
-        #     index=None
-        # )
+        descriptions = []
+        ids = []
+        actual_statuses = []
+        for row in rows:
+            description = row.get('description')
+            id = row.get('id')
+            actual_status = row.get('status')
+            if description is not None:
+                descriptions.append(description)
+                ids.append(id)
+                actual_statuses.append(actual_status)
+        selected_task = st.selectbox(
+            label="Select one task",
+            options=descriptions,
+            index=None
+        )
         # if selected_task is not None:
         #     selected_task_status = actual_statuses[descriptions.index(selected_task)]
         #     if selected_task_status == 'en_ejecucion':
