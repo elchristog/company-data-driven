@@ -89,7 +89,7 @@ def tips_tasks_ia(tasks, divider):
     ia_tips_button = st.button("🤖 Help me to prioritize!")     
     if ia_tips_button:       
         st.success('Tips to prioritize your tasks using the Eisenhower method:', icon="🤖")            
-        input_prompt = f"Help me to priorize my tasks using the Eisenhower Matrix methodology, find yourself the urgency and importance and give me just the results, solve it and giveme the tasks priorized with tips, be specific, return just the list of the task prioritized and one tip of each one, use less than 200 tokens: “ {tasks} ”:"
+        input_prompt = f"Help me to priorize my tasks using the Eisenhower Matrix methodology, find yourself the urgency and importance and give me just the results, solve it and give me the tasks priorized with tips, be specific, return just the list of the task prioritized and one tip of each one, use less than 200 tokens: “ {tasks} ”:"
         response = openai.ChatCompletion.create(
         model = "gpt-3.5-turbo",
         messages = [
@@ -105,7 +105,8 @@ def tips_tasks_ia(tasks, divider):
 
 
 
-def task_creation(divider):
-    st.write('pedo')
+def task_creation(user_id, client, divider):
+    roles = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {user_id};", client)
+    st.table(roles)
     if divider == 1:
         st.write("---") 
