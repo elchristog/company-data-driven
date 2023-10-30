@@ -87,6 +87,7 @@ def tasks_achievements(user_id, project_name, client, divider):
 
 
 def tips_tasks_ia(tasks, divider):
+    st.write(len(tips_tasks_ia) )
     if tasks is not None and isinstance(tasks, numbers.Number) :
         if len(tips_tasks_ia) > 0:
             ia_tips_button = st.button("🤖 Help me to prioritize!")     
