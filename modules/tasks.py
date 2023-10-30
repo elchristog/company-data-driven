@@ -131,7 +131,9 @@ def task_creation(role_id, project_id, client, divider):
             index = None
         )
         if selected_username is not None:
-            pass
+            selected_user_id = users_ids[users_username.index(selected_username)]
+            st.write(selected_user_id)
+
 
 
 
