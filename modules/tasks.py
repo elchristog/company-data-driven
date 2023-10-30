@@ -13,7 +13,7 @@ import utils.user_credentials as uc
 #     rows = [dict(row) for row in rows_raw]
 #     return rows
 
-def tasks_visualizer():
+def tasks_visualizer(user_id, project_name, client):
     rows = uc.run_query(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `hacer-storytelling.hacer_storytelling.tasks` WHERE responsable_username = '{username}' AND status IN ('por_iniciar', 'en_ejecucion', 'atrasada')") #finished, canceled, incumplida
     if len(rows) == 0:
         st.success('You have no pending tasks, very good!', icon="😎")
