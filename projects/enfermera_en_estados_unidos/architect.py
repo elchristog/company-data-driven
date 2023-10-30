@@ -4,7 +4,7 @@ import modules.tasks as t
 
 def architect(user_id, role_id, project_id, project_name, project_title, project_icon, project_logo_url, client):
     # admin
-    if role_id == 1:
+    if role_id != 6:
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
             menu = st.sidebar.radio(project_title, ["Home", "Trafico y SEO", "Whatsapp", "Trip Wire"])
