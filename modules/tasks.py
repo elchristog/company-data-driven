@@ -119,7 +119,7 @@ def task_creation(role_id, project_id, project_name, client, divider):
         )
     if selected_role is not None:
         selected_role_id = role_ids[role_names.index(selected_role)]
-        rows_users = uc.run_query(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = {selected_role_id};", client)
+        rows_users = uc.run_query(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = {selected_role_id} ORDER BY u.username ASC;", client)
         users_ids = []
         users_username = []
         for row in rows_users:
@@ -136,7 +136,7 @@ def task_creation(role_id, project_id, project_name, client, divider):
             commitment_date_input = st.date_input("Select a commitment date:")
             create_task_button = st.button("Create task")
             if create_task_button:
-                if selected_user_id is None or task_input is None or len(task_input) < 10 or commitment_date_input is None or len(commitment_date_input) < 4:
+                if selected_user_id is None or task_input is None or len(task_input) < 10 or commitment_date_input is None:
                     st.error("Please fill in completely all of the required fields.")
                 else:
                     today = datetime.date.today()
