@@ -24,9 +24,9 @@ def tasks_visualizer(user_id, project_name, client, divider):
                 ids.append(id)
                 actual_statuses.append(actual_status)
         selected_task = st.selectbox(
-            label="Select one task",
-            options=descriptions,
-            index=None
+            label = "Select one task",
+            options = descriptions,
+            index = None
         )
         if selected_task is not None:
             selected_task_status = actual_statuses[descriptions.index(selected_task)]
@@ -106,7 +106,22 @@ def tips_tasks_ia(tasks, divider):
 
 
 def task_creation(user_id, client, divider):
-    roles = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {user_id};", client)
-    st.table(roles)
+    rows = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {user_id};", client)
+    st.table(rows)
+    role_ids = []
+    role_names = []
+    for row in rows:
+        role_ids.append(row.get('id'))
+        role_names.append(row.get('name'))
+    selected_role = st.selectbox(
+            label = "Select the user's role",
+            options = role_names,
+            index = None
+        )
+    if selected_role is not None:
+        pass
+
+
+
     if divider == 1:
         st.write("---") 
