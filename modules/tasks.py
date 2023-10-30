@@ -90,6 +90,7 @@ def tasks_achievements(user_id, project_name, tasks, client, divider):
 
 
 def tips_tasks_ia(tasks, divider):
+    st.write(tasks)
     ia_tips_button = st.button("🤖 Help me to prioritize!")     
     if ia_tips_button:       
         st.success('Tips to prioritize your tasks using the Eisenhower method:', icon="🤖")            
