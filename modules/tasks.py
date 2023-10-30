@@ -194,8 +194,8 @@ def task_deletion(role_id, project_id, project_name, client, divider):
                 user_tasks_ids.append(rows_user_tasks.get('id'))
                 user_tasks_descriptions.append(rows_user_tasks.get('description'))
             selected_task_description = st.selectbox(
-                label = "Select the username",
-                options = users_username,
+                label = "Select the task to delete",
+                options = user_tasks_descriptions,
                 index = None,
                 key= "deletion_task_description"
             )
