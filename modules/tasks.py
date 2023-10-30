@@ -86,7 +86,7 @@ def tasks_achievements(user_id, project_name, client, divider):
 
 
 def tips_tasks_ia(tasks, divider):
-    if len(tips_tasks_ia) > 0:
+    if tasks is not None and not callable(tasks) and len(tips_tasks_ia) > 0:
         ia_tips_button = st.button("🤖 Help me to prioritize!")     
         if ia_tips_button:       
             st.success('Tips to prioritize your tasks using the Eisenhower method:', icon="🤖")            
