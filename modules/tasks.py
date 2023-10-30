@@ -120,7 +120,19 @@ def task_creation(role_id, project_id, client, divider):
     if selected_role is not None:
         selected_role_id = role_ids[role_names.index(selected_role)]
         rows_users = uc.run_query(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = {selected_role_id};", client)
-        st.table(rows_users)
+        users_ids = []
+        users_username = []
+        for row in rows_users:
+            users_ids.append(row.get('id'))
+            users_username.append(row.get('username'))
+        selected_username = st.selectbox(
+            label = "Select the username",
+            options = users_username,
+            index = None
+        )
+        if selected_username is not None:
+            pass
+
 
 
 
