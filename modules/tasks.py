@@ -187,4 +187,6 @@ def task_deletion(role_id, project_id, project_name, client, divider):
         )
         if selected_username is not None:
             selected_user_id = users_ids[users_username.index(selected_username)]
-            st.write(selected_user_id)
+            rows_user_tasks = uc.run_query(f"SELECT id, description FROM `company-data-driven.{project_name}.tasks` WHERE finished_date IS NULL AND canceled_date IS NULL AND responsible_user_id = {selected_user_id} ORDER BY description ASC;", client)
+            st.table(rows_user_tasks)
+
