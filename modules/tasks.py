@@ -141,7 +141,8 @@ def task_creation(role_id, project_id, project_name, client, divider):
                 else:
                     today = datetime.date.today()
                     today_str = today.strftime("%Y-%m-%d")
-                    uc.run_query(f"INSERT INTO `company-data-driven.{project_name}.tasks` (id, creation_date, description, responsible_user_id, responsible_user_id, status, task_creator_id) VALUES(SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.tasks`, {today_str}, {task_input}, {selected_user_id}, 'to_start', {role_id})", client)
+                    max_id =  uc.run_query(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.tasks`", client)
+                    uc.run_query(f"INSERT INTO `company-data-driven.{project_name}.tasks` (id, creation_date, description, responsible_user_id, responsible_user_id, status, task_creator_id) VALUES({max_id}, {today_str}, {task_input}, {selected_user_id}, 'to_start', {role_id})", client)
 
 
 
