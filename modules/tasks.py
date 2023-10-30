@@ -119,6 +119,8 @@ def task_creation(user_id, client, divider):
             index = None
         )
     if selected_role is not None:
+        selected_role_id = role_ids[role_names.index(selected_role)]
+        st.write(selected_role_id)
         pass
 
 
