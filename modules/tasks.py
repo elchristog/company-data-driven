@@ -86,23 +86,19 @@ def tasks_achievements(user_id, project_name, client, divider):
 
 
 def tips_tasks_ia(tasks, divider):
-    st.write(tasks)
-    st.write(type(tasks))
-    if tasks is not None :
-        if len(tips_tasks_ia) > 0:
-            ia_tips_button = st.button("🤖 Help me to prioritize!")     
-            if ia_tips_button:       
-                st.success('Tips to prioritize your tasks using the Eisenhower method:', icon="🤖")            
-                input_prompt = f"Help me to priorize my tasks using the Eisenhower Matrix methodology, find yourself the urgency and importance and give me just the results, solve it and giveme the tasks priorized with tips, be specific, return just the list of the task prioritized and one tip of each one, use less than 200 tokens: “ {tasks} ”:"
-                response = openai.ChatCompletion.create(
-                model = "gpt-3.5-turbo",
-                messages = [
-                        {"role": "system", "content": "You are an expert in project management and tasks priorization"},
-                        {"role": "user", "content": input_prompt}
-                    ],
-                max_tokens = 200  # ajusta según el tamaño de tu artículo, maximo 4000
-                )
-                st.write(response.choices[0].message['content'].strip())
+    ia_tips_button = st.button("🤖 Help me to prioritize!")     
+    if ia_tips_button:       
+        st.success('Tips to prioritize your tasks using the Eisenhower method:', icon="🤖")            
+        input_prompt = f"Help me to priorize my tasks using the Eisenhower Matrix methodology, find yourself the urgency and importance and give me just the results, solve it and giveme the tasks priorized with tips, be specific, return just the list of the task prioritized and one tip of each one, use less than 200 tokens: “ {tasks} ”:"
+        response = openai.ChatCompletion.create(
+        model = "gpt-3.5-turbo",
+        messages = [
+                {"role": "system", "content": "You are an expert in project management and tasks priorization"},
+                {"role": "user", "content": input_prompt}
+            ],
+        max_tokens = 200  # ajusta según el tamaño de tu artículo, maximo 4000
+        )
+        st.write(response.choices[0].message['content'].strip())
     if divider == 1:
         st.write("---") 
 
