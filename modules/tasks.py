@@ -137,12 +137,12 @@ def task_creation(role_id, project_id, project_name, client, divider):
             create_task_button = st.button("Create task")
             if create_task_button:
                 if selected_user_id is None or task_input is None or len(task_input) < 10 or commitment_date_input is None or len(commitment_date_input) < 4:
-                    st.error("Please fill in all of the required fields.")
+                    st.error("Please fill in completely all of the required fields.")
                 else:
                     today = datetime.date.today()
                     today_str = today.strftime("%Y-%m-%d")
-    #                 uc.run_query(f"INSERT INTO `company-data-driven.{project_name}.tasks` (id, creation_date, description, responsible_user_id, responsible_user_id, status, task_creator_id) VALUES(
-    # SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.tasks`, {today_str}, {task_input}, {selected_user_id}, 'to_start', {role_id})", client)
+                    uc.run_query(f"INSERT INTO `company-data-driven.{project_name}.tasks` (id, creation_date, description, responsible_user_id, responsible_user_id, status, task_creator_id) VALUES(
+    SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.tasks`, {today_str}, {task_input}, {selected_user_id}, 'to_start', {role_id})", client)
 
 
 
