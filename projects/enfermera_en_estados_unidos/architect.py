@@ -15,6 +15,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             tap.title_and_paragraph("Tus tareas", "Gestiona tus tareas", "h2",0)
             t.tasks_visualizer(user_id, project_name, client, 0)
             tap.title_and_paragraph("Tus logros", "Visualiza tu crecimiento", "h3",0)
+            t.tasks_achievements(user_id, project_name, client, 0)
+
 
 
     # customer
