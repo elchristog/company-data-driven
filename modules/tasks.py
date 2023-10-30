@@ -105,8 +105,8 @@ def tips_tasks_ia(tasks, divider):
 
 
 
-def task_creation(user_id, project_id, client, divider):
-    rows = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {user_id} ORDER BY id DESC;", client)
+def task_creation(role_id, project_id, client, divider):
+    rows = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;", client)
     role_ids = []
     role_names = []
     for row in rows:
