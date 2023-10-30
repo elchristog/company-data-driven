@@ -136,7 +136,7 @@ def task_creation(role_id, project_id, project_name, client, divider):
             commitment_date_input = st.date_input("Select a commitment date:")
             create_task_button = st.button("Create task")
             if create_task_button:
-                if selected_user_id is None or task_input is None or commitment_date_input is None:
+                if selected_user_id is None or task_input is None or len(task_input) < 10 or commitment_date_input is None or len(commitment_date_input) < 4:
                     st.error("Please fill in all of the required fields.")
                 else:
                     today = datetime.date.today()
