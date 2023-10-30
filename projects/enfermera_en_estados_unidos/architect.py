@@ -11,8 +11,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             st.write("---") 
 
         if menu == "Home":
-            tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios")
-            t.tasks_visualizer(user_id, project_name, client)
+            tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios", 1)
+            t.tasks_visualizer(user_id, project_name, client, 0)
 
     # customer
     if role_id == 6:
