@@ -1,6 +1,7 @@
 import streamlit as st
 import datetime
 import openai
+import numbers
 
 import utils.user_credentials as uc
 
@@ -86,7 +87,7 @@ def tasks_achievements(user_id, project_name, client, divider):
 
 
 def tips_tasks_ia(tasks, divider):
-    if tasks is not None and not callable(tasks) :
+    if tasks is not None and isinstance(tasks, numbers.Number) :
         if len(tips_tasks_ia) > 0:
             ia_tips_button = st.button("🤖 Help me to prioritize!")     
             if ia_tips_button:       
