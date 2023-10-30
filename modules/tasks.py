@@ -149,3 +149,35 @@ def task_creation(role_id, project_id, project_name, client, divider):
 
     if divider == 1:
         st.write("---") 
+
+
+
+
+def task_deletion(role_id, project_id, project_name, client, divider):
+    rows = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id > {role_id} ORDER BY id DESC;", client)
+    role_ids = []
+    role_names = []
+    for row in rows:
+        role_ids.append(row.get('id'))
+        role_names.append(row.get('name'))
+    selected_role = st.selectbox(
+            label = "Select the user's role",
+            options = role_names,
+            index = None
+        )
+    if selected_role is not None:
+        selected_role_id = role_ids[role_names.index(selected_role)]
+        rows_users = uc.run_query(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = {selected_role_id} ORDER BY u.username ASC;", client)
+        users_ids = []
+        users_username = []
+        for row in rows_users:
+            users_ids.append(row.get('id'))
+            users_username.append(row.get('username'))
+        selected_username = st.selectbox(
+            label = "Select the username",
+            options = users_username,
+            index = None
+        )
+        if selected_username is not None:
+            selected_user_id = users_ids[users_username.index(selected_username)]
+            st.write(selected_user_id)
