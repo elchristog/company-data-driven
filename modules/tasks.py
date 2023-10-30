@@ -57,7 +57,7 @@ def tasks_visualizer(user_id, project_name, client, divider):
 
 
 
-# st.write("---") 
+
 # st.markdown(""" ### Your achievements """)
 # year_fulfillment = run_query(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `hacer-storytelling.hacer_storytelling.tasks` WHERE responsable_username = '{username}' AND canceled_date IS NULL GROUP BY year ORDER BY year DESC LIMIT 2")
 # month_fulfillment = run_query(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, EXTRACT(MONTH FROM commit_finish_date) AS month, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `hacer-storytelling.hacer_storytelling.tasks` WHERE responsable_username = '{username}' AND canceled_date IS NULL GROUP BY year, month ORDER BY year DESC, month DESC LIMIT 2")
