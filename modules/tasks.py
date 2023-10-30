@@ -188,5 +188,18 @@ def task_deletion(role_id, project_id, project_name, client, divider):
         if selected_username is not None:
             selected_user_id = users_ids[users_username.index(selected_username)]
             rows_user_tasks = uc.run_query(f"SELECT id, description FROM `company-data-driven.{project_name}.tasks` WHERE finished_date IS NULL AND canceled_date IS NULL AND responsible_user_id = {selected_user_id} ORDER BY description ASC;", client)
-            st.table(rows_user_tasks)
+            user_tasks_ids = []
+            user_tasks_descriptions = []
+            for row in rows_users:
+                user_tasks_ids.append(rows_user_tasks.get('id'))
+                user_tasks_descriptions.append(rows_user_tasks.get('description'))
+            selected_task_description = st.selectbox(
+                label = "Select the username",
+                options = users_username,
+                index = None,
+                key= "deletion_task_description"
+            )
+            if selected_task_description is not None:
+                selected_task_id = user_tasks_ids[user_tasks_descriptions.index(selected_task_description)]
+                st.write(selected_task_id)
 
