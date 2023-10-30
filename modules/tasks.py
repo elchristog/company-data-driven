@@ -199,13 +199,15 @@ def task_deletion(user_id, role_id, project_id, project_name, client, divider):
                 index = None,
                 key= "deletion_task_description"
             )
-            if selected_task_description is not None:
-                selected_task_id = user_tasks_ids[user_tasks_descriptions.index(selected_task_description)]
-                today = datetime.date.today()
-                today_str = today.strftime("%Y-%m-%d")
-                uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = 'canceled', canceled_date = '{today_str}', task_cancelator_id = {user_id} WHERE id = {selected_task_id};", client)
-                st.success('Task created!', icon="😎")
-                st.rerun()
+            cancel_task_button = st.button("Cancel task")
+            if cancel_task_button:
+                if selected_task_description is not None:
+                    selected_task_id = user_tasks_ids[user_tasks_descriptions.index(selected_task_description)]
+                    today = datetime.date.today()
+                    today_str = today.strftime("%Y-%m-%d")
+                    uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = 'canceled', canceled_date = '{today_str}', task_cancelator_id = {user_id} WHERE id = {selected_task_id};", client)
+                    st.fail('Task deleted!', icon="😎")
+                    st.rerun()
 
     if divider == 1:
         st.write("---") 
