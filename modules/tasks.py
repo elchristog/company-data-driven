@@ -37,7 +37,7 @@ def tasks_visualizer(user_id, project_name, client):
         )
         # if selected_task is not None:
         #     selected_task_status = actual_statuses[descriptions.index(selected_task)]
-        #     if selected_task_status == 'en_ejecucion':
+        #     if selected_task_status == 'on_execution':
         #         selected_status = st.selectbox(
         #         label="Select the new status",
         #         options= ['finished'],
@@ -46,12 +46,12 @@ def tasks_visualizer(user_id, project_name, client):
         #     else:
         #         selected_status = st.selectbox(
         #             label="Select the new status",
-        #             options= ['en_ejecucion'],
+        #             options= ['on_execution'],
         #             index=None
         #         )
         #     update_task_status_button = st.button("Update status")
         #     def update_task_status(task_id, new_status, today_str):
-        #         if new_status == 'en_ejecucion':
+        #         if new_status == 'on_execution':
         #             uc.run_query(f"UPDATE `hacer-storytelling.hacer_storytelling.tasks` SET status = '{new_status}', on_execution_date = '{today_str}' WHERE id = {task_id}")
         #         if new_status == 'finished':
         #             uc.run_query(f"UPDATE `hacer-storytelling.hacer_storytelling.tasks` SET status = '{new_status}', finished_date = '{today_str}' WHERE id = {task_id}")
