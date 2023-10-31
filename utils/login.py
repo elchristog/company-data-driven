@@ -5,6 +5,7 @@ import yaml
 from yaml.loader import SafeLoader
 import utils.user_credentials as uc
 
+@st.cache_data 
 def login():
     with open('config.yaml') as file:
         config = yaml.load(file, Loader=SafeLoader)

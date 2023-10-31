@@ -1,5 +1,6 @@
 import streamlit as st
 
+@st.cache_data 
 def title_and_paragraph(title_text, paragraph_text, title_type, divider):
     if title_type == "h1":
         st.write("# " + title_text)
