@@ -6,7 +6,7 @@ import utils.project_handler as ph
 from google.oauth2 import service_account
 from google.cloud import bigquery
 
-@st.cache
+# @st.cache
 def gcloud_bigquery_client():
     credentials = service_account.Credentials.from_service_account_info(
             st.secrets["gcp_service_account"]
@@ -14,7 +14,7 @@ def gcloud_bigquery_client():
     client = bigquery.Client(credentials=credentials)
     return client
 
-@st.cache
+# @st.cache
 def run_query(query):
     client = gcloud_bigquery_client()
     query_job = client.query(query)
@@ -22,7 +22,7 @@ def run_query(query):
     rows = [dict(row) for row in rows_raw]
     return rows
 
-@st.cache
+# @st.cache
 def user_credentials(name, authentication_status, username):
     # @st.cache_data(ttl=600) # Uses st.cache_data to only rerun when the query changes or after 10 min.
     rows = run_query(f"SELECT u.id AS user_id, u.username, u.status, u.project_id, r.id AS role_id, r.name AS role_name, p.icon, p.logo_url, p.name, p.title   FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.roles` AS r ON ra.role_id = r.id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE username = '{username}';")
