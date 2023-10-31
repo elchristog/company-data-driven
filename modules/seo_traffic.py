@@ -32,7 +32,7 @@ data_padrao = date - relativedelta(months=1)
 # Convert secrets from the TOML file to strings
 clientSecret = st.secrets["clientSecret"]
 clientId = st.secrets["clientId"]
-redirectUri = 'https://company-data-driven.streamlit.app/'
+redirectUri = 'https://company-data-driven.streamlit.app'
 
     
 href = "https://accounts.google.com/o/oauth2/auth?response_type=code&client_id={}&redirect_uri={}&scope=https://www.googleapis.com/auth/webmasters.readonly&access_type=offline&prompt=consent".format(clientId, redirectUri)
