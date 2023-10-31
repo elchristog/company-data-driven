@@ -486,7 +486,7 @@ def criar_grafico_echarts(df_grouped):
             {"type": "value", "name": ""},
             {"type": "value", "inverse": True, "show": False},  # Segundo eixo Y com a opção "inverse"
         ],
-        "backgroundColor": "#282a36",
+        "backgroundColor": "#f5f5f7",
         "color": ["#8be9fd", "#ffb86c", "#50fa7b", "#ff79c6"],
     }
 
