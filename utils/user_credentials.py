@@ -20,7 +20,6 @@ def run_query(query, client):
 
 def user_credentials(name, authentication_status, username):
     client = gcloud_bigquery_client()
-    @st.cache_data
     # @st.cache_data(ttl=600) # Uses st.cache_data to only rerun when the query changes or after 10 min.
     rows = run_query(f"SELECT u.id AS user_id, u.username, u.status, u.project_id, r.id AS role_id, r.name AS role_name, p.icon, p.logo_url, p.name, p.title   FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.roles` AS r ON ra.role_id = r.id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE username = '{username}';", client)
 
