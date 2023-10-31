@@ -13,9 +13,10 @@ def gcloud_bigquery_client():
     client = bigquery.Client(credentials=credentials)
     return client
 
+client = gcloud_bigquery_client()
+
 # @st.cache_data(ttl=600)
 def run_query(query):
-    client = gcloud_bigquery_client()
     query_job = client.query(query)
     rows_raw = query_job.result()
     rows = [dict(row) for row in rows_raw]
