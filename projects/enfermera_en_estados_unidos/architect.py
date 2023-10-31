@@ -1,7 +1,7 @@
 import streamlit as st
 import modules.title_and_paragraph as tap
 import modules.tasks as t
-import modules.seo_traffic as seot
+# import modules.seo_traffic as seot
 
 # https://docs.streamlit.io/library/api-reference/layout
 # https://docs.streamlit.io/library/api-reference/control-flow/st.form
