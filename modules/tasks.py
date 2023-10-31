@@ -8,7 +8,7 @@ openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 
 def tasks_visualizer(user_id, project_name, divider):
-    rows = uc.run_query(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed');") #finished, canceled, unfulfilled
+    rows = uc.run_query_instant(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed');") #finished, canceled, unfulfilled
     if len(rows) == 0:
         st.success('You have no pending tasks, very good!', icon="😎")
     else:
