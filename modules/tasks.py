@@ -8,7 +8,7 @@ openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 @st.cache
 def tasks_visualizer(user_id, project_name, _client, divider):
-    rows = uc.run_query(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed');", client) #finished, canceled, unfulfilled
+    rows = uc.run_query(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed');", _client) #finished, canceled, unfulfilled
     if len(rows) == 0:
         st.success('You have no pending tasks, very good!', icon="😎")
     else:
@@ -46,9 +46,9 @@ def tasks_visualizer(user_id, project_name, _client, divider):
             update_task_status_button = st.button("Update status")
             def update_task_status(task_id, new_status, today_str):
                 if new_status == 'on_execution':
-                    uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', on_execution_date = '{today_str}' WHERE id = {task_id}", client)
+                    uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', on_execution_date = '{today_str}' WHERE id = {task_id}", _client)
                 if new_status == 'finished':
-                    uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', finished_date = '{today_str}' WHERE id = {task_id}", client)
+                    uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', finished_date = '{today_str}' WHERE id = {task_id}", _client)
             if update_task_status_button:
                 today = datetime.date.today()
                 today_str = today.strftime("%Y-%m-%d")
