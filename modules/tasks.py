@@ -55,7 +55,7 @@ def tasks_visualizer(user_id, project_name, divider):
                 selected_task_id = ids[descriptions.index(selected_task)]
                 update_task_status(selected_task_id, selected_status, today_str)
                 st.success('Task status updated!', icon="😎")
-                st.rerun()
+                # st.rerun()
     if divider == 1:
         st.write("---") 
     return rows
@@ -208,7 +208,7 @@ def task_deletion(user_id, role_id, project_id, project_name, divider):
                     today_str = today.strftime("%Y-%m-%d")
                     uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = 'canceled', canceled_date = '{today_str}', task_cancelator_id = {user_id} WHERE id = {selected_task_id};")
                     st.error('Task deleted!', icon="😎")
-                    st.rerun()
+                    # st.rerun()
 
     if divider == 1:
         st.write("---") 
