@@ -14,8 +14,8 @@ def gcloud_bigquery_client():
     return client
 
 @st.cache_data 
-def run_query(query, client):
-    query_job = client.query(query)
+def run_query(query, _client):
+    query_job = _client.query(query)
     rows_raw = query_job.result()
     rows = [dict(row) for row in rows_raw]
     return rows
