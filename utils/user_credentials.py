@@ -14,7 +14,7 @@ def gcloud_bigquery_client():
     client = bigquery.Client(credentials=credentials)
     return client
 
-@st.cache
+# @st.cache
 def run_query(query):
     client = gcloud_bigquery_client()
     query_job = client.query(query)
