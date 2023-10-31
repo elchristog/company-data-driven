@@ -151,7 +151,7 @@ def task_creation(user_id, role_id, project_id, project_name, client, divider):
                     max_id =  uc.run_query(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.tasks`", client)[0].get('max_id')
                     uc.run_query(f"INSERT INTO `company-data-driven.{project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{today_str}', '{task_input}', {selected_user_id}, '{commitment_date_input}', 'to_start', {user_id})", client)
                     st.success('Task created!', icon="😎")
-                    st.rerun()
+                    # st.rerun()
 
     if divider == 1:
         st.write("---") 
