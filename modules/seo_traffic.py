@@ -15,7 +15,7 @@ from pandas.api.types import (
     is_object_dtype,
 )
 import urllib.parse
-import functions as fc
+# import functions as fc
 from streamlit_raw_echarts import st_echarts, JsCode
 import streamlit_antd_components as sac
 
@@ -498,8 +498,8 @@ def createPage():
     colunhead, colundhead2 = st.columns([0.06, 0.99])
     
     # Inserindo animação na primeira coluna
-    with colunhead:
-        st.image(fc.open_image("./assets/robozin2.png"))
+    # with colunhead:
+    #     st.image(fc.open_image("./assets/robozin2.png"))
 
     # Inserindo informações de contatos na segunda coluna
     with colundhead2:
