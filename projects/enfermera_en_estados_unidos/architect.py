@@ -33,7 +33,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             tab1, tab2, tab3 = st.tabs(["Trafico", "SEO", "Eliminar"])
             with tab1:
                 tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios", "h1", 0)
-                seot.createPage()
+                # seot.createPage()
 
 
     # customer
