@@ -15,7 +15,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
         if menu == "Home":
             tab1, tab2, tab3 = st.tabs(["Tareas", "Asignar", "Eliminar"])
             with tab1:
-                tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios", "h1", 1)
+                tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios", "h1", 0)
                 tap.title_and_paragraph("Tus tareas", "Gestiona tus tareas (delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
                 tasks = t.tasks_visualizer(user_id, project_name, 0)
                 t.tips_tasks_ia(tasks, 0)
