@@ -46,9 +46,9 @@ def tasks_visualizer(user_id, project_name, divider):
             update_task_status_button = st.button("Update status")
             def update_task_status(task_id, new_status, today_str):
                 if new_status == 'on_execution':
-                    uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', on_execution_date = '{today_str}' WHERE id = {task_id}")
+                    uc.run_query_instant(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', on_execution_date = '{today_str}' WHERE id = {task_id}")
                 if new_status == 'finished':
-                    uc.run_query(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', finished_date = '{today_str}' WHERE id = {task_id}")
+                    uc.run_query_instant(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', finished_date = '{today_str}' WHERE id = {task_id}")
             if update_task_status_button:
                 today = datetime.date.today()
                 today_str = today.strftime("%Y-%m-%d")
@@ -62,12 +62,12 @@ def tasks_visualizer(user_id, project_name, divider):
 
 
 def tasks_achievements(user_id, project_name, tasks, divider):
-    if len(uc.run_query(f"SELECT id  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND finished_date IS NOT NULL LIMIT 1")) < 1:
+    if len(uc.run_query_instant(f"SELECT id  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND finished_date IS NOT NULL LIMIT 1")) < 1:
         st.success("Your achievements will be available when you finish your first task")
     else:
-        year_fulfillment = uc.run_query(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND canceled_date IS NULL GROUP BY year ORDER BY year DESC LIMIT 2")
-        month_fulfillment = uc.run_query(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, EXTRACT(MONTH FROM commit_finish_date) AS month, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND canceled_date IS NULL GROUP BY year, month ORDER BY year DESC, month DESC LIMIT 2")
-        week_fulfillment = uc.run_query(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, EXTRACT(MONTH FROM commit_finish_date) AS month,  EXTRACT(WEEK FROM commit_finish_date) AS week, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND canceled_date IS NULL GROUP BY year, month, week ORDER BY year DESC, month DESC, week DESC LIMIT 2")
+        year_fulfillment = uc.run_query_instant(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND canceled_date IS NULL GROUP BY year ORDER BY year DESC LIMIT 2")
+        month_fulfillment = uc.run_query_instant(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, EXTRACT(MONTH FROM commit_finish_date) AS month, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND canceled_date IS NULL GROUP BY year, month ORDER BY year DESC, month DESC LIMIT 2")
+        week_fulfillment = uc.run_query_instant(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, EXTRACT(MONTH FROM commit_finish_date) AS month,  EXTRACT(WEEK FROM commit_finish_date) AS week, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND canceled_date IS NULL GROUP BY year, month, week ORDER BY year DESC, month DESC, week DESC LIMIT 2")
 
         col1, col2, col3 = st.columns(3)
         if len(year_fulfillment) == 1:
@@ -109,7 +109,7 @@ def tips_tasks_ia(tasks, divider):
 
 
 def task_creation(user_id, role_id, project_id, project_name, divider):
-    rows = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;")
+    rows = uc.run_query_instant(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;")
     role_ids = []
     role_names = []
     for row in rows:
@@ -123,7 +123,7 @@ def task_creation(user_id, role_id, project_id, project_name, divider):
         )
     if selected_role is not None:
         selected_role_id = role_ids[role_names.index(selected_role)]
-        rows_users = uc.run_query(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = {selected_role_id} ORDER BY u.username ASC;")
+        rows_users = uc.run_query_instant(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = {selected_role_id} ORDER BY u.username ASC;")
         users_ids = []
         users_username = []
         for row in rows_users:
@@ -147,7 +147,7 @@ def task_creation(user_id, role_id, project_id, project_name, divider):
                     today = datetime.date.today()
                     today_str = today.strftime("%Y-%m-%d")
                     max_id =  uc.run_query(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.tasks`")[0].get('max_id')
-                    uc.run_query(f"INSERT INTO `company-data-driven.{project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{today_str}', '{task_input}', {selected_user_id}, '{commitment_date_input}', 'to_start', {user_id})")
+                    uc.run_query_instant(f"INSERT INTO `company-data-driven.{project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{today_str}', '{task_input}', {selected_user_id}, '{commitment_date_input}', 'to_start', {user_id})")
                     st.success('Task created! (' + task_input + ')', icon="😎")
                     # st.rerun()
 
@@ -158,9 +158,9 @@ def task_creation(user_id, role_id, project_id, project_name, divider):
 
 def task_deletion(user_id, role_id, project_id, project_name, divider):
     if role_id == 1:
-        rows = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;")
+        rows = uc.run_query_instant(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;")
     else:
-        rows = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id > {role_id} ORDER BY id DESC;")
+        rows = uc.run_query_instant(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id > {role_id} ORDER BY id DESC;")
     role_ids = []
     role_names = []
     for row in rows:
@@ -174,7 +174,7 @@ def task_deletion(user_id, role_id, project_id, project_name, divider):
         )
     if selected_role is not None:
         selected_role_id = role_ids[role_names.index(selected_role)]
-        rows_users = uc.run_query(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = {selected_role_id} ORDER BY u.username ASC;")
+        rows_users = uc.run_query_instant(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = {selected_role_id} ORDER BY u.username ASC;")
         users_ids = []
         users_username = []
         for row in rows_users:
@@ -188,7 +188,7 @@ def task_deletion(user_id, role_id, project_id, project_name, divider):
         )
         if selected_username is not None:
             selected_user_id = users_ids[users_username.index(selected_username)]
-            rows_user_tasks = uc.run_query(f"SELECT id, description FROM `company-data-driven.{project_name}.tasks` WHERE finished_date IS NULL AND canceled_date IS NULL AND responsible_user_id = {selected_user_id} ORDER BY description ASC;")
+            rows_user_tasks = uc.run_query_instant(f"SELECT id, description FROM `company-data-driven.{project_name}.tasks` WHERE finished_date IS NULL AND canceled_date IS NULL AND responsible_user_id = {selected_user_id} ORDER BY description ASC;")
             user_tasks_ids = []
             user_tasks_descriptions = []
             for row in rows_user_tasks:
