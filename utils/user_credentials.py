@@ -20,7 +20,7 @@ def run_query(query, client):
     rows = [dict(row) for row in rows_raw]
     return rows
 
-@st.cache_data 
+# @st.cache_data 
 def user_credentials(name, authentication_status, username):
     client = gcloud_bigquery_client()
     # @st.cache_data(ttl=600) # Uses st.cache_data to only rerun when the query changes or after 10 min.
