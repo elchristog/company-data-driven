@@ -109,47 +109,50 @@ def tips_tasks_ia(tasks, divider):
 
 
 def task_creation(user_id, role_id, project_id, project_name, divider):
-    rows = uc.run_query_half_day(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;")
-    role_ids = []
-    role_names = []
-    for row in rows:
-        role_ids.append(row.get('id'))
-        role_names.append(row.get('name'))
-    selected_role = st.selectbox(
-            label = "Select the user's role",
-            options = role_names,
-            index = None,
-            key= "creation_task_role"
-        )
-    if selected_role is not None:
-        selected_role_id = role_ids[role_names.index(selected_role)]
-        rows_users = uc.run_query_half_day(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = {selected_role_id} ORDER BY u.username ASC;")
-        users_ids = []
-        users_username = []
-        for row in rows_users:
-            users_ids.append(row.get('id'))
-            users_username.append(row.get('username'))
-        selected_username = st.selectbox(
-            label = "Select the username",
-            options = users_username,
-            index = None,
-            key= "creation_task_username"
-        )
-        if selected_username is not None:
-            selected_user_id = users_ids[users_username.index(selected_username)]
-            task_input = st.text_input("Describe the task:")
-            commitment_date_input = st.date_input("Select a commitment date:")
-            create_task_button = st.button("Create task")
-            if create_task_button:
-                if selected_user_id is None or task_input is None or len(task_input) < 10 or commitment_date_input is None:
-                    st.error("Please fill in completely all of the required fields.")
-                else:
-                    today = datetime.date.today()
-                    today_str = today.strftime("%Y-%m-%d")
-                    max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.tasks`")[0].get('max_id')
-                    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{today_str}', '{task_input}', {selected_user_id}, '{commitment_date_input}', 'to_start', {user_id})")
-                    st.success('Task created! (' + task_input + ')', icon="😎")
-                    # st.rerun()
+    with st.form("my_form"):
+        rows = uc.run_query_half_day(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;")
+        role_ids = []
+        role_names = []
+        for row in rows:
+            role_ids.append(row.get('id'))
+            role_names.append(row.get('name'))
+        selected_role = st.selectbox(
+                label = "Select the user's role",
+                options = role_names,
+                index = None,
+                key= "creation_task_role"
+            )
+        if selected_role is not None:
+            selected_role_id = role_ids[role_names.index(selected_role)]
+            rows_users = uc.run_query_half_day(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = {selected_role_id} ORDER BY u.username ASC;")
+            users_ids = []
+            users_username = []
+            for row in rows_users:
+                users_ids.append(row.get('id'))
+                users_username.append(row.get('username'))
+            selected_username = st.selectbox(
+                label = "Select the username",
+                options = users_username,
+                index = None,
+                key= "creation_task_username"
+            )
+            if selected_username is not None:
+                selected_user_id = users_ids[users_username.index(selected_username)]
+                task_input = st.text_input("Describe the task:")
+                commitment_date_input = st.date_input("Select a commitment date:")
+                create_task_button = st.form_submit_button("Create task")
+                # if submitted:
+                # create_task_button = st.button("Create task")
+                if create_task_button:
+                    if selected_user_id is None or task_input is None or len(task_input) < 10 or commitment_date_input is None:
+                        st.error("Please fill in completely all of the required fields.")
+                    else:
+                        today = datetime.date.today()
+                        today_str = today.strftime("%Y-%m-%d")
+                        max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.tasks`")[0].get('max_id')
+                        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{today_str}', '{task_input}', {selected_user_id}, '{commitment_date_input}', 'to_start', {user_id})")
+                        st.success('Task created! (' + task_input + ')', icon="😎")
+                        # st.rerun()
 
     if divider == 1:
         st.write("---") 
