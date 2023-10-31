@@ -504,7 +504,7 @@ def createPage():
     # Inserindo informações de contatos na segunda coluna
     with colundhead2:
         st.header("Google Search Console API")
-        st.markdown('<p class="minha-classe">By <a href="https://viniciusstanula.com/en/">Vinicius Stanula</a>, made in Streamlit 🎈</p>', unsafe_allow_html=True)
+        # st.markdown('<p class="minha-classe">By <a href="https://viniciusstanula.com/en/">Vinicius Stanula</a>, made in Streamlit 🎈</p>', unsafe_allow_html=True)
         
     if "my_token_input" not in st.session_state:
         st.session_state["my_token_input"] = ""
