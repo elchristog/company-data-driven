@@ -28,6 +28,12 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             with tab3:
                 tap.title_and_paragraph("Eliminar tareas", "Elimina tareas de tu equipo", "h3", 0)
                 t.task_deletion(user_id, role_id, project_id, project_name, 1)
+        if menu == "Trafico y SEO":
+            tab1, tab2, tab3 = st.tabs(["Trafico", "SEO", "Eliminar"])
+            with tab1:
+                tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios", "h1", 0)
+
+        
 
 
 
