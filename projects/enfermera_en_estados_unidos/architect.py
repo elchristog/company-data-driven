@@ -13,14 +13,23 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
         if menu == "Home":
             @st.cache
             tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios", "h1", 1)
+            @st.cache
             tap.title_and_paragraph("Tus tareas", "Gestiona tus tareas (delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
+            @st.cache
             tasks = t.tasks_visualizer(user_id, project_name, client, 0)
+            @st.cache
             t.tips_tasks_ia(tasks, 0)
+            @st.cache
             tap.title_and_paragraph("Tus logros", "Visualiza tu crecimiento", "h3", 0)
+            @st.cache
             t.tasks_achievements(user_id, project_name, tasks, client, 1)
+            @st.cache
             tap.title_and_paragraph("Asignar tareas", "Asigna tareas a tu equipo", "h3", 0)
+            @st.cache
             t.task_creation(user_id, role_id, project_id, project_name, client, 1)
+            @st.cache
             tap.title_and_paragraph("Eliminar tareas", "Elimina tareas de tu equipo", "h3", 0)
+            @st.cache
             t.task_deletion(user_id, role_id, project_id, project_name, client, 1)
 
 
