@@ -6,7 +6,6 @@ import utils.user_credentials as uc
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
-@st.cache_data 
 def tasks_visualizer(user_id, project_name, client, divider):
     rows = uc.run_query(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed');", client) #finished, canceled, unfulfilled
     if len(rows) == 0:
@@ -61,7 +60,6 @@ def tasks_visualizer(user_id, project_name, client, divider):
     return rows
 
 
-@st.cache_data 
 def tasks_achievements(user_id, project_name, tasks, client, divider):
     if len(uc.run_query(f"SELECT id  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND finished_date IS NOT NULL LIMIT 1", client)) < 1:
         st.success("Your achievements will be available when you finish your first task")
@@ -89,7 +87,6 @@ def tasks_achievements(user_id, project_name, tasks, client, divider):
         st.write("---") 
 
 
-@st.cache_data 
 def tips_tasks_ia(tasks, divider):
     if len(tasks) > 2:
         ia_tips_button = st.button("🤖 Help me to prioritize!")     
@@ -110,7 +107,6 @@ def tips_tasks_ia(tasks, divider):
 
 
 
-@st.cache_data 
 def task_creation(user_id, role_id, project_id, project_name, client, divider):
     rows = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;", client)
     role_ids = []
@@ -159,7 +155,6 @@ def task_creation(user_id, role_id, project_id, project_name, client, divider):
 
 
 
-@st.cache_data 
 def task_deletion(user_id, role_id, project_id, project_name, client, divider):
     if role_id == 1:
         rows = uc.run_query(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;", client)
