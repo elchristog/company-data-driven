@@ -33,7 +33,23 @@ def user_creation(user_id, project_id, project_name):
         index = None
     )
     selected_project_id = project_ids[project_names.index(selected_project)]
-    st.write(selected_project_id)
+    user_first_name = st.text_input("Write the user first name:")
+    user_last_name = st.text_input("Write the user last name:")
+    user_email = st.text_input("Write the user email:")
+    commitment_birth_date = st.date_input("User birth date:")
+    user_country = st.selectbox(
+        label = "Select user country",
+        options = ['colombia', 'united states'],
+        index = None
+    )
+    user_gender = st.selectbox(
+        label = "Select user gender",
+        options = ['male', 'female'],
+        index = None
+    )
+
+
+
 
 
 
