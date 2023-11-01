@@ -7,4 +7,4 @@ def hashing():
     hashed_passwords = stauth.Hasher([password_to_hash]).generate()
     hashing_button = st.button("Start Hashing")
     if hashing_button:
-        st.write(hashed_passwords)
+        st.write(hashed_passwords[0])
