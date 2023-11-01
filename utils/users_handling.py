@@ -32,5 +32,8 @@ def user_creation(user_id, project_id, project_name):
         options = project_names,
         index = None
     )
+    selected_project_id = project_ids[project_names.index(selected_project)]
+    st.write(selected_project_id)
+
 
 
