@@ -16,7 +16,6 @@ def user_creation(user_id, project_id, project_name):
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
     username = st.text_input("Write the username:")
-    # if check_username_availability: #name, birthdate, country, gender, user_creator, email, project_id
     checking_username_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
     if len(checking_username_query) > 0:
         st.error('Username is not available', icon = '👻')
@@ -76,6 +75,7 @@ def user_creation(user_id, project_id, project_name):
     user_first_name = st.text_input("Write the user first name:")
     user_last_name = st.text_input("Write the user last name:")
     user_email = st.text_input("Write the user email:")
+    user_phone_number = st.text_input("Write the user phone number:")
     user_birth_date = st.date_input("User birth date:")
     user_country = st.selectbox(
         label = "Select user country",
