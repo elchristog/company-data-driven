@@ -42,10 +42,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 seot.createPage()
 
         if menu == "Users Admin":
-            sub_menu_options=['Tareas', 'Asignar', 'Eliminar']
+            sub_menu_options=['Create User', 'Update User', 'Hashing']
             sub_menu = st.sidebar.radio('Users Admin options', options = sub_menu_options)
-            if sub_menu == "Tareas":
-                tap.title_and_paragraph("Tus tareas" + project_icon, "Gestiona tus tareas (delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
+            if sub_menu == "Hashing":
+                tap.title_and_paragraph("Hashing" + project_icon, "Gestiona tus tareas (delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
 
 
     # customer
