@@ -27,13 +27,13 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tasks = t.tasks_visualizer(user_id, project_name, 0)
                 t.tips_tasks_ia(tasks, 0)
                 tap.title_and_paragraph("Tus logros", "Visualiza tu crecimiento", "h3", 0)
-                t.tasks_achievements(user_id, project_name, tasks, 1)
+                t.tasks_achievements(user_id, project_name, tasks, 0)
             if sub_menu == "Asignar":
                 tap.title_and_paragraph("Asignar tareas", "Asigna tareas a tu equipo", "h3", 0)
-                t.task_creation(user_id, role_id, project_id, project_name, 1)
+                t.task_creation(user_id, role_id, project_id, project_name, 0)
             if sub_menu == "Eliminar":
                 tap.title_and_paragraph("Eliminar tareas", "Elimina tareas de tu equipo", "h3", 0)
-                t.task_deletion(user_id, role_id, project_id, project_name, 1)
+                t.task_deletion(user_id, role_id, project_id, project_name, 0)
             if sub_menu == "Hashing":
                 tap.title_and_paragraph("Hashing passwords", "se asi asi y asi", "h3", 0)
 
