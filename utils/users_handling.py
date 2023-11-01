@@ -87,7 +87,8 @@ def user_creation(user_id, project_id, project_name):
     
     create_user_button = st.button("Create User")
     if create_user_button:
-        if len(username) < 6:
+        checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
+        if len(username) < 6 or len(checking_username_query) > 0:
             st.error("Please fill in completely all of the required fields.")
         else:
             st.write(user_first_name.lower())
