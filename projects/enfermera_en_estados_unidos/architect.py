@@ -41,6 +41,12 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios", "h1", 0)
                 seot.createPage()
 
+        if menu == "Users Admin":
+            sub_menu_options=['Tareas', 'Asignar', 'Eliminar']
+            sub_menu = st.sidebar.radio('Users Admin options', options = sub_menu_options)
+            if sub_menu == "Tareas":
+                tap.title_and_paragraph("Tus tareas" + project_icon, "Gestiona tus tareas (delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
+
 
     # customer
     if role_id == 6:
