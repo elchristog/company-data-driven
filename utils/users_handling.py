@@ -91,6 +91,44 @@ def user_creation(user_id, project_id, project_name):
     create_user_button = st.button("Create User")
     if create_user_button:
         checking_username_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
+        if len(username) < 6:
+            st.error("The username must be at least 6 characters long.")
+        if len(checking_username_query) > 0:
+            st.error("The username is already in use.")
+        if selected_project is None:
+            st.error("Please select a project.")
+        if selected_project != selected_project_confirmation:
+            st.error("The selected project and the confirmation project must match.")
+        if user_role is None:
+            st.error("Please select a user role.")
+        if user_role != user_role_confirmation:
+            st.error("The selected user role and the confirmation user role must match.")
+        if user_first_name is None:
+            st.error("Please enter your first name.")
+        if len(user_first_name) < 3:
+            st.error("The first name must be at least 3 characters long.")
+        if user_last_name is None:
+            st.error("Please enter your last name.")
+        if len(user_last_name) < 3:
+            st.error("The last name must be at least 3 characters long.")
+        if user_email is None:
+            st.error("Please enter your email address.")
+        if len(user_email) < 3:
+            st.error("The email address must be at least 3 characters long.")
+        if user_birth_date is None:
+            st.error("Please enter your birth date.")
+        if user_country is None:
+            st.error("Please select your country.")
+        if len(user_country) < 3:
+            st.error("The country name must be at least 3 characters long.")
+        if user_gender is None:
+            st.error("Please select your gender.")
+        if len(user_gender) < 3:
+            st.error("The gender must be at least 3 characters long.")
+        if user_phone_number is None:
+            st.error("Please enter your phone number.")
+        if len(user_phone_number) < 6:
+            st.error("The phone number must be at least 6 characters long.")
         if len(username) < 6 or len(checking_username_query) > 0 or selected_project is None or selected_project != selected_project_confirmation or user_role is None or user_role != user_role_confirmation or user_first_name is None or len(user_first_name) < 3 or user_last_name is None or len(user_last_name) < 3 or user_email is None or len(user_email) < 3  or user_birth_date is None or user_country is None or len(user_country) < 3 or user_gender is None or len(user_gender) < 3 or user_phone_number is None or len(user_phone_number) < 6:
             st.error("Please fill in completely all of the required fields.")
         else:
