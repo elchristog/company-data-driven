@@ -11,16 +11,16 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
     if role_id != 6:
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
-            menu = st.sidebar.radio(project_title, ["Home", "Trafico y SEO", "Whatsapp", "Trip Wire"])
+            menu_options = ["Home", "Trafico y SEO", "Whatsapp", "Trip Wire"]
+            if role_id == 1:
+                sub_menu_options.extend(['Users Admin'])
+            menu = st.sidebar.radio(project_title, menu_options)
             st.write("---") 
 
         if menu == "Home":
             sub_menu_options=['Tareas', 'Asignar', 'Eliminar']
-            if role_id == 1:
-                sub_menu_options.extend(['Hashing'])
             sub_menu = st.sidebar.radio('Home options', options = sub_menu_options)
             if sub_menu == "Tareas":
-                # tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios", "h1", 0)
                 tap.title_and_paragraph("Tus tareas" + project_icon, "Gestiona tus tareas (delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
                 tasks = t.tasks_visualizer(user_id, project_name, 0)
                 t.tips_tasks_ia(tasks, 0)
@@ -34,6 +34,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 t.task_deletion(user_id, role_id, project_id, project_name, 1)
             if sub_menu == "Hashing":
                 tap.title_and_paragraph("Hashing passwords", "se asi asi y asi", "h3", 0)
+
         if menu == "Trafico y SEO":
             tab1, tab2, tab3 = st.tabs(["Trafico", "SEO", "Eliminar"])
             with tab1:
