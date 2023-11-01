@@ -87,7 +87,7 @@ def user_creation(user_id, project_id, project_name):
     
     create_user_button = st.button("Create User")
     if create_user_button:
-        pass
+        st.write(user_first_name.lower())
 
 
 
