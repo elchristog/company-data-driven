@@ -15,7 +15,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             st.write("---") 
 
         if menu == "Home":
-            sub_menu = st.sidebar.radio('Home options', options=['Tareas', 'Asignar', 'Eliminar'])
+            sub_menu_options=['Tareas', 'Asignar', 'Eliminar']
+            if role_id == 1:
+                sub_menu_options.extend(['Hashing'])
+            sub_menu = st.sidebar.radio('Home options', options = sub_menu_options)
             if sub_menu == "Tareas":
                 # tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios", "h1", 0)
                 tap.title_and_paragraph("Tus tareas" + project_icon, "Gestiona tus tareas (delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
@@ -29,6 +32,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Eliminar":
                 tap.title_and_paragraph("Eliminar tareas", "Elimina tareas de tu equipo", "h3", 0)
                 t.task_deletion(user_id, role_id, project_id, project_name, 1)
+            if sub_menu == "Hashing":
+                tap.title_and_paragraph("Hashing passwords", "se asi asi y asi", "h3", 0)
         if menu == "Trafico y SEO":
             tab1, tab2, tab3 = st.tabs(["Trafico", "SEO", "Eliminar"])
             with tab1:
