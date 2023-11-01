@@ -18,3 +18,6 @@ def user_creation(user_id, project_id, project_name):
         checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
         if len(checking_username_query) > 0:
             st.error('Username is not available', icon = '👻')
+        else:
+            max_id_users = uc.run_query_instant(f"SELECT MAX(id) AS max_id FROM `company-data-driven.global.users`;")
+            st.write(max_id_users)
