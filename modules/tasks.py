@@ -55,7 +55,7 @@ def tasks_visualizer(user_id, project_name, divider):
                 selected_task_id = ids[descriptions.index(selected_task)]
                 update_task_status(selected_task_id, selected_status, today_str)
                 st.success('Task status updated!', icon="😎")
-                # st.rerun()
+                st.rerun()
     if divider == 1:
         st.write("---") 
     return rows
