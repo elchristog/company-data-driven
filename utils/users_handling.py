@@ -133,9 +133,9 @@ def user_creation(user_id, project_id, project_name):
             st.error("Please fill in completely all of the required fields.")
         else:
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.users` (id, username, status, project_id, creation_date, email, name, lastname, birthdate, country, gender, user_creator_id, phone_number) VALUES({max_id_users}, '{username}', 'active', {selected_project_id}, '{today_str}', '{user_email.lower()}', '{user_first_name.lower()}', '{user_last_name.lower()}', '{user_birth_date}', '{user_country.lower()}', '{user_gender.lower()}', {user_id}, '{user_phone_number}');")
-            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.users` (id, user_id, role_id) VALUES({max_id_role_assignement}, {max_id_users}, {selected_role_id});")
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.role_assignment` (id, user_id, role_id) VALUES({max_id_role_assignement}, {max_id_users}, {selected_role_id});")
             st.success('User Created!', icon = '🎈')
-            st.warning('Remember to has the password and add to config', icon = '😶‍🌫️')
+            st.warning('Remember to hash the password and add to config', icon = '😶‍🌫️')
 
 
 
