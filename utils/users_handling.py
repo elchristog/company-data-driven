@@ -73,7 +73,7 @@ def user_creation(user_id, project_id, project_name):
     user_first_name = st.text_input("Write the user first name:")
     user_last_name = st.text_input("Write the user last name:")
     user_email = st.text_input("Write the user email:")
-    commitment_birth_date = st.date_input("User birth date:")
+    user_birth_date = st.date_input("User birth date:")
     user_country = st.selectbox(
         label = "Select user country",
         options = ['colombia', 'united states'],
@@ -88,7 +88,7 @@ def user_creation(user_id, project_id, project_name):
     create_user_button = st.button("Create User")
     if create_user_button:
         checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
-        if len(username) < 6 or len(checking_username_query) > 0 or selected_project is None or selected_project != selected_project_confirmation:
+        if len(username) < 6 or len(checking_username_query) > 0 or selected_project is None or selected_project != selected_project_confirmation or user_role is None or user_role != user_role_confirmation or user_first_name is None or len(user_first_name) < 3 or user_last_name is None or len(user_last_name) < 3 or user_email is None or len(user_email) < 3  or user_birth_date is None or len(user_birth_date) < 3 or user_country is None or len(user_country) < 3 or user_gender is None or len(user_gender) < 3:
             st.error("Please fill in completely all of the required fields.")
         else:
             st.write(user_first_name.lower())
