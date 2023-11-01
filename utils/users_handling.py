@@ -1,5 +1,6 @@
 import streamlit as st
 import streamlit_authenticator as stauth
+import datetime
 
 import utils.user_credentials as uc
 
@@ -12,6 +13,8 @@ def hashing():
         st.write(hashed_passwords[0])
 
 def user_creation(user_id, project_id, project_name): 
+    today = datetime.date.today()
+    today_str = today.strftime("%Y-%m-%d")
     username = st.text_input("Write the username:")
     # if check_username_availability: #name, birthdate, country, gender, user_creator, email, project_id
     checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
@@ -20,6 +23,7 @@ def user_creation(user_id, project_id, project_name):
     else:
         st.success('Username available', icon = '🪬')
     max_id_users = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.global.users`;")[0].get('max_id')
+    max_id_role_assignement = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.global.role_assignment`;")[0].get('max_id')
     get_projects = uc.run_query_instant(f"SELECT id, name FROM `company-data-driven.global.projects`;")
     project_ids = []
     project_names = []
