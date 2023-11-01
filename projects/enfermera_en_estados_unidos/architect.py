@@ -13,7 +13,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             st.image(project_logo_url, width=50, use_column_width=False)
             menu_options = ["Home", "Trafico y SEO", "Whatsapp", "Trip Wire"]
             if role_id == 1:
-                sub_menu_options.extend(['Users Admin'])
+                menu_options.extend(['Users Admin'])
             menu = st.sidebar.radio(project_title, menu_options)
             st.write("---") 
 
