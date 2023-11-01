@@ -17,7 +17,7 @@ def user_creation(user_id, project_id, project_name):
     today_str = today.strftime("%Y-%m-%d")
     username = st.text_input("Write the username:")
     checking_username_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
-    if len(checking_username_query) > 0:
+    if len(checking_username_query) > 0 and len(username) < 6:
         st.error('Username is not available', icon = '👻')
     else:
         st.success('Username available', icon = '🪬')
