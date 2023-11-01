@@ -11,8 +11,9 @@ def hashing():
     if hashing_button:
         st.write(hashed_passwords[0])
 
-def user_creation(): #project_id, project_name, user_id
+def user_creation(user_id, project_id, project_name): 
     username = st.text_input("Write the username:")
     check_username_availability = st.button("Check Availability")
     if check_username_availability: #name, birthdate, country, gender, user_creator, email, project_id
-        checking_username_query = uc.run_query_instant(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed');") #finished, canceled, unfulfilled
+        checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
+        st.write(len(checking_username_query))
