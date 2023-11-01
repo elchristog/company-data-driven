@@ -3,5 +3,6 @@ import streamlit_authenticator as stauth
 
 
 def hashing():
-    hashed_passwords = stauth.Hasher(['abc']).generate()
+    password_to_hash = st.text_input("Write the password to hash:")
+    hashed_passwords = stauth.Hasher([password_to_hash]).generate()
     st.text(hashed_passwords)

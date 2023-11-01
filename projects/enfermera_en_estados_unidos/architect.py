@@ -1,7 +1,9 @@
 import streamlit as st
+
 import modules.title_and_paragraph as tap
 import modules.tasks as t
 import modules.seo_traffic as seot
+import utils.users_handling as uh
 
 # https://docs.streamlit.io/library/api-reference/layout
 # https://docs.streamlit.io/library/api-reference/control-flow/st.form
@@ -45,7 +47,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu_options=['Create User', 'Update User', 'Hashing']
             sub_menu = st.sidebar.radio('Users Admin options', options = sub_menu_options)
             if sub_menu == "Hashing":
-                tap.title_and_paragraph("Hashing" + project_icon, "Gestiona tus tareas (delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
+                tap.title_and_paragraph("Hashing " + project_icon, "Write the password and get the hashed version", "h3", 0)
+                uh.hashing()
 
 
     # customer
