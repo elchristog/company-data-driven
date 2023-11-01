@@ -8,3 +8,6 @@ def hashing():
     hashing_button = st.button("Start Hashing")
     if hashing_button:
         st.write(hashed_passwords[0])
+
+def user_creation():
+    username = st.text_input("Write the username:")
