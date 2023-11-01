@@ -33,6 +33,17 @@ def user_creation(user_id, project_id, project_name):
         index = None
     )
     selected_project_id = project_ids[project_names.index(selected_project)]
+    selected_project_confirmation = st.selectbox(
+        label = "Confirm the project for the user",
+        options = project_names,
+        index = None
+    )
+    selected_project_id_confirmation = project_ids[project_names.index(selected_project_confirmation)]
+    if selected_project == selected_project_confirmation:
+        st.success('Project confirmated', icon = '🎈')
+    else:
+        st.error('Incorrect project', icon = '🀄')
+
     user_first_name = st.text_input("Write the user first name:")
     user_last_name = st.text_input("Write the user last name:")
     user_email = st.text_input("Write the user email:")
