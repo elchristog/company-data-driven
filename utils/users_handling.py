@@ -76,7 +76,7 @@ def user_creation(user_id, project_id, project_name):
     user_last_name = st.text_input("Write the user last name:")
     user_email = st.text_input("Write the user email:")
     user_phone_number = st.text_input("Write the user phone number:")
-    user_birth_date = st.date_input("User birth date:")
+    user_birth_date = st.date_input("User birth date:", min_value = "1970-01-01")
     user_country = st.selectbox(
         label = "Select user country",
         options = ['colombia', 'united states'],
