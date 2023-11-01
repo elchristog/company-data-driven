@@ -48,10 +48,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu = st.sidebar.radio('Users Admin options', options = sub_menu_options)
             if sub_menu == "Create User":
                 tap.title_and_paragraph("Create User " + project_icon, "Remember at the end hash the password and add to the config", "h3", 0)
-                uh.user_creation()
+                uh.user_creation(user_id, project_id, project_name)
             if sub_menu == "Hashing":
                 tap.title_and_paragraph("Hashing " + project_icon, "Write the password and get the hashed version", "h3", 0)
-                uh.hashing(user_id, project_id, project_name)
+                uh.hashing()
 
 
     # customer
