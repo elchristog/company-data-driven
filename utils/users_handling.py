@@ -11,3 +11,6 @@ def hashing():
 
 def user_creation():
     username = st.text_input("Write the username:")
+    check_username_availability = st.button("Check Availability")
+    if check_username_availability:
+        pass
