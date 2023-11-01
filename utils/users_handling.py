@@ -46,10 +46,17 @@ def user_creation(user_id, project_id, project_name):
             st.success('Project confirmed', icon = '🎈')
         else:
             st.error('Incorrect project', icon = '🀄')
+    
+    get_roles = uc.run_query_instant(f"SELECT id, name FROM `company-data-driven.global.roles`;")
+    roles_ids = []
+    roles_names = []
+    for row in get_roles:
+        roles_ids.append(row.get('id'))
+        roles_names.append(row.get('name'))
 
     user_role = st.selectbox(
         label = "Select user role",
-        options = ['male', 'female'],
+        options = roles_names,
         index = None
     )
 
