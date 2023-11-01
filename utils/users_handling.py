@@ -32,13 +32,15 @@ def user_creation(user_id, project_id, project_name):
         options = project_names,
         index = None
     )
-    selected_project_id = project_ids[project_names.index(selected_project)]
+    if selected_project is not None:
+        selected_project_id = project_ids[project_names.index(selected_project)]
     selected_project_confirmation = st.selectbox(
         label = "Confirm the project for the user",
         options = project_names,
         index = None
     )
-    selected_project_id_confirmation = project_ids[project_names.index(selected_project_confirmation)]
+    if selected_project_confirmation is not None:
+        selected_project_id_confirmation = project_ids[project_names.index(selected_project_confirmation)]
     if selected_project is not None and selected_project_confirmation is not None:
         if selected_project == selected_project_confirmation:
             st.success('Project confirmated', icon = '🎈')
