@@ -57,7 +57,8 @@ def user_creation(user_id, project_id, project_name):
         options = roles_names,
         index = None
     )
-    selected_role_id = roles_ids[roles_names.index(user_role)]
+    if user_role is not None:
+        selected_role_id = roles_ids[roles_names.index(user_role)]
     user_role_confirmation = st.selectbox(
         label = "Confirm user role",
         options = roles_names,
