@@ -61,6 +61,9 @@ def user_creation(user_id, project_id, project_name):
         options = ['male', 'female'],
         index = None
     )
+    create_user_button = st.button("Create User")
+        if create_user_button:
+            pass
 
 
 
