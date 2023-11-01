@@ -11,6 +11,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
     if role_id != 6:
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
+            st.sidebar.radio('drops sub-menu', options=['add drops', 'view drops'])
             menu = st.sidebar.radio(project_title, ["Home", "Trafico y SEO", "Whatsapp", "Trip Wire"])
             st.write("---") 
 
