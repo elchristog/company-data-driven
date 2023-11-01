@@ -21,6 +21,6 @@ def login():
             st.write("---") 
             authenticator.logout('Logout', 'main')
         elif st.session_state["authentication_status"] is False:
-            st.error('Username/password is incorrect')
+            st.error('Username/password is incorrect (Ask to the admin if is hashed)')
         elif st.session_state["authentication_status"] is None:
             st.warning('Please enter your username and password')
