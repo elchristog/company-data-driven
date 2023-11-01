@@ -43,7 +43,7 @@ def user_creation(user_id, project_id, project_name):
         selected_project_id_confirmation = project_ids[project_names.index(selected_project_confirmation)]
     if selected_project is not None and selected_project_confirmation is not None:
         if selected_project == selected_project_confirmation:
-            st.success('Project confirmated', icon = '🎈')
+            st.success('Project confirmed', icon = '🎈')
         else:
             st.error('Incorrect project', icon = '🀄')
 
