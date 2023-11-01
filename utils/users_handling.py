@@ -87,7 +87,9 @@ def user_creation(user_id, project_id, project_name):
     
     create_user_button = st.button("Create User")
     if create_user_button:
-        if len(checking_username_query) == 0:
+        if len(username) < 6:
+            st.error("Please fill in completely all of the required fields.")
+        else:
             st.write(user_first_name.lower())
 
 
