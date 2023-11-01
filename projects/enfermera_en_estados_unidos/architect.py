@@ -51,7 +51,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 uh.user_creation()
             if sub_menu == "Hashing":
                 tap.title_and_paragraph("Hashing " + project_icon, "Write the password and get the hashed version", "h3", 0)
-                uh.hashing()
+                uh.hashing(user_id, project_id, project_name)
 
 
     # customer
