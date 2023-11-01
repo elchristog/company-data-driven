@@ -17,14 +17,14 @@ def user_creation(user_id, project_id, project_name):
     today_str = today.strftime("%Y-%m-%d")
     username = st.text_input("Write the username:")
     # if check_username_availability: #name, birthdate, country, gender, user_creator, email, project_id
-    checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
+    checking_username_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
     if len(checking_username_query) > 0:
         st.error('Username is not available', icon = '👻')
     else:
         st.success('Username available', icon = '🪬')
     max_id_users = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.global.users`;")[0].get('max_id')
     max_id_role_assignement = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.global.role_assignment`;")[0].get('max_id')
-    get_projects = uc.run_query_instant(f"SELECT id, name FROM `company-data-driven.global.projects`;")
+    get_projects = uc.run_query_30_m(f"SELECT id, name FROM `company-data-driven.global.projects`;")
     project_ids = []
     project_names = []
     for row in get_projects:
@@ -48,7 +48,7 @@ def user_creation(user_id, project_id, project_name):
         else:
             st.error('Incorrect project', icon = '🀄')
     
-    get_roles = uc.run_query_instant(f"SELECT id, name FROM `company-data-driven.global.roles`;")
+    get_roles = uc.run_query_30_m(f"SELECT id, name FROM `company-data-driven.global.roles`;")
     roles_ids = []
     roles_names = []
     for row in get_roles:
@@ -90,7 +90,7 @@ def user_creation(user_id, project_id, project_name):
     
     create_user_button = st.button("Create User")
     if create_user_button:
-        checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
+        checking_username_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
         if len(username) < 6 or len(checking_username_query) > 0 or selected_project is None or selected_project != selected_project_confirmation or user_role is None or user_role != user_role_confirmation or user_first_name is None or len(user_first_name) < 3 or user_last_name is None or len(user_last_name) < 3 or user_email is None or len(user_email) < 3  or user_birth_date is None or user_country is None or len(user_country) < 3 or user_gender is None or len(user_gender) < 3:
             st.error("Please fill in completely all of the required fields.")
         else:
