@@ -47,6 +47,12 @@ def user_creation(user_id, project_id, project_name):
         else:
             st.error('Incorrect project', icon = '🀄')
 
+    user_role = st.selectbox(
+        label = "Select user role",
+        options = ['male', 'female'],
+        index = None
+    )
+
     user_first_name = st.text_input("Write the user first name:")
     user_last_name = st.text_input("Write the user last name:")
     user_email = st.text_input("Write the user email:")
@@ -61,6 +67,7 @@ def user_creation(user_id, project_id, project_name):
         options = ['male', 'female'],
         index = None
     )
+    
     create_user_button = st.button("Create User")
     if create_user_button:
         pass
