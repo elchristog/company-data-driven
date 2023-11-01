@@ -16,4 +16,5 @@ def user_creation(user_id, project_id, project_name):
     check_username_availability = st.button("Check Availability")
     if check_username_availability: #name, birthdate, country, gender, user_creator, email, project_id
         checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
-        st.write(len(checking_username_query))
+        if len(checking_username_query) > 0:
+            st.error('Username is not available', icon = '👻')
