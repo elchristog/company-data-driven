@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import datetime
 
 import utils.project_handler as ph
 
@@ -116,7 +117,9 @@ def run_query_1_day(query):
     return rows
 
 def user_credentials(name, authentication_status, username):
-    # @st.cache_data(ttl=600) # Uses st.cache_data to only rerun when the query changes or after 10 min.
+    today = datetime.date.today()
+    today_str = today.strftime("%Y-%m-%d")
+
     rows = run_query_1_day(f"SELECT u.id AS user_id, u.username, u.status, u.project_id, r.id AS role_id, r.name AS role_name, p.icon, p.logo_url, p.name, p.title   FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.roles` AS r ON ra.role_id = r.id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE username = '{username}';")
 
     if len(rows) == 1:
@@ -152,6 +155,8 @@ def user_credentials(name, authentication_status, username):
                 role_id.append(row.get('role_id'))
                 role_name.append(row.get('role_name'))
     
+    run_query_insert_update(f"UPDATE `company-data-driven.global.users` SET last_login_date = '{today_str}' WHERE id = {user_id};")
+
     if status != 'active':
             st.error('User is inactive')
     else:
