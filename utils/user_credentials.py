@@ -155,7 +155,7 @@ def user_credentials(name, authentication_status, username):
                 role_id.append(row.get('role_id'))
                 role_name.append(row.get('role_name'))
     
-    run_query_insert_update(f"UPDATE `company-data-driven.global.users` SET last_login_date = '{today_str}' WHERE id = {user_id};")
+    run_query_1_day(f"UPDATE `company-data-driven.global.users` SET last_login_date = '{today_str}' WHERE id = {user_id};")
 
     if status != 'active':
             st.error('User is inactive')
