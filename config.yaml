@@ -8,6 +8,10 @@ credentials:
       email: jeimy855@gmail.com
       name: Alejandra Martinez
       password: $2b$12$4AWFIxVL40AYHNdxrEbUQ.bvqTqbJV0tLLtY4myqWTklf4fhNKSZa
+    lfmartinezs:
+      email: Lufermartinez1985@gmail.com
+      name: Luisa Martinez
+      password: 2b12$6e1MO438iLQ4WXuxHFag3eyDSSHfAKw8WsGhiwGdgsr88ueiRCFJ6
     testcustomer:
       email: elchristog@gmail.com
       name: Christian Gonzalez
