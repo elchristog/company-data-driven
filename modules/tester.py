@@ -2,7 +2,6 @@ import streamlit as st
 
 import utils.user_credentials as uc
 
-
 def tester(project_name, questions_table_name, num_questions, user_id): 
     new_test = st.button("Start test")
     if new_test:
@@ -13,4 +12,10 @@ def tester(project_name, questions_table_name, num_questions, user_id):
         with tab1:
             st.header(questions[0].get("question"))
 
-            st.write("🔹 **A)** " + "pepe")
+            st.write("🔹 **A)** " + questions[0].get("option_a"))
+
+            selected_answer_q1 = st.selectbox(
+                    label="Select the new status",
+                    options= ['A', 'B', 'C', 'D'],
+                    index=None
+                )
