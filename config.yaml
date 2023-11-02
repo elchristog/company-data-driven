@@ -11,7 +11,7 @@ credentials:
     lfmartinezs:
       email: lufermartinez1985@gmail.com
       name: Luisa Martinez
-      password: $2b12$yomGAzkHLzBa4ODcKJ5WEumzWTr2M9OcY07pX0i6Iyq7FfZh6axsW
+      password: $2b$12$4HfjCRGeboCMCvQyzD70.u3JMUvSV0mgDrDkMpwcZRXk4QprY9TSi
     testcustomer:
       email: elchristog@gmail.com
       name: Christian Gonzalez
