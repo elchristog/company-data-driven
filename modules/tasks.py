@@ -61,7 +61,7 @@ def tasks_visualizer(user_id, project_name, divider):
     return rows
 
 
-def tasks_achievements(user_id, project_name, tasks, divider):
+def tasks_achievements(user_id, project_name, divider):
     if len(uc.run_query_5_s(f"SELECT id  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND finished_date IS NOT NULL LIMIT 1")) < 1:
         st.success("Your achievements will be available when you finish your first task")
     else:
