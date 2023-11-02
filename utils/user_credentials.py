@@ -19,6 +19,10 @@ client = gcloud_bigquery_client()
 def run_query_insert_update(query):
     client.query(query)
 
+@st.cache_data(ttl=86400)
+def run_query_insert_update_1_day(query):
+    client.query(query)
+
 def run_query_instant(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
@@ -155,7 +159,7 @@ def user_credentials(name, authentication_status, username):
                 role_id.append(row.get('role_id'))
                 role_name.append(row.get('role_name'))
     
-    run_query_1_day(f"UPDATE `company-data-driven.global.users` SET last_login_date = '{today_str}' WHERE id = {user_id};")
+    run_query_insert_update_1_day(f"UPDATE `company-data-driven.global.users` SET last_login_date = '{today_str}' WHERE id = {user_id};")
 
     if status != 'active':
             st.error('User is inactive')
