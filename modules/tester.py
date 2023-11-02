@@ -13,6 +13,9 @@ def tester(project_name, questions_table_name, num_questions, user_id):
             st.header(questions[0].get("question"))
 
             st.write("🔹 **A)** " + questions[0].get("option_a"))
+            st.write("🔹 **B)** " + questions[0].get("option_b"))
+            st.write("🔹 **C)** " + questions[0].get("option_c"))
+            st.write("🔹 **D)** " + questions[0].get("option_d"))
 
             selected_answer_q1 = st.selectbox(
                     label="Select the new status",
