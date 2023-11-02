@@ -9,4 +9,8 @@ def tester(project_name, questions_table_name, num_questions, user_id):
         questions = uc.run_query_instant(f"SELECT * FROM `company-data-driven.{project_name}.{questions_table_name}` ORDER BY RAND() LIMIT {num_questions};")
         st.write(questions)
 
-        st.write("🔹 **A)** " + "pepe")
+        tab1, tab2, tab3 = st.tabs(["Question 1", "Question 2", "Question 3"])
+        with tab1:
+            st.header(questions[0].get("question"))
+
+            st.write("🔹 **A)** " + "pepe")
