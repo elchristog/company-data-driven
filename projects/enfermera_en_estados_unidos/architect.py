@@ -82,4 +82,4 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph("Nclex" + project_icon, "Gestiona tus tareas (Delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
             if sub_menu == "Simulacro":
                 tap.title_and_paragraph("Simulacro" + project_icon, "Gestiona tus tareas (Delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
-                tst.tester()
+                tst.tester(project_name, 'nclex_questions', 10, user_id)
