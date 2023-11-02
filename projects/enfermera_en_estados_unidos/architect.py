@@ -76,5 +76,11 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 t.tips_tasks_ia(tasks, 0)
             
         if menu == "Nclex":
-            tap.title_and_paragraph("Nclex" + project_icon, "Gestiona tus tareas (Delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
-            tst.tester()
+            sub_menu_options=['Logros', 'Simulacro']
+            sub_menu = st.sidebar.radio('Home options', options = sub_menu_options)
+            if sub_menu == "Logros":
+                tap.title_and_paragraph("Nclex" + project_icon, "Gestiona tus tareas (Delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
+                tst.tester()
+            if sub_menu == "Simulacro":
+                tap.title_and_paragraph("Simulacro" + project_icon, "Gestiona tus tareas (Delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
+            
