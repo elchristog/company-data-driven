@@ -71,8 +71,5 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             t.tasks_achievements(user_id, project_name, tasks, 0)
 
         if menu == "Nclex":
-            tap.title_and_paragraph("Tus tareas" + project_icon, "Gestiona tus tareas (Delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
-            tasks = t.tasks_visualizer(user_id, project_name, 0)
-            t.tips_tasks_ia(tasks, 0)
-            tap.title_and_paragraph("Tus logros", "Visualiza tu crecimiento", "h3", 0)
-            t.tasks_achievements(user_id, project_name, tasks, 0)
+            tap.title_and_paragraph("Nclex" + project_icon, "Gestiona tus tareas (Delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
+            tst.tester()
