@@ -169,7 +169,4 @@ def add_question_to_test(project_name, questions_table_name, user_id):
 
 
 
-
-
-    st.info(max_id)
     
