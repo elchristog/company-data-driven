@@ -6,7 +6,6 @@ import utils.user_credentials as uc
 
 def tester(project_name, questions_table_name, user_id): 
     questions = uc.run_query_1_day(f"SELECT * FROM `company-data-driven.{project_name}.{questions_table_name}`;")
-    st.write(questions)
     tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs(["Q 1", "Q 2", "Q 3", "Q 4", "Q 5", "Q 6", "Q 7", "Q 8", "Q 9", "Q 10"])
     with tab1:
         st.header(questions[0].get("question"))
@@ -68,3 +67,7 @@ def tester(project_name, questions_table_name, user_id):
                 index=None,
                 key = "question_5"
             ).lower()
+        
+
+    st.write(questions)
+    
