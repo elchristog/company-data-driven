@@ -150,6 +150,12 @@ def tester(project_name, questions_sample_table_name, user_id):
         if selected_answer_q10 is not None:
             selected_answer_q10_lower = selected_answer_q10.lower()
         send_answers = st.button("Send Answers")
+        if send_answers:
+            if selected_answer_q1 is None or selected_answer_q2 is None or selected_answer_q3 is None or selected_answer_q4 is None or selected_answer_q5 is None or selected_answer_q6 is None or selected_answer_q7 is None or selected_answer_q8 is None or selected_answer_q9 is None or selected_answer_q10 is None:
+                st.error("you forgot to answer at least one question", icon = "🤧")
+            else:
+                for i in range(10):
+                    st.write(i) 
 
     st.write(questions)
 
