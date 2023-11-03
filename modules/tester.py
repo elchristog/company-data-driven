@@ -193,9 +193,9 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             st.write("🔹 **C)** " + questions[0].get("option_c"))
             st.write("🔹 **D)** " + questions[0].get("option_d"))
             if today_results[0].get("q1_success") == 1:
-                st.success("You chose the right answer: " + today_results[0].get("q1_success"), icon = "🤓")
+                st.success("You chose the right answer: " + str(today_results[0].get("q1_success")), icon = "🤓")
             else:
-                st.error("You chose: " + today_results[0].get("q1_selected") + ", but right answer was " + questions[0].get("correct_option"), icon = "😵‍💫")
+                st.error("You chose: " + str(today_results[0].get("q1_selected")) + ", but right answer was " + str(questions[0].get("correct_option")), icon = "😵‍💫")
             st.info(questions[0].get("explanation"), icon = "⏭️")
         with tab2:
             st.header(questions[1].get("question"))
