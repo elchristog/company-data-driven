@@ -171,6 +171,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 max_id = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.enfermera_en_estados_unidos.nclex_attempts`;")[0].get("max_id") 
                 uc.run_query_insert_update(f"INSERT INTO `company-data-driven.enfermera_en_estados_unidos.nclex_attempts` VALUES({max_id},'{today_str}', {user_id},{questions[0].get('id')},{correct_q_1},{questions[1].get('id')},{correct_q_2},{questions[2].get('id')},{correct_q_3},{questions[3].get('id')},{correct_q_4},{questions[4].get('id')},{correct_q_5},{questions[5].get('id')},{correct_q_6},{questions[6].get('id')},{correct_q_7},{questions[7].get('id')},{correct_q_8},{questions[8].get('id')},{correct_q_9},{questions[9].get('id')},{correct_q_10},{success_rate});")         
                 st.info("Test sent", icon = "☺️")
+                st.rerun()
 
 
 def add_question_to_test(project_name, questions_table_name, user_id):
