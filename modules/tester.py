@@ -15,7 +15,8 @@ def tester(project_name, questions_table_name, user_id):
         selected_answer_q1 = st.selectbox(
                 label="Select your answer",
                 options= ['A', 'B', 'C', 'D'],
-                index=None
+                index=None,
+                key = "question_1"
             )
     with tab2:
         st.header(questions[1].get("question"))
@@ -26,5 +27,6 @@ def tester(project_name, questions_table_name, user_id):
         selected_answer_q2 = st.selectbox(
                 label="Select your answer",
                 options= ['A', 'B', 'C', 'D'],
-                index=None
+                index=None,
+                key = "question_2"
             )
