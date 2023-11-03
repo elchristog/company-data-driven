@@ -138,7 +138,7 @@ def tester(project_name, questions_sample_table_name, user_id):
 def add_question_to_test(project_name, questions_table_name):
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
-    max_id = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.{project_name}.{questions_table_name}`;")
+    max_id = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.{project_name}.{questions_table_name}`;")[0].get("max_id")
 
     username = st.text_input("Write the username:")
     st.info(max_id)
