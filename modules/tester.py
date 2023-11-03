@@ -136,7 +136,7 @@ def tester(project_name, questions_table_name, user_id):
                 index=None,
                 key = "question_10"
             ).lower()
-        st.toast('Answer selected: ' + selected_answer_q10.upper(), icon='🥸')
+        st.toast('Selected Answer: ' + selected_answer_q10.upper(), icon='🥸')
         
         
 
