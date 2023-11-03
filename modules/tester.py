@@ -10,8 +10,8 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
 
-    user_already_attempt = uc.run_query_instant(f"SELECT * FROM `company-data-driven.{project_name}.{attempts_table_name}` WHERE user_id = {user_id} AND attempt_date = '{today_str}';")
-    if len(user_already_attempt) < 1:
+    today_results = uc.run_query_instant(f"SELECT * FROM `company-data-driven.{project_name}.{attempts_table_name}` WHERE user_id = {user_id} AND attempt_date = '{today_str}';")
+    if len(today_results) < 1:
         questions = uc.run_query_6_h(f"SELECT * FROM `company-data-driven.{project_name}.{questions_sample_table_name}`;")
         tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs(["Q 1", "Q 2", "Q 3", "Q 4", "Q 5", "Q 6", "Q 7", "Q 8", "Q 9", "Q 10"])
         with tab1:
@@ -176,7 +176,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                     st.info("Test sent", icon = "☺️")
                     st.rerun()
     else:
-        st.info("Sapo perraso")
+        st.write(today_results)
 
 
 def add_question_to_test(project_name, questions_table_name, user_id):
