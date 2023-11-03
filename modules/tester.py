@@ -19,7 +19,7 @@ def tester(project_name, questions_table_name, user_id):
                 options= ['A', 'B', 'C', 'D'],
                 index=None,
                 key = "question_1"
-            )
+            ).lower()
     with tab2:
         st.header(questions[1].get("question"))
         st.write("🔹 **A)** " + questions[1].get("option_a"))
@@ -31,7 +31,7 @@ def tester(project_name, questions_table_name, user_id):
                 options= ['A', 'B', 'C', 'D'],
                 index=None,
                 key = "question_2"
-            )
+            ).lower()
     with tab3:
         st.header(questions[2].get("question"))
         st.write("🔹 **A)** " + questions[2].get("option_a"))
@@ -43,4 +43,28 @@ def tester(project_name, questions_table_name, user_id):
                 options= ['A', 'B', 'C', 'D'],
                 index=None,
                 key = "question_3"
-            )
+            ).lower()
+    with tab4:
+        st.header(questions[3].get("question"))
+        st.write("🔹 **A)** " + questions[3].get("option_a"))
+        st.write("🔹 **B)** " + questions[3].get("option_b"))
+        st.write("🔹 **C)** " + questions[3].get("option_c"))
+        st.write("🔹 **D)** " + questions[3].get("option_d"))
+        selected_answer_q4 = st.selectbox(
+                label="Select your answer",
+                options= ['A', 'B', 'C', 'D'],
+                index=None,
+                key = "question_4"
+            ).lower()
+    with tab5:
+        st.header(questions[4].get("question"))
+        st.write("🔹 **A)** " + questions[4].get("option_a"))
+        st.write("🔹 **B)** " + questions[4].get("option_b"))
+        st.write("🔹 **C)** " + questions[4].get("option_c"))
+        st.write("🔹 **D)** " + questions[4].get("option_d"))
+        selected_answer_q5 = st.selectbox(
+                label="Select your answer",
+                options= ['A', 'B', 'C', 'D'],
+                index=None,
+                key = "question_5"
+            ).lower()
