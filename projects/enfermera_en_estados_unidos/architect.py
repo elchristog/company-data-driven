@@ -14,7 +14,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
     if role_id != 6:
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
-            menu_options = ["Home", "Trafico y SEO", "Click bitly", "Whatsapp", "Trip Wire", "Remarketing", "Web tool", "Contract", "Contract Remarketing", "Step1", "Step2", "Customer view", "Team view"]
+            menu_options = ["Home", "Traffic and SEO", "Click bitly", "Whatsapp", "Trip Wire", "Remarketing", "Web tool", "Contract", "Contract Remarketing", "Step1", "Step2", "Customer view", "Team view"]
             if role_id == 1:
                 menu_options.extend(['Users Admin'])
             menu = st.sidebar.radio(project_title, menu_options)
@@ -39,8 +39,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Hashing":
                 tap.title_and_paragraph("Hashing passwords", "se asi asi y asi", "h3", 0)
 
-        if menu == "Trafico y SEO":
-            tab1, tab2, tab3 = st.tabs(["Trafico", "SEO", "Eliminar"])
+        if menu == "Traffic and SEO":
+            tab1, tab2, tab3 = st.tabs(["Traffic", "SEO", "Eliminar"])
             with tab1:
                 tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios", "h1", 0)
                 seot.createPage()
