@@ -49,8 +49,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu_options=['Nclex test creation']
             sub_menu = st.sidebar.radio('Web tool options', options = sub_menu_options)
             if sub_menu == "Nclex test creation":
-                st.info("perrito")
-                tst.add_question_to_test()
+                tap.title_and_paragraph("Creeate a new question in the NCLEX test " + project_icon, "Remember at the end hash the password and add to the config", "h3", 0)
+                tst.add_question_to_test(project_name, 'nclex_questions')
 
         if menu == "Users Admin":
             sub_menu_options=['Create User', 'Update User', 'Hashing']
