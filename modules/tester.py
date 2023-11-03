@@ -166,8 +166,8 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 correct_q_10 = 1 if selected_answer_q10_lower == questions[9].get("correct_option") else 0
                 success_rate = 100 * ((correct_q_1 + correct_q_2 + correct_q_3 + correct_q_4 + correct_q_5 + correct_q_6 + correct_q_7 + correct_q_8 + correct_q_9 + correct_q_10)/10)
                 
-                max_id                
-                st.info(success_rate)
+                max_id = uc.run_query_instant(f"SELECT MAX(id) AS max_id FROM `company-data-driven.enfermera_en_estados_unidos.nclex_attempts`")[0].get("max_id")          
+                st.info(max_id)
     st.write(questions)
 
 
