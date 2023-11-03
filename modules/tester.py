@@ -150,7 +150,9 @@ def add_question_to_test(project_name, questions_table_name):
         label = "Select correct answer",
         options = ['A', 'B', 'C', 'D'],
         index = None
-    ).lower()
+    )
+    if letter_correct_answer is not None:
+        letter_correct_answer_lower = letter_correct_answer.lower()
     explanation = st.text_input("Write the explanation:")
     if explanation is not None:
         cleaned_explanation = re.sub(r'[\"\']', '', explanation)
