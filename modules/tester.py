@@ -20,7 +20,9 @@ def tester(project_name, questions_sample_table_name, user_id):
                 options= ['A', 'B', 'C', 'D'],
                 index=None,
                 key = "question_1"
-            ).lower()
+            )
+        if selected_answer_q1 is not None:
+            selected_answer_q1_lower = selected_answer_q1.lower()
     with tab2:
         st.header(questions[1].get("question"))
         st.write("🔹 **A)** " + questions[1].get("option_a"))
@@ -32,7 +34,9 @@ def tester(project_name, questions_sample_table_name, user_id):
                 options= ['A', 'B', 'C', 'D'],
                 index=None,
                 key = "question_2"
-            ).lower()
+            )
+        if selected_answer_q2 is not None:
+            selected_answer_q2_lower = selected_answer_q2.lower()
     with tab3:
         st.header(questions[2].get("question"))
         st.write("🔹 **A)** " + questions[2].get("option_a"))
@@ -44,7 +48,9 @@ def tester(project_name, questions_sample_table_name, user_id):
                 options= ['A', 'B', 'C', 'D'],
                 index=None,
                 key = "question_3"
-            ).lower()
+            )
+        if selected_answer_q3 is not None:
+            selected_answer_q3_lower = selected_answer_q3.lower()
     with tab4:
         st.header(questions[3].get("question"))
         st.write("🔹 **A)** " + questions[3].get("option_a"))
@@ -56,7 +62,9 @@ def tester(project_name, questions_sample_table_name, user_id):
                 options= ['A', 'B', 'C', 'D'],
                 index=None,
                 key = "question_4"
-            ).lower()
+            )
+        if selected_answer_q4 is not None:
+            selected_answer_q4_lower = selected_answer_q4.lower()
     with tab5:
         st.header(questions[4].get("question"))
         st.write("🔹 **A)** " + questions[4].get("option_a"))
@@ -68,7 +76,9 @@ def tester(project_name, questions_sample_table_name, user_id):
                 options= ['A', 'B', 'C', 'D'],
                 index=None,
                 key = "question_5"
-            ).lower()
+            )
+        if selected_answer_q5 is not None:
+            selected_answer_q5_lower = selected_answer_q5.lower()
     with tab6:
         st.header(questions[5].get("question"))
         st.write("🔹 **A)** " + questions[5].get("option_a"))
@@ -80,7 +90,9 @@ def tester(project_name, questions_sample_table_name, user_id):
                 options= ['A', 'B', 'C', 'D'],
                 index=None,
                 key = "question_6"
-            ).lower()
+            )
+        if selected_answer_q6 is not None:
+            selected_answer_q6_lower = selected_answer_q6.lower()
     with tab7:
         st.header(questions[6].get("question"))
         st.write("🔹 **A)** " + questions[6].get("option_a"))
@@ -92,7 +104,9 @@ def tester(project_name, questions_sample_table_name, user_id):
                 options= ['A', 'B', 'C', 'D'],
                 index=None,
                 key = "question_7"
-            ).lower()
+            )
+        if selected_answer_q7 is not None:
+            selected_answer_q7_lower = selected_answer_q7.lower()
     with tab8:
         st.header(questions[7].get("question"))
         st.write("🔹 **A)** " + questions[7].get("option_a"))
@@ -104,7 +118,9 @@ def tester(project_name, questions_sample_table_name, user_id):
                 options= ['A', 'B', 'C', 'D'],
                 index=None,
                 key = "question_8"
-            ).lower()
+            )
+        if selected_answer_q8 is not None:
+            selected_answer_q8_lower = selected_answer_q8.lower()
     with tab9:
         st.header(questions[8].get("question"))
         st.write("🔹 **A)** " + questions[8].get("option_a"))
@@ -116,7 +132,9 @@ def tester(project_name, questions_sample_table_name, user_id):
                 options= ['A', 'B', 'C', 'D'],
                 index=None,
                 key = "question_9"
-            ).lower()
+            )
+        if selected_answer_q9 is not None:
+            selected_answer_q9_lower = selected_answer_q9.lower()
     with tab10:
         st.header(questions[9].get("question"))
         st.write("🔹 **A)** " + questions[9].get("option_a"))
@@ -128,10 +146,10 @@ def tester(project_name, questions_sample_table_name, user_id):
                 options= ['A', 'B', 'C', 'D'],
                 index=None,
                 key = "question_10"
-            ).lower()
+            )
+        if selected_answer_q10 is not None:
+            selected_answer_q10_lower = selected_answer_q10.lower()
         send_answers = st.button("Send Answers")
-        
-        
 
     st.write(questions)
 
