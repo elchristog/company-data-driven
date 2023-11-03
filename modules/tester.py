@@ -72,6 +72,71 @@ def tester(project_name, questions_table_name, user_id):
                 key = "question_5"
             ).lower()
         st.toast('Answer selected: ' + selected_answer_q5.upper(), icon='🥸')
+    with tab6:
+        st.header(questions[5].get("question"))
+        st.write("🔹 **A)** " + questions[5].get("option_a"))
+        st.write("🔹 **B)** " + questions[5].get("option_b"))
+        st.write("🔹 **C)** " + questions[5].get("option_c"))
+        st.write("🔹 **D)** " + questions[5].get("option_d"))
+        selected_answer_q6 = st.selectbox(
+                label="Select your answer",
+                options= ['A', 'B', 'C', 'D'],
+                index=None,
+                key = "question_6"
+            ).lower()
+        st.toast('Answer selected: ' + selected_answer_q6.upper(), icon='🥸')
+    with tab7:
+        st.header(questions[6].get("question"))
+        st.write("🔹 **A)** " + questions[6].get("option_a"))
+        st.write("🔹 **B)** " + questions[6].get("option_b"))
+        st.write("🔹 **C)** " + questions[6].get("option_c"))
+        st.write("🔹 **D)** " + questions[6].get("option_d"))
+        selected_answer_q7 = st.selectbox(
+                label="Select your answer",
+                options= ['A', 'B', 'C', 'D'],
+                index=None,
+                key = "question_7"
+            ).lower()
+        st.toast('Answer selected: ' + selected_answer_q7.upper(), icon='🥸')
+    with tab8:
+        st.header(questions[7].get("question"))
+        st.write("🔹 **A)** " + questions[7].get("option_a"))
+        st.write("🔹 **B)** " + questions[7].get("option_b"))
+        st.write("🔹 **C)** " + questions[7].get("option_c"))
+        st.write("🔹 **D)** " + questions[7].get("option_d"))
+        selected_answer_q8 = st.selectbox(
+                label="Select your answer",
+                options= ['A', 'B', 'C', 'D'],
+                index=None,
+                key = "question_8"
+            ).lower()
+        st.toast('Answer selected: ' + selected_answer_q8.upper(), icon='🥸')
+    with tab9:
+        st.header(questions[8].get("question"))
+        st.write("🔹 **A)** " + questions[8].get("option_a"))
+        st.write("🔹 **B)** " + questions[8].get("option_b"))
+        st.write("🔹 **C)** " + questions[8].get("option_c"))
+        st.write("🔹 **D)** " + questions[8].get("option_d"))
+        selected_answer_q9 = st.selectbox(
+                label="Select your answer",
+                options= ['A', 'B', 'C', 'D'],
+                index=None,
+                key = "question_9"
+            ).lower()
+        st.toast('Answer selected: ' + selected_answer_q9.upper(), icon='🥸')
+    with tab10:
+        st.header(questions[9].get("question"))
+        st.write("🔹 **A)** " + questions[9].get("option_a"))
+        st.write("🔹 **B)** " + questions[9].get("option_b"))
+        st.write("🔹 **C)** " + questions[9].get("option_c"))
+        st.write("🔹 **D)** " + questions[9].get("option_d"))
+        selected_answer_q10 = st.selectbox(
+                label="Select your answer",
+                options= ['A', 'B', 'C', 'D'],
+                index=None,
+                key = "question_10"
+            ).lower()
+        st.toast('Answer selected: ' + selected_answer_q10.upper(), icon='🥸')
         
         
 
