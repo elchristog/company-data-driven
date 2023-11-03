@@ -155,7 +155,17 @@ def tester(project_name, questions_sample_table_name, user_id):
                 st.error("you forgot to answer at least one question", icon = "🤧")
             else:
                 correct_q_1 = 1 if selected_answer_q1_lower == questions[0].get("correct_option") else 0
-                st.info(correct_q_1)
+                correct_q_2 = 1 if selected_answer_q2_lower == questions[1].get("correct_option") else 0
+                correct_q_3 = 1 if selected_answer_q3_lower == questions[2].get("correct_option") else 0
+                correct_q_4 = 1 if selected_answer_q4_lower == questions[3].get("correct_option") else 0
+                correct_q_5 = 1 if selected_answer_q5_lower == questions[4].get("correct_option") else 0
+                correct_q_6 = 1 if selected_answer_q6_lower == questions[5].get("correct_option") else 0
+                correct_q_7 = 1 if selected_answer_q7_lower == questions[6].get("correct_option") else 0
+                correct_q_8 = 1 if selected_answer_q8_lower == questions[7].get("correct_option") else 0
+                correct_q_9 = 1 if selected_answer_q9_lower == questions[8].get("correct_option") else 0
+                correct_q_10 = 1 if selected_answer_q10_lower == questions[9].get("correct_option") else 0
+
+                st.info(correct_q_10)
     st.write(questions)
 
 
