@@ -49,6 +49,7 @@ def tasks_visualizer(user_id, project_name, divider):
                     uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', on_execution_date = '{today_str}' WHERE id = {task_id}")
                 if new_status == 'finished':
                     uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', finished_date = '{today_str}' WHERE id = {task_id}")
+                    st.balloons()
             if update_task_status_button:
                 today = datetime.date.today()
                 today_str = today.strftime("%Y-%m-%d")
