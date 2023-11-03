@@ -151,6 +151,18 @@ def add_question_to_test(project_name, questions_table_name, user_id):
         options = ['A', 'B', 'C', 'D'],
         index = None
     )
+    confirm_letter_correct_answer = st.selectbox(
+        label = "Confirm correct answer",
+        options = ['A', 'B', 'C', 'D'],
+        index = None
+    )
+    if letter_correct_answer is not None and confirm_letter_correct_answer is not None:
+        if letter_correct_answer == confirm_letter_correct_answer:
+            st.success("Answer confirmed!", icon = "🎈")
+        else:
+            st.error('Incorrect answer', icon = '🀄')
+
+
     if letter_correct_answer is not None:
         letter_correct_answer_lower = letter_correct_answer.lower()
     explanation = st.text_input("Write the explanation:")
