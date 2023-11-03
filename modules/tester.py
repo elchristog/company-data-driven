@@ -136,7 +136,7 @@ def tester(project_name, questions_sample_table_name, user_id):
     st.write(questions)
 
 
-def add_question_to_test(project_name, questions_table_name):
+def add_question_to_test(project_name, questions_table_name, user_id):
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
     max_id = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.{project_name}.{questions_table_name}`;")[0].get("max_id")
@@ -159,9 +159,12 @@ def add_question_to_test(project_name, questions_table_name):
 
     add_question_button = st.button("Add question")
     if add_question_button:
-        st.write(cleaned_explanation)
-        st.success("Question added!", icon = "🐣")
-        st.balloons()
+        if question is None or option_a is None or option_b is None or option_c is None or option_d is None or letter_correct_answer is None or explanation is None:
+            st.error("Please fill in completely all of the required fields.")
+        else:
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.{questions_table_name}` (id, creation_date, question	,option_a	,option_b	,option_c	,option_d	,correct_option	,explanation, creator_id) VALUES({max_id}, '{today_str}', '{question}', '{option_a}', '{option_b}', '{option_c}', '{option_d}', '{letter_correct_answer_lower}', '{cleaned_explanation}', {user_id});")
+            st.success("Question added!", icon = "🐣")
+            st.balloons()
 
 
 
