@@ -10,7 +10,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
 
-    user_already_attempt = uc.run_query_instant(f"SELECT * FROM `company-data-driven.{project_name}.{attempts_table_name}` WHERE user_id = 1 AND attempt_date = '{today_str}';")
+    user_already_attempt = uc.run_query_instant(f"SELECT * FROM `company-data-driven.{project_name}.{attempts_table_name}` WHERE user_id = {user_id} AND attempt_date = '{today_str}';")
     if len(user_already_attempt) < 1:
         questions = uc.run_query_6_h(f"SELECT * FROM `company-data-driven.{project_name}.{questions_sample_table_name}`;")
         tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs(["Q 1", "Q 2", "Q 3", "Q 4", "Q 5", "Q 6", "Q 7", "Q 8", "Q 9", "Q 10"])
@@ -175,6 +175,8 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.{attempts_table_name}` VALUES({max_id},'{today_str}', {user_id},{questions[0].get('id')},{correct_q_1},{questions[1].get('id')},{correct_q_2},{questions[2].get('id')},{correct_q_3},{questions[3].get('id')},{correct_q_4},{questions[4].get('id')},{correct_q_5},{questions[5].get('id')},{correct_q_6},{questions[6].get('id')},{correct_q_7},{questions[7].get('id')},{correct_q_8},{questions[8].get('id')},{correct_q_9},{questions[9].get('id')},{correct_q_10},{success_rate});")         
                     st.info("Test sent", icon = "☺️")
                     st.rerun()
+    else:
+        st.info("Sapo perraso")
 
 
 def add_question_to_test(project_name, questions_table_name, user_id):
