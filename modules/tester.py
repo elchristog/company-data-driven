@@ -177,10 +177,76 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                     st.rerun()
     else:
         if today_results[0].get("success_rate") > 80:
-            st.success("You got **" + str(today_results[0].get("success_rate")) + "%** of the questions right", icon = "😎")
+            st.success("You got **" + str(today_results[0].get("success_rate")) + "%** of today's questions right", icon = "😎")
             st.balloons()
         else:
-            st.warning("You got **" + str(today_results[0].get("success_rate")) + "%** of the questions right", icon = "🦆")
+            st.warning("You got **" + str(today_results[0].get("success_rate")) + "%** of today's questions right", icon = "🦆")
+        
+        st.header("Let's check your answers")
+        questions = uc.run_query_6_h(f"SELECT * FROM `company-data-driven.{project_name}.{questions_sample_table_name}`;")
+        tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs(["Q 1", "Q 2", "Q 3", "Q 4", "Q 5", "Q 6", "Q 7", "Q 8", "Q 9", "Q 10"])
+        with tab1:
+            st.header(questions[0].get("question"))
+            st.write("🔹 **A)** " + questions[0].get("option_a"))
+            st.write("🔹 **B)** " + questions[0].get("option_b"))
+            st.write("🔹 **C)** " + questions[0].get("option_c"))
+            st.write("🔹 **D)** " + questions[0].get("option_d"))
+        with tab2:
+            st.header(questions[1].get("question"))
+            st.write("🔹 **A)** " + questions[1].get("option_a"))
+            st.write("🔹 **B)** " + questions[1].get("option_b"))
+            st.write("🔹 **C)** " + questions[1].get("option_c"))
+            st.write("🔹 **D)** " + questions[1].get("option_d"))
+        with tab3:
+            st.header(questions[2].get("question"))
+            st.write("🔹 **A)** " + questions[2].get("option_a"))
+            st.write("🔹 **B)** " + questions[2].get("option_b"))
+            st.write("🔹 **C)** " + questions[2].get("option_c"))
+            st.write("🔹 **D)** " + questions[2].get("option_d"))
+        with tab4:
+            st.header(questions[3].get("question"))
+            st.write("🔹 **A)** " + questions[3].get("option_a"))
+            st.write("🔹 **B)** " + questions[3].get("option_b"))
+            st.write("🔹 **C)** " + questions[3].get("option_c"))
+            st.write("🔹 **D)** " + questions[3].get("option_d"))
+        with tab5:
+            st.header(questions[4].get("question"))
+            st.write("🔹 **A)** " + questions[4].get("option_a"))
+            st.write("🔹 **B)** " + questions[4].get("option_b"))
+            st.write("🔹 **C)** " + questions[4].get("option_c"))
+            st.write("🔹 **D)** " + questions[4].get("option_d"))
+        with tab6:
+            st.header(questions[5].get("question"))
+            st.write("🔹 **A)** " + questions[5].get("option_a"))
+            st.write("🔹 **B)** " + questions[5].get("option_b"))
+            st.write("🔹 **C)** " + questions[5].get("option_c"))
+            st.write("🔹 **D)** " + questions[5].get("option_d"))
+        with tab7:
+            st.header(questions[6].get("question"))
+            st.write("🔹 **A)** " + questions[6].get("option_a"))
+            st.write("🔹 **B)** " + questions[6].get("option_b"))
+            st.write("🔹 **C)** " + questions[6].get("option_c"))
+            st.write("🔹 **D)** " + questions[6].get("option_d"))
+        with tab8:
+            st.header(questions[7].get("question"))
+            st.write("🔹 **A)** " + questions[7].get("option_a"))
+            st.write("🔹 **B)** " + questions[7].get("option_b"))
+            st.write("🔹 **C)** " + questions[7].get("option_c"))
+            st.write("🔹 **D)** " + questions[7].get("option_d"))
+        with tab9:
+            st.header(questions[8].get("question"))
+            st.write("🔹 **A)** " + questions[8].get("option_a"))
+            st.write("🔹 **B)** " + questions[8].get("option_b"))
+            st.write("🔹 **C)** " + questions[8].get("option_c"))
+            st.write("🔹 **D)** " + questions[8].get("option_d"))
+        with tab10:
+            st.header(questions[9].get("question"))
+            st.write("🔹 **A)** " + questions[9].get("option_a"))
+            st.write("🔹 **B)** " + questions[9].get("option_b"))
+            st.write("🔹 **C)** " + questions[9].get("option_c"))
+            st.write("🔹 **D)** " + questions[9].get("option_d"))
+            
+
 
 
 
