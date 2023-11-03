@@ -3,7 +3,7 @@ import streamlit as st
 import utils.user_credentials as uc
 
 def tester(project_name, questions_table_name, user_id): 
-    questions = uc.run_query_1_day(f"SELECT * FROM `company-data-driven.{project_name}.{questions_table_name}` ORDER BY RAND() LIMIT {num_questions};")
+    questions = uc.run_query_1_day(f"SELECT * FROM `company-data-driven.{project_name}.{questions_table_name}`;")
     st.write(questions)
 
     tab1, tab2, tab3 = st.tabs(["Question 1", "Question 2", "Question 3"])
