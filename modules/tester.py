@@ -203,6 +203,10 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             st.write("🔹 **B)** " + questions[1].get("option_b"))
             st.write("🔹 **C)** " + questions[1].get("option_c"))
             st.write("🔹 **D)** " + questions[1].get("option_d"))
+            if today_results[0].get("q2_success") == 1:
+                st.success("You chose the right answer: " + str(today_results[0].get("q2_selected")).upper(), icon = "🤓")
+            else:
+                st.error("You chose: " + str(today_results[0].get("q2_selected")).upper() + ", but right answer was " + str(questions[1].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[1].get("explanation"), icon = "⏭️")
         with tab3:
             st.header(questions[2].get("question"))
@@ -210,6 +214,10 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             st.write("🔹 **B)** " + questions[2].get("option_b"))
             st.write("🔹 **C)** " + questions[2].get("option_c"))
             st.write("🔹 **D)** " + questions[2].get("option_d"))
+            if today_results[0].get("q3_success") == 1:
+                st.success("You chose the right answer: " + str(today_results[0].get("q3_selected")).upper(), icon = "🤓")
+            else:
+                st.error("You chose: " + str(today_results[0].get("q3_selected")).upper() + ", but right answer was " + str(questions[2].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[2].get("explanation"), icon = "⏭️")
         with tab4:
             st.header(questions[3].get("question"))
@@ -217,6 +225,10 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             st.write("🔹 **B)** " + questions[3].get("option_b"))
             st.write("🔹 **C)** " + questions[3].get("option_c"))
             st.write("🔹 **D)** " + questions[3].get("option_d"))
+            if today_results[0].get("q4_success") == 1:
+                st.success("You chose the right answer: " + str(today_results[0].get("q4_selected")).upper(), icon = "🤓")
+            else:
+                st.error("You chose: " + str(today_results[0].get("q4_selected")).upper() + ", but right answer was " + str(questions[3].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[3].get("explanation"), icon = "⏭️")
         with tab5:
             st.header(questions[4].get("question"))
@@ -224,6 +236,10 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             st.write("🔹 **B)** " + questions[4].get("option_b"))
             st.write("🔹 **C)** " + questions[4].get("option_c"))
             st.write("🔹 **D)** " + questions[4].get("option_d"))
+            if today_results[0].get("q5_success") == 1:
+                st.success("You chose the right answer: " + str(today_results[0].get("q5_selected")).upper(), icon = "🤓")
+            else:
+                st.error("You chose: " + str(today_results[0].get("q5_selected")).upper() + ", but right answer was " + str(questions[4].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[4].get("explanation"), icon = "⏭️")
         with tab6:
             st.header(questions[5].get("question"))
@@ -231,6 +247,10 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             st.write("🔹 **B)** " + questions[5].get("option_b"))
             st.write("🔹 **C)** " + questions[5].get("option_c"))
             st.write("🔹 **D)** " + questions[5].get("option_d"))
+            if today_results[0].get("q6_success") == 1:
+                st.success("You chose the right answer: " + str(today_results[0].get("q6_selected")).upper(), icon = "🤓")
+            else:
+                st.error("You chose: " + str(today_results[0].get("q6_selected")).upper() + ", but right answer was " + str(questions[5].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[5].get("explanation"), icon = "⏭️")
         with tab7:
             st.header(questions[6].get("question"))
@@ -238,6 +258,10 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             st.write("🔹 **B)** " + questions[6].get("option_b"))
             st.write("🔹 **C)** " + questions[6].get("option_c"))
             st.write("🔹 **D)** " + questions[6].get("option_d"))
+            if today_results[0].get("q7_success") == 1:
+                st.success("You chose the right answer: " + str(today_results[0].get("q7_selected")).upper(), icon = "🤓")
+            else:
+                st.error("You chose: " + str(today_results[0].get("q7_selected")).upper() + ", but right answer was " + str(questions[6].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[6].get("explanation"), icon = "⏭️")
         with tab8:
             st.header(questions[7].get("question"))
@@ -245,6 +269,10 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             st.write("🔹 **B)** " + questions[7].get("option_b"))
             st.write("🔹 **C)** " + questions[7].get("option_c"))
             st.write("🔹 **D)** " + questions[7].get("option_d"))
+            if today_results[0].get("q8_success") == 1:
+                st.success("You chose the right answer: " + str(today_results[0].get("q8_selected")).upper(), icon = "🤓")
+            else:
+                st.error("You chose: " + str(today_results[0].get("q8_selected")).upper() + ", but right answer was " + str(questions[7].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[7].get("explanation"), icon = "⏭️")
         with tab9:
             st.header(questions[8].get("question"))
@@ -252,6 +280,10 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             st.write("🔹 **B)** " + questions[8].get("option_b"))
             st.write("🔹 **C)** " + questions[8].get("option_c"))
             st.write("🔹 **D)** " + questions[8].get("option_d"))
+            if today_results[0].get("q9_success") == 1:
+                st.success("You chose the right answer: " + str(today_results[0].get("q9_selected")).upper(), icon = "🤓")
+            else:
+                st.error("You chose: " + str(today_results[0].get("q9_selected")).upper() + ", but right answer was " + str(questions[8].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[8].get("explanation"), icon = "⏭️")
         with tab10:
             st.header(questions[9].get("question"))
@@ -259,6 +291,10 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             st.write("🔹 **B)** " + questions[9].get("option_b"))
             st.write("🔹 **C)** " + questions[9].get("option_c"))
             st.write("🔹 **D)** " + questions[9].get("option_d"))
+            if today_results[0].get("q10_success") == 1:
+                st.success("You chose the right answer: " + str(today_results[0].get("q10_selected")).upper(), icon = "🤓")
+            else:
+                st.error("You chose: " + str(today_results[0].get("q10_selected")).upper() + ", but right answer was " + str(questions[9].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[9].get("explanation"), icon = "⏭️")
 
         st.toast("Remember to discuss answers with your group", icon = "🐬")
