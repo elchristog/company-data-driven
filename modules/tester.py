@@ -2,6 +2,8 @@ import streamlit as st
 
 import utils.user_credentials as uc
 
+# https://docs.streamlit.io/library/api-reference/status
+
 def tester(project_name, questions_table_name, user_id): 
     questions = uc.run_query_1_day(f"SELECT * FROM `company-data-driven.{project_name}.{questions_table_name}`;")
     st.write(questions)
