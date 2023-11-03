@@ -1,6 +1,7 @@
 import streamlit as st
 import datetime
 import re
+import webbrowser
 
 import utils.user_credentials as uc
 
@@ -255,6 +256,11 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             st.write("🔹 **C)** " + questions[9].get("option_c"))
             st.write("🔹 **D)** " + questions[9].get("option_d"))
             st.info(questions[9].get("explanation"), icon = "⏭️")
+
+        url = 'https://www.streamlit.io/'
+        if st.button('Discuss answers with my group'):
+            webbrowser.open_new_tab(url)
+        
             
 
 
@@ -285,7 +291,6 @@ def add_question_to_test(project_name, questions_table_name, user_id):
             st.success("Answer confirmed!", icon = "🎈")
         else:
             st.error('Incorrect answer', icon = '🀄')
-
 
     if letter_correct_answer is not None:
         letter_correct_answer_lower = letter_correct_answer.lower()
