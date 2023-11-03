@@ -179,6 +179,9 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
         if today_results[0].get("success_rate") > 80:
             st.success("You got **" + today_results[0].get("success_rate") + "** of the questions right", icon = "😎")
             st.balloons()
+        else:
+            st.alert("You got **" + today_results[0].get("success_rate") + "** of the questions right", icon = "😎")
+
 
 
 def add_question_to_test(project_name, questions_table_name, user_id):
