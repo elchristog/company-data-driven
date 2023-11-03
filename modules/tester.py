@@ -127,6 +127,7 @@ def tester(project_name, questions_table_name, user_id):
                 index=None,
                 key = "question_10"
             ).lower()
+        send_answers = st.button("Send Answers")
         
         
 
