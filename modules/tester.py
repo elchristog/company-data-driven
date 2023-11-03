@@ -151,7 +151,15 @@ def add_question_to_test(project_name, questions_table_name):
         options = ['A', 'B', 'C', 'D'],
         index = None
     ).lower()
-    explanation = re.sub(r'[\"\']', '', st.text_input("Write the explanation:"))
+    explanation = st.text_input("Write the explanation:")
+    if explanation is not None:
+        cleaned_explanation = re.sub(r'[\"\']', '', explanation)
+
+    add_question_button = st.button("Add question")
+    if add_question_button:
+        st.write(cleaned_explanation)
+        st.success("Question added!", icon = "🐣")
+        st.balloons()
 
 
 
