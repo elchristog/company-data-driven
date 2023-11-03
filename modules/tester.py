@@ -257,6 +257,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             st.write("🔹 **D)** " + questions[9].get("option_d"))
             st.info(questions[9].get("explanation"), icon = "⏭️")
 
+        st.toast("Remember to discuss answers with your group", icon = "🐬")
         link = f"[Discuss answers with my group]({group_chat_url})"
         st.markdown(link, unsafe_allow_html=True)
         
