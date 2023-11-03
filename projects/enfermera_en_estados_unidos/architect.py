@@ -50,6 +50,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu = st.sidebar.radio('Web tool options', options = sub_menu_options)
             if sub_menu == "Nclex test creation":
                 st.info("perrito")
+                tst.add_question_to_test()
 
         if menu == "Users Admin":
             sub_menu_options=['Create User', 'Update User', 'Hashing']

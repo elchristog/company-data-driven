@@ -1,4 +1,5 @@
 import streamlit as st
+import datetime
 
 import utils.user_credentials as uc
 
@@ -132,4 +133,10 @@ def tester(project_name, questions_sample_table_name, user_id):
         
 
     st.write(questions)
+
+
+def add_question_to_test():
+    today = datetime.date.today()
+    today_str = today.strftime("%Y-%m-%d")
+    username = st.text_input("Write the username:")
     
