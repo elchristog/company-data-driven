@@ -1,5 +1,6 @@
 import streamlit as st
 import datetime
+import re
 
 import utils.user_credentials as uc
 
@@ -140,6 +141,22 @@ def add_question_to_test(project_name, questions_table_name):
     today_str = today.strftime("%Y-%m-%d")
     max_id = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.{project_name}.{questions_table_name}`;")[0].get("max_id")
 
-    username = st.text_input("Write the username:")
+    question = st.text_input("Write the question:")
+    option_a = st.text_input("Write the option A:")
+    option_b = st.text_input("Write the option B:")
+    option_c = st.text_input("Write the option C:")
+    option_d = st.text_input("Write the option D:")
+    letter_correct_answer = st.selectbox(
+        label = "Select correct answer",
+        options = ['A', 'B', 'C', 'D'],
+        index = None
+    ).lower()
+    explanation = re.sub(r'[\"\']', '', st.text_input("Write the explanation:"))
+
+
+
+
+
+
     st.info(max_id)
     
