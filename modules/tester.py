@@ -19,6 +19,7 @@ def tester(project_name, questions_table_name, user_id):
                 index=None,
                 key = "question_1"
             ).lower()
+        st.toast('Answer selected: ' + selected_answer_q1.upper(), icon='🥸')
     with tab2:
         st.header(questions[1].get("question"))
         st.write("🔹 **A)** " + questions[1].get("option_a"))
@@ -31,6 +32,7 @@ def tester(project_name, questions_table_name, user_id):
                 index=None,
                 key = "question_2"
             ).lower()
+        st.toast('Answer selected: ' + selected_answer_q2.upper(), icon='🥸')
     with tab3:
         st.header(questions[2].get("question"))
         st.write("🔹 **A)** " + questions[2].get("option_a"))
@@ -43,6 +45,7 @@ def tester(project_name, questions_table_name, user_id):
                 index=None,
                 key = "question_3"
             ).lower()
+        st.toast('Answer selected: ' + selected_answer_q3.upper(), icon='🥸')
     with tab4:
         st.header(questions[3].get("question"))
         st.write("🔹 **A)** " + questions[3].get("option_a"))
@@ -55,6 +58,7 @@ def tester(project_name, questions_table_name, user_id):
                 index=None,
                 key = "question_4"
             ).lower()
+        st.toast('Answer selected: ' + selected_answer_q4.upper(), icon='🥸')
     with tab5:
         st.header(questions[4].get("question"))
         st.write("🔹 **A)** " + questions[4].get("option_a"))
@@ -67,6 +71,8 @@ def tester(project_name, questions_table_name, user_id):
                 index=None,
                 key = "question_5"
             ).lower()
+        st.toast('Answer selected: ' + selected_answer_q5.upper(), icon='🥸')
+        
         
 
     st.write(questions)
