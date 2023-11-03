@@ -257,9 +257,8 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             st.write("🔹 **D)** " + questions[9].get("option_d"))
             st.info(questions[9].get("explanation"), icon = "⏭️")
 
-        url = 'https://www.streamlit.io/'
-        if st.button('Discuss answers with my group'):
-            webbrowser.open_new_tab(url)
+        link = '[Discuss answers with my group](http://github.com)'
+        st.markdown(link, unsafe_allow_html=True)
         
             
 
