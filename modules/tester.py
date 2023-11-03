@@ -7,7 +7,7 @@ import utils.user_credentials as uc
 
 # https://docs.streamlit.io/library/api-reference/status
 
-def tester(project_name, questions_sample_table_name, user_id, attempts_table_name): 
+def tester(project_name, questions_sample_table_name, user_id, attempts_table_name, group_chat_url): 
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
 
@@ -257,7 +257,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             st.write("🔹 **D)** " + questions[9].get("option_d"))
             st.info(questions[9].get("explanation"), icon = "⏭️")
 
-        link = '[Discuss answers with my group](http://github.com)'
+        link = f"[Discuss answers with my group]({group_chat_url})"
         st.markdown(link, unsafe_allow_html=True)
         
             
