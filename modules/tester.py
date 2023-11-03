@@ -6,7 +6,7 @@ import utils.user_credentials as uc
 
 # https://docs.streamlit.io/library/api-reference/status
 
-def tester(project_name, questions_sample_table_name, user_id): 
+def tester(project_name, questions_sample_table_name, user_id, attempts_table_name): 
     questions = uc.run_query_6_h(f"SELECT * FROM `company-data-driven.{project_name}.{questions_sample_table_name}`;")
     tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs(["Q 1", "Q 2", "Q 3", "Q 4", "Q 5", "Q 6", "Q 7", "Q 8", "Q 9", "Q 10"])
     with tab1:
@@ -166,7 +166,7 @@ def tester(project_name, questions_sample_table_name, user_id):
                 correct_q_10 = 1 if selected_answer_q10_lower == questions[9].get("correct_option") else 0
                 success_rate = 100 * ((correct_q_1 + correct_q_2 + correct_q_3 + correct_q_4 + correct_q_5 + correct_q_6 + correct_q_7 + correct_q_8 + correct_q_9 + correct_q_10)/10)
                 
-                # id, date, user_id, q1_id, q1_success, q2_id, q3_id,... success_rate
+                max_id                
                 st.info(success_rate)
     st.write(questions)
 
