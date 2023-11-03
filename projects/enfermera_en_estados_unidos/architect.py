@@ -45,6 +45,12 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios", "h1", 0)
                 seot.createPage()
 
+        if menu == "Web tool":
+            sub_menu_options=['Nclex test creation']
+            sub_menu = st.sidebar.radio('Web tool options', options = sub_menu_options)
+            if sub_menu == "Nclex test creation":
+                st.info("perrito")
+
         if menu == "Users Admin":
             sub_menu_options=['Create User', 'Update User', 'Hashing']
             sub_menu = st.sidebar.radio('Users Admin options', options = sub_menu_options)
@@ -54,6 +60,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Hashing":
                 tap.title_and_paragraph("Hashing " + project_icon, "Write the password and get the hashed version", "h3", 0)
                 uh.hashing()
+                
 
 
     # customer
