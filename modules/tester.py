@@ -30,3 +30,15 @@ def tester(project_name, questions_table_name, user_id):
                 index=None,
                 key = "question_2"
             )
+    with tab3:
+        st.header(questions[2].get("question"))
+        st.write("🔹 **A)** " + questions[2].get("option_a"))
+        st.write("🔹 **B)** " + questions[2].get("option_b"))
+        st.write("🔹 **C)** " + questions[2].get("option_c"))
+        st.write("🔹 **D)** " + questions[2].get("option_d"))
+        selected_answer_q3 = st.selectbox(
+                label="Select your answer",
+                options= ['A', 'B', 'C', 'D'],
+                index=None,
+                key = "question_3"
+            )
