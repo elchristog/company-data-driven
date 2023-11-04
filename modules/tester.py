@@ -410,10 +410,11 @@ def test_achievements(project_name, user_id, attempts_table_name):
         # metrics
         st.header("Month evolution")
         col1, col2, col3, col4 = st.columns(4)
-        col1.metric(label="# Month Tests", value = user_score_evolution_df.shape[0])
-        col2.metric(label="# Avg score", value = user_score_evolution_df.score.mean())
-        col3.metric(label="# % tests with score > 80", value = str((user_score_evolution_df['score'] > 80).sum()/user_score_evolution_df.shape[0]))
-        col4.metric(label="# Avg days between tests", value = user_score_evolution_df.days_between_tests.mean())
+        user_score_evolution_df_month = user_score_evolution_df[(user_score_evolution_df["year_attempt_date"] == '2023')]
+        col1.metric(label="# Month Tests", value = user_score_evolution_df_month.shape[0])
+        col2.metric(label="# Avg score", value = user_score_evolution_df_month.score.mean())
+        col3.metric(label="# % tests with score > 80", value = str((user_score_evolution_df_month['score'] > 80).sum()/user_score_evolution_df_month.shape[0]))
+        col4.metric(label="# Avg days between tests", value = user_score_evolution_df_month.days_between_tests.mean())
 
         st.header("Total evolution")
         col1, col2, col3, col4 = st.columns(4)
