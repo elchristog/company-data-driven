@@ -401,7 +401,7 @@ def test_achievements(project_name, user_id, attempts_table_name):
     chart_user_score_evolution = alt.Chart(user_score_evolution_df).mark_bar().encode(
         y=alt.Y('score', scale=alt.Scale(domain=[0, 100], clamp=True)),
         x=alt.X('attempt', sort='x')
-    ).properties(width='container')
+    ).properties(width = 400)
     st.altair_chart(chart_user_score_evolution)
 
 
