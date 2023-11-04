@@ -341,7 +341,7 @@ def add_question_to_test(project_name, questions_table_name, user_id):
 
     add_question_button = st.button("Add question")
     if add_question_button:
-        if question is None or option_a is None or option_b is None or option_c is None or option_d is None or letter_correct_answer is None or explanation is None:
+        if question is None or option_a is None or option_b is None or option_c is None or option_d is None or letter_correct_answer is None or explanation is None or len(question) < 1 or len(option_a) < 1 or len(option_b) < 1 or len(option_c) < 1 or len(option_d) < 1 or len(letter_correct_answer) < 1 or len(explanation) < 1:
             st.error("Please fill in completely all of the required fields.")
         else:
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.{questions_table_name}` (id, creation_date, question	,option_a	,option_b	,option_c	,option_d	,correct_option	,explanation, creator_id) VALUES({max_id}, '{today_str}', '{question}', '{option_a}', '{option_b}', '{option_c}', '{option_d}', '{letter_correct_answer_lower}', '{cleaned_explanation}', {user_id});")
