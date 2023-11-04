@@ -356,7 +356,7 @@ def test_achievements(project_name, user_id, attempts_table_name):
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
     ranking = uc.run_query_1_m(f"SELECT ROW_NUMBER() OVER(ORDER BY ta.success_rate DESC) AS position, ta.success_rate AS score, u.name, u.lastname, u.id FROM `company-data-driven.{project_name}.{attempts_table_name}` AS ta INNER JOIN `company-data-driven.global.users` AS u ON ta.user_id = u.id  WHERE attempt_date = '{today_str}' ORDER BY success_rate DESC;")
-    st.table(ranking)
+    st.table(ranking[:5])
     pass
 
     
