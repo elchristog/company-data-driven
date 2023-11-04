@@ -368,7 +368,7 @@ def test_achievements(project_name, user_id, attempts_table_name):
         with col1:
             st.table(ranking[:5])
         with col2:
-            user_score_and_position = [index for index, item in enumerate(ranking) if item["id"] == 8]
+            user_score_and_position = [index for index, item in enumerate(ranking) if item["id"] == user_id]
             if len(user_score_and_position) < 1 or user_score_and_position is None < 0:
                 st.warning(f"You have not presented your test", icon = "🫥")
             else:
