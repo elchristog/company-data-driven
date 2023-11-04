@@ -3,6 +3,7 @@ import datetime
 import re
 import time
 import pandas as pd
+import altair as alt
 
 import utils.user_credentials as uc
 
