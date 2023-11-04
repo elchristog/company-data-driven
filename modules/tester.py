@@ -351,7 +351,7 @@ def add_question_to_test(project_name, questions_table_name, user_id):
 
 
 
-def test_achievements(project_name, user_id, attempts_table_name, group_chat_url): 
+def test_achievements(project_name, user_id, attempts_table_name): 
     # today's ranking
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
