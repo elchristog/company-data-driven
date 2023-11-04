@@ -349,6 +349,8 @@ def add_question_to_test(project_name, questions_table_name, user_id):
             st.error("Please fill in completely all of the required fields.")
         else:
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.{questions_table_name}` (id, creation_date, question	,option_a	,option_b	,option_c	,option_d	,correct_option	,explanation, creator_id) VALUES({max_id}, '{today_str}', '{question}', '{option_a}', '{option_b}', '{option_c}', '{option_d}', '{letter_correct_answer_lower}', '{cleaned_explanation}', {user_id});")
+            st.info("Updating, please wait", icon = "☺️")
+            time.sleep(5)
             st.success("Question added!", icon = "🐣")
             st.balloons()
 

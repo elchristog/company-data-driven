@@ -1,6 +1,8 @@
 import streamlit as st
 import datetime
 import openai
+import time
+
 
 import utils.user_credentials as uc
 
@@ -47,9 +49,13 @@ def tasks_visualizer(user_id, project_name, divider):
             def update_task_status(task_id, new_status, today_str):
                 if new_status == 'on_execution':
                     uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', on_execution_date = '{today_str}' WHERE id = {task_id}")
+                    st.info("Updating, please wait", icon = "☺️")
+                    time.sleep(5)
                 if new_status == 'finished':
                     uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', finished_date = '{today_str}' WHERE id = {task_id}")
                     st.balloons()
+                    st.info("Updating, please wait", icon = "☺️")
+                    time.sleep(5)
             if update_task_status_button:
                 today = datetime.date.today()
                 today_str = today.strftime("%Y-%m-%d")
@@ -152,6 +158,8 @@ def task_creation(user_id, role_id, project_id, project_name, divider):
                     today_str = today.strftime("%Y-%m-%d")
                     max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.tasks`")[0].get('max_id')
                     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{today_str}', '{task_input}', {selected_user_id}, '{commitment_date_input}', 'to_start', {user_id})")
+                    st.info("Updating, please wait", icon = "☺️")
+                    time.sleep(5)
                     st.success('Task created! (' + task_input + ')', icon="😎")
                     st.balloons()
                     # st.rerun()
@@ -212,6 +220,8 @@ def task_deletion(user_id, role_id, project_id, project_name, divider):
                     today = datetime.date.today()
                     today_str = today.strftime("%Y-%m-%d")
                     uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = 'canceled', canceled_date = '{today_str}', task_cancelator_id = {user_id} WHERE id = {selected_task_id};")
+                    st.info("Updating, please wait", icon = "☺️")
+                    time.sleep(5)
                     st.error('Task deleted!', icon="😎")
                     st.balloons()
                     # st.rerun()
