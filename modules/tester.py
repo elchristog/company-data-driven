@@ -371,8 +371,10 @@ def test_achievements(project_name, user_id, attempts_table_name):
             user_score_and_position = [index for index, item in enumerate(ranking) if item["id"] == user_id]
             st.write(ranking[user_score_and_position[0]])
             percentile = 100 * (len(ranking)-ranking[user_score_and_position[0]].get("position"))/len(ranking)
-            if percentile < 80:
+            if percentile > 80:
                 st.success(f"You got **{ranking[user_score_and_position[0]].get('score')}%** of today's questions right", icon = "😸")
+                st.success(f"Your position today is: **{ranking[user_score_and_position[0]].get('position')}**", icon = "😸")
+
             st.write()
 
     pass
