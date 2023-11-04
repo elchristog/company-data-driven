@@ -369,7 +369,7 @@ def test_achievements(project_name, user_id, attempts_table_name):
             st.table(ranking[:5])
         with col2:
             user_score_and_position = [index for index, item in enumerate(ranking) if item["id"] == 8]
-            st.write(user_score_and_position)
+            st.write(len(user_score_and_position))
             st.write(ranking[user_score_and_position[0]])
             percentile = 100 * (len(ranking)-ranking[user_score_and_position[0]].get("position"))/len(ranking)
             if percentile < 80:
