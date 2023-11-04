@@ -409,7 +409,7 @@ def test_achievements(project_name, user_id, attempts_table_name):
 
         # metrics
         col1, col2, col3 = st.columns(3)
-        col1.metric(label="# Tests", value = user_score_evolution, delta= 0)
+        col1.metric(label="# Tests", value = len(user_score_evolution), delta= 0)
 
 
 
