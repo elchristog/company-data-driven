@@ -398,6 +398,13 @@ def test_achievements(project_name, user_id, attempts_table_name):
     user_score_evolution_df = pd.DataFrame(user_score_evolution, columns = ["attempt_date","score"])
     st.table(user_score_evolution_df)
     st.bar_chart(user_score_evolution_df, x="attempt_date", y="score")
+    chart_user_score_evolution = alt.Chart(user_score_evolution_df).mark_bar().encode(
+        y=alt.Y('Score', scale=alt.Scale(domain=[0, 100], clamp=True)),
+        x=alt.X('Date', sort='y'),
+        
+    )
+
+    st.altair_chart(chart_df_1)
 
     source = pd.DataFrame({
         'a': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
