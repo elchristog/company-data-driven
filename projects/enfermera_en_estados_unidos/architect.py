@@ -87,7 +87,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu_options=['Logros', 'Nclex test']
             sub_menu = st.sidebar.radio('Home options', options = sub_menu_options)
             if sub_menu == "Logros":
-                tap.title_and_paragraph("Nclex" + project_icon, "Gestiona tus tareas (Delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h2", 0)
+                tap.title_and_paragraph("Tu progreso en Nclex" + project_icon, "Evalúa tu progreso en la preparación para el examen", "h2", 0)
                 tst.test_achievements(project_name, user_id, 'nclex_attempts')
             if sub_menu == "Nclex test":
                 tap.title_and_paragraph("Test diario Nclex" + project_icon, "Cada día un nuevo test", "h2", 0)
