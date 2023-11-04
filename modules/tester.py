@@ -374,9 +374,21 @@ def test_achievements(project_name, user_id, attempts_table_name):
             else:
                 st.write(ranking[user_score_and_position[0]])
                 percentile = 100 * (len(ranking)-ranking[user_score_and_position[0]].get("position"))/len(ranking)
-                if percentile < 80:
+                if percentile > 80:
                     st.success(f"You got **{ranking[user_score_and_position[0]].get('score')}%** of today's questions right", icon = "😸")
                     st.success(f"Your position today is: **{ranking[user_score_and_position[0]].get('position')}**", icon = "😸")
                     st.success(f"Today you surpassed **{percentile}%** of your classmates", icon = "😸")
+                if percentile > 60 and percentile <= 80:
+                    st.info(f"You got **{ranking[user_score_and_position[0]].get('score')}%** of today's questions right", icon = "😹")
+                    st.info(f"Your position today is: **{ranking[user_score_and_position[0]].get('position')}**", icon = "😹")
+                    st.info(f"Today you surpassed **{percentile}%** of your classmates", icon = "😹")
+                if percentile > 40 and percentile <= 60:
+                    st.warning(f"You got **{ranking[user_score_and_position[0]].get('score')}%** of today's questions right", icon = "😼")
+                    st.warning(f"Your position today is: **{ranking[user_score_and_position[0]].get('position')}**", icon = "😼")
+                    st.warning(f"Today you surpassed **{percentile}%** of your classmates", icon = "😼")
+                if percentile < 40:
+                    st.error(f"You got **{ranking[user_score_and_position[0]].get('score')}%** of today's questions right", icon = "🙀")
+                    st.error(f"Your position today is: **{ranking[user_score_and_position[0]].get('position')}**", icon = "🙀")
+                    st.error(f"Today you surpassed **{percentile}%** of your classmates", icon = "🙀")
 
     
