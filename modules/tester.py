@@ -399,4 +399,17 @@ def test_achievements(project_name, user_id, attempts_table_name):
     st.table(user_score_evolution_df)
     st.bar_chart(user_score_evolution_df, x="attempt_date", y="score")
 
+    source = pd.DataFrame({
+        'a': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
+        'b': [28, 55, 43, 91, 81, 53, 19, 87, 52]
+    })
+    st.header("With clamp=True")
+    chart_df_1 = alt.Chart(source).mark_bar().encode(
+        y=alt.Y('b', scale=alt.Scale(domain=[20, 60], clamp=True)),
+        x=alt.X('a', sort='y'),
+        
+    )
+
+    st.altair_chart(chart_df_1)
+
     
