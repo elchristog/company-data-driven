@@ -404,7 +404,7 @@ def test_achievements(project_name, user_id, attempts_table_name):
         
     )
 
-    st.altair_chart(chart_df_1)
+    st.altair_chart(chart_user_score_evolution)
 
     source = pd.DataFrame({
         'a': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
