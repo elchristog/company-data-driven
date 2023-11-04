@@ -365,7 +365,7 @@ def test_achievements(project_name, user_id, attempts_table_name):
             st.table(ranking[:5])
         with col2:
             user_score_and_position = [index for index, item in enumerate(ranking) if item["id"] == 3]
-            st.write(user_score_and_position)
+            st.write(user_score_and_position[0])
     pass
 
     
