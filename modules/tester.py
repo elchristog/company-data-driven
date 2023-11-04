@@ -393,13 +393,13 @@ def test_achievements(project_name, user_id, attempts_table_name):
 
     # your evolution
     st.header("Your evolution")
-    user_score_evolution = uc.run_query_1_day(f"SELECT ROW_NUMBER() OVER(ORDER BY ta.id ASC) AS attempt, ta.success_rate AS score FROM `company-data-driven.{project_name}.{attempts_table_name}` AS ta WHERE ta.user_id = {user_id} ORDER BY ta.id ASC;")
+    user_score_evolution = uc.run_query_1_day(f"SELECT ROW_NUMBER() OVER(ORDER BY ta.id ASC) AS attempt, ta.attempt_date, LAG(ta.attempt_date, 1) OVER(ORDER BY ta.id ASC) AS last_attempt_date, DATE_DIFF(ta.attempt_date, LAG(ta.attempt_date, 1) OVER(ORDER BY ta.id ASC), DAY) AS days_between_tests, ta.success_rate AS score, EXTRACT(YEAR FROM ta.attempt_date) AS year_attempt_date, EXTRACT(MONTH FROM ta.attempt_date) AS month_attempt_date, EXTRACT(WEEK FROM ta.attempt_date) AS week_attempt_date FROM `company-data-driven.{project_name}.{attempts_table_name}` AS ta WHERE ta.user_id = {user_id} ORDER BY ta.id ASC;")
     if len(user_score_evolution) < 1 or user_score_evolution is None < 0:
                 st.warning(f"You have not presented your test", icon = "🫥")
     else:
         user_score_evolution.sort(key=lambda x: x["attempt"])
         
-        user_score_evolution_df = pd.DataFrame(user_score_evolution, columns = ["attempt","score"])
+        user_score_evolution_df = pd.DataFrame(user_score_evolution, columns = ["attempt","attempt_date","last_attempt_date","days_between_tests","score","year_attempt_date","month_attempt_date","week_attempt_date"])
         user_score_evolution_df["attempt"] = user_score_evolution_df["attempt"].astype(str)
         chart_user_score_evolution = alt.Chart(user_score_evolution_df).mark_bar().encode(
             y=alt.Y('score', scale=alt.Scale(domain=[0, 100], clamp=True)),
