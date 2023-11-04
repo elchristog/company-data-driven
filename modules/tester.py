@@ -396,30 +396,12 @@ def test_achievements(project_name, user_id, attempts_table_name):
     user_score_evolution = uc.run_query_1_day(f"SELECT ROW_NUMBER() OVER(ORDER BY ta.id ASC) AS attempt, ta.success_rate AS score FROM `company-data-driven.{project_name}.{attempts_table_name}` AS ta WHERE ta.user_id = {user_id} ORDER BY ta.id ASC;")
     user_score_evolution.sort(key=lambda x: x["attempt"])
     
-    
-
-    source = pd.DataFrame({
-        'a': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
-        'b': [28, 55, 43, 91, 81, 53, 19, 87, 52]
-    })
-    st.write(source)
-    st.header("With clamp=True")
-    chart_df_1 = alt.Chart(source).mark_bar().encode(
-        y=alt.Y('b', scale=alt.Scale(domain=[20, 60], clamp=True)),
-        x=alt.X('a', sort='y'),
-        
-    )
-
-    st.altair_chart(chart_df_1)
-    
-    
-    
     user_score_evolution_df = pd.DataFrame(user_score_evolution, columns = ["attempt","score"])
     user_score_evolution_df["attempt"] = user_score_evolution_df["attempt"].astype(str)
-    st.write(user_score_evolution_df)
     chart_user_score_evolution = alt.Chart(user_score_evolution_df).mark_bar().encode(
         y=alt.Y('score', scale=alt.Scale(domain=[0, 100], clamp=True)),
         x=alt.X('attempt', sort='x'),
+        width=alt.value(100)
     )
     st.altair_chart(chart_user_score_evolution)
 
