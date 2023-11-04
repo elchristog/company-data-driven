@@ -408,7 +408,7 @@ def test_achievements(project_name, user_id, attempts_table_name):
         st.altair_chart(chart_user_score_evolution)
 
         # metrics
-        st.write(today.month)
+        st.write(today.isocalendar()[1])
         st.header("Month evolution")
         col1, col2, col3, col4 = st.columns(4)
         user_score_evolution_df_month = user_score_evolution_df[(user_score_evolution_df["year_attempt_date"] == today.year) & (user_score_evolution_df["month_attempt_date"] == today.month)]
