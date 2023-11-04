@@ -393,30 +393,28 @@ def test_achievements(project_name, user_id, attempts_table_name):
 
     # your evolution
     st.header("Your evolution")
-    user_score_evolution = uc.run_query_1_day(f"SELECT ta.attempt_date, ta.success_rate AS score FROM `company-data-driven.{project_name}.{attempts_table_name}` AS ta WHERE ta.user_id = {user_id} ORDER BY ta.id ASC;")
-    user_score_evolution.sort(key=lambda x: x["attempt_date"])
-    user_score_evolution_df = pd.DataFrame(user_score_evolution, columns = ["attempt_date","score"])
-    st.table(user_score_evolution_df)
-    user_score_evolution_df = user_score_evolution_df.rename(columns={'attempt_date':'index'}).set_index('index')
+    user_score_evolution = uc.run_query_1_day(f"SELECT ROW_NUMBER() OVER(ORDER BY ta.id ASC) AS try, ta.success_rate AS score FROM `company-data-driven.{project_name}.{attempts_table_name}` AS ta WHERE ta.user_id = {user_id} ORDER BY ta.id ASC;")
+    user_score_evolution.sort(key=lambda x: x["try"])
+    user_score_evolution_df = pd.DataFrame(user_score_evolution, columns = ["try","score"])
     st.table(user_score_evolution_df)
     chart_user_score_evolution = alt.Chart(user_score_evolution_df).mark_bar().encode(
         y=alt.Y('Score', scale=alt.Scale(domain=[0, 100], clamp=True)),
-        x=alt.X('Date', sort='x'),
+        x=alt.X('Try', sort='x'),
     )
 
     st.altair_chart(chart_user_score_evolution)
 
-    source = pd.DataFrame({
-        'a': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
-        'b': [28, 55, 43, 91, 81, 53, 19, 87, 52]
-    })
-    st.header("With clamp=True")
-    chart_df_1 = alt.Chart(source).mark_bar().encode(
-        y=alt.Y('b', scale=alt.Scale(domain=[20, 60], clamp=True)),
-        x=alt.X('a', sort='y'),
+    # source = pd.DataFrame({
+    #     'a': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
+    #     'b': [28, 55, 43, 91, 81, 53, 19, 87, 52]
+    # })
+    # st.header("With clamp=True")
+    # chart_df_1 = alt.Chart(source).mark_bar().encode(
+    #     y=alt.Y('b', scale=alt.Scale(domain=[20, 60], clamp=True)),
+    #     x=alt.X('a', sort='y'),
         
-    )
+    # )
 
-    st.altair_chart(chart_df_1)
+    # st.altair_chart(chart_df_1)
 
     
