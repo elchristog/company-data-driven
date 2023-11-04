@@ -408,12 +408,12 @@ def test_achievements(project_name, user_id, attempts_table_name):
         st.altair_chart(chart_user_score_evolution)
 
         # metrics
-        col1, col2 = st.columns(2)
-        col1.header("Total evolution")
+        st.header("Total evolution")
+        col1, col2, col3, col4 = st.columns(4)
         col1.metric(label="# Total Tests", value = len(user_score_evolution), delta= 0)
-        col1.metric(label="# Avg score", value = user_score_evolution_df.score.mean(), delta= 0)
-        col1.metric(label="# % tests with score > 80", value = str((user_score_evolution_df['score'] > 80).sum()/len(user_score_evolution)), delta= 0)
-        col1.metric(label="# Avg days between tests", value = str((user_score_evolution_df['score'] > 80).sum()/len(user_score_evolution)), delta= 0)
+        col2.metric(label="# Avg score", value = user_score_evolution_df.score.mean(), delta= 0)
+        col3.metric(label="# % tests with score > 80", value = str((user_score_evolution_df['score'] > 80).sum()/len(user_score_evolution)), delta= 0)
+        col4.metric(label="# Avg days between tests", value = str((user_score_evolution_df['score'] > 80).sum()/len(user_score_evolution)), delta= 0)
 
 
 
