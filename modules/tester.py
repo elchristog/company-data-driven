@@ -360,7 +360,11 @@ def test_achievements(project_name, user_id, attempts_table_name):
     if len(ranking) < 1:
         st.info("Waiting for user attempts", icon = "🥱")
     else:
-        st.table(ranking[:5])
+        col1, col2 = st.columns(2)
+        with col1:
+            st.table(ranking[:5])
+        with col2:
+            st.write(ranking)
     pass
 
     
