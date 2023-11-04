@@ -390,4 +390,9 @@ def test_achievements(project_name, user_id, attempts_table_name):
                     st.error(f"Your position today is: **{ranking[user_score_and_position[0]].get('position')}**", icon = "🙀")
                     st.error(f"Today you surpassed **{percentile}%** of your classmates", icon = "🙀")
 
+    # your evolution
+    st.header("Your evolution")
+    user_score_evolution = uc.run_query_1_day(f"SELECT ta.attempt_date, ta.success_rate AS score FROM `company-data-driven.{project_name}.{attempts_table_name}` AS ta WHERE ta.user_id = {user_id} ORDER BY ta.id ASC;")
+    st.write(user_score_evolution)
+
     
