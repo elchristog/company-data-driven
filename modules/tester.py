@@ -377,5 +377,6 @@ def test_achievements(project_name, user_id, attempts_table_name):
                 if percentile < 80:
                     st.success(f"You got **{ranking[user_score_and_position[0]].get('score')}%** of today's questions right", icon = "😸")
                     st.success(f"Your position today is: **{ranking[user_score_and_position[0]].get('position')}**", icon = "😸")
+                    st.success(f"Today you surpassed **{percentile}%** of your classmates", icon = "😸")
 
     
