@@ -351,9 +351,11 @@ def add_question_to_test(project_name, questions_table_name, user_id):
 
 
 
-def test_achievements(project_name, questions_sample_table_name, user_id, attempts_table_name, group_chat_url): 
+def test_achievements(project_name, user_id, attempts_table_name, group_chat_url): 
     # today's ranking
-    ranking = uc.run_query_1_m(f"SELECT ROW_NUMBER() OVER(ORDER BY ta.success_rate DESC) AS position, ta.success_rate AS score, u.name, u.lastname, u.id FROM `company-data-driven.enfermera_en_estados_unidos.nclex_attempts` AS ta INNER JOIN `company-data-driven.global.users` AS u ON ta.user_id = u.id  WHERE attempt_date = '2023-11-03' ORDER BY success_rate DESC;")
+    today = datetime.date.today()
+    today_str = today.strftime("%Y-%m-%d")
+    ranking = uc.run_query_1_m(f"SELECT ROW_NUMBER() OVER(ORDER BY ta.success_rate DESC) AS position, ta.success_rate AS score, u.name, u.lastname, u.id FROM `company-data-driven.{project_name}.{attempts_table_name}` AS ta INNER JOIN `company-data-driven.global.users` AS u ON ta.user_id = u.id  WHERE attempt_date = '{today_str}' ORDER BY success_rate DESC;")
     st.table(ranking)
     pass
 
