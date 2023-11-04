@@ -396,6 +396,6 @@ def test_achievements(project_name, user_id, attempts_table_name):
     st.write(user_score_evolution)
     user_score_evolution.sort(key=lambda x: x["attempt_date"])
     user_score_evolution_df = pd.DataFrame(user_score_evolution, columns = ["attempt_date","success_rate"])
-    st.bar_chart(user_score_evolution_df)
+    st.bar_chart(user_score_evolution_df, x="attempt_date", y="score")
 
     
