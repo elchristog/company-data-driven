@@ -393,15 +393,14 @@ def test_achievements(project_name, user_id, attempts_table_name):
 
     # your evolution
     st.header("Your evolution")
-    user_score_evolution = uc.run_query_1_day(f"SELECT ROW_NUMBER() OVER(ORDER BY ta.id ASC) AS try, ta.success_rate AS score FROM `company-data-driven.{project_name}.{attempts_table_name}` AS ta WHERE ta.user_id = {user_id} ORDER BY ta.id ASC;")
-    user_score_evolution.sort(key=lambda x: x["try"])
-    user_score_evolution_df = pd.DataFrame(user_score_evolution, columns = ["try","score"])
+    user_score_evolution = uc.run_query_1_day(f"SELECT ROW_NUMBER() OVER(ORDER BY ta.id ASC) AS attempt, ta.success_rate AS score FROM `company-data-driven.{project_name}.{attempts_table_name}` AS ta WHERE ta.user_id = {user_id} ORDER BY ta.id ASC;")
+    user_score_evolution.sort(key=lambda x: x["attempt"])
+    user_score_evolution_df = pd.DataFrame(user_score_evolution, columns = ["attempt","score"])
     st.table(user_score_evolution_df)
     chart_user_score_evolution = alt.Chart(user_score_evolution_df).mark_bar().encode(
         y=alt.Y('Score', scale=alt.Scale(domain=[0, 100], clamp=True)),
-        x=alt.X('Try', sort='x'),
+        x=alt.X('Attempt', sort='x'),
     )
-
     st.altair_chart(chart_user_score_evolution)
 
     # source = pd.DataFrame({
