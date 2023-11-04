@@ -407,5 +407,10 @@ def test_achievements(project_name, user_id, attempts_table_name):
         ).properties(width = 600)
         st.altair_chart(chart_user_score_evolution)
 
+        # metrics
+        col1, col2, col3 = st.columns(3)
+        col1.metric(label="# Tests", value = user_score_evolution, delta= 0)
+
+
 
     
