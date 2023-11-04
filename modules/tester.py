@@ -418,8 +418,8 @@ def test_achievements(project_name, user_id, attempts_table_name):
     user_score_evolution_df["attempt"] = user_score_evolution_df["attempt"].astype(str)
     st.write(user_score_evolution_df)
     chart_user_score_evolution = alt.Chart(user_score_evolution_df).mark_bar().encode(
-        y=alt.Y('Score', scale=alt.Scale(domain=[0, 100], clamp=True)),
-        x=alt.X('Attempt', sort='x'),
+        y=alt.Y('score', scale=alt.Scale(domain=[0, 100], clamp=True)),
+        x=alt.X('attempt', sort='x'),
     )
     st.altair_chart(chart_user_score_evolution)
 
