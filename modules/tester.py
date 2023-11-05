@@ -182,7 +182,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                         time.sleep(5)
                         st.rerun()
     else:
-        if today_results[0].get("success_rate") > 80:
+        if today_results[0].get("success_rate") >= 80:
             st.success("You got **" + str(today_results[0].get("success_rate")) + "%** of today's questions right", icon = "😎")
             st.balloons()
         else:
@@ -419,7 +419,7 @@ def test_achievements(project_name, user_id, attempts_table_name):
         else:
             col1.metric(label="# Week Tests", value = user_score_evolution_df_week.shape[0])
             col2.metric(label="# Avg score", value = user_score_evolution_df_week.score.mean())
-            col3.metric(label="# % tests with score > 80", value = str((user_score_evolution_df_week['score'] > 80).sum()/user_score_evolution_df_week.shape[0]))
+            col3.metric(label="# % tests with score >= 80", value = str((user_score_evolution_df_week['score'] >= 80).sum()/user_score_evolution_df_week.shape[0]))
             col4.metric(label="# Avg days between tests", value = user_score_evolution_df_week.days_between_tests.mean())
 
         st.header("Month evolution")
@@ -430,14 +430,14 @@ def test_achievements(project_name, user_id, attempts_table_name):
         else:
             col1.metric(label="# Month Tests", value = user_score_evolution_df_month.shape[0])
             col2.metric(label="# Avg score", value = user_score_evolution_df_month.score.mean())
-            col3.metric(label="# % tests with score > 80", value = str((user_score_evolution_df_month['score'] > 80).sum()/user_score_evolution_df_month.shape[0]))
+            col3.metric(label="# % tests with score >= 80", value = str((user_score_evolution_df_month['score'] >= 80).sum()/user_score_evolution_df_month.shape[0]))
             col4.metric(label="# Avg days between tests", value = user_score_evolution_df_month.days_between_tests.mean())
 
         st.header("Total evolution")
         col1, col2, col3, col4 = st.columns(4)
         col1.metric(label="# Total Tests", value = user_score_evolution_df.shape[0])
         col2.metric(label="# Avg score", value = user_score_evolution_df.score.mean())
-        col3.metric(label="# % tests with score > 80", value = str((user_score_evolution_df['score'] > 80).sum()/user_score_evolution_df.shape[0]))
+        col3.metric(label="# % tests with score >= 80", value = str((user_score_evolution_df['score'] >= 80).sum()/user_score_evolution_df.shape[0]))
         col4.metric(label="# Avg days between tests", value = user_score_evolution_df.days_between_tests.mean())
 
 
