@@ -14,7 +14,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
     if role_id != 6:
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
-            menu_options = ["Home", "Traffic and SEO", "Click bitly", "Whatsapp", "Trip Wire", "Remarketing", "Web tool", "Contract", "Contract Remarketing", "Step1", "Step2", "Customer view", "Team view"]
+            menu_options = ["Home", "Traffic and SEO", "Click bitly", "Whatsapp", "Trip Wire", "Remarketing", "Web tool", "Contract", "Contract Remarketing", "Step1", "Step2"]
             if role_id == 1:
                 menu_options.extend(['Users Admin'])
             menu = st.sidebar.radio(project_title, menu_options)
@@ -46,8 +46,12 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 seot.createPage()
 
         if menu == "Web tool":
-            sub_menu_options=['Nclex test creation']
+            sub_menu_options=["Customer view", "Team view", 'Nclex test creation']
             sub_menu = st.sidebar.radio('Web tool options', options = sub_menu_options)
+            if sub_menu == "Customer view":
+                tap.title_and_paragraph("Create a new question in the NCLEX test " + project_icon, "Remember not add the letters [A), B), C), D)] in the options", "h3", 0)
+            if sub_menu == "Team view":
+                tap.title_and_paragraph("Create a new question in the NCLEX test " + project_icon, "Remember not add the letters [A), B), C), D)] in the options", "h3", 0)
             if sub_menu == "Nclex test creation":
                 tap.title_and_paragraph("Create a new question in the NCLEX test " + project_icon, "Remember not add the letters [A), B), C), D)] in the options", "h3", 0)
                 tst.add_question_to_test(project_name, 'nclex_questions', user_id)
