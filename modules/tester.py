@@ -416,7 +416,7 @@ def test_achievements(project_name, user_id, attempts_table_name):
         st.write(user_score_evolution_df)
         st.write(user_score_evolution_df_week)
         st.write(today.isocalendar()[1])
-        st.write(today.isocalendar()[1] - 1 if today.isocalendar()[2] == 7 else today.isocalendar()[1])
+        st.write(today.isocalendar()[1] + 1 if today.isocalendar()[2] == 7 else today.isocalendar()[1])
         if len(user_score_evolution_df_week) < 1 or user_score_evolution_df_week is None < 0:
                 st.warning(f"You have not presented your test", icon = "🫥")
         else:
