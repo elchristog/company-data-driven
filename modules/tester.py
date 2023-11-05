@@ -412,7 +412,7 @@ def test_achievements(project_name, user_id, attempts_table_name):
         # metrics
         st.header("Week evolution")
         col1, col2, col3, col4 = st.columns(4)
-        user_score_evolution_df_week = user_score_evolution_df[(user_score_evolution_df["year_attempt_date"] == today.year) & (user_score_evolution_df["month_attempt_date"] == today.month) & (user_score_evolution_df["week_attempt_date"] == today.isocalendar()[1])]
+        user_score_evolution_df_week = user_score_evolution_df[(user_score_evolution_df["year_attempt_date"] == today.year) & (user_score_evolution_df["month_attempt_date"] == today.month) & (user_score_evolution_df["week_attempt_date"] == today.strftime("%U"))]
         st.write(user_score_evolution_df)
         st.write(user_score_evolution_df_week)
         if len(user_score_evolution_df_week) < 1 or user_score_evolution_df_week is None < 0:
