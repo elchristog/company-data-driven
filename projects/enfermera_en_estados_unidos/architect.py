@@ -14,7 +14,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
     if role_id != 6:
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
-            menu_options = ["Home", "Traffic and SEO", "Click bitly", "Whatsapp", "Trip Wire", "Remarketing", "Web tool", "Contract", "Contract Remarketing", "Step1", "Step2"]
+            menu_options = ["Home", "Traffic and SEO", "Click bitly", "Whatsapp", "Trip Wire", "Remarketing", "Web App", "Contract", "Contract Remarketing", "Step1", "Step2"]
             if role_id == 1:
                 menu_options.extend(['Users Admin'])
             menu = st.sidebar.radio(project_title, menu_options)
@@ -45,7 +45,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios", "h1", 0)
                 seot.createPage()
 
-        if menu == "Web tool":
+        if menu == "Web App":
             sub_menu_options=["Customer view", "Team view", 'Nclex test creation']
             sub_menu = st.sidebar.radio('Web tool options', options = sub_menu_options)
             if sub_menu == "Customer view":
