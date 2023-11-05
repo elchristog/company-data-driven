@@ -5,6 +5,8 @@ import modules.tasks as t
 import modules.seo_traffic as seot
 import utils.users_handling as uh
 import modules.tester as tst
+import modules.web_app_activity as wap
+
 
 # https://docs.streamlit.io/library/api-reference/layout
 # https://docs.streamlit.io/library/api-reference/control-flow/st.form
@@ -50,6 +52,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu = st.sidebar.radio('Web tool options', options = sub_menu_options)
             if sub_menu == "Customer view":
                 tap.title_and_paragraph("Visualize the activity of your customers in the Web App " + project_icon, "Remember not add the letters [A), B), C), D)] in the options", "h3", 0)
+                wap.login_activity()
             if sub_menu == "Team view":
                 tap.title_and_paragraph("Visualize the activity of your team in the Web App " + project_icon, "Remember not add the letters [A), B), C), D)] in the options", "h3", 0)
             if sub_menu == "Nclex test creation":
