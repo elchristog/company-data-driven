@@ -109,5 +109,5 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tst.tester(project_name, 'nclex_questions_sample', user_id, 'nclex_attempts', 'https://chat.whatsapp.com/BvsGUAmKDscDXqEDQ74Xf6')
 
         if menu == "Recursos":
-            st.success("My douglas")
+            tap.title_and_paragraph("Tus recursos" + project_icon, "Accede a los recursos habilitados para ti", "h2", 0)
             r.one_resource()
