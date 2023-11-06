@@ -6,6 +6,7 @@ import modules.seo_traffic as seot
 import utils.users_handling as uh
 import modules.tester as tst
 import modules.web_app_activity as wap
+import modules.resources as r
 
 
 # https://docs.streamlit.io/library/api-reference/layout
@@ -109,3 +110,4 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         if menu == "Recursos":
             st.success("My douglas")
+            r.one_resource()
