@@ -48,7 +48,9 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 seot.createPage()
 
         if menu == "Web App":
-            sub_menu_options=["Customer view", "Team view", 'Nclex test creation']
+            sub_menu_options=["Customer view", 'Nclex test creation']
+            if role_id < 4:
+                menu_options.extend(['Team view'])
             sub_menu = st.sidebar.radio('Web tool options', options = sub_menu_options)
             if sub_menu == "Customer view":
                 tap.title_and_paragraph("Visualize the activity of your customers in the Web App " + project_icon, "Remember not add the letters [A), B), C), D)] in the options", "h3", 0)
