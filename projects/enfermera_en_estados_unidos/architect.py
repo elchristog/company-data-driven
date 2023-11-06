@@ -110,4 +110,4 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         if menu == "Recursos":
             tap.title_and_paragraph("Tus recursos" + project_icon, "Accede a los recursos habilitados para ti", "h2", 0)
-            r.resources(project_name, user_id)
+            r.resources(project_name, user_id, [':selfie:', 'name', 'link_url'])
