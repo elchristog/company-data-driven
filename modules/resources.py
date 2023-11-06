@@ -8,4 +8,4 @@ import utils.user_credentials as uc
 def one_resource():
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.link_button(":card_index_dividers: Go to gallery", "https://streamlit.io/gallery")
+        st.link_button(":card_index_dividers: Google Drive", "https://streamlit.io/gallery")
