@@ -71,6 +71,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Hashing":
                 tap.title_and_paragraph("Hashing " + project_icon, "Write the password and get the hashed version", "h3", 0)
                 uh.hashing()
+
+
+
+         
                 
 
 
@@ -78,7 +82,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
     if role_id == 6:
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
-            menu_options = ["Home", "Nclex"]
+            menu_options = ["Home", "Nclex", "Recursos"]
             menu = st.sidebar.radio(project_title, menu_options)
             st.write("---") 
 
@@ -102,3 +106,6 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Nclex test":
                 tap.title_and_paragraph("Test diario Nclex" + project_icon, "Cada día un nuevo test", "h2", 0)
                 tst.tester(project_name, 'nclex_questions_sample', user_id, 'nclex_attempts', 'https://chat.whatsapp.com/BvsGUAmKDscDXqEDQ74Xf6')
+
+        if menu == "Recursos":
+            st.success("My douglas")
