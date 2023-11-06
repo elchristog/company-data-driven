@@ -52,9 +52,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu = st.sidebar.radio('Web tool options', options = sub_menu_options)
             if sub_menu == "Customer view":
                 tap.title_and_paragraph("Visualize the activity of your customers in the Web App " + project_icon, "Remember not add the letters [A), B), C), D)] in the options", "h3", 0)
-                wap.login_activity()
+                wap.login_activity('customer')
             if sub_menu == "Team view":
                 tap.title_and_paragraph("Visualize the activity of your team in the Web App " + project_icon, "Remember not add the letters [A), B), C), D)] in the options", "h3", 0)
+                wap.login_activity('team')
             if sub_menu == "Nclex test creation":
                 tap.title_and_paragraph("Create a new question in the NCLEX test " + project_icon, "Remember not add the letters [A), B), C), D)] in the options", "h3", 0)
                 tst.add_question_to_test(project_name, 'nclex_questions', user_id)
