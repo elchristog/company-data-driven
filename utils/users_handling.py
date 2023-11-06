@@ -88,6 +88,8 @@ def user_creation(user_id, project_id, project_name):
         options = ['male', 'female'],
         index = None
     )
+    user_drive_folder = st.text_input("Write the user Google Drive folder url:")
+    
     
     create_user_button = st.button("Create User")
     if create_user_button:
@@ -130,10 +132,14 @@ def user_creation(user_id, project_id, project_name):
             st.error("Please enter your phone number.")
         if len(user_phone_number) < 6:
             st.error("The phone number must be at least 6 characters long.")
-        if len(username) < 6 or len(checking_username_query) > 0 or selected_project is None or selected_project != selected_project_confirmation or user_role is None or user_role != user_role_confirmation or user_first_name is None or len(user_first_name) < 3 or user_last_name is None or len(user_last_name) < 3 or user_email is None or len(user_email) < 3  or user_birth_date is None or user_country is None or len(user_country) < 3 or user_gender is None or len(user_gender) < 3 or user_phone_number is None or len(user_phone_number) < 6:
+        if user_drive_folder is None:
+            st.error("Please enter the Drive URL.")
+        if len(user_drive_folder) < 6:
+            st.error("The Drive URL must be at least 6 characters long.")
+        if len(username) < 6 or len(checking_username_query) > 0 or selected_project is None or selected_project != selected_project_confirmation or user_role is None or user_role != user_role_confirmation or user_first_name is None or len(user_first_name) < 3 or user_last_name is None or len(user_last_name) < 3 or user_email is None or len(user_email) < 3  or user_birth_date is None or user_country is None or len(user_country) < 3 or user_gender is None or len(user_gender) < 3 or user_phone_number is None or len(user_phone_number) < 6 or user_drive_folder is None or len(user_drive_folder) < 6:
             st.error("Please fill in completely all of the required fields.")
         else:
-            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.users` (id, username, status, project_id, creation_date, email, name, lastname, birthdate, country, gender, user_creator_id, phone_number) VALUES({max_id_users}, '{username}', 'active', {selected_project_id}, '{today_str}', '{user_email.lower()}', '{user_first_name.lower()}', '{user_last_name.lower()}', '{user_birth_date}', '{user_country.lower()}', '{user_gender.lower()}', {user_id}, '{user_phone_number}');")
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.users` (id, username, status, project_id, creation_date, email, name, lastname, birthdate, country, gender, user_creator_id, phone_number, user_drive_folder) VALUES({max_id_users}, '{username}', 'active', {selected_project_id}, '{today_str}', '{user_email.lower()}', '{user_first_name.lower()}', '{user_last_name.lower()}', '{user_birth_date}', '{user_country.lower()}', '{user_gender.lower()}', {user_id}, '{user_phone_number}', '{user_drive_folder}');")
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.role_assignment` (id, user_id, role_id) VALUES({max_id_role_assignement}, {max_id_users}, {selected_role_id});")
             st.info("Updating, please wait", icon = "☺️")
             time.sleep(5)
