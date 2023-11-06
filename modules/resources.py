@@ -5,7 +5,8 @@ import utils.user_credentials as uc
 
 # https://streamlit-emoji-shortcodes-streamlit-app-gwckff.streamlit.app/
 
-def one_resource():
+def resources(project_name, user_id):
+    
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.link_button(":card_index_dividers: Google Drive", "https://streamlit.io/gallery")
