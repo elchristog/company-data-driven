@@ -3,7 +3,6 @@ import datetime
 import openai
 import time
 
-
 import utils.user_credentials as uc
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
