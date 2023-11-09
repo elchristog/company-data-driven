@@ -145,7 +145,7 @@ def user_creation(user_id, project_id, project_name):
             time.sleep(5)
             st.success('User Created!', icon = '🎈')
             st.balloons()
-            st.warning('Remember to hash the password and add to config', icon = '😶‍🌫️')
+            st.warning('Remember to hash the password and add to config, and create the demo task', icon = '😶‍🌫️')
 
 
 
