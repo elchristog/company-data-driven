@@ -7,6 +7,8 @@ import utils.users_handling as uh
 import modules.tester as tst
 import modules.web_app_activity as wap
 import modules.resources as r
+import modules.program_progress as pp
+
 
 
 # https://docs.streamlit.io/library/api-reference/layout
@@ -126,4 +128,5 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         if menu == "Progreso":
             tap.title_and_paragraph("Tus progreso" + project_icon, "Verifica tu progreso en el programa", "h2", 0)
+            pp.general_progress()
 
