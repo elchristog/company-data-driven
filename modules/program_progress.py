@@ -3,3 +3,4 @@ import datetime
 
 def general_progress():
     st.success('My douglas')
+    st.progress(0, text = 'Progreso general')
