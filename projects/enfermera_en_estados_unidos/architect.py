@@ -18,7 +18,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
     input:
     output:
     """
-    # admin
+    # admin ###################################################################
     if role_id != 6:
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
@@ -89,7 +89,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 
 
 
-    # customer
+    # customer ###################################################################
     if role_id == 6:
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
@@ -126,4 +126,4 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         if menu == "Progreso":
             tap.title_and_paragraph("Tus progreso" + project_icon, "Verifica tu progreso en el programa", "h2", 0)
-            
+
