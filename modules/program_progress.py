@@ -6,7 +6,7 @@ import utils.user_credentials as uc
 
 def general_progress():
     st.header('Program progress and steps')
-    user_progress_table = uc.run_query_3_h(f"SELECT ps.name, ps.description, COALESCE(CAST(upsp_user.creation_date AS STRING),"pending") AS starting_date FROM `company-data-driven.enfermera_en_estados_unidos.program_steps` AS ps LEFT JOIN (SELECT  * FROM `company-data-driven.enfermera_en_estados_unidos.user_program_steps_progress` AS upsp WHERE upsp.user_id = 3) AS upsp_user ON ps.id = upsp_user.program_step_id  ORDER BY ps.id;")
+    user_progress_table = uc.run_query_3_h(f"SELECT ps.name, ps.description, COALESCE(CAST(upsp_user.creation_date AS STRING),'pending') AS starting_date FROM `company-data-driven.enfermera_en_estados_unidos.program_steps` AS ps LEFT JOIN (SELECT  * FROM `company-data-driven.enfermera_en_estados_unidos.user_program_steps_progress` AS upsp WHERE upsp.user_id = 3) AS upsp_user ON ps.id = upsp_user.program_step_id  ORDER BY ps.id;")
     st.progress(5, text = f"Global progress: **{5}%**")
     st.table(user_progress_table)
     
