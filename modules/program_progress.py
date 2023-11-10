@@ -11,5 +11,9 @@ def general_progress(user_id, project_name, program_steps_table_tame, program_st
 
     st.progress(5, text = f"Global progress: **{5}%**")
     st.table(user_progress_table)
-    st.write(user_actual_step)
+
+
+    st.write(user_actual_step[0].get("program_step_id"))
+    st.write(user_actual_step[0].get("creation_date"))
+
     
