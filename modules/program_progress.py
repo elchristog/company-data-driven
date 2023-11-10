@@ -12,8 +12,7 @@ def general_progress(user_id, project_name, program_steps_table_tame, program_st
     st.progress(5, text = f"Global progress: **{5}%**")
     st.table(user_progress_table)
 
-    st.write(user_actual_step[0].get("program_step_id"))
-    st.write(user_actual_step[0].get("days_since_achievemen"))
-    # if user_actual_step[0].get("program_step_id")/len(user_progress_table) > 0.9 or 
+    if user_actual_step[0].get("program_step_id")/len(user_progress_table) >= 0.9 or user_actual_step[0].get("days_since_achievemen") < 5:
+        st.balloons()
 
     
