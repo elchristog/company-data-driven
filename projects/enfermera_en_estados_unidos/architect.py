@@ -128,5 +128,5 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         if menu == "Progreso":
             tap.title_and_paragraph("Tus progreso" + project_icon, "Verifica tu progreso en el programa", "h2", 0)
-            pp.general_progress(user_id, project_name, 'program_steps', 'user_program_steps_progress')
+            user_actual_step_id = pp.general_progress(user_id, project_name, 'program_steps', 'user_program_steps_progress')
 

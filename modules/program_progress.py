@@ -15,6 +15,7 @@ def general_progress(user_id, project_name, program_steps_table_tame, program_st
         st.success("You are the best!", icon = "🥳")
     st.progress(5, text = f"Global progress: **{round(100*progress)}%**")
     st.table(user_progress_table)
+    return user_actual_step[0].get("program_step_id") 
 
     
 
