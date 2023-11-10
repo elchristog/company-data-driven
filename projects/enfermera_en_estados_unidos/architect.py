@@ -8,6 +8,7 @@ import modules.tester as tst
 import modules.web_app_activity as wap
 import modules.resources as r
 import modules.program_progress as pp
+import projects.enfermera_en_estados_unidos.modules.program_steps_guide as psg
 
 
 
@@ -129,4 +130,4 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
         if menu == "Progreso":
             tap.title_and_paragraph("Tus progreso" + project_icon, "Verifica tu progreso en el programa", "h2", 0)
             user_actual_step_id = pp.general_progress(user_id, project_name, 'program_steps', 'user_program_steps_progress')
-
+            psg.program_steps_guide(user_actual_step_id)
