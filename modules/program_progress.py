@@ -10,6 +10,5 @@ def general_progress(user_id, project_name, program_steps_table_tame, program_st
     user_actual_step= uc.run_query_3_h(f"SELECT MAX(program_step_id) AS actual_step FROM `company-data-driven.{project_name}.{program_steps_user_progress_table_name}` AS upsp WHERE upsp.user_id = {user_id};")
     st.progress(5, text = f"Global progress: **{5}%**")
     st.table(user_progress_table)
-    st.write(user_progress_table)
     st.write(user_actual_step)
     
