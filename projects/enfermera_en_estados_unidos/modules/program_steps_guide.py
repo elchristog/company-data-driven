@@ -47,3 +47,25 @@ def program_steps_guide(user_actual_step_id):
                 st.write(f"fsdf")
             with st.expander(":seedling: Sobre enviado desde entidad de licencia"):
                 st.write(f"fsdf")
+
+        with tab2:
+            st.header("New York")
+            with st.expander(":seedling: Formulario  2F Universidad"):
+                st.write(f"fsdf")
+            with st.expander(":seedling: Formulario 3F licencia profesional"):
+                st.write(f"fsdf")
+            with st.expander(":seedling: Certificado notas con traducción"):
+                 st.write(f"fsdf")
+            with st.expander(":seedling: Certificado horas y créditos con traducción"):
+                 st.write(f"fsdf")
+            with st.expander(":seedling: Diploma de secundaria con traducción"):
+                 st.write(f"fsdf")
+            with st.expander(":seedling: Diploma o título de enfermería con traducción"):
+                 st.write(f"fsdf")
+            with st.expander(":seedling: Copia de licencia o tarjeta profesional"):
+                 st.write(f"fsdf")
+            with st.expander(":seedling: Sobre enviado desde la universidad"):
+                 st.write(f"fsdf")
+            with st.expander(":seedling: Sobre enviado desde entidad de licencia"):
+                 st.write(f"fsdf")
+
