@@ -72,6 +72,20 @@ def program_steps_guide(user_actual_step_id):
 
 
     # if user_actual_step_id == 3:
+        st.success(f"### Inscripción ante la Junta de Enfermería")
+        st.write(f"¡Bienvenido/a al Programa de Enfermería en Estados Unidos! En esta sección, te proporcionaremos actualizaciones continuas con toda la información necesaria para que tengas claridad sobre las tareas y la manera en que deben llevarse a cabo. Esto te permitirá alcanzar con éxito tu objetivo de convertirte en enfermero/a en Estados Unidos.")
+        with st.expander(":seedling: Certificado curso Abuso infantil"):
+            st.write(f"F")
+        with st.expander(":seedling: Certificado curso control de infecciones"):
+            st.write(f"F")
+        with st.expander(":seedling: Diligenciamiento 1F y pago de licencia"):
+            st.write(f"F")
+    
+    
+
+
+
+    # if user_actual_step_id == 4:
         st.success(f"### Preparación NCLEX")
         st.write(f"¡Bienvenido/a al Programa de Enfermería en Estados Unidos! En esta sección, te proporcionaremos actualizaciones continuas con toda la información necesaria para que tengas claridad sobre las tareas y la manera en que deben llevarse a cabo. Esto te permitirá alcanzar con éxito tu objetivo de convertirte en enfermero/a en Estados Unidos.")
         with st.expander(":seedling: Pagar examen"):
@@ -96,7 +110,7 @@ def program_steps_guide(user_actual_step_id):
             st.write(f"F")
 
 
-    # if user_actual_step_id == 4:
+    # if user_actual_step_id == 5:
         st.success(f"### Preparación de inglés")
         st.write(f"¡Bienvenido/a al Programa de Enfermería en Estados Unidos! En esta sección, te proporcionaremos actualizaciones continuas con toda la información necesaria para que tengas claridad sobre las tareas y la manera en que deben llevarse a cabo. Esto te permitirá alcanzar con éxito tu objetivo de convertirte en enfermero/a en Estados Unidos.")
         with st.expander(":seedling: Hacer plan de estudio"):
@@ -114,7 +128,7 @@ def program_steps_guide(user_actual_step_id):
 
 
 
-    # if user_actual_step_id == 5:
+    # if user_actual_step_id == 6:
         st.success(f"### Entrevistas de trabajo")
         st.write(f"¡Bienvenido/a al Programa de Enfermería en Estados Unidos! En esta sección, te proporcionaremos actualizaciones continuas con toda la información necesaria para que tengas claridad sobre las tareas y la manera en que deben llevarse a cabo. Esto te permitirá alcanzar con éxito tu objetivo de convertirte en enfermero/a en Estados Unidos.")
         with st.expander(":seedling: Preparar CV"):
@@ -130,7 +144,7 @@ def program_steps_guide(user_actual_step_id):
 
 
 
-    # if user_actual_step_id == 6:
+    # if user_actual_step_id == 7:
         st.success(f"### Visa Screen")
         st.write(f"¡Bienvenido/a al Programa de Enfermería en Estados Unidos! En esta sección, te proporcionaremos actualizaciones continuas con toda la información necesaria para que tengas claridad sobre las tareas y la manera en que deben llevarse a cabo. Esto te permitirá alcanzar con éxito tu objetivo de convertirte en enfermero/a en Estados Unidos.")
         with st.expander(":seedling: Crear perfil CGFNS"):
@@ -146,7 +160,7 @@ def program_steps_guide(user_actual_step_id):
 
 
 
-    # if user_actual_step_id == 7:
+    # if user_actual_step_id == 8:
         st.success(f"### Trámite NVC")
         st.write(f"¡Bienvenido/a al Programa de Enfermería en Estados Unidos! En esta sección, te proporcionaremos actualizaciones continuas con toda la información necesaria para que tengas claridad sobre las tareas y la manera en que deben llevarse a cabo. Esto te permitirá alcanzar con éxito tu objetivo de convertirte en enfermero/a en Estados Unidos.")
         with st.expander(":seedling: Documentos abogados - Formularios"):
@@ -190,5 +204,14 @@ def program_steps_guide(user_actual_step_id):
         with st.expander(":seedling: Documentos NVC - Tarjeta militar con traducción"):
             st.write(f"F")
         with st.expander(":seedling: Documentos NVC - Certificados policía con traducción"):
+            st.write(f"F")
+
+
+
+
+     # if user_actual_step_id == 9:
+        st.success(f"### Preparación de inglés")
+        st.write(f"¡Bienvenido/a al Programa de Enfermería en Estados Unidos! En esta sección, te proporcionaremos actualizaciones continuas con toda la información necesaria para que tengas claridad sobre las tareas y la manera en que deben llevarse a cabo. Esto te permitirá alcanzar con éxito tu objetivo de convertirte en enfermero/a en Estados Unidos.")
+        with st.expander(":seedling: Hacer plan de estudio"):
             st.write(f"F")
 
