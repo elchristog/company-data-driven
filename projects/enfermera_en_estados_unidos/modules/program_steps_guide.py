@@ -210,8 +210,28 @@ def program_steps_guide(user_actual_step_id):
 
 
      # if user_actual_step_id == 9:
-        st.success(f"### Preparación de inglés")
+        st.success(f"### Trámite embajada")
         st.write(f"¡Bienvenido/a al Programa de Enfermería en Estados Unidos! En esta sección, te proporcionaremos actualizaciones continuas con toda la información necesaria para que tengas claridad sobre las tareas y la manera en que deben llevarse a cabo. Esto te permitirá alcanzar con éxito tu objetivo de convertirte en enfermero/a en Estados Unidos.")
-        with st.expander(":seedling: Hacer plan de estudio"):
+        with st.expander(":seedling: Envío de carta expedite"):
+            st.write(f"F")
+        with st.expander(":seedling: Notificación expedite aceptado"):
+            st.write(f"F")
+        with st.expander(":seedling: Agendar cita en la embajada"):
+            st.write(f"F")
+        with st.expander(":seedling: Alistar los documentos exigidos para la cita"):
+            st.write(f"F")
+        with st.expander(":seedling: Agendar cita médica"):
+            st.write(f"F")
+        with st.expander(":seedling: Alistar los documentos exigidos para la cita"):
+            st.write(f"F")
+        with st.expander(":seedling: Asistir a la cita médica"):
+            st.write(f"F")
+        with st.expander(":seedling: Asistir a la cita de huellas y foto"):
+            st.write(f"F")
+        with st.expander(":seedling: Asistir a la entrevista consular en la embajada"):
+            st.write(f"F")
+        with st.expander(":seedling: Recoger pasaporte"):
+            st.write(f"F")
+        with st.expander(":seedling: Acordar viaje con hospital"):
             st.write(f"F")
 
