@@ -234,4 +234,18 @@ def program_steps_guide(user_actual_step_id):
             st.write(f"F")
         with st.expander(":seedling: Acordar viaje con hospital"):
             st.write(f"F")
+            
 
+
+
+    # if user_actual_step_id == 10:
+        st.success(f"### Vida en estados Unidos")
+        st.write(f"¡Bienvenido/a al Programa de Enfermería en Estados Unidos! En esta sección, te proporcionaremos actualizaciones continuas con toda la información necesaria para que tengas claridad sobre las tareas y la manera en que deben llevarse a cabo. Esto te permitirá alcanzar con éxito tu objetivo de convertirte en enfermero/a en Estados Unidos.")
+        with st.expander(":seedling: Viaje"):
+            st.write(f"F")
+        with st.expander(":seedling: Carro"):
+            st.write(f"F")
+        with st.expander(":seedling: Casa"):
+            st.write(f"F")
+        with st.expander(":seedling: Seguro"):
+            st.write(f"F")
