@@ -15,7 +15,7 @@ def program_steps_guide(user_actual_step_id):
             st.write(f"Ahora que has iniciado el programa, nos estamos preparando para avanzar al paso 2. Para esto, procederemos con la firma del contrato y la aceptación de los acuerdos del programa.")
 
 
-    if user_actual_step_id == 2:
+    # if user_actual_step_id == 2:
         st.success(f"### Trámite de documentos")
         st.write(f"¡Bienvenido/a al Programa de Enfermería en Estados Unidos! En esta sección, te proporcionaremos actualizaciones continuas con toda la información necesaria para que tengas claridad sobre las tareas y la manera en que deben llevarse a cabo. Esto te permitirá alcanzar con éxito tu objetivo de convertirte en enfermero/a en Estados Unidos.")
         tab1, tab2, tab3 = st.tabs(["Cat", "Dog", "Owl"])
