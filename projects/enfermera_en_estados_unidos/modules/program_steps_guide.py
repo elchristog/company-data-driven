@@ -144,3 +144,51 @@ def program_steps_guide(user_actual_step_id):
         with st.expander(":seedling: Confirmar recibido Visa Screen"):
             st.write(f"F")
 
+
+
+    # if user_actual_step_id == 7:
+        st.success(f"### Trámite NVC")
+        st.write(f"¡Bienvenido/a al Programa de Enfermería en Estados Unidos! En esta sección, te proporcionaremos actualizaciones continuas con toda la información necesaria para que tengas claridad sobre las tareas y la manera en que deben llevarse a cabo. Esto te permitirá alcanzar con éxito tu objetivo de convertirte en enfermero/a en Estados Unidos.")
+        with st.expander(":seedling: Documentos abogados - Formularios"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos abogados - Diploma o título enfermería"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos abogados - Certificados laborales"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos abogados - Registro de nacimiento propio con traducción"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos abogados - Registro de nacimiento de familiares con traducción"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos abogados - Registro de matrimonio"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos abogados - Licencia RN "):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos abogados - Pasaporte propio con traducción"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos abogados - Pasaporte de familiares con traducción"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos abogados - Form ETA 9089"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos abogados - Reporte examen inglés"):
+            st.write(f"F")
+        with st.expander(":seedling: Aprobación I-140"):
+            st.write(f"F")
+        with st.expander(":seedling: Creación de usuario NVC"):
+            st.write(f"F")
+        with st.expander(":seedling: Diligenciamiento DS-260"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos NVC - Cover sheet"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos NVC - Pasaportes con traducción"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos NVC - Registros de nacimiento con traducción"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos NVC - Registro de matrimonio con traducción"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos NVC - Registro de divorcio con traducción"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos NVC - Tarjeta militar con traducción"):
+            st.write(f"F")
+        with st.expander(":seedling: Documentos NVC - Certificados policía con traducción"):
+            st.write(f"F")
+
