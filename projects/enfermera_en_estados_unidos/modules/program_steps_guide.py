@@ -21,5 +21,29 @@ def program_steps_guide(user_actual_step_id):
         tab1, tab2 = st.tabs(["CGFNS", "New York"])
         with tab1:
             st.header("CGFNS")
-            with st.expander(":pouch: Recursos"):
+            with st.expander(":pouch: Crear perfil CGFNS"):
+                st.write(f"fsdf")
+            with st.expander(":pouch: Pago del servicio de CGFNS"):
+                st.write(f"fsdf")
+            with st.expander(":pouch: Formulario Universidad"):
+                st.write(f"fsdf")
+            with st.expander(":pouch: Formulario licencia profesional"):
+                st.write(f"fsdf")
+            with st.expander(":pouch: Certificado notas con traducción"):
+                st.write(f"fsdf")
+            with st.expander(":pouch: Certificado horas y créditos con traducción"):
+                st.write(f"fsdf")
+            with st.expander(":pouch: Diploma de secundaria con traducción"):
+                st.write(f"fsdf")
+            with st.expander(":pouch: Diploma o título de enfermería con traducción"):
+                st.write(f"fsdf")
+            with st.expander(":pouch: Pasaporte con traducción"):
+                st.write(f"fsdf")
+            with st.expander(":pouch: Formulario para autenticar"):
+                st.write(f"fsdf")
+            with st.expander(":pouch: Copia de licencia o tarjeta profesional"):
+                st.write(f"fsdf")
+            with st.expander(":pouch: Sobre enviado desde la universidad"):
+                st.write(f"fsdf")
+            with st.expander(":pouch: Sobre enviado desde entidad de licencia"):
                 st.write(f"fsdf")
