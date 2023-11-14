@@ -239,7 +239,7 @@ def program_steps_guide(user_actual_step_id):
 
 
     # if user_actual_step_id == 10:
-        st.success(f"### Vida en estados Unidos")
+        st.success(f"### Vida en Estados Unidos")
         st.write(f"¡Bienvenido/a al Programa de Enfermería en Estados Unidos! En esta sección, te proporcionaremos actualizaciones continuas con toda la información necesaria para que tengas claridad sobre las tareas y la manera en que deben llevarse a cabo. Esto te permitirá alcanzar con éxito tu objetivo de convertirte en enfermero/a en Estados Unidos.")
         with st.expander(":seedling: Viaje"):
             st.write(f"F")
