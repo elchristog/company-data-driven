@@ -69,3 +69,30 @@ def program_steps_guide(user_actual_step_id):
             with st.expander(":seedling: Sobre enviado desde entidad de licencia"):
                  st.write(f"fsdf")
 
+
+
+    # if user_actual_step_id == 3:
+        st.success(f"### Preparación NCLEX")
+        st.write(f"¡Bienvenido/a al Programa de Enfermería en Estados Unidos! En esta sección, te proporcionaremos actualizaciones continuas con toda la información necesaria para que tengas claridad sobre las tareas y la manera en que deben llevarse a cabo. Esto te permitirá alcanzar con éxito tu objetivo de convertirte en enfermero/a en Estados Unidos.")
+        with st.expander(":seedling: Pagar examen"):
+            st.write(f"F")
+        with st.expander(":seedling: Obtener ATT"):
+            st.write(f"F")
+        with st.expander(":seedling: Hacer plan de estudio"):
+            st.write(f"F")
+        with st.expander(":seedling: Comenzar a leer los recursos"):
+            st.write(f"F")
+        with st.expander(":seedling: Preguntas de simulacro"):
+            st.write(f"F")
+        with st.expander(":seedling: Comprar banco de preguntas"):
+            st.write(f"F")
+        with st.expander(":seedling: Medición de rendimiento CAT"):
+            st.write(f"F")
+        with st.expander(":seedling: Agendar el examen"):
+            st.write(f"F")
+        with st.expander(":seedling: Pagar gastos viaje"):
+            st.write(f"F")
+        with st.expander(":seedling: Presentar el examen"):
+            st.write(f"F")
+
+
