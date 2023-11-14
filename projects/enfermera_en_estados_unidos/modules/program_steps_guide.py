@@ -18,7 +18,7 @@ def program_steps_guide(user_actual_step_id):
     # if user_actual_step_id == 2:
         st.success(f"### Trámite de documentos")
         st.write(f"¡Bienvenido/a al Programa de Enfermería en Estados Unidos! En esta sección, te proporcionaremos actualizaciones continuas con toda la información necesaria para que tengas claridad sobre las tareas y la manera en que deben llevarse a cabo. Esto te permitirá alcanzar con éxito tu objetivo de convertirte en enfermero/a en Estados Unidos.")
-        tab1, tab2, tab3 = st.tabs(["CGFNS", "New York"])
+        tab1, tab2 = st.tabs(["CGFNS", "New York"])
         with tab1:
             st.header("CGFNS")
             with st.expander(":pouch: Recursos"):
