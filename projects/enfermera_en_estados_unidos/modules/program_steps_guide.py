@@ -96,3 +96,19 @@ def program_steps_guide(user_actual_step_id):
             st.write(f"F")
 
 
+    # if user_actual_step_id == 4:
+        st.success(f"### Preparación de inglés")
+        st.write(f"¡Bienvenido/a al Programa de Enfermería en Estados Unidos! En esta sección, te proporcionaremos actualizaciones continuas con toda la información necesaria para que tengas claridad sobre las tareas y la manera en que deben llevarse a cabo. Esto te permitirá alcanzar con éxito tu objetivo de convertirte en enfermero/a en Estados Unidos.")
+        with st.expander(":seedling: Hacer plan de estudio"):
+            st.write(f"F")
+        with st.expander(":seedling: Comenzar a leer los recursos"):
+            st.write(f"F")
+        with st.expander(":seedling: Preguntas de simulacro"):
+            st.write(f"F")
+        with st.expander(":seedling: Clases particulares"):
+            st.write(f"F")
+        with st.expander(":seedling: Agendar el examen"):
+            st.write(f"F")
+        with st.expander(":seedling: Presentar el examen"):
+            st.write(f"F")
+
