@@ -8,3 +8,7 @@ def program_steps_guide(user_actual_step_id):
 
         with st.expander("Plataforma"):
             st.write(f"Familiarízate con la plataforma, probando cada uno de los módulos y comprendiendo cómo debe ser tu herramienta de trabajo diario. Practica para el NCLEX y realiza un seguimiento de tu progreso.")
+        with st.expander("Recursos"):
+            st.write(f"Descarga los recursos y familiarízate con tu espacio en la nube para acceder a los recursos y grabaciones de nuestras sesiones.")
+        with st.expander("Avanzar al paso 2"):
+            st.write(f"Ahora que has iniciado el programa, nos estamos preparando para avanzar al paso 2. Para esto, procederemos con la firma del contrato y la aceptación de los acuerdos del programa.")
