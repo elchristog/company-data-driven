@@ -76,6 +76,7 @@ def update_customer_progress(user_id, project_id, project_name, program_steps_ta
                     time.sleep(5)
                     st.success('Status updated! (' + selected_new_step + ')', icon="😎")
                     st.balloons()
+                    st.rerun()
                 else:
                     st.error("Step is not confirmed.")
 
