@@ -68,7 +68,6 @@ def update_customer_progress(user_id, project_id, project_name, program_steps_ta
                 st.error("Please fill in completely all of the required fields.")
             else:
                 if selected_new_step == confirm_new_step:
-
                     today = datetime.date.today()
                     today_str = today.strftime("%Y-%m-%d")
                     max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.{program_steps_user_progress_table_name}`")[0].get('max_id')
