@@ -19,8 +19,21 @@ def general_progress(user_id, project_name, program_steps_table_tame, program_st
 
 
 
-def update_customer_progress(user_id, project_name, program_steps_table_tame, program_steps_user_progress_table_name):
-    st.success('perraso')
+def update_customer_progress(user_id, project_id, project_name, program_steps_table_tame, program_steps_user_progress_table_name):
+    rows_users = uc.run_query_half_day(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = 6 ORDER BY u.username ASC;")
+    users_ids = []
+    users_username = []
+    for row in rows_users:
+        users_ids.append(row.get('id'))
+        users_username.append(row.get('username'))
+    selected_username = st.selectbox(
+        label = "Select the username",
+        options = users_username,
+        index = None,
+        key= "creation_task_username"
+    )
+    if selected_username is not None:
+        selected_user_id = users_ids[users_username.index(selected_username)]
 
     
 

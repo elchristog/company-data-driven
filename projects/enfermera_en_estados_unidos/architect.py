@@ -74,7 +74,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tst.add_question_to_test(project_name, 'nclex_questions', user_id)
             if sub_menu == "Update customer progress":
                 tap.title_and_paragraph("Update customer progress " + project_icon, "lala", "h3", 0)
-                pp.update_customer_progress(user_id, project_name, 'program_steps', 'user_program_steps_progress')
+                pp.update_customer_progress(user_id, project_id, project_name, 'program_steps', 'user_program_steps_progress')
 
         if menu == "Users Admin":
             sub_menu_options=['Create User', 'Update User', 'Hashing']
