@@ -30,12 +30,31 @@ def update_customer_progress(user_id, project_id, project_name, program_steps_ta
         label = "Select the username",
         options = users_username,
         index = None,
-        key= "creation_task_username"
+        key= "update_progress_step_username"
     )
     if selected_username is not None:
         selected_user_id = users_ids[users_username.index(selected_username)]
         user_next_steps = uc.run_query_6_h(f"SELECT ps.id, ps.name FROM `company-data-driven.{project_name}.{program_steps_table_tame}` AS ps WHERE id > (SELECT MAX(upsp.program_step_id) AS actual_step_id FROM `company-data-driven.{project_name}.{program_steps_user_progress_table_name}` AS upsp WHERE upsp.user_id = {selected_user_id}) ORDER BY id ASC;")
-        st.table(user_next_steps)
-        
+        step_ids = []
+        step_names = []
+
+        for row in user_next_steps:
+            step_ids.append(row.get('id'))
+            step_names.append(row.get('name'))
+
+        selected_new_step = st.selectbox(
+            label = "Select the new step",
+            options = step_names,
+            index = None,
+            key= "new_step_names"
+        )
+        confirm_new_step = st.selectbox(
+            label = "Confirm the new step",
+            options = step_names,
+            index = None,
+            key= "confirm_step_names"
+        )
+
+
 
     
