@@ -59,7 +59,6 @@ def update_customer_progress(user_id, project_id, project_name, program_steps_ta
             if selected_new_step == confirm_new_step:
                 st.success("Step confirmed!", icon = "🎈")
                 selected_step_id = step_ids[step_names.index(selected_new_step)]
-                st.write(selected_step_id)
             else:
                 st.error('Incorrect selection', icon = '🀄')
 
