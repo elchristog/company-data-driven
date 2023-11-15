@@ -1,5 +1,6 @@
 import streamlit as st
 import datetime
+import time
 
 import utils.user_credentials as uc
 
@@ -54,6 +55,31 @@ def update_customer_progress(user_id, project_id, project_name, program_steps_ta
             index = None,
             key= "confirm_step_names"
         )
+        if selected_new_step is not None and confirm_new_step is not None:
+            if selected_new_step == confirm_new_step:
+                st.success("Step confirmed!", icon = "🎈")
+                selected_step_id = step_ids[step_names.index(selected_new_step)]
+            else:
+                st.error('Incorrect selection', icon = '🀄')
+
+        update_step_button = st.button("Update step")
+        if update_step_button:
+            if selected_username is None or selected_new_step is None or confirm_new_step is None:
+                st.error("Please fill in completely all of the required fields.")
+            else:
+                if selected_new_step == confirm_new_step:
+
+                    today = datetime.date.today()
+                    today_str = today.strftime("%Y-%m-%d")
+                    max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.{program_steps_user_progress_table_name}`")[0].get('max_id')
+                    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.{program_steps_user_progress_table_name}` VALUES({max_id}, '{today_str}', {user_id}, {selected_user_id}, {selected_step_id})")
+                    st.info("Updating, please wait", icon = "☺️")
+                    time.sleep(5)
+                    st.success('Status updated! (' + selected_new_step + ')', icon="😎")
+                    st.balloons()
+                else:
+                    st.error("Step is not confirmed.")
+
 
 
 
