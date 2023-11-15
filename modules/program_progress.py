@@ -17,6 +17,11 @@ def general_progress(user_id, project_name, program_steps_table_tame, program_st
     st.table(user_progress_table)
     return user_actual_step[0].get("program_step_id") 
 
+
+
+def update_customer_progress(user_id, project_name, program_steps_table_tame, program_steps_user_progress_table_name):
+    st.success('perraso')
+
     
 
     
