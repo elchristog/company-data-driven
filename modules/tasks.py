@@ -101,6 +101,12 @@ def tasks_achievements(user_id, project_name, divider):
             else:
                 st.table(unfulfilled_tasks_table)
 
+            st.write("#### Completed tasks")
+            number_tasks_to_show = st.slider('Select number of tasks to be shown', 0, 30, 5)
+            completed_tasks_table = uc.run_query_5_s(f"SELECT t.description, t.commit_finish_date, t.finished_date  FROM `company-data-driven.{project_name}.tasks` AS t WHERE responsible_user_id = {user_id} AND t.status = 'finished' ORDER BY t.finished_date DESC LIMIT {number_tasks_to_show};")
+            st.table(completed_tasks_table)
+            
+
     if divider == 1:
         st.write("---") 
 
