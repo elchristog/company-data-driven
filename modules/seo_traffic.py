@@ -19,9 +19,9 @@ import urllib.parse
 from streamlit_raw_echarts import st_echarts, JsCode
 import streamlit_antd_components as sac
 
-# https://github.com/ViniciusStanula/Search-Console-API/blob/main/views/gsc_api.py
+# https://github.com/ViniciusStanula/Search-Console-API/tree/main
 
-
+import utils.user_credentials as uc
 
 # Define o período inicial e final padrão para o slider
 date = date.today()
@@ -587,11 +587,11 @@ def createPage():
             dimensions = ['page']
             
         # Define a opção de filtrar URL e Palavra-Chave
-        cf1, cf2 = st.columns(2)
-        with cf1:
-            filtro_url = st.checkbox("Filter URL")
-        with cf2:
-            filtro_palavra = st.checkbox("Filter Keyword")     
+        # cf1, cf2 = st.columns(2)
+        # with cf1:
+        #     filtro_url = st.checkbox("Filter URL")
+        # with cf2:
+        #     filtro_palavra = st.checkbox("Filter Keyword")     
             
         c1_1, c1_2 = st.columns(2)
         
