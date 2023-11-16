@@ -53,8 +53,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph("Hashing passwords", "se asi asi y asi", "h3", 0)
 
         if menu == "Traffic and SEO":
-            tab1, tab2, tab3 = st.tabs(["Traffic", "SEO", "Eliminar"])
-            with tab1:
+            sub_menu_options=['Traffic', 'SEO']
+            if sub_menu == "Traffic":
                 tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios", "h1", 0)
                 seot.createPage()
 
