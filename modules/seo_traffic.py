@@ -588,11 +588,11 @@ def createPage(project_url_clean):
             dimensions = ['page']
             
         # Define a opção de filtrar URL e Palavra-Chave
-        cf1, cf2 = st.columns(2)
-        with cf1:
-            filtro_url = st.checkbox("Filter URL")
-        with cf2:
-            filtro_palavra = st.checkbox("Filter Keyword")     
+        # cf1, cf2 = st.columns(2)
+        # with cf1:
+        #     filtro_url = st.checkbox("Filter URL")
+        # with cf2:
+        #     filtro_palavra = st.checkbox("Filter Keyword")     
             
         c1_1, c1_2 = st.columns(2)
         
@@ -602,19 +602,19 @@ def createPage(project_url_clean):
         palavra_filter = None
         palavra_operator = None    
         
-        # Define as opções de filtro para URL
-        if filtro_url:
-            with c1_1:
-                url_filter = st.selectbox('URL', ("contains", "notcontains", "includingRegex", "excludingRegex"))
-            with c1_2:
-                url_operator = st.text_input('Filter', key='URL_Operador')
+        # # Define as opções de filtro para URL
+        # if filtro_url:
+        #     with c1_1:
+        #         url_filter = st.selectbox('URL', ("contains", "notcontains", "includingRegex", "excludingRegex"))
+        #     with c1_2:
+        #         url_operator = st.text_input('Filter', key='URL_Operador')
                 
-        # Define as opções de filtro para Palavra-Chave
-        if filtro_palavra:
-            with c1_1:
-                palavra_filter = st.selectbox('Keywords', ("contains", "notcontains", "includingRegex", "excludingRegex"))
-            with c1_2:
-                palavra_operator = st.text_input('Filter', key='Palavra_Operador')
+        # # Define as opções de filtro para Palavra-Chave
+        # if filtro_palavra:
+        #     with c1_1:
+        #         palavra_filter = st.selectbox('Keywords', ("contains", "notcontains", "includingRegex", "excludingRegex"))
+        #     with c1_2:
+        #         palavra_operator = st.text_input('Filter', key='Palavra_Operador')
                 
         # Seleciona o período de data desejado
         day = st.date_input(
