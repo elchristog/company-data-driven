@@ -565,7 +565,8 @@ def createPage(project_url_clean):
 
     with c1:
         # Obtém a URL para consulta
-        url = st.text_input('Domain:', help='The desired domain or URL for data extraction, precisely as it appears in Google Search Console.')
+        # url = st.text_input('Domain:', help='The desired domain or URL for data extraction, precisely as it appears in Google Search Console.')
+        url = project_url_clean
         property_url = check_input_url(url)
         
         st.session_state.domain = property_url
