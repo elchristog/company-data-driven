@@ -57,7 +57,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
             if sub_menu == "Traffic":
                 tap.title_and_paragraph("Trafico y SEO" + project_icon, "Seguimiento y mantenimiento de los usuarios", "h3", 0)
-                seot.createPage()
+                seot.createPage(project_url_clean)
 
         if menu == "Web App":
             sub_menu_options=["Customer view", 'Nclex test creation', 'Update customer progress']

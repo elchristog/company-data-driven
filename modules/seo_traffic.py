@@ -493,7 +493,7 @@ def criar_grafico_echarts(df_grouped):
     # Exibir o gráfico de linha do ECharts usando st_echarts
     st_echarts(option=options, theme='chalk', height=400, width='100%')
     
-def createPage():
+def createPage(project_url_clean):
     # Criando duas colunas para layout
     colunhead, colundhead2 = st.columns([0.06, 0.99])
     
