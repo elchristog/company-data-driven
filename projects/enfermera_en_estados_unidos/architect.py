@@ -15,7 +15,7 @@ import projects.enfermera_en_estados_unidos.modules.program_steps_guide as psg
 # https://docs.streamlit.io/library/api-reference/layout
 # https://docs.streamlit.io/library/api-reference/control-flow/st.form
 
-def architect(user_id, role_id, project_id, project_name, project_title, project_icon, project_logo_url, project_handler):
+def architect(user_id, role_id, project_id, project_name, project_title, project_icon, project_logo_url, project_url_clean):
     """
     description: The developing interfaces must be approved just for users id 1 and 3
     input:
