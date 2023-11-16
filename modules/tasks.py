@@ -93,6 +93,14 @@ def tasks_achievements(user_id, project_name, divider):
                 col3.metric(label="Week fulfillment (%)", value = round(week_fulfillment[0].get('fulfillment')), delta= 0)
             else:
                 col3.metric(label="Week fulfillment (%)", value = round(week_fulfillment[0].get('fulfillment')), delta= round(week_fulfillment[0].get('fulfillment') - week_fulfillment[1].get('fulfillment')))
+            
+            st.header("Unfulfilled tasks last 3 months")
+            unfulfilled_tasks_table = uc.run_query_5_s(f"SELECT t.description, t.commit_finish_date, t.unfulfilled_date  FROM `company-data-driven.{project_name}.tasks` AS t WHERE responsible_user_id = {user_id} AND t.status = 'unfulfilled' AND t.unfulfilled_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH) AND EXTRACT(YEAR FROM t.creation_date) = EXTRACT(YEAR FROM CURRENT_DATE()) ORDER BY t.unfulfilled_date DESC;")
+            if len(unfulfilled_tasks_table) < 1:
+                st.success("You are the best!", icon = "😎")
+            else:
+                st.table(unfulfilled_tasks_table)
+
     if divider == 1:
         st.write("---") 
 
