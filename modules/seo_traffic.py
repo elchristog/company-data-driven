@@ -587,11 +587,11 @@ def createPage():
             dimensions = ['page']
             
         # Define a opção de filtrar URL e Palavra-Chave
-        # cf1, cf2 = st.columns(2)
-        # with cf1:
-        #     filtro_url = st.checkbox("Filter URL")
-        # with cf2:
-        #     filtro_palavra = st.checkbox("Filter Keyword")     
+        cf1, cf2 = st.columns(2)
+        with cf1:
+            filtro_url = st.checkbox("Filter URL")
+        with cf2:
+            filtro_palavra = st.checkbox("Filter Keyword")     
             
         c1_1, c1_2 = st.columns(2)
         
