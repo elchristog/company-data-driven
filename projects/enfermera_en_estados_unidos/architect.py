@@ -56,7 +56,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu_options=['Traffic', 'SEO']
             sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
             if sub_menu == "Traffic":
-                tap.title_and_paragraph(project_title + project_icon, "Seguimiento y mantenimiento de los usuarios", "h1", 0)
+                tap.title_and_paragraph("Trafico y SEO" + project_icon, "Seguimiento y mantenimiento de los usuarios", "h3", 0)
                 seot.createPage()
 
         if menu == "Web App":
