@@ -496,15 +496,10 @@ def criar_grafico_echarts(df_grouped):
 def createPage(project_url_clean):
     # Criando duas colunas para layout
     colunhead, colundhead2 = st.columns([0.06, 0.99])
-    
-    # Inserindo animação na primeira coluna
-    # with colunhead:
-    #     st.image(fc.open_image("./assets/robozin2.png"))
 
     # Inserindo informações de contatos na segunda coluna
     with colundhead2:
         st.header("Google Search Console API")
-        # st.markdown('<p class="minha-classe">By <a href="https://viniciusstanula.com/en/">Vinicius Stanula</a>, made in Streamlit 🎈</p>', unsafe_allow_html=True)
         
     if "my_token_input" not in st.session_state:
         st.session_state["my_token_input"] = ""
@@ -540,7 +535,6 @@ def createPage(project_url_clean):
             "font-size: 16px;"
         )
 
-        # URL que você deseja vincular ao botão
         url = href
 
         st.markdown('1 - Log in to your Google account:')
@@ -587,13 +581,6 @@ def createPage(project_url_clean):
         elif metricas == "Pages":
             dimensions = ['page']
             
-        # Define a opção de filtrar URL e Palavra-Chave
-        # cf1, cf2 = st.columns(2)
-        # with cf1:
-        #     filtro_url = st.checkbox("Filter URL")
-        # with cf2:
-        #     filtro_palavra = st.checkbox("Filter Keyword")     
-            
         c1_1, c1_2 = st.columns(2)
         
         # Define valores padrão para as variáveis de filtro
@@ -601,21 +588,7 @@ def createPage(project_url_clean):
         url_operator = None
         palavra_filter = None
         palavra_operator = None    
-        
-        # # Define as opções de filtro para URL
-        # if filtro_url:
-        #     with c1_1:
-        #         url_filter = st.selectbox('URL', ("contains", "notcontains", "includingRegex", "excludingRegex"))
-        #     with c1_2:
-        #         url_operator = st.text_input('Filter', key='URL_Operador')
-                
-        # # Define as opções de filtro para Palavra-Chave
-        # if filtro_palavra:
-        #     with c1_1:
-        #         palavra_filter = st.selectbox('Keywords', ("contains", "notcontains", "includingRegex", "excludingRegex"))
-        #     with c1_2:
-        #         palavra_operator = st.text_input('Filter', key='Palavra_Operador')
-                
+       
         # Seleciona o período de data desejado
         day = st.date_input(
             "Time Range:",
@@ -638,7 +611,7 @@ def createPage(project_url_clean):
                     df_date = get_data_date(property_url, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
                             url_filter=url_filter, url_operator=url_operator,
                             palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-                    
+                    st.write(df_date)
                     st.session_state.dataframeData = df_date
                 except ValueError as e:
                     if "Please supply either code or authorization_response parameters" in str(e):
