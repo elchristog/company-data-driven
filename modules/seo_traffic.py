@@ -557,7 +557,8 @@ def createPage(project_url_clean):
 
 
 
-    
+        url = project_url_clean
+        property_url = check_input_url(url)
         df_date = get_data_date(property_url, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
                             url_filter=url_filter, url_operator=url_operator,
                             palavra_filter=palavra_filter, palavra_operator=palavra_operator)
