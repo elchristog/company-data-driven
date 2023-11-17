@@ -603,6 +603,11 @@ def createPage(project_url_clean):
         button = st.button('Buscar Dados ✨', on_click=click_button)
         
     with c2:
+        if button:
+            df_date = get_data_date(property_url, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
+                                url_filter=url_filter, url_operator=url_operator,
+                                palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+            
         tab1, tab2 = st.tabs(["📅 Date", "📃 Table"])
         with tab1:
             if button:
