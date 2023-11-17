@@ -556,26 +556,26 @@ def createPage(project_url_clean):
             )
 
 
-
+        ############################################
         url = project_url_clean
         property_url = check_input_url(url)
         st.session_state.domain = property_url
 
-        # Seleciona as métricas desejadas
-        metricass = st.selectbox(
-            'Metrics:',
-            ("Keywords", "Pages", "Pages per Keyword", "Keywords per Page"), help='Specify the metric you are interested in filtering for.'
-        )
+        # # Seleciona as métricas desejadas
+        # metricass = st.selectbox(
+        #     'Metrics:',
+        #     ("Keywords", "Pages", "Pages per Keyword", "Keywords per Page"), help='Specify the metric you are interested in filtering for.'
+        # )
 
-        # Define as dimensões de acordo com as métricas selecionadas
-        if metricass == "Keywords per Page":
-            dimensions = ['page', 'query']
-        elif metricass == "Pages per Keyword":
-            dimensions = ['query', 'page']
-        elif metricass == "Keywords":
-            dimensions = ['query']
-        elif metricass == "Pages":
-            dimensions = ['page']
+        # # Define as dimensões de acordo com as métricas selecionadas
+        # if metricass == "Keywords per Page":
+        #     dimensions = ['page', 'query']
+        # elif metricass == "Pages per Keyword":
+        #     dimensions = ['query', 'page']
+        # elif metricass == "Keywords":
+        #     dimensions = ['query']
+        # elif metricass == "Pages":
+        #     dimensions = ['page']
             
         # Define valores padrão para as variáveis de filtro
         url_filter = None
