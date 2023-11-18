@@ -473,54 +473,7 @@ def createPage(project_url_clean):
                 label_visibility="collapsed",
             )
 
-
-        ############################################
-        url = project_url_clean
-        property_url = check_input_url(url)
-        st.session_state.domain = property_url
-
-        # # Seleciona as métricas desejadas
-        # metricass = st.selectbox(
-        #     'Metrics:',
-        #     ("Keywords", "Pages", "Pages per Keyword", "Keywords per Page"), help='Specify the metric you are interested in filtering for.'
-        # )
-
-        # # Define as dimensões de acordo com as métricas selecionadas
-        # if metricass == "Keywords per Page":
-        #     dimensions = ['page', 'query']
-        # elif metricass == "Pages per Keyword":
-        #     dimensions = ['query', 'page']
-        # elif metricass == "Keywords":
-        #     dimensions = ['query']
-        # elif metricass == "Pages":
-        #     dimensions = ['page']
-            
-        # # Define valores padrão para as variáveis de filtro
-        # url_filter = None
-        # url_operator = None
-        # palavra_filter = None
-        # palavra_operator = None    
-       
-        # # Seleciona o período de data desejado
-        # day = st.date_input(
-        #     "Time Range:",
-        #     (data_padrao, data_final),
-        #     min_value=data_inicial,
-        #     max_value=data_final,
-        #     format="DD/MM/YYYY",
-        #     help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format'
-        # )
-                
-        # button = st.button('Buscar Dados ✨', on_click=click_button)
-
-        # if button:
-        #     df_date = get_data_date(property_url, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
-        #                         url_filter=url_filter, url_operator=url_operator,
-        #                         palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-        #     st.table(df_date)
-
-
-    ######################        
+     
 
     c1, c2 = st.columns([1.2, 4])
 
