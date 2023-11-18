@@ -516,23 +516,23 @@ def createPage(project_url_clean):
         )
                 
         # Botão para buscar os dados
-        button = st.button('Buscar Dados ✨', on_click=click_button)
+        # button = st.button('Buscar Dados ✨', on_click=click_button)
         
         tab1, tab2 = st.tabs(["📅 Date", "📃 Table"])
         with tab1:
-            if button:
-                try:
-                    # Obtém os dados para a aba "Data"
-                    df_date = get_data_date(property_url, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
-                            url_filter=url_filter, url_operator=url_operator,
-                            palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-                    
-                    st.session_state.dataframeData = df_date
-                except ValueError as e:
-                    if "Please supply either code or authorization_response parameters" in str(e):
-                        st.error("⚠️Please grant API access. (If you are seeing a chart, it is a cached version)")
-                    else:
-                        raise e
+            # if button:
+            try:
+                # Obtém os dados para a aba "Data"
+                df_date = get_data_date(property_url, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
+                        url_filter=url_filter, url_operator=url_operator,
+                        palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+                
+                st.session_state.dataframeData = df_date
+            except ValueError as e:
+                if "Please supply either code or authorization_response parameters" in str(e):
+                    st.error("⚠️Please grant API access. (If you are seeing a chart, it is a cached version)")
+                else:
+                    raise e
             if hasattr(st.session_state, 'dataframeData'):
                 try:
                     novo_df = st.session_state.dataframeData                   
@@ -578,18 +578,18 @@ def createPage(project_url_clean):
                     pass
                                 
         with tab2:
-            if button:
-                try:
-                    df = get_data(property_url, dimensions, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
-                    url_filter=url_filter, url_operator=url_operator,
-                    palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-                    
-                    st.session_state.dataframe = df
-                except ValueError as e:
-                    if "Please supply either code or authorization_response parameters" in str(e):
-                        st.error("⚠️Please grant API access. (If you are seeing a chart, it is a cached version)")
-                    else:
-                        raise e
+            # if button:
+            try:
+                df = get_data(property_url, dimensions, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
+                url_filter=url_filter, url_operator=url_operator,
+                palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+                
+                st.session_state.dataframe = df
+            except ValueError as e:
+                if "Please supply either code or authorization_response parameters" in str(e):
+                    st.error("⚠️Please grant API access. (If you are seeing a chart, it is a cached version)")
+                else:
+                    raise e
             if hasattr(st.session_state, 'dataframe'):
                 try:
                     # Obtém os dados para a aba "Tabela"
