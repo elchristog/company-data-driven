@@ -462,6 +462,8 @@ def createPage(project_url_clean):
     st.write(df_date)
     st.table(df_date)
 
+    for index, row in df_date.iterrows():
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
 
     df_grouped = df_date.groupby('Date').agg({
             'Clicks': 'sum',
