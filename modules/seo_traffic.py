@@ -475,9 +475,7 @@ def createPage(project_url_clean):
 
      
 
-    c1, c2 = st.columns([1.2, 4])
 
-    with c1:
         # Obtém a URL para consulta
         # url = st.text_input('Domain:', help='The desired domain or URL for data extraction, precisely as it appears in Google Search Console.')
         url = project_url_clean
@@ -523,7 +521,6 @@ def createPage(project_url_clean):
         button = st.button('Buscar Dados ✨', on_click=click_button)
         click_button
         
-    with c2:
         tab1, tab2 = st.tabs(["📅 Date", "📃 Table"])
         with tab1:
             if button:
