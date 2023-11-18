@@ -514,7 +514,6 @@ def createPage(project_url_clean):
             
 
     try:
-        # Obtém os dados para a aba "Data"
         df_date = get_data_date(property_url, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
                 url_filter=url_filter, url_operator=url_operator,
                 palavra_filter=palavra_filter, palavra_operator=palavra_operator)
@@ -528,13 +527,11 @@ def createPage(project_url_clean):
                 'Position': 'mean'
             }).reset_index()
         
-        # Calcula algumas métricas gerais
         Clicks = df_date['Clicks'].sum()
         Impressions = df_date['Impressions'].sum()
         ctr_mean = df_date['CTR'].mean()
         pos_mean = df_date['Position'].mean()
         
-        # Exibe as métricas em formato de cartões
         met1, met2, met3, met4 = st.columns(4)
             
         with met1:
@@ -562,59 +559,59 @@ def createPage(project_url_clean):
         df = get_data(property_url, dimensions, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
         url_filter=url_filter, url_operator=url_operator,
         palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-        
-        st.session_state.dataframe = df
+        st.table(df)
+        # st.session_state.dataframe = df
     except ValueError as e:
         if "Please supply either code or authorization_response parameters" in str(e):
             st.error("⚠️Please grant API access. (If you are seeing a chart, it is a cached version)")
         else:
             raise e
-    if hasattr(st.session_state, 'dataframe'):
-        try:
-            # Obtém os dados para a aba "Tabela"
-            met1, met2, met3, met4 = st.columns(4)
+    # if hasattr(st.session_state, 'dataframe'):
+    #     try:
+    #         # Obtém os dados para a aba "Tabela"
+    #         met1, met2, met3, met4 = st.columns(4)
 
-            filtered_df = st.session_state.dataframe
+    #         filtered_df = st.session_state.dataframe
             
-            # Calcula algumas métricas gerais
-            Clicks = filtered_df['Clicks'].sum()
-            Impressions = filtered_df['Impressions'].sum()
-            ctr_mean = filtered_df['CTR'].mean()
-            pos_mean = filtered_df['Position'].mean()
-            filtered_df['CTR'] = filtered_df['CTR']
+    #         # Calcula algumas métricas gerais
+    #         Clicks = filtered_df['Clicks'].sum()
+    #         Impressions = filtered_df['Impressions'].sum()
+    #         ctr_mean = filtered_df['CTR'].mean()
+    #         pos_mean = filtered_df['Position'].mean()
+    #         filtered_df['CTR'] = filtered_df['CTR']
             
-            # Exibe as métricas em formato de cartões
-            with met1:
-                st.metric('Clicks:', f'{Clicks:,}')
-            with met2:
-                st.metric('Impressions:', f'{Impressions:,}')
-            with met3:
-                st.metric('CTR:', f'{ctr_mean * 100:.2f}%')
-            with met4:
-                st.metric('Position:', f'{pos_mean:.1f}')     
+    #         # Exibe as métricas em formato de cartões
+    #         with met1:
+    #             st.metric('Clicks:', f'{Clicks:,}')
+    #         with met2:
+    #             st.metric('Impressions:', f'{Impressions:,}')
+    #         with met3:
+    #             st.metric('CTR:', f'{ctr_mean * 100:.2f}%')
+    #         with met4:
+    #             st.metric('Position:', f'{pos_mean:.1f}')     
 
-            # Exibe os dados em formato de tabela
-            st.dataframe(filtered_df.assign(CTR=lambda x: x['CTR'].apply(lambda ctr: f"{ctr * 100:.2f}%")), use_container_width=True)
+    #         # Exibe os dados em formato de tabela
+    #         st.dataframe(filtered_df.assign(CTR=lambda x: x['CTR'].apply(lambda ctr: f"{ctr * 100:.2f}%")), use_container_width=True)
             
-            gerarExcel = st.checkbox('Generate Excel')
-            if gerarExcel:
-                # Botão para download dos dados em formato Excel
-                df_xlsx = to_excel(filtered_df)
-                excel_filename = f'API-GSC-{st.session_state.domain}.xlsx'
-                st.download_button(label='📥 Download Excel',
-                                data=df_xlsx,
-                                file_name=excel_filename,
-                                    key='botao_download_table')
-        except TypeError as e:
-                if "NoneType" in str(e):
-                    pass
-                else:
-                    raise e
-        except AttributeError as e:
-            st.error("⚠️ There's no data to be filtered, please fill in the camps on the side.")
-        except ValueError as e:
-                if "Please supply either code or authorization_response parameters" in str(e):
-                    st.warning("Please supply either code or authorization_response parameters")
-                else:
-                    raise e
+    #         gerarExcel = st.checkbox('Generate Excel')
+    #         if gerarExcel:
+    #             # Botão para download dos dados em formato Excel
+    #             df_xlsx = to_excel(filtered_df)
+    #             excel_filename = f'API-GSC-{st.session_state.domain}.xlsx'
+    #             st.download_button(label='📥 Download Excel',
+    #                             data=df_xlsx,
+    #                             file_name=excel_filename,
+    #                                 key='botao_download_table')
+    #     except TypeError as e:
+    #             if "NoneType" in str(e):
+    #                 pass
+    #             else:
+    #                 raise e
+    #     except AttributeError as e:
+    #         st.error("⚠️ There's no data to be filtered, please fill in the camps on the side.")
+    #     except ValueError as e:
+    #             if "Please supply either code or authorization_response parameters" in str(e):
+    #                 st.warning("Please supply either code or authorization_response parameters")
+    #             else:
+    #                 raise e
     return True
