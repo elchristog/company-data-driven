@@ -649,7 +649,8 @@ def createPage(project_url_clean):
         )
                 
         # Botão para buscar os dados
-        button = st.button('Buscar Dados ✨', on_click=click_button)
+        # button = st.button('Buscar Dados ✨', on_click=click_button)
+        click_button
         
     with c2:
         tab1, tab2 = st.tabs(["📅 Date", "📃 Table"])
