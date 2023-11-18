@@ -566,52 +566,5 @@ def createPage(project_url_clean):
             st.error("⚠️Please grant API access. (If you are seeing a chart, it is a cached version)")
         else:
             raise e
-    # if hasattr(st.session_state, 'dataframe'):
-    #     try:
-    #         # Obtém os dados para a aba "Tabela"
-    #         met1, met2, met3, met4 = st.columns(4)
-
-    #         filtered_df = st.session_state.dataframe
-            
-    #         # Calcula algumas métricas gerais
-    #         Clicks = filtered_df['Clicks'].sum()
-    #         Impressions = filtered_df['Impressions'].sum()
-    #         ctr_mean = filtered_df['CTR'].mean()
-    #         pos_mean = filtered_df['Position'].mean()
-    #         filtered_df['CTR'] = filtered_df['CTR']
-            
-    #         # Exibe as métricas em formato de cartões
-    #         with met1:
-    #             st.metric('Clicks:', f'{Clicks:,}')
-    #         with met2:
-    #             st.metric('Impressions:', f'{Impressions:,}')
-    #         with met3:
-    #             st.metric('CTR:', f'{ctr_mean * 100:.2f}%')
-    #         with met4:
-    #             st.metric('Position:', f'{pos_mean:.1f}')     
-
-    #         # Exibe os dados em formato de tabela
-    #         st.dataframe(filtered_df.assign(CTR=lambda x: x['CTR'].apply(lambda ctr: f"{ctr * 100:.2f}%")), use_container_width=True)
-            
-    #         gerarExcel = st.checkbox('Generate Excel')
-    #         if gerarExcel:
-    #             # Botão para download dos dados em formato Excel
-    #             df_xlsx = to_excel(filtered_df)
-    #             excel_filename = f'API-GSC-{st.session_state.domain}.xlsx'
-    #             st.download_button(label='📥 Download Excel',
-    #                             data=df_xlsx,
-    #                             file_name=excel_filename,
-    #                                 key='botao_download_table')
-    #     except TypeError as e:
-    #             if "NoneType" in str(e):
-    #                 pass
-    #             else:
-    #                 raise e
-    #     except AttributeError as e:
-    #         st.error("⚠️ There's no data to be filtered, please fill in the camps on the side.")
-    #     except ValueError as e:
-    #             if "Please supply either code or authorization_response parameters" in str(e):
-    #                 st.warning("Please supply either code or authorization_response parameters")
-    #             else:
-    #                 raise e
+   
     return True
