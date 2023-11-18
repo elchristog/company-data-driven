@@ -1,5 +1,4 @@
 import streamlit as st
-import os
 import pandas as pd
 from datetime import date
 from dateutil.relativedelta import relativedelta
@@ -8,16 +7,8 @@ import time
 from googleapiclient import discovery
 from pyexcelerate import Workbook
 from google_auth_oauthlib.flow import Flow
-from pandas.api.types import (
-    is_categorical_dtype,
-    is_datetime64_any_dtype,
-    is_numeric_dtype,
-    is_object_dtype,
-)
-import urllib.parse
 # import functions as fc
-from streamlit_raw_echarts import st_echarts, JsCode
-import streamlit_antd_components as sac
+from streamlit_raw_echarts import st_echarts
 
 # https://github.com/ViniciusStanula/Search-Console-API/tree/main
 
@@ -33,10 +24,7 @@ data_padrao = date - relativedelta(months=1)
 clientSecret = st.secrets["clientSecret"]
 clientId = st.secrets["clientId"]
 redirectUri = 'https://company-data-driven.streamlit.app'
-
-    
 href = "https://accounts.google.com/o/oauth2/auth?response_type=code&client_id={}&redirect_uri={}&scope=https://www.googleapis.com/auth/webmasters.readonly&access_type=offline&prompt=consent".format(clientId, redirectUri)
-
 credentials = {
     "installed": {
         "client_id": clientId,
@@ -52,7 +40,6 @@ flow = Flow.from_client_config(
     scopes=["https://www.googleapis.com/auth/webmasters.readonly"],
     redirect_uri=redirectUri,
 )
-
 auth_url, _ = flow.authorization_url(prompt="consent")
     
 def button_callback():
@@ -62,37 +49,6 @@ def button_callback():
         st.session_state.my_token_input = code
     except KeyError or ValueError:
         st.error("⚠️ The parameter 'code' was not found in the URL. Please log in.")
-
-
-def to_excel(df):
-    """
-    Converter DataFrame para formato Excel usando PyExcelerate.
-
-    Parâmetros:
-        df (pd.DataFrame): O DataFrame a ser convertido.
-
-    Retorna:
-        bytes: Os dados do Excel em formato de bytes.
-    """
-    output = BytesIO()
-    wb = Workbook()
-    ws = wb.new_sheet("Dados-API-GSC")
-    
-    # Obter os nomes das colunas do DataFrame
-    columns = df.columns.tolist()
-
-    # Converter o DataFrame para uma lista de listas para o PyExcelerate
-    data = [columns] + df.values.tolist()
-
-    # Escrever os dados na planilha
-    for row_index, row_data in enumerate(data, start=1):
-        for col_index, cell_value in enumerate(row_data, start=1):
-            ws[row_index][col_index].value = cell_value
-
-    # Salvar o arquivo
-    wb.save(output)
-    processed_data = output.getvalue()
-    return processed_data
 
 def check_input_url(input_url):
     # Verificar se a entrada contém "https://" ou "http://"
@@ -411,36 +367,26 @@ def criar_grafico_echarts(df_grouped):
     # Exibir o gráfico de linha do ECharts usando st_echarts
     st_echarts(option=options, theme='chalk', height=400, width='100%')
     
-def createPage(project_url_clean):
-    # Criando duas colunas para layout
-    colunhead, colundhead2 = st.columns([0.06, 0.99])
 
+
+
+
+def createPage(project_url_clean):
     # Inserindo informações de contatos na segunda coluna
-    with colundhead2:
-        st.header("Google Search Console API")
-        
     if "my_token_input" not in st.session_state:
         st.session_state["my_token_input"] = ""
-
     if "my_token_received" not in st.session_state:
         st.session_state["my_token_received"] = False
-        
     if 'dataframe' not in st.session_state:
         st.session_state.dataframe = None
-        
     if 'domain' not in st.session_state:
         st.session_state.domain = None
-        
     if 'dataframeData' not in st.session_state:
         st.session_state.dataframeData = None
-                 
     if 'clicked' not in st.session_state:
         st.session_state.clicked = False
-
                
     st.markdown("----")
-    
-    # Estilização do link
     link_style = (
         "text-decoration: none;"
         "color: #FFF;"
@@ -470,11 +416,7 @@ def createPage(project_url_clean):
             label_visibility="collapsed",
         )
 
-    
-
-
     # Obtém a URL para consulta
-    # url = st.text_input('Domain:', help='The desired domain or URL for data extraction, precisely as it appears in Google Search Console.')
     url = project_url_clean
     property_url = check_input_url(url)
     
