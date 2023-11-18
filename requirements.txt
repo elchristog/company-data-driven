@@ -1,6 +1,7 @@
 altair
 numpy
 pandas
+pandas_gbq
 pydeck
 streamlit
 streamlit-authenticator
