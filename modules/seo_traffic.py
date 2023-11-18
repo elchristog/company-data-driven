@@ -472,7 +472,7 @@ def createPage(project_url_clean):
     job_config = bigquery.LoadJobConfig(
         write_disposition=bigquery.WriteDisposition.WRITE_APPEND
     )
-    pandas_gbq.to_gbq(df_date, destination_table=table_ref, project_id=project_id)#, if_exists='append')
+    pandas_gbq.to_gbq(df_date, destination_table=table_ref, project_id=project_id)
     
     df_grouped = df_date.groupby('Date').agg({
             'Clicks': 'sum',
