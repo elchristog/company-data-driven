@@ -461,6 +461,7 @@ def createPage(project_url_clean):
             palavra_filter=palavra_filter, palavra_operator=palavra_operator)
     st.write(df_date)
     st.table(df_date)
+    pandas_gbq.to_gbq(df_date, 'enfermera_en_estados_unidos.traffic_analytics_web_clicks', project_id= 'company-data-driven')
     df_grouped = df_date.groupby('Date').agg({
             'Clicks': 'sum',
             'Impressions': 'sum',
