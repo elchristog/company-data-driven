@@ -539,7 +539,12 @@ def createPage(project_url_clean):
     with st.container():
         criar_grafico_echarts(df_grouped)
 
-                            
+
+    # pages
+    df = get_data(property_url, ['page'], day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
+    url_filter=url_filter, url_operator=url_operator,
+    palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+    st.table(df)          
     # keywords
     df = get_data(property_url, ['query'], day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
     url_filter=url_filter, url_operator=url_operator,
