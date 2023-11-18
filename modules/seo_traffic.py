@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import pandas_gbqseo 
+import pandas_gbq
 from datetime import date
 from dateutil.relativedelta import relativedelta
 from io import BytesIO
