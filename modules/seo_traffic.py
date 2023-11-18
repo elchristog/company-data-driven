@@ -649,13 +649,13 @@ def createPage(project_url_clean):
         )
                 
         # Botão para buscar os dados
-        # button = st.button('Buscar Dados ✨', on_click=click_button)
+        button = st.button('Buscar Dados ✨', on_click=click_button)
         click_button
         
     with c2:
         tab1, tab2 = st.tabs(["📅 Date", "📃 Table"])
         with tab1:
-            # if button:
+            if button:
                 try:
                     # Obtém os dados para a aba "Data"
                     df_date = get_data_date(property_url, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
@@ -713,7 +713,7 @@ def createPage(project_url_clean):
                     pass
                                 
         with tab2:
-            # if button:
+            if button:
                 try:
                     df = get_data(property_url, dimensions, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
                     url_filter=url_filter, url_operator=url_operator,
