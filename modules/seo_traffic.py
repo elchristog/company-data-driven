@@ -437,8 +437,6 @@ def createPage(project_url_clean):
     if 'clicked' not in st.session_state:
         st.session_state.clicked = False
 
-    def click_button():
-        st.session_state.clicked = True
                
     st.markdown("----")
     
@@ -515,12 +513,9 @@ def createPage(project_url_clean):
             help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format'
         )
                 
-        # Botão para buscar os dados
-        # button = st.button('Buscar Dados ✨', on_click=click_button)
         
         tab1, tab2 = st.tabs(["📅 Date", "📃 Table"])
         with tab1:
-            # if button:
             try:
                 # Obtém os dados para a aba "Data"
                 df_date = get_data_date(property_url, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
@@ -578,7 +573,6 @@ def createPage(project_url_clean):
                     pass
                                 
         with tab2:
-            # if button:
             try:
                 df = get_data(property_url, dimensions, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
                 url_filter=url_filter, url_operator=url_operator,
