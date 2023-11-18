@@ -556,49 +556,7 @@ def createPage(project_url_clean):
             st.error("⚠️Please grant API access. (If you are seeing a chart, it is a cached version)")
         else:
             raise e
-    # if hasattr(st.session_state, 'dataframeData'):
-    #     try:
-    #         novo_df = st.session_state.dataframeData                   
-    #         # Agrupa os dados por data e calcula algumas métricas
-    #         df_grouped = novo_df.groupby('Date').agg({
-    #             'Clicks': 'sum',
-    #             'Impressions': 'sum',
-    #             'CTR': 'mean',
-    #             'Position': 'mean'
-    #         }).reset_index()
-            
-    #         # Calcula algumas métricas gerais
-    #         Clicks = novo_df['Clicks'].sum()
-    #         Impressions = novo_df['Impressions'].sum()
-    #         ctr_mean = novo_df['CTR'].mean()
-    #         pos_mean = novo_df['Position'].mean()
-            
-    #         # Exibe as métricas em formato de cartões
-    #         met1, met2, met3, met4 = st.columns(4)
-                
-    #         with met1:
-    #             st.metric('Clicks:', f'{Clicks:,}')
-    #         with met2:
-    #             st.metric('Impressions:', f'{Impressions:,}')
-    #         with met3:
-    #             st.metric('CTR:', f'{ctr_mean * 100:.2f}%')
-    #         with met4:
-    #             st.metric('Position:', f'{pos_mean:.1f}')
-                
-            
-    #         with st.container():
-    #             # Plota o gráfico com as métricas agrupadas por data
-    #             criar_grafico_echarts(df_grouped)
-            
-    #         # Botão para download dos dados em formato Excel
-    #         df_xlsx = to_excel(novo_df)
-    #         excel_date_filename = f'API-GSC-{st.session_state.domain}.xlsx'
-    #         st.download_button(label='📥 Download Excel',
-    #                         data=df_xlsx,
-    #                         file_name=excel_date_filename,
-    #                             key='download-chart')
-    #     except AttributeError:
-    #         pass
+   
                             
     try:
         df = get_data(property_url, dimensions, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
