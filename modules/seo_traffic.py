@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pandas_gbq
+from google.cloud import bigquery
 from datetime import date
 from dateutil.relativedelta import relativedelta
 from io import BytesIO
@@ -461,7 +462,18 @@ def createPage(project_url_clean):
             palavra_filter=palavra_filter, palavra_operator=palavra_operator)
     st.write(df_date)
     st.table(df_date)
-    pandas_gbq.to_gbq(df_date, 'enfermera_en_estados_unidos.traffic_analytics_web_clicks', project_id= 'company-data-driven')
+
+    project_id = 'company-data-driven'
+    dataset_id = 'enfermera_en_estados_unidos'
+    table_id = 'traffic_analytics_web_clicks'
+    client = bigquery.Client(project=project_id)
+    dataset_ref = client.dataset(dataset_id)
+    table_ref = dataset_ref.table(table_id)
+    job_config = bigquery.LoadJobConfig(
+        write_disposition=bigquery.WriteDisposition.WRITE_APPEND
+    )
+    pandas_gbq.to_gbq(df_date, destination_table=table_ref, project_id=project_id)#, if_exists='append')
+    
     df_grouped = df_date.groupby('Date').agg({
             'Clicks': 'sum',
             'Impressions': 'sum',
