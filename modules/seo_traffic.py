@@ -550,5 +550,11 @@ def createPage(project_url_clean):
     url_filter=url_filter, url_operator=url_operator,
     palavra_filter=palavra_filter, palavra_operator=palavra_operator)
     st.table(df)
+    # keywords per page
+    df = get_data(property_url, ['page', 'query'], day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
+    url_filter=url_filter, url_operator=url_operator,
+    palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+    st.table(df)
+
 
     return True
