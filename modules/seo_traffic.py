@@ -63,88 +63,6 @@ def button_callback():
     except KeyError or ValueError:
         st.error("⚠️ The parameter 'code' was not found in the URL. Please log in.")
 
-def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
-    modify = st.checkbox("Add Filters")
-
-    if not modify:
-        return df
-
-    df = df.copy()
-
-    # Try to convert datetimes into a standard format (datetime, no timezone)
-    for col in df.columns:
-        if is_object_dtype(df[col]):
-            try:
-                df[col] = pd.to_datetime(df[col])
-            except Exception:
-                pass
-
-        if is_datetime64_any_dtype(df[col]):
-            df[col] = df[col].dt.tz_localize(None)
-
-    modification_container = st.container()
-
-    with modification_container:
-        to_filter_columns = st.multiselect("Filer Dataframe for:", df.columns)
-        for column in to_filter_columns:
-            left, right = st.columns((1, 20))
-
-            # Check if the column is numeric and CTR
-            is_ctr_column = column == 'CTR' and is_numeric_dtype(df[column])
-
-            # Treat columns with < 10 unique values as categorical
-            if is_categorical_dtype(df[column]) or df[column].nunique() < 10:
-                user_cat_input = right.multiselect(
-                    f"Values for: {column}",
-                    df[column].unique(),
-                    default=list(df[column].unique()),
-                )
-                df = df[df[column].isin(user_cat_input)]
-            elif is_numeric_dtype(df[column]):
-                _min = float(df[column].min())
-                _max = float(df[column].max())
-                step = (_max - _min) / 100
-                
-                # If the column is CTR, format the slider values as percentage
-                if is_ctr_column:
-                    user_num_input = right.slider(
-                        f"Values for: {column}",
-                        min_value=_min * 100,  # Format as percentage
-                        max_value=_max * 100,  # Format as percentage
-                        value=(_min * 100, _max * 100),  # Format as percentage
-                        step=step * 100,  # Format as percentage
-                    )
-                    user_num_input = (user_num_input[0] / 100, user_num_input[1] / 100)  # Convert back to float
-                else:
-                    user_num_input = right.slider(
-                        f"Values for: {column}",
-                        min_value=_min,
-                        max_value=_max,
-                        value=(_min, _max),
-                        step=step,
-                        format="%.2f",  # Formato para exibição
-                    )
-                df = df[df[column].between(*user_num_input)]
-            elif is_datetime64_any_dtype(df[column]):
-                user_date_input = right.date_input(
-                    f"Values for: {column}",
-                    value=(
-                        df[column].min(),
-                        df[column].max(),
-                    ),
-                )
-                if len(user_date_input) == 2:
-                    user_date_input = tuple(map(pd.to_datetime, user_date_input))
-                    start_date, end_date = user_date_input
-                    df = df.loc[df[column].between(start_date, end_date)]
-            else:
-                user_text_input = right.text_input(
-                    f"String or Regex for: {column}",
-                )
-                if user_text_input:
-                    df = df[df[column].astype(str).str.contains(user_text_input)]
-
-    return df
 
 def to_excel(df):
     """
@@ -730,7 +648,7 @@ def createPage(project_url_clean):
                     # Obtém os dados para a aba "Tabela"
                     met1, met2, met3, met4 = st.columns(4)
 
-                    filtered_df = filter_dataframe(st.session_state.dataframe)
+                    filtered_df = st.session_state.dataframe
                     
                     # Calcula algumas métricas gerais
                     Clicks = filtered_df['Clicks'].sum()
