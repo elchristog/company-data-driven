@@ -499,7 +499,7 @@ def createPage(project_url_clean):
         elif metricas == "Pages":
             dimensions = ['page']
             
-        c1_1, c1_2 = st.columns(2)
+        
         
         # Define valores padrão para as variáveis de filtro
         url_filter = None
