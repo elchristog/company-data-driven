@@ -512,39 +512,33 @@ def createPage(project_url_clean):
         help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format'
     )
             
+    # clicks
+    df_date = get_data_date(property_url, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
+            url_filter=url_filter, url_operator=url_operator,
+            palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+    st.table(df_date)
+    df_grouped = df_date.groupby('Date').agg({
+            'Clicks': 'sum',
+            'Impressions': 'sum',
+            'CTR': 'mean',
+            'Position': 'mean'
+        }).reset_index()
+    Clicks = df_date['Clicks'].sum()
+    Impressions = df_date['Impressions'].sum()
+    ctr_mean = df_date['CTR'].mean()
+    pos_mean = df_date['Position'].mean()
+    met1, met2, met3, met4 = st.columns(4)
+    with met1:
+        st.metric('Clicks:', f'{Clicks:,}')
+    with met2:
+        st.metric('Impressions:', f'{Impressions:,}')
+    with met3:
+        st.metric('CTR:', f'{ctr_mean * 100:.2f}%')
+    with met4:
+        st.metric('Position:', f'{pos_mean:.1f}')
+    with st.container():
+        criar_grafico_echarts(df_grouped)
 
-    try:
-        df_date = get_data_date(property_url, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
-                url_filter=url_filter, url_operator=url_operator,
-                palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-        st.table(df_date)
-        df_grouped = df_date.groupby('Date').agg({
-                'Clicks': 'sum',
-                'Impressions': 'sum',
-                'CTR': 'mean',
-                'Position': 'mean'
-            }).reset_index()
-        Clicks = df_date['Clicks'].sum()
-        Impressions = df_date['Impressions'].sum()
-        ctr_mean = df_date['CTR'].mean()
-        pos_mean = df_date['Position'].mean()
-        met1, met2, met3, met4 = st.columns(4)
-        with met1:
-            st.metric('Clicks:', f'{Clicks:,}')
-        with met2:
-            st.metric('Impressions:', f'{Impressions:,}')
-        with met3:
-            st.metric('CTR:', f'{ctr_mean * 100:.2f}%')
-        with met4:
-            st.metric('Position:', f'{pos_mean:.1f}')
-        with st.container():
-            criar_grafico_echarts(df_grouped)
-    except ValueError as e:
-        if "Please supply either code or authorization_response parameters" in str(e):
-            st.error("⚠️Please grant API access. (If you are seeing a chart, it is a cached version)")
-        else:
-            raise e
-   
                             
     # keywords
     df = get_data(property_url, ['query'], day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
