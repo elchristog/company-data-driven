@@ -512,7 +512,6 @@ def createPage(project_url_clean):
         help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format'
     )
             
-    
 
     try:
         # Obtém os dados para a aba "Data"
@@ -520,6 +519,7 @@ def createPage(project_url_clean):
                 url_filter=url_filter, url_operator=url_operator,
                 palavra_filter=palavra_filter, palavra_operator=palavra_operator)
         
+        st.table(df_date)
         st.session_state.dataframeData = df_date
     except ValueError as e:
         if "Please supply either code or authorization_response parameters" in str(e):
