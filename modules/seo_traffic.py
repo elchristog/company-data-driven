@@ -521,7 +521,7 @@ def createPage(project_url_clean):
         
         st.table(df_date)
         
-        df_grouped = df_date('Date').agg({
+        df_grouped = df_date.groupby('Date').agg({
                 'Clicks': 'sum',
                 'Impressions': 'sum',
                 'CTR': 'mean',
