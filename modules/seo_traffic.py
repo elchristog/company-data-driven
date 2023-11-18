@@ -499,8 +499,6 @@ def createPage(project_url_clean):
         elif metricas == "Pages":
             dimensions = ['page']
             
-        
-        
         # Define valores padrão para as variáveis de filtro
         url_filter = None
         url_operator = None
@@ -519,7 +517,6 @@ def createPage(project_url_clean):
                 
         # Botão para buscar os dados
         button = st.button('Buscar Dados ✨', on_click=click_button)
-        click_button
         
         tab1, tab2 = st.tabs(["📅 Date", "📃 Table"])
         with tab1:
