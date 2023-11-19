@@ -449,5 +449,5 @@ def show_web_metrics(project_name):
         with st.container():
             plot_echarts(df_grouped)
         st.write(f"#### Visits per page")
-        pages_visits = uc.run_query_1_h(f"SELECT page, clicks, impressions, ctr, position FROM `company-data-driven.{project_name}.traffic_analytics_web_pages` WHERE creation_date = (SELECT MAX(creation_date) AS max_daye FROM `company-data-driven.{project_name}.traffic_analytics_web_pages`) ORDER BY ctr DESC;")
+        pages_visits = uc.run_query_1_h(f"SELECT page, SUM(clicks) AS clicks, SUM(impressions) AS impressions, AVG(ctr) AS ctr, AVG(position) AS position FROM `company-data-driven.{project_name}.traffic_analytics_web_pages` WHERE start_query_date >= '{day[0].strftime('%Y-%m-%d')}' AND end_query_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY page  ORDER BY ctr DESC;")
         st.table(pages_visits)
