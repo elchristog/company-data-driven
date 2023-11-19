@@ -426,7 +426,7 @@ def show_web_metrics(project_name):
             format="DD/MM/YYYY",
             help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format'
         )
-        df = pd.DataFrame(uc.run_query_1_h(f"SELECT * FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks` WHERE date >= {day[0].strftime('%Y-%m-%d')} AND date <= {day[1].strftime('%Y-%m-%d')} ORDER BY date ASC;"))
+        df = pd.DataFrame(uc.run_query_1_h(f"SELECT * FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks` WHERE date >= '{day[0].strftime('%Y-%m-%d')}' AND date <= '{day[1].strftime('%Y-%m-%d')}' ORDER BY date ASC;"))
         df_grouped = df.groupby('date').agg({
                 'clicks': 'sum',
                 'impressions': 'sum',
