@@ -221,12 +221,12 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
 
 @st.cache_data(experimental_allow_widgets=True, show_spinner=False)
 def plot_echarts(df_grouped):
-    df_grouped['CTR'] = df_grouped['CTR'].apply(lambda ctr: f"{ctr * 100:.2f}")
-    df_grouped['Position'] = df_grouped['Position'].apply(lambda pos: round(pos, 2))
+    df_grouped['ctr'] = df_grouped['ctr'].apply(lambda ctr: f"{ctr * 100:.2f}")
+    df_grouped['position'] = df_grouped['position'].apply(lambda pos: round(pos, 2))
     options = {
         "xAxis": {
             "type": "category",
-            "data": df_grouped['Date'].tolist(),
+            "data": df_grouped['date'].tolist(),
             "axisLabel": {
                 "formatter": "{value}"
             }
@@ -243,42 +243,42 @@ def plot_echarts(df_grouped):
             "top": "top",
             "align": "auto",
             "selected": {  # Definindo a seleção inicial das séries
-                "Clicks": True,         # A série "Clicks" está selecionada
-                "Impressions": True,    # A série "Impressions" está selecionada
-                "CTR": False,           # A série "CTR" não está selecionada
-                "Position": False       # A série "Position" não está selecionada
+                "clicks": True,         # A série "Clicks" está selecionada
+                "impressions": True,    # A série "Impressions" está selecionada
+                "ctr": False,           # A série "CTR" não está selecionada
+                "position": False       # A série "Position" não está selecionada
             }
         },
         "tooltip": {"trigger": "axis", },
         "series": [
             {
                 "type": "line",
-                "name": "Clicks",
-                "data": df_grouped['Clicks'].tolist(),
+                "name": "clicks",
+                "data": df_grouped['clicks'].tolist(),
                 "smooth": True,
                 "lineStyle": {"width": 2.4, "color": "#8be9fd"},
                 "showSymbol": False,  # Remova os marcadores de dados para esta série
             },
             {
                 "type": "line",
-                "name": "Impressions",
-                "data": df_grouped['Impressions'].tolist(),
+                "name": "impressions",
+                "data": df_grouped['impressions'].tolist(),
                 "smooth": True,
                 "lineStyle": {"width": 2.4, "color": "#ffb86c"},
                 "showSymbol": False,  # Remova os marcadores de dados para esta série
             },
             {
                 "type": "line",
-                "name": "CTR",
-                "data": df_grouped['CTR'].tolist(),
+                "name": "ctr",
+                "data": df_grouped['ctr'].tolist(),
                 "smooth": True,
                 "lineStyle": {"width": 2.4, "color": "#50fa7b"},
                 "showSymbol": False,  # Remova os marcadores de dados para esta série
             },
 {
     "type": "line",
-    "name": "Position",
-    "data": df_grouped['Position'].tolist(),
+    "name": "position",
+    "data": df_grouped['position'].tolist(),
     "smooth": True,
     "lineStyle": {"width": 2.4, "color": "#ff79c6"},
     "showSymbol": False,  # Remova os marcadores de dados para esta série
