@@ -302,78 +302,79 @@ def plot_echarts(df_grouped):
 
 
 
-def get_data_save_to_bq(project_url_clean):
-    dates_in_table = uc.run_query_10_s(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) - 2 AS days_last_update, DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY) AS min_date_first_query, DATE_ADD(MAX(date), INTERVAL 1 DAY) AS min_date_next_query, DATE_SUB(CURRENT_DATE(), INTERVAL 2 DAY) AS max_date_next_query FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks`;")
-    days_last_update = dates_in_table[0].get("days_last_update")
-    min_date_first_query = dates_in_table[0].get("min_date_first_query")
-    min_date_next_query = dates_in_table[0].get("min_date_next_query")
-    max_date_next_query = dates_in_table[0].get("max_date_next_query")
+def get_data_save_to_bq(role_id, project_url_clean):
+    if role_id == 1:
+        dates_in_table = uc.run_query_10_s(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) - 2 AS days_last_update, DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY) AS min_date_first_query, DATE_ADD(MAX(date), INTERVAL 1 DAY) AS min_date_next_query, DATE_SUB(CURRENT_DATE(), INTERVAL 2 DAY) AS max_date_next_query FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks`;")
+        days_last_update = dates_in_table[0].get("days_last_update")
+        min_date_first_query = dates_in_table[0].get("min_date_first_query")
+        min_date_next_query = dates_in_table[0].get("min_date_next_query")
+        max_date_next_query = dates_in_table[0].get("max_date_next_query")
 
-    if days_last_update is None or days_last_update > 0:
-        if "my_token_input" not in st.session_state:
-            st.session_state["my_token_input"] = ""
-        if "my_token_received" not in st.session_state:
-            st.session_state["my_token_received"] = False
-        if 'dataframe' not in st.session_state:
-            st.session_state.dataframe = None
-        if 'domain' not in st.session_state:
-            st.session_state.domain = None
-        if 'dataframeData' not in st.session_state:
-            st.session_state.dataframeData = None
-        if 'clicked' not in st.session_state:
-            st.session_state.clicked = False
-        
-        st.write("### Update your web data")
-        st.markdown("----")
-        link_style = (
-            "text-decoration: none;"
-            "color: #FFF;"
-            "padding: 8px 20px;"
-            "border-radius: 4px;"
-            "background-color: #DD4B39;"
-            "font-size: 16px;"
-        )
-        url = href
-        st.markdown('1 - Log in to your Google account:')
-        st.markdown(f'<a href="{url}" target="_blank" style="{link_style}">'
-                f'<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png" alt="Google" style="vertical-align: middle; margin-right: 10px;">'
-                f'Login With Google'
-                f'</a>', unsafe_allow_html=True)
-        st.markdown('2 - Click the Button to grant API access:')
-        submit_button = st.button(
-            label="Grant API access", on_click=button_callback
-        )
-        st.markdown('This is your OAuth token:')
-        code = st.text_input(
-                "",
-                key="my_token_input",
-                label_visibility="collapsed",
-            )
-        get_data_button = st.button("Get data")
-        if get_data_button:
-            url = project_url_clean
-            property_url = check_input_url(url)
-            st.session_state.domain = property_url
-
-            url_filter = None
-            url_operator = None
-            palavra_filter = None
-            palavra_operator = None   
+        if days_last_update is None or days_last_update > 0:
+            if "my_token_input" not in st.session_state:
+                st.session_state["my_token_input"] = ""
+            if "my_token_received" not in st.session_state:
+                st.session_state["my_token_received"] = False
+            if 'dataframe' not in st.session_state:
+                st.session_state.dataframe = None
+            if 'domain' not in st.session_state:
+                st.session_state.domain = None
+            if 'dataframeData' not in st.session_state:
+                st.session_state.dataframeData = None
+            if 'clicked' not in st.session_state:
+                st.session_state.clicked = False
             
-            if days_last_update is None:
-                df_date = get_data_date(property_url, min_date_first_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
-                    url_filter=url_filter, url_operator=url_operator,
-                    palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-            elif days_last_update > 0:
-                df_date = get_data_date(property_url, min_date_next_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
-                    url_filter=url_filter, url_operator=url_operator,
-                    palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-            st.table(df_date)
-            for index, row in df_date.iterrows():
-                uc.run_query_insert_update(f"INSERT INTO `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
-            st.info("Updating, please wait", icon = "☺️")
-            time.sleep(5)
-            st.rerun()
+            st.write("### Update your web data")
+            st.markdown("----")
+            link_style = (
+                "text-decoration: none;"
+                "color: #FFF;"
+                "padding: 8px 20px;"
+                "border-radius: 4px;"
+                "background-color: #DD4B39;"
+                "font-size: 16px;"
+            )
+            url = href
+            st.markdown('1 - Log in to your Google account:')
+            st.markdown(f'<a href="{url}" target="_blank" style="{link_style}">'
+                    f'<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png" alt="Google" style="vertical-align: middle; margin-right: 10px;">'
+                    f'Login With Google'
+                    f'</a>', unsafe_allow_html=True)
+            st.markdown('2 - Click the Button to grant API access:')
+            submit_button = st.button(
+                label="Grant API access", on_click=button_callback
+            )
+            st.markdown('This is your OAuth token:')
+            code = st.text_input(
+                    "",
+                    key="my_token_input",
+                    label_visibility="collapsed",
+                )
+            get_data_button = st.button("Get data")
+            if get_data_button:
+                url = project_url_clean
+                property_url = check_input_url(url)
+                st.session_state.domain = property_url
+
+                url_filter = None
+                url_operator = None
+                palavra_filter = None
+                palavra_operator = None   
+                
+                if days_last_update is None:
+                    df_date = get_data_date(property_url, min_date_first_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
+                        url_filter=url_filter, url_operator=url_operator,
+                        palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+                elif days_last_update > 0:
+                    df_date = get_data_date(property_url, min_date_next_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
+                        url_filter=url_filter, url_operator=url_operator,
+                        palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+                st.table(df_date)
+                for index, row in df_date.iterrows():
+                    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
+                st.info("Updating, please wait", icon = "☺️")
+                time.sleep(5)
+                st.rerun()
 
     # df_grouped = df_date.groupby('Date').agg({
     #         'Clicks': 'sum',
