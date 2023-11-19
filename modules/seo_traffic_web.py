@@ -405,10 +405,10 @@ def show_web_metrics():
             'ctr': 'mean',
             'position': 'mean'
         }).reset_index()
-    Clicks = df['Clicks'].sum()
-    Impressions = df['Impressions'].sum()
-    ctr_mean = df['CTR'].mean()
-    pos_mean = df['Position'].mean()
+    Clicks = df['clicks'].sum()
+    Impressions = df['impressions'].sum()
+    ctr_mean = df['ctr'].mean()
+    pos_mean = df['position'].mean()
     met1, met2, met3, met4 = st.columns(4)
     with met1:
         st.metric('Clicks:', f'{Clicks:,}')
