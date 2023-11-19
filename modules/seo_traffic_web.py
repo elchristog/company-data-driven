@@ -388,7 +388,7 @@ def get_data_save_to_bq(role_id, project_name, project_url_clean):
                     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
                 for index, row in df_pages.iterrows():
                     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_web_pages` (id, ctreation_date, start_query_date, end_query_date, page, clicks, impressions, ctr, position) VALUES (GENERATE_UUID(), '{today_str}', '{starting_date_to_pages}', '{ending_date_to_pages}', '{row['Page']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
-                time.sleep(10)
+                time.sleep(15)
                 st.rerun()
 
     # # pages
