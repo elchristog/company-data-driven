@@ -432,6 +432,8 @@ def createPage(project_url_clean):
         url_operator = None
         palavra_filter = None
         palavra_operator = None   
+
+        
         if days_last_update is None:
             df_date = get_data_date(property_url, min_date_first_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
                 url_filter=url_filter, url_operator=url_operator,
