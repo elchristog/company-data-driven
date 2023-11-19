@@ -219,7 +219,7 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
 
 
 
-@st.cache_data(experimental_allow_widgets=True, show_spinner=False)
+# @st.cache_data(experimental_allow_widgets=True, show_spinner=False)
 def plot_echarts(df_grouped):
     df_grouped['ctr'] = df_grouped['ctr'].apply(lambda ctr: f"{ctr * 100:.2f}")
     df_grouped['position'] = df_grouped['position'].apply(lambda pos: round(pos, 2))
