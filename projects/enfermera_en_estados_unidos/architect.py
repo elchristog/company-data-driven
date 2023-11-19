@@ -2,7 +2,7 @@ import streamlit as st
 
 import modules.title_and_paragraph as tap
 import modules.tasks as t
-import modules.seo_traffic as seot
+import modules.seo_traffic_web as seotw
 import utils.users_handling as uh
 import modules.tester as tst
 import modules.web_app_activity as wap
@@ -57,7 +57,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
             if sub_menu == "Traffic":
                 tap.title_and_paragraph("Trafico y SEO" + project_icon, "Seguimiento y mantenimiento de los usuarios", "h3", 0)
-                seot.get_data_save_to_bq(role_id, project_url_clean)
+                seotw.get_data_save_to_bq(role_id, project_url_clean)
 
         if menu == "Web App":
             sub_menu_options=["Customer view", 'Nclex test creation', 'Update customer progress']
