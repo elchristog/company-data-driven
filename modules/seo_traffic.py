@@ -447,24 +447,27 @@ def createPage(project_url_clean):
     palavra_operator = None    
     
     # Seleciona o período de data desejado
-    day = st.date_input(
-        "Time Range:",
-        (data_padrao, data_final),
-        min_value=data_inicial,
-        max_value=data_final,
-        format="DD/MM/YYYY",
-        help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format'
-    )
+    # day = st.date_input(
+    #     "Time Range:",
+    #     (data_padrao, data_final),
+    #     min_value=data_inicial,
+    #     max_value=data_final,
+    #     format="DD/MM/YYYY",
+    #     help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format'
+    # )
             
     # clicks
-    df_date = get_data_date(property_url, day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
+    dates_in_table = uc.run_query_10_s(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) - 2 AS days_last_update, DATE_ADD(MAX(date), INTERVAL 1 DAY) AS min_date_next_query, DATE_SUB(CURRENT_DATE(), INTERVAL 2 DAY) AS max_date_next_query FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks`;")
+    days_last_update = dates_in_table[0].get("days_last_update")
+    min_date_next_query = dates_in_table[0].get("min_date_next_query")
+    max_date_next_query = dates_in_table[0].get("max_date_next_query")
+
+
+    df_date = get_data_date(property_url, min_date_next_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
             url_filter=url_filter, url_operator=url_operator,
             palavra_filter=palavra_filter, palavra_operator=palavra_operator)
     st.table(df_date)
 
-    today = datetime.date.today()
-    today_str = today.strftime("%Y-%m-%d")
-    days_last_update = uc.run_query_10_s(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) - 2 AS days_last_update FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks`;")[0].get("days_last_update")
     if days_last_update is None or days_last_update > 0:
         for index, row in df_date.iterrows():
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
