@@ -422,7 +422,7 @@ def show_web_metrics(project_name):
             "Time Range:",
             (data_padrao, data_final),
             min_value=min_max_dates_range[0].get("min_date").strftime("%Y-%m-%d"),
-            max_value=data_final[0].get("max_date").strftime("%Y-%m-%d"),
+            max_value=min_max_dates_range[0].get("max_date").strftime("%Y-%m-%d"),
             format="DD/MM/YYYY",
             help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format'
         )
