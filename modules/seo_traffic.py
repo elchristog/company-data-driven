@@ -1,24 +1,22 @@
 import streamlit as st
 import pandas as pd
+import time
+
 from datetime import date
 from dateutil.relativedelta import relativedelta
-import time
 from googleapiclient import discovery
 from google_auth_oauthlib.flow import Flow
-# import functions as fc
 from streamlit_raw_echarts import st_echarts
-
-# https://github.com/ViniciusStanula/Search-Console-API/tree/main
 
 import utils.user_credentials as uc
 
-# Define o período inicial e final padrão para o slider
+# https://github.com/ViniciusStanula/Search-Console-API/tree/main
+
 date = date.today()
 data_final = date - relativedelta(days=2)
 data_inicial = date - relativedelta(months=16)
 data_padrao = date - relativedelta(months=1)
 
-# Convert secrets from the TOML file to strings
 clientSecret = st.secrets["clientSecret"]
 clientId = st.secrets["clientId"]
 redirectUri = 'https://company-data-driven.streamlit.app'
@@ -40,6 +38,8 @@ flow = Flow.from_client_config(
 )
 auth_url, _ = flow.authorization_url(prompt="consent")
     
+
+
 def button_callback():
     try:
         st.session_state.my_token_received = True
@@ -48,12 +48,14 @@ def button_callback():
     except KeyError or ValueError:
         st.error("⚠️ The parameter 'code' was not found in the URL. Please log in.")
 
+
+
 def check_input_url(input_url):
-    # Verificar se a entrada contém "https://" ou "http://"
     if "https://" in input_url or "http://" in input_url:
         return input_url
-    # Caso contrário, assume que é um domínio e adiciona "sc-domain:"
     return f'sc-domain:{input_url}'
+
+
 
 @st.cache_resource(show_spinner=False)
 def get_webproperty(token):
@@ -65,32 +67,20 @@ def get_webproperty(token):
         credentials=credentials,
         cache_discovery=False,
     )
-
     return service
 
+
+
 # @st.cache_data(show_spinner=False)
-# Definir a função para consultar e processar dados
 def get_data(property_url, dimensions, startDate, endDate, url_filter=None, url_operator=None,
             palavra_filter=None, palavra_operator=None):
     service = get_webproperty(st.session_state.my_token_input)
-
-    # Criar uma lista vazia para armazenar as linhas recuperadas da resposta
     data = []
-    
-    # Definir o limite de linhas desejado para 300.000 linhas
     row_limit = 300000
-    
-    # Definir o texto de progresso a ser exibido acima da barra de progresso
     progress_text = "Retrieving Metrics. Please Wait. 🐈"
-
-    # Criar o widget de barra de progresso usando o Streamlit
     my_bar = st.progress(0, text=progress_text)
-
-    # Inicializar a variável 'startRow' para rastrear a linha de início de cada solicitação
     startRow = 0
-
     while startRow == 0 or startRow % 25000 == 0 and startRow < row_limit:
-        # Construir o corpo da solicitação com as variáveis especificadas
         request = {
             'startDate': startDate,
             'endDate': endDate,
@@ -98,7 +88,6 @@ def get_data(property_url, dimensions, startDate, endDate, url_filter=None, url_
             'rowLimit': 25000,
             'startRow': startRow
         }
-
         if url_filter and url_operator:
             url_dimension_filter = {
                 'dimension': 'PAGE',
@@ -106,7 +95,6 @@ def get_data(property_url, dimensions, startDate, endDate, url_filter=None, url_
                 'expression': url_operator
             }
             request['dimensionFilterGroups'] = [{'filters': [url_dimension_filter]}]
-
         if palavra_filter and palavra_operator:
             palavra_dimension_filter = {
                 'dimension': 'QUERY',
@@ -117,27 +105,14 @@ def get_data(property_url, dimensions, startDate, endDate, url_filter=None, url_
                 request['dimensionFilterGroups'].append({'filters': [palavra_dimension_filter]})
             else:
                 request['dimensionFilterGroups'] = [{'filters': [palavra_dimension_filter]}]
-
-        # Armazenar a resposta da API do Google Search Console
         response = service.searchanalytics().query(siteUrl=property_url, body=request).execute()
-
-        # Obter e atualizar as linhas
         rows = response.get('rows', [])
         startRow = startRow + len(rows)
-
-        # Estender a lista de dados com as linhas
         data.extend(rows)
-        
-        # Calcular a porcentagem de progresso
         progress_percent = min((startRow / row_limit) * 100, 100)
-
-        # Converter a porcentagem de progresso para um valor entre 0.0 e 1.0
         progress_value = progress_percent / 100.0
-
-        # Atualizar a barra de progresso com o progresso atual
         my_bar.progress(progress_value, text=progress_text)
     
-    # Criar um DataFrame a partir da lista de dados
     if dimensions == ['page', 'query']:
         df = pd.DataFrame([
             {
@@ -180,40 +155,23 @@ def get_data(property_url, dimensions, startDate, endDate, url_filter=None, url_
                 'Position': row['position']
             } for row in data
         ])
-        
-    # Atualizar a barra de progresso para 100% para mostrar que o processamento de dados está completo
     my_bar.progress(1.0, text="Processing is now finished 😸")
-
-    # Aguardar por uma curta duração para exibir a mensagem "Processamento de Dados Completo"
     time.sleep(2)
-
-    # Limpar a barra de progresso para removê-la da interface do aplicativo
     my_bar.empty()
-        
     return df
+
+
 
 # @st.cache_data(show_spinner=False)
 def get_data_date(property_url, startDate, endDate, url_filter=None, url_operator=None,
                 palavra_filter=None, palavra_operator=None):
         service = get_webproperty(st.session_state.my_token_input)
-
-        # Criar uma lista vazia para armazenar as linhas recuperadas da resposta
         data = []
-        
-        # Definir o limite de linhas desejado para 300.000 linhas
         row_limit = 1000
-        
-        # Definir o texto de progresso a ser exibido acima da barra de progresso
         progress_text = "Retrieving Metrics. Please Wait. 🐈"
-
-        # Criar o widget de barra de progresso usando o Streamlit
         my_bar = st.progress(0, text=progress_text)
-
-        # Inicializar a variável 'startRow' para rastrear a linha de início de cada solicitação
         startRow = 0
-
         while startRow == 0 or startRow % 25000 == 0 and startRow < row_limit:
-            # Construir o corpo da solicitação com as variáveis especificadas
             request = {
                 'startDate': startDate,
                 'endDate': endDate,
@@ -221,7 +179,6 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
                 'rowLimit': 25000,
                 'startRow': startRow
             }
-
             if url_filter and url_operator:
                 url_dimension_filter = {
                     'dimension': 'PAGE',
@@ -229,7 +186,6 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
                     'expression': url_operator
                 }
                 request['dimensionFilterGroups'] = [{'filters': [url_dimension_filter]}]
-
             if palavra_filter and palavra_operator:
                 palavra_dimension_filter = {
                     'dimension': 'QUERY',
@@ -240,26 +196,13 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
                     request['dimensionFilterGroups'].append({'filters': [palavra_dimension_filter]})
                 else:
                     request['dimensionFilterGroups'] = [{'filters': [palavra_dimension_filter]}]
-
-            # Armazenar a resposta da API do Google Search Console
             response = service.searchanalytics().query(siteUrl=property_url, body=request).execute()
-
-            # Obter e atualizar as linhas
             rows = response.get('rows', [])
             startRow = startRow + len(rows)
-
-            # Estender a lista de dados com as linhas
             data.extend(rows)
-            
-            # Calcular a porcentagem de progresso
             progress_percent = min((startRow / row_limit) * 100, 100)
-
-            # Converter a porcentagem de progresso para um valor entre 0.0 e 1.0
             progress_value = progress_percent / 100.0
-
-            # Atualizar a barra de progresso com o progresso atual
             my_bar.progress(progress_value, text=progress_text)
-        
         df_date = pd.DataFrame([
             {
                 'Date': row['keys'][0],
@@ -269,25 +212,17 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
                 'Position': row['position']
             } for row in data
         ])
-            
-        # Atualizar a barra de progresso para 100% para mostrar que o processamento de dados está completo
         my_bar.progress(1.0, text="Processing is now finished. 😸")
-
-        # Aguardar por uma curta duração para exibir a mensagem "Processamento de Dados Completo"
         time.sleep(2)
-
-        # Limpar a barra de progresso para removê-la da interface do aplicativo
         my_bar.empty()
-            
         return df_date
 
+
+
 @st.cache_data(experimental_allow_widgets=True, show_spinner=False)
-def criar_grafico_echarts(df_grouped):
-    # Formate a coluna 'CTR' do DataFrame
+def plot_echarts(df_grouped):
     df_grouped['CTR'] = df_grouped['CTR'].apply(lambda ctr: f"{ctr * 100:.2f}")
     df_grouped['Position'] = df_grouped['Position'].apply(lambda pos: round(pos, 2))
-
-    # Translated ECharts options
     options = {
         "xAxis": {
             "type": "category",
@@ -362,13 +297,12 @@ def criar_grafico_echarts(df_grouped):
         "color": ["#8be9fd", "#ffb86c", "#50fa7b", "#ff79c6"],
     }
 
-    # Exibir o gráfico de linha do ECharts usando st_echarts
     st_echarts(option=options, theme='chalk', height=400, width='100%')
     
 
 
 
-def createPage(project_url_clean):
+def get_data_save_to_bq(project_url_clean):
     dates_in_table = uc.run_query_10_s(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) - 2 AS days_last_update, DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY) AS min_date_first_query, DATE_ADD(MAX(date), INTERVAL 1 DAY) AS min_date_next_query, DATE_SUB(CURRENT_DATE(), INTERVAL 2 DAY) AS max_date_next_query FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks`;")
     days_last_update = dates_in_table[0].get("days_last_update")
     min_date_first_query = dates_in_table[0].get("min_date_first_query")
@@ -440,7 +374,7 @@ def createPage(project_url_clean):
             st.info("Updating, please wait", icon = "☺️")
             time.sleep(5)
             st.rerun()
-            
+
     # df_grouped = df_date.groupby('Date').agg({
     #         'Clicks': 'sum',
     #         'Impressions': 'sum',
@@ -461,7 +395,7 @@ def createPage(project_url_clean):
     # with met4:
     #     st.metric('Position:', f'{pos_mean:.1f}')
     # with st.container():
-    #     criar_grafico_echarts(df_grouped)
+    #     plot_echarts(df_grouped)
 
 
     # # pages
