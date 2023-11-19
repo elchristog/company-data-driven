@@ -1,13 +1,9 @@
 import streamlit as st
 import pandas as pd
-import datetime
-from google.cloud import bigquery
 from datetime import date
 from dateutil.relativedelta import relativedelta
-from io import BytesIO
 import time
 from googleapiclient import discovery
-from pyexcelerate import Workbook
 from google_auth_oauthlib.flow import Flow
 # import functions as fc
 from streamlit_raw_echarts import st_echarts
@@ -369,7 +365,6 @@ def criar_grafico_echarts(df_grouped):
     # Exibir o gráfico de linha do ECharts usando st_echarts
     st_echarts(option=options, theme='chalk', height=400, width='100%')
     
-
 
 
 
