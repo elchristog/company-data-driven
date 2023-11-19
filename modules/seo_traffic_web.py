@@ -414,7 +414,7 @@ def get_data_save_to_bq(role_id, project_name, project_url_clean):
 
 def show_web_metrics(project_name):
     st.write("### 	:earth_americas: Web traffic")
-    df = pd.DataFrame(uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks` ORDER BY date ASC;"))
+    df = pd.DataFrame(uc.run_query_3_h(f"SELECT * FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks` ORDER BY date ASC;"))
     if df.shape[0] < 1:
         st.warning("Waiting for data")
     else:
