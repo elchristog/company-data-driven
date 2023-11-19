@@ -463,12 +463,11 @@ def createPage(project_url_clean):
     max_date_next_query = dates_in_table[0].get("max_date_next_query")
 
 
-    df_date = get_data_date(property_url, min_date_next_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
+    if days_last_update is None or days_last_update > 0:
+        df_date = get_data_date(property_url, min_date_next_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
             url_filter=url_filter, url_operator=url_operator,
             palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-    st.table(df_date)
-
-    if days_last_update is None or days_last_update > 0:
+        st.table(df_date)
         for index, row in df_date.iterrows():
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
 
