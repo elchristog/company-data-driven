@@ -223,6 +223,7 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
 def plot_echarts(df_grouped):
     df_grouped['ctr'] = df_grouped['ctr'].apply(lambda ctr: f"{ctr * 100:.2f}")
     df_grouped['position'] = df_grouped['position'].apply(lambda pos: round(pos, 2))
+    st.table(df_grouped)
     options = {
         "xAxis": {
             "type": "category",
@@ -275,18 +276,18 @@ def plot_echarts(df_grouped):
                 "lineStyle": {"width": 2.4, "color": "#50fa7b"},
                 "showSymbol": False,  # Remova os marcadores de dados para esta série
             },
-{
-    "type": "line",
-    "name": "position",
-    "data": df_grouped['position'].tolist(),
-    "smooth": True,
-    "lineStyle": {"width": 2.4, "color": "#ff79c6"},
-    "showSymbol": False,  # Remova os marcadores de dados para esta série
-    "yAxisIndex": 1,  # Indica que esta série usará o segundo eixo Y
-    "axisLabel": {
-        "show": False  # Oculta os rótulos do eixo Y para esta série
-    }
-},
+            {
+                "type": "line",
+                "name": "position",
+                "data": df_grouped['position'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#ff79c6"},
+                "showSymbol": False,  # Remova os marcadores de dados para esta série
+                "yAxisIndex": 1,  # Indica que esta série usará o segundo eixo Y
+                "axisLabel": {
+                    "show": False  # Oculta os rótulos do eixo Y para esta série
+                }
+            },
         ],
 
         "yAxis": [
