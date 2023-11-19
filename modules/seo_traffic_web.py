@@ -6,7 +6,7 @@ from datetime import date
 from dateutil.relativedelta import relativedelta
 from googleapiclient import discovery
 from google_auth_oauthlib.flow import Flow
-from streamlit_raw_echarts import st_echarts
+from streamlit_raw_echarts import st_echarts, JsCode
 
 import utils.user_credentials as uc
 
@@ -223,7 +223,8 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
 def plot_echarts(df_grouped):
     df_grouped['ctr'] = df_grouped['ctr'].apply(lambda ctr: f"{ctr * 100:.2f}")
     df_grouped['position'] = df_grouped['position'].apply(lambda pos: round(pos, 2))
-    st.table(df_grouped)
+    df_grouped['date'] = df_grouped['date'].astype(str)  # Convert 'date' to string
+
     options = {
         "xAxis": {
             "type": "category",
