@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import time
+import datetime
+
 
 from datetime import date
 from dateutil.relativedelta import relativedelta
@@ -365,25 +367,29 @@ def get_data_save_to_bq(role_id, project_name, project_url_clean):
                 palavra_operator = None   
                 
                 if days_last_update is None:
-                    df_clicks = get_data_date(property_url, min_date_first_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
-                        url_filter=url_filter, url_operator=url_operator,
-                        palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-                    df_pages = get_data(property_url, ['page'], min_date_first_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
-                        url_filter=url_filter, url_operator=url_operator,
-                        palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+                    starting_date_to_pages = min_date_first_query.strftime("%Y-%m-%d")
+                    ending_date_to_pages = max_date_next_query.strftime("%Y-%m-%d")
                 elif days_last_update > 0:
-                    df_clicks = get_data_date(property_url, min_date_next_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
+                    starting_date_to_pages = min_date_next_query.strftime("%Y-%m-%d")
+                    ending_date_to_pages = max_date_next_query.strftime("%Y-%m-%d")
+
+                df_clicks = get_data_date(property_url, starting_date_to_pages, ending_date_to_pages,
                         url_filter=url_filter, url_operator=url_operator,
                         palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-                    df_pages = get_data(property_url, ['page'], min_date_next_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
+                df_pages = get_data(property_url, ['page'], starting_date_to_pages, ending_date_to_pages,
                         url_filter=url_filter, url_operator=url_operator,
                         palavra_filter=palavra_filter, palavra_operator=palavra_operator)
                 st.table(df_clicks)
                 st.table(df_pages)
+                # today = datetime.date.today()
+                # today_str = today.strftime("%Y-%m-%d")
                 # for index, row in df_clicks.iterrows():
                 #     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
+                # for index, row in df_pages.iterrows():
+                #     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_web_pages` (id, ctreation_date, start_query_date, end_query_date, page, clicks, impressions, ctr, position) VALUES (GENERATE_UUID(), '{today_str}', '{starting_date_to_pages}', '{ending_date_to_pages}', '{row['Page']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
+
                 # st.info("Updating, please wait", icon = "☺️")
-                # time.sleep(5)
+                # time.sleep(10)
                 # st.rerun()
 
     # # pages
@@ -410,24 +416,27 @@ def get_data_save_to_bq(role_id, project_name, project_url_clean):
 def show_web_metrics(project_name):
     st.write("### 	:earth_americas: Web traffic")
     df = pd.DataFrame(uc.run_query_3_h(f"SELECT * FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks` ORDER BY date ASC;"))
-    df_grouped = df.groupby('date').agg({
-            'clicks': 'sum',
-            'impressions': 'sum',
-            'ctr': 'mean',
-            'position': 'mean'
-        }).reset_index()
-    Clicks = df['clicks'].sum()
-    Impressions = df['impressions'].sum()
-    ctr_mean = df['ctr'].mean()
-    pos_mean = df['position'].mean()
-    met1, met2, met3, met4 = st.columns(4)
-    with met1:
-        st.metric('Clicks:', f'{Clicks:,}')
-    with met2:
-        st.metric('Impressions:', f'{Impressions:,}')
-    with met3:
-        st.metric('CTR:', f'{ctr_mean * 100:.2f}%')
-    with met4:
-        st.metric('Position:', f'{pos_mean:.1f}')
-    with st.container():
-        plot_echarts(df_grouped)
+    if df.shape[0] < 1:
+        st.warning("Waiting for data")
+    else:
+        df_grouped = df.groupby('date').agg({
+                'clicks': 'sum',
+                'impressions': 'sum',
+                'ctr': 'mean',
+                'position': 'mean'
+            }).reset_index()
+        Clicks = df['clicks'].sum()
+        Impressions = df['impressions'].sum()
+        ctr_mean = df['ctr'].mean()
+        pos_mean = df['position'].mean()
+        met1, met2, met3, met4 = st.columns(4)
+        with met1:
+            st.metric('Clicks:', f'{Clicks:,}')
+        with met2:
+            st.metric('Impressions:', f'{Impressions:,}')
+        with met3:
+            st.metric('CTR:', f'{ctr_mean * 100:.2f}%')
+        with met4:
+            st.metric('Position:', f'{pos_mean:.1f}')
+        with st.container():
+            plot_echarts(df_grouped)
