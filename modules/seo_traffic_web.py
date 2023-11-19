@@ -420,6 +420,7 @@ def show_web_metrics(project_name):
     else:
         day = st.date_input(
             "Time Range:",
+            (min_max_dates_range[0].get("min_date"), min_max_dates_range[0].get("max_date")),
             min_value=min_max_dates_range[0].get("min_date"),
             max_value=min_max_dates_range[0].get("max_date"),
             format="DD/MM/YYYY",
