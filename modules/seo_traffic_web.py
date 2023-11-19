@@ -415,16 +415,14 @@ def get_data_save_to_bq(role_id, project_name, project_url_clean):
 def show_web_metrics(project_name):
     st.write("### 	:earth_americas: Web traffic")
     min_max_dates_range = uc.run_query_1_h(f"SELECT MIN(date) AS min_date, MAX(date) as max_date FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
-    st.write(min_max_dates_range)
-    st.write(len(min_max_dates_range))
     if len(min_max_dates_range) < 1:
         st.warning("Waiting for data")
     else:
         day = st.date_input(
             "Time Range:",
             (data_padrao, data_final),
-            min_value=min_max_dates_range[0].get("min_date").strftime("%Y-%m-%d"),
-            max_value=min_max_dates_range[0].get("max_date").strftime("%Y-%m-%d"),
+            min_value=min_max_dates_range[0].get("min_date"),
+            max_value=min_max_dates_range[0].get("max_date"),
             format="DD/MM/YYYY",
             help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format'
         )
