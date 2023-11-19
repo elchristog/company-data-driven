@@ -471,44 +471,44 @@ def createPage(project_url_clean):
         for index, row in df_date.iterrows():
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
 
-    df_grouped = df_date.groupby('Date').agg({
-            'Clicks': 'sum',
-            'Impressions': 'sum',
-            'CTR': 'mean',
-            'Position': 'mean'
-        }).reset_index()
-    Clicks = df_date['Clicks'].sum()
-    Impressions = df_date['Impressions'].sum()
-    ctr_mean = df_date['CTR'].mean()
-    pos_mean = df_date['Position'].mean()
-    met1, met2, met3, met4 = st.columns(4)
-    with met1:
-        st.metric('Clicks:', f'{Clicks:,}')
-    with met2:
-        st.metric('Impressions:', f'{Impressions:,}')
-    with met3:
-        st.metric('CTR:', f'{ctr_mean * 100:.2f}%')
-    with met4:
-        st.metric('Position:', f'{pos_mean:.1f}')
-    with st.container():
-        criar_grafico_echarts(df_grouped)
+    # df_grouped = df_date.groupby('Date').agg({
+    #         'Clicks': 'sum',
+    #         'Impressions': 'sum',
+    #         'CTR': 'mean',
+    #         'Position': 'mean'
+    #     }).reset_index()
+    # Clicks = df_date['Clicks'].sum()
+    # Impressions = df_date['Impressions'].sum()
+    # ctr_mean = df_date['CTR'].mean()
+    # pos_mean = df_date['Position'].mean()
+    # met1, met2, met3, met4 = st.columns(4)
+    # with met1:
+    #     st.metric('Clicks:', f'{Clicks:,}')
+    # with met2:
+    #     st.metric('Impressions:', f'{Impressions:,}')
+    # with met3:
+    #     st.metric('CTR:', f'{ctr_mean * 100:.2f}%')
+    # with met4:
+    #     st.metric('Position:', f'{pos_mean:.1f}')
+    # with st.container():
+    #     criar_grafico_echarts(df_grouped)
 
 
-    # pages
-    df = get_data(property_url, ['page'], day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
-    url_filter=url_filter, url_operator=url_operator,
-    palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-    st.table(df)          
-    # keywords
-    df = get_data(property_url, ['query'], day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
-    url_filter=url_filter, url_operator=url_operator,
-    palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-    st.table(df)
-    # keywords per page
-    df = get_data(property_url, ['page', 'query'], day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
-    url_filter=url_filter, url_operator=url_operator,
-    palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-    st.table(df)
+    # # pages
+    # df = get_data(property_url, ['page'], day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
+    # url_filter=url_filter, url_operator=url_operator,
+    # palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+    # st.table(df)          
+    # # keywords
+    # df = get_data(property_url, ['query'], day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
+    # url_filter=url_filter, url_operator=url_operator,
+    # palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+    # st.table(df)
+    # # keywords per page
+    # df = get_data(property_url, ['page', 'query'], day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
+    # url_filter=url_filter, url_operator=url_operator,
+    # palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+    # st.table(df)
 
 
     return True
