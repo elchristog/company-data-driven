@@ -72,7 +72,7 @@ def get_webproperty(token):
 
     return service
 
-@st.cache_data(show_spinner=False)
+# @st.cache_data(show_spinner=False)
 # Definir a função para consultar e processar dados
 def get_data(property_url, dimensions, startDate, endDate, url_filter=None, url_operator=None,
             palavra_filter=None, palavra_operator=None):
@@ -196,7 +196,7 @@ def get_data(property_url, dimensions, startDate, endDate, url_filter=None, url_
         
     return df
 
-@st.cache_data(show_spinner=False)
+# @st.cache_data(show_spinner=False)
 def get_data_date(property_url, startDate, endDate, url_filter=None, url_operator=None,
                 palavra_filter=None, palavra_operator=None):
         service = get_webproperty(st.session_state.my_token_input)
@@ -469,7 +469,7 @@ def createPage(project_url_clean):
             df_date = get_data_date(property_url, min_date_first_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
                 url_filter=url_filter, url_operator=url_operator,
                 palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-        if days_last_update > 0:
+        elif days_last_update > 0:
             df_date = get_data_date(property_url, min_date_next_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
                 url_filter=url_filter, url_operator=url_operator,
                 palavra_filter=palavra_filter, palavra_operator=palavra_operator)
