@@ -258,7 +258,7 @@ def plot_echarts(df_grouped):
                 "name": "clicks",
                 "data": df_grouped['clicks'].tolist(),
                 "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#8be9fd"},
+                "lineStyle": {"width": 2.4, "color": "#A6785D"},
                 "showSymbol": False,  # Remova os marcadores de dados para esta série
             },
             {
@@ -266,7 +266,7 @@ def plot_echarts(df_grouped):
                 "name": "impressions",
                 "data": df_grouped['impressions'].tolist(),
                 "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#ffb86c"},
+                "lineStyle": {"width": 2.4, "color": "#394A59"},
                 "showSymbol": False,  # Remova os marcadores de dados para esta série
             },
             {
@@ -274,7 +274,7 @@ def plot_echarts(df_grouped):
                 "name": "ctr",
                 "data": df_grouped['ctr'].tolist(),
                 "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#50fa7b"},
+                "lineStyle": {"width": 2.4, "color": "#BF3F34"},
                 "showSymbol": False,  # Remova os marcadores de dados para esta série
             },
             {
@@ -282,7 +282,7 @@ def plot_echarts(df_grouped):
                 "name": "position",
                 "data": df_grouped['position'].tolist(),
                 "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#ff79c6"},
+                "lineStyle": {"width": 2.4, "color": "#4F6573"},
                 "showSymbol": False,  # Remova os marcadores de dados para esta série
                 "yAxisIndex": 1,  # Indica que esta série usará o segundo eixo Y
                 "axisLabel": {
@@ -296,7 +296,7 @@ def plot_echarts(df_grouped):
             {"type": "value", "inverse": True, "show": False},  # Segundo eixo Y com a opção "inverse"
         ],
         "backgroundColor": "#ffffff",
-        "color": ["#8be9fd", "#ffb86c", "#50fa7b", "#ff79c6"],
+        "color": ["#A6785D", "#394A59", "#BF3F34", "#4F6573"],
     }
 
     st_echarts(option=options, theme='chalk', height=400, width='100%')
