@@ -467,7 +467,7 @@ def createPage(project_url_clean):
     days_last_update = uc.run_query_10_s(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) - 2 AS days_last_update FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks`;")[0].get("days_last_update")
     if days_last_update is None or days_last_update > 0:
         for index, row in df_date.iterrows():
-            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) SELECT '{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']} WHERE '{row['Date']}' NOT IN (SELECT date FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks`);")
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
 
     df_grouped = df_date.groupby('Date').agg({
             'Clicks': 'sum',
