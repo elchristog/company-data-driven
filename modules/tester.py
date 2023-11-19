@@ -18,7 +18,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
         questions = uc.run_query_6_h(f"SELECT * FROM `company-data-driven.{project_name}.{questions_sample_table_name}`;")
         tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs(["Q 1", "Q 2", "Q 3", "Q 4", "Q 5", "Q 6", "Q 7", "Q 8", "Q 9", "Q 10"])
         with tab1:
-            st.header(questions[0].get("question"))
+            st.write("#### " + questions[0].get("question"))
             st.write("🔹 **A)** " + questions[0].get("option_a"))
             st.write("🔹 **B)** " + questions[0].get("option_b"))
             st.write("🔹 **C)** " + questions[0].get("option_c"))
@@ -32,7 +32,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             if selected_answer_q1 is not None:
                 selected_answer_q1_lower = selected_answer_q1.lower()
         with tab2:
-            st.header(questions[1].get("question"))
+            st.write("#### " + questions[1].get("question"))
             st.write("🔹 **A)** " + questions[1].get("option_a"))
             st.write("🔹 **B)** " + questions[1].get("option_b"))
             st.write("🔹 **C)** " + questions[1].get("option_c"))
@@ -46,7 +46,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             if selected_answer_q2 is not None:
                 selected_answer_q2_lower = selected_answer_q2.lower()
         with tab3:
-            st.header(questions[2].get("question"))
+            st.write("#### " + questions[2].get("question"))
             st.write("🔹 **A)** " + questions[2].get("option_a"))
             st.write("🔹 **B)** " + questions[2].get("option_b"))
             st.write("🔹 **C)** " + questions[2].get("option_c"))
@@ -60,7 +60,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             if selected_answer_q3 is not None:
                 selected_answer_q3_lower = selected_answer_q3.lower()
         with tab4:
-            st.header(questions[3].get("question"))
+            st.write("#### " + questions[3].get("question"))
             st.write("🔹 **A)** " + questions[3].get("option_a"))
             st.write("🔹 **B)** " + questions[3].get("option_b"))
             st.write("🔹 **C)** " + questions[3].get("option_c"))
@@ -74,7 +74,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             if selected_answer_q4 is not None:
                 selected_answer_q4_lower = selected_answer_q4.lower()
         with tab5:
-            st.header(questions[4].get("question"))
+            st.write("#### " + questions[4].get("question"))
             st.write("🔹 **A)** " + questions[4].get("option_a"))
             st.write("🔹 **B)** " + questions[4].get("option_b"))
             st.write("🔹 **C)** " + questions[4].get("option_c"))
@@ -88,7 +88,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             if selected_answer_q5 is not None:
                 selected_answer_q5_lower = selected_answer_q5.lower()
         with tab6:
-            st.header(questions[5].get("question"))
+            st.write("#### " + questions[5].get("question"))
             st.write("🔹 **A)** " + questions[5].get("option_a"))
             st.write("🔹 **B)** " + questions[5].get("option_b"))
             st.write("🔹 **C)** " + questions[5].get("option_c"))
@@ -102,7 +102,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             if selected_answer_q6 is not None:
                 selected_answer_q6_lower = selected_answer_q6.lower()
         with tab7:
-            st.header(questions[6].get("question"))
+            st.write("#### " + questions[6].get("question"))
             st.write("🔹 **A)** " + questions[6].get("option_a"))
             st.write("🔹 **B)** " + questions[6].get("option_b"))
             st.write("🔹 **C)** " + questions[6].get("option_c"))
@@ -116,7 +116,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             if selected_answer_q7 is not None:
                 selected_answer_q7_lower = selected_answer_q7.lower()
         with tab8:
-            st.header(questions[7].get("question"))
+            st.write("#### " + questions[7].get("question"))
             st.write("🔹 **A)** " + questions[7].get("option_a"))
             st.write("🔹 **B)** " + questions[7].get("option_b"))
             st.write("🔹 **C)** " + questions[7].get("option_c"))
@@ -130,7 +130,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             if selected_answer_q8 is not None:
                 selected_answer_q8_lower = selected_answer_q8.lower()
         with tab9:
-            st.header(questions[8].get("question"))
+            st.write("#### " + questions[8].get("question"))
             st.write("🔹 **A)** " + questions[8].get("option_a"))
             st.write("🔹 **B)** " + questions[8].get("option_b"))
             st.write("🔹 **C)** " + questions[8].get("option_c"))
@@ -144,7 +144,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             if selected_answer_q9 is not None:
                 selected_answer_q9_lower = selected_answer_q9.lower()
         with tab10:
-            st.header(questions[9].get("question"))
+            st.write("#### " + questions[9].get("question"))
             st.write("🔹 **A)** " + questions[9].get("option_a"))
             st.write("🔹 **B)** " + questions[9].get("option_b"))
             st.write("🔹 **C)** " + questions[9].get("option_c"))
@@ -192,7 +192,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
         questions = uc.run_query_6_h(f"SELECT * FROM `company-data-driven.{project_name}.{questions_sample_table_name}`;")
         tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs(["Q 1", "Q 2", "Q 3", "Q 4", "Q 5", "Q 6", "Q 7", "Q 8", "Q 9", "Q 10"])
         with tab1:
-            st.header(questions[0].get("question"))
+            st.write("#### " + questions[0].get("question"))
             st.write("🔹 **A)** " + questions[0].get("option_a"))
             st.write("🔹 **B)** " + questions[0].get("option_b"))
             st.write("🔹 **C)** " + questions[0].get("option_c"))
@@ -203,7 +203,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 st.error("You chose: " + str(today_results[0].get("q1_selected")).upper() + ", but right answer was " + str(questions[0].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[0].get("explanation"), icon = "⏭️")
         with tab2:
-            st.header(questions[1].get("question"))
+            st.write("#### " + questions[1].get("question"))
             st.write("🔹 **A)** " + questions[1].get("option_a"))
             st.write("🔹 **B)** " + questions[1].get("option_b"))
             st.write("🔹 **C)** " + questions[1].get("option_c"))
@@ -214,7 +214,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 st.error("You chose: " + str(today_results[0].get("q2_selected")).upper() + ", but right answer was " + str(questions[1].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[1].get("explanation"), icon = "⏭️")
         with tab3:
-            st.header(questions[2].get("question"))
+            st.write("#### " + questions[2].get("question"))
             st.write("🔹 **A)** " + questions[2].get("option_a"))
             st.write("🔹 **B)** " + questions[2].get("option_b"))
             st.write("🔹 **C)** " + questions[2].get("option_c"))
@@ -225,7 +225,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 st.error("You chose: " + str(today_results[0].get("q3_selected")).upper() + ", but right answer was " + str(questions[2].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[2].get("explanation"), icon = "⏭️")
         with tab4:
-            st.header(questions[3].get("question"))
+            st.write("#### " + questions[3].get("question"))
             st.write("🔹 **A)** " + questions[3].get("option_a"))
             st.write("🔹 **B)** " + questions[3].get("option_b"))
             st.write("🔹 **C)** " + questions[3].get("option_c"))
@@ -236,7 +236,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 st.error("You chose: " + str(today_results[0].get("q4_selected")).upper() + ", but right answer was " + str(questions[3].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[3].get("explanation"), icon = "⏭️")
         with tab5:
-            st.header(questions[4].get("question"))
+            st.write("#### " + questions[4].get("question"))
             st.write("🔹 **A)** " + questions[4].get("option_a"))
             st.write("🔹 **B)** " + questions[4].get("option_b"))
             st.write("🔹 **C)** " + questions[4].get("option_c"))
@@ -247,7 +247,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 st.error("You chose: " + str(today_results[0].get("q5_selected")).upper() + ", but right answer was " + str(questions[4].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[4].get("explanation"), icon = "⏭️")
         with tab6:
-            st.header(questions[5].get("question"))
+            st.write("#### " + questions[5].get("question"))
             st.write("🔹 **A)** " + questions[5].get("option_a"))
             st.write("🔹 **B)** " + questions[5].get("option_b"))
             st.write("🔹 **C)** " + questions[5].get("option_c"))
@@ -258,7 +258,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 st.error("You chose: " + str(today_results[0].get("q6_selected")).upper() + ", but right answer was " + str(questions[5].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[5].get("explanation"), icon = "⏭️")
         with tab7:
-            st.header(questions[6].get("question"))
+            st.write("#### " + questions[6].get("question"))
             st.write("🔹 **A)** " + questions[6].get("option_a"))
             st.write("🔹 **B)** " + questions[6].get("option_b"))
             st.write("🔹 **C)** " + questions[6].get("option_c"))
@@ -269,7 +269,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 st.error("You chose: " + str(today_results[0].get("q7_selected")).upper() + ", but right answer was " + str(questions[6].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[6].get("explanation"), icon = "⏭️")
         with tab8:
-            st.header(questions[7].get("question"))
+            st.write("#### " + questions[7].get("question"))
             st.write("🔹 **A)** " + questions[7].get("option_a"))
             st.write("🔹 **B)** " + questions[7].get("option_b"))
             st.write("🔹 **C)** " + questions[7].get("option_c"))
@@ -280,7 +280,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 st.error("You chose: " + str(today_results[0].get("q8_selected")).upper() + ", but right answer was " + str(questions[7].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[7].get("explanation"), icon = "⏭️")
         with tab9:
-            st.header(questions[8].get("question"))
+            st.write("#### " + questions[8].get("question"))
             st.write("🔹 **A)** " + questions[8].get("option_a"))
             st.write("🔹 **B)** " + questions[8].get("option_b"))
             st.write("🔹 **C)** " + questions[8].get("option_c"))
@@ -291,7 +291,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 st.error("You chose: " + str(today_results[0].get("q9_selected")).upper() + ", but right answer was " + str(questions[8].get("correct_option")).upper(), icon = "😵‍💫")
             st.info(questions[8].get("explanation"), icon = "⏭️")
         with tab10:
-            st.header(questions[9].get("question"))
+            st.write("#### " + questions[9].get("question"))
             st.write("🔹 **A)** " + questions[9].get("option_a"))
             st.write("🔹 **B)** " + questions[9].get("option_b"))
             st.write("🔹 **C)** " + questions[9].get("option_c"))
