@@ -376,29 +376,6 @@ def get_data_save_to_bq(role_id, project_url_clean):
                 time.sleep(5)
                 st.rerun()
 
-    # df_grouped = df_date.groupby('Date').agg({
-    #         'Clicks': 'sum',
-    #         'Impressions': 'sum',
-    #         'CTR': 'mean',
-    #         'Position': 'mean'
-    #     }).reset_index()
-    # Clicks = df_date['Clicks'].sum()
-    # Impressions = df_date['Impressions'].sum()
-    # ctr_mean = df_date['CTR'].mean()
-    # pos_mean = df_date['Position'].mean()
-    # met1, met2, met3, met4 = st.columns(4)
-    # with met1:
-    #     st.metric('Clicks:', f'{Clicks:,}')
-    # with met2:
-    #     st.metric('Impressions:', f'{Impressions:,}')
-    # with met3:
-    #     st.metric('CTR:', f'{ctr_mean * 100:.2f}%')
-    # with met4:
-    #     st.metric('Position:', f'{pos_mean:.1f}')
-    # with st.container():
-    #     plot_echarts(df_grouped)
-
-
     # # pages
     # df = get_data(property_url, ['page'], day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
     # url_filter=url_filter, url_operator=url_operator,
@@ -416,3 +393,30 @@ def get_data_save_to_bq(role_id, project_url_clean):
     # st.table(df)
 
     return True
+
+
+
+
+def show_web_metrics():
+    df = pd.DataFrame(uc.run_query_3_h(f"SELECT * FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks` ORDER BY date ASC;"))
+    df_grouped = df.groupby('Date').agg({
+            'Clicks': 'sum',
+            'Impressions': 'sum',
+            'CTR': 'mean',
+            'Position': 'mean'
+        }).reset_index()
+    Clicks = df['Clicks'].sum()
+    Impressions = df['Impressions'].sum()
+    ctr_mean = df['CTR'].mean()
+    pos_mean = df['Position'].mean()
+    met1, met2, met3, met4 = st.columns(4)
+    with met1:
+        st.metric('Clicks:', f'{Clicks:,}')
+    with met2:
+        st.metric('Impressions:', f'{Impressions:,}')
+    with met3:
+        st.metric('CTR:', f'{ctr_mean * 100:.2f}%')
+    with met4:
+        st.metric('Position:', f'{pos_mean:.1f}')
+    with st.container():
+        plot_echarts(df_grouped)
