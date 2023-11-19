@@ -439,6 +439,6 @@ def show_web_metrics(project_name):
             st.metric('Position:', f'{pos_mean:.1f}')
         with st.container():
             plot_echarts(df_grouped)
-        st.write(f"Visits per page")
+        st.write(f"#### Visits per page")
         pages_visits = uc.run_query_1_h(f"SELECT page, clicks, impressions, ctr, position FROM `company-data-driven.{project_name}.traffic_analytics_web_pages` WHERE creation_date = (SELECT MAX(creation_date) AS max_daye FROM `company-data-driven.{project_name}.traffic_analytics_web_pages`) ORDER BY ctr DESC;")
         st.table(pages_visits)
