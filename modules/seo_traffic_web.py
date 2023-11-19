@@ -204,7 +204,7 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
             progress_percent = min((startRow / row_limit) * 100, 100)
             progress_value = progress_percent / 100.0
             my_bar.progress(progress_value, text=progress_text)
-        df_date = pd.DataFrame([
+        df_clicks = pd.DataFrame([
             {
                 'Date': row['keys'][0],
                 'Clicks': row['clicks'],
@@ -216,7 +216,7 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
         my_bar.progress(1.0, text="Processing is now finished. 😸")
         time.sleep(2)
         my_bar.empty()
-        return df_date
+        return df_clicks
 
 
 
@@ -365,19 +365,26 @@ def get_data_save_to_bq(role_id, project_name, project_url_clean):
                 palavra_operator = None   
                 
                 if days_last_update is None:
-                    df_date = get_data_date(property_url, min_date_first_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
+                    df_clicks = get_data_date(property_url, min_date_first_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
+                        url_filter=url_filter, url_operator=url_operator,
+                        palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+                    df_pages = get_data(property_url, ['page'], min_date_first_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
                         url_filter=url_filter, url_operator=url_operator,
                         palavra_filter=palavra_filter, palavra_operator=palavra_operator)
                 elif days_last_update > 0:
-                    df_date = get_data_date(property_url, min_date_next_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
+                    df_clicks = get_data_date(property_url, min_date_next_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
                         url_filter=url_filter, url_operator=url_operator,
                         palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-                st.table(df_date)
-                for index, row in df_date.iterrows():
-                    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
-                st.info("Updating, please wait", icon = "☺️")
-                time.sleep(5)
-                st.rerun()
+                    df_pages = get_data(property_url, ['page'], min_date_next_query.strftime("%Y-%m-%d"), max_date_next_query.strftime("%Y-%m-%d"),
+                        url_filter=url_filter, url_operator=url_operator,
+                        palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+                st.table(df_clicks)
+                st.table(df_pages)
+                # for index, row in df_clicks.iterrows():
+                #     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
+                # st.info("Updating, please wait", icon = "☺️")
+                # time.sleep(5)
+                # st.rerun()
 
     # # pages
     # df = get_data(property_url, ['page'], day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
