@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import datetime
 from google.cloud import bigquery
 from datetime import date
 from dateutil.relativedelta import relativedelta
@@ -461,6 +462,10 @@ def createPage(project_url_clean):
             palavra_filter=palavra_filter, palavra_operator=palavra_operator)
     st.table(df_date)
 
+    today = datetime.date.today()
+    today_str = today.strftime("%Y-%m-%d")
+    days_last_update = uc.run_query_10_s(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) AS days_last_update FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks`;")[0].get("days_last_update")
+    st.write(days_last_update)
     for index, row in df_date.iterrows():
         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) SELECT '{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']} WHERE '{row['Date']}' NOT IN (SELECT date FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks`);")
 
