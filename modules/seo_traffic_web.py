@@ -295,7 +295,7 @@ def plot_echarts(df_grouped):
             {"type": "value", "name": ""},
             {"type": "value", "inverse": True, "show": False},  # Segundo eixo Y com a opção "inverse"
         ],
-        "backgroundColor": "#f5f5f7",
+        "backgroundColor": "#ffffff",
         "color": ["#8be9fd", "#ffb86c", "#50fa7b", "#ff79c6"],
     }
 
