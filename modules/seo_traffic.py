@@ -424,37 +424,10 @@ def createPage(project_url_clean):
     
     st.session_state.domain = property_url
 
-    # Seleciona as métricas desejadas
-    # metricas = st.selectbox(
-    #     'Metrics:',
-    #     ("Keywords", "Pages", "Pages per Keyword", "Keywords per Page"), help='Specify the metric you are interested in filtering for.'
-    # )
-
-    # # Define as dimensões de acordo com as métricas selecionadas
-    # if metricas == "Keywords per Page":
-    #     dimensions = ['page', 'query']
-    # elif metricas == "Pages per Keyword":
-    #     dimensions = ['query', 'page']
-    # elif metricas == "Keywords":
-    #     dimensions = ['query']
-    # elif metricas == "Pages":
-    #     dimensions = ['page']
-        
-    # Define valores padrão para as variáveis de filtro
     url_filter = None
     url_operator = None
     palavra_filter = None
     palavra_operator = None    
-    
-    # Seleciona o período de data desejado
-    # day = st.date_input(
-    #     "Time Range:",
-    #     (data_padrao, data_final),
-    #     min_value=data_inicial,
-    #     max_value=data_final,
-    #     format="DD/MM/YYYY",
-    #     help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format'
-    # )
             
     # clicks
     dates_in_table = uc.run_query_10_s(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) - 2 AS days_last_update, DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY) AS min_date_first_query, DATE_ADD(MAX(date), INTERVAL 1 DAY) AS min_date_next_query, DATE_SUB(CURRENT_DATE(), INTERVAL 2 DAY) AS max_date_next_query FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks`;")
@@ -462,7 +435,6 @@ def createPage(project_url_clean):
     min_date_first_query = dates_in_table[0].get("min_date_first_query")
     min_date_next_query = dates_in_table[0].get("min_date_next_query")
     max_date_next_query = dates_in_table[0].get("max_date_next_query")
-
 
     if days_last_update is None or days_last_update > 0:
         if days_last_update is None:
