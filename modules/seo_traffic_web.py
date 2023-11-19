@@ -399,11 +399,11 @@ def get_data_save_to_bq(role_id, project_url_clean):
 
 def show_web_metrics():
     df = pd.DataFrame(uc.run_query_3_h(f"SELECT * FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_clicks` ORDER BY date ASC;"))
-    df_grouped = df.groupby('Date').agg({
-            'Clicks': 'sum',
-            'Impressions': 'sum',
-            'CTR': 'mean',
-            'Position': 'mean'
+    df_grouped = df.groupby('date').agg({
+            'clicks': 'sum',
+            'impressions': 'sum',
+            'ctr': 'mean',
+            'position': 'mean'
         }).reset_index()
     Clicks = df['Clicks'].sum()
     Impressions = df['Impressions'].sum()
