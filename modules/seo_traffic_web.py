@@ -414,6 +414,15 @@ def get_data_save_to_bq(role_id, project_name, project_url_clean):
 
 def show_web_metrics(project_name):
     st.write("### 	:earth_americas: Web traffic")
+    day = st.date_input(
+            "Time Range:",
+            (data_padrao, data_final),
+            min_value=data_inicial,
+            max_value=data_final,
+            format="DD/MM/YYYY",
+            help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format'
+        )
+    # day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d")
     df = pd.DataFrame(uc.run_query_1_h(f"SELECT * FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks` ORDER BY date ASC;"))
     if df.shape[0] < 1:
         st.warning("Waiting for data")
