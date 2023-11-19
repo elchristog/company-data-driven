@@ -11,6 +11,7 @@ from streamlit_raw_echarts import st_echarts, JsCode
 import utils.user_credentials as uc
 
 # https://github.com/ViniciusStanula/Search-Console-API/tree/main
+# https://streamlit-emoji-shortcodes-streamlit-app-gwckff.streamlit.app/
 
 date = date.today()
 data_final = date - relativedelta(days=2)
