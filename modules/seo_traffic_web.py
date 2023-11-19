@@ -282,7 +282,7 @@ def plot_echarts(df_grouped):
                 "name": "position",
                 "data": df_grouped['position'].tolist(),
                 "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#4F6573"},
+                "lineStyle": {"width": 2.4, "color": "#BFB5B4"},
                 "showSymbol": False,  # Remova os marcadores de dados para esta série
                 "yAxisIndex": 1,  # Indica que esta série usará o segundo eixo Y
                 "axisLabel": {
@@ -296,7 +296,7 @@ def plot_echarts(df_grouped):
             {"type": "value", "inverse": True, "show": False},  # Segundo eixo Y com a opção "inverse"
         ],
         "backgroundColor": "#ffffff",
-        "color": ["#A6785D", "#394A59", "#BF3F34", "#4F6573"],
+        "color": ["#A6785D", "#394A59", "#BF3F34", "#BFB5B4"],
     }
 
     st_echarts(option=options, theme='chalk', height=400, width='100%')
