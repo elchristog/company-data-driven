@@ -73,11 +73,35 @@ def content_creation_guide_effective_communication_storytelling():
         )
 
         text_input_8 = st.text_area(
-            "por que de cada como",
+            "por que del primer como",
             label_visibility = 'visible',
             disabled = False,
-            placeholder = 'Sabes cual es la funcion de la miniatura? llamar la atencion, no es explicar de que trata el video y es ahi donde muchos fallan, si generas expectativa entonces van a dar click, porque la gente esta pasando cosas y solo para en lo que le llama la atebncion, si tu miniatura es igual al resto de miniaturas del mundo nadie te va a preferir',
-            help = 'ayudigna'
+            placeholder = 'Sabes cual es la funcion de la miniatura? llamar la atencion, no es explicar de que trata el video y es ahi donde muchos fallan, si generas expectativa entonces van a dar click, porque la gente esta pasando cosas y solo para en lo que le llama la atebncion, si tu miniatura es igual al resto de miniaturas del mundo nadie te va a preferir, ejemplo, mira lo que hace mr beast',
+            help = 'Fijate que aca habla de que hay que llamar la atencion pero no explica como se hacer para llamar la atencion, eso es lo que se vende marcos, caras, emojis, calor distinto al resto....'
+        )
+
+        text_input_9 = st.text_area(
+            "Ejemplo del primer como",
+            label_visibility = 'visible',
+            disabled = False,
+            placeholder = 'mira lo que hace mr beast, esta es su miniatura, la ha cambiado 3 veces',
+            help = 'Fijate que aca habla de que hay que llamar la atencion pero no explica como se hacer para llamar la atencion, eso es lo que se vende marcos, caras, emojis, calor distinto al resto....'
+        )
+
+        text_input_10 = st.text_area(
+            "por que del segundo como",
+            label_visibility = 'visible',
+            disabled = False,
+            placeholder = 'Y cual es la funcion del titulo? Describir de que va el video generando una respuesta emocional en el usuario, si describe de que va el video pero genera curiosidad',
+            help = 'Lo mismo, habla del que y no del como, si hay que mejorar el titulo pero el como es mayuscilas selectivas, diferenciarse del resto, emojis, palabra clave...'
+        )
+
+        text_input_11 = st.text_area(
+            "Ejemplo del segundo como",
+            label_visibility = 'visible',
+            disabled = False,
+            placeholder = 'Mira lo que usa mr beast, explamaciones, mayusculas....',
+            help = 'Lo mismo, habla del que y no del como, si hay que mejorar el titulo pero el como es mayuscilas selectivas, diferenciarse del resto, emojis, palabra clave...'
         )
 
 
