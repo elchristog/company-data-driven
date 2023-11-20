@@ -118,7 +118,7 @@ def tips_tasks_ia(tasks, divider):
             st.success('Tips to prioritize your tasks using the Eisenhower method:', icon="🤖")            
             input_prompt = f"Help me to priorize my tasks using the Eisenhower Matrix methodology, find yourself the urgency and importance and give me just the results, solve it and give me the tasks priorized with tips, be specific, return just the list of the task prioritized and one tip of each one, use less than 200 tokens: “ {tasks} ”:"
             response = openai.ChatCompletion.create(
-            model = "gpt-4-1106-preview",
+            model = "gpt-3.5-turbo", # gpt-3.5-turbo, gpt-4-1106-preview
             messages = [
                     {"role": "system", "content": "You are an expert in project management and tasks priorization"},
                     {"role": "user", "content": input_prompt}
