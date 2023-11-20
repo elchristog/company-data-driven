@@ -10,9 +10,9 @@ def content_creation_guide_effective_communication_storytelling():
 
         text_input = st.text_input(
             "Enter some text 👇",
-            label_visibility=st.session_state.visibility,
-            disabled=st.session_state.disabled,
-            placeholder=st.session_state.placeholder,
+            label_visibility='visible',
+            disabled=False,
+            placeholder='Un plaveholder',
         )
 
         submitted = st.form_submit_button("Submit")
