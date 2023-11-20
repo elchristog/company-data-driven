@@ -10,7 +10,7 @@ google-cloud-bigquery
 google-auth 
 google-auth-httplib2 
 google-api-python-client
-openai 
+openai==0.28.1
 oauth2client
 pyexcelerate
 google_auth_oauthlib
