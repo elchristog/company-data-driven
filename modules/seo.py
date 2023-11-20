@@ -8,7 +8,7 @@ import utils.user_credentials as uc
 def content_creation_guide_effective_communication_storytelling():
     with st.form("comm_eff_storytelling_form", clear_on_submit = True):
 
-        text_input = st.text_input(
+        text_input = st.text_area(
             "Enter some text 👇",
             label_visibility = 'visible',
             disabled = False,
