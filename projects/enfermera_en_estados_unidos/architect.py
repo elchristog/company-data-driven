@@ -3,6 +3,7 @@ import streamlit as st
 import modules.title_and_paragraph as tap
 import modules.tasks as t
 import modules.seo_traffic_web as seotw
+import modules.seo as seo
 import utils.users_handling as uh
 import modules.tester as tst
 import modules.web_app_activity as wap
@@ -61,6 +62,9 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph("Trafico" + project_icon, "Seguimiento y mantenimiento de los usuarios", "h3", 0)
                 seotw.get_data_save_to_bq(role_id, project_name, project_url_clean)
                 seotw.show_web_metrics(project_name)
+            if sub_menu == "Content creation guide":
+                tap.title_and_paragraph("Creacion de contenido" + project_icon, "Seguimiento y mantenimiento de los usuarios", "h3", 0)
+                seo.content_creation_guide_effective_communication_storytelling()
 
         if menu == "Web App":
             sub_menu_options=["Customer view", 'Nclex test creation', 'Update customer progress']
