@@ -25,7 +25,7 @@ def content_creation_guide_effective_communication_storytelling():
         )
 
         text_input_3 = st.text_area(
-            "Demuestra que sirve",
+            "Demuestra que sirve, resuelve la intencion de busqueda",
             label_visibility = 'visible',
             disabled = False,
             placeholder = 'Pero antes que eso te voy a mostrar los ingresos que estoy teniendo, pues bien estoy ganando 5 mil dolares al mes mira',
