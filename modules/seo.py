@@ -72,6 +72,14 @@ def content_creation_guide_effective_communication_storytelling():
             help = 'ayudigna'
         )
 
+        text_input_8 = st.text_area(
+            "por que de cada como",
+            label_visibility = 'visible',
+            disabled = False,
+            placeholder = 'Sabes cual es la funcion de la miniatura? llamar la atencion, no es explicar de que trata el video y es ahi donde muchos fallan, si generas expectativa entonces van a dar click, porque la gente esta pasando cosas y solo para en lo que le llama la atebncion, si tu miniatura es igual al resto de miniaturas del mundo nadie te va a preferir',
+            help = 'ayudigna'
+        )
+
 
         submitted = st.form_submit_button("Submit")
         if submitted:
