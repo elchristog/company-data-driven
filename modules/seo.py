@@ -104,6 +104,22 @@ def content_creation_guide_effective_communication_storytelling():
             help = 'Lo mismo, habla del que y no del como, si hay que mejorar el titulo pero el como es mayuscilas selectivas, diferenciarse del resto, emojis, palabra clave...'
         )
 
+        text_input_12 = st.text_area(
+            "Conclusiones checklist",
+            label_visibility = 'visible',
+            disabled = False,
+            placeholder = 'Si consigues mejorar el ctr  entonces vas a lograr que youtube te recomiende y eso se hace logrando que las miniaturas llamen ams la atebncion y que los titulos generen curiosidad',
+            help = 'Lo mismo, habla del que y no del como, si hay que mejorar el titulo pero el como es mayuscilas selectivas, diferenciarse del resto, emojis, palabra clave...'
+        )
+
+        text_input_13 = st.text_area(
+            "CliffHanger",
+            label_visibility = 'visible',
+            disabled = False,
+            placeholder = 'De esa manera vas a mejorar mucho tus clicks, pero mira lop que estoy logrando, para conseguir esto necesitaras tambien conoceer el tercer metodo para que youtube te recomiende y eso lo veremos en el siguiente video',
+            help = 'Lo mismo, habla del que y no del como, si hay que mejorar el titulo pero el como es mayuscilas selectivas, diferenciarse del resto, emojis, palabra clave...'
+        )
+
 
         submitted = st.form_submit_button("Submit")
         if submitted:
