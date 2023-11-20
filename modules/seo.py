@@ -13,6 +13,7 @@ def content_creation_guide_effective_communication_storytelling():
             label_visibility = 'visible',
             disabled = False,
             placeholder = 'Un plaveholder',
+            help = 'ayudigna'
         )
 
         submitted = st.form_submit_button("Submit")
