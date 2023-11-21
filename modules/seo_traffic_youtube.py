@@ -47,7 +47,7 @@ def button_callback():
     try:
         st.session_state.my_token_received = True
         code_yt = st.experimental_get_query_params()["code"][0]
-        st.session_state.my_token_input = code_yt
+        st.session_state.my_token_input_youtube = code_yt
     except KeyError or ValueError:
         st.error("⚠️ The parameter 'code' was not found in the URL. Please log in.")
 
@@ -79,7 +79,7 @@ def get_ytproperty(token):
 # @st.cache_data(show_spinner=False)
 def get_data_date(property_url, startDate, endDate, url_filter=None, url_operator=None,
                 palavra_filter=None, palavra_operator=None):
-        service = get_ytproperty(st.session_state.my_token_input)
+        service = get_ytproperty(st.session_state.my_token_input_youtube)
         data = []
         row_limit = 1000
         progress_text = "Retrieving Metrics. Please Wait. 🐈"
@@ -145,8 +145,8 @@ def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
         max_date_next_query = dates_in_table[0].get("max_date_next_query")
 
         if days_last_update is None or days_last_update > 0:
-            if "my_token_input" not in st.session_state:
-                st.session_state["my_token_input"] = ""
+            if "my_token_input_youtube" not in st.session_state:
+                st.session_state["my_token_input_youtube"] = ""
             if "my_token_received" not in st.session_state:
                 st.session_state["my_token_received"] = False
             if 'dataframe' not in st.session_state:
