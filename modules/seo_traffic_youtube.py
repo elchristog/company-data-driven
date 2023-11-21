@@ -158,21 +158,21 @@ def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
             if 'clicked' not in st.session_state:
                 st.session_state.clicked = False
             
-            st.write("### Update your web data")
+            st.write("### Update your youtube data")
             st.markdown("----")
             link_style = (
                 "text-decoration: none;"
                 "color: #FFF;"
                 "padding: 8px 20px;"
                 "border-radius: 4px;"
-                "background-color: #DD4B39;"
+                "background-color: #BFB5B4;"
                 "font-size: 16px;"
             )
             url = href
-            st.markdown('1 - Log in to your Google account:')
+            st.markdown('1 - Log in to your Youtube account:')
             st.markdown(f'<a href="{url}" target="_blank" style="{link_style}">'
-                    f'<img src="https://www.youtube.com/s/desktop/af9710b4/img/favicon_32x32.png" alt="Google" style="vertical-align: middle; margin-right: 10px;">'
-                    f'Login With Google'
+                    f'<img src="https://www.youtube.com/s/desktop/af9710b4/img/favicon_32x32.png" alt="Youtube" style="vertical-align: middle; margin-right: 10px;">'
+                    f'Login With Youtube'
                     f'</a>', unsafe_allow_html=True)
             st.markdown('2 - Click the Button to grant API access:')
             submit_button = st.button(
