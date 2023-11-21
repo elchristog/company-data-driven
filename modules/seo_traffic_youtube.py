@@ -129,7 +129,8 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
 
 def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
     if role_id == 1:
-        client = Client(st.secrets["yt_analytics_api"])
+        secrets_file_path = st.secrets["yt_analytics_api"]
+        client = Client(secrets_file_path)
         st.write(client)
         # report = client.fetch_report(
         #     dimensions=("video",),
