@@ -205,7 +205,7 @@ def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
                 df_clicks = get_data_date(property_url, starting_date_to_pages, ending_date_to_pages,
                         url_filter=url_filter, url_operator=url_operator,
                         palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-                # st.table(df_clicks)
+                st.table(df_clicks)
                 # st.table(df_pages)
                 today = datetime.date.today()
                 today_str = today.strftime("%Y-%m-%d")
