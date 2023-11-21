@@ -80,6 +80,7 @@ def get_ytproperty(token):
 def get_data_date(property_url, startDate, endDate, url_filter=None, url_operator=None,
                 palavra_filter=None, palavra_operator=None):
         service = get_ytproperty(st.session_state.my_token_input_youtube)
+        st.write(service)
         data = []
         row_limit = 1000
         progress_text = "Retrieving Metrics. Please Wait. 🐈"
