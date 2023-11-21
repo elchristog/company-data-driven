@@ -112,6 +112,8 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
             progress_percent = min((startRow / row_limit) * 100, 100)
             progress_value = progress_percent / 100.0
             my_bar.progress(progress_value, text=progress_text)
+        st.write(response)
+        st.table(response)
         df_clicks = pd.DataFrame([
             {
                 'Date': row['keys'][0],
