@@ -36,7 +36,7 @@ credentials = {
 
 flow = Flow.from_client_config(
     credentials,
-    scopes=["https://www.googleapis.com/auth/youtube.analytics.readonly"],
+    scopes=["https://www.googleapis.com/auth/yt-analytics.readonly"],
     redirect_uri=redirectUri,
 )
 auth_url, _ = flow.authorization_url(prompt="consent")
@@ -65,7 +65,7 @@ def get_ytproperty(token):
     flow.fetch_token(code=token)
     credentials = flow.credentials
     service = discovery.build(
-        serviceName="youtubeAnalytics",
+        serviceName="youtube",
         version="v3",
         credentials=credentials,
         cache_discovery=False,
