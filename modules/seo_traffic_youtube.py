@@ -130,16 +130,17 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
 def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
     if role_id == 1:
         client = Client(st.secrets["yt_analytics_api"])
-        report = client.fetch_report(
-            dimensions=("video",),
-            filters={"country": "US"},
-            metrics=("estimatedMinutesWatched", "views", "likes", "comments"),
-            sort_options=("-estimatedMinutesWatched",),
-            start_date=date(2022, 1, 1),
-            end_date=date(2022, 12, 31),
-            max_results=10,
-        )
-        st.write(report)
+        st.write(client)
+        # report = client.fetch_report(
+        #     dimensions=("video",),
+        #     filters={"country": "US"},
+        #     metrics=("estimatedMinutesWatched", "views", "likes", "comments"),
+        #     sort_options=("-estimatedMinutesWatched",),
+        #     start_date=date(2022, 1, 1),
+        #     end_date=date(2022, 12, 31),
+        #     max_results=10,
+        # )
+        # st.write(report)
 
 
 
