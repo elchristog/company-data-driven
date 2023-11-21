@@ -100,6 +100,7 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
             }
             
             response = service.reports().query(
+                ids='channel==MINE',
                 dimensions = "date",
                 endDate=endDate,
                 startDate=startDate
