@@ -181,7 +181,7 @@ def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
             st.markdown('This is your OAuth token:')
             code = st.text_input(
                     "",
-                    key="my_token_input",
+                    key="my_token_input_youtube",
                     label_visibility="collapsed",
                 )
             get_data_button = st.button("Get data", key = "youtube_get_data")
