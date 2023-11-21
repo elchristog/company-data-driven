@@ -3,7 +3,7 @@ import streamlit as st
 import modules.title_and_paragraph as tap
 import modules.tasks as t
 import modules.seo_traffic_web as seotw
-import modules.seo_traffic_web as seoty
+import modules.seo_traffic_youtube as seoty
 import modules.seo as seo
 import utils.users_handling as uh
 import modules.tester as tst
