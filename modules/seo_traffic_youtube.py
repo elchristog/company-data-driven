@@ -65,7 +65,7 @@ def get_ytproperty(token):
     flow.fetch_token(code=token)
     credentials = flow.credentials
     service = discovery.build(
-        serviceName="youtube",
+        serviceName="youtubeAnalytics",
         version="v3",
         credentials=credentials,
         cache_discovery=False,
@@ -111,7 +111,7 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
                     request['dimensionFilterGroups'].append({'filters': [palavra_dimension_filter]})
                 else:
                     request['dimensionFilterGroups'] = [{'filters': [palavra_dimension_filter]}]
-            response = service.run().query(siteUrl=property_url, body=request).execute()
+            response = service.searchanalytics().query(siteUrl=property_url, body=request).execute()
             rows = response.get('rows', [])
             startRow = startRow + len(rows)
             data.extend(rows)
