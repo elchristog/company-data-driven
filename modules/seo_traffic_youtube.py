@@ -100,8 +100,8 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
             
             response = service.reports().query(
                 ids='channel==MINE',
-                startDate='2017-01-01',
-                endDate='2019-01-01',
+                startDate='2023-09-01',
+                endDate='2023-10-01',
                 metrics='estimatedMinutesWatched,views,likes,subscribersGained',
                 dimensions='day',
                 sort='day'
