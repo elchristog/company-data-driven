@@ -46,8 +46,8 @@ auth_url, _ = flow.authorization_url(prompt="consent")
 def button_callback():
     try:
         st.session_state.my_token_received = True
-        code = st.experimental_get_query_params()["code"][0]
-        st.session_state.my_token_input = code
+        code_yt = st.experimental_get_query_params()["code_yt"][0]
+        st.session_state.my_token_input = code_yt
     except KeyError or ValueError:
         st.error("⚠️ The parameter 'code' was not found in the URL. Please log in.")
 
@@ -62,7 +62,7 @@ def check_input_url(input_url):
 
 @st.cache_resource(show_spinner=False)
 def get_webproperty(token):
-    flow.fetch_token(code=token)
+    flow.fetch_token(code_yt=token)
     credentials = flow.credentials
     service = discovery.build(
         serviceName="yt-analytics",
@@ -179,7 +179,7 @@ def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
                 label="Grant API access", on_click=button_callback, key = "youtube_api_access"
             )
             st.markdown('This is your OAuth token:')
-            code = st.text_input(
+            code_yt = st.text_input(
                     "",
                     key="my_token_input_youtube",
                     label_visibility="collapsed",
