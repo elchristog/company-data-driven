@@ -101,9 +101,11 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
             
             response = service.reports().query(
                 ids='channel==MINE',
-                dimensions = "date",
-                endDate=endDate,
-                startDate=startDate
+                startDate='2017-01-01',
+                endDate='2017-12-31',
+                metrics='estimatedMinutesWatched,views,likes,subscribersGained'
+                dimensions='day',
+                sort='day'
             ).execute()
             rows = response.get('rows', [])
             startRow = startRow + len(rows)
