@@ -162,10 +162,10 @@ def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
             st.markdown("----")
             link_style = (
                 "text-decoration: none;"
-                "color: #FFF;"
+                "color: #D95F5F;"
                 "padding: 8px 20px;"
                 "border-radius: 4px;"
-                "background-color: #BFB5B4;"
+                "background-color: #F2E4DF;"
                 "font-size: 16px;"
             )
             url = href
