@@ -46,7 +46,7 @@ auth_url, _ = flow.authorization_url(prompt="consent")
 def button_callback():
     try:
         st.session_state.my_token_received = True
-        code_yt = st.experimental_get_query_params()["code_yt"][0]
+        code_yt = st.experimental_get_query_params()["code"][0]
         st.session_state.my_token_input = code_yt
     except KeyError or ValueError:
         st.error("⚠️ The parameter 'code' was not found in the URL. Please log in.")
