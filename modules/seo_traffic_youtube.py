@@ -3,6 +3,7 @@ import pandas as pd
 import time
 import datetime
 import json
+import tempfile
 
 
 from datetime import date
@@ -131,8 +132,9 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
 def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
     if role_id == 1:
         secrets_dict = dict(st.secrets["yt_analytics_api"])
-
-        client = Client(secrets_dict)
+        with tempfile.NamedTemporaryFile(mode='w', delete=False) as temp_file:
+            json.dump(secrets_dict, temp_file)
+        client = Client(temp_file.name)
         st.write(client)
         # report = client.fetch_report(
         #     dimensions=("video",),
