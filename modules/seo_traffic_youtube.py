@@ -36,7 +36,7 @@ credentials = {
 
 flow = Flow.from_client_config(
     credentials,
-    scopes=["https://www.googleapis.com/auth/webmasters.readonly"],
+    scopes=["https://www.googleapis.com/auth/yt-analytics.readonly"],
     redirect_uri=redirectUri,
 )
 auth_url, _ = flow.authorization_url(prompt="consent")
