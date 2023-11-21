@@ -7,7 +7,6 @@ import tempfile
 
 
 from datetime import date
-from analytix import Client
 from dateutil.relativedelta import relativedelta
 from googleapiclient import discovery
 from google_auth_oauthlib.flow import Flow
