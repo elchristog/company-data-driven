@@ -96,7 +96,11 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
                 'startRow': startRow
             }
             
-            response = service.reports().query(request).execute()
+            response = service.reports().query(
+                dimensions = "date",
+                endDate=endDate,
+                startDate=startDate
+            ).execute()
             rows = response.get('rows', [])
             startRow = startRow + len(rows)
             data.extend(rows)
