@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import time
 import datetime
+import json
 
 
 from datetime import date
@@ -129,8 +130,10 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
 
 def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
     if role_id == 1:
-        secrets_file_path = st.secrets["yt_analytics_api"]
-        client = Client(secrets_file_path)
+        secrets_json = st.secrets["yt_analytics_api"]
+        secrets_dict = json.loads(secrets_json)
+
+        client = Client(secrets_dict)
         st.write(client)
         # report = client.fetch_report(
         #     dimensions=("video",),
