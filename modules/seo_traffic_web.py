@@ -73,12 +73,94 @@ def get_webproperty(token):
     return service
 
 
+# @st.cache_data(experimental_allow_widgets=True, show_spinner=False)
+def plot_echarts(df_grouped):
+    df_grouped['ctr'] = df_grouped['ctr'].apply(lambda ctr: f"{ctr * 100:.2f}")
+    df_grouped['position'] = df_grouped['position'].apply(lambda pos: round(pos, 2))
+    df_grouped['date'] = df_grouped['date'].astype(str)  # Convert 'date' to string
+
+    options = {
+        "xAxis": {
+            "type": "category",
+            "data": df_grouped['date'].tolist(),
+            "axisLabel": {
+                "formatter": "{value}"
+            }
+        },
+        "yAxis": {"type": "value", "name": ""},
+        "grid": {
+            "right": 20,
+            "left": 65,
+            "top": 45,
+            "bottom": 50,
+        },
+        "legend": {
+            "show": True,
+            "top": "top",
+            "align": "auto",
+            "selected": {  # Definindo a seleção inicial das séries
+                "clicks": True,         # A série "Clicks" está selecionada
+                "impressions": True,    # A série "Impressions" está selecionada
+                "ctr": False,           # A série "CTR" não está selecionada
+                "position": False       # A série "Position" não está selecionada
+            }
+        },
+        "tooltip": {"trigger": "axis", },
+        "series": [
+            {
+                "type": "line",
+                "name": "clicks",
+                "data": df_grouped['clicks'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#A6785D"},
+                "showSymbol": False,  # Remova os marcadores de dados para esta série
+            },
+            {
+                "type": "line",
+                "name": "impressions",
+                "data": df_grouped['impressions'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#394A59"},
+                "showSymbol": False,  # Remova os marcadores de dados para esta série
+            },
+            {
+                "type": "line",
+                "name": "ctr",
+                "data": df_grouped['ctr'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#BF3F34"},
+                "showSymbol": False,  # Remova os marcadores de dados para esta série
+            },
+            {
+                "type": "line",
+                "name": "position",
+                "data": df_grouped['position'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#BFB5B4"},
+                "showSymbol": False,  # Remova os marcadores de dados para esta série
+                "yAxisIndex": 1,  # Indica que esta série usará o segundo eixo Y
+                "axisLabel": {
+                    "show": False  # Oculta os rótulos do eixo Y para esta série
+                }
+            },
+        ],
+
+        "yAxis": [
+            {"type": "value", "name": ""},
+            {"type": "value", "inverse": True, "show": False},  # Segundo eixo Y com a opção "inverse"
+        ],
+        "backgroundColor": "#ffffff",
+        "color": ["#A6785D", "#394A59", "#BF3F34", "#BFB5B4"],
+    }
+
+    st_echarts(option=options, theme='chalk', height=400, width='100%')
+    
 
 # @st.cache_data(show_spinner=False)
 def get_data(property_url, dimensions, startDate, endDate, url_filter=None, url_operator=None,
             palavra_filter=None, palavra_operator=None):
     service = get_webproperty(st.session_state.my_token_input)
-    st.write(service)
+    # st.write(service)
     data = []
     row_limit = 300000
     progress_text = "Retrieving Metrics. Please Wait. 🐈"
@@ -170,6 +252,7 @@ def get_data(property_url, dimensions, startDate, endDate, url_filter=None, url_
 def get_data_date(property_url, startDate, endDate, url_filter=None, url_operator=None,
                 palavra_filter=None, palavra_operator=None):
         service = get_webproperty(st.session_state.my_token_input)
+        # st.write(service)
         data = []
         row_limit = 1000
         progress_text = "Retrieving Metrics. Please Wait. 🐈"
@@ -221,90 +304,6 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
         my_bar.empty()
         return df_clicks
 
-
-
-# @st.cache_data(experimental_allow_widgets=True, show_spinner=False)
-def plot_echarts(df_grouped):
-    df_grouped['ctr'] = df_grouped['ctr'].apply(lambda ctr: f"{ctr * 100:.2f}")
-    df_grouped['position'] = df_grouped['position'].apply(lambda pos: round(pos, 2))
-    df_grouped['date'] = df_grouped['date'].astype(str)  # Convert 'date' to string
-
-    options = {
-        "xAxis": {
-            "type": "category",
-            "data": df_grouped['date'].tolist(),
-            "axisLabel": {
-                "formatter": "{value}"
-            }
-        },
-        "yAxis": {"type": "value", "name": ""},
-        "grid": {
-            "right": 20,
-            "left": 65,
-            "top": 45,
-            "bottom": 50,
-        },
-        "legend": {
-            "show": True,
-            "top": "top",
-            "align": "auto",
-            "selected": {  # Definindo a seleção inicial das séries
-                "clicks": True,         # A série "Clicks" está selecionada
-                "impressions": True,    # A série "Impressions" está selecionada
-                "ctr": False,           # A série "CTR" não está selecionada
-                "position": False       # A série "Position" não está selecionada
-            }
-        },
-        "tooltip": {"trigger": "axis", },
-        "series": [
-            {
-                "type": "line",
-                "name": "clicks",
-                "data": df_grouped['clicks'].tolist(),
-                "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#A6785D"},
-                "showSymbol": False,  # Remova os marcadores de dados para esta série
-            },
-            {
-                "type": "line",
-                "name": "impressions",
-                "data": df_grouped['impressions'].tolist(),
-                "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#394A59"},
-                "showSymbol": False,  # Remova os marcadores de dados para esta série
-            },
-            {
-                "type": "line",
-                "name": "ctr",
-                "data": df_grouped['ctr'].tolist(),
-                "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#BF3F34"},
-                "showSymbol": False,  # Remova os marcadores de dados para esta série
-            },
-            {
-                "type": "line",
-                "name": "position",
-                "data": df_grouped['position'].tolist(),
-                "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#BFB5B4"},
-                "showSymbol": False,  # Remova os marcadores de dados para esta série
-                "yAxisIndex": 1,  # Indica que esta série usará o segundo eixo Y
-                "axisLabel": {
-                    "show": False  # Oculta os rótulos do eixo Y para esta série
-                }
-            },
-        ],
-
-        "yAxis": [
-            {"type": "value", "name": ""},
-            {"type": "value", "inverse": True, "show": False},  # Segundo eixo Y com a opção "inverse"
-        ],
-        "backgroundColor": "#ffffff",
-        "color": ["#A6785D", "#394A59", "#BF3F34", "#BFB5B4"],
-    }
-
-    st_echarts(option=options, theme='chalk', height=400, width='100%')
-    
 
 
 
@@ -380,8 +379,8 @@ def get_data_save_to_bq(role_id, project_name, project_url_clean):
                 df_pages = get_data(property_url, ['page'], starting_date_to_pages, ending_date_to_pages,
                         url_filter=url_filter, url_operator=url_operator,
                         palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-                # st.table(df_clicks)
-                # st.table(df_pages)
+                st.table(df_clicks)
+                st.table(df_pages)
                 today = datetime.date.today()
                 today_str = today.strftime("%Y-%m-%d")
                 st.info("Updating, please wait", icon = "☺️")
