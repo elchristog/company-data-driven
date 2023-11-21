@@ -104,7 +104,7 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
                 dimensions = "date",
                 startDate='2017-01-01',
                 endDate='2019-01-01',
-                metrics='estimatedMinutesWatched,views,likes,subscribersGained',
+                metrics='estimatedMinutesWatched,views,likes,subscribersGained'
                 dimensions='day',
                 sort='day'
             ).execute()
