@@ -111,7 +111,7 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
                     request['dimensionFilterGroups'].append({'filters': [palavra_dimension_filter]})
                 else:
                     request['dimensionFilterGroups'] = [{'filters': [palavra_dimension_filter]}]
-            response = service.reports().query(body=request).execute()
+            response = service.reports().query().execute()
             rows = response.get('rows', [])
             startRow = startRow + len(rows)
             data.extend(rows)
