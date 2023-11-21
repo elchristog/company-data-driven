@@ -80,6 +80,7 @@ def get_ytproperty(token):
 def get_data_date(property_url, startDate, endDate, url_filter=None, url_operator=None,
                 palavra_filter=None, palavra_operator=None):
         service = get_ytproperty(st.session_state.my_token_input_youtube)
+        st.write(service)
         data = []
         row_limit = 1000
         progress_text = "Retrieving Metrics. Please Wait. 🐈"
@@ -110,7 +111,7 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
                     request['dimensionFilterGroups'].append({'filters': [palavra_dimension_filter]})
                 else:
                     request['dimensionFilterGroups'] = [{'filters': [palavra_dimension_filter]}]
-            response = service.reports().query(siteUrl=property_url, body=request).execute()
+            response = service.searchanalytics().query(siteUrl=property_url, body=request).execute()
             rows = response.get('rows', [])
             startRow = startRow + len(rows)
             data.extend(rows)
