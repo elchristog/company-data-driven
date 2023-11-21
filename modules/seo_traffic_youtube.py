@@ -61,7 +61,7 @@ def check_input_url(input_url):
 
 
 @st.cache_resource(show_spinner=False)
-def get_webproperty(token):
+def get_ytproperty(token):
     flow.fetch_token(code_yt=token)
     credentials = flow.credentials
     service = discovery.build(
@@ -79,7 +79,7 @@ def get_webproperty(token):
 # @st.cache_data(show_spinner=False)
 def get_data_date(property_url, startDate, endDate, url_filter=None, url_operator=None,
                 palavra_filter=None, palavra_operator=None):
-        service = get_webproperty(st.session_state.my_token_input)
+        service = get_ytproperty(st.session_state.my_token_input)
         data = []
         row_limit = 1000
         progress_text = "Retrieving Metrics. Please Wait. 🐈"
