@@ -65,7 +65,7 @@ def get_webproperty(token):
     flow.fetch_token(code=token)
     credentials = flow.credentials
     service = discovery.build(
-        serviceName="webmasters",
+        serviceName="yt-analytics",
         version="v3",
         credentials=credentials,
         cache_discovery=False,
