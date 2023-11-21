@@ -14,6 +14,7 @@ import utils.user_credentials as uc
 
 # https://github.com/ViniciusStanula/Search-Console-API/tree/main
 # https://streamlit-emoji-shortcodes-streamlit-app-gwckff.streamlit.app/
+# https://developers.google.com/youtube/analytics/reference/reports/query?hl=es-419
 
 date = date.today()
 data_final = date - relativedelta(days=2)
