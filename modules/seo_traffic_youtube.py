@@ -176,7 +176,7 @@ def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
                     f'</a>', unsafe_allow_html=True)
             st.markdown('2 - Click the Button to grant API access:')
             submit_button = st.button(
-                label="Grant API access", on_click=button_callback
+                label="Grant API access", on_click=button_callback, key = "youtube_api_access"
             )
             st.markdown('This is your OAuth token:')
             code = st.text_input(
