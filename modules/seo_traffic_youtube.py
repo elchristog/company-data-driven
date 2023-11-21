@@ -62,7 +62,7 @@ def check_input_url(input_url):
 
 @st.cache_resource(show_spinner=False)
 def get_ytproperty(token):
-    flow.fetch_token(code_yt=token)
+    flow.fetch_token(code=token)
     credentials = flow.credentials
     service = discovery.build(
         serviceName="yt-analytics",
