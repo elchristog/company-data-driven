@@ -184,7 +184,7 @@ def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
                     key="my_token_input",
                     label_visibility="collapsed",
                 )
-            get_data_button = st.button("Get data")
+            get_data_button = st.button("Get data", key = "youtube_get_data")
             if get_data_button:
                 url = project_url_clean
                 property_url = check_input_url(url)
