@@ -131,103 +131,80 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
 
 def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
     if role_id == 1:
-        secrets_dict = dict(st.secrets["yt_analytics_api"])
-        with tempfile.NamedTemporaryFile(mode='w', delete=False) as temp_file:
-            json.dump(secrets_dict, temp_file)
-        client = Client(temp_file.name)
-        st.write(client)
-        # report = client.fetch_report(
-        #     dimensions=("video",),
-        #     filters={"country": "US"},
-        #     metrics=("estimatedMinutesWatched", "views", "likes", "comments"),
-        #     sort_options=("-estimatedMinutesWatched",),
-        #     start_date=date(2022, 1, 1),
-        #     end_date=date(2022, 12, 31),
-        #     max_results=10,
-        # )
-        # st.write(report)
+        dates_in_table = uc.run_query_instant(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) - 2 AS days_last_update, DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY) AS min_date_first_query, DATE_ADD(MAX(date), INTERVAL 1 DAY) AS min_date_next_query, DATE_SUB(CURRENT_DATE(), INTERVAL 2 DAY) AS max_date_next_query FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
+        days_last_update = dates_in_table[0].get("days_last_update")
+        min_date_first_query = dates_in_table[0].get("min_date_first_query")
+        min_date_next_query = dates_in_table[0].get("min_date_next_query")
+        max_date_next_query = dates_in_table[0].get("max_date_next_query")
 
-
-
-
-
-
-
-
-        # dates_in_table = uc.run_query_instant(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) - 2 AS days_last_update, DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY) AS min_date_first_query, DATE_ADD(MAX(date), INTERVAL 1 DAY) AS min_date_next_query, DATE_SUB(CURRENT_DATE(), INTERVAL 2 DAY) AS max_date_next_query FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
-        # days_last_update = dates_in_table[0].get("days_last_update")
-        # min_date_first_query = dates_in_table[0].get("min_date_first_query")
-        # min_date_next_query = dates_in_table[0].get("min_date_next_query")
-        # max_date_next_query = dates_in_table[0].get("max_date_next_query")
-
-        # if days_last_update is None or days_last_update > 0:
-        #     if "my_token_input_youtube" not in st.session_state:
-        #         st.session_state["my_token_input_youtube"] = ""
-        #     if "my_token_received" not in st.session_state:
-        #         st.session_state["my_token_received"] = False
-        #     if 'dataframe' not in st.session_state:
-        #         st.session_state.dataframe = None
-        #     if 'domain' not in st.session_state:
-        #         st.session_state.domain = None
-        #     if 'dataframeData' not in st.session_state:
-        #         st.session_state.dataframeData = None
-        #     if 'clicked' not in st.session_state:
-        #         st.session_state.clicked = False
+        if days_last_update is None or days_last_update > 0:
+            if "my_token_input_youtube" not in st.session_state:
+                st.session_state["my_token_input_youtube"] = ""
+            if "my_token_received" not in st.session_state:
+                st.session_state["my_token_received"] = False
+            if 'dataframe' not in st.session_state:
+                st.session_state.dataframe = None
+            if 'domain' not in st.session_state:
+                st.session_state.domain = None
+            if 'dataframeData' not in st.session_state:
+                st.session_state.dataframeData = None
+            if 'clicked' not in st.session_state:
+                st.session_state.clicked = False
             
-        #     st.write("### Update your youtube data")
-        #     st.markdown("----")
-        #     link_style = (
-        #         "text-decoration: none;"
-        #         "color: #D95F5F;"
-        #         "padding: 8px 20px;"
-        #         "border-radius: 4px;"
-        #         "background-color: #F2E4DF;"
-        #         "font-size: 16px;"
-        #     )
-        #     url = href
-        #     st.markdown('1 - Log in to your Youtube account:')
-        #     st.markdown(f'<a href="{url}" target="_blank" style="{link_style}">'
-        #             f'<img src="https://www.youtube.com/s/desktop/af9710b4/img/favicon_32x32.png" alt="Youtube" style="vertical-align: middle; margin-right: 10px;">'
-        #             f'Login With Youtube'
-        #             f'</a>', unsafe_allow_html=True)
-        #     st.markdown('2 - Click the Button to grant API access:')
-        #     submit_button = st.button(
-        #         label="Grant API access", on_click=button_callback, key = "youtube_api_access"
-        #     )
-        #     st.markdown('This is your OAuth token:')
-        #     code_yt = st.text_input(
-        #             "",
-        #             key="my_token_input_youtube",
-        #             label_visibility="collapsed",
-        #         )
-        #     get_data_button_yt = st.button("Get data", key = "youtube_get_data")
-        #     if get_data_button_yt:
-        #         url = project_url_clean
-        #         property_url = check_input_url(url)
-        #         st.session_state.domain = property_url
+            st.write("### Update your youtube data")
+            st.markdown("----")
+            link_style = (
+                "text-decoration: none;"
+                "color: #D95F5F;"
+                "padding: 8px 20px;"
+                "border-radius: 4px;"
+                "background-color: #F2E4DF;"
+                "font-size: 16px;"
+            )
+            url = href
+            st.markdown('1 - Log in to your Youtube account:')
+            st.markdown(f'<a href="{url}" target="_blank" style="{link_style}">'
+                    f'<img src="https://www.youtube.com/s/desktop/af9710b4/img/favicon_32x32.png" alt="Youtube" style="vertical-align: middle; margin-right: 10px;">'
+                    f'Login With Youtube'
+                    f'</a>', unsafe_allow_html=True)
+            st.markdown('2 - Click the Button to grant API access:')
+            submit_button = st.button(
+                label="Grant API access", on_click=button_callback, key = "youtube_api_access"
+            )
+            st.markdown('This is your OAuth token:')
+            code_yt = st.text_input(
+                    "",
+                    key="my_token_input_youtube",
+                    label_visibility="collapsed",
+                )
+            get_data_button_yt = st.button("Get data", key = "youtube_get_data")
+            if get_data_button_yt:
+                url = project_url_clean
+                property_url = check_input_url(url)
+                st.session_state.domain = property_url
 
-        #         url_filter = None
-        #         url_operator = None
-        #         palavra_filter = None
-        #         palavra_operator = None   
+                url_filter = None
+                url_operator = None
+                palavra_filter = None
+                palavra_operator = None   
                 
-        #         if days_last_update is None:
-        #             starting_date_to_pages = min_date_first_query.strftime("%Y-%m-%d")
-        #             ending_date_to_pages = max_date_next_query.strftime("%Y-%m-%d")
-        #         elif days_last_update > 0:
-        #             starting_date_to_pages = min_date_next_query.strftime("%Y-%m-%d")
-        #             ending_date_to_pages = max_date_next_query.strftime("%Y-%m-%d")
+                if days_last_update is None:
+                    starting_date_to_pages = min_date_first_query.strftime("%Y-%m-%d")
+                    ending_date_to_pages = max_date_next_query.strftime("%Y-%m-%d")
+                elif days_last_update > 0:
+                    starting_date_to_pages = min_date_next_query.strftime("%Y-%m-%d")
+                    ending_date_to_pages = max_date_next_query.strftime("%Y-%m-%d")
 
-        #         df_clicks = get_data_date(property_url, starting_date_to_pages, ending_date_to_pages,
-        #                 url_filter=url_filter, url_operator=url_operator,
-        #                 palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-        #         st.table(df_clicks)
-        #         # st.table(df_pages)
-        #         today = datetime.date.today()
-        #         today_str = today.strftime("%Y-%m-%d")
-        #         st.info("Updating, please wait", icon = "☺️")
-        #         # for index, row in df_clicks.iterrows():
-        #         #     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
-        #         time.sleep(15)
-        #         st.rerun()
+                df_clicks = get_data_date(property_url, starting_date_to_pages, ending_date_to_pages,
+                        url_filter=url_filter, url_operator=url_operator,
+                        palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+                st.table(df_clicks)
+                # st.table(df_pages)
+                today = datetime.date.today()
+                today_str = today.strftime("%Y-%m-%d")
+                st.info("Updating, please wait", icon = "☺️")
+                # for index, row in df_clicks.iterrows():
+                #     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
+                time.sleep(15)
+                st.rerun()
 
