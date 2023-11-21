@@ -24,7 +24,7 @@ data_padrao = date - relativedelta(months=1)
 clientSecret = st.secrets["clientSecret"]
 clientId = st.secrets["clientId"]
 redirectUri = 'https://company-data-driven.streamlit.app'
-href = "https://accounts.google.com/o/oauth2/auth?response_type=code&client_id={}&redirect_uri={}&scope=https://www.googleapis.com/auth/yt-analytics.readonly&access_type=offline&prompt=consent".format(clientId, redirectUri)
+href = "https://accounts.google.com/o/oauth2/auth?response_type=code&client_id={}&redirect_uri={}&scope=https://www.googleapis.com/auth/youtube.readonly&access_type=offline&prompt=consent".format(clientId, redirectUri)
 credentials = {
     "installed": {
         "client_id": clientId,
@@ -37,7 +37,7 @@ credentials = {
 
 flow = Flow.from_client_config(
     credentials,
-    scopes=["https://www.googleapis.com/auth/yt-analytics.readonly"],
+    scopes=["https://www.googleapis.com/auth/youtube.readonly"],
     redirect_uri=redirectUri,
 )
 auth_url, _ = flow.authorization_url(prompt="consent")
