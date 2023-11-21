@@ -78,6 +78,7 @@ def get_webproperty(token):
 def get_data(property_url, dimensions, startDate, endDate, url_filter=None, url_operator=None,
             palavra_filter=None, palavra_operator=None):
     service = get_webproperty(st.session_state.my_token_input)
+    st.write(service)
     data = []
     row_limit = 300000
     progress_text = "Retrieving Metrics. Please Wait. 🐈"
