@@ -95,24 +95,8 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
                 'rowLimit': 25000,
                 'startRow': startRow
             }
-            if url_filter and url_operator:
-                url_dimension_filter = {
-                    'dimension': 'PAGE',
-                    'operator': url_filter,
-                    'expression': url_operator
-                }
-                request['dimensionFilterGroups'] = [{'filters': [url_dimension_filter]}]
-            if palavra_filter and palavra_operator:
-                palavra_dimension_filter = {
-                    'dimension': 'QUERY',
-                    'operator': palavra_filter,
-                    'expression': palavra_operator
-                }
-                if 'dimensionFilterGroups' in request:
-                    request['dimensionFilterGroups'].append({'filters': [palavra_dimension_filter]})
-                else:
-                    request['dimensionFilterGroups'] = [{'filters': [palavra_dimension_filter]}]
-            response = service.reports().query(siteUrl=property_url, body=request).execute()
+            
+            response = service.reports().query(request).execute()
             rows = response.get('rows', [])
             startRow = startRow + len(rows)
             data.extend(rows)
