@@ -65,7 +65,7 @@ def get_ytproperty(token):
     flow.fetch_token(code=token)
     credentials = flow.credentials
     service = discovery.build(
-        serviceName="yt-analytics",
+        serviceName="youtube",
         version="v3",
         credentials=credentials,
         cache_discovery=False,
