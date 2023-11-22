@@ -102,7 +102,7 @@ def get_data_date(property_url, start_date, end_date, url_filter=None, url_opera
                 ids='channel==MINE',
                 startDate=start_date,
                 endDate=end_date,
-                metrics='estimatedMinutesWatched,views,likes,subscribersGained',
+                metrics='views,averageViewDuration,viewerPercentage,subscribersGained',
                 dimensions='day',
                 sort='day'
             ).execute()
