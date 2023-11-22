@@ -116,11 +116,11 @@ def get_data_date(property_url, start_date, end_date, url_filter=None, url_opera
         st.table(rows)
         df_clicks = pd.DataFrame([
             {
-                'Date': row['keys'][0],
-                'Clicks': row['clicks'],
-                'Impressions': row['impressions'],
-                'CTR': row['ctr'],
-                'Position': row['position']
+                'date': row[0],
+                'views': row[1],
+                'subscribersGained': row[2],
+                'averageViewPercentage': row[3],
+                'shares': row[4]
             } for row in data
         ])
         my_bar.progress(1.0, text="Processing is now finished. 😸")
