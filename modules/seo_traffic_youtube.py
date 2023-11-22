@@ -112,8 +112,6 @@ def get_data_date(property_url, start_date, end_date, url_filter=None, url_opera
             progress_percent = min((startRow / row_limit) * 100, 100)
             progress_value = progress_percent / 100.0
             my_bar.progress(progress_value, text=progress_text)
-        st.write(rows)
-        st.table(rows)
         df_clicks = pd.DataFrame([
             {
                 'date': row[0],
@@ -209,6 +207,6 @@ def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
                 st.info("Updating, please wait", icon = "☺️")
                 # for index, row in df_clicks.iterrows():
                 #     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
-                time.sleep(15)
-                st.rerun()
+                # time.sleep(15)
+                # st.rerun()
 
