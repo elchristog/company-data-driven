@@ -80,7 +80,7 @@ def get_ytproperty(token):
 
 
 # @st.cache_data(show_spinner=False)
-def get_data_date(property_url, startDate, endDate, url_filter=None, url_operator=None,
+def get_data_date(property_url, start_date, end_date, url_filter=None, url_operator=None,
                 palavra_filter=None, palavra_operator=None):
         service = get_ytproperty(st.session_state.my_token_input_youtube)
         st.write(service)
@@ -91,8 +91,8 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
         startRow = 0
         while startRow == 0 or startRow % 25000 == 0 and startRow < row_limit:
             request = {
-                'startDate': startDate,
-                'endDate': endDate,
+                'startDate': start_date,
+                'endDate': end_date,
                 'dimensions': 'date',
                 'rowLimit': 25000,
                 'startRow': startRow
@@ -100,8 +100,8 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
             
             response = service.reports().query(
                 ids='channel==MINE',
-                startDate='2023-09-01',
-                endDate='2023-10-01',
+                startDate=start_date,
+                endDate=end_date,
                 metrics='estimatedMinutesWatched,views,likes,subscribersGained',
                 dimensions='day',
                 sort='day'
