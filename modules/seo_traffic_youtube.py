@@ -209,15 +209,15 @@ def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
 
 def show_youtube_metrics(project_name):
     st.write("### 	:movie_camera: Web traffic")
-    min_max_dates_range = uc.run_query_1_h(f"SELECT MIN(date) AS min_date, MAX(date) as max_date FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
-    if len(min_max_dates_range) < 1:
+    min_max_dates_range_yt = uc.run_query_1_h(f"SELECT MIN(date) AS min_date, MAX(date) as max_date FROM `company-data-driven.{project_name}.traffic_analytics_youtube_views`;")
+    if len(min_max_dates_range_yt) < 1:
         st.warning("Waiting for data")
     else:
-        day = st.date_input(
+        day_yt = st.date_input(
             "Time Range:",
-            (min_max_dates_range[0].get("min_date"), min_max_dates_range[0].get("max_date")),
-            min_value=min_max_dates_range[0].get("min_date"),
-            max_value=min_max_dates_range[0].get("max_date"),
+            (min_max_dates_range_yt[0].get("min_date"), min_max_dates_range_yt[0].get("max_date")),
+            min_value=min_max_dates_range_yt[0].get("min_date"),
+            max_value=min_max_dates_range_yt[0].get("max_date"),
             format="DD/MM/YYYY",
             help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format',
             key = 'date_input_youtube'
