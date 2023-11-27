@@ -208,7 +208,7 @@ def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
 
 
 def show_youtube_metrics(project_name):
-    st.write("### 	:earth_americas: Web traffic")
+    st.write("### 	:movie_camera: Web traffic")
     min_max_dates_range = uc.run_query_1_h(f"SELECT MIN(date) AS min_date, MAX(date) as max_date FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
     if len(min_max_dates_range) < 1:
         st.warning("Waiting for data")
@@ -219,30 +219,28 @@ def show_youtube_metrics(project_name):
             min_value=min_max_dates_range[0].get("min_date"),
             max_value=min_max_dates_range[0].get("max_date"),
             format="DD/MM/YYYY",
-            help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format'
+            help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format',
+            key = 'date_input_youtube'
         )
-        df = pd.DataFrame(uc.run_query_1_h(f"SELECT * FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks` WHERE date >= '{day[0].strftime('%Y-%m-%d')}' AND date <= '{day[1].strftime('%Y-%m-%d')}' ORDER BY date ASC;"))
-        df_grouped = df.groupby('date').agg({
-                'clicks': 'sum',
-                'impressions': 'sum',
-                'ctr': 'mean',
-                'position': 'mean'
-            }).reset_index()
-        Clicks = df['clicks'].sum()
-        Impressions = df['impressions'].sum()
-        ctr_mean = df['ctr'].mean()
-        pos_mean = df['position'].mean()
-        met1, met2, met3, met4 = st.columns(4)
-        with met1:
-            st.metric('Clicks:', f'{Clicks:,}')
-        with met2:
-            st.metric('Impressions:', f'{Impressions:,}')
-        with met3:
-            st.metric('CTR:', f'{ctr_mean * 100:.2f}%')
-        with met4:
-            st.metric('Position:', f'{pos_mean:.1f}')
-        with st.container():
-            plot_echarts(df_grouped)
-        st.write(f"#### Visits per page")
-        pages_visits = uc.run_query_1_h(f"SELECT page, SUM(clicks) AS clicks, SUM(impressions) AS impressions, AVG(ctr) AS ctr, AVG(position) AS position FROM `company-data-driven.{project_name}.traffic_analytics_web_pages` WHERE start_query_date >= '{day[0].strftime('%Y-%m-%d')}' AND end_query_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY page  ORDER BY ctr DESC;")
-        st.table(pages_visits)
+        # df = pd.DataFrame(uc.run_query_1_h(f"SELECT * FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks` WHERE date >= '{day[0].strftime('%Y-%m-%d')}' AND date <= '{day[1].strftime('%Y-%m-%d')}' ORDER BY date ASC;"))
+        # df_grouped = df.groupby('date').agg({
+        #         'clicks': 'sum',
+        #         'impressions': 'sum',
+        #         'ctr': 'mean',
+        #         'position': 'mean'
+        #     }).reset_index()
+        # Clicks = df['clicks'].sum()
+        # Impressions = df['impressions'].sum()
+        # ctr_mean = df['ctr'].mean()
+        # pos_mean = df['position'].mean()
+        # met1, met2, met3, met4 = st.columns(4)
+        # with met1:
+        #     st.metric('Clicks:', f'{Clicks:,}')
+        # with met2:
+        #     st.metric('Impressions:', f'{Impressions:,}')
+        # with met3:
+        #     st.metric('CTR:', f'{ctr_mean * 100:.2f}%')
+        # with met4:
+        #     st.metric('Position:', f'{pos_mean:.1f}')
+        # # with st.container():
+        # #     plot_echarts(df_grouped)
