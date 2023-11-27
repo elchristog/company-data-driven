@@ -143,9 +143,8 @@ def seo_ideation():
 
         submitted = st.form_submit_button("Submit")
         if submitted:
-            st.write(text_input_1)
-            st.success('Tips to prioritize your tasks using the Eisenhower method:', icon="🤖")            
-            answer = cgptg.prompt_ia("Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] enfermera en estados unidos [/KEYWORD] [IDEASEXTRA] {text_input_1} [/IDEASEXTRA] [INSTRUCTION] En 400 palabras, Dame ideas de 6 articulos que posicionen aclarando el titulo que debe tener el articulo y la keyword que quieres posicionar en cada uno:[/INSTRUCTION]", 400)
+            st.success('Generating Ideas:', icon="🤖")            
+            answer = cgptg.prompt_ia("Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] enfermera en estados unidos [/KEYWORD] [IDEASEXTRA] {text_input_1} [/IDEASEXTRA] [INSTRUCTION] Analiza las metricas y en 400 palabras, Dame ideas de 6 articulos que posicionen aclarando el titulo que debe tener el articulo y la keyword que quieres posicionar en cada uno, evita hablar sobre articulos que ya he creado [YACREADO]:[/INSTRUCTION]", 400)
             st.write(answer)
 
 
