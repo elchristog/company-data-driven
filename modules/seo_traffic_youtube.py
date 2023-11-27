@@ -124,8 +124,7 @@ def get_data_date(property_url, start_date, end_date, url_filter=None, url_opera
                 startDate=start_date,
                 endDate=end_date,
                 metrics='views,subscribersGained,averageViewPercentage,shares',
-                dimensions='video',
-                sort='video'
+                dimensions='video'
             ).execute()
             rows = response.get('rows', [])
             startRow = startRow + len(rows)
