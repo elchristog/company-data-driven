@@ -131,7 +131,6 @@ def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
         min_date_first_query = dates_in_table[0].get("min_date_first_query")
         min_date_next_query = dates_in_table[0].get("min_date_next_query")
         max_date_next_query = dates_in_table[0].get("max_date_next_query")
-        st.write(days_last_update)
         if days_last_update is None or days_last_update > 0:
             if "my_token_input_youtube" not in st.session_state:
                 st.session_state["my_token_input_youtube"] = ""
