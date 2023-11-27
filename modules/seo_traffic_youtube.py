@@ -78,6 +78,89 @@ def get_ytproperty(token):
 
 
 
+# @st.cache_data(experimental_allow_widgets=True, show_spinner=False)
+def plot_echarts_yt(df_grouped):
+    df_grouped['ctr'] = df_grouped['ctr'].apply(lambda ctr: f"{ctr * 100:.2f}")
+    df_grouped['position'] = df_grouped['position'].apply(lambda pos: round(pos, 2))
+    df_grouped['date'] = df_grouped['date'].astype(str)  # Convert 'date' to string
+
+    options = {
+        "xAxis": {
+            "type": "category",
+            "data": df_grouped['date'].tolist(),
+            "axisLabel": {
+                "formatter": "{value}"
+            }
+        },
+        "yAxis": {"type": "value", "name": ""},
+        "grid": {
+            "right": 20,
+            "left": 65,
+            "top": 45,
+            "bottom": 50,
+        },
+        "legend": {
+            "show": True,
+            "top": "top",
+            "align": "auto",
+            "selected": {  # Definindo a seleção inicial das séries
+                "clicks": True,         # A série "Clicks" está selecionada
+                "impressions": True,    # A série "Impressions" está selecionada
+                "ctr": False,           # A série "CTR" não está selecionada
+                "position": False       # A série "Position" não está selecionada
+            }
+        },
+        "tooltip": {"trigger": "axis", },
+        "series": [
+            {
+                "type": "line",
+                "name": "clicks",
+                "data": df_grouped['clicks'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#A6785D"},
+                "showSymbol": False,  # Remova os marcadores de dados para esta série
+            },
+            {
+                "type": "line",
+                "name": "impressions",
+                "data": df_grouped['impressions'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#394A59"},
+                "showSymbol": False,  # Remova os marcadores de dados para esta série
+            },
+            {
+                "type": "line",
+                "name": "ctr",
+                "data": df_grouped['ctr'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#BF3F34"},
+                "showSymbol": False,  # Remova os marcadores de dados para esta série
+            },
+            {
+                "type": "line",
+                "name": "position",
+                "data": df_grouped['position'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#BFB5B4"},
+                "showSymbol": False,  # Remova os marcadores de dados para esta série
+                "yAxisIndex": 1,  # Indica que esta série usará o segundo eixo Y
+                "axisLabel": {
+                    "show": False  # Oculta os rótulos do eixo Y para esta série
+                }
+            },
+        ],
+
+        "yAxis": [
+            {"type": "value", "name": ""},
+            {"type": "value", "inverse": True, "show": False},  # Segundo eixo Y com a opção "inverse"
+        ],
+        "backgroundColor": "#ffffff",
+        "color": ["#A6785D", "#394A59", "#BF3F34", "#BFB5B4"],
+    }
+
+    st_echarts(option=options, theme='chalk', height=400, width='100%')
+
+
 
 # @st.cache_data(show_spinner=False)
 def get_data_date(property_url, start_date, end_date, url_filter=None, url_operator=None,
