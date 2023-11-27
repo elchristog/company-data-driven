@@ -4,6 +4,7 @@ import time
 import datetime
 
 import utils.user_credentials as uc
+import utils.chat_gpt_gestor as cgptg
 
 def content_creation_guide_effective_communication_storytelling():
     with st.form("comm_eff_storytelling_form", clear_on_submit = True):
@@ -124,4 +125,27 @@ def content_creation_guide_effective_communication_storytelling():
         submitted = st.form_submit_button("Submit")
         if submitted:
             st.write(text_input_1)
+
+
+
+
+
+def seo_ideation():
+    with st.form("seo_ideation_form", clear_on_submit = True):
+
+        text_input_1 = st.text_area(
+            "Ideas extras de keywords",
+            label_visibility = 'visible',
+            disabled = False,
+            placeholder = 'Hola soy XX y en este video te voy a ensenar a como hacer que la gente haga click en tu video',
+            help = 'ayudigna'
+        )
+
+        submitted = st.form_submit_button("Submit")
+        if submitted:
+            st.write(text_input_1)
+            st.success('Tips to prioritize your tasks using the Eisenhower method:', icon="🤖")            
+            answer = cgptg.prompt_ia("Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] enfermera en estados unidos [/KEYWORD] [INSTRUCTION] Dame ideas de 6 articulos que posicionen aclarando el titulo que debe tener el articulo y la keyword que quieres posicionar en cada uno:[/INSTRUCTION]", 200)
+            st.write(answer)
+
 
