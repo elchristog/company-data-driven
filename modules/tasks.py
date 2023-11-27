@@ -4,8 +4,9 @@ import openai
 import time
 
 import utils.user_credentials as uc
+import utils.chat_gpt_gestor as cgptg
 
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+# openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 
 def tasks_visualizer(user_id, project_name, divider):
@@ -116,16 +117,18 @@ def tips_tasks_ia(tasks, divider):
         ia_tips_button = st.button("🤖 Help me to prioritize!")     
         if ia_tips_button:       
             st.success('Tips to prioritize your tasks using the Eisenhower method:', icon="🤖")            
-            input_prompt = f"Help me to priorize my tasks using the Eisenhower Matrix methodology, find yourself the urgency and importance and give me just the results, solve it and give me the tasks priorized with tips, be specific, return just the list of the task prioritized and one tip of each one, use less than 200 tokens: “ {tasks} ”:"
-            response = openai.ChatCompletion.create(
-            model = st.secrets["GPT_MODEL"], # gpt-3.5-turbo, gpt-4-1106-preview
-            messages = [
-                    {"role": "system", "content": "You are an expert in project management and tasks priorization"},
-                    {"role": "user", "content": input_prompt}
-                ],
-            max_tokens = 200  # ajusta según el tamaño de tu artículo, maximo 4000
-            )
-            st.write(response.choices[0].message['content'].strip())
+            answer = cgptg.prompt_ia("You are an expert in project management and tasks priorization", f"Help me to priorize my tasks using the Eisenhower Matrix methodology, find yourself the urgency and importance and give me just the results, solve it and give me the tasks priorized with tips, be specific, return just the list of the task prioritized and one tip of each one, use less than 200 tokens: “ {tasks} ”:", 200)
+            
+            # input_prompt = f"Help me to priorize my tasks using the Eisenhower Matrix methodology, find yourself the urgency and importance and give me just the results, solve it and give me the tasks priorized with tips, be specific, return just the list of the task prioritized and one tip of each one, use less than 200 tokens: “ {tasks} ”:"
+            # response = openai.ChatCompletion.create(
+            # model = st.secrets["GPT_MODEL"], # gpt-3.5-turbo, gpt-4-1106-preview
+            # messages = [
+            #         {"role": "system", "content": "You are an expert in project management and tasks priorization"},
+            #         {"role": "user", "content": input_prompt}
+            #     ],
+            # max_tokens = 200  # ajusta según el tamaño de tu artículo, maximo 4000
+            # )
+            st.write(answer)
     if divider == 1:
         st.write("---") 
 
