@@ -64,6 +64,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 seotw.get_data_save_to_bq(role_id, project_name, project_url_clean)
                 seotw.show_web_metrics(project_name)
                 seoty.get_youtube_data_save_to_bq(role_id, project_name, project_url_clean)
+                seoty.show_youtube_metrics(project_name)
+
 
             if sub_menu == "Content creation guide":
                 tap.title_and_paragraph("Creacion de contenido" + project_icon, "Seguimiento y mantenimiento de los usuarios", "h3", 0)
