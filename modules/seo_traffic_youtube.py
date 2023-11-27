@@ -222,25 +222,25 @@ def show_youtube_metrics(project_name):
             help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format',
             key = 'date_input_youtube'
         )
-        # df = pd.DataFrame(uc.run_query_1_h(f"SELECT * FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks` WHERE date >= '{day[0].strftime('%Y-%m-%d')}' AND date <= '{day[1].strftime('%Y-%m-%d')}' ORDER BY date ASC;"))
-        # df_grouped = df.groupby('date').agg({
-        #         'clicks': 'sum',
-        #         'impressions': 'sum',
-        #         'ctr': 'mean',
-        #         'position': 'mean'
-        #     }).reset_index()
-        # Clicks = df['clicks'].sum()
-        # Impressions = df['impressions'].sum()
-        # ctr_mean = df['ctr'].mean()
-        # pos_mean = df['position'].mean()
-        # met1, met2, met3, met4 = st.columns(4)
-        # with met1:
-        #     st.metric('Clicks:', f'{Clicks:,}')
-        # with met2:
-        #     st.metric('Impressions:', f'{Impressions:,}')
-        # with met3:
-        #     st.metric('CTR:', f'{ctr_mean * 100:.2f}%')
-        # with met4:
-        #     st.metric('Position:', f'{pos_mean:.1f}')
+        df = pd.DataFrame(uc.run_query_1_h(f"SELECT * FROM `company-data-driven.{project_name}.traffic_analytics_youtube_views` WHERE date >= '{day[0].strftime('%Y-%m-%d')}' AND date <= '{day[1].strftime('%Y-%m-%d')}' ORDER BY date ASC;"))
+        df_grouped = df.groupby('date').agg({
+                'views': 'sum',
+                'suscribers_gained': 'sum',
+                'average_view_percentage': 'mean',
+                'shares': 'sum'
+            }).reset_index()
+        views = df['views'].sum()
+        suscribers_gained = df['suscribers_gained'].sum()
+        average_view_percentage = df['average_view_percentage'].mean()
+        shares = df['shares'].sum()
+        met1, met2, met3, met4 = st.columns(4)
+        with met1:
+            st.metric('views:', f'{views:,}')
+        with met2:
+            st.metric('suscribers_gained:', f'{suscribers_gained:,}')
+        with met3:
+            st.metric('average_view_percentage:', f'{average_view_percentage * 100:.2f}%')
+        with met4:
+            st.metric('shares:', f'{shares:.1f}')
         # # with st.container():
         # #     plot_echarts(df_grouped)
