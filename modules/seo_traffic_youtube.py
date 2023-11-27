@@ -208,7 +208,7 @@ def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
 
 
 def show_youtube_metrics(project_name):
-    st.write("### 	:movie_camera: Web traffic")
+    st.write("### 	:movie_camera: Youtube traffic")
     min_max_dates_range_yt = uc.run_query_1_h(f"SELECT MIN(date) AS min_date, MAX(date) as max_date FROM `company-data-driven.{project_name}.traffic_analytics_youtube_views`;")
     if len(min_max_dates_range_yt) < 1:
         st.warning("Waiting for data")
