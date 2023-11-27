@@ -239,7 +239,7 @@ def show_youtube_metrics(project_name):
         with met2:
             st.metric('suscribers_gained:', f'{suscribers_gained:,}')
         with met3:
-            st.metric('average_view_percentage:', f'{average_view_percentage * 100:.2f}%')
+            st.metric('average_view_percentage:', f'{average_view_percentage:.2f}%')
         with met4:
             st.metric('shares:', f'{shares:.1f}')
         # # with st.container():
