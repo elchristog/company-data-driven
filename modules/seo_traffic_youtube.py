@@ -80,8 +80,8 @@ def get_ytproperty(token):
 
 # @st.cache_data(experimental_allow_widgets=True, show_spinner=False)
 def plot_echarts_yt(df_grouped):
-    df_grouped['ctr'] = df_grouped['ctr'].apply(lambda ctr: f"{ctr * 100:.2f}")
-    df_grouped['position'] = df_grouped['position'].apply(lambda pos: round(pos, 2))
+    df_grouped['average_view_percentage'] = df_grouped['average_view_percentage'].apply(lambda average_view_percentage: f"{average_view_percentage:.2f}")
+    # df_grouped['position'] = df_grouped['position'].apply(lambda pos: round(pos, 2))
     df_grouped['date'] = df_grouped['date'].astype(str)  # Convert 'date' to string
 
     options = {
@@ -104,42 +104,42 @@ def plot_echarts_yt(df_grouped):
             "top": "top",
             "align": "auto",
             "selected": {  # Definindo a seleção inicial das séries
-                "clicks": True,         # A série "Clicks" está selecionada
-                "impressions": True,    # A série "Impressions" está selecionada
-                "ctr": False,           # A série "CTR" não está selecionada
-                "position": False       # A série "Position" não está selecionada
+                "views": True,         # A série "views" está selecionada
+                "suscribers_gained": True,    # A série "suscribers_gained" está selecionada
+                "average_view_percentage": False,           # A série "average_view_percentage" não está selecionada
+                "shares": False       # A série "shares" não está selecionada
             }
         },
         "tooltip": {"trigger": "axis", },
         "series": [
             {
                 "type": "line",
-                "name": "clicks",
-                "data": df_grouped['clicks'].tolist(),
+                "name": "views",
+                "data": df_grouped['views'].tolist(),
                 "smooth": True,
                 "lineStyle": {"width": 2.4, "color": "#A6785D"},
                 "showSymbol": False,  # Remova os marcadores de dados para esta série
             },
             {
                 "type": "line",
-                "name": "impressions",
-                "data": df_grouped['impressions'].tolist(),
+                "name": "suscribers_gained",
+                "data": df_grouped['suscribers_gained'].tolist(),
                 "smooth": True,
                 "lineStyle": {"width": 2.4, "color": "#394A59"},
                 "showSymbol": False,  # Remova os marcadores de dados para esta série
             },
             {
                 "type": "line",
-                "name": "ctr",
-                "data": df_grouped['ctr'].tolist(),
+                "name": "average_view_percentage",
+                "data": df_grouped['average_view_percentage'].tolist(),
                 "smooth": True,
                 "lineStyle": {"width": 2.4, "color": "#BF3F34"},
                 "showSymbol": False,  # Remova os marcadores de dados para esta série
             },
             {
                 "type": "line",
-                "name": "position",
-                "data": df_grouped['position'].tolist(),
+                "name": "shares",
+                "data": df_grouped['shares'].tolist(),
                 "smooth": True,
                 "lineStyle": {"width": 2.4, "color": "#BFB5B4"},
                 "showSymbol": False,  # Remova os marcadores de dados para esta série
@@ -325,5 +325,5 @@ def show_youtube_metrics(project_name):
             st.metric('average_view_percentage:', f'{average_view_percentage:.2f}%')
         with met4:
             st.metric('shares:', f'{shares:.1f}')
-        # # with st.container():
-        # #     plot_echarts(df_grouped)
+        with st.container():
+            plot_echarts_yt(df_grouped)
