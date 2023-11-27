@@ -88,6 +88,7 @@ def get_data_date(property_url, start_date, end_date, url_filter=None, url_opera
         row_limit = 1000
         progress_text = "Retrieving Metrics. Please Wait. 🐈"
         my_bar = st.progress(0, text=progress_text)
+        # day views
         startRow = 0
         while startRow == 0 or startRow % 25000 == 0 and startRow < row_limit:
             response = service.reports().query(
@@ -113,8 +114,37 @@ def get_data_date(property_url, start_date, end_date, url_filter=None, url_opera
                 'shares': row[4]
             } for row in data
         ])
-        my_bar.progress(1.0, text="Processing is now finished. 😸")
         time.sleep(2)
+
+        # video views
+        startRow = 0
+        while startRow == 0 or startRow % 25000 == 0 and startRow < row_limit:
+            response = service.reports().query(
+                ids='channel==MINE',
+                startDate=start_date,
+                endDate=end_date,
+                metrics='views,subscribersGained,averageViewPercentage,shares',
+                dimensions='day',
+                sort='day'
+            ).execute()
+            rows = response.get('rows', [])
+            startRow = startRow + len(rows)
+            data.extend(rows)
+            progress_percent = min((startRow / row_limit) * 100, 100)
+            progress_value = progress_percent / 100.0
+            my_bar.progress(progress_value, text=progress_text)
+        st.table(rows)
+        # df_clicks = pd.DataFrame([
+        #     {
+        #         'date': row[0],
+        #         'views': row[1],
+        #         'subscribersGained': row[2],
+        #         'averageViewPercentage': row[3],
+        #         'shares': row[4]
+        #     } for row in data
+        # ])
+        time.sleep(2)
+
         my_bar.empty()
         return df_clicks
 
