@@ -90,14 +90,6 @@ def get_data_date(property_url, start_date, end_date, url_filter=None, url_opera
         my_bar = st.progress(0, text=progress_text)
         startRow = 0
         while startRow == 0 or startRow % 25000 == 0 and startRow < row_limit:
-            request = {
-                'startDate': start_date,
-                'endDate': end_date,
-                'dimensions': 'date',
-                'rowLimit': 25000,
-                'startRow': startRow
-            }
-            
             response = service.reports().query(
                 ids='channel==MINE',
                 startDate=start_date,
