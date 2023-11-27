@@ -116,34 +116,6 @@ def get_data_date(property_url, start_date, end_date, url_filter=None, url_opera
         ])
         time.sleep(2)
 
-        # video views
-        startRow = 0
-        while startRow == 0 or startRow % 25000 == 0 and startRow < row_limit:
-            response = service.reports().query(
-                ids='channel==MINE',
-                startDate=start_date,
-                endDate=end_date,
-                metrics='views,subscribersGained,averageViewPercentage,shares',
-                dimensions='video'
-            ).execute()
-            rows = response.get('rows', [])
-            startRow = startRow + len(rows)
-            data.extend(rows)
-            progress_percent = min((startRow / row_limit) * 100, 100)
-            progress_value = progress_percent / 100.0
-            my_bar.progress(progress_value, text=progress_text)
-        st.table(rows)
-        # df_clicks = pd.DataFrame([
-        #     {
-        #         'date': row[0],
-        #         'views': row[1],
-        #         'subscribersGained': row[2],
-        #         'averageViewPercentage': row[3],
-        #         'shares': row[4]
-        #     } for row in data
-        # ])
-        time.sleep(2)
-
         my_bar.empty()
         return df_clicks
 
