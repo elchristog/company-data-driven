@@ -140,7 +140,7 @@ def seo_ideation(project_name, project_keyword):
             help = 'Estas ideas seran almacenadas y priorizadas con el tiempo'
         )
 
-        submitted = st.form_submit_button("Submit")
+        submitted = st.form_submit_button("Generate ideas")
         if submitted:
             st.success('Generating Ideas:', icon="🤖")    
             keyword_research = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{project_name}.keywords`;")        
