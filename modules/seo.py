@@ -132,7 +132,7 @@ def content_creation_guide_effective_communication_storytelling():
 
 def seo_ideation(project_name, project_keyword):
     with st.form("seo_ideation_form", clear_on_submit = True):
-
+        st.write(project_keyword)
         text_input_1 = st.text_area(
             "Ideas extras de keywords",
             label_visibility = 'visible',
