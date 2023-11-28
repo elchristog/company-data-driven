@@ -72,7 +72,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
             if sub_menu == "SEO ideation":
                 tap.title_and_paragraph("SEO Ideation" + project_icon, "Generation of 6 long tail ideas based on Keyword research", "h3", 0)
-                seo.seo_ideation(project_name, project_keyword)
+                seo.seo_ideation(project_name, project_keyword, user_id)
 
         if menu == "Web App":
             sub_menu_options=["Customer view", 'Nclex test creation', 'Update customer progress']
