@@ -10,115 +10,115 @@ def content_creation_guide_effective_communication_storytelling():
     with st.form("comm_eff_storytelling_form", clear_on_submit = True):
 
         text_input_1 = st.text_area(
-            "Que va a lograr tu usuario con este contenido?",
+            "Keyword del articulo",
             label_visibility = 'visible',
             disabled = False,
-            placeholder = 'Hola soy XX y en este video te voy a ensenar a como hacer que la gente haga click en tu video',
-            help = 'ayudigna'
+            placeholder = 'Obtener la licencia de enfermería en Estados Unidos',
+            help = 'No se debe poner cualquier cosa, debe ser lo que entrego el ideador'
         )
 
         text_input_2 = st.text_area(
-            "Por que?",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Por que de nada sirve que ahgas videos muy buenos si nadie los ve',
-            help = 'ayudigna'
-        )
-
-        text_input_3 = st.text_area(
-            "Demuestra que sirve, resuelve la intencion de busqueda",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Pero antes que eso te voy a mostrar los ingresos que estoy teniendo, pues bien estoy ganando 5 mil dolares al mes mira',
-            help = 'ayudigna'
-        )
-
-        text_input_4 = st.text_area(
-            "Suscribete en momento de alta atencion relativa",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Asi que recuerda suscribirte',
-            help = 'ayudigna'
-        )
-
-        text_input_4 = st.text_area(
-            "Explicar el que y darle contexto",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Para que hagan mas click debes mejorqar el ctr, es decir la cantidad de veces que hacen click en tu video por cada vez que lo muestra, mira te lo muestro en la plataforma, por ejemplo si tienes un ctr del 6 porciento significa que el 6 porciento de las personas que buscaron te eligieron',
-            help = 'ayudigna'
-        )
-
-        text_input_5 = st.text_area(
-            "Por que es importante esto?",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Tu que crees que youtube va a mostrar mas, un video que cada vez que youtube lo muestra nadie le da click o uno que cada que lo muestra todo el mundo hace click',
-            help = 'ayudigna'
-        )
-
-        text_input_6 = st.text_area(
             "Idea principal",
             label_visibility = 'visible',
             disabled = False,
-            placeholder = 'Si consigues mejorar el ctr y en este video te voy a mostrar la estrategia para lograrlo, entonces vas a lograr que youtube te recomiende',
-            help = 'ayudigna'
+            placeholder = 'Si quieren obtener la licencia en USA deben aplicar los 10 pasos: Trámite de documentos CGFNS, Inscripción ante la Junta de Enfermería, Preparación NCLEX, 	Preparación de inglés y Visa Screen. Aplicar el modelo incrementara los ingresos en 13%',
+            help = 'Es una frase que persuada a la persona para que haga lo que quiero que haga, esta orientada al verbo hacer y al beneficio de hacerlo.'
+        )
+
+        text_input_3 = st.text_area(
+            "Por que de la primer parte de la idea principal",
+            label_visibility = 'visible',
+            disabled = False,
+            placeholder = 'Por que aplicar 10 pasos? Por que son los mismos pasos que yo tuve que vivir cuando me converti en enfermera en este pais y son los que requiere el gobierno de los estados unidos, pueden revisarse en esta web:',
+            help = 'Parte la idea principal en 3 partes y contesta por que de cada una, de forma completa y detallada'
+        )
+
+        text_input_4 = st.text_area(
+            "Por que de la segunda parte de la idea principal",
+            label_visibility = 'visible',
+            disabled = False,
+            placeholder = 'por que Trámite de documentos CGFNS, Inscripción ante la Junta de Enfermería, Preparación NCLEX? Porque los estados unidos requieren que cualquier enfermero extranjero que quiera trabajar en los estados unidos debe demostrar que sus estudios equivalen a una enfermera registrada que estudio en el pais, y para eso se deben legalizar y comprobar una serie de documentos y pruebas que demuestren que si es asi',
+            help = 'Parte la idea principal en 3 partes y contesta por que de cada una, de forma completa y detallada'
+        )
+
+        text_input_4 = st.text_area(
+            "Por que de la tercera parte de la idea principal",
+            label_visibility = 'visible',
+            disabled = False,
+            placeholder = 'por que Preparación de inglés y Visa Screen? porque ese documento es el que expide EU diciendo que efectivamente tu cumples con todos los requisitos de valides de tus estudios, conocimientos en salud y por suepuesto el ingles, y sin ese documento no te dejan tramitar la visa',
+            help = 'Parte la idea principal en 3 partes y contesta por que de cada una, de forma completa y detallada'
+        )
+
+        text_input_5 = st.text_area(
+            "Como de la primera parte de la idea principal",
+            label_visibility = 'visible',
+            disabled = False,
+            placeholder = 'Como se aplican los 10 pasos? Con asesoria, nosotros asesoramos a enfermeros que se quieren ir a estados unidos durante todo el proceso hasta que lleguen al pais y se adapten a la vida, se hace entrando al link de whatsapp y me escriben y citamos la primera reunion',
+            help = 'explica como se hace'
+        )
+
+        text_input_6 = st.text_area(
+            "Como de la segunda parte de la idea principal",
+            label_visibility = 'visible',
+            disabled = False,
+            placeholder = 'como se hace Trámite de documentos CGFNS, Inscripción ante la Junta de Enfermería, Preparación NCLEX? para la aprte de cgfns pueden entrar a la pagina web de ellos y este es el link, aca explican como se hace por ejemplo vean que aca dice que se necesita esto y esto otro, para la parte del nclex les recomiendo el libro de archer y el de pearson y tambien nuestra asesoria porque los rpeparamos y probamos',
+            help = 'Explica como se hace'
         )
 
         text_input_7 = st.text_area(
-            "Resolver la intencion de busqueda",
+            "Como de la tercera parte de la idea principal",
             label_visibility = 'visible',
             disabled = False,
-            placeholder = 'Para que te den mas click mueve estas 2 cosas: la miniatura y el titulo del video',
-            help = 'ayudigna'
+            placeholder = 'Como se hace Preparación de inglés y Visa Screen? hay tres examenes posibles ielts, toefl y el pti primero deben pensar muy bien cual elegir porque aunque hay unos ams faciles que otros no totdos son validos en todos los estados por ejemplo para una maestria que muchas veces las pagan les exigen esto y esto',
+            help = 'Explica como se hace'
         )
 
         text_input_8 = st.text_area(
-            "por que del primer como",
+            "Haga experimentos y tablas comparativas 1",
             label_visibility = 'visible',
             disabled = False,
-            placeholder = 'Sabes cual es la funcion de la miniatura? llamar la atencion, no es explicar de que trata el video y es ahi donde muchos fallan, si generas expectativa entonces van a dar click, porque la gente esta pasando cosas y solo para en lo que le llama la atebncion, si tu miniatura es igual al resto de miniaturas del mundo nadie te va a preferir, ejemplo, mira lo que hace mr beast',
-            help = 'Fijate que aca habla de que hay que llamar la atencion pero no explica como se hacer para llamar la atencion, eso es lo que se vende marcos, caras, emojis, calor distinto al resto....'
+            placeholder = 'Comparemos obtener la licencia por nuestra cuenta contra una agencia, miren la agencia los obliga a quedarse en ciertos estados no dodne quiera, ademas tatatta',
+            help = 'Debe ser la parte mas larga y detallada: Probemos opcion1 y opcion2, miren lo que da cuando hacemos 1 y lo que da cuando hacemos 2, en una tabla comparativa se ve asi'
         )
 
         text_input_9 = st.text_area(
-            "Ejemplo del primer como",
+            "Haga experimentos y tablas comparativas 2",
             label_visibility = 'visible',
             disabled = False,
-            placeholder = 'mira lo que hace mr beast, esta es su miniatura, la ha cambiado 3 veces',
-            help = 'Fijate que aca habla de que hay que llamar la atencion pero no explica como se hacer para llamar la atencion, eso es lo que se vende marcos, caras, emojis, calor distinto al resto....'
+            placeholder = 'Comparemos obtener la licencia por nuestra cuenta contra una agencia, miren la agencia los obliga a quedarse en ciertos estados no dodne quiera, ademas tatatta',
+            help = 'Debe ser la parte mas larga y detallada: Probemos opcion1 y opcion2, miren lo que da cuando hacemos 1 y lo que da cuando hacemos 2, en una tabla comparativa se ve asi'
         )
 
         text_input_10 = st.text_area(
-            "por que del segundo como",
+            "Haga experimentos y tablas comparativas 3",
             label_visibility = 'visible',
             disabled = False,
-            placeholder = 'Y cual es la funcion del titulo? Describir de que va el video generando una respuesta emocional en el usuario, si describe de que va el video pero genera curiosidad',
-            help = 'Lo mismo, habla del que y no del como, si hay que mejorar el titulo pero el como es mayuscilas selectivas, diferenciarse del resto, emojis, palabra clave...'
+            placeholder = 'Comparemos obtener la licencia por nuestra cuenta contra una agencia, miren la agencia los obliga a quedarse en ciertos estados no dodne quiera, ademas tatatta',
+            help = 'Debe ser la parte mas larga y detallada: Probemos opcion1 y opcion2, miren lo que da cuando hacemos 1 y lo que da cuando hacemos 2, en una tabla comparativa se ve asi'
         )
 
         text_input_11 = st.text_area(
-            "Ejemplo del segundo como",
+            "Copia y pega lo mas relevante de lo que escriben los top 3 competidores de esto",
             label_visibility = 'visible',
             disabled = False,
-            placeholder = 'Mira lo que usa mr beast, explamaciones, mayusculas....',
-            help = 'Lo mismo, habla del que y no del como, si hay que mejorar el titulo pero el como es mayuscilas selectivas, diferenciarse del resto, emojis, palabra clave...'
+            placeholder = 'Para trabajar de manera legal en Estados Unidos, además de contar con un título académico de tu país de origen, necesitarás aprobar el examen que realiza la Licenciatura del Consejo Nacional (NCLEX). Una vez que apruebes este examen obtendrás una licencia que te permitirá ejercer la profesión de enfermera',
+            help = 'Solo trae lo relevante'
         )
 
         text_input_12 = st.text_area(
-            "Conclusiones checklist",
+            "Checklist",
             label_visibility = 'visible',
             disabled = False,
-            placeholder = 'Si consigues mejorar el ctr  entonces vas a lograr que youtube te recomiende y eso se hace logrando que las miniaturas llamen ams la atebncion y que los titulos generen curiosidad',
-            help = 'Lo mismo, habla del que y no del como, si hay que mejorar el titulo pero el como es mayuscilas selectivas, diferenciarse del resto, emojis, palabra clave...'
+            placeholder = 'por eso recuerda 1, buscar un programa de acompanamiento, 2 hacer el Trámite de documentos, 3 inscripción ante la Junta de Enfermería...',
+            help = 'Resume en un checklists los mensajes principales'
         )
 
         text_input_13 = st.text_area(
-            "CliffHanger",
+            "llamado a la accion con pasos a seguir",
             label_visibility = 'visible',
             disabled = False,
-            placeholder = 'De esa manera vas a mejorar mucho tus clicks, pero mira lop que estoy logrando, para conseguir esto necesitaras tambien conoceer el tercer metodo para que youtube te recomiende y eso lo veremos en el siguiente video',
-            help = 'Lo mismo, habla del que y no del como, si hay que mejorar el titulo pero el como es mayuscilas selectivas, diferenciarse del resto, emojis, palabra clave...'
+            placeholder = 'Suscribete para seguir aprendiendo conmigo y si quieres iniciar el programa dale al enlace de whatsapp',
+            help = ''
         )
 
 
