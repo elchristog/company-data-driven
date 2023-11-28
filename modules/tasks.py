@@ -44,9 +44,9 @@ def tasks_visualizer(user_id, project_name, divider):
                     time.sleep(5)
                 if new_status == 'finished':
                     uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', finished_date = '{today_str}' WHERE id = {task_id}")
-                    st.balloons()
                     st.info("Updating, please wait", icon = "☺️")
                     time.sleep(5)
+                    st.balloons()
             if update_task_status_button:
                 if selected_task is not None:
                     selected_task_status = actual_statuses[descriptions.index(selected_task)]
