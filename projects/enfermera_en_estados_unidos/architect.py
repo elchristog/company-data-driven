@@ -71,7 +71,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 seo.content_creation_guide_effective_communication_storytelling()
 
             if sub_menu == "SEO ideation":
-                tap.title_and_paragraph("SEO Ideation" + project_icon, "Seguimiento y mantenimiento de los usuarios", "h3", 0)
+                tap.title_and_paragraph("SEO Ideation" + project_icon, "Generation of 6 long tail ideas based on Keyword research", "h3", 0)
                 seo.seo_ideation(project_name, project_keyword)
 
         if menu == "Web App":
