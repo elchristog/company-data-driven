@@ -6,8 +6,6 @@ import time
 import utils.user_credentials as uc
 import utils.chat_gpt_gestor as cgptg
 
-# openai.api_key = st.secrets["OPENAI_API_KEY"]
-
 
 def tasks_visualizer(user_id, project_name, divider):
     rows = uc.run_query_instant(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed');") #finished, canceled, unfulfilled
@@ -37,20 +35,7 @@ def tasks_visualizer(user_id, project_name, divider):
                     options= ['on_execution', 'finished'],
                     index=None
                 )
-            # if selected_task is not None:
-            #     selected_task_status = actual_statuses[descriptions.index(selected_task)]
-            #     if selected_task_status == 'on_execution':
-            #         selected_status = st.selectbox(
-            #         label="Select the new status",
-            #         options= ['finished'],
-            #         index=None
-            #     )
-            #     else:
-            #         selected_status = st.selectbox(
-            #             label="Select the new status",
-            #             options= ['on_execution'],
-            #             index=None
-            #         )
+           
             update_task_status_button = st.form_submit_button("Update status")
             def update_task_status(task_id, new_status, today_str):
                 if new_status == 'on_execution':
@@ -63,12 +48,21 @@ def tasks_visualizer(user_id, project_name, divider):
                     st.info("Updating, please wait", icon = "☺️")
                     time.sleep(5)
             if update_task_status_button:
-                today = datetime.date.today()
-                today_str = today.strftime("%Y-%m-%d")
-                selected_task_id = ids[descriptions.index(selected_task)]
-                update_task_status(selected_task_id, selected_status, today_str)
-                st.success('Task status updated!', icon="😎")
-                st.rerun()
+                if selected_task is not None:
+                    selected_task_status = actual_statuses[descriptions.index(selected_task)]
+                    if selected_task_status == 'on_execution' and selected_status == 'on_execution':
+                        st.error("Task was already on execution", icon = "😝")
+                    if selected_task_status == 'to_start' and selected_status == 'finished':
+                        st.error("First must be on execution", icon = "😝")
+                    if selected_task_status == 'delayed' and selected_status == 'finished':
+                        st.error("First must be on execution", icon = "😝")
+                    if (selected_task_status == 'to_start' and selected_status == 'on_execution') or (selected_task_status == 'on_execution' and selected_status == 'finished'):
+                        today = datetime.date.today()
+                        today_str = today.strftime("%Y-%m-%d")
+                        selected_task_id = ids[descriptions.index(selected_task)]
+                        update_task_status(selected_task_id, selected_status, today_str)
+                        st.success('Task status updated!', icon="😎")
+                        st.rerun()
     if divider == 1:
         st.write("---") 
     return rows
