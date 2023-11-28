@@ -311,7 +311,7 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
 
 def get_data_save_to_bq(role_id, project_name, project_url_clean):
     if role_id == 1:
-        dates_in_table = uc.run_query_instant(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) - 2 AS days_last_update, DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY) AS min_date_first_query, DATE_ADD(MAX(date), INTERVAL 1 DAY) AS min_date_next_query, DATE_SUB(CURRENT_DATE(), INTERVAL 2 DAY) AS max_date_next_query FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
+        dates_in_table = uc.run_query_instant(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) - 3 AS days_last_update, DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY) AS min_date_first_query, DATE_ADD(MAX(date), INTERVAL 1 DAY) AS min_date_next_query, DATE_SUB(CURRENT_DATE(), INTERVAL 3 DAY) AS max_date_next_query FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
         days_last_update = dates_in_table[0].get("days_last_update")
         min_date_first_query = dates_in_table[0].get("min_date_first_query")
         min_date_next_query = dates_in_table[0].get("min_date_next_query")
