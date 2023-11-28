@@ -230,6 +230,7 @@ def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
                 st.session_state.clicked = False
             
             st.write("### Update your youtube data")
+            st.warning("Be sure to select the right channel")
             st.markdown("----")
             link_style = (
                 "text-decoration: none;"
