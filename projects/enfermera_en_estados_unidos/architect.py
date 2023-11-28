@@ -17,7 +17,7 @@ import projects.enfermera_en_estados_unidos.modules.program_steps_guide as psg
 # https://docs.streamlit.io/library/api-reference/layout
 # https://docs.streamlit.io/library/api-reference/control-flow/st.form
 
-def architect(user_id, role_id, project_id, project_name, project_title, project_icon, project_logo_url, project_url_clean):
+def architect(user_id, role_id, project_id, project_name, project_title, project_icon, project_logo_url, project_url_clean, project_keyword):
     """
     description: The developing interfaces must be approved just for users id 1 and 3
     input:
@@ -72,7 +72,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
             if sub_menu == "SEO ideation":
                 tap.title_and_paragraph("SEO Ideation" + project_icon, "Seguimiento y mantenimiento de los usuarios", "h3", 0)
-                seo.seo_ideation(project_name)
+                seo.seo_ideation(project_name, project_keyword)
 
         if menu == "Web App":
             sub_menu_options=["Customer view", 'Nclex test creation', 'Update customer progress']

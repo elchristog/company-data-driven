@@ -124,7 +124,7 @@ def user_credentials(name, authentication_status, username):
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
 
-    rows = run_query_1_day(f"SELECT u.id AS user_id, u.username, u.status, u.project_id, r.id AS role_id, r.name AS role_name, p.icon, p.logo_url, p.name, p.title, p.web_url_clean   FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.roles` AS r ON ra.role_id = r.id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE username = '{username}';")
+    rows = run_query_1_day(f"SELECT u.id AS user_id, u.username, u.status, u.project_id, r.id AS role_id, r.name AS role_name, p.icon, p.logo_url, p.name, p.title, p.web_url_clean, p.keyword   FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.roles` AS r ON ra.role_id = r.id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE username = '{username}';")
 
     if len(rows) == 1:
         user_id = rows[0].get('user_id')
@@ -137,6 +137,7 @@ def user_credentials(name, authentication_status, username):
         project_name = rows[0].get('name')
         project_title = rows[0].get('title')
         project_url_clean = rows[0].get('web_url_clean')
+        project_keyword = rows[0].get('keyword')
 
     else:
         user_id = rows[0].get('user_id')
@@ -147,6 +148,7 @@ def user_credentials(name, authentication_status, username):
         project_name = rows[0].get('name')
         project_title = rows[0].get('title')
         project_url_clean = rows[0].get('web_url_clean')
+        project_keyword = rows[0].get('keyword')
 
 
         user_ids = []
@@ -183,7 +185,7 @@ def user_credentials(name, authentication_status, username):
             else:
                 st.error('User has multiple projects')
              
-        ph.project_handler(user_id, project_id, role_id, role_name, project_name, project_title, project_icon, project_logo_url, project_url_clean)
+        ph.project_handler(user_id, project_id, role_id, role_name, project_name, project_title, project_icon, project_logo_url, project_url_clean, project_keyword)
 
 
 
