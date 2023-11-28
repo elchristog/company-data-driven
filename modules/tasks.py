@@ -32,20 +32,25 @@ def tasks_visualizer(user_id, project_name, divider):
                 options = descriptions,
                 index = None
             )
-            if selected_task is not None:
-                selected_task_status = actual_statuses[descriptions.index(selected_task)]
-                if selected_task_status == 'on_execution':
-                    selected_status = st.selectbox(
+            selected_status = st.selectbox(
                     label="Select the new status",
-                    options= ['finished'],
+                    options= ['on_execution', 'finished'],
                     index=None
                 )
-                else:
-                    selected_status = st.selectbox(
-                        label="Select the new status",
-                        options= ['on_execution'],
-                        index=None
-                    )
+            # if selected_task is not None:
+            #     selected_task_status = actual_statuses[descriptions.index(selected_task)]
+            #     if selected_task_status == 'on_execution':
+            #         selected_status = st.selectbox(
+            #         label="Select the new status",
+            #         options= ['finished'],
+            #         index=None
+            #     )
+            #     else:
+            #         selected_status = st.selectbox(
+            #             label="Select the new status",
+            #             options= ['on_execution'],
+            #             index=None
+            #         )
             update_task_status_button = st.form_submit_button("Update status")
             def update_task_status(task_id, new_status, today_str):
                 if new_status == 'on_execution':
