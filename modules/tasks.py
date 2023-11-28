@@ -46,24 +46,24 @@ def tasks_visualizer(user_id, project_name, divider):
                         options= ['on_execution'],
                         index=None
                     )
-                update_task_status_button = st.form_submit_button("Update status")
-                def update_task_status(task_id, new_status, today_str):
-                    if new_status == 'on_execution':
-                        uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', on_execution_date = '{today_str}' WHERE id = {task_id}")
-                        st.info("Updating, please wait", icon = "☺️")
-                        time.sleep(5)
-                    if new_status == 'finished':
-                        uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', finished_date = '{today_str}' WHERE id = {task_id}")
-                        st.balloons()
-                        st.info("Updating, please wait", icon = "☺️")
-                        time.sleep(5)
-                if update_task_status_button:
-                    today = datetime.date.today()
-                    today_str = today.strftime("%Y-%m-%d")
-                    selected_task_id = ids[descriptions.index(selected_task)]
-                    update_task_status(selected_task_id, selected_status, today_str)
-                    st.success('Task status updated!', icon="😎")
-                    st.rerun()
+            update_task_status_button = st.form_submit_button("Update status")
+            def update_task_status(task_id, new_status, today_str):
+                if new_status == 'on_execution':
+                    uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', on_execution_date = '{today_str}' WHERE id = {task_id}")
+                    st.info("Updating, please wait", icon = "☺️")
+                    time.sleep(5)
+                if new_status == 'finished':
+                    uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', finished_date = '{today_str}' WHERE id = {task_id}")
+                    st.balloons()
+                    st.info("Updating, please wait", icon = "☺️")
+                    time.sleep(5)
+            if update_task_status_button:
+                today = datetime.date.today()
+                today_str = today.strftime("%Y-%m-%d")
+                selected_task_id = ids[descriptions.index(selected_task)]
+                update_task_status(selected_task_id, selected_status, today_str)
+                st.success('Task status updated!', icon="😎")
+                st.rerun()
     if divider == 1:
         st.write("---") 
     return rows
