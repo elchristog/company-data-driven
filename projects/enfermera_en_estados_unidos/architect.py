@@ -74,6 +74,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph("SEO Ideation" + project_icon, "Generation of 6 long tail ideas based on Keyword research", "h3", 0)
                 seo.seo_ideation(project_name, project_keyword, user_id, role_id)
 
+            if sub_menu == "Web creation guide":
+                tap.title_and_paragraph("Web creation guide" + project_icon, "Sigue estos pasos", "h3", 0)
+                seo.web_creation_guide()
+
         if menu == "Web App":
             sub_menu_options=["Customer view", 'Nclex test creation', 'Update customer progress']
             if role_id < 4:
