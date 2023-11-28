@@ -136,8 +136,8 @@ def seo_ideation(project_name, project_keyword):
             "Ideas extras de keywords",
             label_visibility = 'visible',
             disabled = False,
-            placeholder = 'Hola soy XX y en este video te voy a ensenar a como hacer que la gente haga click en tu video',
-            help = 'ayudigna'
+            placeholder = 'pasos para ser enfermera latina en usa, comparacion de agencias de enfermeria, cuanto gana una enfermera en texas',
+            help = 'Estas ideas seran almacenadas y priorizadas con el tiempo'
         )
 
         submitted = st.form_submit_button("Submit")
