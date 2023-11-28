@@ -130,7 +130,7 @@ def content_creation_guide_effective_communication_storytelling():
 
 
 
-def seo_ideation():
+def seo_ideation(project_name):
     with st.form("seo_ideation_form", clear_on_submit = True):
 
         text_input_1 = st.text_area(
@@ -144,9 +144,9 @@ def seo_ideation():
         submitted = st.form_submit_button("Submit")
         if submitted:
             st.success('Generating Ideas:', icon="🤖")    
-            keyword_research = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.enfermera_en_estados_unidos.keywords`;")        
-            longtail_questions = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.enfermera_en_estados_unidos.keyword_common_questions`;")        
-            created_content = uc.run_query_10_s(f"SELECT page AS page, SUM(clicks) AS clicks, SUM(impressions) AS impressions, AVG(ctr) AS ctr  FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_web_pages` GROUP BY page;")        
+            keyword_research = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{project_name}.keywords`;")        
+            longtail_questions = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{project_name}.keyword_common_questions`;")        
+            created_content = uc.run_query_10_s(f"SELECT page AS page, SUM(clicks) AS clicks, SUM(impressions) AS impressions, AVG(ctr) AS ctr  FROM `company-data-driven.{project_name}.traffic_analytics_web_pages` GROUP BY page;")        
             answer = cgptg.prompt_ia("Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] enfermera en estados unidos [/KEYWORD] [KEYWORD_RESEARCH] {keyword_research} [/KEYWORD_RESEARCH] [LONGTAIL_QUESTIONS] {longtail_questions} [/LONGTAIL_QUESTIONS] [IDEASEXTRA] {text_input_1} [/IDEASEXTRA] [YACREADO] {created_content} [/YACREADO] [INSTRUCTION] Analiza las metricas, Dame ideas de 6 articulos que posicionen aclarando el titulo que debe tener el articulo y la keyword que quieres posicionar en cada uno, evita hablar sobre articulos que ya he creado [YACREADO], asegura que 2 de los articulos vengan de los [LONGTAIL_QUESTIONS] o de los [IDEASEXTRA]:[/INSTRUCTION]", 600)
             st.write(answer)
 
