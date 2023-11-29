@@ -68,7 +68,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
             if sub_menu == "Content creation guide":
                 tap.title_and_paragraph("Creacion de contenido" + project_icon, "Seguimiento y mantenimiento de los usuarios", "h3", 0)
-                seo.content_creation_guide_effective_communication_storytelling()
+                seo.content_creation_guide_effective_communication_storytelling(user_id, project_name)
 
             if sub_menu == "SEO ideation":
                 tap.title_and_paragraph("SEO Ideation" + project_icon, "Generation of 6 long tail ideas based on Keyword research", "h3", 0)
@@ -76,7 +76,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
             if sub_menu == "Web creation guide":
                 tap.title_and_paragraph("Web creation guide" + project_icon, "Sigue estos pasos", "h3", 0)
-                seo.web_creation_guide(user_id, project_name)
+                seo.web_creation_guide()
 
         if menu == "Web App":
             sub_menu_options=["Customer view", 'Nclex test creation', 'Update customer progress']
