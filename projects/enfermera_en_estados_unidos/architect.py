@@ -76,7 +76,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
             if sub_menu == "Web creation guide":
                 tap.title_and_paragraph("Web creation guide" + project_icon, "Sigue estos pasos", "h3", 0)
-                seo.web_creation_guide()
+                seo.web_creation_guide(user_id)
 
         if menu == "Web App":
             sub_menu_options=["Customer view", 'Nclex test creation', 'Update customer progress']

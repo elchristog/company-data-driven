@@ -6,7 +6,7 @@ import datetime
 import utils.user_credentials as uc
 import utils.chat_gpt_gestor as cgptg
 
-def content_creation_guide_effective_communication_storytelling():
+def content_creation_guide_effective_communication_storytelling(user_id):
     with st.form("comm_eff_storytelling_form", clear_on_submit = True):
 
         text_input_1 = st.text_area(
@@ -41,7 +41,7 @@ def content_creation_guide_effective_communication_storytelling():
             help = 'Parte la idea principal en 3 partes y contesta por que de cada una, de forma completa y detallada'
         )
 
-        text_input_4 = st.text_area(
+        text_input_5 = st.text_area(
             "Por que de la tercera parte de la idea principal",
             label_visibility = 'visible',
             disabled = False,
@@ -49,7 +49,7 @@ def content_creation_guide_effective_communication_storytelling():
             help = 'Parte la idea principal en 3 partes y contesta por que de cada una, de forma completa y detallada'
         )
 
-        text_input_5 = st.text_area(
+        text_input_6 = st.text_area(
             "Como de la primera parte de la idea principal",
             label_visibility = 'visible',
             disabled = False,
@@ -57,7 +57,7 @@ def content_creation_guide_effective_communication_storytelling():
             help = 'explica como se hace'
         )
 
-        text_input_6 = st.text_area(
+        text_input_7 = st.text_area(
             "Como de la segunda parte de la idea principal",
             label_visibility = 'visible',
             disabled = False,
@@ -65,7 +65,7 @@ def content_creation_guide_effective_communication_storytelling():
             help = 'Explica como se hace'
         )
 
-        text_input_7 = st.text_area(
+        text_input_8 = st.text_area(
             "Como de la tercera parte de la idea principal",
             label_visibility = 'visible',
             disabled = False,
@@ -73,7 +73,7 @@ def content_creation_guide_effective_communication_storytelling():
             help = 'Explica como se hace'
         )
 
-        text_input_8 = st.text_area(
+        text_input_9 = st.text_area(
             "Haga experimentos y tablas comparativas 1",
             label_visibility = 'visible',
             disabled = False,
@@ -81,7 +81,7 @@ def content_creation_guide_effective_communication_storytelling():
             help = 'Debe ser la parte mas larga y detallada: Probemos opcion1 y opcion2, miren lo que da cuando hacemos 1 y lo que da cuando hacemos 2, en una tabla comparativa se ve asi'
         )
 
-        text_input_9 = st.text_area(
+        text_input_10 = st.text_area(
             "Haga experimentos y tablas comparativas 2",
             label_visibility = 'visible',
             disabled = False,
@@ -89,7 +89,7 @@ def content_creation_guide_effective_communication_storytelling():
             help = 'Debe ser la parte mas larga y detallada: Probemos opcion1 y opcion2, miren lo que da cuando hacemos 1 y lo que da cuando hacemos 2, en una tabla comparativa se ve asi'
         )
 
-        text_input_10 = st.text_area(
+        text_input_11 = st.text_area(
             "Haga experimentos y tablas comparativas 3",
             label_visibility = 'visible',
             disabled = False,
@@ -97,7 +97,7 @@ def content_creation_guide_effective_communication_storytelling():
             help = 'Debe ser la parte mas larga y detallada: Probemos opcion1 y opcion2, miren lo que da cuando hacemos 1 y lo que da cuando hacemos 2, en una tabla comparativa se ve asi'
         )
 
-        text_input_11 = st.text_area(
+        text_input_12 = st.text_area(
             "Copia y pega lo mas relevante de lo que escriben los top 3 competidores de esto",
             label_visibility = 'visible',
             disabled = False,
@@ -105,7 +105,7 @@ def content_creation_guide_effective_communication_storytelling():
             help = 'Solo trae lo relevante'
         )
 
-        text_input_12 = st.text_area(
+        text_input_13 = st.text_area(
             "Checklist",
             label_visibility = 'visible',
             disabled = False,
@@ -113,7 +113,7 @@ def content_creation_guide_effective_communication_storytelling():
             help = 'Resume en un checklists los mensajes principales'
         )
 
-        text_input_13 = st.text_area(
+        text_input_14 = st.text_area(
             "llamado a la accion con pasos a seguir",
             label_visibility = 'visible',
             disabled = False,
@@ -124,7 +124,11 @@ def content_creation_guide_effective_communication_storytelling():
 
         submitted = st.form_submit_button("Submit")
         if submitted:
-            st.write(text_input_1)
+            st.info("Please wait", icon = "☺️")
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.enfermera_en_estados_unidos.effective_communication_content` (id, creation_date, creator_user_id, keyword, main_idea, why_1, why_2, why_3, how_1, how_2, how_3, experiment_1, experiment_2, experiment_3, relevant_content, checklist, call_to_action, created_content) VALUES (GENERATE_UUID(), CURRENT_DATE(), {user_id}, '{text_input_1}', '{text_input_2}', '{text_input_3}', '{text_input_4}', '{text_input_5}', '{text_input_6}', '{text_input_7}', '{text_input_8}', '{text_input_9}', '{text_input_10}', '{text_input_11}', '{text_input_12}', '{text_input_13}', '{text_input_14}' ,0);")
+            time.sleep(5)
+            st.balloons()
+            
 
 
 
