@@ -139,7 +139,7 @@ def task_creation(user_id, role_id, project_id, project_name, divider):
         )
     if selected_role is not None:
         selected_role_id = role_ids[role_names.index(selected_role)]
-        rows_users = uc.run_query_half_day(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = {selected_role_id} ORDER BY u.username ASC;")
+        rows_users = uc.run_query_instant(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = {selected_role_id} ORDER BY u.username ASC;")
         users_ids = []
         users_username = []
         for row in rows_users:
