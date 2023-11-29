@@ -16,10 +16,18 @@ credentials:
       email: elchristog@gmail.com
       name: Christian Gonzalez
       password: $2b$12$4AWFIxVL40AYHNdxrEbUQ.bvqTqbJV0tLLtY4myqWTklf4fhNKSZa
-    yeseniaramirez:
-      email: yeseniaramirez.ee@gmail.com
-      name: Yesenia Ramirez
-      password: $2b$12$PBbkQ3otfa.1DhdFVYH68OeoNXrCW7wkQGM7tVfZ7jwQbZvZ8ZKjq
+    jumaruiz:
+      email: juliamariaruiz1@gmail.com
+      name: Julia Ruiz
+      password: $2b$12$Fmhn4ilWz2KfpUKz4NgzB.V7Uh0pICzsUu6RhdeNQH2RFbRAn6nC2
+    yesntiranoes:
+      email: escobar_9420@hotmail.com
+      name: Yeisson Tirano
+      password: $2b$12$qUVARWuLj0WBPzluAQG0M./r6rmI3G26ZxK4sk6u3KPNVehTXa6pC
+    prmartince:
+      email: marin.pris1983@gmail.comm
+      name: Priscilla Cervantes
+      password: $2b$12$SHze82ShGY/goUqugqqcL.lzaDHqC.lct9sGVK15YXjuZqyzf3jT2
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
