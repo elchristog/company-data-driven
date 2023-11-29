@@ -6,7 +6,7 @@ import datetime
 import utils.user_credentials as uc
 import utils.chat_gpt_gestor as cgptg
 
-def content_creation_guide_effective_communication_storytelling(user_id):
+def content_creation_guide_effective_communication_storytelling(user_id, project_name):
     with st.form("comm_eff_storytelling_form", clear_on_submit = True):
 
         text_input_1 = st.text_area(
@@ -125,7 +125,7 @@ def content_creation_guide_effective_communication_storytelling(user_id):
         submitted = st.form_submit_button("Submit")
         if submitted:
             st.info("Please wait", icon = "☺️")
-            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.enfermera_en_estados_unidos.effective_communication_content` (id, creation_date, creator_user_id, keyword, main_idea, why_1, why_2, why_3, how_1, how_2, how_3, experiment_1, experiment_2, experiment_3, relevant_content, checklist, call_to_action, created_content) VALUES (GENERATE_UUID(), CURRENT_DATE(), {user_id}, '{text_input_1}', '{text_input_2}', '{text_input_3}', '{text_input_4}', '{text_input_5}', '{text_input_6}', '{text_input_7}', '{text_input_8}', '{text_input_9}', '{text_input_10}', '{text_input_11}', '{text_input_12}', '{text_input_13}', '{text_input_14}' ,0);")
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.effective_communication_content` (id, creation_date, creator_user_id, keyword, main_idea, why_1, why_2, why_3, how_1, how_2, how_3, experiment_1, experiment_2, experiment_3, relevant_content, checklist, call_to_action, created_content) VALUES (GENERATE_UUID(), CURRENT_DATE(), {user_id}, '{text_input_1}', '{text_input_2}', '{text_input_3}', '{text_input_4}', '{text_input_5}', '{text_input_6}', '{text_input_7}', '{text_input_8}', '{text_input_9}', '{text_input_10}', '{text_input_11}', '{text_input_12}', '{text_input_13}', '{text_input_14}' ,0);")
             time.sleep(5)
             st.balloons()
             
