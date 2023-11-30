@@ -93,11 +93,14 @@ def user_creation(user_id, project_id, project_name):
     
     create_user_button = st.button("Create User")
     if create_user_button:
-        checking_username_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
+        checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
+        checking_user_role = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.role_assignment` WHERE user_id = {checking_username_query[0].get('id')};")
         if len(username) < 6:
             st.error("The username must be at least 6 characters long.")
         if len(checking_username_query) > 0:
             st.error("The username is already in use.")
+        if len(checking_user_role) > 0:
+            st.error("The username already has a role.")
         if selected_project is None:
             st.error("Please select a project.")
         if selected_project != selected_project_confirmation:
@@ -136,7 +139,7 @@ def user_creation(user_id, project_id, project_name):
             st.error("Please enter the Drive URL.")
         if len(user_drive_folder) < 6:
             st.error("The Drive URL must be at least 6 characters long.")
-        if len(username) < 6 or len(checking_username_query) > 0 or selected_project is None or selected_project != selected_project_confirmation or user_role is None or user_role != user_role_confirmation or user_first_name is None or len(user_first_name) < 3 or user_last_name is None or len(user_last_name) < 3 or user_email is None or len(user_email) < 3  or user_birth_date is None or user_country is None or len(user_country) < 3 or user_gender is None or len(user_gender) < 3 or user_phone_number is None or len(user_phone_number) < 6 or user_drive_folder is None or len(user_drive_folder) < 6:
+        if len(username) < 6 or len(checking_username_query) > 0 or len(checking_user_role) > 0 or selected_project is None or selected_project != selected_project_confirmation or user_role is None or user_role != user_role_confirmation or user_first_name is None or len(user_first_name) < 3 or user_last_name is None or len(user_last_name) < 3 or user_email is None or len(user_email) < 3  or user_birth_date is None or user_country is None or len(user_country) < 3 or user_gender is None or len(user_gender) < 3 or user_phone_number is None or len(user_phone_number) < 6 or user_drive_folder is None or len(user_drive_folder) < 6:
             st.error("Please fill in completely all of the required fields.")
         else:
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.users` (id, username, status, project_id, creation_date, email, name, lastname, birthdate, country, gender, user_creator_id, phone_number, user_drive_folder) VALUES({max_id_users}, '{username}', 'active', {selected_project_id}, '{today_str}', '{user_email.lower()}', '{user_first_name.lower()}', '{user_last_name.lower()}', '{user_birth_date}', '{user_country.lower()}', '{user_gender.lower()}', {user_id}, '{user_phone_number}', '{user_drive_folder}');")
