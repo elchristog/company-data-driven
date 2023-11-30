@@ -152,7 +152,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         if menu == "Ofertas de trabajo":
             tap.title_and_paragraph("Ofertas de trabajo" + project_icon, "Accede a ofertas de trabajo activas en USA", "h2", 0)
-            r.resources(user_id, [':hospital:', 'AdventHealth', 'https://jobs.adventhealth.com/jobs/'], [':health_worker:', 'Piedmont Care', 'https://piedmontcareers.org/search/?filter[category][]=Allied+Health&filter[specialty][]=Behavioral+Health+-+Allied+Health&src=DM-10960&utm_source=Google&utm_medium=Search&utm_campaign=Bayard&gclid=Cj0KCQiAgqGrBhDtARIsAM5s0_nfl0k48Akzmv1LYGQkLGRlwlxaI8xxwgnVrKOMEE1Gr1QuZXjHg5caAoFlEALw_wcB'])
+            r.resources(user_id, [':hospital:', 'AdventHealth', 'https://jobs.adventhealth.com/jobs/'], [':health_worker:', 'Piedmont Care', 'https://piedmontcareers.org/search/?filter[category][]=Allied+Health&filter[specialty][]=Behavioral+Health+-+Allied+Health&src=DM-10960&utm_source=Google&utm_medium=Search&utm_campaign=Bayard&gclid=Cj0KCQiAgqGrBhDtARIsAM5s0_nfl0k48Akzmv1LYGQkLGRlwlxaI8xxwgnVrKOMEE1Gr1QuZXjHg5caAoFlEALw_wcB'], [':office:', "St Joseph's Candler", 'https://careers.sjchs.org/search/nursing/jobs'])
 
         if menu == "Progreso":
             tap.title_and_paragraph("Tus progreso" + project_icon, "Verifica tu progreso en el programa", "h2", 0)
