@@ -95,7 +95,7 @@ def user_creation(user_id, project_id, project_name):
     if create_user_button:
         checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
         if len(checking_username_query) < 1:
-            checking_user_role = 0
+            checking_user_role = []
         else:
             checking_user_role = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.role_assignment` WHERE user_id = {checking_username_query[0].get('id')};")
         if len(username) < 6:
