@@ -24,6 +24,7 @@ def run_query_insert_update_1_day(query):
     client.query(query)
 
 @st.cache_resource(show_spinner=False)
+# @st.cache_data(experimental_allow_widgets=True, show_spinner=False)
 def run_query_instant(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
