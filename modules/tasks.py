@@ -1,6 +1,5 @@
 import streamlit as st
 import datetime
-import openai
 import time
 
 import utils.user_credentials as uc
