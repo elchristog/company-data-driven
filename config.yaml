@@ -32,6 +32,10 @@ credentials:
       email: didavidsantt@hotmail.es
       name: Santiago Leal
       password: $2b$12$mRSiosSXaSQchnkcUIsZ2OoHXCu0UJY46C4DkmXzyg.zDaB1dJr7S
+    lgmatar:
+      email: laumata21@gmail.com
+      name: Laura Mata
+      password: $2b$12$QocVs3Edg3XsBhq9wE.yHe1uoN0U6bOvZhhgoF1goLAFzofsFQuj2
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
