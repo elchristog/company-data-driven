@@ -210,7 +210,7 @@ def task_deletion(user_id, role_id, project_id, project_name, divider):
         )
         if selected_username is not None:
             selected_user_id = users_ids[users_username.index(selected_username)]
-            rows_user_tasks = uc.run_query_instant(f"SELECT id, description FROM `company-data-driven.{project_name}.tasks` WHERE finished_date IS NULL AND canceled_date IS NULL AND responsible_user_id = {selected_user_id} ORDER BY description ASC;")
+            rows_user_tasks = uc.run_query_1_m(f"SELECT id, description FROM `company-data-driven.{project_name}.tasks` WHERE finished_date IS NULL AND canceled_date IS NULL AND responsible_user_id = {selected_user_id} ORDER BY description ASC;")
             user_tasks_ids = []
             user_tasks_descriptions = []
             for row in rows_user_tasks:
@@ -231,6 +231,7 @@ def task_deletion(user_id, role_id, project_id, project_name, divider):
                     uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = 'canceled', canceled_date = '{today_str}', task_cancelator_id = {user_id} WHERE id = {selected_task_id};")
                     st.info("Updating, please wait", icon = "☺️")
                     time.sleep(5)
+                    uc.run_query_1_m.clear()
                     st.error('Task deleted!', icon="😎")
                     st.balloons()
                     # st.rerun()
