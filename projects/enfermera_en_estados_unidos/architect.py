@@ -119,7 +119,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
     if role_id == 6:
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
-            menu_options = ["Home", "Nclex", "Recursos"]
+            menu_options = ["Home", "Nclex", "Recursos", "Ofertas de trabajo"]
             if user_id == 3: #------ in develop -----------
                 menu_options.extend(['Progreso'])
             menu = st.sidebar.radio(project_title, menu_options)
@@ -149,6 +149,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
         if menu == "Recursos":
             tap.title_and_paragraph("Tus recursos" + project_icon, "Accede a los recursos habilitados para ti", "h2", 0)
             r.resources(user_id, [':closed_book:', 'Saunders Book', 'https://drive.google.com/uc?export=download&id=1-eLwUvGPgXHpmhcrJzi1nlLs2oZhqgXX'], [':closed_book:','Saunders Strategies','https://drive.google.com/uc?export=download&id=1Bkr-4VGyTUOj9rhw6nqKTOItKQiL4jKU'], [':notebook:','Kaplan Book','https://drive.google.com/uc?export=download&id=1zuJ9HOSMrYWwOH-txKmD8o1asgmfVHAL'], [':ledger:','LaCharity Book','https://drive.google.com/uc?export=download&id=1E8DsdgNqXimVWMeQKD9K82-nx3dHFrfJ'])
+
+        if menu == "Ofertas de trabajo":
+            tap.title_and_paragraph("Ofertas de trabajo" + project_icon, "Accede a ofertas de trabajo activas en USA", "h2", 0)
+            r.resources(user_id, [':hospital:', 'AdventHealth', 'https://jobs.adventhealth.com/jobs/'], )
 
         if menu == "Progreso":
             tap.title_and_paragraph("Tus progreso" + project_icon, "Verifica tu progreso en el programa", "h2", 0)
