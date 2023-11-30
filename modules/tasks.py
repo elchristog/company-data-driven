@@ -108,7 +108,6 @@ def tasks_achievements(user_id, project_name, divider):
             completed_tasks_table = uc.run_query_5_s(f"SELECT t.description, t.commit_finish_date, t.finished_date  FROM `company-data-driven.{project_name}.tasks` AS t WHERE responsible_user_id = {user_id} AND t.status = 'finished' ORDER BY t.finished_date DESC, t.id DESC LIMIT {number_tasks_to_show};")
             st.table(completed_tasks_table)
             
-
     if divider == 1:
         st.write("---") 
 
@@ -126,7 +125,7 @@ def tips_tasks_ia(tasks, divider):
 
 
 def task_creation(user_id, role_id, project_id, project_name, divider):
-    rows = uc.run_query_half_day(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;")
+    rows = uc.run_query_1_day(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;")
     role_ids = []
     role_names = []
     for row in rows:
@@ -140,7 +139,8 @@ def task_creation(user_id, role_id, project_id, project_name, divider):
         )
     if selected_role is not None:
         selected_role_id = role_ids[role_names.index(selected_role)]
-        rows_users = uc.run_query_instant(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = {selected_role_id} ORDER BY u.username ASC;")
+        rows_users = uc.run_query_1_day(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = {selected_role_id} ORDER BY u.username ASC;")
+        uc.run_query_1_day.clear()
         users_ids = []
         users_username = []
         for row in rows_users:
@@ -163,9 +163,10 @@ def task_creation(user_id, role_id, project_id, project_name, divider):
                 else:
                     today = datetime.date.today()
                     today_str = today.strftime("%Y-%m-%d")
-                    max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.tasks`")[0].get('max_id')
+                    max_id =  uc.run_query_1_day(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.tasks`")[0].get('max_id')
                     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{today_str}', '{task_input}', {selected_user_id}, '{commitment_date_input}', 'to_start', {user_id})")
                     st.info("Updating, please wait", icon = "☺️")
+                    uc.run_query_1_day.clear()
                     time.sleep(5)
                     st.success('Task created! (' + task_input + ')', icon="😎")
                     st.balloons()
