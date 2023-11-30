@@ -56,6 +56,10 @@ credentials:
       email: espitiaarizaangielorena@gmail.com
       name: Angie Espitia
       password: $2b$12$saspEq7hp2Xir3UFN9HOxOZf4Sw7ZNd4v4nJHYXZPXc5JS32x6zum
+    mparboledap:
+      email: Michellearboleda909@gmail.com 
+      name: Paola Arboleda
+      password: $2b$12$MePjMYL/3yDuiG68JrU07e.vzpQ6gbCeAOUpYZGJKDyS0MoA3RZgW
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
