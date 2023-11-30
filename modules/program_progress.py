@@ -35,7 +35,7 @@ def update_customer_progress(user_id, project_id, project_name, program_steps_ta
     )
     if selected_username is not None:
         selected_user_id = users_ids[users_username.index(selected_username)]
-        user_next_steps = uc.run_query_instant(f"SELECT ps.id, ps.name FROM `company-data-driven.{project_name}.{program_steps_table_tame}` AS ps WHERE id > (SELECT MAX(upsp.program_step_id) AS actual_step_id FROM `company-data-driven.{project_name}.{program_steps_user_progress_table_name}` AS upsp WHERE upsp.user_id = {selected_user_id}) ORDER BY id ASC;")
+        user_next_steps = uc.run_query_15_m(f"SELECT ps.id, ps.name FROM `company-data-driven.{project_name}.{program_steps_table_tame}` AS ps WHERE id > (SELECT MAX(upsp.program_step_id) AS actual_step_id FROM `company-data-driven.{project_name}.{program_steps_user_progress_table_name}` AS upsp WHERE upsp.user_id = {selected_user_id}) ORDER BY id ASC;")
         step_ids = []
         step_names = []
 
