@@ -94,7 +94,10 @@ def user_creation(user_id, project_id, project_name):
     create_user_button = st.button("Create User")
     if create_user_button:
         checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
-        checking_user_role = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.role_assignment` WHERE user_id = {checking_username_query[0].get('id')};")
+        if len(checking_username_query) < 1:
+            checking_user_role = 0
+        else:
+            checking_user_role = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.role_assignment` WHERE user_id = {checking_username_query[0].get('id')};")
         if len(username) < 6:
             st.error("The username must be at least 6 characters long.")
         if len(checking_username_query) > 0:
