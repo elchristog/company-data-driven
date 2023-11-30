@@ -28,6 +28,10 @@ credentials:
       email: marin.pris1983@gmail.comm
       name: Priscilla Cervantes
       password: $2b$12$SHze82ShGY/goUqugqqcL.lzaDHqC.lct9sGVK15YXjuZqyzf3jT2
+    dslealc:
+      email: didavidsantt@hotmail.es
+      name: Santiago Leal
+      password: $2b$12$mRSiosSXaSQchnkcUIsZ2OoHXCu0UJY46C4DkmXzyg.zDaB1dJr7S
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
