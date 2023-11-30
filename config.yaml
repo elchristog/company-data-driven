@@ -48,6 +48,10 @@ credentials:
       email: vialaya@hotmail.com
       name: Luz Restrepo
       password: $2b$12$KVuBsj/PARlyKQX7JO1wg.H/0/gpjFgdmb8khQhnC.7TMPZn9OgQG
+    marenas:
+      email: ymarenascardenas@gmail.com
+      name: Marcela Arenas
+      password: $2b$12$Z4AijPo7xw2KIC1KMffgMediWjI67u0NSNBuQnRQveiwjJf2MYb.e
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
