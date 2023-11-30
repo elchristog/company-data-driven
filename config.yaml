@@ -36,6 +36,10 @@ credentials:
       email: laumata21@gmail.com
       name: Laura Mata
       password: $2b$12$QocVs3Edg3XsBhq9wE.yHe1uoN0U6bOvZhhgoF1goLAFzofsFQuj2
+    cgomezva:
+      email: camila.gomezvasquez@gmail.com
+      name: Camila Gomez
+      password: $2b$12$9Mg5MHeENF4OfwUKHrcI0ujOnX7UAmsdxojE/FARHC9AYPeZWdI9S
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
