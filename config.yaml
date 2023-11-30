@@ -40,6 +40,10 @@ credentials:
       email: camila.gomezvasquez@gmail.com
       name: Camila Gomez
       password: $2b$12$9Mg5MHeENF4OfwUKHrcI0ujOnX7UAmsdxojE/FARHC9AYPeZWdI9S
+    sdburitacam:
+      email: saradanellyburitica@gmail.com
+      name: Sara Buritica
+      password: $2b$12$uk.FYLsUKHdrbroVfMsLj.CbM1bBeW8zwIC5hX3KbKkCd15VVcaq2
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
