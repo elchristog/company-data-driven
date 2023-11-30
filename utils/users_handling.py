@@ -146,6 +146,7 @@ def user_creation(user_id, project_id, project_name):
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.role_assignment` (id, user_id, role_id) VALUES({max_id_role_assignement}, {max_id_users}, {selected_role_id});")
             st.info("Updating, please wait", icon = "☺️")
             time.sleep(5)
+            uc.run_query_30_m.clear()
             st.success('User Created!', icon = '🎈')
             st.balloons()
             st.warning('Remember to hash the password and add to config, and create the demo task', icon = '😶‍🌫️')
