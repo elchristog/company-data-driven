@@ -74,6 +74,7 @@ def update_customer_progress(user_id, project_id, project_name, program_steps_ta
                     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.{program_steps_user_progress_table_name}` VALUES({max_id}, '{today_str}', {user_id}, {selected_user_id}, {selected_step_id})")
                     st.info("Updating, please wait", icon = "☺️")
                     time.sleep(5)
+                    uc.run_query_15_m.clear()
                     st.success('Status updated! (' + selected_new_step + ')', icon="😎")
                     st.balloons()
                     st.rerun()
