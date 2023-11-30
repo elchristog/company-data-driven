@@ -72,12 +72,12 @@ def tasks_visualizer(user_id, project_name, divider):
 
 
 def tasks_achievements(user_id, project_name, divider):
-    if len(uc.run_query_5_s(f"SELECT id  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND finished_date IS NOT NULL LIMIT 1")) < 1:
+    if len(uc.run_query_1_m(f"SELECT id  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND finished_date IS NOT NULL LIMIT 1")) < 1:
         st.success("Your achievements will be available when you finish your first task")
     else:
-        year_fulfillment = uc.run_query_5_s(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND canceled_date IS NULL AND  EXTRACT(YEAR FROM commit_finish_date) <= EXTRACT(YEAR FROM CURRENT_DATE()) AND EXTRACT(MONTH FROM commit_finish_date) <= EXTRACT(MONTH FROM CURRENT_DATE()) AND EXTRACT(WEEK FROM commit_finish_date) <= EXTRACT(WEEK FROM CURRENT_DATE()) GROUP BY year ORDER BY year DESC LIMIT 2")
-        month_fulfillment = uc.run_query_5_s(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, EXTRACT(MONTH FROM commit_finish_date) AS month, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND canceled_date IS NULL AND  EXTRACT(YEAR FROM commit_finish_date) <= EXTRACT(YEAR FROM CURRENT_DATE()) AND EXTRACT(MONTH FROM commit_finish_date) <= EXTRACT(MONTH FROM CURRENT_DATE()) AND EXTRACT(WEEK FROM commit_finish_date) <= EXTRACT(WEEK FROM CURRENT_DATE()) GROUP BY year, month ORDER BY year DESC, month DESC LIMIT 2")
-        week_fulfillment = uc.run_query_5_s(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, EXTRACT(MONTH FROM commit_finish_date) AS month,  EXTRACT(WEEK FROM commit_finish_date) AS week, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND canceled_date IS NULL AND  EXTRACT(YEAR FROM commit_finish_date) <= EXTRACT(YEAR FROM CURRENT_DATE()) AND EXTRACT(MONTH FROM commit_finish_date) <= EXTRACT(MONTH FROM CURRENT_DATE()) AND EXTRACT(WEEK FROM commit_finish_date) <= EXTRACT(WEEK FROM CURRENT_DATE()) GROUP BY year, month, week ORDER BY year DESC, month DESC, week DESC LIMIT 2")
+        year_fulfillment = uc.run_query_1_m(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND canceled_date IS NULL AND  EXTRACT(YEAR FROM commit_finish_date) <= EXTRACT(YEAR FROM CURRENT_DATE()) AND EXTRACT(MONTH FROM commit_finish_date) <= EXTRACT(MONTH FROM CURRENT_DATE()) AND EXTRACT(WEEK FROM commit_finish_date) <= EXTRACT(WEEK FROM CURRENT_DATE()) GROUP BY year ORDER BY year DESC LIMIT 2")
+        month_fulfillment = uc.run_query_1_m(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, EXTRACT(MONTH FROM commit_finish_date) AS month, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND canceled_date IS NULL AND  EXTRACT(YEAR FROM commit_finish_date) <= EXTRACT(YEAR FROM CURRENT_DATE()) AND EXTRACT(MONTH FROM commit_finish_date) <= EXTRACT(MONTH FROM CURRENT_DATE()) AND EXTRACT(WEEK FROM commit_finish_date) <= EXTRACT(WEEK FROM CURRENT_DATE()) GROUP BY year, month ORDER BY year DESC, month DESC LIMIT 2")
+        week_fulfillment = uc.run_query_1_m(f"SELECT EXTRACT(YEAR FROM commit_finish_date) AS year, EXTRACT(MONTH FROM commit_finish_date) AS month,  EXTRACT(WEEK FROM commit_finish_date) AS week, 100*(SUM(CASE WHEN finished_date IS NOT NULL THEN 1 ELSE 0 END)/COUNT(id)) AS fulfillment  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND canceled_date IS NULL AND  EXTRACT(YEAR FROM commit_finish_date) <= EXTRACT(YEAR FROM CURRENT_DATE()) AND EXTRACT(MONTH FROM commit_finish_date) <= EXTRACT(MONTH FROM CURRENT_DATE()) AND EXTRACT(WEEK FROM commit_finish_date) <= EXTRACT(WEEK FROM CURRENT_DATE()) GROUP BY year, month, week ORDER BY year DESC, month DESC, week DESC LIMIT 2")
 
         if len(year_fulfillment) == 0:
             st.warning("Your achievements will be available since the next week", icon = "😵‍💫")
@@ -99,7 +99,7 @@ def tasks_achievements(user_id, project_name, divider):
                 col3.metric(label="Week fulfillment (%)", value = round(week_fulfillment[0].get('fulfillment')), delta= round(week_fulfillment[0].get('fulfillment') - week_fulfillment[1].get('fulfillment')))
             
             st.write("#### Unfulfilled tasks last 3 months")
-            unfulfilled_tasks_table = uc.run_query_5_s(f"SELECT t.description, t.commit_finish_date, t.unfulfilled_date  FROM `company-data-driven.{project_name}.tasks` AS t WHERE responsible_user_id = {user_id} AND t.status = 'unfulfilled' AND t.unfulfilled_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH) AND EXTRACT(YEAR FROM t.creation_date) = EXTRACT(YEAR FROM CURRENT_DATE()) ORDER BY t.unfulfilled_date DESC;")
+            unfulfilled_tasks_table = uc.run_query_1_m(f"SELECT t.description, t.commit_finish_date, t.unfulfilled_date  FROM `company-data-driven.{project_name}.tasks` AS t WHERE responsible_user_id = {user_id} AND t.status = 'unfulfilled' AND t.unfulfilled_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH) AND EXTRACT(YEAR FROM t.creation_date) = EXTRACT(YEAR FROM CURRENT_DATE()) ORDER BY t.unfulfilled_date DESC;")
             if len(unfulfilled_tasks_table) < 1:
                 st.success("You are the best!", icon = "😎")
             else:
@@ -107,7 +107,7 @@ def tasks_achievements(user_id, project_name, divider):
 
             st.write("#### Completed tasks")
             number_tasks_to_show = st.slider('Select number of tasks to be shown', 0, 30, 5)
-            completed_tasks_table = uc.run_query_5_s(f"SELECT t.description, t.commit_finish_date, t.finished_date  FROM `company-data-driven.{project_name}.tasks` AS t WHERE responsible_user_id = {user_id} AND t.status = 'finished' ORDER BY t.finished_date DESC, t.id DESC LIMIT {number_tasks_to_show};")
+            completed_tasks_table = uc.run_query_1_m(f"SELECT t.description, t.commit_finish_date, t.finished_date  FROM `company-data-driven.{project_name}.tasks` AS t WHERE responsible_user_id = {user_id} AND t.status = 'finished' ORDER BY t.finished_date DESC, t.id DESC LIMIT {number_tasks_to_show};")
             st.table(completed_tasks_table)
             
     if divider == 1:
