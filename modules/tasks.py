@@ -194,6 +194,22 @@ def task_creation(user_id, role_id, project_id, project_name, divider):
 
 
 
+def task_deletion_execution():
+    if st.session_state.selected_task_description is not None:
+        selected_task_id = st.session_state.user_tasks_ids[st.session_state.user_tasks_descriptions.index(st.session_state.selected_task_description)]
+        today = datetime.date.today()
+        today_str = today.strftime("%Y-%m-%d")
+        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.project_name}.tasks` SET status = 'canceled', canceled_date = '{today_str}', task_cancelator_id = {st.session_state.user_id} WHERE id = {selected_task_id};")
+        st.toast("Updating, please wait", icon = "☺️")
+        time.sleep(5)
+        uc.run_query_1_m.clear()
+        uc.run_query_2_m.clear()
+        st.error('Task deleted!', icon="😎")
+        st.balloons()
+        # st.rerun()
+
+
+
 def task_deletion(user_id, role_id, project_id, project_name, divider):
     if role_id == 1:
         rows = uc.run_query_half_day(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;")
@@ -238,20 +254,16 @@ def task_deletion(user_id, role_id, project_id, project_name, divider):
                 index = None,
                 key= "deletion_task_description"
             )
-            cancel_task_button = st.button("Cancel task")
-            if cancel_task_button:
-                if selected_task_description is not None:
-                    selected_task_id = user_tasks_ids[user_tasks_descriptions.index(selected_task_description)]
-                    today = datetime.date.today()
-                    today_str = today.strftime("%Y-%m-%d")
-                    uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = 'canceled', canceled_date = '{today_str}', task_cancelator_id = {user_id} WHERE id = {selected_task_id};")
-                    st.info("Updating, please wait", icon = "☺️")
-                    time.sleep(5)
-                    uc.run_query_1_m.clear()
-                    uc.run_query_2_m.clear()
-                    st.error('Task deleted!', icon="😎")
-                    st.balloons()
-                    # st.rerun()
+            st.session_state.user_id = user_id
+            st.session_state.role_id = role_id
+            st.session_state.project_id = project_id
+            st.session_state.project_name = project_name
+            st.session_state.selected_task_description = selected_task_description
+            st.session_state.user_tasks_ids = user_tasks_ids
+            st.session_state.user_tasks_descriptions = user_tasks_descriptions
+            
+            cancel_task_button = st.button("Cancel task", on_click = task_deletion_execution)
+
 
     if divider == 1:
         st.write("---") 
