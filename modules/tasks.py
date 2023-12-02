@@ -10,10 +10,13 @@ def update_task_status():
     if st.session_state.selected_task is not None:
         selected_task_status = st.session_state.actual_statuses[st.session_state.descriptions.index(st.session_state.selected_task)]
         if selected_task_status == 'on_execution' and st.session_state.selected_status == 'on_execution':
+            st.toast("Task was already on execution", icon = "😝")
             st.error("Task was already on execution", icon = "😝")
         if selected_task_status == 'to_start' and st.session_state.selected_status == 'finished':
+            st.toast("First must be on execution", icon = "😝")
             st.error("First must be on execution", icon = "😝")
         if selected_task_status == 'delayed' and st.session_state.selected_status == 'finished':
+            st.toast("First must be on execution", icon = "😝")
             st.error("First must be on execution", icon = "😝")
         if (selected_task_status == 'to_start' and st.session_state.selected_status == 'on_execution') or (selected_task_status == 'on_execution' and st.session_state.selected_status == 'finished') or (selected_task_status == 'delayed' and st.session_state.selected_status == 'on_execution'):
             today = datetime.date.today()
@@ -22,6 +25,7 @@ def update_task_status():
             if new_status == 'on_execution':
                 uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.project_name}.tasks` SET status = '{st.session_state.selected_status}', on_execution_date = '{today_str}' WHERE id = {selected_task_id}")
                 st.info("Updating, please wait", icon = "☺️")
+                st.toast("Updating, please wait", icon = "☺️")
                 time.sleep(5)
             if new_status == 'finished':
                 uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{st.session_state.selected_status}', finished_date = '{today_str}' WHERE id = {selected_task_id}")
@@ -29,6 +33,7 @@ def update_task_status():
                 time.sleep(5)
                 st.balloons()
             st.success('Task status updated!', icon="😎")
+            st.toast("Task status updated!", icon = "😎")
             uc.run_query_2_m.clear()
             # st.rerun()
 
