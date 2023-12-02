@@ -6,6 +6,33 @@ import utils.user_credentials as uc
 import utils.chat_gpt_gestor as cgptg
 
 
+def update_task_status():
+    if st.session_state.selected_task is not None:
+        selected_task_status = st.session_state.actual_statuses[st.session_state.descriptions.index(st.session_state.selected_task)]
+        if selected_task_status == 'on_execution' and st.session_state.selected_status == 'on_execution':
+            st.error("Task was already on execution", icon = "😝")
+        if selected_task_status == 'to_start' and st.session_state.selected_status == 'finished':
+            st.error("First must be on execution", icon = "😝")
+        if selected_task_status == 'delayed' and st.session_state.selected_status == 'finished':
+            st.error("First must be on execution", icon = "😝")
+        if (selected_task_status == 'to_start' and st.session_state.selected_status == 'on_execution') or (selected_task_status == 'on_execution' and st.session_state.selected_status == 'finished') or (selected_task_status == 'delayed' and st.session_state.selected_status == 'on_execution'):
+            today = datetime.date.today()
+            today_str = today.strftime("%Y-%m-%d")
+            selected_task_id = st.session_state.ids[st.session_state.descriptions.index(st.session_state.selected_task)]
+            if new_status == 'on_execution':
+                uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.project_name}.tasks` SET status = '{st.session_state.selected_status}', on_execution_date = '{today_str}' WHERE id = {selected_task_id}")
+                st.info("Updating, please wait", icon = "☺️")
+                time.sleep(5)
+            if new_status == 'finished':
+                uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{st.session_state.selected_status}', finished_date = '{today_str}' WHERE id = {selected_task_id}")
+                st.info("Updating, please wait", icon = "☺️")
+                time.sleep(5)
+                st.balloons()
+            st.success('Task status updated!', icon="😎")
+            uc.run_query_2_m.clear()
+            st.rerun()
+
+
 def tasks_visualizer(user_id, project_name, divider):
     rows = uc.run_query_2_m(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed') ORDER BY commit_finish_date ASC;") #finished, canceled, unfulfilled
     if len(rows) == 0:
@@ -23,46 +50,27 @@ def tasks_visualizer(user_id, project_name, divider):
                 descriptions.append(description)
                 ids.append(id)
                 actual_statuses.append(actual_status)
+        st.session_state.actual_statuses = actual_statuses
+        st.session_state.descriptions = descriptions
+        st.session_state.ids = ids
+        st.session_state.user_id = user_id
+        st.session_state.project_name = project_name
         with st.form("task_update_form", clear_on_submit = True):
             selected_task = st.selectbox(
                 label = "Select one task",
                 options = descriptions,
-                index = None
+                index = None,
+                key = 'selected_task'
             )
             selected_status = st.selectbox(
                     label="Select the new status",
                     options= ['on_execution', 'finished'],
-                    index=None
+                    index=None,
+                    key = 'selected_status'
                 )
            
-            update_task_status_button = st.form_submit_button("Update status")
-            def update_task_status(task_id, new_status, today_str):
-                if new_status == 'on_execution':
-                    uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', on_execution_date = '{today_str}' WHERE id = {task_id}")
-                    st.info("Updating, please wait", icon = "☺️")
-                    time.sleep(5)
-                if new_status == 'finished':
-                    uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{new_status}', finished_date = '{today_str}' WHERE id = {task_id}")
-                    st.info("Updating, please wait", icon = "☺️")
-                    time.sleep(5)
-                    st.balloons()
-            if update_task_status_button:
-                if selected_task is not None:
-                    selected_task_status = actual_statuses[descriptions.index(selected_task)]
-                    if selected_task_status == 'on_execution' and selected_status == 'on_execution':
-                        st.error("Task was already on execution", icon = "😝")
-                    if selected_task_status == 'to_start' and selected_status == 'finished':
-                        st.error("First must be on execution", icon = "😝")
-                    if selected_task_status == 'delayed' and selected_status == 'finished':
-                        st.error("First must be on execution", icon = "😝")
-                    if (selected_task_status == 'to_start' and selected_status == 'on_execution') or (selected_task_status == 'on_execution' and selected_status == 'finished') or (selected_task_status == 'delayed' and selected_status == 'on_execution'):
-                        today = datetime.date.today()
-                        today_str = today.strftime("%Y-%m-%d")
-                        selected_task_id = ids[descriptions.index(selected_task)]
-                        update_task_status(selected_task_id, selected_status, today_str)
-                        st.success('Task status updated!', icon="😎")
-                        uc.run_query_2_m.clear()
-                        st.rerun()
+            update_task_status_button = st.form_submit_button("Update status", on_click = update_task_status)
+            
     if divider == 1:
         st.write("---") 
     return rows
