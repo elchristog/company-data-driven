@@ -55,7 +55,7 @@ def tasks_visualizer(user_id, project_name, divider):
                         st.error("First must be on execution", icon = "😝")
                     if selected_task_status == 'delayed' and selected_status == 'finished':
                         st.error("First must be on execution", icon = "😝")
-                    if (selected_task_status == 'to_start' and selected_status == 'on_execution') or (selected_task_status == 'on_execution' and selected_status == 'finished'):
+                    if (selected_task_status == 'to_start' and selected_status == 'on_execution') or (selected_task_status == 'on_execution' and selected_status == 'finished') or (selected_task_status == 'delayed' and selected_status == 'on_execution'):
                         today = datetime.date.today()
                         today_str = today.strftime("%Y-%m-%d")
                         selected_task_id = ids[descriptions.index(selected_task)]
