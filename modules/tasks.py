@@ -187,7 +187,7 @@ def task_creation(user_id, role_id, project_id, project_name, divider):
         st.session_state.project_name = project_name
         st.session_state.user_id = user_id
     
-    create_task_button = st.form_submit_button("Create task", on_click = execute_task_creation)
+        create_task_button = st.form_submit_button("Create task", on_click = execute_task_creation)
 
     if divider == 1:
         st.write("---") 
