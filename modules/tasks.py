@@ -22,12 +22,12 @@ def update_task_status():
             today = datetime.date.today()
             today_str = today.strftime("%Y-%m-%d")
             selected_task_id = st.session_state.ids[st.session_state.descriptions.index(st.session_state.selected_task)]
-            if new_status == 'on_execution':
+            if st.session_state.selected_status == 'on_execution':
                 uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.project_name}.tasks` SET status = '{st.session_state.selected_status}', on_execution_date = '{today_str}' WHERE id = {selected_task_id}")
                 st.info("Updating, please wait", icon = "☺️")
                 st.toast("Updating, please wait", icon = "☺️")
                 time.sleep(5)
-            if new_status == 'finished':
+            if st.session_state.selected_status == 'finished':
                 uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{st.session_state.selected_status}', finished_date = '{today_str}' WHERE id = {selected_task_id}")
                 st.info("Updating, please wait", icon = "☺️")
                 time.sleep(5)
