@@ -133,6 +133,23 @@ def tips_tasks_ia(tasks, divider):
 
 
 
+def execute_task_creation():
+    if st.session_state.selected_user_id is None or st.session_state.task_input is None or len(st.session_state.task_input) < 10 or st.session_state.commitment_date_input is None:
+        st.toast("Please fill in completely all of the required fields."))
+    else:
+        today = datetime.date.today()
+        today_str = today.strftime("%Y-%m-%d")
+        max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{st.session_state.project_name}.tasks`")[0].get('max_id')
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{today_str}', '{st.session_state.task_input}', {st.session_state.selected_user_id}, '{st.session_state.commitment_date_input}', 'to_start', {st.session_state.user_id})")
+        st.toast("Updating, please wait", icon = "☺️")
+        time.sleep(5)
+        uc.run_query_5_m.clear()
+        uc.run_query_2_m.clear()
+        st.toast('Task created! (' + st.session_state.task_input + ')', icon="😎")
+        st.balloons()
+        # st.rerun()
+
+
 def task_creation(user_id, role_id, project_id, project_name, divider):
     rows = uc.run_query_1_day(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;")
     role_ids = []
@@ -164,22 +181,13 @@ def task_creation(user_id, role_id, project_id, project_name, divider):
             selected_user_id = users_ids[users_username.index(selected_username)]
             task_input = st.text_input("Describe the task:")
             commitment_date_input = st.date_input("Select a commitment date:")
-            create_task_button = st.button("Create task")
-            if create_task_button:
-                if selected_user_id is None or task_input is None or len(task_input) < 10 or commitment_date_input is None:
-                    st.error("Please fill in completely all of the required fields.")
-                else:
-                    today = datetime.date.today()
-                    today_str = today.strftime("%Y-%m-%d")
-                    max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.tasks`")[0].get('max_id')
-                    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{today_str}', '{task_input}', {selected_user_id}, '{commitment_date_input}', 'to_start', {user_id})")
-                    st.info("Updating, please wait", icon = "☺️")
-                    time.sleep(5)
-                    uc.run_query_5_m.clear()
-                    uc.run_query_2_m.clear()
-                    st.success('Task created! (' + task_input + ')', icon="😎")
-                    st.balloons()
-                    # st.rerun()
+            st.session_state.selected_user_id = selected_user_id
+            st.session_state.task_input = task_input
+            st.session_state.commitment_date_input = commitment_date_input
+            st.session_state.project_name = project_name
+            st.session_state.user_id = user_id
+            
+            create_task_button = st.button("Create task", on_click = execute_task_creation)
 
     if divider == 1:
         st.write("---") 
