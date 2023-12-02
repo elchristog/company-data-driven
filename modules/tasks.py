@@ -28,7 +28,7 @@ def update_task_status():
                 st.toast("Updating, please wait", icon = "☺️")
                 time.sleep(5)
             if st.session_state.selected_status == 'finished':
-                uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = '{st.session_state.selected_status}', finished_date = '{today_str}' WHERE id = {selected_task_id}")
+                uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.project_name}.tasks` SET status = '{st.session_state.selected_status}', finished_date = '{today_str}' WHERE id = {selected_task_id}")
                 st.info("Updating, please wait", icon = "☺️")
                 time.sleep(5)
                 st.balloons()
