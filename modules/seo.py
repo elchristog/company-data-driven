@@ -12,7 +12,6 @@ def save_new_content(project_name, user_id, text_input_1, text_input_2, text_inp
     st.info("Please wait", icon = "☺️")
     st.write(project_name)
     st.write(user_id)
-    st.write(text_input_1)
     st.write(st.session_state.text_input_1)
     
     
