@@ -30,7 +30,7 @@ def update_task_status():
                 st.balloons()
             st.success('Task status updated!', icon="😎")
             uc.run_query_2_m.clear()
-            st.rerun()
+            # st.rerun()
 
 
 def tasks_visualizer(user_id, project_name, divider):
