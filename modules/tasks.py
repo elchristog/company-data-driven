@@ -135,7 +135,7 @@ def tips_tasks_ia(tasks, divider):
 
 def execute_task_creation():
     if st.session_state.selected_user_id is None or st.session_state.task_input is None or len(st.session_state.task_input) < 10 or st.session_state.commitment_date_input is None:
-        st.toast("Please fill in completely all of the required fields."))
+        st.toast("Please fill in completely all of the required fields.")
     else:
         today = datetime.date.today()
         today_str = today.strftime("%Y-%m-%d")
