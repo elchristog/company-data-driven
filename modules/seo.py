@@ -10,7 +10,7 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
     with st.form("comm_eff_storytelling_form", clear_on_submit = True):
 
         text_input_1 = st.text_area(
-            "Keyword del articulo",
+            "Keyword del articulo - test",
             label_visibility = 'visible',
             disabled = False,
             placeholder = 'Obtener la licencia de enfermería en Estados Unidos',
