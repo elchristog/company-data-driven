@@ -179,15 +179,16 @@ def task_creation(user_id, role_id, project_id, project_name, divider):
         )
         if selected_username is not None:
             selected_user_id = users_ids[users_username.index(selected_username)]
-            task_input = st.text_input("Describe the task:")
-            commitment_date_input = st.date_input("Select a commitment date:")
-            st.session_state.selected_user_id = selected_user_id
-            st.session_state.task_input = task_input
-            st.session_state.commitment_date_input = commitment_date_input
-            st.session_state.project_name = project_name
-            st.session_state.user_id = user_id
+            with st.form("create_task_form", clear_on_submit = True):
+                task_input = st.text_input("Describe the task:")
+                commitment_date_input = st.date_input("Select a commitment date:")
+                st.session_state.selected_user_id = selected_user_id
+                st.session_state.task_input = task_input
+                st.session_state.commitment_date_input = commitment_date_input
+                st.session_state.project_name = project_name
+                st.session_state.user_id = user_id
             
-            create_task_button = st.button("Create task", on_click = execute_task_creation)
+            create_task_button = st.form_submit_button("Create task", on_click = execute_task_creation)
 
     if divider == 1:
         st.write("---") 
