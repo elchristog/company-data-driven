@@ -308,6 +308,44 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
 
 
 
+def get_data_save_to_bq_execution():
+    url = st.session_state.project_url_clean
+    property_url = check_input_url(url)
+    st.session_state.domain = property_url
+
+    url_filter = None
+    url_operator = None
+    palavra_filter = None
+    palavra_operator = None   
+    
+    if st.session_state.days_last_update is None:
+        starting_date_to_pages = st.session_state.min_date_first_query.strftime("%Y-%m-%d")
+        ending_date_to_pages = st.session_state.max_date_next_query.strftime("%Y-%m-%d")
+    elif days_last_update > 0:
+        starting_date_to_pages = st.session_state.min_date_next_query.strftime("%Y-%m-%d")
+        ending_date_to_pages = st.session_state.max_date_next_query.strftime("%Y-%m-%d")
+
+    df_clicks = get_data_date(st.session_state.property_url, starting_date_to_pages, ending_date_to_pages,
+            url_filter=url_filter, url_operator=url_operator,
+            palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+    df_pages = get_data(st.session_state.property_url, ['page'], starting_date_to_pages, ending_date_to_pages,
+            url_filter=url_filter, url_operator=url_operator,
+            palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+    # st.table(df_clicks)
+    # st.table(df_pages)
+    today = datetime.date.today()
+    today_str = today.strftime("%Y-%m-%d")
+    st.info("Updating, please wait", icon = "☺️")
+    for index, row in df_clicks.iterrows():
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
+    for index, row in df_pages.iterrows():
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.traffic_analytics_web_pages` (id, creation_date, start_query_date, end_query_date, page, clicks, impressions, ctr, position) VALUES (GENERATE_UUID(), '{today_str}', '{starting_date_to_pages}', '{ending_date_to_pages}', '{row['Page']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
+    time.sleep(15)
+    st.rerun()
+
+
+
+
 
 def get_data_save_to_bq(role_id, project_name, project_url_clean):
     if role_id == 1:
@@ -357,41 +395,18 @@ def get_data_save_to_bq(role_id, project_name, project_url_clean):
                     key="my_token_input",
                     label_visibility="collapsed",
                 )
-            get_data_button = st.button("Get data")
-            if get_data_button:
-                url = project_url_clean
-                property_url = check_input_url(url)
-                st.session_state.domain = property_url
 
-                url_filter = None
-                url_operator = None
-                palavra_filter = None
-                palavra_operator = None   
-                
-                if days_last_update is None:
-                    starting_date_to_pages = min_date_first_query.strftime("%Y-%m-%d")
-                    ending_date_to_pages = max_date_next_query.strftime("%Y-%m-%d")
-                elif days_last_update > 0:
-                    starting_date_to_pages = min_date_next_query.strftime("%Y-%m-%d")
-                    ending_date_to_pages = max_date_next_query.strftime("%Y-%m-%d")
-
-                df_clicks = get_data_date(property_url, starting_date_to_pages, ending_date_to_pages,
-                        url_filter=url_filter, url_operator=url_operator,
-                        palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-                df_pages = get_data(property_url, ['page'], starting_date_to_pages, ending_date_to_pages,
-                        url_filter=url_filter, url_operator=url_operator,
-                        palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-                # st.table(df_clicks)
-                # st.table(df_pages)
-                today = datetime.date.today()
-                today_str = today.strftime("%Y-%m-%d")
-                st.info("Updating, please wait", icon = "☺️")
-                for index, row in df_clicks.iterrows():
-                    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
-                for index, row in df_pages.iterrows():
-                    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_web_pages` (id, creation_date, start_query_date, end_query_date, page, clicks, impressions, ctr, position) VALUES (GENERATE_UUID(), '{today_str}', '{starting_date_to_pages}', '{ending_date_to_pages}', '{row['Page']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
-                time.sleep(15)
-                st.rerun()
+            st.session_state.role_id = role_id
+            st.session_state.project_name = project_name
+            
+            st.session_state.days_last_update = days_last_update
+            st.session_state.min_date_next_query = min_date_next_query
+            st.session_state.project_url_clean = project_url_clean
+            st.session_state.min_date_first_query = min_date_first_query
+            st.session_state.max_date_next_query = max_date_next_query
+            
+            
+            get_data_button = st.button("Get data", on_click = get_data_save_to_bq_execution)
 
     # # pages
     # df = get_data(property_url, ['page'], day[0].strftime("%Y-%m-%d"), day[1].strftime("%Y-%m-%d"),
