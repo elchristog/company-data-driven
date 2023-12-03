@@ -215,10 +215,10 @@ def get_youtube_data_save_to_bq_execute():
     palavra_filter = None
     palavra_operator = None   
     
-    if days_last_update is None:
+    if st.session_state.days_last_update is None:
         starting_date_to_pages = st.session_state.min_date_first_query.strftime("%Y-%m-%d")
         ending_date_to_pages = st.session_state.max_date_next_query.strftime("%Y-%m-%d")
-    elif days_last_update > 0:
+    elif st.session_state.days_last_update > 0:
         starting_date_to_pages = st.session_state.min_date_next_query.strftime("%Y-%m-%d")
         ending_date_to_pages = st.session_state.max_date_next_query.strftime("%Y-%m-%d")
 
