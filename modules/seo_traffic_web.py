@@ -325,10 +325,10 @@ def get_data_save_to_bq_execution():
         starting_date_to_pages = st.session_state.min_date_next_query.strftime("%Y-%m-%d")
         ending_date_to_pages = st.session_state.max_date_next_query.strftime("%Y-%m-%d")
 
-    df_clicks = get_data_date(st.session_state.property_url, starting_date_to_pages, ending_date_to_pages,
+    df_clicks = get_data_date(property_url, starting_date_to_pages, ending_date_to_pages,
             url_filter=url_filter, url_operator=url_operator,
             palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-    df_pages = get_data(st.session_state.property_url, ['page'], starting_date_to_pages, ending_date_to_pages,
+    df_pages = get_data(property_url, ['page'], starting_date_to_pages, ending_date_to_pages,
             url_filter=url_filter, url_operator=url_operator,
             palavra_filter=palavra_filter, palavra_operator=palavra_operator)
     # st.table(df_clicks)
