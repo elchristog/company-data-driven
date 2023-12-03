@@ -205,6 +205,38 @@ def get_data_date(property_url, start_date, end_date, url_filter=None, url_opera
 
 
 
+def get_youtube_data_save_to_bq_execute():
+    url = st.session_state.project_url_clean
+    property_url = check_input_url(url)
+    st.session_state.domain = property_url
+
+    url_filter = None
+    url_operator = None
+    palavra_filter = None
+    palavra_operator = None   
+    
+    if days_last_update is None:
+        starting_date_to_pages = st.session_state.min_date_first_query.strftime("%Y-%m-%d")
+        ending_date_to_pages = st.session_state.max_date_next_query.strftime("%Y-%m-%d")
+    elif days_last_update > 0:
+        starting_date_to_pages = st.session_state.min_date_next_query.strftime("%Y-%m-%d")
+        ending_date_to_pages = st.session_state.max_date_next_query.strftime("%Y-%m-%d")
+
+    df_clicks = get_data_date(property_url, starting_date_to_pages, ending_date_to_pages,
+            url_filter=url_filter, url_operator=url_operator,
+            palavra_filter=palavra_filter, palavra_operator=palavra_operator)
+    st.table(df_clicks)
+    today = datetime.date.today()
+    today_str = today.strftime("%Y-%m-%d")
+    st.toast("Updating, please wait", icon = "☺️")
+    for index, row in df_clicks.iterrows():
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.traffic_analytics_youtube_views` (date, views, suscribers_gained, average_view_percentage, shares) VALUES ('{row['date']}', {row['views']}, {row['subscribersGained']}, {row['averageViewPercentage']}, {row['shares']});")
+    time.sleep(15)
+    uc.run_query_1_h.clear()
+    st.rerun()
+
+
+
 
 
 def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
@@ -256,35 +288,18 @@ def get_youtube_data_save_to_bq(role_id, project_name, project_url_clean):
                     key="my_token_input_youtube",
                     label_visibility="collapsed",
                 )
-            get_data_button_yt = st.button("Get data", key = "youtube_get_data")
-            if get_data_button_yt:
-                url = project_url_clean
-                property_url = check_input_url(url)
-                st.session_state.domain = property_url
 
-                url_filter = None
-                url_operator = None
-                palavra_filter = None
-                palavra_operator = None   
+            st.session_state.role_id = role_id
+            st.session_state.project_name = project_name
+            st.session_state.project_url_clean = project_url_clean
+            st.session_state.days_last_update = days_last_update
+            st.session_state.min_date_first_query = min_date_first_query
+            st.session_state.min_date_next_query = min_date_next_query
+            st.session_state.max_date_next_query = max_date_next_query
+            
+            
+            get_data_button_yt = st.button("Get data", key = "youtube_get_data", on_click = get_youtube_data_save_to_bq_execute)
                 
-                if days_last_update is None:
-                    starting_date_to_pages = min_date_first_query.strftime("%Y-%m-%d")
-                    ending_date_to_pages = max_date_next_query.strftime("%Y-%m-%d")
-                elif days_last_update > 0:
-                    starting_date_to_pages = min_date_next_query.strftime("%Y-%m-%d")
-                    ending_date_to_pages = max_date_next_query.strftime("%Y-%m-%d")
-
-                df_clicks = get_data_date(property_url, starting_date_to_pages, ending_date_to_pages,
-                        url_filter=url_filter, url_operator=url_operator,
-                        palavra_filter=palavra_filter, palavra_operator=palavra_operator)
-                st.table(df_clicks)
-                today = datetime.date.today()
-                today_str = today.strftime("%Y-%m-%d")
-                st.info("Updating, please wait", icon = "☺️")
-                for index, row in df_clicks.iterrows():
-                    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_youtube_views` (date, views, suscribers_gained, average_view_percentage, shares) VALUES ('{row['date']}', {row['views']}, {row['subscribersGained']}, {row['averageViewPercentage']}, {row['shares']});")
-                time.sleep(15)
-                st.rerun()
 
 
 
