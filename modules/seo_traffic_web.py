@@ -335,7 +335,7 @@ def get_data_save_to_bq_execution():
     # st.table(df_pages)
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
-    st.info("Updating, please wait", icon = "☺️")
+    st.toast("Updating, please wait", icon = "☺️")
     for index, row in df_clicks.iterrows():
         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.traffic_analytics_web_clicks` (date, clicks, impressions, ctr, position) VALUES ('{row['Date']}', {row['Clicks']}, {row['Impressions']}, {row['CTR']}, {row['Position']});")
     for index, row in df_pages.iterrows():
