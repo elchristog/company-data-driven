@@ -150,6 +150,24 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
 
 
 
+def seo_ideation_execution():
+    st.toast('Generating Ideas:', icon="🤖")  
+    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.keyword_seo_ideation_log` (id, creation_date, creator_user_id, ideas) VALUES (GENERATE_UUID(), CURRENT_DATE(), {st.session_state.user_id}, '{st.session_state.text_input_1}')")  
+    keyword_research = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{st.session_state.project_name}.keywords`;")        
+    longtail_questions = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{st.session_state.project_name}.keyword_common_questions`;")        
+    created_content = uc.run_query_10_s(f"SELECT page AS page, SUM(clicks) AS clicks, SUM(impressions) AS impressions, AVG(ctr) AS ctr  FROM `company-data-driven.{st.session_state.project_name}.traffic_analytics_web_pages` GROUP BY page;")  
+    st.toast("Keyword research", icon = "☺️")
+    time.sleep(5)
+    all_ideas = uc.run_query_10_s(f"SELECT ideas FROM `company-data-driven.{st.session_state.project_name}.keyword_seo_ideation_log`;")  
+    answer = cgptg.prompt_ia("Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.project_keyword} [/KEYWORD] [KEYWORD_RESEARCH] {keyword_research} [/KEYWORD_RESEARCH] [LONGTAIL_QUESTIONS] {longtail_questions} [/LONGTAIL_QUESTIONS] [IDEASEXTRA] {all_ideas} [/IDEASEXTRA] [YACREADO] {created_content} [/YACREADO] [INSTRUCTION] Analiza las metricas, Dame ideas de 6 articulos que posicionen aclarando el titulo que debe tener el articulo y la keyword que quieres posicionar en cada uno, evita hablar sobre articulos que ya he creado [YACREADO], asegura que 2 de los articulos vengan de los [LONGTAIL_QUESTIONS] o de los [IDEASEXTRA]:[/INSTRUCTION]", 600)
+    st.toast("IA working", icon = "☺️")
+    st.session_state.answer = answer
+    st.write(answer)
+    
+
+
+
+
 
 
 def seo_ideation(project_name, project_keyword, user_id, role_id):
@@ -162,19 +180,16 @@ def seo_ideation(project_name, project_keyword, user_id, role_id):
             help = 'This ideas will be saved an priorized with the time'
         )
 
-        submitted = st.form_submit_button("Generate ideas")
-        if submitted:
-            st.success('Generating Ideas:', icon="🤖")  
-            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.keyword_seo_ideation_log` (id, creation_date, creator_user_id, ideas) VALUES (GENERATE_UUID(), CURRENT_DATE(), {user_id}, '{text_input_1}')")  
-            keyword_research = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{project_name}.keywords`;")        
-            longtail_questions = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{project_name}.keyword_common_questions`;")        
-            created_content = uc.run_query_10_s(f"SELECT page AS page, SUM(clicks) AS clicks, SUM(impressions) AS impressions, AVG(ctr) AS ctr  FROM `company-data-driven.{project_name}.traffic_analytics_web_pages` GROUP BY page;")  
-            st.info("Keyword research", icon = "☺️")
-            time.sleep(5)
-            all_ideas = uc.run_query_10_s(f"SELECT ideas FROM `company-data-driven.{project_name}.keyword_seo_ideation_log`;")  
-            answer = cgptg.prompt_ia("Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {project_keyword} [/KEYWORD] [KEYWORD_RESEARCH] {keyword_research} [/KEYWORD_RESEARCH] [LONGTAIL_QUESTIONS] {longtail_questions} [/LONGTAIL_QUESTIONS] [IDEASEXTRA] {all_ideas} [/IDEASEXTRA] [YACREADO] {created_content} [/YACREADO] [INSTRUCTION] Analiza las metricas, Dame ideas de 6 articulos que posicionen aclarando el titulo que debe tener el articulo y la keyword que quieres posicionar en cada uno, evita hablar sobre articulos que ya he creado [YACREADO], asegura que 2 de los articulos vengan de los [LONGTAIL_QUESTIONS] o de los [IDEASEXTRA]:[/INSTRUCTION]", 600)
-            st.info("IA working", icon = "☺️")
-            st.write(answer)
+        st.session_state.project_name = project_name
+        st.session_state.project_keyword = project_keyword
+        st.session_state.user_id = user_id
+        st.session_state.role_id = role_id
+        st.session_state.text_input_1 = text_input_1
+        
+        submitted = st.form_submit_button("Generate ideas", on_click = seo_ideation_execution)
+        if 'answer' in st.session_state:
+            st.download_button('Download answer', st.session_state.answer)
+    
     if role_id == 1:
         st.write("---")
         st.header("Keyword research steps")
