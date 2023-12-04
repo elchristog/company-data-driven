@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import time
 import datetime
+import re
 
 import utils.user_credentials as uc
 import utils.chat_gpt_gestor as cgptg
