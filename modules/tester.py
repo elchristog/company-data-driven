@@ -350,9 +350,11 @@ def add_question_to_test(project_name, questions_table_name, user_id):
 
     if letter_correct_answer is not None:
         letter_correct_answer_lower = letter_correct_answer.lower()
+        st.session_state.letter_correct_answer_lower = letter_correct_answer_lower
     explanation = st.text_input("Write the explanation:")
     if explanation is not None:
         cleaned_explanation = re.sub(r'[\"\']', '', explanation)
+        st.session_state.cleaned_explanation = cleaned_explanation
 
     st.session_state.project_name = project_name
     st.session_state.questions_table_name = questions_table_name
@@ -367,9 +369,7 @@ def add_question_to_test(project_name, questions_table_name, user_id):
     st.session_state.option_d = option_d
     st.session_state.letter_correct_answer = letter_correct_answer
     st.session_state.confirm_letter_correct_answer = confirm_letter_correct_answer
-    st.session_state.letter_correct_answer_lower = letter_correct_answer_lower
     st.session_state.explanation = explanation
-    st.session_state.cleaned_explanation = cleaned_explanation
     
     add_question_button = st.button("Add question", on_click = add_question_to_test_execution)
 
