@@ -55,6 +55,7 @@ def update_customer_progress(user_id, project_id, project_name, program_steps_ta
     )
     if selected_username is not None:
         selected_user_id = users_ids[users_username.index(selected_username)]
+        st.session_state.selected_user_id = selected_user_id
         user_next_steps = uc.run_query_15_m(f"SELECT ps.id, ps.name FROM `company-data-driven.{project_name}.{program_steps_table_tame}` AS ps WHERE id > (SELECT MAX(upsp.program_step_id) AS actual_step_id FROM `company-data-driven.{project_name}.{program_steps_user_progress_table_name}` AS upsp WHERE upsp.user_id = {selected_user_id}) ORDER BY id ASC;")
         if len(user_next_steps) < 1 or len(user_next_steps) is None:
             user_next_steps = uc.run_query_15_m(f"SELECT id, name FROM `company-data-driven.{project_name}.{program_steps_table_tame}` WHERE id = (SELECT MIN(id) FROM `company-data-driven.{project_name}.{program_steps_table_tame}`);")
@@ -81,6 +82,7 @@ def update_customer_progress(user_id, project_id, project_name, program_steps_ta
             if selected_new_step == confirm_new_step:
                 st.success("Step confirmed!", icon = "🎈")
                 selected_step_id = step_ids[step_names.index(selected_new_step)]
+                st.session_state.selected_step_id = selected_step_id
             else:
                 st.error('Incorrect selection', icon = '🀄')
 
@@ -93,8 +95,8 @@ def update_customer_progress(user_id, project_id, project_name, program_steps_ta
         st.session_state.selected_username = selected_username
         st.session_state.selected_new_step = selected_new_step
         st.session_state.confirm_new_step = confirm_new_step
-        st.session_state.selected_user_id = selected_user_id
-        st.session_state.selected_step_id = selected_step_id
+        
+        
         
         update_step_button = st.button("Update step", on_click = update_customer_progress_execution)
 
