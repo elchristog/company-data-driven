@@ -9,6 +9,33 @@ import utils.user_credentials as uc
 
 # https://docs.streamlit.io/library/api-reference/status
 
+
+def tester_execution():
+    if st.session_state.selected_answer_q1 is None or st.session_state.selected_answer_q2 is None or st.session_state.selected_answer_q3 is None or st.session_state.selected_answer_q4 is None or st.session_state.selected_answer_q5 is None or st.session_state.selected_answer_q6 is None or st.session_state.selected_answer_q7 is None or st.session_state.selected_answer_q8 is None or st.session_state.selected_answer_q9 is None or st.session_state.selected_answer_q10 is None:
+        st.toast("you forgot to answer at least one question", icon = "🤧")
+    else:
+        correct_q_1 = 1 if st.session_state.selected_answer_q1_lower == st.session_state.questions[0].get("correct_option") else 0
+        correct_q_2 = 1 if st.session_state.selected_answer_q2_lower == st.session_state.questions[1].get("correct_option") else 0
+        correct_q_3 = 1 if st.session_state.selected_answer_q3_lower == st.session_state.questions[2].get("correct_option") else 0
+        correct_q_4 = 1 if st.session_state.selected_answer_q4_lower == st.session_state.questions[3].get("correct_option") else 0
+        correct_q_5 = 1 if st.session_state.selected_answer_q5_lower == st.session_state.questions[4].get("correct_option") else 0
+        correct_q_6 = 1 if st.session_state.selected_answer_q6_lower == st.session_state.questions[5].get("correct_option") else 0
+        correct_q_7 = 1 if st.session_state.selected_answer_q7_lower == st.session_state.questions[6].get("correct_option") else 0
+        correct_q_8 = 1 if st.session_state.selected_answer_q8_lower == st.session_state.questions[7].get("correct_option") else 0
+        correct_q_9 = 1 if st.session_state.selected_answer_q9_lower == st.session_state.questions[8].get("correct_option") else 0
+        correct_q_10 = 1 if st.session_state.selected_answer_q10_lower == st.session_state.questions[9].get("correct_option") else 0
+        success_rate = 100 * ((correct_q_1 + correct_q_2 + correct_q_3 + correct_q_4 + correct_q_5 + correct_q_6 + correct_q_7 + correct_q_8 + correct_q_9 + correct_q_10)/10)
+        
+        today_answer_already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.{st.session_state.project_name}.{st.session_state.attempts_table_name}` WHERE attempt_date = '{st.session_state.today_str}' AND user_id = {st.session_state.user_id};")
+        if len(today_answer_already_created) < 1:
+            max_id = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.{st.session_state.project_name}.{st.session_state.attempts_table_name}`;")[0].get("max_id") 
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.{st.session_state.attempts_table_name}` VALUES({max_id},'{st.session_state.today_str}', {st.session_state.user_id},{st.session_state.questions[0].get('id')},{correct_q_1},{st.session_state.questions[1].get('id')},{correct_q_2},{st.session_state.questions[2].get('id')},{correct_q_3},{st.session_state.questions[3].get('id')},{correct_q_4},{st.session_state.questions[4].get('id')},{correct_q_5},{st.session_state.questions[5].get('id')},{correct_q_6},{st.session_state.questions[6].get('id')},{correct_q_7},{st.session_state.questions[7].get('id')},{correct_q_8},{st.session_state.questions[8].get('id')},{correct_q_9},{st.session_state.questions[9].get('id')},{correct_q_10},{success_rate}, '{st.session_state.selected_answer_q1_lower}', '{st.session_state.selected_answer_q2_lower}', '{st.session_state.selected_answer_q3_lower}', '{st.session_state.selected_answer_q4_lower}', '{st.session_state.selected_answer_q5_lower}', '{st.session_state.selected_answer_q6_lower}', '{st.session_state.selected_answer_q7_lower}', '{st.session_state.selected_answer_q8_lower}', '{st.session_state.selected_answer_q9_lower}', '{st.session_state.selected_answer_q10_lower}');")         
+            st.toast("Test sent, wait for answers", icon = "☺️")
+            time.sleep(5)
+            st.rerun()
+
+
+
 def tester(project_name, questions_sample_table_name, user_id, attempts_table_name, group_chat_url): 
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
@@ -31,6 +58,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 )
             if selected_answer_q1 is not None:
                 selected_answer_q1_lower = selected_answer_q1.lower()
+                st.session_state.selected_answer_q1_lower = selected_answer_q1_lower
         with tab2:
             st.write("#### " + questions[1].get("question"))
             st.write("🔹 **A)** " + questions[1].get("option_a"))
@@ -45,6 +73,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 )
             if selected_answer_q2 is not None:
                 selected_answer_q2_lower = selected_answer_q2.lower()
+                st.session_state.selected_answer_q2_lower = selected_answer_q2_lower
         with tab3:
             st.write("#### " + questions[2].get("question"))
             st.write("🔹 **A)** " + questions[2].get("option_a"))
@@ -59,6 +88,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 )
             if selected_answer_q3 is not None:
                 selected_answer_q3_lower = selected_answer_q3.lower()
+                st.session_state.selected_answer_q3_lower = selected_answer_q3_lower
         with tab4:
             st.write("#### " + questions[3].get("question"))
             st.write("🔹 **A)** " + questions[3].get("option_a"))
@@ -73,6 +103,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 )
             if selected_answer_q4 is not None:
                 selected_answer_q4_lower = selected_answer_q4.lower()
+                st.session_state.selected_answer_q4_lower = selected_answer_q4_lower
         with tab5:
             st.write("#### " + questions[4].get("question"))
             st.write("🔹 **A)** " + questions[4].get("option_a"))
@@ -87,6 +118,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 )
             if selected_answer_q5 is not None:
                 selected_answer_q5_lower = selected_answer_q5.lower()
+                st.session_state.selected_answer_q5_lower = selected_answer_q5_lower
         with tab6:
             st.write("#### " + questions[5].get("question"))
             st.write("🔹 **A)** " + questions[5].get("option_a"))
@@ -101,6 +133,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 )
             if selected_answer_q6 is not None:
                 selected_answer_q6_lower = selected_answer_q6.lower()
+                st.session_state.selected_answer_q6_lower = selected_answer_q6_lower
         with tab7:
             st.write("#### " + questions[6].get("question"))
             st.write("🔹 **A)** " + questions[6].get("option_a"))
@@ -115,6 +148,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 )
             if selected_answer_q7 is not None:
                 selected_answer_q7_lower = selected_answer_q7.lower()
+                st.session_state.selected_answer_q7_lower = selected_answer_q7_lower
         with tab8:
             st.write("#### " + questions[7].get("question"))
             st.write("🔹 **A)** " + questions[7].get("option_a"))
@@ -129,6 +163,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 )
             if selected_answer_q8 is not None:
                 selected_answer_q8_lower = selected_answer_q8.lower()
+                st.session_state.selected_answer_q8_lower = selected_answer_q8_lower
         with tab9:
             st.write("#### " + questions[8].get("question"))
             st.write("🔹 **A)** " + questions[8].get("option_a"))
@@ -143,6 +178,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 )
             if selected_answer_q9 is not None:
                 selected_answer_q9_lower = selected_answer_q9.lower()
+                st.session_state.selected_answer_q9_lower = selected_answer_q9_lower
         with tab10:
             st.write("#### " + questions[9].get("question"))
             st.write("🔹 **A)** " + questions[9].get("option_a"))
@@ -157,30 +193,31 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 )
             if selected_answer_q10 is not None:
                 selected_answer_q10_lower = selected_answer_q10.lower()
-            send_answers = st.button("Send Answers")
-            if send_answers:
-                if selected_answer_q1 is None or selected_answer_q2 is None or selected_answer_q3 is None or selected_answer_q4 is None or selected_answer_q5 is None or selected_answer_q6 is None or selected_answer_q7 is None or selected_answer_q8 is None or selected_answer_q9 is None or selected_answer_q10 is None:
-                    st.error("you forgot to answer at least one question", icon = "🤧")
-                else:
-                    correct_q_1 = 1 if selected_answer_q1_lower == questions[0].get("correct_option") else 0
-                    correct_q_2 = 1 if selected_answer_q2_lower == questions[1].get("correct_option") else 0
-                    correct_q_3 = 1 if selected_answer_q3_lower == questions[2].get("correct_option") else 0
-                    correct_q_4 = 1 if selected_answer_q4_lower == questions[3].get("correct_option") else 0
-                    correct_q_5 = 1 if selected_answer_q5_lower == questions[4].get("correct_option") else 0
-                    correct_q_6 = 1 if selected_answer_q6_lower == questions[5].get("correct_option") else 0
-                    correct_q_7 = 1 if selected_answer_q7_lower == questions[6].get("correct_option") else 0
-                    correct_q_8 = 1 if selected_answer_q8_lower == questions[7].get("correct_option") else 0
-                    correct_q_9 = 1 if selected_answer_q9_lower == questions[8].get("correct_option") else 0
-                    correct_q_10 = 1 if selected_answer_q10_lower == questions[9].get("correct_option") else 0
-                    success_rate = 100 * ((correct_q_1 + correct_q_2 + correct_q_3 + correct_q_4 + correct_q_5 + correct_q_6 + correct_q_7 + correct_q_8 + correct_q_9 + correct_q_10)/10)
-                    
-                    today_answer_already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.{project_name}.{attempts_table_name}` WHERE attempt_date = '{today_str}' AND user_id = {user_id};")
-                    if len(today_answer_already_created) < 1:
-                        max_id = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.{project_name}.{attempts_table_name}`;")[0].get("max_id") 
-                        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.{attempts_table_name}` VALUES({max_id},'{today_str}', {user_id},{questions[0].get('id')},{correct_q_1},{questions[1].get('id')},{correct_q_2},{questions[2].get('id')},{correct_q_3},{questions[3].get('id')},{correct_q_4},{questions[4].get('id')},{correct_q_5},{questions[5].get('id')},{correct_q_6},{questions[6].get('id')},{correct_q_7},{questions[7].get('id')},{correct_q_8},{questions[8].get('id')},{correct_q_9},{questions[9].get('id')},{correct_q_10},{success_rate}, '{selected_answer_q1_lower}', '{selected_answer_q2_lower}', '{selected_answer_q3_lower}', '{selected_answer_q4_lower}', '{selected_answer_q5_lower}', '{selected_answer_q6_lower}', '{selected_answer_q7_lower}', '{selected_answer_q8_lower}', '{selected_answer_q9_lower}', '{selected_answer_q10_lower}');")         
-                        st.info("Test sent, wait for answers", icon = "☺️")
-                        time.sleep(5)
-                        st.rerun()
+                st.session_state.selected_answer_q10_lower = selected_answer_q10_lower
+                
+
+            st.session_state.project_name = project_name
+            st.session_state.questions_sample_table_name = questions_sample_table_name
+            st.session_state.user_id = user_id
+            st.session_state.attempts_table_name = attempts_table_name
+            st.session_state.group_chat_url = group_chat_url
+
+            st.session_state.selected_answer_q1 = selected_answer_q1
+            st.session_state.selected_answer_q2 = selected_answer_q2
+            st.session_state.selected_answer_q3 = selected_answer_q3
+            st.session_state.selected_answer_q4 = selected_answer_q4
+            st.session_state.selected_answer_q5 = selected_answer_q5
+            st.session_state.selected_answer_q6 = selected_answer_q6
+            st.session_state.selected_answer_q7 = selected_answer_q7
+            st.session_state.selected_answer_q8 = selected_answer_q8
+            st.session_state.selected_answer_q9 = selected_answer_q9
+            st.session_state.selected_answer_q10 = selected_answer_q10
+
+            st.session_state.questions = questions
+            st.session_state.today_str = today_str
+            
+            send_answers = st.button("Send Answers", on_click = tester_execution)
+
     else:
         if today_results[0].get("success_rate") >= 80:
             st.success("You got **" + str(today_results[0].get("success_rate")) + "%** of today's questions right", icon = "😎")
