@@ -168,6 +168,7 @@ def user_creation(user_id_user_creation, project_id, project_name):
     st.session_state.project_name_user_creation = project_name
     st.session_state.username_user_creation = username
     st.session_state.checking_username_query_user_creation = checking_username_query
+    st.session_state.selected_project_user_creation = selected_project
     st.session_state.selected_project_confirmation_user_creation = selected_project_confirmation
     st.session_state.user_role_user_creation = user_role
     st.session_state.user_role_confirmation_user_creation = user_role_confirmation
