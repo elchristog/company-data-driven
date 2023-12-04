@@ -49,6 +49,7 @@ def save_new_content(project_name, user_id):
 
 
 def content_creation_guide_effective_communication_storytelling(user_id, project_name):
+    st.warning("Do not use line breaks, double or single quotes", icon = "🙈")
     with st.form("comm_eff_storytelling_form", clear_on_submit = True):
         text_input_1 = st.text_area(
             "Keyword del articulo",
