@@ -108,6 +108,8 @@ def user_creation(user_id, project_id, project_name):
     )
     if selected_project is not None:
         selected_project_id = project_ids[project_names.index(selected_project)]
+        st.session_state.selected_project = selected_project
+        st.session_state.selected_project_id = selected_project_id
     selected_project_confirmation = st.selectbox(
         label = "Confirm the project for the user",
         options = project_names,
@@ -166,8 +168,6 @@ def user_creation(user_id, project_id, project_name):
     st.session_state.project_name = project_name
     st.session_state.username = username
     st.session_state.checking_username_query = checking_username_query
-    st.session_state.selected_project = selected_project
-    st.session_state.selected_project_id = selected_project_id
     st.session_state.selected_project_confirmation = selected_project_confirmation
     st.session_state.user_role = user_role
     st.session_state.user_role_confirmation = user_role_confirmation
