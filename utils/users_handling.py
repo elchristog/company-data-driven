@@ -6,12 +6,15 @@ import time
 import utils.user_credentials as uc
 
 
+def hashing_execution():
+    st.write(st.session_state.hashed_passwords)
+
 def hashing():
     password_to_hash = st.text_input("Write the password to hash:")
     hashed_passwords = stauth.Hasher([password_to_hash]).generate()
-    hashing_button = st.button("Start Hashing")
-    if hashing_button:
-        st.write(hashed_passwords)
+    st.session_state.hashed_passwords = hashed_passwords
+    hashing_button = st.button("Start Hashing", on_click = hashing_execution)
+
 
 def user_creation(user_id, project_id, project_name): 
     today = datetime.date.today()
