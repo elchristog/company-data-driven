@@ -80,7 +80,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
             if sub_menu == "SEO writting":
                 tap.title_and_paragraph("SEO writting" + project_icon, "Sigue estos pasos", "h3", 0)
-                seo.seo_writing(project_name, user_id, role_id):
+                seo.seo_writing(project_name, user_id, role_id)
 
 
         if menu == "Web App":
