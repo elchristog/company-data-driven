@@ -163,25 +163,25 @@ def user_creation(user_id_user_creation, project_id, project_name):
     )
     user_drive_folder = st.text_input("Write the user Google Drive folder url:")
     
-    # st.session_state.user_id_user_creation = user_id_user_creation
-    # st.session_state.project_id = project_id
-    # st.session_state.project_name = project_name
-    # st.session_state.username = username
-    # st.session_state.checking_username_query = checking_username_query
-    # st.session_state.selected_project_confirmation = selected_project_confirmation
-    # st.session_state.user_role = user_role
-    # st.session_state.user_role_confirmation = user_role_confirmation
-    # st.session_state.user_first_name = user_first_name
-    # st.session_state.user_last_name = user_last_name
-    # st.session_state.user_email = user_email
-    # st.session_state.user_birth_date = user_birth_date
-    # st.session_state.user_country = user_country
-    # st.session_state.user_gender = user_gender
-    # st.session_state.user_phone_number = user_phone_number
-    # st.session_state.user_drive_folder = user_drive_folder
-    # st.session_state.username = username
-    # st.session_state.today_str = today_str
-    # st.session_state.max_id_users = max_id_users
-    # st.session_state.max_id_role_assignement = max_id_role_assignement
+    st.session_state.user_id_user_creation = user_id_user_creation
+    st.session_state.project_id_user_creation = project_id
+    st.session_state.project_name_user_creation = project_name
+    st.session_state.username_user_creation = username
+    st.session_state.checking_username_query_user_creation = checking_username_query
+    st.session_state.selected_project_confirmation_user_creation = selected_project_confirmation
+    st.session_state.user_role_user_creation = user_role
+    st.session_state.user_role_confirmation_user_creation = user_role_confirmation
+    st.session_state.user_first_name_user_creation = user_first_name
+    st.session_state.user_last_name_user_creation = user_last_name
+    st.session_state.user_email_user_creation = user_email
+    st.session_state.user_birth_date_user_creation = user_birth_date
+    st.session_state.user_country_user_creation = user_country
+    st.session_state.user_gender_user_creation = user_gender
+    st.session_state.user_phone_number_user_creation = user_phone_number
+    st.session_state.user_drive_folder_user_creation = user_drive_folder
+    st.session_state.username_user_creation = username
+    st.session_state.today_str_user_creation = today_str
+    st.session_state.max_id_users_user_creation = max_id_users
+    st.session_state.max_id_role_assignement_user_creation = max_id_role_assignement
     
     create_user_button = st.button("Create User", on_click = user_creation_execution)
