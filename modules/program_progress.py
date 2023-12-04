@@ -32,7 +32,7 @@ def update_customer_progress_execution():
             st.toast("Updating, please wait", icon = "☺️")
             time.sleep(5)
             uc.run_query_15_m.clear()
-            st.toast('Status updated! (' + selected_new_step + ')', icon="😎")
+            st.toast('Status updated! (' + st.session_state.selected_new_step + ')', icon="😎")
             st.balloons()
             st.rerun()
         else:
