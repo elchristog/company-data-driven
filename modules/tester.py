@@ -309,6 +309,17 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             
 
 
+def add_question_to_test_execution():
+    if st.session_state.question is None or st.session_state.option_a is None or st.session_state.option_b is None or st.session_state.option_c is None or st.session_state.option_d is None or st.session_state.letter_correct_answer is None or st.session_state.explanation is None or len(st.session_state.question) < 1 or len(st.session_state.option_a) < 1 or len(st.session_state.option_b) < 1 or len(st.session_state.option_c) < 1 or len(st.session_state.option_d) < 1 or len(st.session_state.letter_correct_answer) < 1 or len(st.session_state.explanation) < 1:
+        st.toast("Please fill in completely all of the required fields.")
+    else:
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.{questions_table_name}` (id, creation_date, question	,option_a	,option_b	,option_c	,option_d	,correct_option	,explanation, creator_id) VALUES({st.session_state.max_id}, '{st.session_state.today_str}', '{st.session_state.question}', '{st.session_state.option_a}', '{st.session_state.option_b}', '{st.session_state.option_c}', '{st.session_state.option_d}', '{st.session_state.letter_correct_answer_lower}', '{st.session_state.cleaned_explanation}', {st.session_state.user_id});")
+        st.toast("Updating, please wait", icon = "☺️")
+        time.sleep(5)
+        st.toast("Question added!", icon = "🐣")
+        st.balloons()
+
+
 
 
 def add_question_to_test(project_name, questions_table_name, user_id):
@@ -343,16 +354,25 @@ def add_question_to_test(project_name, questions_table_name, user_id):
     if explanation is not None:
         cleaned_explanation = re.sub(r'[\"\']', '', explanation)
 
-    add_question_button = st.button("Add question")
-    if add_question_button:
-        if question is None or option_a is None or option_b is None or option_c is None or option_d is None or letter_correct_answer is None or explanation is None or len(question) < 1 or len(option_a) < 1 or len(option_b) < 1 or len(option_c) < 1 or len(option_d) < 1 or len(letter_correct_answer) < 1 or len(explanation) < 1:
-            st.error("Please fill in completely all of the required fields.")
-        else:
-            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.{questions_table_name}` (id, creation_date, question	,option_a	,option_b	,option_c	,option_d	,correct_option	,explanation, creator_id) VALUES({max_id}, '{today_str}', '{question}', '{option_a}', '{option_b}', '{option_c}', '{option_d}', '{letter_correct_answer_lower}', '{cleaned_explanation}', {user_id});")
-            st.info("Updating, please wait", icon = "☺️")
-            time.sleep(5)
-            st.success("Question added!", icon = "🐣")
-            st.balloons()
+    st.session_state.project_name = project_name
+    st.session_state.questions_table_name = questions_table_name
+    st.session_state.user_id = user_id
+
+    st.session_state.today_str = today_str
+    st.session_state.max_id = max_id
+    st.session_state.question = question
+    st.session_state.option_a = option_a
+    st.session_state.option_b = option_b
+    st.session_state.option_c = option_c
+    st.session_state.option_d = option_d
+    st.session_state.letter_correct_answer = letter_correct_answer
+    st.session_state.confirm_letter_correct_answer = confirm_letter_correct_answer
+    st.session_state.letter_correct_answer_lower = letter_correct_answer_lower
+    st.session_state.explanation = explanation
+    st.session_state.cleaned_explanation = cleaned_explanation
+    
+    add_question_button = st.button("Add question", on_click = add_question_to_test_execution)
+
 
 
 
