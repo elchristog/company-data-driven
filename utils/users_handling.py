@@ -70,7 +70,7 @@ def user_creation_execution():
     if len(st.session_state.username) < 6 or len(st.session_state.checking_username_query) > 0 or len(checking_user_role) > 0 or st.session_state.selected_project is None or st.session_state.selected_project != st.session_state.selected_project_confirmation or st.session_state.user_role is None or st.session_state.user_role != st.session_state.user_role_confirmation or st.session_state.user_first_name is None or len(st.session_state.user_first_name) < 3 or st.session_state.user_last_name is None or len(st.session_state.user_last_name) < 3 or st.session_state.user_email is None or len(st.session_state.user_email) < 3  or st.session_state.user_birth_date is None or st.session_state.user_country is None or len(st.session_state.user_country) < 3 or st.session_state.user_gender is None or len(st.session_state.user_gender) < 3 or st.session_state.user_phone_number is None or len(st.session_state.user_phone_number) < 6 or st.session_state.user_drive_folder is None or len(st.session_state.user_drive_folder) < 6:
         st.toast("Please fill in completely all of the required fields.")
     else:
-        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.users` (id, username, status, project_id, creation_date, email, name, lastname, birthdate, country, gender, user_creator_id, phone_number, user_drive_folder) VALUES({st.session_state.max_id_users}, '{st.session_state.username}', 'active', {st.session_state.selected_project_id}, '{st.session_state.today_str}', '{st.session_state.user_email.lower()}', '{st.session_state.user_first_name.lower()}', '{st.session_state.user_last_name.lower()}', '{st.session_state.user_birth_date}', '{st.session_state.user_country.lower()}', '{st.session_state.user_gender.lower()}', {st.session_state.user_id}, '{st.session_state.user_phone_number}', '{st.session_state.user_drive_folder}');")
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.users` (id, username, status, project_id, creation_date, email, name, lastname, birthdate, country, gender, user_creator_id, phone_number, user_drive_folder) VALUES({st.session_state.max_id_users}, '{st.session_state.username}', 'active', {st.session_state.selected_project_id}, '{st.session_state.today_str}', '{st.session_state.user_email.lower()}', '{st.session_state.user_first_name.lower()}', '{st.session_state.user_last_name.lower()}', '{st.session_state.user_birth_date}', '{st.session_state.user_country.lower()}', '{st.session_state.user_gender.lower()}', {st.session_state.user_id_user_creation}, '{st.session_state.user_phone_number}', '{st.session_state.user_drive_folder}');")
         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.role_assignment` (id, user_id, role_id) VALUES({st.session_state.max_id_role_assignement}, {st.session_state.max_id_users}, {st.session_state.selected_role_id});")
         st.toast("Updating, please wait", icon = "☺️")
         time.sleep(5)
@@ -84,7 +84,7 @@ def user_creation_execution():
 
 
 
-def user_creation(user_id, project_id, project_name): 
+def user_creation(user_id_user_creation, project_id, project_name): 
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
     username = st.text_input("Write the username:")
@@ -163,7 +163,7 @@ def user_creation(user_id, project_id, project_name):
     )
     user_drive_folder = st.text_input("Write the user Google Drive folder url:")
     
-    st.session_state.user_id = user_id
+    st.session_state.user_id_user_creation = user_id_user_creation
     st.session_state.project_id = project_id
     st.session_state.project_name = project_name
     st.session_state.username = username
