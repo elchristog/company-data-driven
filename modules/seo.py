@@ -59,6 +59,7 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
             help = 'No se debe poner cualquier cosa, debe ser lo que entrego el ideador',
             key = 'text_input_1'
         )
+        st.write(st.session_state.text_input_1)
 
         text_input_2 = st.text_area(
             "Idea principal",
@@ -68,6 +69,7 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
             help = 'Es una frase que persuada a la persona para que haga lo que quiero que haga, esta orientada al verbo hacer y al beneficio de hacerlo.',
             key = 'text_input_2'
         )
+        st.write(st.session_state.text_input_2)
 
         text_input_3 = st.text_area(
             "Por que de la primer parte de la idea principal",
@@ -77,6 +79,7 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
             help = 'Parte la idea principal en 3 partes y contesta por que de cada una, de forma completa y detallada',
             key = 'text_input_3'
         )
+        st.write(st.session_state.text_input_3)
 
         text_input_4 = st.text_area(
             "Por que de la segunda parte de la idea principal",
@@ -86,6 +89,7 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
             help = 'Parte la idea principal en 3 partes y contesta por que de cada una, de forma completa y detallada',
             key = 'text_input_4'
         )
+        st.write(st.session_state.text_input_4)
 
         text_input_5 = st.text_area(
             "Por que de la tercera parte de la idea principal",
@@ -95,6 +99,7 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
             help = 'Parte la idea principal en 3 partes y contesta por que de cada una, de forma completa y detallada',
             key = 'text_input_5'
         )
+        st.write(st.session_state.text_input_5)
 
         text_input_6 = st.text_area(
             "Como de la primera parte de la idea principal",
@@ -104,6 +109,7 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
             help = 'explica como se hace',
             key = 'text_input_6'
         )
+        st.write(st.session_state.text_input_6)
 
         text_input_7 = st.text_area(
             "Como de la segunda parte de la idea principal",
@@ -113,6 +119,7 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
             help = 'Explica como se hace',
             key = 'text_input_7'
         )
+        st.write(st.session_state.text_input_7)
 
         text_input_8 = st.text_area(
             "Como de la tercera parte de la idea principal",
@@ -122,6 +129,7 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
             help = 'Explica como se hace',
             key = 'text_input_8'
         )
+        st.write(st.session_state.text_input_8)
 
         text_input_9 = st.text_area(
             "Haga experimentos y tablas comparativas 1",
@@ -131,6 +139,7 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
             help = 'Debe ser la parte mas larga y detallada: Probemos opcion1 y opcion2, miren lo que da cuando hacemos 1 y lo que da cuando hacemos 2, en una tabla comparativa se ve asi',
             key = 'text_input_9'
         )
+        st.write(st.session_state.text_input_9)
 
         text_input_10 = st.text_area(
             "Haga experimentos y tablas comparativas 2",
@@ -140,6 +149,7 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
             help = 'Debe ser la parte mas larga y detallada: Probemos opcion1 y opcion2, miren lo que da cuando hacemos 1 y lo que da cuando hacemos 2, en una tabla comparativa se ve asi',
             key = 'text_input_10'
         )
+        st.write(st.session_state.text_input_10)
 
         text_input_11 = st.text_area(
             "Haga experimentos y tablas comparativas 3",
@@ -149,6 +159,7 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
             help = 'Debe ser la parte mas larga y detallada: Probemos opcion1 y opcion2, miren lo que da cuando hacemos 1 y lo que da cuando hacemos 2, en una tabla comparativa se ve asi',
             key = 'text_input_11'
         )
+        st.write(st.session_state.text_input_11)
 
         text_input_12 = st.text_area(
             "Copia y pega lo mas relevante de lo que escriben los top 3 competidores de esto",
@@ -158,6 +169,7 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
             help = 'Solo trae lo relevante',
             key = 'text_input_12'
         )
+        st.write(st.session_state.text_input_12)
 
         text_input_13 = st.text_area(
             "Checklist",
@@ -167,6 +179,7 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
             help = 'Resume en un checklists los mensajes principales',
             key = 'text_input_13'
         )
+        st.write(st.session_state.text_input_13)
 
         text_input_14 = st.text_area(
             "llamado a la accion con pasos a seguir",
@@ -176,6 +189,7 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
             help = '',
             key = 'text_input_14'
         )
+        st.write(st.session_state.text_input_14)
 
 
         submitted = st.form_submit_button("Submit", on_click = save_new_content, args = [project_name, user_id])
