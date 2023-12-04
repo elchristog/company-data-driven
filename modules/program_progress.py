@@ -20,6 +20,26 @@ def general_progress(user_id, project_name, program_steps_table_tame, program_st
 
 
 
+def update_customer_progress_execution():
+    if st.session_state.selected_username is None or st.session_state.selected_new_step is None or st.session_state.confirm_new_step is None:
+        st.error("Please fill in completely all of the required fields.")
+    else:
+        if st.session_state.selected_new_step == st.session_state.confirm_new_step:
+            today = datetime.date.today()
+            today_str = today.strftime("%Y-%m-%d")
+            max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{st.session_state.project_name}.{st.session_state.program_steps_user_progress_table_name}`")[0].get('max_id')
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.{st.session_state.program_steps_user_progress_table_name}` VALUES({max_id}, '{today_str}', {st.session_state.user_id}, {st.session_state.selected_user_id}, {st.session_state.selected_step_id})")
+            st.toast("Updating, please wait", icon = "☺️")
+            time.sleep(5)
+            uc.run_query_15_m.clear()
+            st.toast('Status updated! (' + selected_new_step + ')', icon="😎")
+            st.balloons()
+            st.rerun()
+        else:
+            st.toast("Step is not confirmed.")
+
+
+
 def update_customer_progress(user_id, project_id, project_name, program_steps_table_tame, program_steps_user_progress_table_name):
     rows_users = uc.run_query_half_day(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = {project_id} AND u.status = 'active' AND ra.role_id = 6 ORDER BY u.username ASC;")
     users_ids = []
@@ -64,24 +84,20 @@ def update_customer_progress(user_id, project_id, project_name, program_steps_ta
             else:
                 st.error('Incorrect selection', icon = '🀄')
 
-        update_step_button = st.button("Update step")
-        if update_step_button:
-            if selected_username is None or selected_new_step is None or confirm_new_step is None:
-                st.error("Please fill in completely all of the required fields.")
-            else:
-                if selected_new_step == confirm_new_step:
-                    today = datetime.date.today()
-                    today_str = today.strftime("%Y-%m-%d")
-                    max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{project_name}.{program_steps_user_progress_table_name}`")[0].get('max_id')
-                    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.{program_steps_user_progress_table_name}` VALUES({max_id}, '{today_str}', {user_id}, {selected_user_id}, {selected_step_id})")
-                    st.info("Updating, please wait", icon = "☺️")
-                    time.sleep(5)
-                    uc.run_query_15_m.clear()
-                    st.success('Status updated! (' + selected_new_step + ')', icon="😎")
-                    st.balloons()
-                    st.rerun()
-                else:
-                    st.error("Step is not confirmed.")
+        st.session_state.user_id = user_id
+        st.session_state.project_id = project_id
+        st.session_state.project_name = project_name
+        st.session_state.program_steps_table_tame = program_steps_table_tame
+        st.session_state.program_steps_user_progress_table_name = program_steps_user_progress_table_name
+        
+        st.session_state.selected_username = selected_username
+        st.session_state.selected_new_step = selected_new_step
+        st.session_state.confirm_new_step = confirm_new_step
+        st.session_state.selected_user_id = selected_user_id
+        st.session_state.selected_step_id = selected_step_id
+        
+        update_step_button = st.button("Update step", on_click = update_customer_progress_execution)
+
 
 
 
