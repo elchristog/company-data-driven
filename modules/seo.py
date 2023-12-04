@@ -24,6 +24,22 @@ def save_new_content(project_name, user_id):
     st.session_state.text_input_12 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_12)
     st.session_state.text_input_13 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_13)
     st.session_state.text_input_14 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_14)
+
+    st.session_state.text_input_1 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_1)
+    st.session_state.text_input_2 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_2)
+    st.session_state.text_input_3 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_3)
+    st.session_state.text_input_4 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_4)
+    st.session_state.text_input_5 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_5)
+    st.session_state.text_input_6 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_6)
+    st.session_state.text_input_7 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_7)
+    st.session_state.text_input_8 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_8)
+    st.session_state.text_input_9 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_9)
+    st.session_state.text_input_10 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_10)
+    st.session_state.text_input_11 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_11)
+    st.session_state.text_input_12 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_12)
+    st.session_state.text_input_13 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_13)
+    st.session_state.text_input_14 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_14)
+    
     
     st.toast("Please wait", icon = "☺️")
     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.effective_communication_content` (id, creation_date, creator_user_id, keyword, main_idea, why_1, why_2, why_3, how_1, how_2, how_3, experiment_1, experiment_2, experiment_3, relevant_content, checklist, call_to_action, created_content) VALUES (GENERATE_UUID(), CURRENT_DATE(), {user_id}, '{st.session_state.text_input_1}', '{st.session_state.text_input_2}', '{st.session_state.text_input_3}', '{st.session_state.text_input_4}', '{st.session_state.text_input_5}', '{st.session_state.text_input_6}', '{st.session_state.text_input_7}', '{st.session_state.text_input_8}', '{st.session_state.text_input_9}', '{st.session_state.text_input_10}', '{st.session_state.text_input_11}', '{st.session_state.text_input_12}', '{st.session_state.text_input_13}', '{st.session_state.text_input_14}' ,0);")
