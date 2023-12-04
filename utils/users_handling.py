@@ -75,6 +75,7 @@ def user_creation_execution():
         st.toast("Updating, please wait", icon = "☺️")
         time.sleep(5)
         uc.run_query_30_m.clear()
+        uc.run_query_instant.clear()
         st.toast('User Created!', icon = '🎈')
         st.balloons()
         st.warning('Remember to hash the password and add to config, and create the demo task', icon = '😶‍🌫️')
