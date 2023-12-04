@@ -18,7 +18,93 @@ def hashing():
 
 
 
-def user_creation(user_id, project_id, project_name): 
+import streamlit as st
+import streamlit_authenticator as stauth
+import datetime
+import time
+
+import utils.user_credentials as uc
+
+
+def hashing_execution():
+    st.write(st.session_state.hashed_passwords)
+
+def hashing():
+    password_to_hash = st.text_input("Write the password to hash:")
+    hashed_passwords = stauth.Hasher([password_to_hash]).generate()
+    st.session_state.hashed_passwords = hashed_passwords
+    hashing_button = st.button("Start Hashing", on_click = hashing_execution)
+
+
+
+def user_creation_execution():
+    checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{st.session_state.username}';")
+    # if len(checking_username_query) < 1:
+    #     checking_user_role = []
+    # else:
+    #     checking_user_role = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.role_assignment` WHERE user_id = {checking_username_query[0].get('id')};")
+    # if len(st.session_state.username) < 6:
+    #     st.toast("The username must be at least 6 characters long.")
+    # if len(st.session_state.checking_username_query) > 0:
+    #     st.toast("The username is already in use.")
+    # if len(checking_user_role) > 0:
+    #     st.toast("The username already has a role.")
+    # if st.session_state.selected_project is None:
+    #     st.toast("Please select a project.")
+    # if st.session_state.selected_project != st.session_state.selected_project_confirmation:
+    #     st.toast("The selected project and the confirmation project must match.")
+    # if st.session_state.user_role is None:
+    #     st.toast("Please select a user role.")
+    # if st.session_state.user_role != st.session_state.user_role_confirmation:
+    #     st.toast("The selected user role and the confirmation user role must match.")
+    # if st.session_state.user_first_name is None:
+    #     st.toast("Please enter your first name.")
+    # if len(st.session_state.user_first_name) < 3:
+    #     st.toast("The first name must be at least 3 characters long.")
+    # if st.session_state.user_last_name is None:
+    #     st.toast("Please enter your last name.")
+    # if len(st.session_state.user_last_name) < 3:
+    #     st.toast("The last name must be at least 3 characters long.")
+    # if st.session_state.user_email is None:
+    #     st.toast("Please enter your email address.")
+    # if len(st.session_state.user_email) < 3:
+    #     st.toast("The email address must be at least 3 characters long.")
+    # if st.session_state.user_birth_date is None:
+    #     st.toast("Please enter your birth date.")
+    # if st.session_state.user_country is None:
+    #     st.toast("Please select your country.")
+    # if len(st.session_state.user_country) < 3:
+    #     st.toast("The country name must be at least 3 characters long.")
+    # if st.session_state.user_gender is None:
+    #     st.toast("Please select your gender.")
+    # if len(st.session_state.user_gender) < 3:
+    #     st.toast("The gender must be at least 3 characters long.")
+    # if st.session_state.user_phone_number is None:
+    #     st.toast("Please enter your phone number.")
+    # if len(st.session_state.user_phone_number) < 6:
+    #     st.toast("The phone number must be at least 6 characters long.")
+    # if st.session_state.user_drive_folder is None:
+    #     st.toast("Please enter the Drive URL.")
+    # if len(st.session_state.user_drive_folder) < 6:
+    #     st.toast("The Drive URL must be at least 6 characters long.")
+    # if len(st.session_state.username) < 6 or len(st.session_state.checking_username_query) > 0 or len(checking_user_role) > 0 or st.session_state.selected_project is None or st.session_state.selected_project != st.session_state.selected_project_confirmation or st.session_state.user_role is None or st.session_state.user_role != st.session_state.user_role_confirmation or st.session_state.user_first_name is None or len(st.session_state.user_first_name) < 3 or st.session_state.user_last_name is None or len(st.session_state.user_last_name) < 3 or st.session_state.user_email is None or len(st.session_state.user_email) < 3  or st.session_state.user_birth_date is None or st.session_state.user_country is None or len(st.session_state.user_country) < 3 or st.session_state.user_gender is None or len(st.session_state.user_gender) < 3 or st.session_state.user_phone_number is None or len(st.session_state.user_phone_number) < 6 or st.session_state.user_drive_folder is None or len(st.session_state.user_drive_folder) < 6:
+    #     st.toast("Please fill in completely all of the required fields.")
+    # else:
+    #     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.users` (id, username, status, project_id, creation_date, email, name, lastname, birthdate, country, gender, user_creator_id, phone_number, user_drive_folder) VALUES({st.session_state.max_id_users}, '{st.session_state.username}', 'active', {st.session_state.selected_project_id}, '{st.session_state.today_str}', '{st.session_state.user_email.lower()}', '{st.session_state.user_first_name.lower()}', '{st.session_state.user_last_name.lower()}', '{st.session_state.user_birth_date}', '{st.session_state.user_country.lower()}', '{st.session_state.user_gender.lower()}', {st.session_state.user_id_user_creation}, '{st.session_state.user_phone_number}', '{st.session_state.user_drive_folder}');")
+    #     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.role_assignment` (id, user_id, role_id) VALUES({st.session_state.max_id_role_assignement}, {st.session_state.max_id_users}, {st.session_state.selected_role_id});")
+    #     st.toast("Updating, please wait", icon = "☺️")
+    #     time.sleep(5)
+    #     uc.run_query_30_m.clear()
+    #     st.toast('User Created!', icon = '🎈')
+    #     st.balloons()
+    #     st.warning('Remember to hash the password and add to config, and create the demo task', icon = '😶‍🌫️')
+    #     st.toast('Remember to hash the password and add to config, and create the demo task', icon = '😶‍🌫️')
+        
+
+
+
+
+def user_creation(user_id_user_creation, project_id, project_name): 
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
     username = st.text_input("Write the username:")
@@ -42,6 +128,8 @@ def user_creation(user_id, project_id, project_name):
     )
     if selected_project is not None:
         selected_project_id = project_ids[project_names.index(selected_project)]
+        st.session_state.selected_project = selected_project
+        st.session_state.selected_project_id = selected_project_id
     selected_project_confirmation = st.selectbox(
         label = "Confirm the project for the user",
         options = project_names,
@@ -95,66 +183,25 @@ def user_creation(user_id, project_id, project_name):
     )
     user_drive_folder = st.text_input("Write the user Google Drive folder url:")
     
+    # st.session_state.user_id_user_creation = user_id_user_creation
+    # st.session_state.project_id = project_id
+    # st.session_state.project_name = project_name
+    # st.session_state.username = username
+    # st.session_state.checking_username_query = checking_username_query
+    # st.session_state.selected_project_confirmation = selected_project_confirmation
+    # st.session_state.user_role = user_role
+    # st.session_state.user_role_confirmation = user_role_confirmation
+    # st.session_state.user_first_name = user_first_name
+    # st.session_state.user_last_name = user_last_name
+    # st.session_state.user_email = user_email
+    # st.session_state.user_birth_date = user_birth_date
+    # st.session_state.user_country = user_country
+    # st.session_state.user_gender = user_gender
+    # st.session_state.user_phone_number = user_phone_number
+    # st.session_state.user_drive_folder = user_drive_folder
+    # st.session_state.username = username
+    # st.session_state.today_str = today_str
+    # st.session_state.max_id_users = max_id_users
+    # st.session_state.max_id_role_assignement = max_id_role_assignement
     
-    create_user_button = st.button("Create User")
-    if create_user_button:
-        checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
-        if len(checking_username_query) < 1:
-            checking_user_role = []
-        else:
-            checking_user_role = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.role_assignment` WHERE user_id = {checking_username_query[0].get('id')};")
-        if len(username) < 6:
-            st.error("The username must be at least 6 characters long.")
-        if len(checking_username_query) > 0:
-            st.error("The username is already in use.")
-        if len(checking_user_role) > 0:
-            st.error("The username already has a role.")
-        if selected_project is None:
-            st.error("Please select a project.")
-        if selected_project != selected_project_confirmation:
-            st.error("The selected project and the confirmation project must match.")
-        if user_role is None:
-            st.error("Please select a user role.")
-        if user_role != user_role_confirmation:
-            st.error("The selected user role and the confirmation user role must match.")
-        if user_first_name is None:
-            st.error("Please enter your first name.")
-        if len(user_first_name) < 3:
-            st.error("The first name must be at least 3 characters long.")
-        if user_last_name is None:
-            st.error("Please enter your last name.")
-        if len(user_last_name) < 3:
-            st.error("The last name must be at least 3 characters long.")
-        if user_email is None:
-            st.error("Please enter your email address.")
-        if len(user_email) < 3:
-            st.error("The email address must be at least 3 characters long.")
-        if user_birth_date is None:
-            st.error("Please enter your birth date.")
-        if user_country is None:
-            st.error("Please select your country.")
-        if len(user_country) < 3:
-            st.error("The country name must be at least 3 characters long.")
-        if user_gender is None:
-            st.error("Please select your gender.")
-        if len(user_gender) < 3:
-            st.error("The gender must be at least 3 characters long.")
-        if user_phone_number is None:
-            st.error("Please enter your phone number.")
-        if len(user_phone_number) < 6:
-            st.error("The phone number must be at least 6 characters long.")
-        if user_drive_folder is None:
-            st.error("Please enter the Drive URL.")
-        if len(user_drive_folder) < 6:
-            st.error("The Drive URL must be at least 6 characters long.")
-        if len(username) < 6 or len(checking_username_query) > 0 or len(checking_user_role) > 0 or selected_project is None or selected_project != selected_project_confirmation or user_role is None or user_role != user_role_confirmation or user_first_name is None or len(user_first_name) < 3 or user_last_name is None or len(user_last_name) < 3 or user_email is None or len(user_email) < 3  or user_birth_date is None or user_country is None or len(user_country) < 3 or user_gender is None or len(user_gender) < 3 or user_phone_number is None or len(user_phone_number) < 6 or user_drive_folder is None or len(user_drive_folder) < 6:
-            st.error("Please fill in completely all of the required fields.")
-        else:
-            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.users` (id, username, status, project_id, creation_date, email, name, lastname, birthdate, country, gender, user_creator_id, phone_number, user_drive_folder) VALUES({max_id_users}, '{username}', 'active', {selected_project_id}, '{today_str}', '{user_email.lower()}', '{user_first_name.lower()}', '{user_last_name.lower()}', '{user_birth_date}', '{user_country.lower()}', '{user_gender.lower()}', {user_id}, '{user_phone_number}', '{user_drive_folder}');")
-            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.role_assignment` (id, user_id, role_id) VALUES({max_id_role_assignement}, {max_id_users}, {selected_role_id});")
-            st.info("Updating, please wait", icon = "☺️")
-            time.sleep(5)
-            uc.run_query_30_m.clear()
-            st.success('User Created!', icon = '🎈')
-            st.balloons()
-            st.warning('Remember to hash the password and add to config, and create the demo task', icon = '😶‍🌫️')
+    create_user_button = st.button("Create User", on_click = user_creation_execution)
