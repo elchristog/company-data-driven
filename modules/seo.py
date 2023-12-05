@@ -265,13 +265,11 @@ def seo_writing_execution():
     selected_content_relevant_content = st.session_state.relevant_contents[st.session_state.keywords.index(st.session_state.selected_keyword)]
     selected_content_checklist = st.session_state.checklists[st.session_state.keywords.index(st.session_state.selected_keyword)]
     selected_content_call_to_action = st.session_state.call_to_actions[st.session_state.keywords.index(st.session_state.selected_keyword)]
-    st.toast(st.session_state.why_1s)
 
-
-    # article = cgptg.prompt_ia("Eres un experto en SEO, especialmente en generacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.project_keyword} [/KEYWORD] [KEYWORD_RESEARCH] {keyword_research} [/KEYWORD_RESEARCH] [LONGTAIL_QUESTIONS] {longtail_questions} [/LONGTAIL_QUESTIONS] [IDEASEXTRA] {all_ideas} [/IDEASEXTRA] [YACREADO] {created_content} [/YACREADO] [INSTRUCTION] Analiza las metricas, Dame ideas de 6 articulos que posicionen aclarando el titulo que debe tener el articulo y la keyword que quieres posicionar en cada uno, evita hablar sobre articulos que ya he creado [YACREADO], asegura que 2 de los articulos vengan de los [LONGTAIL_QUESTIONS] o de los [IDEASEXTRA]:[/INSTRUCTION]", 600)
-    # st.toast("Saving article", icon = "☺️")
-    # st.session_state.article = article
-    # st.write(article)
+    article = cgptg.prompt_ia("Eres un experto en SEO, especialmente en generacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.selected_keyword} [/KEYWORD] [ARTICLE] {selected_content_main_idea} [/ARTICLE] [INSTRUCTION] Reescribe este articulo de una forma mas extensa y detallada posible, no omitas los ejemplos quiero que los muestres [/INSTRUCTION]", 600)
+    st.toast("Saving article", icon = "☺️")
+    st.session_state.article = article
+    st.write(article)
     
     time.sleep(5)
     st.balloons()
