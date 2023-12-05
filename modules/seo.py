@@ -251,6 +251,13 @@ def web_creation_guide():
 
 def seo_writing_execution():
     st.toast("My douglas!", icon = "🍩")
+
+    #  article = cgptg.prompt_ia("Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.project_keyword} [/KEYWORD] [KEYWORD_RESEARCH] {keyword_research} [/KEYWORD_RESEARCH] [LONGTAIL_QUESTIONS] {longtail_questions} [/LONGTAIL_QUESTIONS] [IDEASEXTRA] {all_ideas} [/IDEASEXTRA] [YACREADO] {created_content} [/YACREADO] [INSTRUCTION] Analiza las metricas, Dame ideas de 6 articulos que posicionen aclarando el titulo que debe tener el articulo y la keyword que quieres posicionar en cada uno, evita hablar sobre articulos que ya he creado [YACREADO], asegura que 2 de los articulos vengan de los [LONGTAIL_QUESTIONS] o de los [IDEASEXTRA]:[/INSTRUCTION]", 600)
+    # st.toast("IA working", icon = "☺️")
+    # st.session_state.article = article
+    # st.write(article)
+
+
     time.sleep(5)
     st.balloons()
     uc.run_query_30_m.clear()
@@ -318,5 +325,8 @@ def seo_writing(project_name, user_id, role_id):
         st.session_state.call_to_actions = call_to_actions
 
         seo_writing_button = st.form_submit_button("Generate content", on_click = seo_writing_execution) 
+
+    if 'article' in st.session_state:
+        st.download_button('Download article', st.session_state.article)
         
 
