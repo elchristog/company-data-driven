@@ -250,13 +250,28 @@ def web_creation_guide():
 
 
 def seo_writing_execution():
-    st.toast("My douglas!", icon = "🍩")
+    st.toast("IA working!", icon = "🍩")
+    selected_content_id = st.session_state.ids[st.session_state.keywords.index(st.session_state.selected_keyword)]
+    selected_content_main_idea = st.session_state.main_ideas[st.session_state.keywords.index(st.session_state.selected_keyword)]
+    selected_content_why_1 = st.session_state.why_1s[st.session_state.keywords.index(st.session_state.selected_keyword)]
+    selected_content_why_2 = st.session_state.why_2s[st.session_state.keywords.index(st.session_state.selected_keyword)]
+    selected_content_why_3 = st.session_state.why_3s[st.session_state.keywords.index(st.session_state.selected_keyword)]
+    selected_content_how_1 = st.session_state.how_1s[st.session_state.keywords.index(st.session_state.selected_keyword)]
+    selected_content_how_2 = st.session_state.how_2s[st.session_state.keywords.index(st.session_state.selected_keyword)]
+    selected_content_how_3 = st.session_state.how_3s[st.session_state.keywords.index(st.session_state.selected_keyword)]
+    selected_content_experiment_1 = st.session_state.experiment_1s[st.session_state.keywords.index(st.session_state.selected_keyword)]
+    selected_content_experiment_2 = st.session_state.experiment_2s[st.session_state.keywords.index(st.session_state.selected_keyword)]
+    selected_content_experiment_3 = st.session_state.experiment_3s[st.session_state.keywords.index(st.session_state.selected_keyword)]
+    selected_content_relevant_content = st.session_state.relevant_contents[st.session_state.keywords.index(st.session_state.selected_keyword)]
+    selected_content_checklist = st.session_state.checklists[st.session_state.keywords.index(st.session_state.selected_keyword)]
+    selected_content_call_to_action = st.session_state.call_to_actions[st.session_state.keywords.index(st.session_state.selected_keyword)]
+    st.toast(st.session_state.why_1s)
 
-    #  article = cgptg.prompt_ia("Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.project_keyword} [/KEYWORD] [KEYWORD_RESEARCH] {keyword_research} [/KEYWORD_RESEARCH] [LONGTAIL_QUESTIONS] {longtail_questions} [/LONGTAIL_QUESTIONS] [IDEASEXTRA] {all_ideas} [/IDEASEXTRA] [YACREADO] {created_content} [/YACREADO] [INSTRUCTION] Analiza las metricas, Dame ideas de 6 articulos que posicionen aclarando el titulo que debe tener el articulo y la keyword que quieres posicionar en cada uno, evita hablar sobre articulos que ya he creado [YACREADO], asegura que 2 de los articulos vengan de los [LONGTAIL_QUESTIONS] o de los [IDEASEXTRA]:[/INSTRUCTION]", 600)
-    # st.toast("IA working", icon = "☺️")
-    # st.session_state.article = article
-    # st.write(article)
 
+     article = cgptg.prompt_ia("Eres un experto en SEO, especialmente en generacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.project_keyword} [/KEYWORD] [KEYWORD_RESEARCH] {keyword_research} [/KEYWORD_RESEARCH] [LONGTAIL_QUESTIONS] {longtail_questions} [/LONGTAIL_QUESTIONS] [IDEASEXTRA] {all_ideas} [/IDEASEXTRA] [YACREADO] {created_content} [/YACREADO] [INSTRUCTION] Analiza las metricas, Dame ideas de 6 articulos que posicionen aclarando el titulo que debe tener el articulo y la keyword que quieres posicionar en cada uno, evita hablar sobre articulos que ya he creado [YACREADO], asegura que 2 de los articulos vengan de los [LONGTAIL_QUESTIONS] o de los [IDEASEXTRA]:[/INSTRUCTION]", 600)
+    st.toast("Saving article", icon = "☺️")
+    st.session_state.article = article
+    st.write(article)
 
     time.sleep(5)
     st.balloons()
