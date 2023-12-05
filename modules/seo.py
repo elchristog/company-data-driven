@@ -249,6 +249,14 @@ def web_creation_guide():
 
 
 
+def seo_writing_execution():
+    st.toast("My douglas!", icon = "🍩")
+    time.sleep(5)
+    st.balloons()
+    uc.run_query_30_m.clear()
+    
+
+
 
 def seo_writing(project_name, user_id, role_id):
     non_created_contents = uc.run_query_30_m(f"SELECT * FROM `company-data-driven.{project_name}.effective_communication_content` WHERE created_content = 0 ORDER BY creation_date;")
@@ -293,6 +301,22 @@ def seo_writing(project_name, user_id, role_id):
             key = 'selected_keyword'
         )
 
-        seo_writing_button = st.form_submit_button("Generate content") #, on_click = update_task_status
+        st.session_state.ids = ids
+        st.session_state.keywords = keywords
+        st.session_state.main_ideas = main_ideas
+        st.session_state.why_1s = why_1s
+        st.session_state.why_2s = why_2s
+        st.session_state.why_3s = why_3s
+        st.session_state.how_1s = how_1s
+        st.session_state.how_2s = how_2s
+        st.session_state.how_3s = how_3s
+        st.session_state.experiment_1s = experiment_1s
+        st.session_state.experiment_2s = experiment_2s
+        st.session_state.experiment_3s = experiment_3s
+        st.session_state.relevant_contents = relevant_contents
+        st.session_state.checklists = checklists
+        st.session_state.call_to_actions = call_to_actions
+
+        seo_writing_button = st.form_submit_button("Generate content", on_click = seo_writing_execution) 
         
 
