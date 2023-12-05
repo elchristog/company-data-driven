@@ -251,6 +251,7 @@ def web_creation_guide():
 
 
 def seo_writing(project_name, user_id, role_id):
+    st.success("my bro")
     non_created_contents = uc.run_query_30_m(f"SELECT * FROM `company-data-driven.{project_name}.effective_communication_content` WHERE created_content = 0 ORDER BY creation_date;")
     ids = []
     keywords = []
