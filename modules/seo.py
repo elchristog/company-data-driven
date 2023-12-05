@@ -252,5 +252,39 @@ def web_creation_guide():
 
 def seo_writing(project_name, user_id, role_id):
     non_created_contents = uc.run_query_30_m(f"SELECT * FROM `company-data-driven.{project_name}.effective_communication_content` WHERE created_content = 0 ORDER BY creation_date;")
-    st.write(non_created_contents)
+    ids = []
+    keywords = []
+    main_ideas = []
+    why_1s = []
+    why_2s = []
+    why_3s = []
+    how_1s = []
+    how_2s = []
+    how_3s = []
+    experiment_1s = []
+    experiment_2s = []
+    experiment_3s = []
+    relevant_contents = []
+    checklists = []
+    call_to_actions = []
+    
+    for row in non_created_contents:
+        ids.append(row.get('id'))
+        keywords.append(row.get('keyword'))
+        main_ideas.append(row.get('main_idea'))
+        why_1s.append(row.get('why_1'))
+        why_2s.append(row.get('why_2'))
+        why_3s.append(row.get('why_3'))
+        how_1s.append(row.get('how_1'))
+        how_2s.append(row.get('how_2'))
+        how_3s.append(row.get('how_3'))
+        experiment_1s.append(row.get('experiment_1'))
+        experiment_2s.append(row.get('experiment_2'))
+        experiment_3s.append(row.get('experiment_3'))
+        relevant_contents.append(row.get('relevant_content'))
+        checklists.append(row.get('checklist'))
+        call_to_actions.append(row.get('call_to_action'))
+
+    st.write(keywords)
+        
 
