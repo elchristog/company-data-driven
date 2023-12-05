@@ -223,6 +223,8 @@ def seo_ideation(project_name, project_keyword, user_id, role_id):
         submitted = st.form_submit_button("Generate ideas", on_click = seo_ideation_execution)
     if 'answer' in st.session_state:
         st.download_button('Download answer', st.session_state.answer, file_name = 'content_ideas.txt')
+        time.sleep(5)
+        del st.session_state.answer
     
     if role_id == 1:
         st.write("---")
@@ -341,5 +343,7 @@ def seo_writing(project_name, user_id, role_id):
 
     if 'article' in st.session_state:
         st.download_button('Download article', st.session_state.article, file_name = 'ia_article.txt')
+        time.sleep(5)
+        del st.session_state.article
         
 
