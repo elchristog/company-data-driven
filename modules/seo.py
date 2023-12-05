@@ -186,6 +186,8 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
 
 def seo_ideation_execution():
     st.toast('Generating Ideas:', icon="🤖")  
+    if 'answer' in st.session_state:
+        del st.session_state.answer
     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.keyword_seo_ideation_log` (id, creation_date, creator_user_id, ideas) VALUES (GENERATE_UUID(), CURRENT_DATE(), {st.session_state.user_id}, '{st.session_state.text_input_1}')")  
     keyword_research = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{st.session_state.project_name}.keywords`;")        
     longtail_questions = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{st.session_state.project_name}.keyword_common_questions`;")        
@@ -252,6 +254,8 @@ def web_creation_guide():
 
 def seo_writing_execution():
     st.toast("IA working!", icon = "🍩")
+    if 'article' in st.session_state:
+        del st.session_state.article
     selected_content_id = st.session_state.ids[st.session_state.keywords.index(st.session_state.selected_keyword)]
     selected_content_main_idea = st.session_state.main_ideas[st.session_state.keywords.index(st.session_state.selected_keyword)]
     selected_content_why_1 = st.session_state.why_1s[st.session_state.keywords.index(st.session_state.selected_keyword)]
