@@ -251,7 +251,6 @@ def web_creation_guide():
 
 
 def seo_writing(project_name, user_id, role_id):
-    st.success("my bro")
     non_created_contents = uc.run_query_30_m(f"SELECT * FROM `company-data-driven.{project_name}.effective_communication_content` WHERE created_content = 0 ORDER BY creation_date;")
     ids = []
     keywords = []
@@ -286,6 +285,14 @@ def seo_writing(project_name, user_id, role_id):
         checklists.append(row.get('checklist'))
         call_to_actions.append(row.get('call_to_action'))
 
-    st.write(keywords)
+    with st.form("seo_writing_form", clear_on_submit = True):
+        selected_keyword = st.selectbox(
+            label = "Select one article idea",
+            options = keywords,
+            index = None,
+            key = 'selected_keyword'
+        )
+
+        seo_writing_button = st.form_submit_button("Generate content") #, on_click = update_task_status
         
 
