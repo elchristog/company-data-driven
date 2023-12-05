@@ -19,7 +19,7 @@ client = gcloud_bigquery_client()
 def run_query_insert_update(query):
     client.query(query)
 
-@st.cache_data(ttl=86400)
+@st.cache_data(ttl=86400, show_spinner=False)
 def run_query_insert_update_1_day(query):
     client.query(query)
 
@@ -31,91 +31,91 @@ def run_query_instant(query):
     rows = [dict(row) for row in rows_raw]
     return rows
 
-@st.cache_data(ttl=5)
+@st.cache_data(ttl=5, show_spinner=False)
 def run_query_5_s(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
     rows = [dict(row) for row in rows_raw]
     return rows
 
-@st.cache_data(ttl=10)
+@st.cache_data(ttl=10, show_spinner=False)
 def run_query_10_s(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
     rows = [dict(row) for row in rows_raw]
     return rows
 
-@st.cache_data(ttl=30)
+@st.cache_data(ttl=30, show_spinner=False)
 def run_query_30_s(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
     rows = [dict(row) for row in rows_raw]
     return rows
 
-@st.cache_data(ttl=60)
+@st.cache_data(ttl=60, show_spinner=False)
 def run_query_1_m(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
     rows = [dict(row) for row in rows_raw]
     return rows
 
-@st.cache_data(ttl=120)
+@st.cache_data(ttl=120, show_spinner=False)
 def run_query_2_m(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
     rows = [dict(row) for row in rows_raw]
     return rows
 
-@st.cache_data(ttl=300)
+@st.cache_data(ttl=300, show_spinner=False)
 def run_query_5_m(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
     rows = [dict(row) for row in rows_raw]
     return rows
 
-@st.cache_data(ttl=900)
+@st.cache_data(ttl=900, show_spinner=False)
 def run_query_15_m(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
     rows = [dict(row) for row in rows_raw]
     return rows
 
-@st.cache_data(ttl=1800)
+@st.cache_data(ttl=1800, show_spinner=False)
 def run_query_30_m(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
     rows = [dict(row) for row in rows_raw]
     return rows
 
-@st.cache_data(ttl=3600)
+@st.cache_data(ttl=3600, show_spinner=False)
 def run_query_1_h(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
     rows = [dict(row) for row in rows_raw]
     return rows
 
-@st.cache_data(ttl=10800)
+@st.cache_data(ttl=10800, show_spinner=False)
 def run_query_3_h(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
     rows = [dict(row) for row in rows_raw]
     return rows
 
-@st.cache_data(ttl=21600)
+@st.cache_data(ttl=21600, show_spinner=False)
 def run_query_6_h(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
     rows = [dict(row) for row in rows_raw]
     return rows
 
-@st.cache_data(ttl=43200)
+@st.cache_data(ttl=43200, show_spinner=False)
 def run_query_half_day(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
     rows = [dict(row) for row in rows_raw]
     return rows
 
-@st.cache_data(ttl=86400)
+@st.cache_data(ttl=86400, show_spinner=False)
 def run_query_1_day(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
