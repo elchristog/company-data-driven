@@ -266,7 +266,7 @@ def seo_writing_execution():
     selected_content_checklist = st.session_state.checklists[st.session_state.keywords.index(st.session_state.selected_keyword)]
     selected_content_call_to_action = st.session_state.call_to_actions[st.session_state.keywords.index(st.session_state.selected_keyword)]
 
-    article = cgptg.prompt_ia("Eres un experto en SEO, especialmente en generacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.selected_keyword} [/KEYWORD] [ARTICLE] {selected_content_main_idea} [/ARTICLE] [INSTRUCTION] Reescribe este articulo de una forma mas extensa y detallada posible, no omitas los ejemplos quiero que los muestres [/INSTRUCTION]", 600)
+    article = cgptg.prompt_ia("Eres un experto en SEO, especialmente en generacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.selected_keyword} [/KEYWORD] [ARTICLE] {selected_content_main_idea} [/ARTICLE] [INSTRUCTION] Reescribe este articulo de una forma mas extensa y detallada posible, no omitas los ejemplos quiero que los muestres, presenta todo en formato de codigo html [/INSTRUCTION]", 600)
     st.toast("Saving article", icon = "☺️")
     st.session_state.article = article
     st.write(article)
@@ -340,6 +340,6 @@ def seo_writing(project_name, user_id, role_id):
         seo_writing_button = st.form_submit_button("Generate content", on_click = seo_writing_execution) 
 
     if 'article' in st.session_state:
-        st.download_button('Download article', st.session_state.article)
+        st.download_button('Download article', st.session_state.article, file_name = 'ia_article.txt')
         
 
