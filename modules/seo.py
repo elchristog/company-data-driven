@@ -275,7 +275,7 @@ def seo_writing_execution():
     
     st.toast("Saving article", icon = "☺️")
     st.session_state.article = article_part_1 + article_part_1_extras
-    st.write(article)
+    st.write(st.session_state.article)
     
     time.sleep(5)
     st.balloons()
