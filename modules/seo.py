@@ -222,7 +222,7 @@ def seo_ideation(project_name, project_keyword, user_id, role_id):
         
         submitted = st.form_submit_button("Generate ideas", on_click = seo_ideation_execution)
     if 'answer' in st.session_state:
-        st.download_button('Download answer', st.session_state.answer)
+        st.download_button('Download answer', st.session_state.answer, file_name = 'content_ideas.txt')
     
     if role_id == 1:
         st.write("---")
