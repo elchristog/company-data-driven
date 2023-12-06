@@ -283,6 +283,8 @@ def seo_writing_execution():
 
     article_insights = cgptg.prompt_ia("Eres un experto en SEO, especialmente en generacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.selected_keyword} [/KEYWORD] [ARTICLE] [SEARCH INTENTION] {selected_content_checklist} [/SEARCH INTENTION] {selected_content_main_idea} {selected_content_why_1} {selected_content_how_1} {selected_content_why_2} {selected_content_how_2} {selected_content_why_3} {selected_content_how_3} {selected_content_relevant_content} {selected_content_experiment_1} {selected_content_experiment_2} {selected_content_experiment_1} [/ARTICLE]  [INSTRUCTION] Escribe los 5 principales insights del articulo de forma detallada, bien explicada, resolutiva y que llame la atencion, expresalos en forma de ideas y no de resumen ya que no quiero algo por el estilo de (El artículo destaca...) lo que si quiero es algo al estilo de (Yo creo que lo mejor es..., o algo como: Yo publico y publico pendejadas útiles (contenido de valor) todos los días para luego agarrar a toda esa gente que interactuó con él y mostrarle anuncios de mis talleres. Así de simple llevo viviendo de esto desde el 2018 y si usted dejara esa mentalidad de empleado podría hacer lo mismo con lo que debe hacer market o al estilo de: Es muy triste cuando alguien me pregunta si al tomar mis talleres recibirá un certificado. No, campeón, mis talleres no se hicieron para crear más subordinados.Son para aprender y emprender, no para que te suban el sueldo…  #startup o al estilo de Ganarse la vida a través de Internet es algo sin sentido para las personas que fueron educadas creyendo que la única forma de vivir es yendo todos los días a meterse en un cubículo a fingir estar ocupada. #startup o al estilo de Cuando arranca su emprendimiento o está creando uno nuevo habrá muchos días en los que tendrá que pasar la prueba de ver a todo el mundo de rumba o de vacaciones, mientras usted solo trabaja. o al estilo de Aléjese de las personas que culpan a los demás de su propio fracaso o usted terminará siendo igual…). [/INSTRUCTION]", 4000)
 
+    uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.project_name}.effective_communication_content` SET created_content = 1 WHERE id = '{selected_content_id}'")
+
     
     st.toast("Saving article", icon = "☺️")
     st.session_state.article = f"[KEYWORD] {st.session_state.selected_keyword}" + " ----Recuerda agregar 3 links internos, 3 links externos, anclar el video a la web, agregar comentario fijado al video, comaprtir el video en redes, indexar la web en search console, publicar los contenidos y compartir el pantallazo en otras redes---- [ARTICLE] First add here the [WEB META DESCRIPTION] as the first text" + article_part_1 + article_part_1_extras + article_part_2 + article_part_2_extras + article_part_3 + article_part_3_extras + " [EXTRAS] " + article_attributes + " [POSTS] " + article_insights
@@ -354,6 +356,10 @@ def seo_writing(project_name, user_id, role_id):
         st.session_state.relevant_contents = relevant_contents
         st.session_state.checklists = checklists
         st.session_state.call_to_actions = call_to_actions
+        st.session_state.project_name = project_name
+        st.session_state.user_id = user_id
+        st.session_state.role_id = role_id
+        
 
         seo_writing_button = st.form_submit_button("Generate content", on_click = seo_writing_execution) 
 
