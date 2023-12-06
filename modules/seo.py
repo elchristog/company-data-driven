@@ -283,7 +283,7 @@ def seo_writing_execution():
 
     
     st.toast("Saving article", icon = "☺️")
-    # st.session_state.article = f"[KEYWORD] {st.session_state.selected_keyword}" + "[ARTICLE] " + article_part_1 + article_part_1_extras + article_part_2 + article_part_2_extras + article_part_3 + article_part_3_extras + " [EXTRAS] " + article_attributes
+    # st.session_state.article = f"[KEYWORD] {st.session_state.selected_keyword}" + "[ARTICLE] First add here the [WEB META DESCRIPTION] as the first text" + article_part_1 + article_part_1_extras + article_part_2 + article_part_2_extras + article_part_3 + article_part_3_extras + " [EXTRAS] " + article_attributes
 
     st.session_state.article = f"[KEYWORD] {st.session_state.selected_keyword}" +  " [EXTRAS] " + article_attributes
 
