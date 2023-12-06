@@ -79,7 +79,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 seo.web_creation_guide()
 
             if sub_menu == "SEO writting":
-                tap.title_and_paragraph("SEO writting" + project_icon, "Sigue estos pasos", "h3", 0)
+                tap.title_and_paragraph("SEO writting" + project_icon, "Estimated time: 20 minutes", "h3", 0)
                 seo.seo_writing(project_name, user_id, role_id)
 
 
