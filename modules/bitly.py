@@ -25,7 +25,7 @@ def save_bitly_metrics_one_link(project_name, bitly_link, link_name):
   dates = []
   clicks = []
   for row in clicks_story.get('link_clicks', []):
-        dates.append(row.get('date'))
+        dates.append(row.get('date').strftime("%Y-%m-%d"))
         clicks.append(row.get('clicks'))
 
   st.write(dates)
