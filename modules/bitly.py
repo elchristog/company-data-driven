@@ -16,8 +16,9 @@ def get_clicks_for_bitlink(token, bitlink, unit, units):
 
 def save_bitly_metrics_one_link(project_name, bitly_link, link_name):
   access_token = st.secrets["BITLY_TOKEN"]
-  bitlink = "bit.ly/45SidF6"
+  bitlink = bitly_link
   unit = "day"
   units = -1
   clicks = get_clicks_for_bitlink(access_token, bitlink, unit, units)
+  st.write(link_name)
   st.write(json.dumps(clicks, indent=4))
