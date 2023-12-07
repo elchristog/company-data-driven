@@ -50,7 +50,7 @@ def save_bitly_metrics_bulk(project_name):
   max_date = dates_in_table[0].get('max_date')
   st.success(days_last_update)
   st.success(max_date)
-  
+  st.toast("Updating bitly data", icon = "🥶")
   if days_last_update is None or days_last_update is None:
     save_bitly_metrics_one_link(project_name, 'bit.ly/45SidF6', 'enfermera_en_estados_unidos_youtube_to_whatsapp', None)
     save_bitly_metrics_one_link(project_name, 'bit.ly/3R6SrJa', 'enfermera_en_estados_unidos_instagram_to_whatsapp', None)
@@ -61,6 +61,7 @@ def save_bitly_metrics_bulk(project_name):
     save_bitly_metrics_one_link(project_name, 'bit.ly/3R6RbFW', 'enfermera_en_estados_unidos_web_to_whatsapp', max_date)
   else:
     pass
+  uc.run_query_half_day.clear()
 
   
     
