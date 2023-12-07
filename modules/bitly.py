@@ -1,1 +1,23 @@
+import streamlit as st
+import time
+import datetime
+import requests
+import json
 
+import utils.user_credentials as uc
+
+def get_clicks_for_bitlink(token, bitlink, unit, units):
+  url = f"https://api-ssl.bitly.com/v4/bitlinks/{bitlink}/clicks"
+  headers = {"Authorization": f"Bearer {token}"}
+  params = {"unit": unit, "units": units}
+  response = requests.get(url, headers=headers, params=params)
+  response.raise_for_status()
+  return response.json()
+
+def save_bitly_metrics_one_link(project_name, bitly_link, link_name):
+  access_token = "b26c930c225e198362624b30408217f23c21febb" # naas.secret.get("BITLY_TOKEN") or "<YOUR_TOKEN>"
+  bitlink = "bit.ly/45SidF6"
+  unit = "day"
+  units = -1
+  clicks = get_clicks_for_bitlink(access_token, bitlink, unit, units)
+  st.write(json.dumps(clicks, indent=4))
