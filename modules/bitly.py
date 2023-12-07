@@ -38,7 +38,7 @@ def save_bitly_metrics_one_link(project_name, bitly_link, link_name, max_stored_
     filtered_clicks =  df_clicks
   else:
     filtered_clicks =  df_clicks[df_clicks['date'] > max_stored_date]
-st.write(filtered_clicks)
+  st.write(filtered_clicks)
 # for index, row in filtered_clicks.iterrows():
 #         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` (date, bitly_link, link_name, clicks) VALUES ('{row['date']}', '{bitly_link}', '{link_name}', {row['clicks']});")
 
