@@ -22,15 +22,17 @@ def save_bitly_metrics_one_link(project_name, bitly_link, link_name):
   unit = "day"
   units = -1
   clicks_story = get_clicks_for_bitlink(access_token, bitlink, unit, units)
-  st.write(link_name)
-  st.write(json.dumps(clicks_story, indent=4))
   dates = []
   clicks = []
   st.success("My lord!")
-  for row in clicks_story.get('link_clicks', []):
-        dates.append(datetime.strptime(row.get('date') , "%Y-%m-%dT%H:%M:%S%z").strftime("%Y-%m-%d"))
-        clicks.append(row.get('clicks'))
 
-  st.write(dates)
+  df_clicks = pd.DataFrame([
+            {
+                'date': datetime.strptime(row.get('date') , "%Y-%m-%dT%H:%M:%S%z").strftime("%Y-%m-%d"),
+                'clicks': row.get('clicks')
+            } for row in clicks_story
+        ])
+  
+  st.write(df_clicks)
     
   
