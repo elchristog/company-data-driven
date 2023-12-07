@@ -27,7 +27,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
     # admin ###################################################################
     if role_id != 6:
         # retrieve metrics ###
-        btl.save_bitly_metrics_bulk(project_name) if role_id == 1 else pass
+        if role_id == 1:
+            btl.save_bitly_metrics_bulk(project_name)
         ######################
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
