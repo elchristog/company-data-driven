@@ -15,7 +15,7 @@ def get_clicks_for_bitlink(token, bitlink, unit, units):
   return response.json()
 
 def save_bitly_metrics_one_link(project_name, bitly_link, link_name):
-  access_token = "b26c930c225e198362624b30408217f23c21febb" # naas.secret.get("BITLY_TOKEN") or "<YOUR_TOKEN>"
+  access_token = st.secrets["BITLY_TOKEN"]
   bitlink = "bit.ly/45SidF6"
   unit = "day"
   units = -1
