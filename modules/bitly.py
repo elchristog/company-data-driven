@@ -4,6 +4,8 @@ import datetime
 import requests
 import json
 
+from datetime import datetime
+
 import utils.user_credentials as uc
 
 def get_clicks_for_bitlink(token, bitlink, unit, units):
@@ -25,7 +27,7 @@ def save_bitly_metrics_one_link(project_name, bitly_link, link_name):
   dates = []
   clicks = []
   for row in clicks_story.get('link_clicks', []):
-        dates.append(row.get('date').strftime("%Y-%m-%d"))
+        dates.append(datetime.strptime(row.get('date'),"%Y-%m-%d").strftime("%Y-%m-%d"))
         clicks.append(row.get('clicks'))
 
   st.write(dates)
