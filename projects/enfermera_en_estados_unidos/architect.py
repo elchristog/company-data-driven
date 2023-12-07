@@ -11,6 +11,7 @@ import modules.web_app_activity as wap
 import modules.resources as r
 import modules.program_progress as pp
 import projects.enfermera_en_estados_unidos.modules.program_steps_guide as psg
+import modules.bitly as btl
 
 
 
@@ -82,6 +83,16 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph("SEO writting" + project_icon, "Estimated time: 20 minutes", "h3", 0)
                 seo.seo_writing(project_name, user_id, role_id)
 
+
+        if menu == "Click bitly":
+            sub_menu_options=['Clicks', 'Something']
+            if role_id == 1:
+                sub_menu_options.extend(['Something else'])
+            sub_menu = st.sidebar.radio('Click bitly options', options = sub_menu_options)
+            if sub_menu == "Clicks":
+                tap.title_and_paragraph("Clicks" + project_icon, "Seguimiento de los clicks en los enlaces para chatear", "h3", 0)
+                btl.save_bitly_metrics_one_link(project_name, 'demo_link', 'demo_name')
+        
 
         if menu == "Web App":
             sub_menu_options=["Customer view", 'Nclex test creation', 'Update customer progress']
