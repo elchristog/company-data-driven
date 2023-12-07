@@ -91,7 +91,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu = st.sidebar.radio('Click bitly options', options = sub_menu_options)
             if sub_menu == "Clicks":
                 tap.title_and_paragraph("Clicks" + project_icon, "Seguimiento de los clicks en los enlaces para chatear", "h3", 0)
-                btl.save_bitly_metrics_one_link(project_name, 'demo_link', 'demo_name')
+                btl.save_bitly_metrics_one_link(project_name, 'bit.ly/45SidF6', 'enfermera_en_estados_unidos_youtube_to_whatsapp')
         
 
         if menu == "Web App":
