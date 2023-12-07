@@ -31,7 +31,7 @@ def save_bitly_metrics_one_link(project_name, bitly_link, link_name):
             {
                 'date': datetime.strptime(row.get('date') , "%Y-%m-%dT%H:%M:%S%z").strftime("%Y-%m-%d"),
                 'clicks': row.get('clicks')
-            } for row in clicks_story
+            } for row in clicks_story.get('link_clicks', [])
         ])
   
   st.write(df_clicks)
