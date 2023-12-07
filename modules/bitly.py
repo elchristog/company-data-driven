@@ -17,7 +17,7 @@ def get_clicks_for_bitlink(token, bitlink, unit, units):
   response.raise_for_status()
   return response.json()
 
-def save_bitly_metrics_one_link(project_name, bitly_link, link_name, max_stored_date):
+def save_bitly_metrics_one_link(project_name, bitly_link, link_name, max_stored_date, current_date):
   access_token = st.secrets["BITLY_TOKEN"]
   bitlink = bitly_link
   unit = "day"
@@ -34,9 +34,10 @@ def save_bitly_metrics_one_link(project_name, bitly_link, link_name, max_stored_
         ])
 
   if max_stored_date is None:
-    filtered_clicks =  df_clicks
+    filtered_clicks =  df_clicks[df_clicks['date'] < current_date]
   else:
     filtered_clicks =  df_clicks[df_clicks['date'] > max_stored_date]
+    filtered_clicks =  filtered_clicks[filtered_clicks['date'] < current_date]
 
   for index, row in filtered_clicks.iterrows():
     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` (date, bitly_link, link_name, clicks) VALUES ('{row['date']}', '{bitly_link}', '{link_name}', {row['clicks']});")
@@ -44,20 +45,21 @@ def save_bitly_metrics_one_link(project_name, bitly_link, link_name, max_stored_
 
 
 def save_bitly_metrics_bulk(project_name):
-  dates_in_table = uc.run_query_half_day(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) AS days_last_update, MAX(date) AS max_date FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
+  dates_in_table = uc.run_query_half_day(f"SELECT CURRENT_DATE() AS current_date, DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) AS days_last_update, MAX(date) AS max_date FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
+  current_date = dates_in_table[0].get('current_date')
   days_last_update = dates_in_table[0].get('days_last_update')
   max_date = dates_in_table[0].get('max_date')
   if days_last_update is None or days_last_update is None:
     st.toast("Updating bitly data", icon = "🥶")
-    save_bitly_metrics_one_link(project_name, 'bit.ly/45SidF6', 'enfermera_en_estados_unidos_youtube_to_whatsapp', None)
-    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6SrJa', 'enfermera_en_estados_unidos_instagram_to_whatsapp', None)
-    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6RbFW', 'enfermera_en_estados_unidos_web_to_whatsapp', None)
+    save_bitly_metrics_one_link(project_name, 'bit.ly/45SidF6', 'enfermera_en_estados_unidos_youtube_to_whatsapp', None, current_date)
+    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6SrJa', 'enfermera_en_estados_unidos_instagram_to_whatsapp', None, current_date)
+    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6RbFW', 'enfermera_en_estados_unidos_web_to_whatsapp', None, current_date)
     uc.run_query_half_day.clear()
-  elif days_last_update > 0:
+  elif days_last_update > 1: # 1 day because today still getting data
     st.toast("Updating bitly data", icon = "🥶")
-    save_bitly_metrics_one_link(project_name, 'bit.ly/45SidF6', 'enfermera_en_estados_unidos_youtube_to_whatsapp', max_date)
-    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6SrJa', 'enfermera_en_estados_unidos_instagram_to_whatsapp', max_date)
-    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6RbFW', 'enfermera_en_estados_unidos_web_to_whatsapp', max_date)
+    save_bitly_metrics_one_link(project_name, 'bit.ly/45SidF6', 'enfermera_en_estados_unidos_youtube_to_whatsapp', max_date, current_date)
+    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6SrJa', 'enfermera_en_estados_unidos_instagram_to_whatsapp', max_date, current_date)
+    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6RbFW', 'enfermera_en_estados_unidos_web_to_whatsapp', max_date, current_date)
     uc.run_query_half_day.clear()
   else:
     pass
