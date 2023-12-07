@@ -33,7 +33,7 @@ def save_bitly_metrics_one_link(project_name, bitly_link, link_name):
                 'clicks': row.get('clicks')
             } for row in clicks_story.get('link_clicks', [])
         ])
-  filtered_clicks =  df_clicks[df_clicks['date'] > '2023-11-01']
+  filtered_clicks =  df_clicks[df_clicks['date'] > '2023-11-12']
   
   st.write(df_clicks)
   st.write(filtered_clicks)
