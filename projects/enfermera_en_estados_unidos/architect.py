@@ -26,6 +26,9 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
     """
     # admin ###################################################################
     if role_id != 6:
+        # retrieve metrics ###
+        btl.save_bitly_metrics_bulk(project_name) if role_id == 1 else pass
+        ######################
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
             menu_options = ["Home", "Traffic", "Click bitly", "Whatsapp", "Trip Wire", "Remarketing", "Web App", "Contract", "Contract Remarketing", "Step1: Inicio del programa", "Step2: Trámite de documentos", "Step3: Inscripción ante la Junta de Enfermería", "Step4: Preparación NCLEX", "Step5: Preparación de inglés", "Step6: Entrevistas de trabajo", "Step7: Visa Screen", "Step8: Trámite NVC", "Step9: Trámite embajada", "Step10: Vida en estados Unidos"]
@@ -91,7 +94,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu = st.sidebar.radio('Click bitly options', options = sub_menu_options)
             if sub_menu == "Clicks":
                 tap.title_and_paragraph("Clicks" + project_icon, "Seguimiento de los clicks en los enlaces para chatear", "h3", 0)
-                btl.save_bitly_metrics_bulk(project_name)
+                
         
 
         if menu == "Web App":
