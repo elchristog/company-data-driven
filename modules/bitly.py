@@ -19,12 +19,12 @@ def save_bitly_metrics_one_link(project_name, bitly_link, link_name):
   bitlink = bitly_link
   unit = "day"
   units = -1
-  clicks = get_clicks_for_bitlink(access_token, bitlink, unit, units)
+  clicks_story = get_clicks_for_bitlink(access_token, bitlink, unit, units)
   st.write(link_name)
-  st.write(json.dumps(clicks, indent=4))
+  st.write(json.dumps(clicks_story, indent=4))
   dates = []
   clicks = []
-  for row in clicks:
+  for row in clicks_story.get('link_clicks', []):
         dates.append(row.get('date'))
         clicks.append(row.get('clicks'))
 
