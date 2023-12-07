@@ -25,7 +25,6 @@ def save_bitly_metrics_one_link(project_name, bitly_link, link_name, max_stored_
   clicks_story = get_clicks_for_bitlink(access_token, bitlink, unit, units)
   dates = []
   clicks = []
-  st.success("My lord!")
 
   df_clicks = pd.DataFrame([
             {
