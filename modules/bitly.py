@@ -66,4 +66,7 @@ def save_bitly_metrics_bulk(project_name):
 
   
     
-  
+
+
+def show_bitly_web_youtube_metrics(project_name):
+    st.write("### 	:movie_camera: Bitly web conversion")
