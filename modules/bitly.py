@@ -36,7 +36,7 @@ def save_bitly_metrics_one_link(project_name, bitly_link, link_name, max_stored_
   if max_stored_date is None:
     filtered_clicks =  df_clicks[df_clicks['date'] < current_date.strftime("%Y-%m-%d")]
   else:
-    filtered_clicks =  df_clicks[df_clicks['date'] > max_stored_date]
+    filtered_clicks =  df_clicks[df_clicks['date'] > max_stored_date.strftime("%Y-%m-%d")]
     filtered_clicks =  filtered_clicks[filtered_clicks['date'] < current_date.strftime("%Y-%m-%d")]
 
   for index, row in filtered_clicks.iterrows():
