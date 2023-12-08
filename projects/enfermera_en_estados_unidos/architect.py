@@ -95,6 +95,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu = st.sidebar.radio('Click bitly options', options = sub_menu_options)
             if sub_menu == "Clicks":
                 tap.title_and_paragraph("Clicks" + project_icon, "Seguimiento de los clicks en los enlaces para chatear", "h3", 0)
+                btl.show_bitly_web_youtube_metrics(project_name)
                 
         
 
