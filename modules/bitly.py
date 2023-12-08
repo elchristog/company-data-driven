@@ -70,8 +70,20 @@ def save_bitly_metrics_bulk(project_name):
 
 def show_bitly_web_youtube_metrics(project_name):
     st.write("### 	:earth_americas: Bitly web conversion")
-  
-    df_bitly_web = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tawc.clicks AS web_clicks, tabc.clicks AS bitly_clicks, ROUND(tabc.clicks/tawc.clicks, 2) AS conversion FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_web_clicks` AS tawc ON tabc.date = tawc.date WHERE tabc.bitly_link = 'bit.ly/3R6RbFW';"))
+    # min_max_dates_range = uc.run_query_1_h(f"SELECT MIN(date) AS min_date, MAX(date) as max_date FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
+    # if len(min_max_dates_range) < 1:
+    #     st.warning("Waiting for data")
+    # else:
+    #     day = st.date_input(
+    #         "Time Range:",
+    #         (min_max_dates_range[0].get("min_date"), min_max_dates_range[0].get("max_date")),
+    #         min_value=min_max_dates_range[0].get("min_date"),
+    #         max_value=min_max_dates_range[0].get("max_date"),
+    #         format="DD/MM/YYYY",
+    #         help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format'
+    #     )
+      
+    df_bitly_web = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tawc.clicks AS web_clicks, tabc.clicks AS bitly_clicks, ROUND(tabc.clicks/tawc.clicks, 2) AS conversion FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_web_clicks` AS tawc ON tabc.date = tawc.date WHERE tabc.bitly_link = 'bit.ly/3R6RbFW'  ORDER BY tabc.date ASC;"))
     st.write(df_bitly_web)
 
 
