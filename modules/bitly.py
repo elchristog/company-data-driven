@@ -71,8 +71,8 @@ def save_bitly_metrics_bulk(project_name):
 
 def show_bitly_web_youtube_metrics(project_name):
     st.write("### 	:earth_americas: Bitly web conversion")
-    dates_bitly = c.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
-    dates_web = c.run_query_1_h(f"SELECT MIN(date) AS min_date_web, MAX(date) AS max_date_web FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
+    dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
+    dates_web = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_web, MAX(date) AS max_date_web FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
   
     if len(dates_bitly) < 1 or len(dates_web) < 1:
         st.warning("Waiting for data")
