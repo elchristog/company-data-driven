@@ -79,7 +79,7 @@ def show_bitly_web_youtube_metrics(project_name):
     else:
         day = st.date_input(
             "Time Range:",
-            (df_bitly_web.date.min(), df_bitly_web.date.max()),
+            (np.maximum(dates_bitly[0].get('min_date_bitly'), dates_web[0].get('min_date_web')), np.minimum(dates_bitly[0].get('max_date_bitly'), dates_web[0].get('max_date_web'))),
             min_value=np.maximum(dates_bitly[0].get('min_date_bitly'), dates_web[0].get('min_date_web')),
             max_value=np.minimum(dates_bitly[0].get('max_date_bitly'), dates_web[0].get('max_date_web')),
             format="DD/MM/YYYY",
