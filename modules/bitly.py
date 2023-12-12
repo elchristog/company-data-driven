@@ -165,7 +165,7 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link):
             format="DD/MM/YYYY",
             help=''
         )
-        df_bitly_web = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tawc.clicks AS web_clicks, tabc.clicks AS bitly_clicks, ROUND(tabc.clicks/tawc.clicks, 2) AS conversion FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_web_clicks` AS tawc ON tabc.date = tawc.date WHERE tabc.bitly_link = '{bitly_web_link}'   AND tabc.date >= '{day[0].strftime('%Y-%m-%d')}' AND tabc.date <= '{day[1].strftime('%Y-%m-%d')}'  ORDER BY tabc.date ASC;"))
+        df_bitly_web = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tawc.clicks AS web_clicks, tabc.clicks AS bitly_clicks, ROUND(tabc.clicks/NULLIF(tawc.clicks, 0), 2) AS conversion FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_web_clicks` AS tawc ON tabc.date = tawc.date WHERE tabc.bitly_link = '{bitly_web_link}'   AND tabc.date >= '{day[0].strftime('%Y-%m-%d')}' AND tabc.date <= '{day[1].strftime('%Y-%m-%d')}'  ORDER BY tabc.date ASC;"))
     
         web_clicks = df_bitly_web['web_clicks'].sum()
         bitly_clicks = df_bitly_web['bitly_clicks'].sum()
@@ -196,7 +196,7 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link):
             help='',
             key = 'day_yt'
         )
-        df_bitly_yt = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tayv.views AS yt_views, tabc.clicks AS bitly_clicks, ROUND(tabc.clicks/ tayv.views, 2) AS conversion FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_youtube_views` AS tayv ON tabc.date = tayv.date WHERE tabc.bitly_link = '{bitly_yt_link}'   AND tabc.date >= '{day[0].strftime('%Y-%m-%d')}' AND tabc.date <= '{day[1].strftime('%Y-%m-%d')}'  ORDER BY tabc.date ASC;"))
+        df_bitly_yt = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tayv.views AS yt_views, tabc.clicks AS bitly_clicks, ROUND(tabc.clicks/ NULLIF(tayv.views, 0), 2) AS conversion FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_youtube_views` AS tayv ON tabc.date = tayv.date WHERE tabc.bitly_link = '{bitly_yt_link}'   AND tabc.date >= '{day[0].strftime('%Y-%m-%d')}' AND tabc.date <= '{day[1].strftime('%Y-%m-%d')}'  ORDER BY tabc.date ASC;"))
     
         yt_views = df_bitly_web['yt_views'].sum()
         bitly_clicks = df_bitly_web['bitly_clicks'].sum()
