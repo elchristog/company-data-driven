@@ -208,6 +208,6 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link):
             st.metric('bitly_clicks:', f'{bitly_clicks:,}')
         with met3:
             st.metric('conversion:', f'{conversion * 100:.2f}%')
-        # with st.container():
-        #     plot_echarts_btl_web_yt(df_bitly_yt, 'yt')
+        with st.container():
+            plot_echarts_btl_web_yt(df_bitly_yt, 'yt')
     
