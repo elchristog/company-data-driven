@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np
 
 from datetime import datetime
+from streamlit_raw_echarts import st_echarts, JsCode
 
 import utils.user_credentials as uc
 
