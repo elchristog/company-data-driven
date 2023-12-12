@@ -45,9 +45,36 @@ def save_bitly_metrics_one_link(project_name, bitly_link, link_name, max_stored_
 
 
 
+
+
+def save_bitly_metrics_bulk(project_name):
+  dates_in_table = uc.run_query_half_day(f"SELECT CURRENT_DATE() AS current_date, DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) AS days_last_update, MAX(date) AS max_date FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
+  current_date = dates_in_table[0].get('current_date')
+  days_last_update = dates_in_table[0].get('days_last_update')
+  max_date = dates_in_table[0].get('max_date')
+  if days_last_update is None or days_last_update is None:
+    st.toast("Updating bitly data", icon = "🥶")
+    save_bitly_metrics_one_link(project_name, 'bit.ly/45SidF6', 'enfermera_en_estados_unidos_youtube_to_whatsapp', None, current_date)
+    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6SrJa', 'enfermera_en_estados_unidos_instagram_to_whatsapp', None, current_date)
+    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6RbFW', 'enfermera_en_estados_unidos_web_to_whatsapp', None, current_date)
+    uc.run_query_half_day.clear()
+  elif days_last_update > 1: # 1 day because today still getting data
+    st.toast("Updating bitly data", icon = "🥶")
+    save_bitly_metrics_one_link(project_name, 'bit.ly/45SidF6', 'enfermera_en_estados_unidos_youtube_to_whatsapp', max_date, current_date)
+    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6SrJa', 'enfermera_en_estados_unidos_instagram_to_whatsapp', max_date, current_date)
+    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6RbFW', 'enfermera_en_estados_unidos_web_to_whatsapp', max_date, current_date)
+    uc.run_query_half_day.clear()
+  else:
+    pass
+
+
+
+
+
+
 def plot_echarts_btl_web(df_grouped):
     df_grouped['conversion'] = df_grouped['conversion'].apply(lambda conversion: f"{conversion:.2f}")
-    df_grouped['date'] = df_grouped['date'].astype(str)  # Convert 'date' to string
+    df_grouped['date'] = df_grouped['date'].astype(str)
 
     options = {
         "xAxis": {
@@ -100,7 +127,6 @@ def plot_echarts_btl_web(df_grouped):
                 "lineStyle": {"width": 2.4, "color": "#BF3F34"},
                 "showSymbol": False,
             }
-            },
         ],
 
         "yAxis": [
@@ -115,28 +141,8 @@ def plot_echarts_btl_web(df_grouped):
 
 
 
-def save_bitly_metrics_bulk(project_name):
-  dates_in_table = uc.run_query_half_day(f"SELECT CURRENT_DATE() AS current_date, DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) AS days_last_update, MAX(date) AS max_date FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
-  current_date = dates_in_table[0].get('current_date')
-  days_last_update = dates_in_table[0].get('days_last_update')
-  max_date = dates_in_table[0].get('max_date')
-  if days_last_update is None or days_last_update is None:
-    st.toast("Updating bitly data", icon = "🥶")
-    save_bitly_metrics_one_link(project_name, 'bit.ly/45SidF6', 'enfermera_en_estados_unidos_youtube_to_whatsapp', None, current_date)
-    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6SrJa', 'enfermera_en_estados_unidos_instagram_to_whatsapp', None, current_date)
-    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6RbFW', 'enfermera_en_estados_unidos_web_to_whatsapp', None, current_date)
-    uc.run_query_half_day.clear()
-  elif days_last_update > 1: # 1 day because today still getting data
-    st.toast("Updating bitly data", icon = "🥶")
-    save_bitly_metrics_one_link(project_name, 'bit.ly/45SidF6', 'enfermera_en_estados_unidos_youtube_to_whatsapp', max_date, current_date)
-    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6SrJa', 'enfermera_en_estados_unidos_instagram_to_whatsapp', max_date, current_date)
-    save_bitly_metrics_one_link(project_name, 'bit.ly/3R6RbFW', 'enfermera_en_estados_unidos_web_to_whatsapp', max_date, current_date)
-    uc.run_query_half_day.clear()
-  else:
-    pass
 
-  
-    
+
 
 
 def show_bitly_web_youtube_metrics(project_name):
