@@ -77,7 +77,7 @@ def plot_echarts_btl_web_yt(df_grouped, channel_name):
     if channel_name == 'web':
       interaction_variable_name = 'web_clicks'
     elif channel_name == 'yt':
-      interaction_variable_name = 'yt_clicks'
+      interaction_variable_name = 'yt_views'
     df_grouped['conversion'] = df_grouped['conversion'].apply(lambda conversion: f"{conversion:.2f}")
     df_grouped['date'] = df_grouped['date'].astype(str)
 
@@ -150,11 +150,10 @@ def plot_echarts_btl_web_yt(df_grouped, channel_name):
 
 
 
-def show_bitly_web_youtube_metrics(project_name, bitly_web_link):
+def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link):
     st.write("### 	:earth_americas: Bitly web conversion")
     dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
     dates_web = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_web, MAX(date) AS max_date_web FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
-  
     if len(dates_bitly) < 1 or len(dates_web) < 1:
         st.warning("Waiting for data")
     else:
@@ -183,4 +182,32 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link):
 
 
     st.write("### 	:movie_camera: Bitly youtube conversion")
+    dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
+    dates_yt = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_yt, MAX(date) AS max_date_yt FROM `company-data-driven.{project_name}.traffic_analytics_youtube_views`;")
+    if len(dates_bitly) < 1 or len(dates_yt) < 1:
+        st.warning("Waiting for data")
+    else:
+        day_yt = st.date_input(
+            "Time Range:",
+            (np.maximum(dates_bitly[0].get('min_date_bitly'), dates_yt[0].get('min_date_yt')), np.minimum(dates_bitly[0].get('max_date_bitly'), dates_yt[0].get('max_date_yt'))),
+            min_value=np.maximum(dates_bitly[0].get('min_date_bitly'), dates_yt[0].get('min_date_yt')),
+            max_value=np.minimum(dates_bitly[0].get('max_date_bitly'), dates_yt[0].get('max_date_yt')),
+            format="DD/MM/YYYY",
+            help='',
+            key = 'day_yt'
+        )
+        df_bitly_yt = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tayv.views AS yt_views, tabc.clicks AS bitly_clicks, ROUND(tabc.clicks/ tayv.views, 2) AS conversion FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_youtube_views` AS tayv ON tabc.date = tayv.date WHERE tabc.bitly_link = '{bitly_yt_link}'   AND tabc.date >= '{day[0].strftime('%Y-%m-%d')}' AND tabc.date <= '{day[1].strftime('%Y-%m-%d')}'  ORDER BY tabc.date ASC;"))
+    
+        yt_views = df_bitly_web['yt_views'].sum()
+        bitly_clicks = df_bitly_web['bitly_clicks'].sum()
+        conversion = bitly_clicks/yt_views
+        met1, met2, met3 = st.columns(3)
+        with met1:
+            st.metric('yt_views:', f'{yt_views:,}')
+        with met2:
+            st.metric('bitly_clicks:', f'{bitly_clicks:,}')
+        with met3:
+            st.metric('conversion:', f'{conversion * 100:.2f}%')
+        with st.container():
+            plot_echarts_btl_web_yt(df_bitly_yt, 'yt')
     
