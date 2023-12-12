@@ -4,6 +4,7 @@ import datetime
 import requests
 import json
 import pandas as pd
+import numpy as np
 
 from datetime import datetime
 
@@ -70,19 +71,21 @@ def save_bitly_metrics_bulk(project_name):
 
 def show_bitly_web_youtube_metrics(project_name):
     st.write("### 	:earth_americas: Bitly web conversion")
-    df_bitly_web = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tawc.clicks AS web_clicks, tabc.clicks AS bitly_clicks, ROUND(tabc.clicks/tawc.clicks, 2) AS conversion FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_web_clicks` AS tawc ON tabc.date = tawc.date WHERE tabc.bitly_link = 'bit.ly/3R6RbFW'  ORDER BY tabc.date ASC;"))
+    dates_bitly = c.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
+    dates_web = c.run_query_1_h(f"SELECT MIN(date) AS min_date_web, MAX(date) AS max_date_web FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
   
-    if len(df_bitly_web) < 1:
+    if len(dates_bitly) < 1 or len(dates_web) < 1:
         st.warning("Waiting for data")
     else:
         day = st.date_input(
             "Time Range:",
             (df_bitly_web.date.min(), df_bitly_web.date.max()),
-            min_value=df_bitly_web.date.min(),
-            max_value=df_bitly_web.date.max(),
+            min_value=np.maximum(dates_bitly[0].get('min_date_bitly'), dates_web[0].get('min_date_web')),
+            max_value=np.minimum(dates_bitly[0].get('max_date_bitly'), dates_web[0].get('max_date_web')),
             format="DD/MM/YYYY",
             help=''
         )
+        df_bitly_web = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tawc.clicks AS web_clicks, tabc.clicks AS bitly_clicks, ROUND(tabc.clicks/tawc.clicks, 2) AS conversion FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_web_clicks` AS tawc ON tabc.date = tawc.date WHERE tabc.bitly_link = 'bit.ly/3R6RbFW'  ORDER BY tabc.date ASC;"))
       
     
     st.write(df_bitly_web)
