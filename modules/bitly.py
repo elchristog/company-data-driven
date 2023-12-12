@@ -73,7 +73,11 @@ def save_bitly_metrics_bulk(project_name):
 
 
 
-def plot_echarts_btl_web(df_grouped):
+def plot_echarts_btl_web_yt(df_grouped, channel_name):
+    if channel_name == 'web':
+      interaction_variable_name = 'web_clicks'
+    elif channel_name == 'yt':
+      interaction_variable_name = 'yt_clicks'
     df_grouped['conversion'] = df_grouped['conversion'].apply(lambda conversion: f"{conversion:.2f}")
     df_grouped['date'] = df_grouped['date'].astype(str)
 
@@ -98,7 +102,7 @@ def plot_echarts_btl_web(df_grouped):
             "align": "auto",
             "selected": {  
                 "conversion": True,        
-                "web_clicks": False,    
+                interaction_variable_name: False,    
                 "bitly_clicks": False         
             }
         },
@@ -114,8 +118,8 @@ def plot_echarts_btl_web(df_grouped):
             },
             {
                 "type": "line",
-                "name": "web_clicks",
-                "data": df_grouped['web_clicks'].tolist(),
+                "name": interaction_variable_name,
+                "data": df_grouped[interaction_variable_name].tolist(),
                 "smooth": True,
                 "lineStyle": {"width": 2.4, "color": "#394A59"},
                 "showSymbol": False,
@@ -175,7 +179,7 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link):
         with met3:
             st.metric('conversion:', f'{conversion * 100:.2f}%')
         with st.container():
-            plot_echarts_btl_web(df_bitly_web)
+            plot_echarts_btl_web_yt(df_bitly_web, 'web')
 
 
     st.write("### 	:movie_camera: Bitly youtube conversion")
