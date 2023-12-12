@@ -173,6 +173,8 @@ def show_bitly_web_youtube_metrics(project_name):
             st.metric('bitly_clicks:', f'{bitly_clicks:,}')
         with met3:
             st.metric('conversion:', f'{conversion * 100:.2f}%')
+        with st.container():
+            plot_echarts_btl_web(df_bitly_web)
 
 
     st.write("### 	:movie_camera: Bitly youtube conversion")
