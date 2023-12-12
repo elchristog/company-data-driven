@@ -87,8 +87,8 @@ def show_bitly_web_youtube_metrics(project_name):
         )
         df_bitly_web = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tawc.clicks AS web_clicks, tabc.clicks AS bitly_clicks, ROUND(tabc.clicks/tawc.clicks, 2) AS conversion FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_web_clicks` AS tawc ON tabc.date = tawc.date WHERE tabc.bitly_link = 'bit.ly/3R6RbFW'   AND tabc.date >= '{day[0].strftime('%Y-%m-%d')}' AND tabc.date <= '{day[1].strftime('%Y-%m-%d')}'  ORDER BY tabc.date ASC;"))
     
-        web_clicks = df['web_clicks'].sum()
-        bitly_clicks = df['bitly_clicks'].sum()
+        web_clicks = df_bitly_web['web_clicks'].sum()
+        bitly_clicks = df_bitly_web['bitly_clicks'].sum()
         conversion = bitly_clicks/web_clicks
         met1, met2, met3 = st.columns(3)
         with met1:
