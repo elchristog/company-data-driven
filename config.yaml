@@ -64,6 +64,10 @@ credentials:
       email: yeseniaramirez.ee@gmail.comm
       name: Ivette Ramirez
       password: $2b$12$cNpeIX8nZfsUa1viIl91SeHTUtQbts1VvhKwLExRyckCWKzWyxB4a
+    tacalizarazo:
+      email: taniakmila0810@hotmail.com
+      name: Tatiana Lizaraso
+      password: $2b$12$iJoa3kiqXyUZNJFh3JM7OOw.RNN2jkjYoRdHkHiS.ui.oMU2kvGPa
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
