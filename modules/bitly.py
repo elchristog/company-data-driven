@@ -45,6 +45,76 @@ def save_bitly_metrics_one_link(project_name, bitly_link, link_name, max_stored_
 
 
 
+def plot_echarts_btl_web(df_grouped):
+    df_grouped['conversion'] = df_grouped['conversion'].apply(lambda conversion: f"{conversion:.2f}")
+    df_grouped['date'] = df_grouped['date'].astype(str)  # Convert 'date' to string
+
+    options = {
+        "xAxis": {
+            "type": "category",
+            "data": df_grouped['date'].tolist(),
+            "axisLabel": {
+                "formatter": "{value}"
+            }
+        },
+        "yAxis": {"type": "value", "name": ""},
+        "grid": {
+            "right": 20,
+            "left": 65,
+            "top": 45,
+            "bottom": 50,
+        },
+        "legend": {
+            "show": True,
+            "top": "top",
+            "align": "auto",
+            "selected": {  
+                "conversion": True,        
+                "web_clicks": False,    
+                "bitly_clicks": False         
+            }
+        },
+        "tooltip": {"trigger": "axis", },
+        "series": [
+            {
+                "type": "line",
+                "name": "conversion",
+                "data": df_grouped['conversion'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#A6785D"},
+                "showSymbol": False,
+            },
+            {
+                "type": "line",
+                "name": "web_clicks",
+                "data": df_grouped['web_clicks'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#394A59"},
+                "showSymbol": False,
+            },
+            {
+                "type": "line",
+                "name": "bitly_clicks",
+                "data": df_grouped['bitly_clicks'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#BF3F34"},
+                "showSymbol": False,
+            }
+            },
+        ],
+
+        "yAxis": [
+            {"type": "value", "name": ""},
+            {"type": "value", "inverse": True, "show": False},  
+        ],
+        "backgroundColor": "#ffffff",
+        "color": ["#A6785D", "#394A59", "#BF3F34"],
+    }
+
+    st_echarts(option=options, theme='chalk', height=400, width='100%')
+
+
+
 def save_bitly_metrics_bulk(project_name):
   dates_in_table = uc.run_query_half_day(f"SELECT CURRENT_DATE() AS current_date, DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) AS days_last_update, MAX(date) AS max_date FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
   current_date = dates_in_table[0].get('current_date')
