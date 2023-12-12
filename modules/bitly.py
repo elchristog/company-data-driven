@@ -85,7 +85,7 @@ def show_bitly_web_youtube_metrics(project_name):
             format="DD/MM/YYYY",
             help=''
         )
-        df_bitly_web = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tawc.clicks AS web_clicks, tabc.clicks AS bitly_clicks, ROUND(tabc.clicks/tawc.clicks, 2) AS conversion FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_web_clicks` AS tawc ON tabc.date = tawc.date WHERE tabc.bitly_link = 'bit.ly/3R6RbFW'   AND tabc.date >= '{{day[0].strftime('%Y-%m-%d')}}' AND tabc.date <= '{{day[1].strftime('%Y-%m-%d')}}'  ORDER BY tabc.date ASC;"))
+        df_bitly_web = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tawc.clicks AS web_clicks, tabc.clicks AS bitly_clicks, ROUND(tabc.clicks/tawc.clicks, 2) AS conversion FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_web_clicks` AS tawc ON tabc.date = tawc.date WHERE tabc.bitly_link = 'bit.ly/3R6RbFW'   AND tabc.date >= '{day[0].strftime('%Y-%m-%d')}' AND tabc.date <= '{day[1].strftime('%Y-%m-%d')}'  ORDER BY tabc.date ASC;"))
       
     
     st.write(df_bitly_web)
