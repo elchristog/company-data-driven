@@ -111,7 +111,7 @@ def whatsapp_leads_show_metrics(project_name, bitly_web_link, bitly_yt_link):
       with met3:
           st.metric('conversion:', f'{conversion * 100:.2f}%')
       with st.container():
-          plot_echarts_wsp(df_bitly_web, 'web')
+          plot_echarts_wsp(df_conversion)
       with met1:
           st.metric('bitly_clicks_web:', f'{bitly_clicks_web:,}')
       with met2:
