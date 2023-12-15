@@ -6,6 +6,79 @@ import pandas as pd
 
 import utils.user_credentials as uc
 
+
+
+
+def plot_echarts_wsp(df_grouped):
+    df_grouped['conversion'] = df_grouped['conversion'].apply(lambda conversion: f"{conversion:.2f}")
+    df_grouped['date'] = df_grouped['date'].astype(str)
+
+    options = {
+        "xAxis": {
+            "type": "category",
+            "data": df_grouped['date'].tolist(),
+            "axisLabel": {
+                "formatter": "{value}"
+            }
+        },
+        "yAxis": {"type": "value", "name": ""},
+        "grid": {
+            "right": 20,
+            "left": 65,
+            "top": 45,
+            "bottom": 50,
+        },
+        "legend": {
+            "show": True,
+            "top": "top",
+            "align": "auto",
+            "selected": {  
+                "conversion": True,        
+                "bitly_clicks_total": False,    
+                "num_leads_wsp": False         
+            }
+        },
+        "tooltip": {"trigger": "axis", },
+        "series": [
+            {
+                "type": "line",
+                "name": "conversion",
+                "data": df_grouped['conversion'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#A6785D"},
+                "showSymbol": False,
+            },
+            {
+                "type": "line",
+                "name": "bitly_clicks_total",
+                "data": df_grouped["bitly_clicks_total"].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#394A59"},
+                "showSymbol": False,
+            },
+            {
+                "type": "line",
+                "name": "num_leads_wsp",
+                "data": df_grouped['num_leads_wsp'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#BF3F34"},
+                "showSymbol": False,
+            }
+        ],
+
+        "yAxis": [
+            {"type": "value", "name": ""},
+            {"type": "value", "inverse": True, "show": False},  
+        ],
+        "backgroundColor": "#ffffff",
+        "color": ["#A6785D", "#394A59", "#BF3F34"],
+    }
+
+    st_echarts(option=options, theme='chalk', height=400, width='100%')
+
+
+
+
 def whatsapp_leads_show_metrics(project_name, bitly_web_link, bitly_yt_link):
   dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
   dates_whatsapp_leads = uc.run_query_1_h(f"SELECT MIN(creation_date) AS min_date_wsp, MAX(creation_date) AS max_date_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
@@ -37,8 +110,8 @@ def whatsapp_leads_show_metrics(project_name, bitly_web_link, bitly_yt_link):
           st.metric('num_leads_wsp:', f'{num_leads_wsp:,}')
       with met3:
           st.metric('conversion:', f'{conversion * 100:.2f}%')
-      # with st.container():
-      #     plot_echarts_btl_web_yt(df_bitly_web, 'web')
+      with st.container():
+          plot_echarts_wsp(df_bitly_web, 'web')
       with met1:
           st.metric('bitly_clicks_web:', f'{bitly_clicks_web:,}')
       with met2:
