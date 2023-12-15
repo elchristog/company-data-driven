@@ -81,7 +81,7 @@ def plot_echarts_wsp(df_grouped):
                 "name": "bitly_clicks_yt",
                 "data": df_grouped['bitly_clicks_yt'].tolist(),
                 "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#BFB5B0"},
+                "lineStyle": {"width": 2.4, "color": "#84C2BD"},
                 "showSymbol": False,
             }
         ],
@@ -91,7 +91,7 @@ def plot_echarts_wsp(df_grouped):
             {"type": "value", "inverse": True, "show": False},  
         ],
         "backgroundColor": "#ffffff",
-        "color": ["#A6785D", "#394A59", "#BF3F34", "#BFB5B4", "#BFB5B0"],
+        "color": ["#A6785D", "#394A59", "#BF3F34", "#BFB5B4", "#84C2BD"],
     }
 
     st_echarts(option=options, theme='chalk', height=400, width='100%')
