@@ -27,6 +27,9 @@ def whatsapp_leads_show_metrics(project_name, bitly_web_link, bitly_yt_link):
       bitly_clicks_total = df_conversion['bitly_clicks_total'].sum()
       num_leads_wsp = df_conversion['num_leads_wsp'].sum()
       conversion = num_leads_wsp/bitly_clicks_total
+      bitly_clicks_web = df_conversion['bitly_clicks_web'].sum()
+      bitly_clicks_yt = df_conversion['bitly_clicks_yt'].sum()
+    
       met1, met2, met3 = st.columns(3)
       with met1:
           st.metric('bitly_clicks_total:', f'{bitly_clicks_total:,}')
@@ -36,3 +39,7 @@ def whatsapp_leads_show_metrics(project_name, bitly_web_link, bitly_yt_link):
           st.metric('conversion:', f'{conversion * 100:.2f}%')
       # with st.container():
       #     plot_echarts_btl_web_yt(df_bitly_web, 'web')
+      with met1:
+          st.metric('bitly_clicks_web:', f'{bitly_clicks_web:,}')
+      with met2:
+          st.metric('bitly_clicks_yt:', f'{bitly_clicks_yt:,}')
