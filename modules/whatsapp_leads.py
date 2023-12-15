@@ -157,7 +157,7 @@ def whatsapp_leads_creation_save(project_name, user_id):
             if st.session_state.text_input_2 == st.session_state.text_input_3:
                 st.toast("Confirmed phone!", icon = "🫡")
                 st.toast("Please wait", icon = "☺️")
-                uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` (id, creation_date, phone_indicator, phone_number, creator_user_id) VALUES (GENERATE_UUID(), CURRENT_DATE(), '{st.session_state.text_input_1}', '{st.session_state.text_input_2}', {user_id});")
+                uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` (id, creation_date, phone_indicator, phone_number, creator_user_id) VALUES (GENERATE_UUID(), 'st.session_state.lead_date_input', '{st.session_state.text_input_1}', '{st.session_state.text_input_2}', {user_id});")
                 time.sleep(5)
                 st.toast("Lead saved!", icon = "👾")
                 st.balloons()
