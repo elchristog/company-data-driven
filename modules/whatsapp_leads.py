@@ -153,11 +153,18 @@ def whatsapp_leads_creation_save(project_name, user_id):
     st.session_state.text_input_2 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_2)
     st.session_state.text_input_3 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_3)
 
-    st.toast("Please wait", icon = "☺️")
-    # uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.effective_communication_content` (id, creation_date, creator_user_id, keyword, main_idea, why_1, why_2, why_3, how_1, how_2, how_3, experiment_1, experiment_2, experiment_3, relevant_content, checklist, call_to_action, created_content) VALUES (GENERATE_UUID(), CURRENT_DATE(), {user_id}, '{st.session_state.text_input_1}', '{st.session_state.text_input_2}', '{st.session_state.text_input_3}', '{st.session_state.text_input_4}', '{st.session_state.text_input_5}', '{st.session_state.text_input_6}', '{st.session_state.text_input_7}', '{st.session_state.text_input_8}', '{st.session_state.text_input_9}', '{st.session_state.text_input_10}', '{st.session_state.text_input_11}', '{st.session_state.text_input_12}', '{st.session_state.text_input_13}', '{st.session_state.text_input_14}' ,0);")
-    time.sleep(5)
-    st.toast("Content saved!", icon = "👾")
-    st.balloons()
+    if st.session_state.text_input_2 is not None and st.session_state.text_input_3 is not None:
+            if st.session_state.text_input_2 == st.session_state.text_input_3:
+                st.toast("Confirmed phone!", icon = "🫡")
+                st.toast("Please wait", icon = "☺️")
+                uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` (id, creation_date, phone_indicator, phone_number, creator_user_id) VALUES (GENERATE_UUID(), CURRENT_DATE(), '{st.session_state.text_input_1}', '{st.session_state.text_input_2}', {user_id});")
+                time.sleep(5)
+                st.toast("Lead saved!", icon = "👾")
+                st.balloons()
+            else:
+                st.toast("The phone number does not match", icon = "🥴")
+
+    
 
 
 def whatsapp_leads_creation(user_id, project_name):
@@ -189,12 +196,6 @@ def whatsapp_leads_creation(user_id, project_name):
             help = 'Just the phone number, no symbols or spaces',
             key = 'text_input_3'
         )
-
-        if text_input_2 is not None and text_input_3 is not None:
-            if text_input_2 == text_input_3:
-                st.success("Confirmed phone!", icon = "🫡")
-            else:
-                st.error("The phone number does not match", icon = "🥴")
 
         submitted = st.form_submit_button("Submit", on_click = whatsapp_leads_creation_save, args = [project_name, user_id])
 
