@@ -196,6 +196,7 @@ def whatsapp_leads_creation(user_id, project_name):
             help = 'Just the phone number, no symbols or spaces',
             key = 'text_input_3'
         )
+        lead_date_input = st.date_input("Lead date:", key = 'lead_date_input')
 
         submitted = st.form_submit_button("Submit", on_click = whatsapp_leads_creation_save, args = [project_name, user_id])
 
