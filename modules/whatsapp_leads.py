@@ -5,7 +5,7 @@ import numpy as np
 
 import utils.user_credentials as uc
 
-def whatsapp_leads_show_metrics(project_name, bitly_web_link, bitly_yt_link)):
+def whatsapp_leads_show_metrics(project_name, bitly_web_link, bitly_yt_link):
   dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
   dates_whatsapp_leads = uc.run_query_1_h(f"SELECT MIN(creation_date) AS min_date_wsp, MAX(creation_date) AS max_date_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
   if len(dates_bitly) < 1 or len(dates_whatsapp_leads) < 1:
