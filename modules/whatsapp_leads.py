@@ -37,7 +37,9 @@ def plot_echarts_wsp(df_grouped):
             "selected": {  
                 "conversion": True,        
                 "bitly_clicks_total": False,    
-                "num_leads_wsp": False         
+                "num_leads_wsp": False,
+                "bitly_clicks_web": False,
+                "bitly_clicks_yt": False 
             }
         },
         "tooltip": {"trigger": "axis", },
@@ -65,6 +67,22 @@ def plot_echarts_wsp(df_grouped):
                 "smooth": True,
                 "lineStyle": {"width": 2.4, "color": "#BF3F34"},
                 "showSymbol": False,
+            },
+            {
+                "type": "line",
+                "name": "bitly_clicks_web",
+                "data": df_grouped['bitly_clicks_web'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#BFB5B4"},
+                "showSymbol": False,
+            },
+            {
+                "type": "line",
+                "name": "bitly_clicks_yt",
+                "data": df_grouped['bitly_clicks_yt'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#BFB5B4"},
+                "showSymbol": False,
             }
         ],
 
@@ -73,7 +91,7 @@ def plot_echarts_wsp(df_grouped):
             {"type": "value", "inverse": True, "show": False},  
         ],
         "backgroundColor": "#ffffff",
-        "color": ["#A6785D", "#394A59", "#BF3F34"],
+        "color": ["#A6785D", "#394A59", "#BF3F34", "#BFB5B4", "#BFB5B4"],
     }
 
     st_echarts(option=options, theme='chalk', height=400, width='100%')
