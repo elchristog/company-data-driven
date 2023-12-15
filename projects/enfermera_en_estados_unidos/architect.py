@@ -96,6 +96,17 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Clicks":
                 tap.title_and_paragraph("Clicks" + project_icon, "Seguimiento de los clicks en los enlaces para chatear", "h3", 0)
                 btl.show_bitly_web_youtube_metrics(project_name, 'bit.ly/3R6RbFW', 'bit.ly/45SidF6')
+
+
+
+
+        if menu == "Whatsapp":
+            sub_menu_options=['Leads', 'Add new lead']
+            if role_id == 1:
+                sub_menu_options.extend(['Something else'])
+            sub_menu = st.sidebar.radio('Whatsapp options', options = sub_menu_options)
+            if sub_menu == "Leads":
+                tap.title_and_paragraph("Whatsapp" + project_icon, "Seguimiento de los nuevos leads en whatsapp", "h3", 0)
                 
         
 
