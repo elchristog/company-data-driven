@@ -172,7 +172,7 @@ def whatsapp_leads_creation_save(project_name, user_id):
 
 
 def whatsapp_leads_creation(user_id, project_name):
-    st.warning("Do not use line breaks, double or single quotes, double or single quotes neither", icon = "🙈")
+    st.warning("Do not use line breaks, symbols, double or single quotes", icon = "🙈")
     with st.form("whatsapp_leads_creation_form", clear_on_submit = True):
         text_input_1 = st.text_input(
             "Phone indicator",
