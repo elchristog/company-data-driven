@@ -109,6 +109,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Leads":
                 tap.title_and_paragraph("Whatsapp" + project_icon, "Seguimiento de los nuevos leads en whatsapp", "h3", 0)
                 wls.whatsapp_leads_show_metrics(project_name, 'bit.ly/3R6RbFW', 'bit.ly/45SidF6')
+            if sub_menu == "Add new lead":
+                tap.title_and_paragraph("Whatsapp" + project_icon, "Actualizacion de nuevos leads en whatsapp", "h3", 0)
+                wls.whatsapp_leads_creation(user_id, project_name)
+        
                 
         
 
