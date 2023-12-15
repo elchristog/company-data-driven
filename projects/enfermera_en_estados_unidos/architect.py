@@ -12,6 +12,7 @@ import modules.resources as r
 import modules.program_progress as pp
 import projects.enfermera_en_estados_unidos.modules.program_steps_guide as psg
 import modules.bitly as btl
+import modules.whatsapp_leads as wls
 
 
 
@@ -107,6 +108,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu = st.sidebar.radio('Whatsapp options', options = sub_menu_options)
             if sub_menu == "Leads":
                 tap.title_and_paragraph("Whatsapp" + project_icon, "Seguimiento de los nuevos leads en whatsapp", "h3", 0)
+                wls.whatsapp_leads_show_metrics(project_name)
                 
         
 
