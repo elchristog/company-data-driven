@@ -124,10 +124,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if role_id == 1:
                 sub_menu_options.extend(['Something else'])
             sub_menu = st.sidebar.radio('Trip Wire options', options = sub_menu_options)
-            if sub_menu == "Leads":
+            if sub_menu == "Meetings":
                 tap.title_and_paragraph("Trip Wire" + project_icon, "Seguimiento de los nuevos clientes frios", "h3", 0)
                 twc.trip_wire_calendly(project_name)
-            if sub_menu == "Add new lead":
+            if sub_menu == "Add new meeting":
                 tap.title_and_paragraph("Whatsapp" + project_icon, "Actualizacion de nuevos clientes frios", "h3", 0)
                 # wls.whatsapp_leads_creation(user_id, project_name)
         
