@@ -14,7 +14,7 @@ import utils.user_credentials as uc
 
 
 
-def plot_echarts_wsp(df_grouped):
+def plot_echarts_twc(df_grouped):
     df_grouped['conversion'] = df_grouped['conversion'].apply(lambda conversion: f"{conversion:.2f}")
     df_grouped['date'] = df_grouped['date'].astype(str)
 
@@ -103,9 +103,9 @@ def plot_echarts_wsp(df_grouped):
 
 
 def trip_wire_calendly_show_metrics(project_name):
-  st.success("my douglas")
-  dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
-  # dates_whatsapp_leads = uc.run_query_1_h(f"SELECT MIN(creation_date) AS min_date_wsp, MAX(creation_date) AS max_date_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
+  dates_whatsapp_leads = uc.run_query_1_h(f"SELECT MIN(creation_date) AS min_date_wsp, MAX(creation_date) AS max_date_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
+  dates_cold_customers = uc.run_query_1_h(f"SELECT MIN(creation_date) AS min_date_users, MAX(creation_date) AS max_date_users FROM `company-data-driven.global.users` WHERE project_id = 1;")
+    
   # if len(dates_bitly) < 1 or len(dates_whatsapp_leads) < 1:
   #     st.warning("Waiting for data")
   # else:
