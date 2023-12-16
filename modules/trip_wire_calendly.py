@@ -119,27 +119,21 @@ def trip_wire_calendly_show_metrics(project_name):
           key = 'day_trip_wire'
       )
 
-      df_conversion = pd.DataFrame(uc.run_query_1_h(f"SELECT trip_wire_counts.creation_date, number_wsp_leads.number_leads_wsp, trip_wire_counts.number_trip_wire_customers, ROUND(trip_wire_counts.number_trip_wire_customers / NULLIF(number_wsp_leads.number_leads_wsp, 0), 2) AS conversion FROM (SELECT u.creation_date, COUNT(u.id) AS number_trip_wire_customers FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE p.name = 'enfermera_en_estados_unidos' AND ra.role_id = 6 GROUP BY u.creation_date) AS trip_wire_counts INNER JOIN (SELECT creation_date, COUNT(id) AS number_leads_wsp FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_whatsapp_leads` WHERE creation_date >= '{day[0].strftime('%Y-%m-%d')}'  AND  creation_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY creation_date) AS number_wsp_leads ON trip_wire_counts.creation_date = number_wsp_leads.creation_date ORDER BY trip_wire_counts.creation_date ASC;"))
-      st.write(df_conversion)
-  #     bitly_clicks_total = df_conversion['bitly_clicks_total'].sum()
-  #     num_leads_wsp = df_conversion['num_leads_wsp'].sum()
-  #     conversion = num_leads_wsp/bitly_clicks_total
-  #     bitly_clicks_web = df_conversion['bitly_clicks_web'].sum()
-  #     bitly_clicks_yt = df_conversion['bitly_clicks_yt'].sum()
+      df_conversion = pd.DataFrame(uc.run_query_1_h(f"SELECT trip_wire_counts.creation_date, number_wsp_leads.number_leads_wsp, trip_wire_counts.number_trip_wire_customers, ROUND(trip_wire_counts.number_trip_wire_customers / NULLIF(number_wsp_leads.number_leads_wsp, 0), 2) AS conversion FROM (SELECT u.creation_date, COUNT(u.id) AS number_trip_wire_customers FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE p.name = '{project_name}' AND ra.role_id = 6 GROUP BY u.creation_date) AS trip_wire_counts INNER JOIN (SELECT creation_date, COUNT(id) AS number_leads_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE creation_date >= '{day[0].strftime('%Y-%m-%d')}'  AND  creation_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY creation_date) AS number_wsp_leads ON trip_wire_counts.creation_date = number_wsp_leads.creation_date ORDER BY trip_wire_counts.creation_date ASC;"))
+
+      number_leads_wsp = df_conversion['number_leads_wsp'].sum()
+      number_trip_wire_customers = df_conversion['number_trip_wire_customers'].sum()
+      conversion = num_leads_wsp/bitly_clicks_total
     
-  #     met1, met2, met3 = st.columns(3)
-  #     with met1:
-  #         st.metric('bitly_clicks_total:', f'{bitly_clicks_total:,}')
-  #     with met2:
-  #         st.metric('num_leads_wsp:', f'{num_leads_wsp:,}')
-  #     with met3:
-  #         st.metric('conversion:', f'{conversion * 100:.2f}%')
-  #     with st.container():
-  #         plot_echarts_wsp(df_conversion)
-  #     with met1:
-  #         st.metric('bitly_clicks_web:', f'{bitly_clicks_web:,}')
-  #     with met2:
-  #         st.metric('bitly_clicks_yt:', f'{bitly_clicks_yt:,}')
+      met1, met2, met3 = st.columns(3)
+      with met1:
+          st.metric('number_leads_wsp:', f'{number_leads_wsp:,}')
+      with met2:
+          st.metric('number_trip_wire_customers:', f'{number_trip_wire_customers:,}')
+      with met3:
+          st.metric('conversion:', f'{conversion * 100:.2f}%')
+      # with st.container():
+      #     plot_echarts_wsp(df_conversion)
 
 
 
