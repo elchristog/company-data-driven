@@ -105,19 +105,19 @@ def plot_echarts_twc(df_grouped):
 def trip_wire_calendly_show_metrics(project_name):
   dates_whatsapp_leads = uc.run_query_1_h(f"SELECT MIN(creation_date) AS min_date_wsp, MAX(creation_date) AS max_date_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
   dates_cold_customers = uc.run_query_1_h(f"SELECT MIN(u.creation_date) AS min_date_users, MAX(u.creation_date) AS max_date_users FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE p.name = '{project_name}' AND ra.role_id = 6;")
-  st.write(dates_cold_customers)
-  # if len(dates_bitly) < 1 or len(dates_whatsapp_leads) < 1:
-  #     st.warning("Waiting for data")
-  # else:
-  #     day = st.date_input(
-  #         "Time Range:",
-  #         (np.maximum(dates_bitly[0].get('min_date_bitly'), dates_whatsapp_leads[0].get('min_date_wsp')), np.minimum(dates_bitly[0].get('max_date_bitly'), dates_whatsapp_leads[0].get('max_date_wsp'))),
-  #         min_value=np.maximum(dates_bitly[0].get('min_date_bitly'), dates_whatsapp_leads[0].get('min_date_wsp')),
-  #         max_value=np.minimum(dates_bitly[0].get('max_date_bitly'), dates_whatsapp_leads[0].get('max_date_wsp')),
-  #         format="DD/MM/YYYY",
-  #         help='',
-  #         key = 'day_web'
-  #     )
+
+  if len(dates_whatsapp_leads) < 1 or len(dates_cold_customers) < 1:
+      st.warning("Waiting for data")
+  else:
+      day = st.date_input(
+          "Time Range:",
+          (np.maximum(dates_whatsapp_leads[0].get('min_date_wsp'), dates_cold_customers[0].get('min_date_users')), np.minimum(dates_whatsapp_leads[0].get('max_date_wsp'), dates_cold_customers[0].get('max_date_users'))),
+          min_value=np.maximum(dates_whatsapp_leads[0].get('min_date_wsp'), dates_cold_customers[0].get('min_date_users')),
+          max_value=np.minimum(dates_whatsapp_leads[0].get('max_date_wsp'), dates_cold_customers[0].get('max_date_users')),
+          format="DD/MM/YYYY",
+          help='',
+          key = 'day_trip_wire'
+      )
 
   #     df_conversion = pd.DataFrame(uc.run_query_1_h(f"SELECT btl_totals.date, btl_totals.bitly_clicks_web, btl_totals.bitly_clicks_yt, btl_totals.bitly_clicks_total, wsp_leads.num_leads_wsp, ROUND(wsp_leads.num_leads_wsp/NULLIF(btl_totals.bitly_clicks_total, 0), 2) AS conversion  FROM (SELECT date, SUM(CASE WHEN bitly_link IN ('{bitly_web_link}') THEN clicks ELSE 0 END) AS bitly_clicks_web, SUM(CASE WHEN bitly_link IN ('{bitly_yt_link}') THEN clicks ELSE 0 END) AS bitly_clicks_yt, SUM(CASE WHEN bitly_link IN ('{bitly_web_link}', '{bitly_yt_link}') THEN clicks ELSE 0 END) AS bitly_clicks_total FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` GROUP BY date) AS btl_totals INNER JOIN (SELECT creation_date, COUNT(id) AS num_leads_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE creation_date >= '{day[0].strftime('%Y-%m-%d')}'  AND  creation_date <= '{day[1].strftime('%Y-%m-%d')}'  GROUP BY creation_date) AS wsp_leads ON wsp_leads.creation_date = btl_totals.date ORDER BY btl_totals.date ASC;"))
     
