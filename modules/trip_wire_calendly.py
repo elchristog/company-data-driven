@@ -123,7 +123,7 @@ def trip_wire_calendly_show_metrics(project_name):
       st.write(df_conversion)
       number_leads_wsp = df_conversion['number_leads_wsp'].sum()
       number_trip_wire_customers = df_conversion['number_trip_wire_customers'].sum()
-      conversion = num_leads_wsp/bitly_clicks_total
+      conversion = number_trip_wire_customers/number_leads_wsp
     
       met1, met2, met3 = st.columns(3)
       with met1:
