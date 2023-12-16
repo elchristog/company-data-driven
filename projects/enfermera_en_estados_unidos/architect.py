@@ -13,6 +13,8 @@ import modules.program_progress as pp
 import projects.enfermera_en_estados_unidos.modules.program_steps_guide as psg
 import modules.bitly as btl
 import modules.whatsapp_leads as wls
+import modules.trip_wire_calendly as twc
+
 
 
 
@@ -112,6 +114,22 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Add new lead":
                 tap.title_and_paragraph("Whatsapp" + project_icon, "Actualizacion de nuevos leads en whatsapp", "h3", 0)
                 wls.whatsapp_leads_creation(user_id, project_name)
+
+
+
+
+
+        if menu == "Trip Wire":
+            sub_menu_options=['Meetings', 'Add new meeting']
+            if role_id == 1:
+                sub_menu_options.extend(['Something else'])
+            sub_menu = st.sidebar.radio('Trip Wire options', options = sub_menu_options)
+            if sub_menu == "Leads":
+                tap.title_and_paragraph("Trip Wire" + project_icon, "Seguimiento de los nuevos clientes frios", "h3", 0)
+                twc.trip_wire_calendly(project_name)
+            if sub_menu == "Add new lead":
+                tap.title_and_paragraph("Whatsapp" + project_icon, "Actualizacion de nuevos clientes frios", "h3", 0)
+                # wls.whatsapp_leads_creation(user_id, project_name)
         
                 
         
