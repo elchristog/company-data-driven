@@ -225,7 +225,6 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
     st.session_state.username_customer_creation = username
     st.session_state.checking_username_query_customer_creation = checking_username_query
     st.session_state.selected_project_customer_creation = project_name
-    st.session_state.user_role_customer_creation = user_role
     st.session_state.selected_role_id_customer_creation = 6
     st.session_state.user_first_name_customer_creation = user_first_name
     st.session_state.user_last_name_customer_creation = user_last_name
