@@ -129,8 +129,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 twc.trip_wire_calendly_show_metrics(project_name)
             if sub_menu == "Add new meeting":
                 tap.title_and_paragraph("Whatsapp" + project_icon, "Actualizacion de nuevos clientes frios", "h3", 0)
-                # wls.whatsapp_leads_creation(user_id, project_name)
-        
+                twc.customer_creation(user_id, project_id, project_name)
                 
         
 
