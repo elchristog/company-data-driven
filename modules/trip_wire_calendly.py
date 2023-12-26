@@ -122,68 +122,68 @@ def trip_wire_calendly_show_metrics(project_name):
 
 
 
-# def customer_creation_execution():
-#     checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{st.session_state.username_user_creation}';")
-#     if len(checking_username_query) < 1:
-#         checking_user_role = []
-#     else:
-#         checking_user_role = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.role_assignment` WHERE user_id = {checking_username_query[0].get('id')};")
-#     if len(st.session_state.username_user_creation) < 6:
-#         st.toast("The username must be at least 6 characters long.")
-#     if len(st.session_state.checking_username_query_user_creation) > 0:
-#         st.toast("The username is already in use.")
-#     if len(checking_user_role) > 0:
-#         st.toast("The username already has a role.")
-#     if st.session_state.selected_project_user_creation is None:
-#         st.toast("Please select a project.")
-#     if st.session_state.selected_project_user_creation != st.session_state.selected_project_confirmation_user_creation:
-#         st.toast("The selected project and the confirmation project must match.")
-#     if st.session_state.user_role_user_creation is None:
-#         st.toast("Please select a user role.")
-#     if st.session_state.user_role_user_creation != st.session_state.user_role_confirmation_user_creation:
-#         st.toast("The selected user role and the confirmation user role must match.")
-#     if st.session_state.user_first_name_user_creation is None:
-#         st.toast("Please enter your first name.")
-#     if len(st.session_state.user_first_name_user_creation) < 3:
-#         st.toast("The first name must be at least 3 characters long.")
-#     if st.session_state.user_last_name_user_creation is None:
-#         st.toast("Please enter your last name.")
-#     if len(st.session_state.user_last_name_user_creation) < 3:
-#         st.toast("The last name must be at least 3 characters long.")
-#     if st.session_state.user_email_user_creation is None:
-#         st.toast("Please enter your email address.")
-#     if len(st.session_state.user_email_user_creation) < 3:
-#         st.toast("The email address must be at least 3 characters long.")
-#     if st.session_state.user_birth_date_user_creation is None:
-#         st.toast("Please enter your birth date.")
-#     if st.session_state.user_country_user_creation is None:
-#         st.toast("Please select your country.")
-#     if len(st.session_state.user_country_user_creation) < 3:
-#         st.toast("The country name must be at least 3 characters long.")
-#     if st.session_state.user_gender_user_creation is None:
-#         st.toast("Please select your gender.")
-#     if len(st.session_state.user_gender_user_creation) < 3:
-#         st.toast("The gender must be at least 3 characters long.")
-#     if st.session_state.user_phone_number_user_creation is None:
-#         st.toast("Please enter your phone number.")
-#     if len(st.session_state.user_phone_number_user_creation) < 6:
-#         st.toast("The phone number must be at least 6 characters long.")
-#     if st.session_state.user_drive_folder_user_creation is None:
-#         st.toast("Please enter the Drive URL.")
-#     if len(st.session_state.user_drive_folder_user_creation) < 6:
-#         st.toast("The Drive URL must be at least 6 characters long.")
-#     if len(st.session_state.username_user_creation) < 6 or len(st.session_state.checking_username_query_user_creation) > 0 or len(checking_user_role) > 0 or st.session_state.selected_project_user_creation is None or st.session_state.selected_project_user_creation != st.session_state.selected_project_confirmation_user_creation or st.session_state.user_role_user_creation is None or st.session_state.user_role_user_creation != st.session_state.user_role_confirmation_user_creation or st.session_state.user_first_name_user_creation is None or len(st.session_state.user_first_name_user_creation) < 3 or st.session_state.user_last_name_user_creation is None or len(st.session_state.user_last_name_user_creation) < 3 or st.session_state.user_email_user_creation is None or len(st.session_state.user_email_user_creation) < 3  or st.session_state.user_birth_date_user_creation is None or st.session_state.user_country_user_creation is None or len(st.session_state.user_country_user_creation) < 3 or st.session_state.user_gender_user_creation is None or len(st.session_state.user_gender_user_creation) < 3 or st.session_state.user_phone_number_user_creation is None or len(st.session_state.user_phone_number_user_creation) < 6 or st.session_state.user_drive_folder_user_creation is None or len(st.session_state.user_drive_folder_user_creation) < 6:
-#         st.toast("Please fill in completely all of the required fields.")
-#     else:
-#         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.users` (id, username, status, project_id, creation_date, email, name, lastname, birthdate, country, gender, user_creator_id, phone_number, user_drive_folder) VALUES({st.session_state.max_id_users_user_creation}, '{st.session_state.username_user_creation}', 'active', {st.session_state.selected_project_id_user_creation}, '{st.session_state.today_str_user_creation}', '{st.session_state.user_email_user_creation.lower()}', '{st.session_state.user_first_name_user_creation.lower()}', '{st.session_state.user_last_name_user_creation.lower()}', '{st.session_state.user_birth_date_user_creation}', '{st.session_state.user_country_user_creation.lower()}', '{st.session_state.user_gender_user_creation.lower()}', {st.session_state.user_id_user_creation}, '{st.session_state.user_phone_number_user_creation}', '{st.session_state.user_drive_folder_user_creation}');")
-#         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.role_assignment` (id, user_id, role_id) VALUES({st.session_state.max_id_role_assignement_user_creation}, {st.session_state.max_id_users_user_creation}, {st.session_state.selected_role_id_user_creation});")
-#         st.toast("Updating, please wait", icon = "☺️")
-#         time.sleep(5)
-#         uc.run_query_30_m.clear()
-#         st.toast('User Created!', icon = '🎈')
-#         st.balloons()
-#         st.warning('Remember to hash the password and add to config, and create the demo task', icon = '😶‍🌫️')
-#         st.toast('Remember to hash the password and add to config, and create the demo task', icon = '😶‍🌫️')
+def customer_creation_execution():
+    checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{st.session_state.username_customer_creation}';")
+    if len(checking_username_query) < 1:
+        checking_user_role = []
+    else:
+        checking_user_role = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.role_assignment` WHERE user_id = {checking_username_query[0].get('id')};")
+    if len(st.session_state.username_customer_creation) < 6:
+        st.toast("The username must be at least 6 characters long.")
+    if len(st.session_state.checking_username_query_customer_creation) > 0:
+        st.toast("The username is already in use.")
+    if len(checking_user_role) > 0:
+        st.toast("The username already has a role.")
+    if st.session_state.selected_project_customer_creation is None:
+        st.toast("Please select a project.")
+    if st.session_state.selected_project_customer_creation != st.session_state.selected_project_confirmation_customer_creation:
+        st.toast("The selected project and the confirmation project must match.")
+    if st.session_state.user_role_customer_creation is None:
+        st.toast("Please select a user role.")
+    if st.session_state.user_role_customer_creation != st.session_state.user_role_confirmation_user_creation:
+        st.toast("The selected user role and the confirmation user role must match.")
+    if st.session_state.user_first_name_customer_creation is None:
+        st.toast("Please enter your first name.")
+    if len(st.session_state.user_first_name_customer_creation) < 3:
+        st.toast("The first name must be at least 3 characters long.")
+    if st.session_state.user_last_name_customer_creation is None:
+        st.toast("Please enter your last name.")
+    if len(st.session_state.user_last_name_customer_creation) < 3:
+        st.toast("The last name must be at least 3 characters long.")
+    if st.session_state.user_email_customer_creation is None:
+        st.toast("Please enter your email address.")
+    if len(st.session_state.user_email_customer_creation) < 3:
+        st.toast("The email address must be at least 3 characters long.")
+    if st.session_state.user_birth_date_customer_creation is None:
+        st.toast("Please enter your birth date.")
+    if st.session_state.user_country_customer_creation is None:
+        st.toast("Please select your country.")
+    if len(st.session_state.user_country_customer_creation) < 3:
+        st.toast("The country name must be at least 3 characters long.")
+    if st.session_state.user_gender_customer_creation is None:
+        st.toast("Please select your gender.")
+    if len(st.session_state.user_gender_customer_creation) < 3:
+        st.toast("The gender must be at least 3 characters long.")
+    if st.session_state.user_phone_number_customer_creation is None:
+        st.toast("Please enter your phone number.")
+    if len(st.session_state.user_phone_number_customer_creation) < 6:
+        st.toast("The phone number must be at least 6 characters long.")
+    if st.session_state.user_drive_folder_customer_creation is None:
+        st.toast("Please enter the Drive URL.")
+    if len(st.session_state.user_drive_folder_customer_creation) < 6:
+        st.toast("The Drive URL must be at least 6 characters long.")
+    if len(st.session_state.username_customer_creation) < 6 or len(st.session_state.checking_username_query_customer_creation) > 0 or len(checking_user_role) > 0 or st.session_state.selected_project_customer_creation is None or st.session_state.selected_project_customer_creation != st.session_state.selected_project_confirmation_customer_creation or st.session_state.user_role_customer_creation is None or st.session_state.user_role_customer_creation != st.session_state.user_role_confirmation_customer_creation or st.session_state.user_first_name_customer_creation is None or len(st.session_state.user_first_name_customer_creation) < 3 or st.session_state.user_last_name_customer_creation is None or len(st.session_state.user_last_name_customer_creation) < 3 or st.session_state.user_email_customer_creation is None or len(st.session_state.user_email_customer_creation) < 3  or st.session_state.user_birth_date_customer_creation is None or st.session_state.user_country_customer_creation is None or len(st.session_state.user_country_customer_creation) < 3 or st.session_state.user_gender_customer_creation is None or len(st.session_state.user_gender_customer_creation) < 3 or st.session_state.user_phone_number_customer_creation is None or len(st.session_state.user_phone_number_customer_creation) < 6 or st.session_state.user_drive_folder_customer_creation is None or len(st.session_state.user_drive_folder_customer_creation) < 6:
+        st.toast("Please fill in completely all of the required fields.")
+    else:
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.users` (id, username, status, project_id, creation_date, email, name, lastname, birthdate, country, gender, user_creator_id, phone_number, user_drive_folder) VALUES({st.session_state.max_id_users_customer_creation}, '{st.session_state.username_customer_creation}', 'active', {st.session_state.selected_project_id_customer_creation}, '{st.session_state.today_str_customer_creation}', '{st.session_state.user_email_customer_creation.lower()}', '{st.session_state.user_first_name_customer_creation.lower()}', '{st.session_state.user_last_name_customer_creation.lower()}', '{st.session_state.user_birth_date_customer_creation}', '{st.session_state.user_country_customer_creation.lower()}', '{st.session_state.user_gender_customer_creation.lower()}', {st.session_state.user_id_customer_creation}, '{st.session_state.user_phone_number_customer_creation}', '{st.session_state.user_drive_folder_customer_creation}');")
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.role_assignment` (id, user_id, role_id) VALUES({st.session_state.max_id_role_assignement_customer_creation}, {st.session_state.max_id_users_customer_creation}, {st.session_state.selected_role_id_customer_creation});")
+        st.toast("Updating, please wait", icon = "☺️")
+        time.sleep(5)
+        uc.run_query_30_m.clear()
+        st.toast('User Created!', icon = '🎈')
+        st.balloons()
+        st.warning('Remember to hash the password and add to config, and create the demo task', icon = '😶‍🌫️')
+        st.toast('Remember to hash the password and add to config, and create the demo task', icon = '😶‍🌫️')
         
 
 
