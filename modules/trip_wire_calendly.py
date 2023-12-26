@@ -189,7 +189,7 @@ def trip_wire_calendly_show_metrics(project_name):
 
 
 
-def customer_creation(user_id_user_creation, project_id, project_name): 
+def customer_creation(user_id_customer_creation, project_id, project_name): 
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
     username = st.text_input("Write the username:")
@@ -200,57 +200,7 @@ def customer_creation(user_id_user_creation, project_id, project_name):
         st.success('Username available', icon = '🪬')
     max_id_users = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.global.users`;")[0].get('max_id')
     max_id_role_assignement = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.global.role_assignment`;")[0].get('max_id')
-    get_projects = uc.run_query_30_m(f"SELECT id, name FROM `company-data-driven.global.projects`;")
-    project_ids = []
-    project_names = []
-    for row in get_projects:
-        project_ids.append(row.get('id'))
-        project_names.append(row.get('name'))
-    selected_project = st.selectbox(
-        label = "Select the project for the user",
-        options = project_names,
-        index = None
-    )
-    if selected_project is not None:
-        selected_project_id = project_ids[project_names.index(selected_project)]
-        st.session_state.selected_project_user_creation = selected_project
-        st.session_state.selected_project_id_user_creation = selected_project_id
-    selected_project_confirmation = st.selectbox(
-        label = "Confirm the project for the user",
-        options = project_names,
-        index = None
-    )
-    if selected_project is not None and selected_project_confirmation is not None:
-        if selected_project == selected_project_confirmation:
-            st.success('Project confirmed', icon = '🎈')
-        else:
-            st.error('Incorrect project', icon = '🀄')
-    
-    get_roles = uc.run_query_30_m(f"SELECT id, name FROM `company-data-driven.global.roles`;")
-    roles_ids = []
-    roles_names = []
-    for row in get_roles:
-        roles_ids.append(row.get('id'))
-        roles_names.append(row.get('name'))
 
-    user_role = st.selectbox(
-        label = "Select user role",
-        options = roles_names,
-        index = None
-    )
-    if user_role is not None:
-        selected_role_id = roles_ids[roles_names.index(user_role)]
-        st.session_state.selected_role_id_user_creation = selected_role_id
-    user_role_confirmation = st.selectbox(
-        label = "Confirm user role",
-        options = roles_names,
-        index = None
-    )
-    if user_role is not None and user_role_confirmation is not None:
-        if user_role == user_role_confirmation:
-            st.success('Role confirmed', icon = '🎈')
-        else:
-            st.error('Incorrect role', icon = '🀄')
 
     user_first_name = st.text_input("Write the user first name:")
     user_last_name = st.text_input("Write the user last name:")
@@ -269,26 +219,24 @@ def customer_creation(user_id_user_creation, project_id, project_name):
     )
     user_drive_folder = st.text_input("Write the user Google Drive folder url:")
     
-    st.session_state.user_id_user_creation = user_id_user_creation
-    st.session_state.project_id_user_creation = project_id
-    st.session_state.project_name_user_creation = project_name
-    st.session_state.username_user_creation = username
-    st.session_state.checking_username_query_user_creation = checking_username_query
-    st.session_state.selected_project_user_creation = selected_project
-    st.session_state.selected_project_confirmation_user_creation = selected_project_confirmation
-    st.session_state.user_role_user_creation = user_role
-    st.session_state.user_role_confirmation_user_creation = user_role_confirmation
-    st.session_state.user_first_name_user_creation = user_first_name
-    st.session_state.user_last_name_user_creation = user_last_name
-    st.session_state.user_email_user_creation = user_email
-    st.session_state.user_birth_date_user_creation = user_birth_date
-    st.session_state.user_country_user_creation = user_country
-    st.session_state.user_gender_user_creation = user_gender
-    st.session_state.user_phone_number_user_creation = user_phone_number
-    st.session_state.user_drive_folder_user_creation = user_drive_folder
-    st.session_state.username_user_creation = username
-    st.session_state.today_str_user_creation = today_str
-    st.session_state.max_id_users_user_creation = max_id_users
-    st.session_state.max_id_role_assignement_user_creation = max_id_role_assignement
+    st.session_state.user_id_customer_creation = user_id_customer_creation
+    st.session_state.project_id_customer_creation = project_id
+    st.session_state.project_name_customer_creation = project_name
+    st.session_state.username_customer_creation = username
+    st.session_state.checking_username_query_customer_creation = checking_username_query
+    st.session_state.selected_project_customer_creation = project_name
+    st.session_state.user_role_customer_creation = user_role
+    st.session_state.selected_role_id_customer_creation = 6
+    st.session_state.user_first_name_customer_creation = user_first_name
+    st.session_state.user_last_name_customer_creation = user_last_name
+    st.session_state.user_email_customer_creation = user_email
+    st.session_state.user_birth_date_customer_creation = user_birth_date
+    st.session_state.user_country_customer_creation = user_country
+    st.session_state.user_gender_customer_creation = user_gender
+    st.session_state.user_phone_number_customer_creation = user_phone_number
+    st.session_state.user_drive_folder_customer_creation = user_drive_folder
+    st.session_state.today_str_customer_creation = today_str
+    st.session_state.max_id_users_customer_creation = max_id_users
+    st.session_state.max_id_role_assignement_customer_creation = max_id_role_assignement
     
     create_user_button = st.button("Create User", on_click = customer_creation_execution)
