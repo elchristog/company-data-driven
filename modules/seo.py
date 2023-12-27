@@ -46,6 +46,7 @@ def save_new_content(project_name, user_id):
     time.sleep(5)
     st.toast("Content saved!", icon = "👾")
     st.balloons()
+    uc.run_query_30_m.clear()
 
 
 def content_creation_guide_effective_communication_storytelling(user_id, project_name):
