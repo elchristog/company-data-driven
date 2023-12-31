@@ -219,6 +219,6 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link):
 
 
 
-    st.write("### 	:frame_with_picture: Bitly instagram conversion")
+    st.write("### 	:frame_with_picture: Bitly instagram clicks")
     dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
     
