@@ -215,4 +215,10 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link):
             st.metric('conversion:', f'{yt_conversion * 100:.2f}%')
         with st.container():
             plot_echarts_btl_web_yt(df_bitly_yt, 'yt')
+
+
+
+
+st.write("### 	:frame_with_picture: Bitly instagram conversion")
+    dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
     
