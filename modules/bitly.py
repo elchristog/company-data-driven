@@ -233,4 +233,18 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link):
             help='',
             key = 'day_inst'
         )
+        df_bitly_inst = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tayv.views AS yt_views, tabc.clicks AS bitly_clicks, ROUND(tabc.clicks/ NULLIF(tayv.views, 0), 2) AS conversion FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_youtube_views` AS tayv ON tabc.date = tayv.date WHERE tabc.bitly_link = '{bitly_yt_link}'   AND tabc.date >= '{day_yt[0].strftime('%Y-%m-%d')}' AND tabc.date <= '{day_yt[1].strftime('%Y-%m-%d')}'  ORDER BY tabc.date ASC;"))
+    
+        yt_views = df_bitly_inst['yt_views'].sum()
+        yt_bitly_clicks = df_bitly_inst['bitly_clicks'].sum()
+        yt_conversion = yt_bitly_clicks/yt_views
+        met1, met2, met3 = st.columns(3)
+        with met1:
+            st.metric('yt_views:', f'{yt_views:,}')
+        with met2:
+            st.metric('bitly_clicks:', f'{yt_bitly_clicks:,}')
+        with met3:
+            st.metric('conversion:', f'{yt_conversion * 100:.2f}%')
+        # with st.container():
+        #     plot_echarts_btl_web_yt(df_bitly_yt, 'yt')
     
