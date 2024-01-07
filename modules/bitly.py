@@ -221,4 +221,16 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link):
 
     st.write("### 	:frame_with_picture: Bitly instagram clicks")
     dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
+    if len(dates_bitly) < 1:
+        st.warning("Waiting for data")
+    else:
+        day_inst = st.date_input(
+            "Time Range:",
+            (dates_bitly[0].get('min_date_bitly'), dates_bitly[0].get('max_date_bitly')),
+            min_value=dates_bitly[0].get('min_date_bitly'),
+            max_value=dates_bitly[0].get('max_date_bitly'),
+            format="DD/MM/YYYY",
+            help='',
+            key = 'day_inst'
+        )
     
