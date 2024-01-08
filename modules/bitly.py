@@ -234,9 +234,9 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link, 
             key = 'day_inst'
         )
 
-        df_bitly_inst = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tabc.clicks AS inst_bitly_clicks FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc WHERE tabc.bitly_link = '{bitly_inst_link}' AND tabc.date >= '{day_inst[0].strftime('%Y-%m-%d')}' AND tabc.date <= '{day_inst[1].strftime('%Y-%m-%d')}' ORDER BY tabc.date ASC;"))
+        df_bitly_inst = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tabc.clicks AS network_bitly_clicks FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc WHERE tabc.bitly_link = '{bitly_inst_link}' AND tabc.date >= '{day_inst[0].strftime('%Y-%m-%d')}' AND tabc.date <= '{day_inst[1].strftime('%Y-%m-%d')}' ORDER BY tabc.date ASC;"))
     
-        inst_bitly_clicks = df_bitly_inst['inst_bitly_clicks'].sum()
+        inst_bitly_clicks = df_bitly_inst['network_bitly_clicks'].sum()
         st.metric('inst_bitly_clicks:', f'{inst_bitly_clicks:,}')
         # with st.container():
         #     plot_echarts_btl_web_yt(df_bitly_yt, 'yt')
