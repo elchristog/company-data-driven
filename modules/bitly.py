@@ -154,6 +154,61 @@ def plot_echarts_btl_web_yt(df_grouped, channel_name):
 
 
 
+
+def plot_echarts_btl_networks(df_grouped):
+    df_grouped['date'] = df_grouped['date'].astype(str)
+
+    options = {
+        "xAxis": {
+            "type": "category",
+            "data": df_grouped['date'].tolist(),
+            "axisLabel": {
+                "formatter": "{value}"
+            }
+        },
+        "yAxis": {"type": "value", "name": ""},
+        "grid": {
+            "right": 20,
+            "left": 65,
+            "top": 45,
+            "bottom": 50,
+        },
+        "legend": {
+            "show": True,
+            "top": "top",
+            "align": "auto",
+            "selected": {  
+                "network_bitly_clicks": True      
+            }
+        },
+        "tooltip": {"trigger": "axis", },
+        "series": [
+            {
+                "type": "line",
+                "name": "network_bitly_clicks",
+                "data": df_grouped['network_bitly_clicks'].tolist(),
+                "smooth": True,
+                "lineStyle": {"width": 2.4, "color": "#A6785D"},
+                "showSymbol": False,
+            }
+        ],
+
+        "yAxis": [
+            {"type": "value", "name": ""},
+            {"type": "value", "inverse": True, "show": False},  
+        ],
+        "backgroundColor": "#ffffff",
+        "color": ["#A6785D"],
+    }
+
+    st_echarts(option=options, theme='chalk', height=400, width='100%')
+
+
+
+
+
+
+
 def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link, bitly_inst_link):
     st.write("### 	:earth_americas: Bitly web conversion")
     dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
@@ -238,6 +293,6 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link, 
     
         inst_bitly_clicks = df_bitly_inst['network_bitly_clicks'].sum()
         st.metric('inst_bitly_clicks:', f'{inst_bitly_clicks:,}')
-        # with st.container():
-        #     plot_echarts_btl_web_yt(df_bitly_yt, 'yt')
+        with st.container():
+            plot_echarts_btl_networks(inst_bitly_clicks)
     
