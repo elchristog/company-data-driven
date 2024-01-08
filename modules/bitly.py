@@ -293,6 +293,7 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link, 
     
         inst_bitly_clicks = df_bitly_inst['network_bitly_clicks'].sum()
         st.metric('inst_bitly_clicks:', f'{inst_bitly_clicks:,}')
+        st.write(inst_bitly_clicks)
         with st.container():
             plot_echarts_btl_networks(inst_bitly_clicks)
     
