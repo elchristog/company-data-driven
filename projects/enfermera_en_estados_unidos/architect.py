@@ -117,19 +117,6 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
 
-
-
-        if menu == "Trip Wire":
-            sub_menu_options=['Meetings', 'Add new meeting']
-            if role_id == 1:
-                sub_menu_options.extend(['Something else'])
-            sub_menu = st.sidebar.radio('Trip Wire options', options = sub_menu_options)
-            if sub_menu == "Meetings":
-                tap.title_and_paragraph("Trip Wire" + project_icon, "Seguimiento de los nuevos clientes frios", "h3", 0)
-                twc.trip_wire_calendly_show_metrics(project_name)
-            if sub_menu == "Add new meeting":
-                tap.title_and_paragraph("Whatsapp" + project_icon, "Actualizacion de nuevos clientes frios", "h3", 0)
-                twc.customer_creation(user_id, project_id, project_name)
                 
         
 
@@ -150,6 +137,29 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Update customer progress":
                 tap.title_and_paragraph("Update customer progress " + project_icon, "Select carefully the actual step", "h3", 0)
                 pp.update_customer_progress(user_id, project_id, project_name, 'program_steps', 'user_program_steps_progress')
+
+
+
+
+
+
+        if menu == "Contract":
+            sub_menu_options=['Meetings', 'Add new meeting']
+            if role_id == 1:
+                sub_menu_options.extend(['Something else'])
+            sub_menu = st.sidebar.radio('Trip Wire options', options = sub_menu_options)
+            if sub_menu == "Meetings":
+                tap.title_and_paragraph("Trip Wire" + project_icon, "Seguimiento de los nuevos clientes frios", "h3", 0)
+                twc.trip_wire_calendly_show_metrics(project_name)
+            if sub_menu == "Add new meeting":
+                tap.title_and_paragraph("Whatsapp" + project_icon, "Actualizacion de nuevos clientes frios", "h3", 0)
+                twc.customer_creation(user_id, project_id, project_name)
+
+
+
+
+
+        
 
         if menu == "Users Admin":
             sub_menu_options=['Create User', 'Update User', 'Hashing']
