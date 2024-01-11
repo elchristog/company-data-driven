@@ -36,7 +36,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
         ######################
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
-            menu_options = ["Home", "Traffic", "Click bitly", "Whatsapp", "Groupal session", "Remarketing", "Contract", "Contract Remarketing", "Contract Payments", "Web App", "Step1: Inicio del programa", "Step2: Trámite de documentos", "Step3: Inscripción ante la Junta de Enfermería", "Step4: Preparación NCLEX", "Step5: Preparación de inglés", "Step6: Entrevistas de trabajo", "Step7: Visa Screen", "Step8: Trámite NVC", "Step9: Trámite embajada", "Step10: Vida en estados Unidos"]
+            menu_options = ["Home", "Traffic", "Click bitly Whatsapp", "Whatsapp", "Groupal session", "Remarketing", "Contract", "Contract Remarketing", "Contract Payments", "Web App", "Step1: Inicio del programa", "Step2: Trámite de documentos", "Step3: Inscripción ante la Junta de Enfermería", "Step4: Preparación NCLEX", "Step5: Preparación de inglés", "Step6: Entrevistas de trabajo", "Step7: Visa Screen", "Step8: Trámite NVC", "Step9: Trámite embajada", "Step10: Vida en estados Unidos"]
             if role_id == 1:
                 menu_options.extend(['Users Admin'])
             if user_id == 1: #------ in develop -----------
@@ -92,7 +92,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 seo.seo_writing(project_name, user_id, role_id)
 
 
-        if menu == "Click bitly":
+        if menu == "Click bitly Whatsapp":
             sub_menu_options=['Clicks', 'Something']
             if role_id == 1:
                 sub_menu_options.extend(['Something else'])
