@@ -158,6 +158,11 @@ def add_new_assistant(project_name):
             index = None,
             key= "assistant_phone_numbers"
         )
+    checking_phone_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE CONCAT(phone_indicator,phone_number) LIKE '%{selected_phone}%' ")
+    if len(checking_phone_query) < 1 or checking_phone_query is None:
+        st.error('Phone number does not exists, should be created addind a new lead into Whatsapp', icon = '👻')
+    else:
+        st.success('Phone number available', icon = '🪬')
     if selected_phone is not None:
         selected_phone_id = assistant_ids[assistant_phone_numbers.index(selected_phone)]
         add_assistant_button = st.button("Add assistant", on_click = add_new_assistant_execution)
