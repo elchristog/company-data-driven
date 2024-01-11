@@ -135,3 +135,30 @@ def groupal_session_show_metrics(project_name, bitly_web_link, bitly_yt_link):
       # with st.container():
       #     plot_echarts_gsa(df_conversion)
 
+
+
+
+
+def add_new_assistant_execution():
+    pass
+
+
+
+
+def add_new_assistant(project_name):
+    rows = uc.run_query_half_day(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
+    assistant_ids = []
+    assistant_phone_numbers = []
+    for row in rows:
+        assistant_ids.append(row.get('id'))
+        assistant_phone_numbers.append(row.get('full_phone_number'))
+    selected_phone = st.selectbox(
+            label = "Select the assistant phone number",
+            options = assistant_phone_numbers,
+            index = None,
+            key= "assistant_phone_numbers"
+        )
+    if selected_phone is not None:
+        selected_phone_id = assistant_ids[assistant_phone_numbers.index(selected_phone)]
+        add_assistant_button = st.button("Add assistant", on_click = add_new_assistant_execution)
+
