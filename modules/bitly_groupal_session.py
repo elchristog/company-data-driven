@@ -56,8 +56,8 @@ def plot_echarts_bgs(df_grouped):
             },
             {
                 "type": "line",
-                "name": "bitly_clicks_total",
-                "data": df_grouped["bitly_clicks_total"].tolist(),
+                "name": "num_groupal_session_clicks",
+                "data": df_grouped["num_groupal_session_clicks"].tolist(),
                 "smooth": True,
                 "lineStyle": {"width": 2.4, "color": "#394A59"},
                 "showSymbol": False,
@@ -69,22 +69,6 @@ def plot_echarts_bgs(df_grouped):
                 "smooth": True,
                 "lineStyle": {"width": 2.4, "color": "#BF3F34"},
                 "showSymbol": False,
-            },
-            {
-                "type": "line",
-                "name": "bitly_clicks_web",
-                "data": df_grouped['bitly_clicks_web'].tolist(),
-                "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#BFB5B4"},
-                "showSymbol": False,
-            },
-            {
-                "type": "line",
-                "name": "bitly_clicks_yt",
-                "data": df_grouped['bitly_clicks_yt'].tolist(),
-                "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#84C2BD"},
-                "showSymbol": False,
             }
         ],
 
@@ -93,7 +77,7 @@ def plot_echarts_bgs(df_grouped):
             {"type": "value", "inverse": True, "show": False},  
         ],
         "backgroundColor": "#ffffff",
-        "color": ["#A6785D", "#394A59", "#BF3F34", "#BFB5B4", "#84C2BD"],
+        "color": ["#A6785D", "#394A59", "#BF3F34"],
     }
 
     st_echarts(option=options, theme='chalk', height=400, width='100%')
@@ -131,5 +115,5 @@ def bitly_groupal_session_show_metrics(project_name, bitly_groupal_session_link)
           st.metric('num_groupal_session_clicks:', f'{num_groupal_session_clicks:,}')
       with met3:
           st.metric('conversion:', f'{conversion * 100:.2f}%')
-      # with st.container():
-      #     plot_echarts_gsa(df_conversion)
+      with st.container():
+          plot_echarts_bgs(df_conversion)
