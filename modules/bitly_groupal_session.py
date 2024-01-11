@@ -13,7 +13,7 @@ import utils.user_credentials as uc
 
 
 
-def plot_echarts_gsa(df_grouped):
+def plot_echarts_bgs(df_grouped):
     df_grouped['conversion'] = df_grouped['conversion'].apply(lambda conversion: f"{conversion:.2f}")
     df_grouped['date'] = df_grouped['date'].astype(str)
 
@@ -101,7 +101,7 @@ def plot_echarts_gsa(df_grouped):
 
 
 
-def groupal_session_show_metrics(project_name, bitly_groupal_session_link):
+def bitly_groupal_session_show_metrics(project_name, bitly_groupal_session_link):
   dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
   dates_whatsapp_leads = uc.run_query_1_h(f"SELECT MIN(creation_date) AS min_date_wsp, MAX(creation_date) AS max_date_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
   if len(dates_bitly) < 1 or len(dates_whatsapp_leads) < 1:
