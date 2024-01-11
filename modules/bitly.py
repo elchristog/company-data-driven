@@ -59,7 +59,8 @@ def save_bitly_metrics_bulk(project_name):
     save_bitly_metrics_one_link(project_name, 'bit.ly/3R6SrJa', 'enfermera_en_estados_unidos_instagram_to_whatsapp', None, current_date)
     save_bitly_metrics_one_link(project_name, 'bit.ly/3R6RbFW', 'enfermera_en_estados_unidos_web_to_whatsapp', None, current_date)
     save_bitly_metrics_one_link(project_name, 'bit.ly/3ql14VA', 'enfermera_en_estados_unidos_whatsapp_to_calendly', None, current_date)
-    save_bitly_metrics_one_link(project_name, 'bit.ly/3qr9smo', 'enfermera_en_estados_unidos_remarketing_to_wathsapp', None, current_date)
+    save_bitly_metrics_one_link(project_name, 'bit.ly/3qr9smo', 'enfermera_en_estados_unidos_remarketing_to_whatsapp', None, current_date)
+    save_bitly_metrics_one_link(project_name, 'bit.ly/3vtB3Wi', 'enfermera_en_estados_unidos_whatsapp_to_group_calendly', None, current_date)
     uc.run_query_half_day.clear()
   elif days_last_update > 1: # 1 day because today still getting data
     st.toast("Updating bitly data", icon = "🥶")
@@ -67,7 +68,8 @@ def save_bitly_metrics_bulk(project_name):
     save_bitly_metrics_one_link(project_name, 'bit.ly/3R6SrJa', 'enfermera_en_estados_unidos_instagram_to_whatsapp', max_date, current_date)
     save_bitly_metrics_one_link(project_name, 'bit.ly/3R6RbFW', 'enfermera_en_estados_unidos_web_to_whatsapp', max_date, current_date)
     save_bitly_metrics_one_link(project_name, 'bit.ly/3ql14VA', 'enfermera_en_estados_unidos_whatsapp_to_calendly', max_date, current_date)
-    save_bitly_metrics_one_link(project_name, 'bit.ly/3qr9smo', 'enfermera_en_estados_unidos_remarketing_to_wathsapp', max_date, current_date)
+    save_bitly_metrics_one_link(project_name, 'bit.ly/3qr9smo', 'enfermera_en_estados_unidos_remarketing_to_whatsapp', max_date, current_date)
+    save_bitly_metrics_one_link(project_name, 'bit.ly/3vtB3Wi', 'enfermera_en_estados_unidos_whatsapp_to_group_calendly', max_date, current_date)
     uc.run_query_half_day.clear()
   else:
     pass
