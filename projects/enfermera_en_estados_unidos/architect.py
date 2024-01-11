@@ -131,7 +131,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu = st.sidebar.radio('Whatsapp options', options = sub_menu_options)
             if sub_menu == "Clicks":
                 tap.title_and_paragraph("Groupal session Bitly clicks" + project_icon, "Seguimiento de los clicks para asistir a la reunion grupal", "h3", 0)
-                bgs.groupal_session_show_metrics(project_name, 'bit.ly/3vtB3Wi')
+                bgs.bitly_groupal_session_show_metrics(project_name, 'bit.ly/3vtB3Wi')
 
 
 
