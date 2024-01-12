@@ -147,7 +147,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 gsa.groupal_session_show_metrics(project_name, 'bit.ly/3R6RbFW', 'bit.ly/45SidF6')
             if sub_menu == "Add new assistant":
                 tap.title_and_paragraph("Add new assistant" + project_icon, "Seguimiento de los asistentes a la reunion grupal", "h3", 0)
-                gsa.add_new_assistant(project_name)
+                gsa.add_new_assistant(user_id, project_name)
 
 
 
