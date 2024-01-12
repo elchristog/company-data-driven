@@ -102,7 +102,6 @@ def bitly_groupal_session_show_metrics(project_name, bitly_groupal_session_link)
       )
 
       df_conversion = pd.DataFrame(uc.run_query_1_h(f"SELECT groupal_session.date, groupal_session.num_groupal_session_clicks, whatsapp_leads.num_leads_wsp, ROUND(groupal_session.num_groupal_session_clicks/NULLIF(whatsapp_leads.num_leads_wsp, 0), 2) AS conversion FROM (SELECT date, SUM(clicks) AS num_groupal_session_clicks FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` WHERE bitly_link = '{bitly_groupal_session_link}' GROUP BY date) AS groupal_session INNER JOIN (SELECT creation_date, COUNT(id) AS num_leads_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE creation_date >= '{day[0].strftime('%Y-%m-%d')}'  AND  creation_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY creation_date) AS whatsapp_leads ON groupal_session.date = whatsapp_leads.creation_date ORDER BY groupal_session.date ASC;"))
-      st.write(df_conversion)
     
       num_leads_wsp = df_conversion['num_leads_wsp'].sum()
       num_groupal_session_clicks = df_conversion['num_groupal_session_clicks'].sum()
