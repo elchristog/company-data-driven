@@ -145,7 +145,7 @@ def add_new_assistant_execution():
 
 
 
-def add_new_assistant(project_name):
+def add_new_assistant(user_id, project_name):
     rows = uc.run_query_half_day(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
     assistant_ids = []
     assistant_phone_numbers = []
