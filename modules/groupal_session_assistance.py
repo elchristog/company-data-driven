@@ -120,19 +120,17 @@ def groupal_session_show_metrics(project_name, bitly_web_link, bitly_yt_link):
       df_conversion = pd.DataFrame(uc.run_query_1_h(f"SELECT groupal_session_clicks_df.date, groupal_session_clicks_df.groupal_session_clicks, meeting_assistance.num_assistants FROM (SELECT meeting_date, COUNT(id) AS num_assistants FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` GROUP BY meeting_date) AS meeting_assistance RIGHT JOIN (SELECT date, SUM(clicks) AS groupal_session_clicks FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` WHERE bitly_link = 'bit.ly/3vtB3Wi' AND date >= '{day[0].strftime('%Y-%m-%d')}'  AND  date <= '{day[1].strftime('%Y-%m-%d')}'   GROUP BY date) AS groupal_session_clicks_df ON meeting_assistance.meeting_date = groupal_session_clicks_df.date ORDER BY groupal_session_clicks_df.date ASC;"))
 
       st.write(df_conversion)
-      # bitly_clicks_total = df_conversion['bitly_clicks_total'].sum()
-      # num_leads_wsp = df_conversion['num_leads_wsp'].sum()
-      # conversion = num_leads_wsp/bitly_clicks_total
-      # bitly_clicks_web = df_conversion['bitly_clicks_web'].sum()
-      # bitly_clicks_yt = df_conversion['bitly_clicks_yt'].sum()
+      bitly_clicks_groupal_session = df_conversion['groupal_session_clicks'].sum()
+      num_assistants = df_conversion['num_assistants'].sum()
+      conversion = num_assistants/bitly_clicks_groupal_session
     
-      # met1, met2, met3 = st.columns(3)
-      # with met1:
-      #     st.metric('bitly_clicks_total:', f'{bitly_clicks_total:,}')
-      # with met2:
-      #     st.metric('num_leads_wsp:', f'{num_leads_wsp:,}')
-      # with met3:
-      #     st.metric('conversion:', f'{conversion * 100:.2f}%')
+      met1, met2, met3 = st.columns(3)
+      with met1:
+          st.metric('bitly_clicks_groupal_session:', f'{bitly_clicks_groupal_session:,}')
+      with met2:
+          st.metric('num_assistants:', f'{num_assistants:,}')
+      with met3:
+          st.metric('conversion:', f'{conversion * 100:.2f}%')
       # with st.container():
       #     plot_echarts_gsa(df_conversion)
 
