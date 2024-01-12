@@ -14,7 +14,6 @@ import utils.user_credentials as uc
 
 
 def plot_echarts_gsa(df_grouped):
-    df_grouped['conversion'] = df_grouped['conversion'].apply(lambda conversion: f"{conversion:.2f}")
     df_grouped['date'] = df_grouped['date'].astype(str)
 
     options = {
@@ -37,53 +36,26 @@ def plot_echarts_gsa(df_grouped):
             "top": "top",
             "align": "auto",
             "selected": {  
-                "conversion": True,        
-                "bitly_clicks_total": False,    
-                "num_leads_wsp": False,
-                "bitly_clicks_web": False,
-                "bitly_clicks_yt": False 
+                "groupal_session_clicks": True,        
+                "num_assistants": False
             }
         },
         "tooltip": {"trigger": "axis", },
         "series": [
             {
                 "type": "line",
-                "name": "conversion",
-                "data": df_grouped['conversion'].tolist(),
+                "name": "groupal_session_clicks",
+                "data": df_grouped['groupal_session_clicks'].tolist(),
                 "smooth": True,
                 "lineStyle": {"width": 2.4, "color": "#A6785D"},
                 "showSymbol": False,
             },
             {
                 "type": "line",
-                "name": "bitly_clicks_total",
-                "data": df_grouped["bitly_clicks_total"].tolist(),
+                "name": "num_assistants",
+                "data": df_grouped["num_assistants"].tolist(),
                 "smooth": True,
                 "lineStyle": {"width": 2.4, "color": "#394A59"},
-                "showSymbol": False,
-            },
-            {
-                "type": "line",
-                "name": "num_leads_wsp",
-                "data": df_grouped['num_leads_wsp'].tolist(),
-                "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#BF3F34"},
-                "showSymbol": False,
-            },
-            {
-                "type": "line",
-                "name": "bitly_clicks_web",
-                "data": df_grouped['bitly_clicks_web'].tolist(),
-                "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#BFB5B4"},
-                "showSymbol": False,
-            },
-            {
-                "type": "line",
-                "name": "bitly_clicks_yt",
-                "data": df_grouped['bitly_clicks_yt'].tolist(),
-                "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#84C2BD"},
                 "showSymbol": False,
             }
         ],
@@ -93,7 +65,7 @@ def plot_echarts_gsa(df_grouped):
             {"type": "value", "inverse": True, "show": False},  
         ],
         "backgroundColor": "#ffffff",
-        "color": ["#A6785D", "#394A59", "#BF3F34", "#BFB5B4", "#84C2BD"],
+        "color": ["#A6785D", "#394A59"],
     }
 
     st_echarts(option=options, theme='chalk', height=400, width='100%')
@@ -131,8 +103,8 @@ def groupal_session_show_metrics(project_name, bitly_web_link, bitly_yt_link):
           st.metric('num_assistants:', f'{num_assistants:,}')
       with met3:
           st.metric('conversion:', f'{conversion * 100:.2f}%')
-      # with st.container():
-      #     plot_echarts_gsa(df_conversion)
+      with st.container():
+          plot_echarts_gsa(df_conversion)
 
 
 
