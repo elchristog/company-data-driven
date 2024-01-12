@@ -163,7 +163,7 @@ def add_new_assistant(project_name):
         st.error('Phone number does not exists, should be created adding a new lead into Whatsapp', icon = '👻')
     else:
         st.success('Phone number available', icon = '🪬')
-    if selected_phone is not None:
-        selected_phone_id = assistant_ids[assistant_phone_numbers.index(selected_phone)]
-        add_assistant_button = st.button("Add assistant", on_click = add_new_assistant_execution)
+        if selected_phone is not None:
+            selected_phone_id = assistant_ids[assistant_phone_numbers.index(selected_phone)]
+            add_assistant_button = st.button("Add assistant", on_click = add_new_assistant_execution)
 
