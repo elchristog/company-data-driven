@@ -139,8 +139,8 @@ def groupal_session_show_metrics(project_name, bitly_web_link, bitly_yt_link):
 
 
 
-def add_new_assistant_execution():
-    pass
+def add_new_assistant_execution(user_id, project_name, selected_phone_id):
+    st.toast(selected_phone_id)
 
 
 
@@ -165,5 +165,5 @@ def add_new_assistant(user_id, project_name):
         st.success('Phone number available', icon = '🪬')
         if selected_phone is not None:
             selected_phone_id = assistant_ids[assistant_phone_numbers.index(selected_phone)]
-            add_assistant_button = st.button("Add assistant", on_click = add_new_assistant_execution)
+            add_assistant_button = st.button("Add assistant", on_click = add_new_assistant_execution, args = [user_id, project_name, selected_phone_id])
 
