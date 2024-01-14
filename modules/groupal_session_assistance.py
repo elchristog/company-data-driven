@@ -75,15 +75,14 @@ def plot_echarts_gsa(df_grouped):
 
 def groupal_session_show_metrics(project_name, bitly_groupal_session_link):
   dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
-  dates_groupal_session_assistance = uc.run_query_1_h(f"SELECT MIN(meeting_date) AS min_date_gsa, MAX(meeting_date) AS max_date_gsa FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance`;")
-  if len(dates_bitly) < 1 or len(dates_groupal_session_assistance) < 1:
+  if len(dates_bitly) < 1:
       st.warning("Waiting for data")
   else:
       day = st.date_input(
           "Time Range:",
-          (np.maximum(dates_bitly[0].get('min_date_bitly'), dates_groupal_session_assistance[0].get('min_date_gsa')), np.minimum(dates_bitly[0].get('max_date_bitly'), dates_groupal_session_assistance[0].get('max_date_gsa'))),
-          min_value=np.maximum(dates_bitly[0].get('min_date_bitly'), dates_groupal_session_assistance[0].get('min_date_gsa')),
-          max_value=np.minimum(dates_bitly[0].get('max_date_bitly'), dates_groupal_session_assistance[0].get('max_date_gsa')),
+          (dates_bitly[0].get('min_date_bitly'), dates_bitly[0].get('max_date_bitly')),
+          min_value=dates_bitly[0].get('min_date_bitly'),
+          max_value=dates_bitly[0].get('max_date_bitly'),
           format="DD/MM/YYYY",
           help='',
           key = 'day_gsa'
