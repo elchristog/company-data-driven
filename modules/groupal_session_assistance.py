@@ -90,7 +90,7 @@ def groupal_session_show_metrics(project_name, bitly_groupal_session_link):
 
       df_conversion = pd.DataFrame(uc.run_query_1_h(f"SELECT groupal_session_clicks_df.date, groupal_session_clicks_df.groupal_session_clicks, meeting_assistance.num_assistants FROM (SELECT meeting_date, COUNT(id) AS num_assistants FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` GROUP BY meeting_date) AS meeting_assistance RIGHT OUTER JOIN (SELECT date, SUM(clicks) AS groupal_session_clicks FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` WHERE bitly_link = '{bitly_groupal_session_link}' AND date >= '{day[0].strftime('%Y-%m-%d')}'  AND  date <= '{day[1].strftime('%Y-%m-%d')}'   GROUP BY date) AS groupal_session_clicks_df ON meeting_assistance.meeting_date = groupal_session_clicks_df.date ORDER BY groupal_session_clicks_df.date ASC;"))
 
-      st.write(df_conversion)
+      df_conversion["num_assistants"] = df_conversion["num_assistants"].fillna(0)
       bitly_clicks_groupal_session = df_conversion['groupal_session_clicks'].sum()
       num_assistants = df_conversion['num_assistants'].sum()
       conversion = num_assistants/bitly_clicks_groupal_session
