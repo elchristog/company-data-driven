@@ -378,11 +378,11 @@ def days_since_last_content(project_name):
     else:
         days_since = days_since_last_content_created[0].get("days_since_last_content")
         if days_since < 5:
-            st.success(f"Days since last content: {days_since}", icon ' "😎")
+            st.success(f"Days since last content: {days_since}", icon = "😎")
         if days_since >= 5 and days_since < 8:
-            st.warning(f"Days since last content: {days_since}", icon ' "🤨")
+            st.warning(f"Days since last content: {days_since}", icon = "🤨")
         if days_since >= 8:
-            st.success(f"Days since last content: {days_since}", icon ' "🤬")
+            st.success(f"Days since last content: {days_since}", icon = "🤬")
         
         
         
