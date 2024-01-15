@@ -71,7 +71,7 @@ credentials:
     bingleyodiaz:
       email: bingleyo.diaz@hotmail.com
       name: Bingley Ortiz
-      password: $2b$12$CiDN.bR2HyWjzbXor8USjuupV8SIsoU9C.PiveLnpJdhwwTxgz6T6
+      password: $2b$12$gsJNdu16gcAYdeXqI5u6s.nfaQRNYFQI/Q1Re36Rh41VoSmjbpB9K
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
