@@ -169,9 +169,15 @@ def customer_creation_execution():
     if len(st.session_state.username_customer_creation) < 6 or len(st.session_state.checking_username_query_customer_creation) > 0 or len(checking_user_role) > 0 or st.session_state.selected_project_customer_creation is None or st.session_state.user_first_name_customer_creation is None or len(st.session_state.user_first_name_customer_creation) < 3 or st.session_state.user_last_name_customer_creation is None or len(st.session_state.user_last_name_customer_creation) < 3 or st.session_state.user_email_customer_creation is None or len(st.session_state.user_email_customer_creation) < 3  or st.session_state.user_birth_date_customer_creation is None or st.session_state.user_country_customer_creation is None or len(st.session_state.user_country_customer_creation) < 3 or st.session_state.user_gender_customer_creation is None or len(st.session_state.user_gender_customer_creation) < 3 or st.session_state.user_phone_number_customer_creation is None or len(st.session_state.user_phone_number_customer_creation) < 6 or st.session_state.user_drive_folder_customer_creation is None or len(st.session_state.user_drive_folder_customer_creation) < 6:
         st.toast("Please fill in completely all of the required fields.")
     else:
-        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.users` (id, username, status, project_id, creation_date, email, name, lastname, birthdate, country, gender, user_creator_id, phone_number, user_drive_folder) VALUES({st.session_state.max_id_users_customer_creation}, '{st.session_state.username_customer_creation}', 'active', {st.session_state.project_id_customer_creation}, '{st.session_state.today_str_customer_creation}', '{st.session_state.user_email_customer_creation.lower()}', '{st.session_state.user_first_name_customer_creation.lower()}', '{st.session_state.user_last_name_customer_creation.lower()}', '{st.session_state.user_birth_date_customer_creation}', '{st.session_state.user_country_customer_creation.lower()}', '{st.session_state.user_gender_customer_creation.lower()}', {st.session_state.user_id_customer_creation}, '{st.session_state.user_phone_number_customer_creation}', '{st.session_state.user_drive_folder_customer_creation}');")
-        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.role_assignment` (id, user_id, role_id) VALUES({st.session_state.max_id_role_assignement_customer_creation}, {st.session_state.max_id_users_customer_creation}, {st.session_state.selected_role_id_customer_creation});")
         st.toast("Updating, please wait", icon = "☺️")
+        
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.users` (id, username, status, project_id, creation_date, email, name, lastname, birthdate, country, gender, user_creator_id, phone_number, user_drive_folder) VALUES({st.session_state.max_id_users_customer_creation}, '{st.session_state.username_customer_creation}', 'active', {st.session_state.project_id_customer_creation}, '{st.session_state.today_str_customer_creation}', '{st.session_state.user_email_customer_creation.lower()}', '{st.session_state.user_first_name_customer_creation.lower()}', '{st.session_state.user_last_name_customer_creation.lower()}', '{st.session_state.user_birth_date_customer_creation}', '{st.session_state.user_country_customer_creation.lower()}', '{st.session_state.user_gender_customer_creation.lower()}', {st.session_state.user_id_customer_creation}, '{st.session_state.user_phone_number_customer_creation}', '{st.session_state.user_drive_folder_customer_creation}');")
+        
+        
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.role_assignment` (id, user_id, role_id) VALUES({st.session_state.max_id_role_assignement_customer_creation}, {st.session_state.max_id_users_customer_creation}, {st.session_state.selected_role_id_customer_creation});")
+
+        
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name_customer_creation}.contracts` (id, contract_date, user_id, traffic_analytics_whatsapp_leads_id, contract_total_value, contract_agreed_payments, creator_user_id) VALUES (GENERATE_UUID(), '{st.session_state.today_str_customer_creation}', {st.session_state.max_id_users_customer_creation}, '{st.session_state.selected_phone_id}','{st.session_state.contract_value_customer_creation}', '{st.session_state.contract_num_payments_customer_creation}', {st.session_state.user_id_customer_creation});")
         time.sleep(5)
         uc.run_query_30_m.clear()
         st.toast('User Created!', icon = '🎈')
@@ -199,7 +205,31 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
     user_first_name = st.text_input("Write the user first name:")
     user_last_name = st.text_input("Write the user last name:")
     user_email = st.text_input("Write the user email:")
-    user_phone_number = st.text_input("Write the user phone number:")
+    
+    # user_phone_number = st.text_input("Write the user phone number:")
+    rows = uc.run_query_half_day(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
+    assistant_ids = []
+    assistant_phone_numbers = []
+    for row in rows:
+        assistant_ids.append(row.get('id'))
+        assistant_phone_numbers.append(row.get('full_phone_number'))
+    user_phone_number = st.selectbox(
+            label = "Select the assistant phone number",
+            options = assistant_phone_numbers,
+            index = None,
+            key= "user_phone_number"
+        )
+    checking_phone_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE CONCAT(phone_indicator,phone_number) LIKE '{user_phone_number}' ")
+    if len(checking_phone_query) < 1 or checking_phone_query is None:
+        st.error('Phone number does not exists, should be created adding a new lead into Whatsapp', icon = '👻')
+    else:
+        st.success('Phone number available', icon = '🪬')
+        if user_phone_number is not None:
+            selected_phone_id = assistant_ids[assistant_phone_numbers.index(selected_phone)]
+            st.session_state.selected_phone_id = selected_phone_id
+
+
+    
     user_birth_date = st.date_input("User birth date:", min_value = datetime.date(1970,1,1)) 
     user_country = st.selectbox(
         label = "Select user country",
