@@ -382,7 +382,7 @@ def days_since_last_content(project_name):
         if days_since >= 5 and days_since < 8:
             st.warning(f"Days since last content: {days_since}", icon = "🤨")
         if days_since >= 8:
-            st.success(f"Days since last content: {days_since}", icon = "🤬")
+            st.error(f"Days since last content: {days_since}", icon = "🤬")
         
         
         
