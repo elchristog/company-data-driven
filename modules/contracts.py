@@ -1,5 +1,5 @@
 
-import streamlit as stF
+import streamlit as st
 import time
 import datetime
 import numpy as np
