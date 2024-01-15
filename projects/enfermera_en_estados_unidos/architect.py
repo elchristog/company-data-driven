@@ -36,7 +36,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
         # retrieve metrics ###
         if role_id == 1:
             btl.save_bitly_metrics_bulk(project_name)
-        ######################
+        # retrieve metrics ###
+        
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
             #------ Menu according to each user-----------
@@ -45,7 +46,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if user_id == 2: #flaca
                 menu_options = ["Home", "Traffic", "Click bitly Whatsapp", "Whatsapp", "Click bitly Groupal session", "Groupal session", "Remarketing", "Contract", "Contract Remarketing", "Contract Payments", "Web App", "Step1: Inicio del programa", "Step2: Trámite de documentos", "Step3: Inscripción ante la Junta de Enfermería", "Step4: Preparación NCLEX", "Step5: Preparación de inglés", "Step6: Entrevistas de trabajo", "Step7: Visa Screen", "Step8: Trámite NVC", "Step9: Trámite embajada", "Step10: Vida en estados Unidos"]
             if user_id == 19: #bibgley
-                menu_options = ["Home", "Click bitly Groupal session", "Groupal session", "Contract"]
+                menu_options = ["Home", "Groupal session", "Contract"]
             #------ Menu according to each user-----------
 
 
