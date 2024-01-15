@@ -213,6 +213,8 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
     )
     user_drive_folder = st.text_input("Write the user Google Drive folder url:")
     contract_value = st.text_input("Contract value (USD):", help = "Not dots, just numbers", placeholder = "1200")
+    contract_num_payments = st.text_input("Contract num payments:", help = "Number of agreed payments", placeholder = "2")
+    
     
     st.session_state.user_id_customer_creation = user_id_customer_creation
     st.session_state.project_id_customer_creation = project_id
@@ -230,6 +232,7 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
     st.session_state.user_phone_number_customer_creation = user_phone_number
     st.session_state.user_drive_folder_customer_creation = user_drive_folder
     st.session_state.contract_value_customer_creation = contract_value
+    st.session_state.contract_num_payments_customer_creation = contract_num_payments
     st.session_state.today_str_customer_creation = today_str
     st.session_state.max_id_users_customer_creation = max_id_users
     st.session_state.max_id_role_assignement_customer_creation = max_id_role_assignement
