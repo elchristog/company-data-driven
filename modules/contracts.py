@@ -1,5 +1,5 @@
 
-import streamlit as st
+import streamlit as stF
 import time
 import datetime
 import numpy as np
@@ -212,7 +212,7 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
         index = None
     )
     user_drive_folder = st.text_input("Write the user Google Drive folder url:")
-    contract_value = st.text_input("Contract value (USD):", help = "Not dots, just numbers", placeholder = "1200")
+    contract_value = st.text_input("Contract Total Value (USD):", help = "Not dots, just numbers", placeholder = "1200")
     contract_num_payments = st.text_input("Contract num payments:", help = "Number of agreed payments", placeholder = "2")
     
     
