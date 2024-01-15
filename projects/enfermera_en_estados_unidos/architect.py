@@ -116,7 +116,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
         if menu == "Whatsapp":
-            sub_menu_options=['Leads', 'Add new lead']
+            sub_menu_options=['Leads', 'Add new lead', 'Answer guide']
             if role_id == 1:
                 sub_menu_options.extend(['Something else'])
             sub_menu = st.sidebar.radio('Whatsapp options', options = sub_menu_options)
@@ -126,6 +126,9 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Add new lead":
                 tap.title_and_paragraph("Whatsapp" + project_icon, "Actualizacion de nuevos leads en whatsapp", "h3", 0)
                 wls.whatsapp_leads_creation(user_id, project_name)
+            if sub_menu == "Answer guide":
+                tap.title_and_paragraph("Whatsapp" + project_icon, "Guia de conversacion en whatsapp", "h3", 0)
+                wls.wsp_answer_text(project_id)
 
 
 
