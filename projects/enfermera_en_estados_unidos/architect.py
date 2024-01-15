@@ -80,6 +80,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
             if sub_menu == "Traffic":
                 tap.title_and_paragraph("Trafico" + project_icon, "Seguimiento del trafico y los contenidos generados", "h3", 0)
+                seo.days_since_last_content(project_name)
                 seotw.get_data_save_to_bq(role_id, project_name, project_url_clean)
                 seotw.show_web_metrics(project_name)
                 seoty.get_youtube_data_save_to_bq(role_id, project_name, project_url_clean)
