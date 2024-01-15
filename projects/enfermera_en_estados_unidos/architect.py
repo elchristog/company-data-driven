@@ -163,7 +163,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph("Contracts" + project_icon, "Seguimiento de los contratos acordados", "h3", 0)
                 c.contracts_show_metrics(project_name)
             if sub_menu == "Add new contract":
-                tap.title_and_paragraph("Contracts" + project_icon, "Actualizacion de nuevos ccontratos", "h3", 0)
+                tap.title_and_paragraph("Contracts" + project_icon, "Actualizacion de nuevos contratos", "h3", 0)
                 c.customer_creation(user_id, project_id, project_name)
 
 
