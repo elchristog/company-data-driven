@@ -68,6 +68,10 @@ credentials:
       email: taniakmila0810@hotmail.com
       name: Tatiana Lizaraso
       password: $2b$12$iJoa3kiqXyUZNJFh3JM7OOw.RNN2jkjYoRdHkHiS.ui.oMU2kvGPa
+    bingleyodiaz:
+      email: bingleyo.diaz@hotmail.com
+      name: Bingley Ortiz
+      password: $2b$12$CiDN.bR2HyWjzbXor8USjuupV8SIsoU9C.PiveLnpJdhwwTxgz6T6
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
