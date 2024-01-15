@@ -206,7 +206,6 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
     user_last_name = st.text_input("Write the user last name:")
     user_email = st.text_input("Write the user email:")
     
-    # user_phone_number = st.text_input("Write the user phone number:")
     rows = uc.run_query_half_day(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
     assistant_ids = []
     assistant_phone_numbers = []
@@ -214,7 +213,7 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
         assistant_ids.append(row.get('id'))
         assistant_phone_numbers.append(row.get('full_phone_number'))
     user_phone_number = st.selectbox(
-            label = "Select the assistant phone number",
+            label = "Select the user phone number",
             options = assistant_phone_numbers,
             index = None,
             key= "user_phone_number"
