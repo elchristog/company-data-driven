@@ -84,7 +84,7 @@ def plot_echarts_twc(df_grouped):
 
 
 
-def trip_wire_calendly_show_metrics(project_name):
+def contracts_show_metrics(project_name):
   dates_whatsapp_leads = uc.run_query_1_h(f"SELECT MIN(creation_date) AS min_date_wsp, MAX(creation_date) AS max_date_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
   dates_cold_customers = uc.run_query_1_h(f"SELECT MIN(u.creation_date) AS min_date_users, MAX(u.creation_date) AS max_date_users FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE p.name = '{project_name}' AND ra.role_id = 6;")
 
