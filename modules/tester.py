@@ -32,7 +32,7 @@ def tester_execution():
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.{st.session_state.attempts_table_name}` VALUES({max_id},'{st.session_state.today_str}', {st.session_state.user_id},{st.session_state.questions[0].get('id')},{correct_q_1},{st.session_state.questions[1].get('id')},{correct_q_2},{st.session_state.questions[2].get('id')},{correct_q_3},{st.session_state.questions[3].get('id')},{correct_q_4},{st.session_state.questions[4].get('id')},{correct_q_5},{st.session_state.questions[5].get('id')},{correct_q_6},{st.session_state.questions[6].get('id')},{correct_q_7},{st.session_state.questions[7].get('id')},{correct_q_8},{st.session_state.questions[8].get('id')},{correct_q_9},{st.session_state.questions[9].get('id')},{correct_q_10},{success_rate}, '{st.session_state.selected_answer_q1_lower}', '{st.session_state.selected_answer_q2_lower}', '{st.session_state.selected_answer_q3_lower}', '{st.session_state.selected_answer_q4_lower}', '{st.session_state.selected_answer_q5_lower}', '{st.session_state.selected_answer_q6_lower}', '{st.session_state.selected_answer_q7_lower}', '{st.session_state.selected_answer_q8_lower}', '{st.session_state.selected_answer_q9_lower}', '{st.session_state.selected_answer_q10_lower}');")         
             st.toast("Test sent, wait for answers", icon = "☺️")
             time.sleep(5)
-            st.rerun()
+            
 
 
 
