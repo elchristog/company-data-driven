@@ -224,7 +224,7 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
     else:
         st.success('Phone number available', icon = '🪬')
         if user_phone_number is not None:
-            selected_phone_id = assistant_ids[assistant_phone_numbers.index(selected_phone)]
+            selected_phone_id = assistant_ids[assistant_phone_numbers.index(user_phone_number)]
             st.session_state.selected_phone_id = selected_phone_id
 
 
