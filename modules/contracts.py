@@ -14,7 +14,7 @@ import utils.user_credentials as uc
 
 
 
-def plot_echarts_twc(df_grouped):
+def plot_echarts_c(df_grouped):
     df_grouped['conversion'] = df_grouped['conversion'].apply(lambda conversion: f"{conversion:.2f}")
     df_grouped['date'] = df_grouped['date'].astype(str)
 
@@ -115,7 +115,7 @@ def contracts_show_metrics(project_name):
       with met3:
           st.metric('conversion:', f'{conversion * 100:.2f}%')
       with st.container():
-          plot_echarts_twc(df_conversion)
+          plot_echarts_c(df_conversion)
 
 
 
