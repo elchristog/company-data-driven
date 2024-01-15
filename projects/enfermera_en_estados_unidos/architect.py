@@ -14,7 +14,7 @@ import projects.enfermera_en_estados_unidos.modules.program_steps_guide as psg
 import modules.bitly as btl
 import modules.bitly_clicks_s_networks_whatsapp as btlcsnwsp
 import modules.whatsapp_leads as wls
-import modules.trip_wire_calendly as twc
+import modules.contracts as c
 import modules.bitly_groupal_session as bgs
 import modules.groupal_session_assistance as gsa
 
@@ -151,6 +151,23 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
 
+
+
+
+        if menu == "Contract":
+            sub_menu_options=['Contracts', 'Add new contract']
+            if role_id == 1:
+                sub_menu_options.extend(['Something else'])
+            sub_menu = st.sidebar.radio('Contract options', options = sub_menu_options)
+            if sub_menu == "Contracts":
+                tap.title_and_paragraph("Contracts" + project_icon, "Seguimiento de los contratos acordados", "h3", 0)
+                c.contracts_show_metrics(project_name)
+            if sub_menu == "Add new contract":
+                tap.title_and_paragraph("Contracts" + project_icon, "Actualizacion de nuevos ccontratos", "h3", 0)
+                c.customer_creation(user_id, project_id, project_name)
+
+
+
                 
         
 
@@ -172,22 +189,6 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph("Update customer progress " + project_icon, "Select carefully the actual step", "h3", 0)
                 pp.update_customer_progress(user_id, project_id, project_name, 'program_steps', 'user_program_steps_progress')
 
-
-
-
-
-
-        if menu == "Contract":
-            sub_menu_options=['Meetings', 'Add new meeting']
-            if role_id == 1:
-                sub_menu_options.extend(['Something else'])
-            sub_menu = st.sidebar.radio('Trip Wire options', options = sub_menu_options)
-            if sub_menu == "Meetings":
-                tap.title_and_paragraph("Trip Wire" + project_icon, "Seguimiento de los nuevos clientes frios", "h3", 0)
-                twc.trip_wire_calendly_show_metrics(project_name)
-            if sub_menu == "Add new meeting":
-                tap.title_and_paragraph("Whatsapp" + project_icon, "Actualizacion de nuevos clientes frios", "h3", 0)
-                twc.customer_creation(user_id, project_id, project_name)
 
 
 
