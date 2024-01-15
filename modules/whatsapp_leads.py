@@ -205,3 +205,24 @@ def whatsapp_leads_creation(user_id, project_name):
         submitted = st.form_submit_button("Submit", on_click = whatsapp_leads_creation_save, args = [project_name, user_id])
 
 
+
+
+
+
+
+
+def wsp_answer_text(project_id):
+    if project_id == 1:
+        text_answer = '''Hola Olga, mucho gusto!
+        
+        Cuéntame, ¿ya has podido avanzar algo en el proceso de homologación de tu título?
+        
+        Entiendo
+        
+        Si te parece, el próximo miércoles voy a realizar una sesión informativa para aclarar el proceso, la plataforma y los costos. Puedes registrarte para la sesión en este enlace:  https://bit.ly/3vtB3Wi
+        
+        Me avisas cualquier cosa que necesites. 
+        
+        Nos vemos el miércoles.
+        '''
+    st.markdown(text_answer)
