@@ -366,6 +366,24 @@ def seo_writing(project_name, user_id, role_id):
 
     if 'article' in st.session_state:
         st.download_button('Download article', st.session_state.article, file_name = 'ia_article.txt')
+
+
+
+
+
+def days_since_last_content(project_name):
+    days_since_last_content_created = uc.run_query_1_h(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(creation_date), DAY) AS days_since_last_content FROM `company-data-driven.{project_name}.effective_communication_content`;")
+    if len(days_since_last_content_created) < 1:
+        st.warning("Waiting for data", icon = "😴")
+    else:
+        days_since = days_since_last_content_created[0].get("days_since_last_content")
+        if days_since < 5:
+            st.success(f"Days since last content: {days_since}", icon ' "😎")
+        if days_since >= 5 and days_since < 8:
+            st.warning(f"Days since last content: {days_since}", icon ' "🤨")
+        if days_since >= 8:
+            st.success(f"Days since last content: {days_since}", icon ' "🤬")
+        
         
         
 
