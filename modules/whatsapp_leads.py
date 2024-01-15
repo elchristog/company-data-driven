@@ -213,7 +213,9 @@ def whatsapp_leads_creation(user_id, project_name):
 
 def wsp_answer_text(project_id):
     if project_id == 1:
-        text_answer = '''Hola Olga, mucho gusto!
+        text_answer = '''
+        
+        Hola [Nombre], mucho gusto!
         
         Cuéntame, ¿ya has podido avanzar algo en el proceso de homologación de tu título?
         
