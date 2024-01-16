@@ -104,17 +104,17 @@ def contracts_show_metrics(project_name):
       st.write(df_conversion)
 
 
-      # number_leads_wsp = df_conversion['number_leads_wsp'].sum()
-      # number_trip_wire_customers = df_conversion['number_trip_wire_customers'].sum()
-      # conversion = number_trip_wire_customers/number_leads_wsp
+      num_assistants_groupal_session = df_conversion['num_assistants_groupal_session'].sum()
+      num_contracts = df_conversion['num_contracts'].sum()
+      conversion = num_contracts/num_assistants_groupal_session
     
-      # met1, met2, met3 = st.columns(3)
-      # with met1:
-      #     st.metric('number_leads_wsp:', f'{number_leads_wsp:,}')
-      # with met2:
-      #     st.metric('number_trip_wire_customers:', f'{number_trip_wire_customers:,}')
-      # with met3:
-      #     st.metric('conversion:', f'{conversion * 100:.2f}%')
+      met1, met2, met3 = st.columns(3)
+      with met1:
+          st.metric('num_assistants_groupal_session:', f'{num_assistants_groupal_session:,}')
+      with met2:
+          st.metric('num_contracts:', f'{num_contracts:,}')
+      with met3:
+          st.metric('conversion:', f'{conversion * 100:.2f}%')
       # with st.container():
       #     plot_echarts_c(df_conversion)
 
