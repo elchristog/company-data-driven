@@ -98,7 +98,7 @@ def contracts_show_metrics(project_name):
           max_value=np.minimum(dates_groupal_meeting[0].get('max_date_gm'), dates_contracts[0].get('max_date_c')),
           format="DD/MM/YYYY",
           help='',
-          key = 'day_contract
+          key = 'day_contract'
       )
 
       # df_conversion = pd.DataFrame(uc.run_query_1_h(f"SELECT trip_wire_counts.creation_date AS date, number_wsp_leads.number_leads_wsp, trip_wire_counts.number_trip_wire_customers, ROUND(trip_wire_counts.number_trip_wire_customers / NULLIF(number_wsp_leads.number_leads_wsp, 0), 2) AS conversion FROM (SELECT u.creation_date, COUNT(u.id) AS number_trip_wire_customers FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE p.name = '{project_name}' AND ra.role_id = 6 GROUP BY u.creation_date) AS trip_wire_counts INNER JOIN (SELECT creation_date, COUNT(id) AS number_leads_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE creation_date >= '{day[0].strftime('%Y-%m-%d')}'  AND  creation_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY creation_date) AS number_wsp_leads ON trip_wire_counts.creation_date = number_wsp_leads.creation_date ORDER BY trip_wire_counts.creation_date ASC;"))
