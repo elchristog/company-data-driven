@@ -15,7 +15,6 @@ import utils.user_credentials as uc
 
 
 def plot_echarts_c(df_grouped):
-    df_grouped['conversion'] = df_grouped['conversion'].apply(lambda conversion: f"{conversion:.2f}")
     df_grouped['date'] = df_grouped['date'].astype(str)
 
     options = {
