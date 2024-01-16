@@ -396,24 +396,24 @@ def add_new_contract_payment_execution(user_id, project_name, selected_phone_id,
 
 
 def add_new_contract_payment(user_id, project_id, project_name):
-    rows = uc.run_query_half_day(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
-    assistant_ids = []
-    assistant_phone_numbers = []
+    rows = uc.run_query_half_day(f"SELECT u.username, c.id as contract_id FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN `company-data-driven.global.users` AS u ON u.id = c.user_id;")
+    usernames = []
+    contract_ids = []
     for row in rows:
-        assistant_ids.append(row.get('id'))
-        assistant_phone_numbers.append(row.get('full_phone_number'))
-    selected_phone = st.selectbox(
-            label = "Select the assistant phone number",
-            options = assistant_phone_numbers,
+        usernames.append(row.get('username'))
+        contract_ids.append(row.get('contract_id'))
+    selected_username = st.selectbox(
+            label = "Select the username",
+            options = usernames,
             index = None,
-            key= "assistant_phone_numbers"
+            key= "usernames"
         )
-    checking_phone_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE CONCAT(phone_indicator,phone_number) LIKE '{selected_phone}' ")
-    if len(checking_phone_query) < 1 or checking_phone_query is None:
-        st.error('Phone number does not exists, should be created adding a new lead into Whatsapp', icon = '👻')
+    checking_username = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{selected_username}';")
+    if len(checking_username) < 1 or checking_username is None:
+        st.error('User does not exists', icon = '👻')
     else:
-        st.success('Phone number available', icon = '🪬')
-        if selected_phone is not None:
-            selected_phone_id = assistant_ids[assistant_phone_numbers.index(selected_phone)]
-            meeting_date = st.date_input("Meeting date:", key = 'meeting_date')
-            add_assistant_button = st.button("Add assistant", on_click = add_new_contract_payment_execution, args = [user_id, project_name, selected_phone_id, meeting_date])
+        st.success('User confirmed!', icon = '🪬')
+        if selected_username is not None:
+            selected_contract_id = contract_ids[usernames.index(selected_username)]
+            payment_date = st.date_input("Payment date:", key = 'payment_date')
+            add_payment_button = st.button("Add payment", on_click = add_new_contract_payment_execution, args = [user_id, project_name, selected_contract_id, payment_date])
