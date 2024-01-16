@@ -179,6 +179,22 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
 
+
+
+        if menu == "Contract Payments":
+            sub_menu_options=['Contract Payments', 'Add new payment']
+            if role_id == 1:
+                sub_menu_options.extend(['Something else'])
+            sub_menu = st.sidebar.radio('Contract options', options = sub_menu_options)
+            if sub_menu == "Contract Payment":
+                tap.title_and_paragraph("Contracts Payments" + project_icon, "Seguimiento de los pagos", "h3", 0)
+                c.contract_payments_show_metrics(project_name)
+            if sub_menu == "Add new payment":
+                tap.title_and_paragraph("Contracts" + project_icon, "Agregar nuevos pagos", "h3", 0)
+                c.add_new_contract_payment(user_id, project_id, project_name)
+
+
+
                 
         
 
