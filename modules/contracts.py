@@ -38,35 +38,26 @@ def plot_echarts_c(df_grouped):
             "top": "top",
             "align": "auto",
             "selected": {  
-                "conversion": True,        
-                "number_leads_wsp": False,    
-                "number_trip_wire_customers": False
+                "num_assistants_groupal_session": True,    
+                "num_contracts": True
             }
         },
         "tooltip": {"trigger": "axis", },
         "series": [
             {
                 "type": "line",
-                "name": "conversion",
-                "data": df_grouped['conversion'].tolist(),
+                "name": "num_assistants_groupal_session",
+                "data": df_grouped["num_assistants_groupal_session"].tolist(),
                 "smooth": True,
                 "lineStyle": {"width": 2.4, "color": "#A6785D"},
                 "showSymbol": False,
             },
             {
                 "type": "line",
-                "name": "number_leads_wsp",
-                "data": df_grouped["number_leads_wsp"].tolist(),
+                "name": "num_contracts",
+                "data": df_grouped['num_contracts'].tolist(),
                 "smooth": True,
                 "lineStyle": {"width": 2.4, "color": "#394A59"},
-                "showSymbol": False,
-            },
-            {
-                "type": "line",
-                "name": "number_trip_wire_customers",
-                "data": df_grouped['number_trip_wire_customers'].tolist(),
-                "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#BF3F34"},
                 "showSymbol": False,
             }
         ],
@@ -76,7 +67,7 @@ def plot_echarts_c(df_grouped):
             {"type": "value", "inverse": True, "show": False},  
         ],
         "backgroundColor": "#ffffff",
-        "color": ["#A6785D", "#394A59", "#BF3F34"],
+        "color": ["#A6785D", "#394A59"],
     }
 
     st_echarts(option=options, theme='chalk', height=400, width='100%')
@@ -101,8 +92,6 @@ def contracts_show_metrics(project_name):
       )
 
       df_conversion = pd.DataFrame(uc.run_query_1_h(f"SELECT COALESCE(groupal_session_assistants.date, contracts_counts.date) AS date, COALESCE(num_assistants_groupal_session,0) AS num_assistants_groupal_session, COALESCE(num_contracts,0) AS num_contracts FROM (SELECT meeting_date AS date, COUNT(id) AS num_assistants_groupal_session FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` WHERE meeting_date >= '{day[0].strftime('%Y-%m-%d')}'  AND  meeting_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY meeting_date) AS groupal_session_assistants FULL OUTER JOIN (SELECT contract_date AS date, COUNT(id) AS num_contracts FROM `company-data-driven.{project_name}.contracts` WHERE contract_date >= '{day[0].strftime('%Y-%m-%d')}'  AND  contract_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY contract_date) contracts_counts ON groupal_session_assistants.date = contracts_counts.date  ORDER BY COALESCE(groupal_session_assistants.date, contracts_counts.date) ASC;"))
-      st.write(df_conversion)
-
 
       num_assistants_groupal_session = df_conversion['num_assistants_groupal_session'].sum()
       num_contracts = df_conversion['num_contracts'].sum()
@@ -115,8 +104,8 @@ def contracts_show_metrics(project_name):
           st.metric('num_contracts:', f'{num_contracts:,}')
       with met3:
           st.metric('conversion:', f'{conversion * 100:.2f}%')
-      # with st.container():
-      #     plot_echarts_c(df_conversion)
+      with st.container():
+          plot_echarts_c(df_conversion)
 
 
 
