@@ -92,7 +92,7 @@ def contracts_show_metrics(project_name):
   else:
       day = st.date_input(
           "Time Range:",
-          (dates_groupal_meeting[0].get('min_date_gm', dates_groupal_meeting[0].get('todays_date')),
+          (dates_groupal_meeting[0].get('min_date_gm'), dates_groupal_meeting[0].get('todays_date')),
           min_value=dates_groupal_meeting[0].get('min_date_gm'),
           max_value=dates_groupal_meeting[0].get('todays_date'),
           format="DD/MM/YYYY",
