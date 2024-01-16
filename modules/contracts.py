@@ -349,7 +349,7 @@ def plot_echarts_contract_payments(df_grouped):
 
 
 
-def contract_payments_show_metrics(project_name, bitly_groupal_session_link):
+def contract_payments_show_metrics(project_name):
   dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
   if len(dates_bitly) < 1:
       st.warning("Waiting for data")
@@ -395,7 +395,7 @@ def add_new_contract_payment_execution(user_id, project_name, selected_phone_id,
 
 
 
-def add_new_contract_payment(user_id, project_name):
+def add_new_contract_payment(user_id, project_id, project_name):
     rows = uc.run_query_half_day(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
     assistant_ids = []
     assistant_phone_numbers = []
