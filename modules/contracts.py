@@ -385,11 +385,11 @@ def contract_payments_show_metrics(project_name):
 
 
 
-def add_new_contract_payment_execution(user_id, project_name, selected_phone_id, meeting_date):
+def add_new_contract_payment_execution(user_id, project_name, selected_contract_id, payment_date, payment_value):
     st.toast("Please wait", icon = "☺️")
-    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` (id, traffic_analytics_whatsapp_lead_id, meeting_date, creator_user_id) VALUES (GENERATE_UUID(), '{selected_phone_id}', '{meeting_date}', {user_id});")
+    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contracts_payments` (id, contract_id, payment_value, payment_date, creator_id) VALUES (GENERATE_UUID(), '{selected_contract_id}', '{payment_value}', {payment_date}, '{user_id}');")
     time.sleep(5)
-    st.toast("Assistant saved!", icon = "👾")
+    st.toast("Payment saved!", icon = "👾")
     st.balloons()
 
 
@@ -416,4 +416,5 @@ def add_new_contract_payment(user_id, project_id, project_name):
         if selected_username is not None:
             selected_contract_id = contract_ids[usernames.index(selected_username)]
             payment_date = st.date_input("Payment date:", key = 'payment_date')
-            add_payment_button = st.button("Add payment", on_click = add_new_contract_payment_execution, args = [user_id, project_name, selected_contract_id, payment_date])
+            payment_value = st.text_input("Payment value (USD):", key = 'payment_value', placeholder = "350", help = "Do not use dots, just numbers")
+            add_payment_button = st.button("Add payment", on_click = add_new_contract_payment_execution, args = [user_id, project_name, selected_contract_id, payment_date, payment_value])
