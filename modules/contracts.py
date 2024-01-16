@@ -387,6 +387,7 @@ def contract_payments_show_metrics(project_name):
 
 def add_new_contract_payment_execution(user_id, project_name, selected_contract_id, payment_date, payment_value):
     st.toast("Please wait", icon = "☺️")
+    st.toast(payment_value)
     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contracts_payments` (id, contract_id, payment_value, payment_date, creator_id) VALUES (GENERATE_UUID(), '{selected_contract_id}', '{payment_value}', '{payment_date}', {user_id});")
     time.sleep(5)
     st.toast("Payment saved!", icon = "👾")
