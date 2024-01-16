@@ -86,7 +86,7 @@ def plot_echarts_c(df_grouped):
 
 def contracts_show_metrics(project_name):
   dates_groupal_meeting = uc.run_query_1_h(f"SELECT MIN(meeting_date) AS min_date_gm, MAX(meeting_date) AS max_date_gm FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance`;")
-  dates_contracts = uc.run_query_1_h(f"SELECT MIN(u.contract_date) AS min_date_c, MAX(u.contract_date) AS max_date_c FROM `company-data-driven.{project_name}.contracts`;")
+  dates_contracts = uc.run_query_1_h(f"SELECT MIN(contract_date) AS min_date_c, MAX(contract_date) AS max_date_c FROM `company-data-driven.{project_name}.contracts`;")
 
   if len(dates_groupal_meeting) < 1 or len(dates_contracts) < 1:
       st.warning("Waiting for data")
