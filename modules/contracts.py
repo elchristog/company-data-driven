@@ -85,37 +85,37 @@ def plot_echarts_c(df_grouped):
 
 
 def contracts_show_metrics(project_name):
-  dates_whatsapp_leads = uc.run_query_1_h(f"SELECT MIN(creation_date) AS min_date_wsp, MAX(creation_date) AS max_date_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
-  dates_cold_customers = uc.run_query_1_h(f"SELECT MIN(u.creation_date) AS min_date_users, MAX(u.creation_date) AS max_date_users FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE p.name = '{project_name}' AND ra.role_id = 6;")
+  dates_groupal_meeting = uc.run_query_1_h(f"SELECT MIN(meeting_date) AS min_date_gm, MAX(meeting_date) AS max_date_gm FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance`;")
+  dates_contracts = uc.run_query_1_h(f"SELECT MIN(u.contract_date) AS min_date_c, MAX(u.contract_date) AS max_date_c FROM `company-data-driven.{project_name}.contracts`;")
 
-  if len(dates_whatsapp_leads) < 1 or len(dates_cold_customers) < 1:
+  if len(dates_groupal_meeting) < 1 or len(dates_contracts) < 1:
       st.warning("Waiting for data")
   else:
       day = st.date_input(
           "Time Range:",
-          (np.maximum(dates_whatsapp_leads[0].get('min_date_wsp'), dates_cold_customers[0].get('min_date_users')), np.minimum(dates_whatsapp_leads[0].get('max_date_wsp'), dates_cold_customers[0].get('max_date_users'))),
-          min_value=np.maximum(dates_whatsapp_leads[0].get('min_date_wsp'), dates_cold_customers[0].get('min_date_users')),
-          max_value=np.minimum(dates_whatsapp_leads[0].get('max_date_wsp'), dates_cold_customers[0].get('max_date_users')),
+          (np.maximum(dates_groupal_meeting[0].get('min_date_gm'), dates_contracts[0].get('min_date_c')), np.minimum(dates_groupal_meeting[0].get('max_date_gm'), dates_contracts[0].get('max_date_c'))),
+          min_value=np.maximum(dates_groupal_meeting[0].get('min_date_gm'), dates_contracts[0].get('min_date_c')),
+          max_value=np.minimum(dates_groupal_meeting[0].get('max_date_gm'), dates_contracts[0].get('max_date_c')),
           format="DD/MM/YYYY",
           help='',
-          key = 'day_trip_wire'
+          key = 'day_contract
       )
 
-      df_conversion = pd.DataFrame(uc.run_query_1_h(f"SELECT trip_wire_counts.creation_date AS date, number_wsp_leads.number_leads_wsp, trip_wire_counts.number_trip_wire_customers, ROUND(trip_wire_counts.number_trip_wire_customers / NULLIF(number_wsp_leads.number_leads_wsp, 0), 2) AS conversion FROM (SELECT u.creation_date, COUNT(u.id) AS number_trip_wire_customers FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE p.name = '{project_name}' AND ra.role_id = 6 GROUP BY u.creation_date) AS trip_wire_counts INNER JOIN (SELECT creation_date, COUNT(id) AS number_leads_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE creation_date >= '{day[0].strftime('%Y-%m-%d')}'  AND  creation_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY creation_date) AS number_wsp_leads ON trip_wire_counts.creation_date = number_wsp_leads.creation_date ORDER BY trip_wire_counts.creation_date ASC;"))
+      # df_conversion = pd.DataFrame(uc.run_query_1_h(f"SELECT trip_wire_counts.creation_date AS date, number_wsp_leads.number_leads_wsp, trip_wire_counts.number_trip_wire_customers, ROUND(trip_wire_counts.number_trip_wire_customers / NULLIF(number_wsp_leads.number_leads_wsp, 0), 2) AS conversion FROM (SELECT u.creation_date, COUNT(u.id) AS number_trip_wire_customers FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE p.name = '{project_name}' AND ra.role_id = 6 GROUP BY u.creation_date) AS trip_wire_counts INNER JOIN (SELECT creation_date, COUNT(id) AS number_leads_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE creation_date >= '{day[0].strftime('%Y-%m-%d')}'  AND  creation_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY creation_date) AS number_wsp_leads ON trip_wire_counts.creation_date = number_wsp_leads.creation_date ORDER BY trip_wire_counts.creation_date ASC;"))
 
-      number_leads_wsp = df_conversion['number_leads_wsp'].sum()
-      number_trip_wire_customers = df_conversion['number_trip_wire_customers'].sum()
-      conversion = number_trip_wire_customers/number_leads_wsp
+      # number_leads_wsp = df_conversion['number_leads_wsp'].sum()
+      # number_trip_wire_customers = df_conversion['number_trip_wire_customers'].sum()
+      # conversion = number_trip_wire_customers/number_leads_wsp
     
-      met1, met2, met3 = st.columns(3)
-      with met1:
-          st.metric('number_leads_wsp:', f'{number_leads_wsp:,}')
-      with met2:
-          st.metric('number_trip_wire_customers:', f'{number_trip_wire_customers:,}')
-      with met3:
-          st.metric('conversion:', f'{conversion * 100:.2f}%')
-      with st.container():
-          plot_echarts_c(df_conversion)
+      # met1, met2, met3 = st.columns(3)
+      # with met1:
+      #     st.metric('number_leads_wsp:', f'{number_leads_wsp:,}')
+      # with met2:
+      #     st.metric('number_trip_wire_customers:', f'{number_trip_wire_customers:,}')
+      # with met3:
+      #     st.metric('conversion:', f'{conversion * 100:.2f}%')
+      # with st.container():
+      #     plot_echarts_c(df_conversion)
 
 
 
