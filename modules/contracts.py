@@ -448,7 +448,7 @@ def add_new_crm_contact(user_id, project_name):
             index = None,
             key= "assistant_phone_numbers"
         )
-    checking_phone_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE CONCAT(phone_indicator,phone_number) LIKE '{selected_phone}' ")
+    checking_phone_query = uc.run_query_30_m(f"SELECT awl.id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS awl INNER JOIN `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` AS tagsa ON awl.id = tagsa.traffic_analytics_whatsapp_lead_id WHERE CONCAT(awl.phone_indicator,awl.phone_number) LIKE '{selected_phone}';")
     if len(checking_phone_query) < 1 or checking_phone_query is None:
         st.error('Phone number does not exists, be sure this user assisted at the groupal session', icon = '👻')
     else:
