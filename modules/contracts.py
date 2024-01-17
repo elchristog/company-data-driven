@@ -436,6 +436,8 @@ def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, cont
         st.toast("Please wait", icon = "☺️")
         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
         time.sleep(5)
+        uc.run_query_half_day.clear()
+        uc.run_query_30_m.clear()
         st.toast("CRM Contact saved!", icon = "👾")
         st.balloons()
 
