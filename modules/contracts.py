@@ -426,11 +426,18 @@ def add_new_contract_payment(user_id, project_id, project_name):
 
 
 def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, contact_date, user_status, contact_description):
-    st.toast("Please wait", icon = "☺️")
-    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
-    time.sleep(5)
-    st.toast("CRM Contact saved!", icon = "👾")
-    st.balloons()
+    today = datetime.date.today()
+    today_str = today.strftime("%Y-%m-%d")
+    if contact_description is None:
+        st.toast("contact_description can not be null", icon = "☺️")
+    elif contact_date == today_str:
+        st.toast("User already contacted today", icon = "☺️")
+    else:
+        st.toast("Please wait", icon = "☺️")
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
+        time.sleep(5)
+        st.toast("CRM Contact saved!", icon = "👾")
+        st.balloons()
 
 
 
