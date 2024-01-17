@@ -410,3 +410,50 @@ def add_new_contract_payment(user_id, project_id, project_name):
             payment_date = st.date_input("Payment date:", key = 'payment_date')
             payment_value = st.text_input("Payment value (USD):", key = 'payment_value', placeholder = "325", help = "Do not use dots, just numbers")
             add_payment_button = st.button("Add payment", on_click = add_new_contract_payment_execution, args = [user_id, project_name, selected_contract_id, payment_date, payment_value])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, meeting_date):
+    st.toast("Please wait", icon = "☺️")
+    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` (id, traffic_analytics_whatsapp_lead_id, meeting_date, creator_user_id) VALUES (GENERATE_UUID(), '{selected_phone_id}', '{meeting_date}', {user_id});")
+    time.sleep(5)
+    st.toast("Assistant saved!", icon = "👾")
+    st.balloons()
+
+
+
+
+def add_new_crm_contact(user_id, project_name):
+    rows = uc.run_query_half_day(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
+    assistant_ids = []
+    assistant_phone_numbers = []
+    for row in rows:
+        assistant_ids.append(row.get('id'))
+        assistant_phone_numbers.append(row.get('full_phone_number'))
+    selected_phone = st.selectbox(
+            label = "Select the assistant phone number",
+            options = assistant_phone_numbers,
+            index = None,
+            key= "assistant_phone_numbers"
+        )
+    checking_phone_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE CONCAT(phone_indicator,phone_number) LIKE '{selected_phone}' ")
+    if len(checking_phone_query) < 1 or checking_phone_query is None:
+        st.error('Phone number does not exists, should be created adding a new lead into Whatsapp', icon = '👻')
+    else:
+        st.success('Phone number available', icon = '🪬')
+        if selected_phone is not None:
+            selected_phone_id = assistant_ids[assistant_phone_numbers.index(selected_phone)]
+            meeting_date = st.date_input("Meeting date:", key = 'meeting_date')
+            add_assistant_button = st.button("Add assistant", on_click = add_new_crm_contact_execution, args = [user_id, project_name, selected_phone_id, meeting_date])
