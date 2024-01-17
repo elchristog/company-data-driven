@@ -173,6 +173,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Contracts":
                 tap.title_and_paragraph("Contracts" + project_icon, "Seguimiento de los contratos acordados", "h3", 0)
                 c.contracts_show_metrics(project_name)
+                tap.title_and_paragraph("Contracts CRM opportunities" + project_icon, "Proximos contactos a realizar", "h3", 0)
+                c.contracts_crm_show_metrics(project_name)
             if sub_menu == "Add new CRM contact":
                 tap.title_and_paragraph("Add new CRM contact" + project_icon, "Seguimiento de los contactos para cerrar nuevos contratos", "h3", 0)
                 c.add_new_crm_contact(user_id, project_name)
