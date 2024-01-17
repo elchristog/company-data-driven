@@ -436,7 +436,8 @@ def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, meet
 
 
 def add_new_crm_contact(user_id, project_name):
-    rows = uc.run_query_half_day(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
+    rows = uc.run_query_half_day(f"SELECT awl.id, CONCAT(awl.phone_indicator,awl.phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS awl INNER JOIN `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` AS tagsa ON awl.id = tagsa.traffic_analytics_whatsapp_lead_id;")
+    
     assistant_ids = []
     assistant_phone_numbers = []
     for row in rows:
