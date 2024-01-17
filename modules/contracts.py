@@ -425,7 +425,7 @@ def add_new_contract_payment(user_id, project_id, project_name):
 
 
 
-def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, contact_date, user_status):
+def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, contact_date, user_status, contact_description):
     st.toast("Please wait", icon = "☺️")
     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` (id, traffic_analytics_whatsapp_lead_id, meeting_date, creator_user_id) VALUES (GENERATE_UUID(), '{selected_phone_id}', '{meeting_date}', {user_id});")
     time.sleep(5)
@@ -464,4 +464,5 @@ def add_new_crm_contact(user_id, project_name):
                 placeholder = "active",
                 help = "active = active oportunity, lost = the user reject the process, discarted = the user does not meet the requirements such as nurses from cuba or auxiliaries"
             )
-            add_contact_button = st.button("Add CRM contact", on_click = add_new_crm_contact_execution, args = [user_id, project_name, selected_phone_id, contact_date, user_status])
+            contact_description = st.text_input("Description of the contact", placeholder = "Se contacta entregando enlace de pago y contrato")
+            add_contact_button = st.button("Add CRM contact", on_click = add_new_crm_contact_execution, args = [user_id, project_name, selected_phone_id, contact_date, user_status, contact_description])
