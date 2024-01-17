@@ -430,12 +430,14 @@ def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, cont
     
     if contact_description is None:
         st.toast("contact_description can not be null", icon = "☺️")
+    if len(contact_description) < 36:
+        st.toast("contact_description too short", icon = "☺️")
     if user_status is None:
         st.toast("user_status can not be null", icon = "☺️")
     if last_contact_date[0].get("last_contact_date") is not None:
         if contact_date <= last_contact_date[0].get("last_contact_date"):
             st.toast("User already contacted on that date", icon = "☺️")
-    if (contact_description is not None) and (user_status is not None):
+    if (contact_description is not None) and (user_status is not None) and (len(contact_description) >= 36):
         if last_contact_date[0].get("last_contact_date") is None:
             st.toast("Please wait", icon = "☺️")
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
