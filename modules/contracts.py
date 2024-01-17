@@ -426,14 +426,13 @@ def add_new_contract_payment(user_id, project_id, project_name):
 
 
 def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, contact_date, user_status, contact_description):
-    today = datetime.date.today()
-    today_str = today.strftime("%Y-%m-%d")
+    last_contact_date = uc.run_query_instant(f"SELECT MAX(contact_date) AS last_contact_date FROM `company-data-driven.{project_name}.contract_crm_log` WHERE traffic_analytics_whatsapp_leads_id = 'f20b054e-1f3b-4e8a-aaae-3b15b940b04e';")
     if contact_description is None:
         st.toast("contact_description can not be null", icon = "☺️")
     elif user_status is None:
         st.toast("user_status can not be null", icon = "☺️")
-    elif contact_date == today:
-        st.toast("User already contacted today", icon = "☺️")
+    elif contact_date <= last_contact_date[0].get("last_contact_date"):
+        st.toast("User already contacted on that date", icon = "☺️")
     else:
         st.toast("Please wait", icon = "☺️")
         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
