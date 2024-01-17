@@ -427,9 +427,9 @@ def add_new_contract_payment(user_id, project_id, project_name):
 
 def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, contact_date, user_status, contact_description):
     st.toast("Please wait", icon = "☺️")
-    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` (id, traffic_analytics_whatsapp_lead_id, meeting_date, creator_user_id) VALUES (GENERATE_UUID(), '{selected_phone_id}', '{meeting_date}', {user_id});")
+    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
     time.sleep(5)
-    st.toast("Assistant saved!", icon = "👾")
+    st.toast("CRM Contact saved!", icon = "👾")
     st.balloons()
 
 
