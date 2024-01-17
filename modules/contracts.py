@@ -426,7 +426,7 @@ def add_new_contract_payment(user_id, project_id, project_name):
 
 
 def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, contact_date, user_status, contact_description):
-    last_contact_date = uc.run_query_instant(f"SELECT MAX(contact_date) AS last_contact_date FROM `company-data-driven.{project_name}.contract_crm_log` WHERE traffic_analytics_whatsapp_leads_id = 'f20b054e-1f3b-4e8a-aaae-3b15b940b04e';")
+    last_contact_date = uc.run_query_instant(f"SELECT MAX(contact_date) AS last_contact_date FROM `company-data-driven.{project_name}.contract_crm_log` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}';")
     if contact_description is None:
         st.toast("contact_description can not be null", icon = "☺️")
     elif user_status is None:
