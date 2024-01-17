@@ -430,7 +430,9 @@ def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, cont
     today_str = today.strftime("%Y-%m-%d")
     if contact_description is None:
         st.toast("contact_description can not be null", icon = "☺️")
-    elif contact_date == today_str:
+    elif user_status is None:
+        st.toast("user_status can not be null", icon = "☺️")
+    elif contact_date == today:
         st.toast("User already contacted today", icon = "☺️")
     else:
         st.toast("Please wait", icon = "☺️")
