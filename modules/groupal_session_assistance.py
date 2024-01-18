@@ -113,7 +113,7 @@ def add_new_assistant_execution(user_id, project_name, selected_phone_id, meetin
     st.toast("Please wait", icon = "☺️")
     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` (id, traffic_analytics_whatsapp_lead_id, meeting_date, creator_user_id) VALUES (GENERATE_UUID(), '{selected_phone_id}', '{meeting_date}', {user_id});")
     time.sleep(5)
-    run_query_half_day.clear()
+    uc.run_query_half_day.clear()
     st.toast("Assistant saved!", icon = "👾")
     st.balloons()
 
