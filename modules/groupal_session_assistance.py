@@ -193,3 +193,16 @@ def add_new_absent(user_id, project_name):
             selected_phone_id = assistant_ids[assistant_phone_numbers.index(selected_phone)]
             meeting_date = st.date_input("Meeting date:", key = 'meeting_date')
             add_assistant_button = st.button("Add assistant", on_click = add_new_absent_execution, args = [user_id, project_name, selected_phone_id, meeting_date])
+
+
+
+
+
+
+
+def groupal_session_absents(project_name):
+  absents_df = uc.run_query_1_h(f"SELECT days_absent_df.traffic_analytics_whatsapp_lead_id, CONCAT(tawl.phone_indicator ,tawl.phone_number) AS phone_number, DATE_DIFF(CURRENT_DATE(), days_absent_df.last_status_date, DAY) AS days_absent FROM ( SELECT traffic_analytics_whatsapp_lead_id, LAST_VALUE(status) OVER(PARTITION BY traffic_analytics_whatsapp_lead_id ORDER BY meeting_date ASC) AS last_status, LAST_VALUE(meeting_date) OVER(PARTITION BY traffic_analytics_whatsapp_lead_id ORDER BY meeting_date ASC) AS last_status_date FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance`) AS days_absent_df INNER JOIN `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS tawl ON days_absent_df.traffic_analytics_whatsapp_lead_id = tawl.id WHERE last_status = 'absent';")
+  if len(absents_df) < 1:
+      st.warning("Waiting for data")
+  else:
+      st.table(absents_df)
