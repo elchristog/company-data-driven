@@ -179,7 +179,7 @@ def add_new_absent(user_id, project_name):
         assistant_ids.append(row.get('id'))
         assistant_phone_numbers.append(row.get('full_phone_number'))
     selected_phone = st.selectbox(
-            label = "Select the assistant phone number",
+            label = "Select the absent phone number",
             options = assistant_phone_numbers,
             index = None,
             key= "assistant_phone_numbers"
