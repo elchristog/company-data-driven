@@ -147,3 +147,49 @@ def add_new_assistant(user_id, project_name):
             meeting_date = st.date_input("Meeting date:", key = 'meeting_date')
             add_assistant_button = st.button("Add assistant", on_click = add_new_assistant_execution, args = [user_id, project_name, selected_phone_id, meeting_date])
 
+
+
+
+
+
+
+
+
+
+def add_new_absent_execution(user_id, project_name, selected_phone_id, meeting_date):
+    already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` WHERE traffic_analytics_whatsapp_lead_id = '{selected_phone_id}' AND meeting_date = '{meeting_date}'")
+    if len(already_created) > 0:
+        st.toast("User already absented in this meeting", icon = "☺️")
+    else:
+        st.toast("Please wait", icon = "☺️")
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` (id, traffic_analytics_whatsapp_lead_id, meeting_date, creator_user_id, status) VALUES (GENERATE_UUID(), '{selected_phone_id}', '{meeting_date}', {user_id}, 'absent');")
+        time.sleep(5)
+        uc.run_query_half_day.clear()
+        st.toast("Assistant saved!", icon = "👾")
+        st.balloons()
+
+
+
+
+def add_new_absent(user_id, project_name):
+    rows = uc.run_query_half_day(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
+    assistant_ids = []
+    assistant_phone_numbers = []
+    for row in rows:
+        assistant_ids.append(row.get('id'))
+        assistant_phone_numbers.append(row.get('full_phone_number'))
+    selected_phone = st.selectbox(
+            label = "Select the assistant phone number",
+            options = assistant_phone_numbers,
+            index = None,
+            key= "assistant_phone_numbers"
+        )
+    checking_phone_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE CONCAT(phone_indicator,phone_number) LIKE '{selected_phone}' ")
+    if len(checking_phone_query) < 1 or checking_phone_query is None:
+        st.error('Phone number does not exists, should be created adding a new lead into Whatsapp', icon = '👻')
+    else:
+        st.success('Phone number available', icon = '🪬')
+        if selected_phone is not None:
+            selected_phone_id = assistant_ids[assistant_phone_numbers.index(selected_phone)]
+            meeting_date = st.date_input("Meeting date:", key = 'meeting_date')
+            add_assistant_button = st.button("Add assistant", on_click = add_new_absent_execution, args = [user_id, project_name, selected_phone_id, meeting_date])
