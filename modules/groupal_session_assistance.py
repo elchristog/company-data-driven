@@ -216,3 +216,80 @@ def groupal_session_absents_and_opportunities(project_name):
           st.warning("Waiting for data")
         else:
           st.table(never_attended_df)
+
+
+
+
+
+
+
+
+
+
+def add_new_crm_groupal_session_contact_execution(user_id, project_name, selected_phone_id, contact_date, user_status, contact_description):
+    last_contact_date = uc.run_query_instant(f"SELECT MAX(contact_date) AS last_contact_date FROM `company-data-driven.{project_name}.contract_crm_log` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}';")
+    
+    if contact_description is None:
+        st.toast("contact_description can not be null", icon = "☺️")
+    if len(contact_description) < 36:
+        st.toast("contact_description too short", icon = "☺️")
+    if user_status is None:
+        st.toast("user_status can not be null", icon = "☺️")
+    if last_contact_date[0].get("last_contact_date") is not None:
+        if contact_date <= last_contact_date[0].get("last_contact_date"):
+            st.toast("User already contacted on that date", icon = "☺️")
+    if (contact_description is not None) and (user_status is not None) and (len(contact_description) >= 36):
+        if last_contact_date[0].get("last_contact_date") is None:
+            st.toast("Please wait", icon = "☺️")
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
+            time.sleep(5)
+            uc.run_query_half_day.clear()
+            uc.run_query_30_m.clear()
+            st.toast("CRM Contact saved!", icon = "👾")
+            st.balloons()
+        else:
+            if contact_date > last_contact_date[0].get("last_contact_date"):
+                st.toast("Please wait", icon = "☺️")
+                uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
+                time.sleep(5)
+                uc.run_query_half_day.clear()
+                uc.run_query_30_m.clear()
+                uc.run_query_1_h.clear()
+                st.toast("CRM Contact saved!", icon = "👾")
+                st.balloons()
+        
+
+
+
+
+def add_new_crm_groupal_session_contact(user_id, project_name):
+    rows = uc.run_query_half_day(f"SELECT tawl.id, CONCAT(tawl.phone_indicator,tawl.phone_number) AS full_phone_number, last_user_status_df.last_user_status FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS tawl INNER JOIN `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` AS tagsa ON tawl.id = tagsa.traffic_analytics_whatsapp_lead_id LEFT OUTER JOIN (SELECT traffic_analytics_whatsapp_leads_id, LAST_VALUE(user_status) OVER(PARTITION BY traffic_analytics_whatsapp_leads_id ORDER BY contact_date) AS last_user_status FROM `company-data-driven.{project_name}.contract_crm_log`) AS last_user_status_df ON tawl.id = last_user_status_df.traffic_analytics_whatsapp_leads_id WHERE tagsa.status = 'assistant' AND tawl.id NOT IN (SELECT traffic_analytics_whatsapp_leads_id FROM `company-data-driven.{project_name}.contracts`) AND (last_user_status_df.last_user_status = 'active' OR last_user_status_df.last_user_status IS NULL);")
+    assistant_ids = []
+    assistant_phone_numbers = []
+    for row in rows:
+        assistant_ids.append(row.get('id'))
+        assistant_phone_numbers.append(row.get('full_phone_number'))
+    selected_phone = st.selectbox(
+            label = "Select the user phone number",
+            options = assistant_phone_numbers,
+            index = None,
+            key= "assistant_phone_numbers"
+        )
+    checking_phone_query = uc.run_query_30_m(f"SELECT awl.id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS awl INNER JOIN `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` AS tagsa ON awl.id = tagsa.traffic_analytics_whatsapp_lead_id WHERE CONCAT(awl.phone_indicator,awl.phone_number) LIKE '{selected_phone}';")
+    if len(checking_phone_query) < 1 or checking_phone_query is None:
+        st.error('Phone number does not exists, be sure this user assisted at the groupal session', icon = '👻')
+    else:
+        st.success('Phone number available', icon = '🪬')
+        if selected_phone is not None:
+            selected_phone_id = assistant_ids[assistant_phone_numbers.index(selected_phone)]
+            contact_date = st.date_input("Contact date:", key = 'contact_date')
+            user_status = st.selectbox(
+                label = "Select the user status",
+                options = ['active', 'lost', 'discarted'],
+                index = None,
+                key= "user_status",
+                placeholder = "active",
+                help = "active = active oportunity, lost = the user reject the process, discarted = the user does not meet the requirements such as nurses from cuba or auxiliaries"
+            )
+            contact_description = st.text_input("Contract description", placeholder = "Se contacta entregando enlace de pago y contrato")
+            # add_contact_button = st.button("Add CRM contact", on_click = add_new_crm_contact_execution, args = [user_id, project_name, selected_phone_id, contact_date, user_status, contact_description])
