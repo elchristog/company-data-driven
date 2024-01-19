@@ -490,7 +490,7 @@ def add_new_crm_contact(user_id, project_name):
                 placeholder = "active",
                 help = "active = active oportunity, lost = the user reject the process, discarted = the user does not meet the requirements such as nurses from cuba or auxiliaries"
             )
-            contact_description = st.text_input("Contract description", placeholder = "Se contacta entregando enlace de pago y contrato")
+            contact_description = st.text_input("Contact description", placeholder = "Se contacta entregando enlace de pago y contrato")
             add_contact_button = st.button("Add CRM contact", on_click = add_new_crm_contact_execution, args = [user_id, project_name, selected_phone_id, contact_date, user_status, contact_description])
 
 
