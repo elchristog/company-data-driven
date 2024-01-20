@@ -158,6 +158,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 gsa.groupal_session_show_metrics(project_name, 'bit.ly/3vtB3Wi')
                 tap.title_and_paragraph("Opportunities" + project_icon, "Oportunidades de invitar personas a la sesion grupal", "h3", 0)
                 gsa.groupal_session_absents_and_opportunities(project_name)
+                tap.title_and_paragraph("Your performance" + project_icon, "Visualiza tu rendimiento", "h3", 0)
+                gsa.groupal_session_team_member_performance(user_id, project_name)
             if sub_menu == "CRM user view":
                 tap.title_and_paragraph("CRM user view" + project_icon, "Vista de la relacion con el usuario", "h3", 0)
                 gsa.groupal_session_crm_user_view(project_name)
