@@ -294,3 +294,29 @@ def add_new_crm_groupal_session_contact(user_id, project_name):
             )
             contact_description = st.text_input("Contact description", placeholder = "Se contacta invitando a asistir a la sesion grupal")
             add_contact_button = st.button("Add CRM contact", on_click = add_new_crm_groupal_session_contact_execution, args = [user_id, project_name, selected_phone_id, contact_date, user_status, contact_description])
+
+
+
+
+def groupal_session_crm_user_view(project_name):
+    rows = uc.run_query_half_day(f"SELECT tawl.id, CONCAT(tawl.phone_indicator,tawl.phone_number) AS full_phone_number, COALESCE(DATE_DIFF(CURRENT_DATE(), last_crm_status.last_contact_date, DAY), 99999) AS days_since_last_contact FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS tawl LEFT OUTER JOIN (SELECT tagsc.traffic_analytics_whatsapp_leads_id, LAST_VALUE(tagsc.user_status) OVER(PARTITION BY tagsc.traffic_analytics_whatsapp_leads_id ORDER BY tagsc.contact_date) AS last_user_status, LAST_VALUE(tagsc.contact_date) OVER(PARTITION BY tagsc.traffic_analytics_whatsapp_leads_id ORDER BY tagsc.contact_date) AS last_contact_date FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` AS tagsc) AS last_crm_status ON tawl.id = last_crm_status.traffic_analytics_whatsapp_leads_id WHERE last_crm_status.last_user_status = 'active' OR last_crm_status.last_user_status IS NULL ORDER BY days_since_last_contact DESC;")
+    lead_ids = []
+    lead_phone_numbers = []
+    for row in rows:
+        lead_ids.append(row.get('id'))
+        lead_phone_numbers.append(row.get('full_phone_number'))
+    selected_phone = st.selectbox(
+            label = "Select the user phone number",
+            options = lead_phone_numbers,
+            index = None,
+            key= "lead_phone_numbers"
+        )
+    checking_phone_query = uc.run_query_30_m(f"SELECT awl.id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS awl WHERE CONCAT(awl.phone_indicator,awl.phone_number) LIKE '{selected_phone}';")
+    if len(checking_phone_query) < 1 or checking_phone_query is None:
+        st.error('Phone number does not exists, be sure this user was created as a Whatsapp lead', icon = '👻')
+    else:
+        st.success('Phone number available', icon = '🪬')
+        if selected_phone is not None:
+            selected_phone_id = lead_ids[lead_phone_numbers.index(selected_phone)]
+            user_history = uc.run_query_instant(f"SELECT contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}' ORDER BY contact_date ASC;")
+            st.table(user_history)
