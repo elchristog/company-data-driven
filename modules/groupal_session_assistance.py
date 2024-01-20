@@ -320,3 +320,13 @@ def groupal_session_crm_user_view(project_name):
             selected_phone_id = lead_ids[lead_phone_numbers.index(selected_phone)]
             user_history = uc.run_query_instant(f"SELECT contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}' ORDER BY contact_date ASC;")
             st.table(user_history)
+
+
+
+
+
+
+def groupal_session_team_member_performance(user_id, project_name):
+    team_member_contacts = uc.run_query_half_day(f"SELECT tagsc.contact_date, EXTRACT(YEAR FROM tagsc.contact_date) AS year_contact, EXTRACT(MONTH FROM tagsc.contact_date) AS month_contact, EXTRACT(WEEK FROM tagsc.contact_date) AS week_contact, tagsc.user_status FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` AS tagsc WHERE tagsc.creator_id = {user_id} AND EXTRACT(YEAR FROM tagsc.contact_date) = EXTRACT(YEAR FROM CURRENT_DATE());")
+    st.table(team_member_contacts)
+    
