@@ -299,7 +299,7 @@ def add_new_crm_groupal_session_contact(user_id, project_name):
 
 
 def groupal_session_crm_user_view(project_name):
-    rows = uc.run_query_half_day(f"SELECT tawl.id, CONCAT(tawl.phone_indicator,tawl.phone_number) AS full_phone_number, COALESCE(DATE_DIFF(CURRENT_DATE(), last_crm_status.last_contact_date, DAY), 99999) AS days_since_last_contact FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS tawl LEFT OUTER JOIN (SELECT tagsc.traffic_analytics_whatsapp_leads_id, LAST_VALUE(tagsc.user_status) OVER(PARTITION BY tagsc.traffic_analytics_whatsapp_leads_id ORDER BY tagsc.contact_date) AS last_user_status, LAST_VALUE(tagsc.contact_date) OVER(PARTITION BY tagsc.traffic_analytics_whatsapp_leads_id ORDER BY tagsc.contact_date) AS last_contact_date FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` AS tagsc) AS last_crm_status ON tawl.id = last_crm_status.traffic_analytics_whatsapp_leads_id WHERE last_crm_status.last_user_status = 'active' OR last_crm_status.last_user_status IS NULL ORDER BY days_since_last_contact DESC;")
+    rows = uc.run_query_half_day(f"SELECT tawl.id, CONCAT(tawl.phone_indicator,tawl.phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS tawl;")
     lead_ids = []
     lead_phone_numbers = []
     for row in rows:
