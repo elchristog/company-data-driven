@@ -149,7 +149,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
         if menu == "Groupal session":
-            sub_menu_options=['Assistants', 'CRM Groupal session', 'Add new assistant', 'Add new absent']
+            sub_menu_options=['Assistants', 'CRM user view', 'Add new CRM contact GS', 'Add new assistant', 'Add new absent']
             if role_id == 1:
                 sub_menu_options.extend(['Development'])
             sub_menu = st.sidebar.radio('Whatsapp options', options = sub_menu_options)
@@ -158,7 +158,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 gsa.groupal_session_show_metrics(project_name, 'bit.ly/3vtB3Wi')
                 tap.title_and_paragraph("Opportunities" + project_icon, "Oportunidades de invitar personas a la sesion grupal", "h3", 0)
                 gsa.groupal_session_absents_and_opportunities(project_name)
-            if sub_menu == "CRM Groupal session":
+            if sub_menu == "CRM user view":
+                tap.title_and_paragraph("CRM user view" + project_icon, "Vista de la relacion con el usuario", "h3", 0)
+                gsa.groupal_session_crm_user_view(project_name)
+            if sub_menu == "Add new CRM contact GS":
                 tap.title_and_paragraph("CRM Groupal session" + project_icon, "Creacion de contactos CRM para asistir a la sesion grupal", "h3", 0)
                 gsa.add_new_crm_groupal_session_contact(user_id, project_name)
             if sub_menu == "Add new assistant":
