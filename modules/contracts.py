@@ -502,3 +502,90 @@ def add_new_crm_contact(user_id, project_name):
 def contracts_crm_show_metrics(project_name):
     contracts_crm_oportunities = uc.run_query_1_h(f"SELECT DISTINCT * FROM (SELECT CONCAT(tawl.phone_indicator,tawl.phone_number) AS full_phone_number, COALESCE(DATE_DIFF(CURRENT_DATE(),last_user_status_df.last_contact_date, DAY), 99999) AS days_since_last_contact FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_whatsapp_leads` AS tawl INNER JOIN `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_groupal_session_assistance` AS tagsa ON tawl.id = tagsa.traffic_analytics_whatsapp_lead_id LEFT OUTER JOIN (SELECT traffic_analytics_whatsapp_leads_id, LAST_VALUE(user_status) OVER(PARTITION BY traffic_analytics_whatsapp_leads_id ORDER BY contact_date) AS last_user_status, LAST_VALUE(contact_date) OVER(PARTITION BY traffic_analytics_whatsapp_leads_id ORDER BY contact_date) AS last_contact_date,  ROW_NUMBER() OVER(PARTITION BY traffic_analytics_whatsapp_leads_id ORDER BY contact_date DESC) AS row_number_contact FROM `company-data-driven.enfermera_en_estados_unidos.contract_crm_log`) AS last_user_status_df ON (tawl.id = last_user_status_df.traffic_analytics_whatsapp_leads_id AND last_user_status_df.row_number_contact = 1) WHERE tawl.id NOT IN (SELECT traffic_analytics_whatsapp_leads_id FROM `company-data-driven.enfermera_en_estados_unidos.contracts`) AND (last_user_status_df.last_user_status = 'active' OR last_user_status_df.last_user_status IS NULL) AND COALESCE(DATE_DIFF(CURRENT_DATE(),last_user_status_df.last_contact_date, DAY), 99999) > 3 AND tagsa.status = 'assistant' ORDER BY COALESCE(DATE_DIFF(CURRENT_DATE(),last_user_status_df.last_contact_date, DAY), 99999) DESC);")
     st.table(contracts_crm_oportunities)
+
+
+
+
+
+
+
+
+def contract_crm_user_view(project_name):
+    rows = uc.run_query_half_day(f"SELECT tawl.id, CONCAT(tawl.phone_indicator,tawl.phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS tawl;")
+    lead_ids = []
+    lead_phone_numbers = []
+    for row in rows:
+        lead_ids.append(row.get('id'))
+        lead_phone_numbers.append(row.get('full_phone_number'))
+    selected_phone = st.selectbox(
+            label = "Select the user phone number",
+            options = lead_phone_numbers,
+            index = None,
+            key= "lead_phone_numbers"
+        )
+    checking_phone_query = uc.run_query_30_m(f"SELECT awl.id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS awl WHERE CONCAT(awl.phone_indicator,awl.phone_number) LIKE '{selected_phone}';")
+    if len(checking_phone_query) < 1 or checking_phone_query is None:
+        st.error('Phone number does not exists, be sure this user was created as a Whatsapp lead', icon = '👻')
+    else:
+        st.success('Phone number available', icon = '🪬')
+        if selected_phone is not None:
+            selected_phone_id = lead_ids[lead_phone_numbers.index(selected_phone)]
+            user_history = uc.run_query_instant(f"SELECT contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}' ORDER BY contact_date ASC;")
+            st.table(user_history)
+
+
+
+
+
+
+def contract_team_member_performance(user_id, project_name):
+    team_member_contacts = uc.run_query_half_day(f"SELECT tagsc.contact_date, EXTRACT(YEAR FROM tagsc.contact_date) AS year_contact, EXTRACT(MONTH FROM tagsc.contact_date) AS month_contact, EXTRACT(WEEK FROM tagsc.contact_date) AS week_contact, tagsc.user_status FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` AS tagsc WHERE tagsc.creator_id = {user_id} AND EXTRACT(YEAR FROM tagsc.contact_date) = EXTRACT(YEAR FROM CURRENT_DATE());")
+    team_member_contacts_df = pd.DataFrame(team_member_contacts, columns = ["contact_date","year_contact","month_contact","week_contact","user_status"])
+    team_member_user_assistance = uc.run_query_half_day(f"SELECT meeting_date, EXTRACT(YEAR FROM meeting_date) AS year_meeting_date, EXTRACT(MONTH FROM meeting_date) AS month_meeting_date, EXTRACT(WEEK FROM meeting_date) AS week_meeting_date, status FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` WHERE creator_user_id = {user_id};")
+    team_member_user_assistance_df = pd.DataFrame(team_member_user_assistance, columns = ["meeting_date","year_meeting_date","month_meeting_date","week_meeting_date","status"])
+    today = datetime.date.today()
+    
+    st.header("Week evolution")
+    corrected_week = today.isocalendar()[1] + 1 if today.isocalendar()[2] == 7 else today.isocalendar()[1]
+    col1, col2, col3, col4 = st.columns(4)
+    team_member_contacts_week = team_member_contacts_df[(team_member_contacts_df["year_contact"] == today.year) & (team_member_contacts_df["month_contact"] == today.month) & (team_member_contacts_df["week_contact"] == corrected_week)]
+    team_member_user_assistance_week = team_member_user_assistance_df[(team_member_user_assistance_df["year_meeting_date"] == today.year) & (team_member_user_assistance_df["month_meeting_date"] == today.month) & (team_member_user_assistance_df["week_meeting_date"] == corrected_week)]
+    if len(team_member_contacts_week) < 1 or team_member_contacts_week is None:
+            st.warning(f"You have not added new contacts", icon = "🫥")
+    else:
+        col1.metric(label="# Week Contacts", value = team_member_contacts_week.shape[0])
+        col2.metric(label="# Week Active contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'] == 'active'].shape[0])
+        col3.metric(label="# Week Discarted contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'] == 'discarted'].shape[0])
+        col1.metric(label="# Week Lost contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'] == 'lost'].shape[0])
+        col2.metric(label="# Week Assistants added", value = team_member_user_assistance_week[team_member_user_assistance_week['status'] == 'assistant'].shape[0])
+        col3.metric(label="# Week Absents added", value = team_member_user_assistance_week[team_member_user_assistance_week['status'] == 'absent'].shape[0])
+
+    st.header("Month evolution")
+    col1, col2, col3, col4 = st.columns(4)
+    team_member_contacts_month = team_member_contacts_df[(team_member_contacts_df["year_contact"] == today.year) & (team_member_contacts_df["month_contact"] == today.month)]
+    team_member_user_assistance_month = team_member_user_assistance_df[(team_member_user_assistance_df["year_meeting_date"] == today.year) & (team_member_user_assistance_df["month_meeting_date"] == today.month)]
+    if len(team_member_contacts_month) < 1 or team_member_contacts_month is None:
+            st.warning(f"You have not added new contacts", icon = "🫥")
+    else:
+        col1.metric(label="# Month Contacts", value = team_member_contacts_month.shape[0])
+        col2.metric(label="# Month Active contacts", value = team_member_contacts_month[team_member_contacts_month['user_status'] == 'active'].shape[0])
+        col3.metric(label="# Month Discarted contacts", value = team_member_contacts_month[team_member_contacts_month['user_status'] == 'discarted'].shape[0])
+        col1.metric(label="# Month Lost contacts", value = team_member_contacts_month[team_member_contacts_month['user_status'] == 'lost'].shape[0])
+        col2.metric(label="# Month Assistants added", value = team_member_user_assistance_month[team_member_user_assistance_month['status'] == 'assistant'].shape[0])
+        col3.metric(label="# Month Absents added", value = team_member_user_assistance_month[team_member_user_assistance_month['status'] == 'absent'].shape[0])
+
+    st.header("Year evolution")
+    col1, col2, col3, col4 = st.columns(4)
+    team_member_contacts_year = team_member_contacts_df[(team_member_contacts_df["year_contact"] == today.year)]
+    team_member_user_assistance_year = team_member_user_assistance_df[(team_member_user_assistance_df["year_meeting_date"] == today.year)]
+    if len(team_member_contacts_year) < 1 or team_member_contacts_year is None:
+            st.warning(f"You have not added new contacts", icon = "🫥")
+    else:
+        col1.metric(label="# Year Contacts", value = team_member_contacts_year.shape[0])
+        col2.metric(label="# Year Active contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'] == 'active'].shape[0])
+        col3.metric(label="# Year Discarted contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'] == 'discarted'].shape[0])
+        col1.metric(label="# Year Lost contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'] == 'lost'].shape[0])
+        col2.metric(label="# Year Assistants added", value = team_member_user_assistance_year[team_member_user_assistance_year['status'] == 'assistant'].shape[0])
+        col3.metric(label="# Year Absents added", value = team_member_user_assistance_year[team_member_user_assistance_year['status'] == 'absent'].shape[0])
+        
+        
