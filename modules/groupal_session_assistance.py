@@ -340,7 +340,7 @@ def groupal_session_team_member_performance(user_id, project_name):
             st.warning(f"You have not added new contacts", icon = "🫥")
     else:
         col1.metric(label="# Week Contacts", value = team_member_contacts_week.shape[0])
-        col2.metric(label="# Week Active contacts", value = len(team_member_contacts_week[team_member_contacts_week['user_status'] == 'active'])
+        col2.metric(label="# Week Active contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'] == 'active'].shape[0])
         # col3.metric(label="# % tests with score >= 80", value = str(round(100*(team_member_contacts_week['score'] >= 80).sum()/team_member_contacts_week.shape[0],1)))
         # col4.metric(label="# Avg days between tests", value = round(team_member_contacts_week.days_between_tests.mean(),1))
 
