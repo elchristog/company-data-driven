@@ -349,6 +349,7 @@ def groupal_session_team_member_performance(user_id, project_name):
         col3.metric(label="# Week Absents added", value = team_member_user_assistance_df[team_member_user_assistance_week['status'] == 'absent'].shape[0])
 
     st.header("Month evolution")
+    col1, col2, col3, col4 = st.columns(4)
     team_member_contacts_month = team_member_contacts_df[(team_member_contacts_df["year_contact"] == today.year) & (team_member_contacts_df["month_contact"] == today.month)]
     team_member_user_assistance_month = team_member_user_assistance_df[(team_member_user_assistance_df["year_meeting_date"] == today.year) & (team_member_user_assistance_df["month_meeting_date"] == today.month)]
     if len(team_member_contacts_month) < 1 or team_member_contacts_month is None:
