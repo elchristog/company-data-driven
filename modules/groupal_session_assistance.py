@@ -329,8 +329,10 @@ def groupal_session_crm_user_view(project_name):
 def groupal_session_team_member_performance(user_id, project_name):
     team_member_contacts = uc.run_query_half_day(f"SELECT tagsc.contact_date, EXTRACT(YEAR FROM tagsc.contact_date) AS year_contact, EXTRACT(MONTH FROM tagsc.contact_date) AS month_contact, EXTRACT(WEEK FROM tagsc.contact_date) AS week_contact, tagsc.user_status FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` AS tagsc WHERE tagsc.creator_id = {user_id} AND EXTRACT(YEAR FROM tagsc.contact_date) = EXTRACT(YEAR FROM CURRENT_DATE());")
     team_member_contacts_df = pd.DataFrame(team_member_contacts, columns = ["contact_date","year_contact","month_contact","week_contact","user_status"])
+    team_member_user_assistance = uc.run_query_half_day(f"SELECT meeting_date, EXTRACT(YEAR FROM meeting_date) AS year_meeting_date, EXTRACT(MONTH FROM meeting_date) AS month_meeting_date, EXTRACT(WEEK FROM meeting_date) AS week_meeting_date, status FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` WHERE creator_user_id = {user_id};")
+    team_member_user_assistance_df = pd.DataFrame(team_member_user_assistance, columns = ["meeting_date","year_meeting_date","month_meeting_date","week_meeting_date","status"])
+    st.table(team_member_user_assistance_df)
     today = datetime.date.today()
-    today_str = today.strftime("%Y-%m-%d")
     st.table(team_member_contacts_df)
     st.header("Week evolution")
     corrected_week = today.isocalendar()[1] + 1 if today.isocalendar()[2] == 7 else today.isocalendar()[1]
