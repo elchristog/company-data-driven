@@ -331,12 +331,10 @@ def groupal_session_team_member_performance(user_id, project_name):
     team_member_contacts_df = pd.DataFrame(team_member_contacts, columns = ["contact_date","year_contact","month_contact","week_contact","user_status"])
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
-
+    st.table(team_member_contacts_df)
     st.header("Week evolution")
     corrected_week = today.isocalendar()[1] + 1 if today.isocalendar()[2] == 7 else today.isocalendar()[1]
     col1, col2, col3, col4 = st.columns(4)
-    st.write(team_member_contacts_df["year_contact"] )
-    st.write(today.year)
     team_member_contacts_week = team_member_contacts_df[(team_member_contacts_df["year_contact"] == today.year) & (team_member_contacts_df["month_contact"] == today.month) & (team_member_contacts_df["week_contact"] == corrected_week)]
     if len(team_member_contacts_week) < 1 or team_member_contacts_week is None < 0:
             st.warning(f"You have not added new contacts", icon = "🫥")
