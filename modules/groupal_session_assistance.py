@@ -332,6 +332,7 @@ def groupal_session_team_member_performance(user_id, project_name):
     team_member_user_assistance = uc.run_query_half_day(f"SELECT meeting_date, EXTRACT(YEAR FROM meeting_date) AS year_meeting_date, EXTRACT(MONTH FROM meeting_date) AS month_meeting_date, EXTRACT(WEEK FROM meeting_date) AS week_meeting_date, status FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` WHERE creator_user_id = {user_id};")
     team_member_user_assistance_df = pd.DataFrame(team_member_user_assistance, columns = ["meeting_date","year_meeting_date","month_meeting_date","week_meeting_date","status"])
     today = datetime.date.today()
+    
     st.header("Week evolution")
     corrected_week = today.isocalendar()[1] + 1 if today.isocalendar()[2] == 7 else today.isocalendar()[1]
     col1, col2, col3, col4 = st.columns(4)
@@ -346,6 +347,19 @@ def groupal_session_team_member_performance(user_id, project_name):
         col1.metric(label="# Week Lost contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'] == 'lost'].shape[0])
         col2.metric(label="# Week Assistants added", value = team_member_user_assistance_df[team_member_user_assistance_week['status'] == 'assistant'].shape[0])
         col3.metric(label="# Week Absents added", value = team_member_user_assistance_df[team_member_user_assistance_week['status'] == 'absent'].shape[0])
+
+    st.header("Month evolution")
+    team_member_contacts_month = team_member_contacts_df[(team_member_contacts_df["year_contact"] == today.year) & (team_member_contacts_df["month_contact"] == today.month)]
+    team_member_user_assistance_month = team_member_user_assistance_df[(team_member_user_assistance_df["year_meeting_date"] == today.year) & (team_member_user_assistance_df["month_meeting_date"] == today.month)]
+    if len(team_member_contacts_month) < 1 or team_member_contacts_month is None:
+            st.warning(f"You have not added new contacts", icon = "🫥")
+    else:
+        col1.metric(label="# Week Contacts", value = team_member_contacts_month.shape[0])
+        col2.metric(label="# Week Active contacts", value = team_member_contacts_week[team_member_contacts_month['user_status'] == 'active'].shape[0])
+        col3.metric(label="# Week Discarted contacts", value = team_member_contacts_week[team_member_contacts_month['user_status'] == 'discarted'].shape[0])
+        col1.metric(label="# Week Lost contacts", value = team_member_contacts_week[team_member_contacts_month['user_status'] == 'lost'].shape[0])
+        col2.metric(label="# Week Assistants added", value = team_member_user_assistance_df[team_member_user_assistance_month['status'] == 'assistant'].shape[0])
+        col3.metric(label="# Week Absents added", value = team_member_user_assistance_df[team_member_user_assistance_month['status'] == 'absent'].shape[0])
         
         
     
