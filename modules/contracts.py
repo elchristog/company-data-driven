@@ -440,6 +440,7 @@ def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, cont
     if (contact_description is not None) and (user_status is not None) and (len(contact_description) >= 36):
         if last_contact_date[0].get("last_contact_date") is None:
             st.toast("Please wait", icon = "☺️")
+            contact_description = ''.join(i for i in contact_description if not i.isdigit())
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
             time.sleep(5)
             uc.run_query_half_day.clear()
