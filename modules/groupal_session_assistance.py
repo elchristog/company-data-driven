@@ -336,7 +336,7 @@ def groupal_session_team_member_performance(user_id, project_name):
     st.header("Week evolution")
     corrected_week = today.isocalendar()[1] + 1 if today.isocalendar()[2] == 7 else today.isocalendar()[1]
     col1, col2, col3, col4 = st.columns(4)
-    team_member_contacts_week = team_member_contacts[(team_member_contacts["year_contact"].astype(str) == str(today.year)) & (team_member_contacts["month_contact"].astype(str) == str(today.month)) & (team_member_contacts["week_contact"].astype(str) == str(corrected_week))]
+    team_member_contacts_week = team_member_contacts[(team_member_contacts["year_contact"] == today.year) & (team_member_contacts["month_contact"] == today.month) & (team_member_contacts["week_contact"] == corrected_week)]
     st.table(team_member_contacts_week)
     # if len(team_member_contacts_week) < 1 or team_member_contacts_week is None < 0:
     #         st.warning(f"You have not added new contacts", icon = "🫥")
