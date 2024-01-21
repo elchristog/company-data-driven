@@ -336,15 +336,16 @@ def groupal_session_team_member_performance(user_id, project_name):
     corrected_week = today.isocalendar()[1] + 1 if today.isocalendar()[2] == 7 else today.isocalendar()[1]
     col1, col2, col3, col4 = st.columns(4)
     team_member_contacts_week = team_member_contacts_df[(team_member_contacts_df["year_contact"] == today.year) & (team_member_contacts_df["month_contact"] == today.month) & (team_member_contacts_df["week_contact"] == corrected_week)]
-    if len(team_member_contacts_week) < 1 or team_member_contacts_week is None < 0:
+    team_member_user_assistance_week = team_member_user_assistance_df[(team_member_user_assistance_df["year_meeting_date"] == today.year) & (team_member_user_assistance_df["month_meeting_date"] == today.month) & (team_member_user_assistance_df["week_meeting_date"] == corrected_week)]
+    if len(team_member_contacts_week) < 1 or team_member_contacts_week is None:
             st.warning(f"You have not added new contacts", icon = "🫥")
     else:
         col1.metric(label="# Week Contacts", value = team_member_contacts_week.shape[0])
         col2.metric(label="# Week Active contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'] == 'active'].shape[0])
         col3.metric(label="# Week Discarted contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'] == 'discarted'].shape[0])
         col1.metric(label="# Week Lost contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'] == 'lost'].shape[0])
-        col2.metric(label="# Week Assistants added", value = team_member_user_assistance_df[team_member_user_assistance_df['status'] == 'assistant'].shape[0])
-        col3.metric(label="# Week Absents added", value = team_member_user_assistance_df[team_member_user_assistance_df['status'] == 'absent'].shape[0])
+        col2.metric(label="# Week Assistants added", value = team_member_user_assistance_df[team_member_user_assistance_week['status'] == 'assistant'].shape[0])
+        col3.metric(label="# Week Absents added", value = team_member_user_assistance_df[team_member_user_assistance_week['status'] == 'absent'].shape[0])
         
         
     
