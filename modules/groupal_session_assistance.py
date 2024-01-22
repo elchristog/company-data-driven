@@ -378,3 +378,21 @@ def groupal_session_team_member_performance(user_id, project_name):
         
         
     
+
+
+
+
+
+def groupal_session_contact_text(project_id):
+    if project_id == 1:
+        text_answer = '''
+        
+        Hola XXXX
+
+        Este miércoles voy a hacer otra sesión para explicar el proceso de homologación de enfermería en Estados Unidos. Si quieres asistir, puedes reservar tu espacio desde acá: https://bit.ly/3vtB3Wi
+        
+        También, si quieres, te enviaré el enlace de la reunión ese día antes de iniciar.
+        
+        Me cuentas cualquier cosa. ¡Feliz día!
+        '''
+    st.markdown(text_answer)
