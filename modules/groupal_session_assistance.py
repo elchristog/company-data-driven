@@ -117,9 +117,11 @@ def add_new_assistant_execution(user_id, project_name, selected_phone_id, meetin
         st.toast("Please wait", icon = "☺️")
         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` (id, traffic_analytics_whatsapp_lead_id, meeting_date, creator_user_id, status) VALUES (GENERATE_UUID(), '{selected_phone_id}', '{meeting_date}', {user_id}, 'assistant');")
         time.sleep(5)
-        uc.run_query_half_day.clear()
         st.toast("Assistant saved!", icon = "👾")
         st.balloons()
+        uc.run_query_half_day.clear()
+        uc.run_query_30_m.clear()
+        uc.run_query_1_h.clear()
 
 
 
@@ -164,9 +166,11 @@ def add_new_absent_execution(user_id, project_name, selected_phone_id, meeting_d
         st.toast("Please wait", icon = "☺️")
         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` (id, traffic_analytics_whatsapp_lead_id, meeting_date, creator_user_id, status) VALUES (GENERATE_UUID(), '{selected_phone_id}', '{meeting_date}', {user_id}, 'absent');")
         time.sleep(5)
-        uc.run_query_half_day.clear()
         st.toast("Assistant saved!", icon = "👾")
         st.balloons()
+        uc.run_query_half_day.clear()
+        uc.run_query_30_m.clear()
+        uc.run_query_1_h.clear()
 
 
 
@@ -244,20 +248,21 @@ def add_new_crm_groupal_session_contact_execution(user_id, project_name, selecte
             contact_description = ''.join(i for i in contact_description if not i.isdigit())
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
             time.sleep(5)
-            uc.run_query_half_day.clear()
-            uc.run_query_30_m.clear()
             st.toast("CRM Contact saved!", icon = "👾")
             st.balloons()
+            uc.run_query_half_day.clear()
+            uc.run_query_30_m.clear()
+            uc.run_query_1_h.clear()
         else:
             if contact_date > last_contact_date[0].get("last_contact_date"):
                 st.toast("Please wait", icon = "☺️")
                 uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
                 time.sleep(5)
+                st.toast("CRM Contact saved!", icon = "👾")
+                st.balloons()
                 uc.run_query_half_day.clear()
                 uc.run_query_30_m.clear()
                 uc.run_query_1_h.clear()
-                st.toast("CRM Contact saved!", icon = "👾")
-                st.balloons()
         
 
 
