@@ -387,7 +387,7 @@ def groupal_session_contact_text(project_id):
     if project_id == 1:
         text_answer = '''
         
-        Hola XXXX
+        ¡Hola! Buenos días.
 
         Este miércoles voy a hacer otra sesión para explicar el proceso de homologación de enfermería en Estados Unidos. Si quieres asistir, puedes reservar tu espacio desde acá: https://bit.ly/3vtB3Wi
         
