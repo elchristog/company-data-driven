@@ -530,7 +530,7 @@ def contract_crm_user_view(project_name):
         st.success('Phone number available', icon = '🪬')
         if selected_phone is not None:
             selected_phone_id = lead_ids[lead_phone_numbers.index(selected_phone)]
-            user_history = uc.run_query_instant(f"SELECT contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.traffic_analytics_contract_crm` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}' ORDER BY contact_date ASC;")
+            user_history = uc.run_query_instant(f"SELECT contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.contract_crm_log` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}' ORDER BY contact_date ASC;")
             st.table(user_history)
 
 
