@@ -182,7 +182,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
         if menu == "Contract":
-            sub_menu_options=['Contracts', 'Customer CRM view', 'Add new CRM contact', 'Add new contract']
+            sub_menu_options=['Contracts', 'Customer CRM view', 'Add new CRM contact', 'Add new contract', 'Contact guide']
             if role_id == 1:
                 sub_menu_options.extend(['Something else'])
             sub_menu = st.sidebar.radio('Contract options', options = sub_menu_options)
@@ -202,6 +202,9 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Add new contract":
                 tap.title_and_paragraph("Contracts" + project_icon, "Actualizacion de nuevos contratos y creacion del usuario correspondiente", "h3", 0)
                 c.customer_creation(user_id, project_id, project_name)
+            if sub_menu == "Contact guide":
+                tap.title_and_paragraph("Whatsapp" + project_icon, "Guia de conversacion en whatsapp", "h3", 0)
+                c.contract_contact_text(project_id)
 
 
 
