@@ -339,10 +339,7 @@ def groupal_session_team_member_performance(user_id, project_name):
     today = datetime.date.today()
     
     st.header("Week evolution")
-    corrected_week = today.isocalendar()[1] + 1 if today.isocalendar()[2] == 7 else today.isocalendar()[1]
-    st.write(corrected_week)
-    st.write(team_member_contacts_df)
-    
+    corrected_week = (today.isocalendar()[1] + 1 if today.isocalendar()[2] == 7 else today.isocalendar()[1]) - 1
     col1, col2, col3, col4 = st.columns(4)
     team_member_contacts_week = team_member_contacts_df[(team_member_contacts_df["year_contact"] == today.year) & (team_member_contacts_df["month_contact"] == today.month) & (team_member_contacts_df["week_contact"] == corrected_week)]
     team_member_user_assistance_week = team_member_user_assistance_df[(team_member_user_assistance_df["year_meeting_date"] == today.year) & (team_member_user_assistance_df["month_meeting_date"] == today.month) & (team_member_user_assistance_df["week_meeting_date"] == corrected_week)]
