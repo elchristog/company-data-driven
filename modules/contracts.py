@@ -576,4 +576,22 @@ def contract_team_member_performance(user_id, project_name):
         col2.metric(label="# Year Active contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'] == 'active'].shape[0])
         col3.metric(label="# Year Discarted contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'] == 'discarted'].shape[0])
         col4.metric(label="# Year Lost contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'] == 'lost'].shape[0])
+
+
+
+
+
+
+
+
+
+def contract_contact_text(project_id):
+    if project_id == 1:
+        text_answer = '''
+        
+        ¡Hola! Buenos días.
+
+        Quería preguntarte cómo te ha ido con el proceso de homologación. Si tienes alguna duda o algo en lo que te pueda ayudar.
+        '''
+    st.markdown(text_answer)
         
