@@ -258,7 +258,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 sub_menu_options.extend(['Something'])
             sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
             if sub_menu == "Cv creation":
-                tap.title_and_paragraph("Cv creation" + project_icon, "Creasion del resumee", "h3", 0)
+                tap.title_and_paragraph("Cv creation" + project_icon, "Creacion del resumee", "h3", 0)
                 s1ps.cv_creation_guide()
 
 
