@@ -321,7 +321,7 @@ def show_youtube_metrics(project_name):
             help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format',
             key = 'date_input_youtube'
         )
-        df = pd.DataFrame(uc.run_query_1_h(f"SELECT * FROM `company-data-driven.{project_name}.traffic_analytics_youtube_views` WHERE date >= '{day_yt[0].strftime('%Y-%m-%d')}' AND date <= '{day_yt[1].strftime('%Y-%m-%d')}' ORDER BY date ASC;"))
+        df = pd.DataFrame(uc.run_query_1_h(f"SELECT DISTINCT * FROM `company-data-driven.{project_name}.traffic_analytics_youtube_views` WHERE date >= '{day_yt[0].strftime('%Y-%m-%d')}' AND date <= '{day_yt[1].strftime('%Y-%m-%d')}' ORDER BY date ASC;"))
         df_grouped = df.groupby('date').agg({
                 'views': 'sum',
                 'suscribers_gained': 'sum',
