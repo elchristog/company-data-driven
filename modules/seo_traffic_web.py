@@ -444,7 +444,7 @@ def show_web_metrics(project_name):
             format="DD/MM/YYYY",
             help='The available time range is the same as what is available in Google Search Console. DD/MM/YYYY Format'
         )
-        df = pd.DataFrame(uc.run_query_1_h(f"SELECT * FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks` WHERE date >= '{day[0].strftime('%Y-%m-%d')}' AND date <= '{day[1].strftime('%Y-%m-%d')}' ORDER BY date ASC;"))
+        df = pd.DataFrame(uc.run_query_1_h(f"SELECT DISTINCT * FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks` WHERE date >= '{day[0].strftime('%Y-%m-%d')}' AND date <= '{day[1].strftime('%Y-%m-%d')}' ORDER BY date ASC;"))
         df_grouped = df.groupby('date').agg({
                 'clicks': 'sum',
                 'impressions': 'sum',
@@ -467,5 +467,5 @@ def show_web_metrics(project_name):
         with st.container():
             plot_echarts(df_grouped)
         st.write(f"#### Visits per page")
-        pages_visits = uc.run_query_1_h(f"SELECT page, SUM(clicks) AS clicks, SUM(impressions) AS impressions, AVG(ctr) AS ctr, AVG(position) AS position FROM `company-data-driven.{project_name}.traffic_analytics_web_pages` WHERE start_query_date >= '{day[0].strftime('%Y-%m-%d')}' AND end_query_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY page  ORDER BY ctr DESC;")
+        pages_visits = uc.run_query_1_h(f"SELECT DISTINCT page, SUM(clicks) AS clicks, SUM(impressions) AS impressions, AVG(ctr) AS ctr, AVG(position) AS position FROM `company-data-driven.{project_name}.traffic_analytics_web_pages` WHERE start_query_date >= '{day[0].strftime('%Y-%m-%d')}' AND end_query_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY page  ORDER BY ctr DESC;")
         st.table(pages_visits)
