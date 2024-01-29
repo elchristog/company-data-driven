@@ -461,7 +461,7 @@ def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, cont
 
 
 def add_new_crm_contact(user_id, project_name):
-    rows = uc.run_query_half_day(f"SELECT DISTINCT tawl.id, CONCAT(tawl.phone_indicator,tawl.phone_number) AS full_phone_number, last_user_status_df.last_user_status FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS tawl INNER JOIN `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` AS tagsa ON tawl.id = tagsa.traffic_analytics_whatsapp_lead_id LEFT OUTER JOIN (SELECT traffic_analytics_whatsapp_leads_id, LAST_VALUE(user_status) OVER(PARTITION BY traffic_analytics_whatsapp_leads_id ORDER BY contact_date) AS last_user_status FROM `company-data-driven.{project_name}.contract_crm_log`) AS last_user_status_df ON tawl.id = last_user_status_df.traffic_analytics_whatsapp_leads_id WHERE tagsa.status = 'assistant' AND tawl.id NOT IN (SELECT traffic_analytics_whatsapp_leads_id FROM `company-data-driven.{project_name}.contracts`) AND (last_user_status_df.last_user_status = 'active' OR last_user_status_df.last_user_status IS NULL);")
+    rows = uc.run_query_half_day(f"SELECT DISTINCT tawl.id, CONCAT(tawl.phone_indicator,tawl.phone_number) AS full_phone_number, last_user_status_df.last_user_status FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS tawl INNER JOIN `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` AS tagsa ON tawl.id = tagsa.traffic_analytics_whatsapp_lead_id LEFT OUTER JOIN (SELECT traffic_analytics_whatsapp_leads_id, LAST_VALUE(user_status) OVER(PARTITION BY traffic_analytics_whatsapp_leads_id ORDER BY contact_date) AS last_user_status FROM `company-data-driven.{project_name}.contract_crm_log`) AS last_user_status_df ON tawl.id = last_user_status_df.traffic_analytics_whatsapp_leads_id WHERE tagsa.status = 'assistant' AND tawl.id NOT IN (SELECT traffic_analytics_whatsapp_leads_id FROM `company-data-driven.{project_name}.contracts`) AND (last_user_status_df.last_user_status LIKE '%active%' OR last_user_status_df.last_user_status IS NULL);")
     assistant_ids = []
     assistant_phone_numbers = []
     for row in rows:
@@ -551,7 +551,7 @@ def contract_team_member_performance(user_id, project_name):
             st.warning(f"You have not added new contacts", icon = "🫥")
     else:
         col1.metric(label="# Week Contacts", value = team_member_contacts_week.shape[0])
-        col2.metric(label="# Week Active contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'] == 'active'].shape[0])
+        col2.metric(label="# Week Active contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'].str.contains('active')].shape[0])
         col3.metric(label="# Week Discarted contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'] == 'discarted'].shape[0])
         col4.metric(label="# Week Lost contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'] == 'lost'].shape[0])
 
@@ -562,7 +562,7 @@ def contract_team_member_performance(user_id, project_name):
             st.warning(f"You have not added new contacts", icon = "🫥")
     else:
         col1.metric(label="# Month Contacts", value = team_member_contacts_month.shape[0])
-        col2.metric(label="# Month Active contacts", value = team_member_contacts_month[team_member_contacts_month['user_status'] == 'active'].shape[0])
+        col2.metric(label="# Month Active contacts", value = team_member_contacts_month[team_member_contacts_month['user_status'].str.contains('active')].shape[0])
         col3.metric(label="# Month Discarted contacts", value = team_member_contacts_month[team_member_contacts_month['user_status'] == 'discarted'].shape[0])
         col4.metric(label="# Month Lost contacts", value = team_member_contacts_month[team_member_contacts_month['user_status'] == 'lost'].shape[0])
 
@@ -573,7 +573,7 @@ def contract_team_member_performance(user_id, project_name):
             st.warning(f"You have not added new contacts", icon = "🫥")
     else:
         col1.metric(label="# Year Contacts", value = team_member_contacts_year.shape[0])
-        col2.metric(label="# Year Active contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'] == 'active'].shape[0])
+        col2.metric(label="# Year Active contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'].str.contains('active')].shape[0])
         col3.metric(label="# Year Discarted contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'] == 'discarted'].shape[0])
         col4.metric(label="# Year Lost contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'] == 'lost'].shape[0])
 
