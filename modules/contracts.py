@@ -483,11 +483,11 @@ def add_new_crm_contact(user_id, project_name):
             contact_date = st.date_input("Contact date:", key = 'contact_date')
             user_status = st.selectbox(
                 label = "Select the user status",
-                options = ['active', 'lost', 'discarted'],
+                options = ['active', 'active_15_days', 'active_30_days', 'active_60_days', 'lost', 'discarted'],
                 index = None,
                 key= "user_status",
                 placeholder = "active",
-                help = "active = active oportunity, lost = the user reject the process, discarted = the user does not meet the requirements such as nurses from cuba or auxiliaries"
+                help = "active = active oportunity, active_x_days = active oportunity, but wait x days to next contact, lost = the user reject the process, discarted = the user does not meet the requirements such as nurses from cuba or auxiliaries"
             )
             contact_description = st.text_input("Contact description", placeholder = "Se contacta entregando enlace de pago y contrato")
             add_contact_button = st.button("Add CRM contact", on_click = add_new_crm_contact_execution, args = [user_id, project_name, selected_phone_id, contact_date, user_status, contact_description])
