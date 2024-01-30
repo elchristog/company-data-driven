@@ -337,6 +337,10 @@ def groupal_session_team_member_performance(user_id, project_name):
     team_member_user_assistance = uc.run_query_half_day(f"SELECT meeting_date, EXTRACT(YEAR FROM meeting_date) AS year_meeting_date, EXTRACT(MONTH FROM meeting_date) AS month_meeting_date, EXTRACT(WEEK FROM meeting_date) AS week_meeting_date, status FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` WHERE creator_user_id = {user_id};")
     team_member_user_assistance_df = pd.DataFrame(team_member_user_assistance, columns = ["meeting_date","year_meeting_date","month_meeting_date","week_meeting_date","status"])
     today = datetime.date.today()
+
+    st.header("Your last 10 contacts")
+    team_member_last_contacts = uc.run_query_instant(f"SELECT CONCAT(w.phone_indicator, w.phone_number) AS full_phone_number,tagsc.contact_date, tagsc.contact_description, tagsc.user_status FROM `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_groupal_session_crm` AS tagsc INNER JOIN `company-data-driven.enfermera_en_estados_unidos.traffic_analytics_whatsapp_leads` AS w ON w.id = tagsc.traffic_analytics_whatsapp_leads_id WHERE tagsc.creator_id = 19 ORDER BY tagsc.contact_date DESC LIMIT 10;")
+    st.table(team_member_last_contacts)
     
     st.header("Week evolution")
     corrected_week = (today.isocalendar()[1] + 1 if today.isocalendar()[2] == 7 else today.isocalendar()[1]) - 1
