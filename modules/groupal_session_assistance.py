@@ -415,7 +415,7 @@ def groupal_session_contact_text(project_id):
         st.markdown(text_wsp)
 
         st.write("---")
-        st.write("Texto media hora antes de la sesion grupal")
+        st.write("Texto 15 minutos antes de la sesion grupal")
         text_wsp = '''
         Hola! Sabemos que tienes interés en conocer el proceso de *homologación de enfermería en Estados Unidos*. Estamos a unos minutos de iniciar la sesión donde resolveremos algunas dudas sobre este proceso.
         Puedes unirte en el siguiente enlace: https://calendly.com/events/524e01bd-76b1-45b5-9052-2058628e6893/google_meet
