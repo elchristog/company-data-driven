@@ -431,4 +431,6 @@ def groupal_session_contact_text(project_id):
         Cualquier duda que tengas, me escribes por acá y te ayudaré a resolverla lo más pronto posible.
         '''
         st.markdown(text_wsp)
+        st.write("**Al finalizar la sesion recordar agregar los asistentes, agregar los ausentes, enviar este texto y agregar el envio al CRM de CONTRATOS**")
+        
     
