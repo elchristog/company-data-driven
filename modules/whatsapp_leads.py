@@ -215,6 +215,9 @@ def whatsapp_leads_creation(user_id, project_name):
 
 def wsp_answer_text(project_id):
     if project_id == 1:
+        st.write('---')
+        st.write('**Respuesta para el usuario que escribe por primera vez**')
+        
         text_answer = '''
         
         Hola [Nombre], mucho gusto!
@@ -229,4 +232,6 @@ def wsp_answer_text(project_id):
         
         Nos vemos el miércoles.
         '''
-    st.markdown(text_answer)
+        st.markdown(text_answer)
+        st.write('**Recordar crear el lead en la plataforma, etiquetar el lead en Whatsapp, guardar el contacto con el nombre de la persona**')
+        
