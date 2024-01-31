@@ -422,4 +422,13 @@ def groupal_session_contact_text(project_id):
         ¡Nos vemos en un momento!
         '''
         st.markdown(text_wsp)
+
+
+        st.write("---")
+        st.write("**Texto Al finalizar la sesion**")
+        text_wsp = '''
+        Hola! te dejo el enlace del programa para que lo puedas revisar: https://enfermeraenestadosunidos.com/validar-enfermeria-en-usa/
+        Cualquier duda que tengas, me escribes por acá y te ayudaré a resolverla lo más pronto posible.
+        '''
+        st.markdown(text_wsp)
     
