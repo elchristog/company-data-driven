@@ -395,7 +395,7 @@ def groupal_session_team_member_performance(user_id, project_name):
 def groupal_session_contact_text(project_id):
     if project_id == 1:
         st.write("---")
-        st.write("Texto para ausentes de la reunion grupal")
+        st.write("**Texto para ausentes de la reunion grupal**")
         text_wsp = '''
         ¡Hola! Buenos días.
         Este miércoles voy a hacer otra sesión para explicar el proceso de homologación de enfermería en Estados Unidos. Si quieres asistir, puedes reservar tu espacio desde acá: https://bit.ly/3vtB3Wi
@@ -405,7 +405,7 @@ def groupal_session_contact_text(project_id):
         st.markdown(text_wsp)
 
         st.write("---")
-        st.write("Texto un dia antes de la reunion grupal")
+        st.write("**Texto un dia antes de la reunion grupal**")
         text_wsp = '''
         ¡Hola! ¿Cómo estás?
         Quiero contarte que realizaremos otra sesión grupal gratuita donde explicaré detalladamente el proceso de *homologación de enfermería en Estados Unidos*. Esta es una oportunidad para obtener toda la información que necesitas. La sesión se realizará este miércoles 31 de enero a las 6 pm, hora Georgia EEUU. 
@@ -415,7 +415,7 @@ def groupal_session_contact_text(project_id):
         st.markdown(text_wsp)
 
         st.write("---")
-        st.write("Texto 15 minutos antes de la sesion grupal")
+        st.write("**Texto 15 minutos antes de la sesion grupal**")
         text_wsp = '''
         Hola! Sabemos que tienes interés en conocer el proceso de *homologación de enfermería en Estados Unidos*. Estamos a unos minutos de iniciar la sesión donde resolveremos algunas dudas sobre este proceso.
         Puedes unirte en el siguiente enlace: https://calendly.com/events/524e01bd-76b1-45b5-9052-2058628e6893/google_meet
