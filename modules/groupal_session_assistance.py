@@ -431,6 +431,6 @@ def groupal_session_contact_text(project_id):
         También, si quieres, te llamo en un momento y hablamos de tu caso en particular.
         '''
         st.markdown(text_wsp)
-        st.write("**Antes de iniciar la sesiond escargar el Excel de registrados y agregar las columnas, Asistio,	Agregado como asistente en plataforma,	Agregado como ausente en plataforma,	Entregado link de producto,	etiquetado como groupal session,	llamado,	agregado en CRM de CONTRATOS. AL dia siguiente dejar la tabla totalmente diligenciada**")
+        st.write("**Antes de iniciar la sesion descargar el Excel de registrados y agregar las columnas, Asistio,	Agregado como asistente en plataforma,	Agregado como ausente en plataforma,	Entregado link de producto,	etiquetado como groupal session,	llamado,	agregado en CRM de CONTRATOS. AL dia siguiente dejar la tabla totalmente diligenciada**")
         
     
