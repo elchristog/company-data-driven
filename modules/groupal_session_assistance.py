@@ -428,9 +428,9 @@ def groupal_session_contact_text(project_id):
         st.write("**Texto Al finalizar la sesion**")
         text_wsp = '''
         Hola! te dejo el enlace del programa para que lo puedas revisar: https://enfermeraenestadosunidos.com/validar-enfermeria-en-usa/
-        Cualquier duda que tengas, me escribes por acá y te ayudaré a resolverla lo más pronto posible.
+        También, si quieres, te llamo en un momento y hablamos de tu caso en particular.
         '''
         st.markdown(text_wsp)
-        st.write("**Al finalizar la sesion recordar agregar los asistentes, agregar los ausentes, enviar este texto, etiquetar en Whatsapp como groupal session y agregar el envio al CRM de CONTRATOS**")
+        st.write("**Antes de iniciar la sesiond escargar el Excel de registrados y agregar las columnas, Asistio,	Agregado como asistente en plataforma,	Agregado como ausente en plataforma,	Entregado link de producto,	etiquetado como groupal session,	llamado,	agregado en CRM de CONTRATOS. AL dia siguiente dejar la tabla totalmente diligenciada**")
         
     
