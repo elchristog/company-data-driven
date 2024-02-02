@@ -57,15 +57,14 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             st.write("---") 
 
         if menu == "Home":
-            sub_menu_options=['Logros', 'Tareas', 'Asignar', 'Eliminar']
+            sub_menu_options=['Tareas', 'Asignar', 'Eliminar']
             sub_menu = st.sidebar.radio('Home options', options = sub_menu_options)
-            if sub_menu == "Logros":
-                tap.title_and_paragraph("Cumplimiento de tus tareas" + project_icon, "Visualiza tu crecimiento", "h2", 0)
-                t.tasks_achievements(user_id, project_name, 0)
             if sub_menu == "Tareas":
                 tap.title_and_paragraph("Tus tareas" + project_icon, "Gestiona tus tareas (Delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h3", 0)
                 tasks = t.tasks_visualizer(user_id, project_name, 0)
                 t.tips_tasks_ia(tasks, 0)
+                tap.title_and_paragraph("Cumplimiento de tus tareas" + project_icon, "Visualiza tu crecimiento", "h2", 0)
+                t.tasks_achievements(user_id, project_name, 0)
             if sub_menu == "Asignar":
                 tap.title_and_paragraph("Asignar tareas", "Asigna tareas a tu equipo", "h3", 0)
                 t.task_creation(user_id, role_id, project_id, project_name, 0)
@@ -301,15 +300,14 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             st.write("---") 
 
         if menu == "Home":
-            sub_menu_options=['Logros', 'Tareas']
+            sub_menu_options=['Tareas']
             sub_menu = st.sidebar.radio('Home options', options = sub_menu_options)
-            if sub_menu == "Logros":
-                tap.title_and_paragraph("Cumplimiento de tus tareas" + project_icon, "Visualiza tu crecimiento", "h2", 0)
-                t.tasks_achievements(user_id, project_name, 0)
             if sub_menu == "Tareas":
                 tap.title_and_paragraph("Tus tareas" + project_icon, "Gestiona tus tareas (Delayed tasks will be labeled as unfulfilled after 5 days of the commitment date)", "h3", 0)
                 tasks = t.tasks_visualizer(user_id, project_name, 0)
                 t.tips_tasks_ia(tasks, 0)
+                 tap.title_and_paragraph("Cumplimiento de tus tareas" + project_icon, "Visualiza tu crecimiento", "h2", 0)
+                t.tasks_achievements(user_id, project_name, 0)
             
         if menu == "Nclex":
             sub_menu_options=['Logros', 'Nclex test']
