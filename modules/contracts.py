@@ -405,6 +405,9 @@ def add_new_contract_payment(user_id, project_id, project_name):
         st.success('User confirmed!', icon = '🪬')
         if selected_username is not None:
             selected_contract_id = contract_ids[usernames.index(selected_username)]
+            user_debt = uc.run_quiery_instant(f"SELECT CAST(c.contract_total_value AS INT64) AS contract_total_value, total_payments.total_actual_payment, (CAST(c.contract_total_value AS INT64) - total_payments.total_actual_payment) AS current_debt, total_payments.last_payment_date FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN (SELECT cp.contract_id, SUM(CAST(cp.payment_value AS INT64)) AS total_actual_payment, MAX(cp.payment_date) AS last_payment_date FROM `company-data-driven.{project_name}.contracts_payments` AS cp WHERE cp.contract_id = '{selected_contract_id}' GROUP BY cp.contract_id) AS total_payments ON c.id = total_payments.contract_id WHERE c.id = '{selected_contract_id}';")
+            contract_total_value = user_debt[0].get('contract_total_value')
+            st.write(contract_total_value)
             payment_date = st.date_input("Payment date:", key = 'payment_date')
             payment_value = st.text_input("Payment value (USD):", key = 'payment_value', placeholder = "325", help = "Do not use dots, just numbers")
             add_payment_button = st.button("Add payment", on_click = add_new_contract_payment_execution, args = [user_id, project_name, selected_contract_id, payment_date, payment_value])
