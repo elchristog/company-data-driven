@@ -76,6 +76,10 @@ credentials:
       email: yaneetyancemanrrique@gmail.com
       name: Yaneet Manrrique
       password: $2b$12$MxmAD1xgfdhxRCuq1u3Rt.73JjtLo9H5894D7L2cVwkryuJP54.OK
+    ippadillac:
+      email: paola6_17@hotmail.com
+      name: Paola Padilla
+      password: $2b$12$o7cYeNig1551ve0bBP8Jju9UtGiU0PmsMeTm0XNwjJukegeiyYvm6
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
