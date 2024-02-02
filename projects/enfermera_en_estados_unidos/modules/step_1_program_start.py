@@ -36,6 +36,19 @@ def platform_user_creation_text_guide():
 
 
 
+def babbel_english_text_guide():
+    st.markdown('''
+        **Adquirir la licencia vitalicia de Babbel**
+        
+        Hola XXX,
+
+        Ahora voy a entregarte tu servicio vitalicio de inglés. Para poder hacerlo, necesito que me confirmes tu correo electrónico con el que vas a usar este servicio. Ojalá sea uno que no tenga previamente una cuenta en Babbel.
+
+        **Asegurarse que el usuario peuda acceder a la plataforma**
+        ''')
+
+
+
 
 def cv_creation_guide():
     st.markdown('''
