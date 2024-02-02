@@ -591,9 +591,9 @@ def contract_contact_text(project_id):
         
         ¡Hola! Buenos días.
 
-        Quería preguntarte cómo te ha ido con el proceso de homologación. Si tienes alguna duda o algo en lo que te pueda ayudar.
+        Quería preguntarte cómo te ha ido con el proceso de homologación. Si tienes alguna duda o algo en lo que te podamos ayudar.
 
-        Entiendo, si quieres podemos hacer una llamada y vemos cómo te puedo ayudar.
+        Entiendo, si quieres podemos hacer una llamada y vemos cómo te podemos ayudar.
 
         Vale, te va a llamar XX de nuestro equipo.
 
