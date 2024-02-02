@@ -1,9 +1,34 @@
 import streamlit as st
 
 
+def user_welcome():
+    st.markdown('''
+        Hola XXXX, confirmo recibido. 
+        
+        También voy a pedirte estos datos para cuando tengas un tiempo; puedes ir contestando estas preguntas en este chat:
+    
+    1. Nombre completo.
+    2. Correo electrónico.
+    3. Fecha de nacimiento.
+    4. Dirección de tu vivienda y ciudad.
+    5. Teléfono.
+    6. Número de pasaporte.
+    7. Fecha de inicio y finalización de tu primaria, secundaria y carrera de enfermería.
+    8. Fecha de grado de tu secundaria y carrera de enfermería.
+    9. Número de licencia y fecha de expedición de tu licencia.
+    10. Nombre y ciudad de tu escuela primaria, secundaria y de la universidad.
+    
+    Con esta información, vamos a comenzar a registrarte en CGFNS para homologar tu título. También vamos a crear tu cuenta de usuario en nuestra plataforma y tu cuenta para la plataforma de inglés con Babbel de por vida.
+    ''')
+
+
+
+
 
 def cv_creation_guide():
     st.markdown('''
+    **El dia 1 debes indicarle al usuario que vas a estar trabajando en la creacion de Curriculum para los requisitos de Estados Unidos, pidele su Curriculum actual y tambien su URL de linkedin, Entregale el CV a los 7 dias**
+    
     Traduce el CV del usuario y entregale este prompt a chatgpt:
       
     [RESUME] 
