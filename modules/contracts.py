@@ -405,10 +405,18 @@ def add_new_contract_payment(user_id, project_id, project_name):
         st.success('User confirmed!', icon = '🪬')
         if selected_username is not None:
             selected_contract_id = contract_ids[usernames.index(selected_username)]
-            user_debt = uc.run_query_instant(f"SELECT CAST(c.contract_total_value AS INT64) AS contract_total_value, total_payments.total_actual_payment, (CAST(c.contract_total_value AS INT64) - total_payments.total_actual_payment) AS current_debt, total_payments.last_payment_date FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN (SELECT cp.contract_id, SUM(CAST(cp.payment_value AS INT64)) AS total_actual_payment, MAX(cp.payment_date) AS last_payment_date FROM `company-data-driven.{project_name}.contracts_payments` AS cp WHERE cp.contract_id = '{selected_contract_id}' GROUP BY cp.contract_id) AS total_payments ON c.id = total_payments.contract_id WHERE c.id = '{selected_contract_id}';")
+            user_debt = uc.run_query_instant(f"SELECT CAST(c.contract_total_value AS INT64) AS contract_total_value, total_payments.total_paid, (CAST(c.contract_total_value AS INT64) - total_payments.total_actual_payment) AS current_debt, total_payments.last_payment_date FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN (SELECT cp.contract_id, SUM(CAST(cp.payment_value AS INT64)) AS total_paid, MAX(cp.payment_date) AS last_payment_date FROM `company-data-driven.{project_name}.contracts_payments` AS cp WHERE cp.contract_id = '{selected_contract_id}' GROUP BY cp.contract_id) AS total_payments ON c.id = total_payments.contract_id WHERE c.id = '{selected_contract_id}';")
             contract_total_value = user_debt[0].get('contract_total_value')
+            total_paid = user_debt[0].get('total_actual_payment')
+            current_debt = user_debt[0].get('current_debt')
+            last_payment_date = user_debt[0].get('last_payment_date')
+            
             col1, col2, col3, col4 = st.columns(4)
             col1.metric(label="Contract total value", value = contract_total_value)
+            col1.metric(label="Total paid", value = total_paid)
+            col1.metric(label="Current debt", value = current_debt)
+            col1.metric(label="Last payment date", value = last_payment_date)
+            
 
             payment_date = st.date_input("Payment date:", key = 'payment_date')
             payment_value = st.text_input("Payment value (USD):", key = 'payment_value', placeholder = "325", help = "Do not use dots, just numbers")
