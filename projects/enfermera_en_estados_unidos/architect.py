@@ -253,7 +253,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
         if menu == "Step1: Inicio del programa":
-            sub_menu_options=['User welcome', 'User credentials', 'Cv creation', 'Content creation guide']
+            sub_menu_options=['User welcome', 'User credentials', 'English program', 'Cv creation', 'Content creation guide']
             if role_id == 1:
                 sub_menu_options.extend(['Something'])
             sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
@@ -263,6 +263,9 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "User credentials":
                 tap.title_and_paragraph("User credentials" + project_icon, "Entrega de usuario y clave", "h3", 0)
                 s1ps.platform_user_creation_text_guide()
+            if sub_menu == "English program":
+                tap.title_and_paragraph("English program" + project_icon, "Entrega servicio de ingles", "h3", 0)
+                s1ps.babbel_english_text_guide()
             if sub_menu == "Cv creation":
                 tap.title_and_paragraph("Cv creation" + project_icon, "Creacion del resumee", "h3", 0)
                 s1ps.cv_creation_guide()
