@@ -26,7 +26,7 @@ def user_welcome():
 
 def platform_user_creation_text_guide():
     st.markdown('''
-        **Crear la plataforma el dia siguiente a la isncripcion del usuario, escribirle este mensaje y agendar la reunion en el menor tiempo**
+        **Crear la plataforma el dia siguiente a la inscripcion del usuario, escribirle este mensaje, crearle las tareas (Una practica de Nclex en la plataforma - plazo 15 dias, Descargar los recursos - plazo 15 dias, Reunion de entrega de credenciales - plazo segun se acuerde con la persona) y agendar la reunion en el menor tiempo**
         
         Hola XXXX.
 
