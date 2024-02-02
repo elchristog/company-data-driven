@@ -592,6 +592,12 @@ def contract_contact_text(project_id):
         ¡Hola! Buenos días.
 
         Quería preguntarte cómo te ha ido con el proceso de homologación. Si tienes alguna duda o algo en lo que te pueda ayudar.
+
+        Entiendo, si quieres podemos hacer una llamada y vemos cómo te puedo ayudar.
+
+        Vale, te va a llamar XX de nuestro equipo.
+
+        También te dejo el enlace de suscripción: https://enfermeraenestadosunidos.com/validar-enfermeria-en-usa/
         '''
     st.markdown(text_answer)
         
