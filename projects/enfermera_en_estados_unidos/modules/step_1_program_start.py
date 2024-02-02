@@ -24,6 +24,18 @@ def user_welcome():
 
 
 
+def platform_user_creation_text_guide():
+    st.markdown('''
+        **Crear la plataforma el dia siguiente a la isncripcion del usuario, escribirle este mensaje y agendar la reunion en el menor tiempo**
+        
+        Hola XXXX.
+
+        Ya creamos tu usuario para nuestra plataforma de Estados Unidos donde vamos a poder entregarte los recursos, monitorear el progreso y ayudarte a prepararte para el NCLEX. ¿Cuándo tienes tiempo para que hagamos una reunión corta y presentarte todo?
+        ''')
+
+
+
+
 
 def cv_creation_guide():
     st.markdown('''
