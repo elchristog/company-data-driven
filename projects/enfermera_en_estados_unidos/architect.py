@@ -253,10 +253,13 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
         if menu == "Step1: Inicio del programa":
-            sub_menu_options=['Cv creation', 'Content creation guide']
+            sub_menu_options=['User welcome', 'Cv creation', 'Content creation guide']
             if role_id == 1:
                 sub_menu_options.extend(['Something'])
             sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
+            if sub_menu == "User welcome":
+                tap.title_and_paragraph("User welcome" + project_icon, "Benvenida al usuario y solicitud de datos", "h3", 0)
+                s1ps.user_welcome()
             if sub_menu == "Cv creation":
                 tap.title_and_paragraph("Cv creation" + project_icon, "Creacion del resumee", "h3", 0)
                 s1ps.cv_creation_guide()
