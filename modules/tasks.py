@@ -26,8 +26,8 @@ def update_task_status():
         # if st.session_state.selected_status == 'finished':
         uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.project_name}.tasks` SET status = 'finished', finished_date = '{today_str}' WHERE id = {selected_task_id}")
         st.toast("Updating, please wait", icon = "☺️")
-        time.sleep(5)
         st.balloons()
+        time.sleep(5)
     st.toast("Task status updated!", icon = "😎")
     uc.run_query_2_m.clear()
     # st.rerun()
@@ -142,11 +142,11 @@ def execute_task_creation():
         max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{st.session_state.project_name}.tasks`")[0].get('max_id')
         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{today_str}', '{st.session_state.task_input}', {st.session_state.selected_user_id}, '{st.session_state.commitment_date_input}', 'to_start', {st.session_state.user_id})")
         st.toast("Updating, please wait", icon = "☺️")
+        st.toast('Task created! (' + st.session_state.task_input + ')', icon="😎")
+        st.balloons()
         time.sleep(5)
         uc.run_query_5_m.clear()
         uc.run_query_2_m.clear()
-        st.toast('Task created! (' + st.session_state.task_input + ')', icon="😎")
-        st.balloons()
         # st.rerun()
 
 
@@ -201,11 +201,11 @@ def task_deletion_execution():
         today_str = today.strftime("%Y-%m-%d")
         uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.project_name}.tasks` SET status = 'canceled', canceled_date = '{today_str}', task_cancelator_id = {st.session_state.user_id} WHERE id = {selected_task_id};")
         st.toast("Updating, please wait", icon = "☺️")
+        st.error('Task deleted!', icon="😎")
+        st.balloons()
         time.sleep(5)
         uc.run_query_1_m.clear()
         uc.run_query_2_m.clear()
-        st.error('Task deleted!', icon="😎")
-        st.balloons()
         # st.rerun()
 
 
