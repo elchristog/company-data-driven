@@ -43,9 +43,9 @@ def save_new_content(project_name, user_id):
     
     st.toast("Please wait", icon = "☺️")
     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.effective_communication_content` (id, creation_date, creator_user_id, keyword, main_idea, why_1, why_2, why_3, how_1, how_2, how_3, experiment_1, experiment_2, experiment_3, relevant_content, checklist, call_to_action, created_content) VALUES (GENERATE_UUID(), CURRENT_DATE(), {user_id}, '{st.session_state.text_input_1}', '{st.session_state.text_input_2}', '{st.session_state.text_input_3}', '{st.session_state.text_input_4}', '{st.session_state.text_input_5}', '{st.session_state.text_input_6}', '{st.session_state.text_input_7}', '{st.session_state.text_input_8}', '{st.session_state.text_input_9}', '{st.session_state.text_input_10}', '{st.session_state.text_input_11}', '{st.session_state.text_input_12}', '{st.session_state.text_input_13}', '{st.session_state.text_input_14}' ,0);")
-    time.sleep(5)
     st.toast("Content saved!", icon = "👾")
     st.balloons()
+    time.sleep(5)
     uc.run_query_30_m.clear()
 
 
@@ -291,9 +291,8 @@ def seo_writing_execution():
     st.session_state.article = f"[KEYWORD] {st.session_state.selected_keyword}" + " ----Recuerda agregar 3 links internos, 3 links externos, anclar el video a la web, agregar comentario fijado al video, comaprtir el video en redes, indexar la web en search console, publicar los contenidos y compartir el pantallazo en otras redes---- [ARTICLE] First add here the [WEB META DESCRIPTION] as the first text. Asegurate que el titulo, meta description, descripcion de youtubecontengan la keyword" + article_part_1 + article_part_1_extras + article_part_2 + article_part_2_extras + article_part_3 + article_part_3_extras + " [EXTRAS] " + article_attributes + " [POSTS] " + article_insights
 
     st.write(st.session_state.article)
-    
-    time.sleep(5)
     st.balloons()
+    time.sleep(5)
     uc.run_query_30_m.clear()
 
 
