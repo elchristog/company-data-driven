@@ -165,12 +165,13 @@ def customer_creation_execution():
         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.role_assignment` (id, user_id, role_id) VALUES({st.session_state.max_id_role_assignement_customer_creation}, {st.session_state.max_id_users_customer_creation}, {st.session_state.selected_role_id_customer_creation});")
         
         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name_customer_creation}.contracts` (id, contract_date, user_id, traffic_analytics_whatsapp_leads_id, contract_total_value, contract_agreed_payments, creator_user_id) VALUES (GENERATE_UUID(), '{st.session_state.today_str_customer_creation}', {st.session_state.max_id_users_customer_creation}, '{st.session_state.selected_phone_id}','{st.session_state.contract_value_customer_creation}', '{st.session_state.contract_num_payments_customer_creation}', {st.session_state.user_id_customer_creation});")
-        time.sleep(5)
-        uc.run_query_30_m.clear()
         st.toast('User Created!', icon = '🎈')
         st.balloons()
         st.warning('Remember to hash the password and add to config, and create the demo task', icon = '😶‍🌫️')
         st.toast('Remember to hash the password and add to config, and create the demo task', icon = '😶‍🌫️')
+        time.sleep(5)
+        uc.run_query_30_m.clear()
+        
         
 
 
@@ -463,21 +464,22 @@ def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, cont
             st.toast("Please wait", icon = "☺️")
             contact_description = ''.join(i for i in contact_description if not i.isdigit())
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
+            st.toast("CRM Contact saved!", icon = "👾")
+            st.balloons()
             time.sleep(5)
             uc.run_query_half_day.clear()
             uc.run_query_30_m.clear()
-            st.toast("CRM Contact saved!", icon = "👾")
-            st.balloons()
         else:
             if contact_date > last_contact_date[0].get("last_contact_date"):
                 st.toast("Please wait", icon = "☺️")
                 uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
+                st.toast("CRM Contact saved!", icon = "👾")
+                st.balloons()
                 time.sleep(5)
                 uc.run_query_half_day.clear()
                 uc.run_query_30_m.clear()
                 uc.run_query_1_h.clear()
-                st.toast("CRM Contact saved!", icon = "👾")
-                st.balloons()
+                
         
 
 
