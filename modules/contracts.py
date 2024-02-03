@@ -382,7 +382,7 @@ def add_new_contract_payment_execution(user_id, project_name, selected_contract_
             if int(payment_value) > int(current_debt):
                 st.toast("Payment can't be bigger than debt", icon = "🤨")
             else:
-                if payment_date <= last_payment_date:
+                if payment_date <= last_payment_date.strftime('%Y-%m-%d'):
                     st.toast("Payment can't be before last payment", icon = "🤨")
                 else:
                     st.toast("Please wait", icon = "☺️")
