@@ -30,10 +30,10 @@ def update_customer_progress_execution():
             max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{st.session_state.project_name}.{st.session_state.program_steps_user_progress_table_name}`")[0].get('max_id')
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.{st.session_state.program_steps_user_progress_table_name}` VALUES({max_id}, '{today_str}', {st.session_state.user_id}, {st.session_state.selected_user_id}, {st.session_state.selected_step_id})")
             st.toast("Updating, please wait", icon = "☺️")
-            time.sleep(5)
-            uc.run_query_15_m.clear()
             st.toast('Status updated! (' + st.session_state.selected_new_step + ')', icon="😎")
             st.balloons()
+            time.sleep(5)
+            uc.run_query_15_m.clear()
             st.rerun()
         else:
             st.toast("Step is not confirmed.")
