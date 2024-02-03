@@ -372,15 +372,18 @@ def contract_payments_show_metrics(project_name):
 
 
 
-def add_new_contract_payment_execution(user_id, project_name, selected_contract_id, payment_date, payment_value):
+def add_new_contract_payment_execution(user_id, project_name, selected_contract_id, payment_date, payment_value, contract_total_value, total_paid, current_debt, last_payment_date):
     if payment_value is None:
         st.toast("payment_value can not be null", icon = "🤨")
     else:
-        st.toast("Please wait", icon = "☺️")
-        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contracts_payments` (id, contract_id, payment_value, payment_date, creator_id) VALUES (GENERATE_UUID(), '{selected_contract_id}', '{payment_value}', '{payment_date}', {user_id});")
-        time.sleep(5)
-        st.toast("Payment saved!", icon = "👾")
-        st.balloons()
+        if current_debt <= 0:
+            st.toast("User does not have debts", icon = "🤨")
+        else:
+            st.toast("Please wait", icon = "☺️")
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contracts_payments` (id, contract_id, payment_value, payment_date, creator_id) VALUES (GENERATE_UUID(), '{selected_contract_id}', '{payment_value}', '{payment_date}', {user_id});")
+            time.sleep(5)
+            st.toast("Payment saved!", icon = "👾")
+            st.balloons()
 
 
 
@@ -420,7 +423,7 @@ def add_new_contract_payment(user_id, project_id, project_name):
 
             payment_date = st.date_input("Payment date:", key = 'payment_date')
             payment_value = st.text_input("Payment value (USD):", key = 'payment_value', placeholder = "325", help = "Do not use dots, just numbers")
-            add_payment_button = st.button("Add payment", on_click = add_new_contract_payment_execution, args = [user_id, project_name, selected_contract_id, payment_date, payment_value])
+            add_payment_button = st.button("Add payment", on_click = add_new_contract_payment_execution, args = [user_id, project_name, selected_contract_id, payment_date, payment_value, contract_total_value, total_paid, current_debt, last_payment_date])
 
 
 
