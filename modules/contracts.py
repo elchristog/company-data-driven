@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import re
 
-from datetime import datetime
+from datetime import datetime as dtt
 from streamlit_raw_echarts import st_echarts, JsCode
 
 import utils.user_credentials as uc
@@ -383,7 +383,7 @@ def add_new_contract_payment_execution(user_id, project_name, selected_contract_
             if int(payment_value) > int(current_debt):
                 st.toast("Payment can't be bigger than debt", icon = "🤨")
             else:
-                last_payment_date = datetime.strptime(last_payment_date, '%Y-%m-%d').date()
+                last_payment_date = dtt.strptime(last_payment_date, '%Y-%m-%d').date()
                 if payment_date <= last_payment_date:
                     st.toast("Payment can't be before last payment", icon = "🤨")
                 else:
