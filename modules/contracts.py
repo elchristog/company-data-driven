@@ -379,7 +379,7 @@ def add_new_contract_payment_execution(user_id, project_name, selected_contract_
         if current_debt <= 0:
             st.toast("User does not have debts", icon = "🤨")
         else:
-            print(int(payment_value))
+            print(payment_value)
             print(int(current_debt))
             # if int(payment_value) > int(current_debt):
             #     st.toast("Payment can't be bigger than debt", icon = "🤨")
@@ -425,7 +425,6 @@ def add_new_contract_payment(user_id, project_id, project_name):
             col2.metric(label="Total paid", value = total_paid)
             col3.metric(label="Current debt", value = current_debt)
             col4.metric(label="Last payment date", value = last_payment_date[-8:])
-            
 
             payment_date = st.date_input("Payment date:", key = 'payment_date')
             payment_value = st.text_input("Payment value (USD):", key = 'payment_value', placeholder = "325", help = "Do not use dots, just numbers")
