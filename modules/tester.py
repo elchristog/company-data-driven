@@ -352,9 +352,10 @@ def add_question_to_test_execution():
     else:
         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.{st.session_state.questions_table_name}` (id, creation_date, question	,option_a	,option_b	,option_c	,option_d	,correct_option	,explanation, creator_id) VALUES({st.session_state.max_id}, '{st.session_state.today_str}', '{st.session_state.question}', '{st.session_state.option_a}', '{st.session_state.option_b}', '{st.session_state.option_c}', '{st.session_state.option_d}', '{st.session_state.letter_correct_answer_lower}', '{st.session_state.cleaned_explanation}', {st.session_state.user_id});")
         st.toast("Updating, please wait", icon = "☺️")
-        time.sleep(5)
         st.toast("Question added!", icon = "🐣")
         st.balloons()
+        time.sleep(5)
+        
 
 
 
