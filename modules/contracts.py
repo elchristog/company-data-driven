@@ -409,13 +409,13 @@ def add_new_contract_payment(user_id, project_id, project_name):
             contract_total_value = user_debt[0].get('contract_total_value')
             total_paid = user_debt[0].get('total_paid')
             current_debt = user_debt[0].get('current_debt')
-            last_payment_date = ser_debt[0].get('last_payment_date')
+            last_payment_date = str(ser_debt[0].get('last_payment_date'))
             
             col1, col2, col3, col4 = st.columns(4)
             col1.metric(label="Contract total value", value = contract_total_value)
             col2.metric(label="Total paid", value = total_paid)
             col3.metric(label="Current debt", value = current_debt)
-            col4.metric(label="Last payment date", value = str(last_payment_date))
+            col4.metric(label="Last payment date", value = last_payment_date)
             
 
             payment_date = st.date_input("Payment date:", key = 'payment_date')
