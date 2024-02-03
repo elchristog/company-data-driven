@@ -427,7 +427,7 @@ def add_new_contract_payment(user_id, project_id, project_name):
             col4.metric(label="Last payment date", value = last_payment_date[-8:])
 
             payment_date = st.date_input("Payment date:", key = 'payment_date')
-            payment_value = st.text_input("Payment value (USD):", key = 'payment_value', placeholder = "325", help = "Do not use dots, just numbers")
+            payment_value = st.number_input("Payment value (USD):", key = 'payment_value', placeholder = "325", help = "Do not use dots, just numbers")
             add_payment_button = st.button("Add payment", on_click = add_new_contract_payment_execution, args = [user_id, project_name, selected_contract_id, payment_date, payment_value, contract_total_value, total_paid, current_debt, last_payment_date])
 
 
