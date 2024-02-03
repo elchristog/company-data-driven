@@ -379,7 +379,7 @@ def add_new_contract_payment_execution(user_id, project_name, selected_contract_
         if current_debt <= 0:
             st.toast("User does not have debts", icon = "🤨")
         else:
-            if payment_value > current_debt:
+            if int(payment_value) > int(current_debt):
                 st.toast("Payment can't be bigger than debt", icon = "🤨")
             else:
                 st.toast("Please wait", icon = "☺️")
