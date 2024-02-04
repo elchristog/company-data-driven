@@ -267,76 +267,6 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
 
 
 
-
-
-
-
-
-
-
-
-
-
-def plot_echarts_contract_payments(df_grouped):
-    df_grouped['date'] = df_grouped['date'].astype(str)
-
-    options = {
-        "xAxis": {
-            "type": "category",
-            "data": df_grouped['date'].tolist(),
-            "axisLabel": {
-                "formatter": "{value}"
-            }
-        },
-        "yAxis": {"type": "value", "name": ""},
-        "grid": {
-            "right": 20,
-            "left": 65,
-            "top": 45,
-            "bottom": 50,
-        },
-        "legend": {
-            "show": True,
-            "top": "top",
-            "align": "auto",
-            "selected": {  
-                "groupal_session_clicks": True,        
-                "num_assistants": False
-            }
-        },
-        "tooltip": {"trigger": "axis", },
-        "series": [
-            {
-                "type": "line",
-                "name": "groupal_session_clicks",
-                "data": df_grouped['groupal_session_clicks'].tolist(),
-                "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#A6785D"},
-                "showSymbol": False,
-            },
-            {
-                "type": "line",
-                "name": "num_assistants",
-                "data": df_grouped["num_assistants"].tolist(),
-                "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#394A59"},
-                "showSymbol": False,
-            }
-        ],
-
-        "yAxis": [
-            {"type": "value", "name": ""},
-            {"type": "value", "inverse": True, "show": False},  
-        ],
-        "backgroundColor": "#ffffff",
-        "color": ["#A6785D", "#394A59"],
-    }
-
-    st_echarts(option=options, theme='chalk', height=400, width='100%')
-
-
-
-
 def contract_payments_show_metrics(project_name):
   dates_payments = uc.run_query_1_h(f"SELECT MIN(payment_date) AS min_payment_date, MAX(payment_date) AS max_payment_date FROM `company-data-driven.{project_name}.contracts_payments` AS cp;")
   if len(dates_payments) < 1:
@@ -352,7 +282,10 @@ def contract_payments_show_metrics(project_name):
           key = 'day_payments'
       )
 
-      # df_conversion = pd.DataFrame(uc.run_query_1_h(f"SELECT groupal_session_clicks_df.date, groupal_session_clicks_df.groupal_session_clicks, meeting_assistance.num_assistants FROM (SELECT meeting_date, COUNT(id) AS num_assistants FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance`  WHERE status = 'assistant' GROUP BY meeting_date) AS meeting_assistance RIGHT OUTER JOIN (SELECT date, SUM(clicks) AS groupal_session_clicks FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` WHERE bitly_link = '{bitly_groupal_session_link}' AND date >= '{day[0].strftime('%Y-%m-%d')}'  AND  date <= '{day[1].strftime('%Y-%m-%d')}'   GROUP BY date) AS groupal_session_clicks_df ON meeting_assistance.meeting_date = groupal_session_clicks_df.date ORDER BY groupal_session_clicks_df.date ASC;"))
+
+      df_sales = pd.DataFrame(uc.run_query_1_h(f"SELECT SUM(CAST(c.contract_total_value AS INT64)) AS total_sales FROM `company-data-driven.{project_name}.contracts` AS c WHERE c.contract_date >= '{day[0].strftime('%Y-%m-%d')}' AND c.contract_date <= '{day[1].strftime('%Y-%m-%d')}';"))
+      st.table(df_sales)
+
 
       # df_conversion["num_assistants"] = df_conversion["num_assistants"].fillna(0)
       # bitly_clicks_groupal_session = df_conversion['groupal_session_clicks'].sum()
@@ -366,8 +299,7 @@ def contract_payments_show_metrics(project_name):
       #     st.metric('num_assistants:', f'{num_assistants:,}')
       # with met3:
       #     st.metric('conversion:', f'{conversion * 100:.2f}%')
-      # with st.container():
-      #     plot_echarts_contract_payments(df_conversion)
+
 
 
 
