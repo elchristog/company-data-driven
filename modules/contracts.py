@@ -284,21 +284,20 @@ def contract_payments_show_metrics(project_name):
 
 
       df_sales = pd.DataFrame(uc.run_query_1_h(f"SELECT SUM(CAST(c.contract_total_value AS INT64)) AS total_sales FROM `company-data-driven.{project_name}.contracts` AS c WHERE c.contract_date >= '{day[0].strftime('%Y-%m-%d')}' AND c.contract_date <= '{day[1].strftime('%Y-%m-%d')}';"))
-      st.table(df_sales)
 
-
-      # df_conversion["num_assistants"] = df_conversion["num_assistants"].fillna(0)
-      # bitly_clicks_groupal_session = df_conversion['groupal_session_clicks'].sum()
-      # num_assistants = df_conversion['num_assistants'].sum()
-      # conversion = num_assistants/bitly_clicks_groupal_session
+      df_payments = pd.DataFrame(uc.run_query_1_h(f"SELECT SUM(CAST(cp.payment_value AS INT64)) AS total_paid FROM `company-data-driven.{project_name}.contracts_payments` AS cp WHERE cp.payment_date >= '{day[0].strftime('%Y-%m-%d')}' AND cp.payment_date <= '{day[1].strftime('%Y-%m-%d')}';"))
+      
+      total_sales = df_sales['total_sales'].sum()
+      total_paid = df_payments['total_paid'].sum()
+      total_debt = total_sales-total_paid
     
-      # met1, met2, met3 = st.columns(3)
-      # with met1:
-      #     st.metric('bitly_clicks_groupal_session:', f'{bitly_clicks_groupal_session:,}')
-      # with met2:
-      #     st.metric('num_assistants:', f'{num_assistants:,}')
-      # with met3:
-      #     st.metric('conversion:', f'{conversion * 100:.2f}%')
+      met1, met2, met3 = st.columns(3)
+      with met1:
+          st.metric('total_sales:', f'{total_sales:,}')
+      with met2:
+          st.metric('total_paid:', f'{total_paid:,}')
+      with met3:
+          st.metric('total_debt:', f'{total_debt:,}')
 
 
 
