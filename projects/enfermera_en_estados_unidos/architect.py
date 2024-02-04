@@ -217,7 +217,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if role_id == 1:
                 sub_menu_options.extend(['Something else'])
             sub_menu = st.sidebar.radio('Contract options', options = sub_menu_options)
-            if sub_menu == "Contract Payment":
+            if sub_menu == "Contract Payments":
                 tap.title_and_paragraph("Contracts Payments" + project_icon, "Seguimiento de los pagos", "h3", 0)
                 c.contract_payments_show_metrics(project_name)
             if sub_menu == "Add new payment":
