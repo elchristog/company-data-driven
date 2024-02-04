@@ -323,6 +323,7 @@ def add_new_contract_payment_execution(user_id, project_name, selected_contract_
                     st.toast("Payment saved!", icon = "👾")
                     st.balloons()
                     time.sleep(5)
+                    uc.run_query_1_h.clear()
                 
 
 
