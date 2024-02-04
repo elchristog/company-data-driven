@@ -31,6 +31,7 @@ def update_task_status():
         time.sleep(5)
     st.toast("Task status updated!", icon = "😎")
     uc.run_query_2_m.clear()
+    uc.run_query_1_m.clear()
     # st.rerun()
 
 
