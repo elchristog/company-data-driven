@@ -40,7 +40,7 @@ def tasks_visualizer(user_id, project_name, divider):
         st.success('You have no pending tasks, very good!', icon="😎")
     else:
         tasks_df = pd.DataFrame(rows)
-        st.table(tasks_df)
+        st.table(tasks_df[['description', 'commit_finish_date']])
         descriptions = []
         ids = []
         actual_statuses = []
