@@ -38,7 +38,7 @@ def tasks_visualizer(user_id, project_name, divider):
     if len(rows) == 0:
         st.success('You have no pending tasks, very good!', icon="😎")
     else:
-        st.table(rows)
+        st.table(pd.DataFrame(rows))
         descriptions = []
         ids = []
         actual_statuses = []
