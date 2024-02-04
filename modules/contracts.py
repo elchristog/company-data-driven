@@ -304,7 +304,10 @@ def contract_payments_show_metrics(project_name):
       df_delayed_payments = pd.DataFrame(uc.run_query_1_h(f"SELECT u.username, c.contract_total_value, payments.total_paid, payments.last_payment_date FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN (SELECT cp.contract_id, SUM(CAST(cp.payment_value AS INT64)) AS total_paid, MAX(cp.payment_date) AS last_payment_date FROM `company-data-driven.{project_name}.contracts_payments` AS cp GROUP BY cp.contract_id) AS payments ON c.id = payments.contract_id INNER JOIN `company-data-driven.global.users` AS u ON c.user_id = u.id WHERE CAST(c.contract_total_value AS INT64) > payments.total_paid  AND DATE_DIFF(CURRENT_DATE(), payments.last_payment_date, DAY) > 30 ORDER BY payments.last_payment_date ASC;"))
 
       st.write("**Delayed payments**")
-      st.table(df_delayed_payments)
+      if len(df_delayed_payments) < 1:
+          st.success("No delayed payments", icon = "🦈")
+      else:
+          st.table(df_delayed_payments)
 
 
 
