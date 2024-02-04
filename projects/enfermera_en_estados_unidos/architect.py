@@ -301,7 +301,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
     if role_id == 6:
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
-            menu_options = ["Home", "Nclex", "Recursos", "Ofertas de trabajo"]
+            menu_options = ["Home", "Nclex", "Recursos", "Ofertas de trabajo", "Mis cursos"]
             if user_id == 3: #------ in develop -----------
                 menu_options.extend(['Progreso'])
             menu = st.sidebar.radio(project_title, menu_options)
@@ -334,6 +334,14 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
         if menu == "Ofertas de trabajo":
             tap.title_and_paragraph("Ofertas de trabajo" + project_icon, "Accede a ofertas de trabajo activas en USA", "h2", 0)
             r.resources(user_id, [':hospital:', 'AdventHealth', 'https://jobs.adventhealth.com/jobs/'], [':health_worker:', 'Piedmont Care', 'https://piedmontcareers.org/search/?filter[category][]=Allied+Health&filter[specialty][]=Behavioral+Health+-+Allied+Health&src=DM-10960&utm_source=Google&utm_medium=Search&utm_campaign=Bayard&gclid=Cj0KCQiAgqGrBhDtARIsAM5s0_nfl0k48Akzmv1LYGQkLGRlwlxaI8xxwgnVrKOMEE1Gr1QuZXjHg5caAoFlEALw_wcB'], [':office:', "St Joseph's Candler", 'https://careers.sjchs.org/search/nursing/jobs'], [':metro:', "Indeed", 'https://www.indeed.com/jobs?q=Nurse+RN&l=United+States'], [':left_luggage:', "LinkedIn", 'https://www.linkedin.com/jobs/rn-jobs/'], [':bellhop_bell:', "Recent positions", 'https://www.google.com/search?q=site%3AICIMS.com+OR+site%3Asmartrecruiters.com+OR+site%3Aworkable.com+OR+site%3Ajobs.lever.co+OR+site%3Aboards.greenhouse.io+OR+site%3Amyworkdayjobs.com+OR+site%3Ajobvite.com+OR+site%3Acareers.google.com+OR+site%3Ajobs.apple.com+OR+site%3Ametacareers.com+(%E2%80%9CNurse%E2%80%9D+OR+%E2%80%9CRegistered+Nurse%22+OR+(%E2%80%9CStaff+Nurse%E2%80%9D)&rlz=1CAKDZI_enUS1065&oq=site%3AICIMS.com+OR+site%3Asmartrecruiters.com+OR+site%3Aworkable.com+OR+site%3Ajobs.lever.co+OR+site%3Aboards.greenhouse.io+OR+site%3Amyworkdayjobs.com+OR+site%3Ajobvite.com+OR+site%3Acareers.google.com+OR+site%3Ajobs.apple.com+OR+site%3Ametacareers.com+(%E2%80%9CNurse%E2%80%9D+OR+%E2%80%9CRegistered+Nurse%22+OR+(%E2%80%9CStaff+Nurse%E2%80%9D)&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg60gEIMTQ2OGowajeoAgCwAgA&sourceid=chrome&ie=UTF-8'])
+
+
+
+        if menu == "Mis cursos":
+            tap.title_and_paragraph("Tus cursos" + project_icon, "Accede a tus cursos de preparación", "h2", 0)
+            r.resources(user_id, [':female-student:', 'English for the NCLEX-RN', 'https://company-data-driven.thrivecart.com/l/english-for-the-nclex-rn/'])
+
+        
 
         if menu == "Progreso":
             tap.title_and_paragraph("Tus progreso" + project_icon, "Verifica tu progreso en el programa", "h2", 0)
