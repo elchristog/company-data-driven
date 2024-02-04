@@ -38,7 +38,7 @@ def update_task_status():
 def tasks_visualizer(user_id, project_name, divider):
     rows = uc.run_query_2_m(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed') ORDER BY commit_finish_date ASC;") #finished, canceled, unfulfilled
     if len(rows) == 0:
-        st.success('You have no pending tasks, very good!', icon="😎")
+        st.success('Nailed it! Nothing left on your plate.', icon="😎")
     else:
         tasks_df = pd.DataFrame(rows)
         st.table(tasks_df[['description', 'commit_finish_date']])
@@ -111,7 +111,7 @@ def tasks_achievements(user_id, project_name, divider):
             st.write("#### Unfulfilled tasks last 3 months")
             unfulfilled_tasks_table = uc.run_query_1_m(f"SELECT t.description, t.commit_finish_date, t.unfulfilled_date  FROM `company-data-driven.{project_name}.tasks` AS t WHERE responsible_user_id = {user_id} AND t.status = 'unfulfilled' AND t.unfulfilled_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH) AND EXTRACT(YEAR FROM t.creation_date) = EXTRACT(YEAR FROM CURRENT_DATE()) ORDER BY t.unfulfilled_date DESC;")
             if len(unfulfilled_tasks_table) < 1:
-                st.success("You are the best!", icon = "😎")
+                st.success("You killed it! I knew you could do it!", icon = "😎")
             else:
                 st.table(unfulfilled_tasks_table)
 
