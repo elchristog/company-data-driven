@@ -52,7 +52,7 @@ def babbel_english_text_guide():
 
 def cv_creation_guide():
     st.markdown('''
-    **El dia 1 debes indicarle al usuario que vas a estar trabajando en la creacion de Curriculum para los requisitos de Estados Unidos, pidele su Curriculum actual y tambien su URL de linkedin, Entregale el CV a los 7 dias**
+    **El dia 1 debes indicarle al usuario que vas a estar trabajando en la creacion de Curriculum para los requisitos de Estados Unidos, pidele su Curriculum actual y tambien su URL de linkedin, Entregale el CV a los 7 dias subiendolo al Drive de la persona (Se sube el .md el .pdf y el pdf de como edutar el cv [Descargar](https://drive.google.com/uc?export=download&id=1bvoaWduRqa7EdOV5dRpOo8YMmb_LhclZ))**
     
     Traduce el CV del usuario y entregale este prompt a chatgpt:
       
