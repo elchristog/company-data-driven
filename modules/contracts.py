@@ -481,28 +481,6 @@ def contracts_crm_show_metrics(project_name):
 
 
 
-def contract_crm_user_view(project_name):
-    rows = uc.run_query_half_day(f"SELECT DISTINCT tawl.id, CONCAT(tawl.phone_indicator,tawl.phone_number) AS full_phone_number, last_user_status_df.last_user_status FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS tawl INNER JOIN `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` AS tagsa ON tawl.id = tagsa.traffic_analytics_whatsapp_lead_id LEFT OUTER JOIN (SELECT traffic_analytics_whatsapp_leads_id, LAST_VALUE(user_status) OVER(PARTITION BY traffic_analytics_whatsapp_leads_id ORDER BY contact_date) AS last_user_status FROM `company-data-driven.{project_name}.contract_crm_log`) AS last_user_status_df ON tawl.id = last_user_status_df.traffic_analytics_whatsapp_leads_id WHERE tagsa.status = 'assistant' AND tawl.id NOT IN (SELECT traffic_analytics_whatsapp_leads_id FROM `company-data-driven.{project_name}.contracts`) AND (last_user_status_df.last_user_status LIKE '%active%' OR last_user_status_df.last_user_status IS NULL);")
-    lead_ids = []
-    lead_phone_numbers = []
-    for row in rows:
-        lead_ids.append(row.get('id'))
-        lead_phone_numbers.append(row.get('full_phone_number'))
-    selected_phone = st.selectbox(
-            label = "Select the user phone number",
-            options = lead_phone_numbers,
-            index = None,
-            key= "lead_phone_numbers"
-        )
-    checking_phone_query = uc.run_query_30_m(f"SELECT awl.id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS awl WHERE CONCAT(awl.phone_indicator,awl.phone_number) LIKE '{selected_phone}';")
-    if len(checking_phone_query) < 1 or checking_phone_query is None:
-        st.error('Phone number does not exists, be sure this user was created as a Whatsapp lead', icon = '👻')
-    else:
-        st.success('Phone number available', icon = '🪬')
-        if selected_phone is not None:
-            selected_phone_id = lead_ids[lead_phone_numbers.index(selected_phone)]
-            user_history = uc.run_query_instant(f"SELECT contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.contract_crm_log` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}' ORDER BY contact_date ASC;")
-            st.table(user_history)
 
 
 
