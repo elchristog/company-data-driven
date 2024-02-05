@@ -181,7 +181,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
         if menu == "Contract":
-            sub_menu_options=['Contracts', 'Customer CRM view', 'Add new CRM contact', 'Add new contract', 'Contact guide']
+            sub_menu_options=['Contracts', 'Add new CRM contact', 'Add new contract', 'Contact guide']
             if role_id == 1:
                 sub_menu_options.extend(['Something else'])
             sub_menu = st.sidebar.radio('Contract options', options = sub_menu_options)
@@ -192,9 +192,6 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 c.contracts_crm_show_metrics(project_name)
                 tap.title_and_paragraph("Your performance" + project_icon, "Contactos realizados", "h3", 0)
                 c.contract_team_member_performance(user_id, project_name)
-            if sub_menu == "Customer CRM view":
-                tap.title_and_paragraph("Customer CRM view" + project_icon, "Seguimiento de los contactos con usuarios para acordar un Contrato", "h3", 0)
-                c.contract_crm_user_view(project_name)
             if sub_menu == "Add new CRM contact":
                 tap.title_and_paragraph("Add new CRM contact" + project_icon, "Seguimiento de los contactos para cerrar nuevos contratos", "h3", 0)
                 c.add_new_crm_contact(user_id, project_name)
