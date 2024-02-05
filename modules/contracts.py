@@ -560,7 +560,7 @@ def contract_contact_text(project_id):
 
         Quería preguntarte cómo te ha ido con el proceso de homologación. Si tienes alguna duda o algo en lo que te podamos ayudar.
 
-        Entiendo, si quieres podemos hacer una llamada y vemos cómo te podemos ayudar.
+        Entiendo, si quieres podemos hacer una llamada para revisar tu caso particular.
 
         Vale, te va a llamar XX de nuestro equipo.
 
