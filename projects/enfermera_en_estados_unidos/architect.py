@@ -134,6 +134,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 wls.whatsapp_leads_creation(user_id, project_name)
             if sub_menu == "Answer guide":
                 tap.title_and_paragraph("Whatsapp" + project_icon, "Guia de conversacion en whatsapp", "h3", 0)
+                st.success("Recordar crear el lead en la plataforma, etiquetar el lead en Whatsapp, guardar el contacto con el nombre de la persona")
                 wls.wsp_answer_text(project_id)
 
 
