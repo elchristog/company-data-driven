@@ -18,6 +18,8 @@ import modules.contracts as c
 import modules.bitly_groupal_session as bgs
 import modules.groupal_session_assistance as gsa
 import projects.enfermera_en_estados_unidos.modules.step_1_program_start as s1ps
+import projects.enfermera_en_estados_unidos.modules.step_3_nursing_board_registration as s3nbr
+
 
 
 
