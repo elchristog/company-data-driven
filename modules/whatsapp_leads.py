@@ -234,7 +234,8 @@ def wsp_answer_text(project_id):
         '''
         st.markdown(text_answer)
         st.write('**Recordar crear el lead en la plataforma, etiquetar el lead en Whatsapp, guardar el contacto con el nombre de la persona**')
-        
+
+        st.write("---")
         st.write('**Respuesta para auxiliares de enfermeria**')
         
         text_answer = '''
@@ -250,6 +251,7 @@ def wsp_answer_text(project_id):
         st.markdown(text_answer)
 
 
+        st.write("---")
         st.write('**Respuesta para Cubanos**')
         
         text_answer = '''
