@@ -1,7 +1,8 @@
 import streamlit as st
 
 def cgfns_video_guide():
-  # video_file = open('https://drive.google.com/file/d/1QsqyOLueAlNMHsLgoDTkz1V9T_R6mK6L/view?usp=sharing', 'rb')
-  # video_bytes = video_file.read()
-  
+  st.write("** Crear CGFNS **")  
   st.video('https://youtu.be/z77DLeDwc0E')
+  st.write("** Diligenciar CGFNS **")  
+  st.video('https://www.youtube.com/watch?v=u1gfAGfvXio')
+  
