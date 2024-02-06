@@ -235,3 +235,32 @@ def wsp_answer_text(project_id):
         st.markdown(text_answer)
         st.write('**Recordar crear el lead en la plataforma, etiquetar el lead en Whatsapp, guardar el contacto con el nombre de la persona**')
         
+        st.write('**Respuesta para auxiliares de enfermeria**')
+        
+        text_answer = '''
+        
+        Hola [Nombre], mucho gusto!
+        
+        Cuéntame, ¿ya has podido avanzar algo en el proceso de homologación de tu título?
+        
+        Entiendo
+        
+        Disculpame, lamentablemente no estamos asesorando a auxiliares de enfermería, ya que las regulaciones y el proceso difieren mucho de los enfermeros profesionales.
+        '''
+        st.markdown(text_answer)
+
+
+        st.write('**Respuesta para Cubanos**')
+        
+        text_answer = '''
+        
+        Hola [Nombre], mucho gusto!
+        
+        Cuéntame, ¿ya has podido avanzar algo en el proceso de homologación de tu título?
+        
+        Entiendo
+        
+        Disculpame, lamentablemente no estamos asesorando a enfermeros de Cuba, ya que las regulaciones y el proceso difieren mucho.
+        '''
+        st.markdown(text_answer)
+        
