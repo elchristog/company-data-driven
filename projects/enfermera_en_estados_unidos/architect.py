@@ -279,7 +279,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if role_id == 1:
                 sub_menu_options.extend(['Something'])
             sub_menu = st.sidebar.radio('Step3 options', options = sub_menu_options)
-            if sub_menu == "CGFNS guide:
+            if sub_menu == "CGFNS guide":
                 tap.title_and_paragraph("Guia de registro" + project_icon, "Registro ante la junta de enfermeria CGFNS", "h3", 0)
                 s3nbr.cgfns_video_guide()
 
