@@ -80,6 +80,10 @@ credentials:
       email: paola6_17@hotmail.com
       name: Paola Padilla
       password: $2b$12$o7cYeNig1551ve0bBP8Jju9UtGiU0PmsMeTm0XNwjJukegeiyYvm6
+    lvortizb:
+      email: liseth1102@ocloud.com
+      name: Liseth Ortiz
+      password: $2b$12$CKUJEDCShQaBm3V7McJrU.OdfMp1KxKJbC8mBWB/pxtQya1L2uNJK
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
