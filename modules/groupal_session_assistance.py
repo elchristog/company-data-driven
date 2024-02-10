@@ -264,7 +264,7 @@ def add_new_crm_groupal_session_contact_execution(user_id, project_name, selecte
     # Main processing logic
     st.toast("Please wait", icon="☺️")
     contact_description = ''.join(i for i in contact_description if not i.isdigit())
-    uc.run_query_insert_update(f"...")  # Your insertion query
+    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
     st.toast("CRM Contact saved!", icon="👾")
     st.balloons()
     time.sleep(5)
