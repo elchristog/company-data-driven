@@ -243,23 +243,24 @@ def add_new_crm_groupal_session_contact_execution(user_id, project_name, selecte
     last_contact_date = uc.run_query_instant(f"SELECT MAX(contact_date) AS last_contact_date FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}';")
     last_contact_date_value = last_contact_date[0].get("last_contact_date")
 
-    # Check last user status
-    last_user_status = uc.run_query_instant(f"""
-SELECT user_status
-FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm`
-WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}'
-AND contact_date = '{last_contact_date_value}'
-ORDER BY contact_date DESC
-LIMIT 1;
-""")
-
-    # Check if user is still active
-    if last_user_status[0].get("user_status") in ("discarted", "lost"):
-        st.toast("No se puede realizar la acción. El usuario ya no está activo.", icon="😔")
-        return
+    if last_contact_date_value is not None:
+        # Check last user status
+        last_user_status = uc.run_query_instant(f"""
+            SELECT user_status
+            FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm`
+            WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}'
+            AND contact_date = '{last_contact_date_value}'
+            ORDER BY contact_date DESC
+            LIMIT 1;
+        """)
+    
+        # Check if user is still active
+        if last_user_status[0].get("user_status") in ("discarted", "lost"):
+            st.toast("No se puede realizar la acción. El usuario ya no está activo.", icon="😔")
+            return
 
     # Check contact date 
-    if last_contact_date_value is not None and contact_date <= last_contact_date_value:
+     and contact_date <= last_contact_date_value:
         st.toast("User already contacted on that date", icon = "☺️")
         return 
 
