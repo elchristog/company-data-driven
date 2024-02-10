@@ -217,33 +217,41 @@ def groupal_session_absents_and_opportunities(project_name):
         st.write("### Never attended")
         never_attended_df = uc.run_query_instant(f'''
                 WITH last_contact_df AS (
+                SELECT 
+                    tagsc.traffic_analytics_whatsapp_leads_id,
+                    LAST_VALUE(tagsc.user_status) OVER (PARTITION BY tagsc.traffic_analytics_whatsapp_leads_id ORDER BY tagsc.contact_date) AS last_user_status,
+                    LAST_VALUE(tagsc.contact_date) OVER (PARTITION BY tagsc.traffic_analytics_whatsapp_leads_id ORDER BY tagsc.contact_date) AS last_contact_date
+                FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` AS tagsc
+                WHERE tagsc.user_status LIKE '%active%'  
+            ) 
             SELECT 
-                tagsc.traffic_analytics_whatsapp_leads_id,
-                LAST_VALUE(tagsc.user_status) OVER (PARTITION BY tagsc.traffic_analytics_whatsapp_leads_id ORDER BY tagsc.contact_date) AS last_user_status,
-                LAST_VALUE(tagsc.contact_date) OVER (PARTITION BY tagsc.traffic_analytics_whatsapp_leads_id ORDER BY tagsc.contact_date) AS last_contact_date
-            FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` AS tagsc
-            WHERE tagsc.user_status LIKE '%active%'  -- Include other filtering conditions?
-        ) 
-        SELECT 
-            CONCAT(tawl.phone_indicator, tawl.phone_number) AS phone_number, 
-            CASE 
-                WHEN last_contact_df.last_user_status IS NULL THEN 99999
-                WHEN last_contact_df.last_user_status LIKE '%15%' THEN DATE_DIFF(CURRENT_DATE(), last_contact_df.last_contact_date, DAY) - 15
-                WHEN last_contact_df.last_user_status LIKE '%30%' THEN DATE_DIFF(CURRENT_DATE(), last_contact_df.last_contact_date, DAY) - 30
-                WHEN last_contact_df.last_user_status LIKE '%60%' THEN DATE_DIFF(CURRENT_DATE(), last_contact_df.last_contact_date, DAY) - 60
-                ELSE DATE_DIFF(CURRENT_DATE(), last_contact_df.last_contact_date, DAY)
-            END AS days_since_last_contact,
-            DATE_DIFF(CURRENT_DATE(), tawl.creation_date, DAY) AS days_since_creation
-        FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS tawl 
-        LEFT OUTER JOIN last_contact_df ON tawl.id = last_contact_df.traffic_analytics_whatsapp_leads_id
-        WHERE (last_contact_df.last_user_status LIKE '%active%' OR last_contact_df.last_user_status IS NULL) 
-        AND tawl.id NOT IN ( -- Consider LEFT JOIN / IS NULL alternative 
-                SELECT DISTINCT traffic_analytics_whatsapp_lead_id
-                FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance`
-            )
-        AND days_since_last_contact > 3 -- Calculation moved from SELECT
-        ORDER BY days_since_last_contact DESC, days_since_creation DESC 
-        LIMIT 15; 
+                CONCAT(tawl.phone_indicator, tawl.phone_number) AS phone_number, 
+                CASE 
+                    WHEN last_contact_df.last_user_status IS NULL THEN 99999
+                    WHEN last_contact_df.last_user_status LIKE '%15%' THEN DATE_DIFF(CURRENT_DATE(), last_contact_df.last_contact_date, DAY) - 15
+                    WHEN last_contact_df.last_user_status LIKE '%30%' THEN DATE_DIFF(CURRENT_DATE(), last_contact_df.last_contact_date, DAY) - 30
+                    WHEN last_contact_df.last_user_status LIKE '%60%' THEN DATE_DIFF(CURRENT_DATE(), last_contact_df.last_contact_date, DAY) - 60
+                    ELSE DATE_DIFF(CURRENT_DATE(), last_contact_df.last_contact_date, DAY)
+                END AS days_since_last_contact,
+                DATE_DIFF(CURRENT_DATE(), tawl.creation_date, DAY) AS days_since_creation
+            FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS tawl 
+            LEFT OUTER JOIN last_contact_df ON tawl.id = last_contact_df.traffic_analytics_whatsapp_leads_id
+            WHERE (last_contact_df.last_user_status LIKE '%active%' OR last_contact_df.last_user_status IS NULL) 
+            AND tawl.id NOT IN ( 
+                    SELECT DISTINCT traffic_analytics_whatsapp_lead_id
+                    FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance`
+                )
+            AND days_since_last_contact > 3 
+            ORDER BY 
+                CASE 
+                    WHEN last_contact_df.last_user_status IS NULL THEN 99999
+                    WHEN last_contact_df.last_user_status LIKE '%15%' THEN DATE_DIFF(CURRENT_DATE(), last_contact_df.last_contact_date, DAY) - 15
+                    WHEN last_contact_df.last_user_status LIKE '%30%' THEN DATE_DIFF(CURRENT_DATE(), last_contact_df.last_contact_date, DAY) - 30
+                    WHEN last_contact_df.last_user_status LIKE '%60%' THEN DATE_DIFF(CURRENT_DATE(), last_contact_df.last_contact_date, DAY) - 60
+                    ELSE DATE_DIFF(CURRENT_DATE(), last_contact_df.last_contact_date, DAY)
+                END DESC, 
+                days_since_creation DESC 
+            LIMIT 15; 
         ''')
         if len(never_attended_df) < 1:
           st.warning("Waiting for data")
