@@ -83,7 +83,7 @@ credentials:
     lvortizb:
       email: liseth1102@ocloud.com
       name: Liseth Ortiz
-      password: $2b$12$CKUJEDCShQaBm3V7McJrU.OdfMp1KxKJbC8mBWB/pxtQya1L2uNJK
+      password: $2b$12$bNhEKonEUVv4xf4H5eF34u9n6bWzDgMG72u7oIp3ZNHNXYPm.iXp6
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
