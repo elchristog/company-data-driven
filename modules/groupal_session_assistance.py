@@ -238,12 +238,13 @@ def add_new_crm_groupal_session_contact_execution(user_id, project_name, selecte
         return
 
    # Potentially Combined Query (If performant on your dataset)
-    results = uc.run_query_instant(f"""
-          SELECT 
-              MAX(contact_date) AS last_contact_date,
-              LAST_VALUE(user_status) OVER (ORDER BY contact_date DESC) AS last_user_status
-          FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm`
-          WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}' 
+    results =  uc.run_query_instant(f"""
+        SELECT 
+            MAX(contact_date) AS last_contact_date,
+            LAST_VALUE(user_status)  OVER (ORDER BY contact_date DESC) AS last_user_status
+        FROM `company-data-driven.{project_name}.analytics_groupal_session_crm`
+        WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}' 
+        GROUP BY traffic_analytics_whatsapp_leads_id;
     """)
 
     last_contact_date_value = results[0].get("last_contact_date") 
