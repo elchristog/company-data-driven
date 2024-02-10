@@ -260,7 +260,7 @@ def add_new_crm_groupal_session_contact_execution(user_id, project_name, selecte
             return
 
     # Check contact date 
-    if last_contact_date_value is not None: and contact_date <= last_contact_date_value:
+    if last_contact_date_value is not None and contact_date <= last_contact_date_value:
         st.toast("User already contacted on that date", icon = "☺️")
         return 
 
