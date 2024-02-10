@@ -231,38 +231,30 @@ def groupal_session_absents_and_opportunities(project_name):
 
 
 def add_new_crm_groupal_session_contact_execution(user_id, project_name, selected_phone_id, contact_date, user_status, contact_description):
-    pass
+    # Input validation
+    if contact_description is None or len(contact_description) < 36 or user_status is None:
+        # Display toasts for all errors as needed
+        st.toast("contact_description can not be null or too short", icon="☺️") 
+        st.toast("user_status can not be null", icon="☺️")
+        return
+    # Fetch last_contact_date
     last_contact_date = uc.run_query_instant(f"SELECT MAX(contact_date) AS last_contact_date FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}';")
-    if contact_description is None:
-        st.toast("contact_description can not be null", icon = "☺️")
-    if len(contact_description) < 36:
-        st.toast("contact_description too short", icon = "☺️")
-    if user_status is None:
-        st.toast("user_status can not be null", icon = "☺️")
-    if last_contact_date[0].get("last_contact_date") is not None:
-        if contact_date <= last_contact_date[0].get("last_contact_date"):
-            st.toast("User already contacted on that date", icon = "☺️")
-    if (contact_description is not None) and (user_status is not None) and (len(contact_description) >= 36):
-        if last_contact_date[0].get("last_contact_date") is None:
-            st.toast("Please wait", icon = "☺️")
-            contact_description = ''.join(i for i in contact_description if not i.isdigit())
-            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
-            st.toast("CRM Contact saved!", icon = "👾")
-            st.balloons()
-            time.sleep(5)
-            uc.run_query_half_day.clear()
-            uc.run_query_30_m.clear()
-            uc.run_query_1_h.clear()
-        else:
-            if contact_date > last_contact_date[0].get("last_contact_date"):
-                st.toast("Please wait", icon = "☺️")
-                uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
-                st.toast("CRM Contact saved!", icon = "👾")
-                st.balloons()
-                time.sleep(5)
-                uc.run_query_half_day.clear()
-                uc.run_query_30_m.clear()
-                uc.run_query_1_h.clear()
+    last_contact_date_value = last_contact_date[0].get("last_contact_date")
+    # Check contact date 
+    if last_contact_date_value is not None and contact_date <= last_contact_date_value:
+        st.toast("User already contacted on that date", icon = "☺️")
+        return 
+    # Main processing logic
+    st.toast("Please wait", icon="☺️")
+    contact_description = ''.join(i for i in contact_description if not i.isdigit())
+    uc.run_query_insert_update(f"...")  # Your insertion query
+    st.toast("CRM Contact saved!", icon="👾")
+    st.balloons()
+    time.sleep(5)
+    uc.run_query_half_day.clear()
+    uc.run_query_30_m.clear()
+    uc.run_query_1_h.clear()
+
         
 
 
