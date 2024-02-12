@@ -79,10 +79,12 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Hashing":
                 tap.title_and_paragraph("Hashing passwords", "se asi asi y asi", "h3", 0)
 
+
+        
         if menu == "Traffic":
             sub_menu_options=['Traffic', 'Content creation guide']
             if role_id == 1:
-                sub_menu_options.extend(['SEO ideation', 'SEO writting', 'Web creation guide'])
+                sub_menu_options.extend(['SEO ideation', 'SEO writting', 'Web creation guide', 'Post content prompt'])
             sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
             if sub_menu == "Traffic":
                 tap.title_and_paragraph("Trafico" + project_icon, "Seguimiento del trafico y los contenidos generados", "h3", 0)
@@ -100,13 +102,17 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph("SEO Ideation" + project_icon, "Generation of 6 long tail ideas based on Keyword research", "h3", 0)
                 seo.seo_ideation(project_name, project_keyword, user_id, role_id)
 
+            if sub_menu == "SEO writting":
+                tap.title_and_paragraph("SEO writting" + project_icon, "Estimated time: 20 minutes", "h3", 0)
+                seo.seo_writing(project_name, user_id, role_id)
+
             if sub_menu == "Web creation guide":
                 tap.title_and_paragraph("Web creation guide" + project_icon, "Sigue estos pasos", "h3", 0)
                 seo.web_creation_guide()
 
-            if sub_menu == "SEO writting":
-                tap.title_and_paragraph("SEO writting" + project_icon, "Estimated time: 20 minutes", "h3", 0)
-                seo.seo_writing(project_name, user_id, role_id)
+            if sub_menu == "Post content prompt":
+                tap.title_and_paragraph("Post content prompt" + project_icon, "Sigue estos pasos", "h3", 0)
+                seo.post_content_prompt()
 
 
         if menu == "Click bitly Whatsapp":
