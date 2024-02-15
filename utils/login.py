@@ -15,7 +15,7 @@ def login():
             config['cookie']['expiry_days'],
             config['preauthorized']
         )
-        name, authentication_status, username = authenticator.login('Login', 'main')
+        name, authentication_status, username = authenticator.login()
         if st.session_state["authentication_status"]:
             uc.user_credentials(name, authentication_status, username)
             st.write("---") 
