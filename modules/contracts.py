@@ -360,9 +360,9 @@ def add_new_contract_payment(user_id, project_id, project_name):
         if selected_username is not None:
             selected_contract_id = contract_ids[usernames.index(selected_username)]
             user_debt = uc.run_query_instant(f'''
-            SELECT 
-                CAST(ROUND(c.contract_total_value) AS INT64) AS contract_total_value, 
-                ROUND(total_payments.total_paid) AS total_paid, 
+           SELECT 
+                CAST(ROUND(CAST(c.contract_total_value AS FLOAT64)) AS INT64) AS contract_total_value, 
+                CAST(ROUND(total_payments.total_paid) AS INT64) AS total_paid, 
                 ROUND(CAST(c.contract_total_value AS NUMERIC), 0) AS current_debt, 
                 total_payments.last_payment_date 
             FROM `company-data-driven.{project_name}.contracts` AS c 
