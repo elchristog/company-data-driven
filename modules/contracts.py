@@ -366,7 +366,7 @@ def add_new_contract_payment(user_id, project_id, project_name):
                 ROUND(CAST(c.contract_total_value AS NUMERIC), 0) AS current_debt, 
                 total_payments.last_payment_date 
             FROM `company-data-driven.{project_name}.contracts` AS c 
-            INNER JOIN (
+            LEFT JOIN (
                 SELECT 
                     cp.contract_id, 
                     SUM(CAST(ROUND(CAST(cp.payment_value AS NUMERIC)) AS INT64)) AS total_paid, 
@@ -378,6 +378,7 @@ def add_new_contract_payment(user_id, project_id, project_name):
             ON c.id = total_payments.contract_id 
             WHERE c.id = '{selected_contract_id}'; 
             ''')
+            st.write(user_debt)
             if len(user_debt) < 1:
                 st.error("User has no payments", icon = "🤬")
             else:
