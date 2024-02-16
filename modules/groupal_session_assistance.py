@@ -300,7 +300,12 @@ def add_new_crm_groupal_session_contact(user_id, project_name):
         if selected_phone is not None:
             selected_phone_id = lead_ids[lead_phone_numbers.index(selected_phone)]
             
-            user_history = uc.run_query_instant(f"SELECT contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}' ORDER BY contact_date ASC;")
+            user_history = uc.run_query_instant(f'''
+                SELECT 'contract' AS funnel_step, contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.contract_crm_log` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}'
+                UNION ALL (
+                  SELECT 'groupal_session' AS funnel_step, contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}'
+                ) ORDER BY contact_date ASC;
+            ''')
             st.table(user_history)
             
             contact_date = st.date_input("Contact date:", key = 'contact_date')
