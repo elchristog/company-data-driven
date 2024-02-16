@@ -162,6 +162,10 @@ def whatsapp_leads_creation_save(project_name, user_id):
                 else:
                     st.toast("Please wait", icon = "☺️")
                     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` (id, creation_date, phone_indicator, phone_number, creator_user_id) VALUES (GENERATE_UUID(), '{st.session_state.lead_date_input}', '{st.session_state.text_input_1}', '{st.session_state.text_input_2}', {user_id});")
+                    selected_phone = st.session_state.text_input_1 + st.session_state.text_input_2
+                    time.sleep(2)
+                    phone_associated_id = uc.run_query_instant(f"SELECT awl.id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS awl WHERE CONCAT(awl.phone_indicator,awl.phone_number) LIKE '{selected_phone}';")[0].get("id")
+                    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{creation_date}', '{phone_associated_id}', {user_id}, 'active', 'Se crea el lead en whatsapp y se entrega enlace de sesion grupal');")
                     st.toast("Lead saved!", icon = "👾")
                     st.balloons()
                     time.sleep(5)
