@@ -378,20 +378,16 @@ def add_new_contract_payment(user_id, project_id, project_name):
             ON c.id = total_payments.contract_id 
             WHERE c.id = '{selected_contract_id}'; 
             ''')
-            st.write(user_debt)
-            if len(user_debt) < 1:
-                st.error("User has no payments", icon = "🤬")
-            else:
-                contract_total_value = user_debt[0].get('contract_total_value')
-                total_paid = user_debt[0].get('total_paid')
-                current_debt = user_debt[0].get('current_debt')
-                last_payment_date = str(user_debt[0].get('last_payment_date'))
-                
-                col1, col2, col3, col4 = st.columns(4)
-                col1.metric(label="Contract total value", value = contract_total_value)
-                col2.metric(label="Total paid", value = total_paid)
-                col3.metric(label="Current debt", value = str(current_debt))
-                col4.metric(label="Last payment date", value = last_payment_date[-8:])
+            contract_total_value = user_debt[0].get('contract_total_value')
+            total_paid = user_debt[0].get('total_paid')
+            current_debt = user_debt[0].get('current_debt')
+            last_payment_date = str(user_debt[0].get('last_payment_date'))
+            
+            col1, col2, col3, col4 = st.columns(4)
+            col1.metric(label="Contract total value", value = contract_total_value)
+            col2.metric(label="Total paid", value = total_paid)
+            col3.metric(label="Current debt", value = str(current_debt))
+            col4.metric(label="Last payment date", value = last_payment_date[-8:])
 
             payment_date = st.date_input("Payment date:", key = 'payment_date')
             payment_value = st.number_input("Payment value (USD):", key = 'payment_value', placeholder = 325, help = "Do not use dots, just numbers")
