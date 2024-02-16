@@ -361,22 +361,22 @@ def add_new_contract_payment(user_id, project_id, project_name):
             selected_contract_id = contract_ids[usernames.index(selected_username)]
             user_debt = uc.run_query_instant(f'''
             SELECT 
-                CAST(CAST(ROUND(c.contract_total_value AS NUMERIC)) AS INT64) AS contract_total_value, 
-                ROUND(total_payments.total_paid), 
+                CAST(ROUND(c.contract_total_value) AS INT64) AS contract_total_value, 
+                ROUND(total_payments.total_paid) AS total_paid, 
                 ROUND(CAST(c.contract_total_value AS NUMERIC), 0) AS current_debt, 
                 total_payments.last_payment_date 
             FROM `company-data-driven.{project_name}.contracts` AS c 
             INNER JOIN (
                 SELECT 
-                  cp.contract_id, 
-                  SUM(CAST(ROUND(cp.payment_value AS INT64))) AS total_paid, 
-                  MAX(cp.payment_date) AS last_payment_date 
+                    cp.contract_id, 
+                    SUM(CAST(ROUND(cp.payment_value) AS INT64)) AS total_paid, 
+                    MAX(cp.payment_date) AS last_payment_date 
                 FROM `company-data-driven.{project_name}.contracts_payments` AS cp 
                 WHERE cp.contract_id = '{selected_contract_id}' 
                 GROUP BY cp.contract_id
             ) AS total_payments 
             ON c.id = total_payments.contract_id 
-            WHERE c.id = '{selected_contract_id}'; 
+            WHERE c.id = '{selected_contract_id}';
             ''')
             contract_total_value = user_debt[0].get('contract_total_value')
             total_paid = user_debt[0].get('total_paid')
