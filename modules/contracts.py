@@ -378,6 +378,7 @@ def add_new_contract_payment(user_id, project_id, project_name):
             ON c.id = total_payments.contract_id 
             WHERE c.id = '{selected_contract_id}'; 
             ''')
+            st.write(user_debt)
             contract_total_value = user_debt[0].get('contract_total_value')
             total_paid = user_debt[0].get('total_paid')
             current_debt = user_debt[0].get('current_debt')
