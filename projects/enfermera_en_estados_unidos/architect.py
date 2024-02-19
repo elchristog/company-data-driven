@@ -337,15 +337,15 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 t.tasks_achievements(user_id, project_name, 0)
             
         if menu == "Nclex":
-            sub_menu_options=['Logros', 'Nclex test']
+            sub_menu_options=['Nclex test', 'Logros']
             sub_menu = st.sidebar.radio('Nclex options', options = sub_menu_options)
-            if sub_menu == "Logros":
-                tap.title_and_paragraph("Tu progreso en Nclex" + project_icon, "Evalúa tu progreso en la preparación para el examen", "h2", 0)
-                tst.test_achievements(project_name, user_id, 'nclex_attempts')
             if sub_menu == "Nclex test":
                 tap.title_and_paragraph("Test diario Nclex" + project_icon, "Cada día un nuevo test", "h2", 0)
                 tst.tester(project_name, 'nclex_questions_sample', user_id, 'nclex_attempts', 'https://chat.whatsapp.com/BvsGUAmKDscDXqEDQ74Xf6')
-
+            if sub_menu == "Logros":
+                tap.title_and_paragraph("Tu progreso en Nclex" + project_icon, "Evalúa tu progreso en la preparación para el examen", "h2", 0)
+                tst.test_achievements(project_name, user_id, 'nclex_attempts')
+            
         if menu == "Recursos":
             tap.title_and_paragraph("Tus recursos" + project_icon, "Accede a los recursos habilitados para ti", "h2", 0)
             r.resources(user_id, [':closed_book:', 'Saunders Book', 'https://drive.google.com/uc?export=download&id=1-eLwUvGPgXHpmhcrJzi1nlLs2oZhqgXX'], [':closed_book:','Saunders Strategies','https://drive.google.com/uc?export=download&id=1Bkr-4VGyTUOj9rhw6nqKTOItKQiL4jKU'], [':notebook:','Kaplan Book','https://drive.google.com/uc?export=download&id=1zuJ9HOSMrYWwOH-txKmD8o1asgmfVHAL'], [':ledger:','LaCharity Book','https://drive.google.com/uc?export=download&id=1E8DsdgNqXimVWMeQKD9K82-nx3dHFrfJ'])
