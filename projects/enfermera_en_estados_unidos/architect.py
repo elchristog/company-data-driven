@@ -358,7 +358,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         if menu == "Mis cursos":
             tap.title_and_paragraph("Tus cursos" + project_icon, "Accede a tus cursos de preparación", "h2", 0)
-            r.resources(user_id, [':computer:', 'Plataforma', 'https://company-data-driven.thrivecart.com/l/introduccin-a-la-plataforma-de-enfermera-en-estados-unidos/'], [':female-student:', 'PTE Academic', 'https://company-data-driven.thrivecart.com/l/pte-academic/'])
+            r.resources(user_id,  [':female-student:', 'PTE Academic', 'https://company-data-driven.thrivecart.com/l/pte-academic/'])
 
         
 
