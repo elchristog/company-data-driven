@@ -315,25 +315,33 @@ def contract_payments_show_metrics(project_name):
 
 
 def add_new_contract_payment_execution(user_id, project_name, selected_contract_id, payment_date, payment_value, contract_total_value, total_paid, current_debt, last_payment_date):
-    if payment_value is None:
-        st.toast("payment_value can not be null", icon = "🤨")
+  if payment_value is None:
+    st.toast("payment_value can not be null", icon="🤨")
+  else:
+    if current_debt <= 0:
+      st.toast("User does not have debts", icon="🤨")
     else:
-        if current_debt <= 0:
-            st.toast("User does not have debts", icon = "🤨")
+      if int(payment_value) > int(current_debt):
+        st.toast("Payment can't be bigger than debt", icon="🤨")
+      else:
+        if last_payment_date is not None:  # Check for null
+          last_payment_date = dtt.strptime(last_payment_date, '%Y-%m-%d').date()
+          if payment_date <= last_payment_date:
+            st.toast("Payment can't be before last payment", icon="🤨")
+          else:  # Proceed if the date check passes
+            st.toast("Please wait", icon="☺️")
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contracts_payments` (id, contract_id, payment_value, payment_date, creator_id) VALUES (GENERATE_UUID(), '{selected_contract_id}', '{payment_value}', '{payment_date}', {user_id});")
+            st.toast("Payment saved!", icon="👾")
+            st.balloons()
+            time.sleep(5)
+            uc.run_query_1_h.clear()  
         else:
-            if int(payment_value) > int(current_debt):
-                st.toast("Payment can't be bigger than debt", icon = "🤨")
-            else:
-                last_payment_date = dtt.strptime(last_payment_date, '%Y-%m-%d').date()
-                if payment_date <= last_payment_date:
-                    st.toast("Payment can't be before last payment", icon = "🤨")
-                else:
-                    st.toast("Please wait", icon = "☺️")
-                    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contracts_payments` (id, contract_id, payment_value, payment_date, creator_id) VALUES (GENERATE_UUID(), '{selected_contract_id}', '{payment_value}', '{payment_date}', {user_id});")
-                    st.toast("Payment saved!", icon = "👾")
-                    st.balloons()
-                    time.sleep(5)
-                    uc.run_query_1_h.clear()
+            st.toast("Please wait", icon="☺️")
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contracts_payments` (id, contract_id, payment_value, payment_date, creator_id) VALUES (GENERATE_UUID(), '{selected_contract_id}', '{payment_value}', '{payment_date}', {user_id});")
+            st.toast("Payment saved!", icon="👾")
+            st.balloons()
+            time.sleep(5)
+            uc.run_query_1_h.clear() 
                 
 
 
