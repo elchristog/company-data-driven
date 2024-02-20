@@ -87,7 +87,7 @@ credentials:
     malejandraag:
       email: mayraariasga@gmail.com 
       name: Mayra Arias
-      password: $2b$12$VdE4FfTTKrSu9uKYcZ8f3.rVeC/TuhVdGV5cqbXqY88Zo2uVkEkLO
+      password: $2b$12$oEjiWzPuyLs8CrDXfH4mHOK6/vMDFAWszp191EuJhRmlP9/jIDXEu
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
