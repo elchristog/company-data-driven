@@ -283,9 +283,9 @@ def contract_payments_show_metrics(project_name):
       )
 
 
-      df_sales = pd.DataFrame(uc.run_query_1_h(f"SELECT SUM(CAST(c.contract_total_value AS INT64)) AS total_sales FROM `company-data-driven.{project_name}.contracts` AS c WHERE c.contract_date >= '{day[0].strftime('%Y-%m-%d')}' AND c.contract_date <= '{day[1].strftime('%Y-%m-%d')}';"))
+      df_sales = pd.DataFrame(uc.run_query_1_h(f"SELECT SUM(CAST(c.contract_total_value AS FLOAT64)) AS total_sales FROM `company-data-driven.{project_name}.contracts` AS c WHERE c.contract_date >= '{day[0].strftime('%Y-%m-%d')}' AND c.contract_date <= '{day[1].strftime('%Y-%m-%d')}';"))
 
-      df_payments = pd.DataFrame(uc.run_query_1_h(f"SELECT SUM(CAST(cp.payment_value AS INT64)) AS total_paid FROM `company-data-driven.{project_name}.contracts_payments` AS cp WHERE cp.payment_date >= '{day[0].strftime('%Y-%m-%d')}' AND cp.payment_date <= '{day[1].strftime('%Y-%m-%d')}';"))
+      df_payments = pd.DataFrame(uc.run_query_1_h(f"SELECT SUM(CAST(cp.payment_value AS FLOAT64)) AS total_paid FROM `company-data-driven.{project_name}.contracts_payments` AS cp WHERE cp.payment_date >= '{day[0].strftime('%Y-%m-%d')}' AND cp.payment_date <= '{day[1].strftime('%Y-%m-%d')}';"))
       
       total_sales = df_sales['total_sales'].sum()
       total_paid = df_payments['total_paid'].sum()
