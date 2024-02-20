@@ -84,6 +84,10 @@ credentials:
       email: liseth1102@ocloud.com
       name: Liseth Ortiz
       password: $2b$12$bNhEKonEUVv4xf4H5eF34u9n6bWzDgMG72u7oIp3ZNHNXYPm.iXp6
+    malejandraag:
+      email: mayraariasga@gmail.com 
+      name: Mayra Arias
+      password: $2b$12$VdE4FfTTKrSu9uKYcZ8f3.rVeC/TuhVdGV5cqbXqY88Zo2uVkEkLO
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
