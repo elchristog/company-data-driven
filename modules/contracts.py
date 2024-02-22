@@ -268,7 +268,7 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
 
 
 def contract_payments_show_metrics(project_name):
-  dates_payments = uc.run_query_1_h(f"SELECT MIN(payment_date) AS min_payment_date, MAX(payment_date) AS max_payment_date FROM `company-data-driven.{project_name}.contracts_payments` AS cp;")
+  dates_payments = uc.run_query_1_h(f"SELECT MIN(payment_date) AS min_payment_date, CURRENT_DATE() AS max_payment_date FROM `company-data-driven.{project_name}.contracts_payments` AS cp;")
   if len(dates_payments) < 1:
       st.warning("Waiting for data")
   else:
