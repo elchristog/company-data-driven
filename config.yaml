@@ -88,6 +88,10 @@ credentials:
       email: mayraariasga@gmail.com 
       name: Mayra Arias
       password: $2b$12$oEjiWzPuyLs8CrDXfH4mHOK6/vMDFAWszp191EuJhRmlP9/jIDXEu
+    lgurbano:
+      email: gelijulumar@gmail.com
+      name: Lizagoretty Urbano
+      password: $2b$12$PZTYN.aGa91jmkYCKYSoOugoMEt8EwhRkaJGV5/g3klU7lDvoD7ay
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
