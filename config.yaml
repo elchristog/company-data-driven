@@ -95,7 +95,7 @@ credentials:
     jvduartea:
       email: vivi.duartea23@gmail.com
       name: Viviana Duarte
-      password: $2b$12$fH33gdeusXHNYc4ECE2.dOL4okbShiNyuTNuN2G7BWnZQ2MirR3n6
+      password: $2b$12$4QNIVrpb9HPb2xVyNXnzQ.C51HK8apZASSB/WM8DirRnIm6QhkZTy
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
