@@ -92,6 +92,10 @@ credentials:
       email: gelijulumar@gmail.com
       name: Lizagoretty Urbano
       password: $2b$12$PZTYN.aGa91jmkYCKYSoOugoMEt8EwhRkaJGV5/g3klU7lDvoD7ay
+    jvduartea:
+      email: vivi.duartea23@gmail.com
+      name: Viviana Duarte
+      password: $2b$12$fH33gdeusXHNYc4ECE2.dOL4okbShiNyuTNuN2G7BWnZQ2MirR3n6
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
