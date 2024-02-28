@@ -160,7 +160,8 @@ def add_new_assistant(user_id, project_name):
 
 def add_new_absent_execution(user_id, project_name, selected_phone_id, meeting_date):
     already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` WHERE traffic_analytics_whatsapp_lead_id = '{selected_phone_id}' AND meeting_date = '{meeting_date}'")
-    if len(already_created) > 0:
+    already_assisted = uc.run_query_instant(f"SELECT id FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` WHERE traffic_analytics_whatsapp_lead_id = '{selected_phone_id}' AND status = 'assistant'")
+    if len(already_created) > 0 or len(already_assisted) > 0:
         st.toast("User already absented in this meeting", icon = "☺️")
     else:
         st.toast("Please wait", icon = "☺️")
