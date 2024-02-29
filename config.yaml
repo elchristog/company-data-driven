@@ -96,6 +96,10 @@ credentials:
       email: vivi.duartea23@gmail.com
       name: Viviana Duarte
       password: $2b$12$4QNIVrpb9HPb2xVyNXnzQ.C51HK8apZASSB/WM8DirRnIm6QhkZTy
+    dstephaniehr:
+      email: dshernandezr23@gmail.com
+      name: Dayanne Stephanie Hernandez Romero
+      password: $2b$12$RX3rjHugTJ63YHDozVhGaOwXNc2w58Rr2.FjaZsqyS3sIfqDHKaO.
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
