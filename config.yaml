@@ -100,6 +100,10 @@ credentials:
       email: dshernandezr23@gmail.com
       name: Dayanne Stephanie Hernandez Romero
       password: $2b$12$RX3rjHugTJ63YHDozVhGaOwXNc2w58Rr2.FjaZsqyS3sIfqDHKaO.
+    erodriguezmr:
+      email: eva66803@gmail.com
+      name: Eva Rodriguez
+      password: $2b$12$PIDhj9dsWv/Bj7LUnrU5yenyqShZ/XnDPzyn2FmxyJrxli9KvC.iO
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
