@@ -358,7 +358,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         if menu == "Mis cursos":
             tap.title_and_paragraph("Tus cursos" + project_icon, "Accede a tus cursos de preparación", "h2", 0)
-            r.resources(user_id,  [':computer:', 'Uso de la plataforma', 'https://company-data-driven.thrivecart.com/l/introduccin-a-la-plataforma-de-enfermera-en-estados-unidos/'], [':flag-um:', 'English for the NCLEX-RN', 'https://company-data-driven.thrivecart.com/l/english-for-the-nclex-rn/'], [':female-student:', 'PTE Academic', 'https://company-data-driven.thrivecart.com/l/pte-academic/'], [':1234:', 'Next Generation NCLEX', 'https://company-data-driven.thrivecart.com/l/next-generation-nclex/'])
+            r.resources(user_id,  [':computer:', 'Uso de la plataforma', 'https://company-data-driven.thrivecart.com/l/introduccin-a-la-plataforma-de-enfermera-en-estados-unidos/'], [':flag-um:', 'English for the NCLEX-RN', 'https://company-data-driven.thrivecart.com/l/english-for-the-nclex-rn/'], [':female-student:', 'PTE Academic', 'https://company-data-driven.thrivecart.com/l/pte-academic/'], [':classical_building:', 'IELTS Preparation', 'https://company-data-driven.thrivecart.com/l/ielts-preparation/'], [':1234:', 'Next Generation NCLEX', 'https://company-data-driven.thrivecart.com/l/next-generation-nclex/'])
 
         
 
