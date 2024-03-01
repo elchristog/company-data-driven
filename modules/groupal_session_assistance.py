@@ -221,7 +221,7 @@ def groupal_session_absents_and_opportunities(project_name):
           st.warning("Waiting for data")
         else:
           st.table(never_attended_df)
-     with col3:
+    with col3:
         st.write("### Discarted")
         discarted_df = uc.run_query_instant(f"SELECT CONCAT(tawl.phone_indicator,tawl.phone_number) AS phone_number, tagsc.contact_date, tagsc.contact_description FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` AS tagsc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS tawl ON tagsc.traffic_analytics_whatsapp_leads_id = tawl.id WHERE tagsc.user_status = 'discarted' ORDER BY tagsc.contact_date DESC LIMIT 15;")
         if len(discarted_df) < 1:
