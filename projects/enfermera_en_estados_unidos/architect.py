@@ -54,15 +54,15 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if user_id == 9: #santiago
                 menu_options = ["Home", "Whatsapp", "Step3: Inscripción ante la Junta de Enfermería"]
             #------ Menu according to each user-----------
-            messages = st.container(height=300)
-            if prompt := st.chat_input("Say something"):
-                messages.chat_message("user").write(prompt)
-                messages.chat_message("assistant").write(f"Echo: {prompt}")
 
 
             
             menu = st.sidebar.radio(project_title, menu_options)
             st.write("---") 
+            messages = st.container(height=300)
+            if prompt := st.chat_input("Say something"):
+                messages.chat_message("user").write(prompt)
+                messages.chat_message("assistant").write(f"Echo: {prompt}")
 
         if menu == "Home":
             sub_menu_options=['Tareas', 'Asignar', 'Eliminar']
