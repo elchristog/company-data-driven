@@ -1193,3 +1193,5 @@ P: En que pagina debo pagar por sus servicios R: https://enfermeraenestadosunido
 
 P: Debo apostillar los documentos? R: NO, los documentos no se apostillan para Estados Unidos
 P: cual es mas facild e pasar, el PTE o el ielts R: Es mas facil de pasar el PTE porque es evaluado por una IA y no por un himano qiue puede tener opiniones subjetivas, sin embargo no todos los estados valen el PTE como si el IELTS, SI tu meta es solo conseguir trabajo entonces es mejor hacer el PTE y luego seguir estudiando ingles en Babbel o en el ESOL program, pero si quieres hacer un posgrado que la maypria de hospoitales te cubren esos gastos, entonces es mejor el IELTS.
+
+P: Hola tengo una duda sobre los pagos... Si se financia en 4 pagos, cada cuánto se realizan los mismos? R: Hola son pagos mensuales, para el plan A serian de Choose a pricing optionOne-time payment ($1750.00)$1750.00Split pay (2x $950.00)2x $950.00Split pay (4x $537.00) y Para el plab B serian de $1400.00Split pay (2x $775.00)2x $775.00Split pay (4x $450.00)
