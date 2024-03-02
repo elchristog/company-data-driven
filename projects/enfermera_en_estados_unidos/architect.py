@@ -310,7 +310,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         if menu == "IA questions":
             messages = st.container(height=300)
-            prompt := st.chat_input("Say something")                
+            prompt = st.chat_input("Say something")                
             if prompt:
                 st.session_state.prompt = prompt
                 if 'prompt' in st.session_state:
