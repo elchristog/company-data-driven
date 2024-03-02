@@ -4,7 +4,7 @@ import google.generativeai as genai
 API_KEY = st.secrets["GEMINI_API_KEY"]
 genai.configure(api_key = API_KEY)
 
-def gemini_knowledge_base_ia(project_name):
+def gemini_knowledge_base_ia(project_name, model_prompt):
     generation_config = {
       "temperature": 0.9,
       "top_p": 1,
@@ -37,18 +37,17 @@ def gemini_knowledge_base_ia(project_name):
     
     with open("projects/" + project_name + "/knowledge_base.txt", "r") as file:
         base_knowledge = file.read()
-        st.write(base_knowledge[1:100])
     
-    # convo = model.start_chat(history=[
-    #   {
-    #     "role": "user",
-    #     "parts": [base_knowledge]
-    #   },
-    #   {
-    #     "role": "model",
-    #     "parts": ["​Ahora soy un experto en el proceso de homologacion de enfermeria en estados unidos"]
-    #   },
-    # ])
+    convo = model.start_chat(history=[
+      {
+        "role": "user",
+        "parts": [base_knowledge]
+      },
+      {
+        "role": "model",
+        "parts": [model_prompt]
+      },
+    ])
     
     # convo.send_message("YOUR_USER_INPUT")
     # print(convo.last.text)
