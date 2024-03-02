@@ -114,3 +114,4 @@ validators==0.22.0
 watchdog==4.0.0
 yarl==1.9.4
 zipp==3.17.0
+google-generativeai==0.4.0
