@@ -4,7 +4,7 @@ import google.generativeai as genai
 API_KEY = st.secrets["GEMINI_API_KEY"]
 genai.configure(api_key = API_KEY)
 
-def gemini_knowledge_base_ia(project_name, model_prompt):
+def gemini_knowledge_base_ia(project_name, model_prompt, user_question):
     generation_config = {
       "temperature": 0.9,
       "top_p": 1,
@@ -49,5 +49,5 @@ def gemini_knowledge_base_ia(project_name, model_prompt):
       },
     ])
     
-    # convo.send_message("YOUR_USER_INPUT")
-    # print(convo.last.text)
+    convo.send_message(user_question)
+    return convo.last.text
