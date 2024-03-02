@@ -37,7 +37,7 @@ def gemini_knowledge_base_ia(project_name):
     
     with open("projects/" + project_name + "/knowledge_base.txt", "r") as file:
         base_knowledge = file.read()
-        print(base_knowledge[1])
+        st.write(base_knowledge[1:100])
     
     # convo = model.start_chat(history=[
     #   {
