@@ -46,13 +46,13 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             st.image(project_logo_url, width=50, use_column_width=False)
             #------ Menu according to each user-----------
             if user_id == 1: #chris
-                menu_options = ["Home", "Traffic", "Click bitly Whatsapp", "Whatsapp", "Click bitly Groupal session", "Groupal session", "Remarketing", "Contract", "Contract Remarketing", "Contract Payments", "Web App", "Step1: Inicio del programa", "Step2: Trámite de documentos", "Step3: Inscripción ante la Junta de Enfermería", "Step4: Preparación NCLEX", "Step5: Preparación de inglés", "Step6: Entrevistas de trabajo", "Step7: Visa Screen", "Step8: Trámite NVC", "Step9: Trámite embajada", "Step10: Vida en estados Unidos", 'Users Admin']
+                menu_options = ["Home", "Traffic", "Click bitly Whatsapp", "Whatsapp", "Click bitly Groupal session", "Groupal session", "Remarketing", "Contract", "Contract Remarketing", "Contract Payments", "Web App", "Step1: Inicio del programa", "Step2: Trámite de documentos", "Step3: Inscripción ante la Junta de Enfermería", "Step4: Preparación NCLEX", "Step5: Preparación de inglés", "Step6: Entrevistas de trabajo", "Step7: Visa Screen", "Step8: Trámite NVC", "Step9: Trámite embajada", "Step10: Vida en estados Unidos", 'Users Admin', "IA questions"]
             if user_id == 2: #flaca
-                menu_options = ["Home", "Traffic"]
+                menu_options = ["Home", "Traffic", "IA questions"]
             if user_id == 19: #bingley
-                menu_options = ["Home", "Whatsapp", "Groupal session", "Contract"]
+                menu_options = ["Home", "Whatsapp", "Groupal session", "Contract", "IA questions"]
             if user_id == 9: #santiago
-                menu_options = ["Home", "Whatsapp", "Step3: Inscripción ante la Junta de Enfermería"]
+                menu_options = ["Home", "Whatsapp", "Step3: Inscripción ante la Junta de Enfermería", "IA questions"]
             #------ Menu according to each user-----------
 
           
@@ -308,11 +308,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
 
-        with st.sidebar:
-            messages = st.container(height=300)
-            if prompt := st.chat_input("Say something"):
-                messages.chat_message("user").write(prompt)
-                messages.chat_message("assistant").write(f"Echo: {prompt}")
+        if menu == "IA questions":
+            prompt = st.chat_input("Say something")
+            if prompt:
+                st.write(f"User has sent the following prompt: {prompt}")
 
 
 
