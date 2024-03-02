@@ -19,6 +19,8 @@ import modules.bitly_groupal_session as bgs
 import modules.groupal_session_assistance as gsa
 import projects.enfermera_en_estados_unidos.modules.step_1_program_start as s1ps
 import projects.enfermera_en_estados_unidos.modules.step_3_nursing_board_registration as s3nbr
+import utils.g_gemini_gestor as ggg
+
 
 
 
@@ -310,6 +312,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         if menu == "IA questions":
             messages = st.container(height=300)
+            ggg.gemini_knowledge_base_ia(project_name)
             prompt = st.chat_input("Say something")                
             if prompt:
                 st.session_state.prompt = prompt
