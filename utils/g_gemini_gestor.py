@@ -35,7 +35,7 @@ def gemini_knowledge_base_ia(project_name):
                                   generation_config=generation_config,
                                   safety_settings=safety_settings)
     
-    with open("projects/"project_name + "/knowledge_base.txt", "r") as file:
+    with open("projects/" + project_name + "/knowledge_base.txt", "r") as file:
         base_knowledge = file.read()
         print(base_knowledge[1])
     
