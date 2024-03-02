@@ -309,9 +309,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
         if menu == "IA questions":
-            prompt = st.chat_input("Say something")
-            if prompt:
-                st.write(f"User has sent the following prompt: {prompt}")
+            messages = st.container(height=600)
+            if prompt := st.chat_input("Say something"):
+                messages.chat_message("user").write(prompt)
+                messages.chat_message("assistant").write(f"Echo: {prompt}")
 
 
 
