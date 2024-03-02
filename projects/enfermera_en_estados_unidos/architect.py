@@ -1,4 +1,5 @@
 import streamlit as st
+import time
 
 import modules.title_and_paragraph as tap
 import modules.tasks as t
@@ -312,10 +313,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if prompt:
                 st.session_state.prompt = prompt
                 st.session_state.ia_answer = ggg.gemini_knowledge_base_ia(project_name, "​Ahora soy un experto en el proceso de homologacion de enfermeria en estados unidos", prompt)
-                st.write(st.session_state.ia_answer)
+                time.sleep(5)
             if 'prompt' in st.session_state:
                 messages.chat_message("user").write(st.session_state.prompt)
-                messages.chat_message("assistant").write(f"Echo: {st.session_state.ia_answer}")
+                messages.chat_message("assistant").write(f"{st.session_state.ia_answer}")
 
 
 
