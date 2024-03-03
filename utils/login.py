@@ -20,6 +20,9 @@ def login():
                 config['preauthorized']
             )
             name, authentication_status, username = authenticator.login()
+            st.session.name = name
+            st.session.authentication_status = authentication_status
+            st.session.username = username
     if st.session_state["authentication_status"]:
         os.write(1, '- login: Skipping authentication \n'.encode('utf-8'))
         uc.user_credentials(name, authentication_status, username)
