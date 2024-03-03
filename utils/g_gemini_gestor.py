@@ -40,7 +40,7 @@ def gemini_knowledge_base_ia(project_name, model_prompt, user_question):
     
     with open("projects/" + project_name + "/knowledge_base.txt", "r") as file:
         base_knowledge = file.read()
-        os.write(1, '- gemini_knowledge_base_ia: Reading knowledge_base \n'.encode('utf-8'))
+        os.write(1, '- Reading knowledge_base \n'.encode('utf-8'))
     
     convo = model.start_chat(history=[
       {
@@ -54,4 +54,5 @@ def gemini_knowledge_base_ia(project_name, model_prompt, user_question):
     ])
     
     convo.send_message(user_question)
+    os.write(1, '- Generating answer \n'.encode('utf-8'))
     return convo.last.text
