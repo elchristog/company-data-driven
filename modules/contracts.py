@@ -183,8 +183,14 @@ def customer_creation_execution():
 
 
 def customer_creation(user_id_customer_creation, project_id, project_name): 
-    today = datetime.date.today()
-    today_str = today.strftime("%Y-%m-%d")
+    
+    if 'today_str_customer_creation' not in st.session_state:
+        today = datetime.date.today()
+        today_str = today.strftime("%Y-%m-%d")
+        st.session_state.today_str_customer_creation = today_str
+    else:
+        today_str = st.session_state.today_str_customer_creation
+    
     username = st.text_input("Write the username:")
     checking_username_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
     if len(checking_username_query) > 0 or len(username) < 6 or username is None:
