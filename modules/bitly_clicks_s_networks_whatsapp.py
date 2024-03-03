@@ -151,8 +151,16 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link, 
     os.write(1, '🥏 Executing show_bitly_web_youtube_metrics \n'.encode('utf-8'))
     os.write(1, '- show_bitly_web_youtube_metrics: Web data \n'.encode('utf-8'))
     st.write("### 	:earth_americas: Bitly web conversion")
-    dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
-    dates_web = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_web, MAX(date) AS max_date_web FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
+
+    if 'show_bitly_web_youtube_metrics_dates_bitly' not in st.session_state or 'show_bitly_web_youtube_metrics_dates_web' not in st.session_state:
+        dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
+        dates_web = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_web, MAX(date) AS max_date_web FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
+        st.session_state.show_bitly_web_youtube_metrics_dates_bitly = dates_bitly
+        st.session_state.show_bitly_web_youtube_metrics_dates_web = dates_web
+    else:
+        dates_bitly = st.session_state.show_bitly_web_youtube_metrics_dates_bitly
+        dates_web = st.session_state.show_bitly_web_youtube_metrics_dates_web
+    
     if len(dates_bitly) < 1 or len(dates_web) < 1:
         st.warning("Waiting for data")
     else:
