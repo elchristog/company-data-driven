@@ -174,11 +174,8 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link, 
             key = 'day_web'
         )
 
-        if 'df_bitly_web' not in st.session_state:
-            df_bitly_web = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tawc.clicks AS web_clicks, tabc.clicks AS bitly_clicks, ROUND(tabc.clicks/NULLIF(tawc.clicks, 0), 2) AS conversion FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_web_clicks` AS tawc ON tabc.date = tawc.date WHERE tabc.bitly_link = '{bitly_web_link}'   AND tabc.date >= '{day[0].strftime('%Y-%m-%d')}' AND tabc.date <= '{day[1].strftime('%Y-%m-%d')}'  ORDER BY tabc.date ASC;"))
-            st.session_state.df_bitly_web = df_bitly_web
-        else:
-            df_bitly_web = st.session_state.df_bitly_web
+        df_bitly_web = pd.DataFrame(uc.run_query_1_h(f"SELECT tabc.date, tawc.clicks AS web_clicks, tabc.clicks AS bitly_clicks, ROUND(tabc.clicks/NULLIF(tawc.clicks, 0), 2) AS conversion FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` AS tabc INNER JOIN `company-data-driven.{project_name}.traffic_analytics_web_clicks` AS tawc ON tabc.date = tawc.date WHERE tabc.bitly_link = '{bitly_web_link}'   AND tabc.date >= '{day[0].strftime('%Y-%m-%d')}' AND tabc.date <= '{day[1].strftime('%Y-%m-%d')}'  ORDER BY tabc.date ASC;"))
+
     
         web_clicks = df_bitly_web['web_clicks'].sum()
         bitly_clicks = df_bitly_web['bitly_clicks'].sum()
