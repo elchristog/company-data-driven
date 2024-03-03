@@ -287,26 +287,26 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
     contract_num_payments = st.text_input("Contract num payments:", help = "Number of agreed payments", placeholder = "2")
     
     
-    st.session_state.user_id_customer_creation = user_id_customer_creation
-    st.session_state.project_id_customer_creation = project_id
-    st.session_state.project_name_customer_creation = project_name
-    st.session_state.username_customer_creation = username
-    st.session_state.checking_username_query_customer_creation = checking_username_query
-    st.session_state.selected_project_customer_creation = project_name
-    st.session_state.selected_role_id_customer_creation = 6
-    st.session_state.user_first_name_customer_creation = user_first_name
-    st.session_state.user_last_name_customer_creation = user_last_name
-    st.session_state.user_email_customer_creation = user_email
-    st.session_state.user_birth_date_customer_creation = user_birth_date
-    st.session_state.user_country_customer_creation = user_country
-    st.session_state.user_gender_customer_creation = user_gender
-    st.session_state.user_phone_number_customer_creation = user_phone_number
-    st.session_state.user_drive_folder_customer_creation = user_drive_folder
-    st.session_state.contract_value_customer_creation = contract_value
-    st.session_state.contract_num_payments_customer_creation = contract_num_payments
-    st.session_state.today_str_customer_creation = today_str
-    st.session_state.max_id_users_customer_creation = max_id_users
-    st.session_state.max_id_role_assignement_customer_creation = max_id_role_assignement
+    # st.session_state.user_id_customer_creation = user_id_customer_creation
+    # st.session_state.project_id_customer_creation = project_id
+    # st.session_state.project_name_customer_creation = project_name
+    # st.session_state.username_customer_creation = username
+    # st.session_state.checking_username_query_customer_creation = checking_username_query
+    # st.session_state.selected_project_customer_creation = project_name
+    # st.session_state.selected_role_id_customer_creation = 6
+    # st.session_state.user_first_name_customer_creation = user_first_name
+    # st.session_state.user_last_name_customer_creation = user_last_name
+    # st.session_state.user_email_customer_creation = user_email
+    # st.session_state.user_birth_date_customer_creation = user_birth_date
+    # st.session_state.user_country_customer_creation = user_country
+    # st.session_state.user_gender_customer_creation = user_gender
+    # st.session_state.user_phone_number_customer_creation = user_phone_number
+    # st.session_state.user_drive_folder_customer_creation = user_drive_folder
+    # st.session_state.contract_value_customer_creation = contract_value
+    # st.session_state.contract_num_payments_customer_creation = contract_num_payments
+    # st.session_state.today_str_customer_creation = today_str
+    # st.session_state.max_id_users_customer_creation = max_id_users
+    # st.session_state.max_id_role_assignement_customer_creation = max_id_role_assignement
     
     create_user_button = st.button("Create User", on_click = customer_creation_execution)
 
