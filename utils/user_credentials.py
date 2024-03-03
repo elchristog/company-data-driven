@@ -193,12 +193,15 @@ def user_credentials(name, authentication_status, username):
             st.session_state.user_id = user_id
             st.session_state.status = status
             st.session_state.project_id = project_id
+            st.session_state.role_id = role_id
+            st.session_state.role_name = role_name
             st.session_state.project_icon = project_icon
             st.session_state.project_logo_url = project_logo_url
             st.session_state.project_name = project_name
             st.session_state.project_title = project_title
             st.session_state.project_url_clean = project_url_clean
             st.session_state.project_keyword = project_keyword
+
 
         
     ph.project_handler(st.session_state.user_id, st.session_state.project_id, st.session_state.role_id, st.session_state.role_name, st.session_state.project_name, st.session_state.project_title, st.session_state.project_icon, st.session_state.project_logo_url, st.session_state.project_url_clean, st.session_state.project_keyword)
