@@ -237,12 +237,27 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
     for row in rows:
         assistant_ids.append(row.get('id'))
         assistant_phone_numbers.append(row.get('full_phone_number'))
-    user_phone_number = st.selectbox(
-            label = "Select the user phone number",
-            options = assistant_phone_numbers,
-            index = None,
-            key= "user_phone_number"
-        )
+
+    if 'user_phone_number_customer_creation' not in st.session_state:
+        user_phone_number = st.selectbox(
+                label = "Select the user phone number",
+                options = assistant_phone_numbers,
+                index = None,
+                key= "user_phone_number"
+            )
+        st.session_state.user_phone_number_customer_creation = user_phone_number
+        st.session_state.user_phone_number_customer_creation_index  = assistant_phone_numbers.index(st.session_state.user_phone_number_customer_creation)
+    else:
+        user_phone_number = st.selectbox(
+                label = "Select the user phone number",
+                options = assistant_phone_numbers,
+                index = assistant_phone_numbers.index(st.session_state.user_phone_number_customer_creation),
+                key= "user_phone_number"
+            )
+        st.session_state.user_phone_number_customer_creation = user_phone_number
+        st.session_state.user_phone_number_customer_creation_index  = assistant_phone_numbers.index(st.session_state.user_phone_number_customer_creation)
+    
+    
     checking_phone_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE CONCAT(phone_indicator,phone_number) LIKE '{user_phone_number}' ")
     if len(checking_phone_query) < 1 or checking_phone_query is None:
         st.error('Phone number does not exists, should be created adding a new lead into Whatsapp', icon = '👻')
