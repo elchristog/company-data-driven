@@ -23,14 +23,12 @@ def login():
             st.session_state.name = name
             st.session_state.authentication_status = authentication_status
             st.session_state.username = username
-            with st.sidebar:
-                st.write("---") 
-                authenticator.logout('Logout', 'main')
+            # with st.sidebar:
+            #     st.write("---") 
+            #     authenticator.logout('Logout', 'main')
     if st.session_state["authentication_status"]:
         os.write(1, '- login: Skipping authentication \n'.encode('utf-8'))
         uc.user_credentials(st.session_state.name, st.session_state.authentication_status, st.session_state.username)
         st.write("---") 
     elif st.session_state["authentication_status"] is False:
         st.error('Username/password is incorrect (Ask to the admin if is hashed)')
-    elif st.session_state["authentication_status"] is None:
-        st.warning('Please enter your username and password')
