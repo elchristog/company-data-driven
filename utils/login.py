@@ -18,7 +18,7 @@ def login():
             config['preauthorized']
         )
         name, authentication_status, username = authenticator.login()
-        os.write(1, '- Authenticating user \n'.encode('utf-8'))
+        os.write(1, '- login: Authenticating user \n'.encode('utf-8'))
         if st.session_state["authentication_status"]:
             uc.user_credentials(name, authentication_status, username)
             st.write("---") 
