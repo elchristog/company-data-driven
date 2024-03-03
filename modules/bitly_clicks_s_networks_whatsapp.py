@@ -147,6 +147,8 @@ def plot_echarts_btl_networks(df_grouped):
 
 
 def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link, bitly_inst_link):
+    os.write(1, '🥏 Executing show_bitly_web_youtube_metrics \n'.encode('utf-8'))
+    os.write(1, '- show_bitly_web_youtube_metrics: Web data \n'.encode('utf-8'))
     st.write("### 	:earth_americas: Bitly web conversion")
     dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
     dates_web = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_web, MAX(date) AS max_date_web FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
@@ -177,7 +179,8 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link, 
         with st.container():
             plot_echarts_btl_web_yt(df_bitly_web, 'web')
 
-
+    
+    os.write(1, '- show_bitly_web_youtube_metrics: Youtube data \n'.encode('utf-8'))
     st.write("### 	:movie_camera: Bitly youtube conversion")
     dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
     dates_yt = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_yt, MAX(date) AS max_date_yt FROM `company-data-driven.{project_name}.traffic_analytics_youtube_views`;")
@@ -210,7 +213,7 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link, 
 
 
 
-
+    os.write(1, '- show_bitly_web_youtube_metrics: Instagram data \n'.encode('utf-8'))
     st.write("### 	:frame_with_picture: Bitly instagram clicks")
     dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
     if len(dates_bitly) < 1:
