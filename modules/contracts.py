@@ -76,6 +76,8 @@ def plot_echarts_c(df_grouped):
 
 
 def contracts_show_metrics(project_name):
+  os.write(1, '🥏 Executing contracts_show_metrics \n'.encode('utf-8'))
+  os.write(1, '- contracts_show_metrics: Getting data \n'.encode('utf-8'))
   dates_groupal_meeting = uc.run_query_1_h(f"SELECT MIN(meeting_date) AS min_date_gm, MAX(meeting_date) AS max_date_gm, CURRENT_DATE() AS todays_date FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance`;")
 
   if len(dates_groupal_meeting) < 1:
