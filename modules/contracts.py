@@ -5,6 +5,7 @@ import datetime
 import numpy as np
 import pandas as pd
 import re
+import os
 
 from datetime import datetime as dtt
 from streamlit_raw_echarts import st_echarts, JsCode
@@ -502,6 +503,8 @@ def add_new_crm_contact(user_id, project_name):
 
 
 def contracts_crm_show_metrics(project_name):
+    os.write(1, '🥏 Executing contracts_crm_show_metrics \n'.encode('utf-8'))
+    os.write(1, '- contracts_crm_show_metrics: Getting data \n'.encode('utf-8'))
     contracts_crm_oportunities = uc.run_query_instant(f"SELECT    CONCAT(tawl.phone_indicator, tawl.phone_number) AS full_phone_number,   (COALESCE(DATE_DIFF(CURRENT_DATE(), last_user_status_df.last_contact_date, DAY), 99999)      - CASE        WHEN last_user_status_df.last_user_status LIKE '%15%' THEN 15        WHEN last_user_status_df.last_user_status LIKE '%30%' THEN 30        WHEN last_user_status_df.last_user_status LIKE '%60%' THEN 60        ELSE 0      END   ) AS days_since_last_contact FROM    `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS tawl   INNER JOIN `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` AS tagsa     ON tawl.id = tagsa.traffic_analytics_whatsapp_lead_id   LEFT JOIN (     SELECT        traffic_analytics_whatsapp_leads_id,       LAST_VALUE(user_status) OVER (PARTITION BY traffic_analytics_whatsapp_leads_id ORDER BY contact_date) AS last_user_status,       LAST_VALUE(contact_date) OVER (PARTITION BY traffic_analytics_whatsapp_leads_id ORDER BY contact_date) AS last_contact_date,       ROW_NUMBER() OVER (PARTITION BY traffic_analytics_whatsapp_leads_id ORDER BY contact_date DESC) AS row_number_contact     FROM `company-data-driven.{project_name}.contract_crm_log`   ) AS last_user_status_df      ON tawl.id = last_user_status_df.traffic_analytics_whatsapp_leads_id AND last_user_status_df.row_number_contact = 1 WHERE    tawl.id NOT IN (SELECT traffic_analytics_whatsapp_leads_id FROM `company-data-driven.{project_name}.contracts`)   AND (last_user_status_df.last_user_status LIKE '%active%' OR last_user_status_df.last_user_status IS NULL)   AND (COALESCE(DATE_DIFF(CURRENT_DATE(), last_user_status_df.last_contact_date, DAY), 99999)      - CASE        WHEN last_user_status_df.last_user_status LIKE '%15%' THEN 15        WHEN last_user_status_df.last_user_status LIKE '%30%' THEN 30        WHEN last_user_status_df.last_user_status LIKE '%60%' THEN 60        ELSE 0      END   ) > 3   AND tagsa.status = 'assistant' ORDER BY days_since_last_contact DESC;")
     st.table(contracts_crm_oportunities)
 
@@ -519,6 +522,8 @@ def contracts_crm_show_metrics(project_name):
 
 
 def contract_team_member_performance(user_id, project_name):
+    os.write(1, '🥏 Executing contract_team_member_performance \n'.encode('utf-8'))
+    os.write(1, '- contract_team_member_performance: Getting data \n'.encode('utf-8'))
     team_member_contacts = uc.run_query_half_day(f"SELECT tagsc.contact_date, EXTRACT(YEAR FROM tagsc.contact_date) AS year_contact, EXTRACT(MONTH FROM tagsc.contact_date) AS month_contact, EXTRACT(WEEK FROM tagsc.contact_date) AS week_contact, tagsc.user_status FROM `company-data-driven.{project_name}.contract_crm_log` AS tagsc WHERE tagsc.creator_id = {user_id} AND EXTRACT(YEAR FROM tagsc.contact_date) = EXTRACT(YEAR FROM CURRENT_DATE());")
     team_member_contacts_df = pd.DataFrame(team_member_contacts, columns = ["contact_date","year_contact","month_contact","week_contact","user_status"])
     today = datetime.date.today()
