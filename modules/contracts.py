@@ -175,6 +175,26 @@ def customer_creation_execution():
         st.warning('Remember to hash the password and add to config, and create the demo task', icon = '😶‍🌫️')
         st.toast('Remember to hash the password and add to config, and create the demo task', icon = '😶‍🌫️')
         time.sleep(5)
+        del st.session_state['user_id_customer_creation']
+        del st.session_state['project_id_customer_creation']
+        del st.session_state['project_name_customer_creation'] 
+        del st.session_state['username_customer_creation']
+        del st.session_state['checking_username_query_customer_creation'] 
+        del st.session_state['selected_project_customer_creation'] 
+        del st.session_state['selected_role_id_customer_creation'] 
+        del st.session_state['user_first_name_customer_creation']
+        del st.session_state['user_last_name_customer_creation']
+        del st.session_state['user_email_customer_creation'] 
+        del st.session_state['user_birth_date_customer_creation'] 
+        del st.session_state['user_country_customer_creation'] 
+        del st.session_state['user_gender_customer_creation']
+        del st.session_state['user_phone_number_customer_creation']
+        del st.session_state['user_drive_folder_customer_creation']
+        del st.session_state['contract_value_customer_creation']
+        del st.session_state['contract_num_payments_customer_creation']
+        del st.session_state['today_str_customer_creation']
+        del st.session_state['max_id_users_customer_creation']
+        del st.session_state['max_id_role_assignement_customer_creation'] 
         uc.run_query_30_m.clear()
         
         
