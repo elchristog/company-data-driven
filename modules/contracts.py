@@ -218,7 +218,7 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
         user_first_name = st.text_input("Write the user first name:")
         st.session_state.user_first_name_customer_creation = user_first_name
     else:
-        user_first_name = st.text_input("Write the user first name:", st.session_state.username_customer_creation)
+        user_first_name = st.text_input("Write the user first name:", st.session_state.user_first_name_customer_creation)
         st.session_state.user_first_name_customer_creation = user_first_name
         
     user_last_name = st.text_input("Write the user last name:")
