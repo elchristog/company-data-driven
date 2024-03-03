@@ -6,6 +6,7 @@ from yaml.loader import SafeLoader
 import utils.user_credentials as uc
 
 def login():
+    os.write(1, '🥏 Executing login \n'.encode('utf-8'))
     with open('config.yaml') as file:
         config = yaml.load(file, Loader=SafeLoader)
         authenticator = stauth.Authenticate(
@@ -16,6 +17,7 @@ def login():
             config['preauthorized']
         )
         name, authentication_status, username = authenticator.login()
+        os.write(1, '- Authenticating user \n'.encode('utf-8'))
         if st.session_state["authentication_status"]:
             uc.user_credentials(name, authentication_status, username)
             st.write("---") 
