@@ -20,7 +20,6 @@ def login():
                 config['preauthorized']
             )
             name, authentication_status, username = authenticator.login()
-            st.session_state.authenticator = authenticator
             st.session_state.name = name
             st.session_state.authentication_status = authentication_status
             st.session_state.username = username
@@ -30,7 +29,7 @@ def login():
         st.write("---") 
         with st.sidebar:
             st.write("---") 
-            st.session_state.authenticator.logout('Logout', 'main')
+            authenticator.logout('Logout', 'main')
     elif st.session_state["authentication_status"] is False:
         st.error('Username/password is incorrect (Ask to the admin if is hashed)')
     elif st.session_state["authentication_status"] is None:
