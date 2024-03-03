@@ -7,7 +7,7 @@ API_KEY = st.secrets["GEMINI_API_KEY"]
 genai.configure(api_key = API_KEY)
 
 def gemini_knowledge_base_ia(project_name, model_prompt, user_question):
-    os.write(1, '🎮 Executing gemini_knowledge_base_ia\n'.encode('utf-8'))
+    os.write(1, '🎮 Executing gemini_knowledge_base_ia \n'.encode('utf-8'))
     generation_config = {
       "temperature": 0.9,
       "top_p": 1,
@@ -40,6 +40,7 @@ def gemini_knowledge_base_ia(project_name, model_prompt, user_question):
     
     with open("projects/" + project_name + "/knowledge_base.txt", "r") as file:
         base_knowledge = file.read()
+        os.write(1, '- gemini_knowledge_base_ia: Reading knowledge_base \n'.encode('utf-8'))
     
     convo = model.start_chat(history=[
       {
