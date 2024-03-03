@@ -196,7 +196,13 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link, 
     
     os.write(1, '- show_bitly_web_youtube_metrics: Youtube data \n'.encode('utf-8'))
     st.write("### 	:movie_camera: Bitly youtube conversion")
-    dates_yt = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_yt, MAX(date) AS max_date_yt FROM `company-data-driven.{project_name}.traffic_analytics_youtube_views`;")
+    
+    if 'dates_yt' not in st.session_state:
+        dates_yt = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_yt, MAX(date) AS max_date_yt FROM `company-data-driven.{project_name}.traffic_analytics_youtube_views`;")
+        st.session_state.dates_yt = dates_yt
+    else: 
+        dates_yt = st.session_state.dates_yt
+    
     if len(dates_bitly) < 1 or len(dates_yt) < 1:
         st.warning("Waiting for data")
     else:
