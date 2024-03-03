@@ -25,7 +25,7 @@ def login():
             st.session.username = username
     if st.session_state["authentication_status"]:
         os.write(1, '- login: Skipping authentication \n'.encode('utf-8'))
-        uc.user_credentials(name, authentication_status, username)
+        uc.user_credentials(st.session.name, st.session.authentication_status, st.session.username)
         st.write("---") 
         with st.sidebar:
             st.write("---") 
