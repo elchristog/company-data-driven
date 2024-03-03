@@ -190,8 +190,14 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
         st.session_state.today_str_customer_creation = today_str
     else:
         today_str = st.session_state.today_str_customer_creation
+
+    if 'username_customer_creation' not in st.session_state:
+        username = st.text_input("Write the username:")
+        st.session_state.username_customer_creation = username
+    else:
+        username = st.text_input("Write the username:", st.session_state.username_customer_creation)
+        st.session_state.username_customer_creation = username
     
-    username = st.text_input("Write the username:")
     checking_username_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{username}';")
     if len(checking_username_query) > 0 or len(username) < 6 or username is None:
         st.error('Username is not available', icon = '👻')
