@@ -8,7 +8,7 @@ import utils.user_credentials as uc
 
 def login():
     os.write(1, '🥏 Executing login \n'.encode('utf-8'))
-    if 'authentication_status' not in st.session_state:
+    if 'authentication_status' not in st.session_state or st.session_state["authentication_status"] is None:
         os.write(1, '- login: Authenticating user \n'.encode('utf-8'))
         with open('config.yaml') as file:
             config = yaml.load(file, Loader=SafeLoader)
