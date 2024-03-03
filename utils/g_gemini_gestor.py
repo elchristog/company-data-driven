@@ -7,7 +7,7 @@ API_KEY = st.secrets["GEMINI_API_KEY"]
 genai.configure(api_key = API_KEY)
 
 def gemini_knowledge_base_ia(project_name, model_prompt, user_question):
-    os.write(1, '🃏 Executing gemini_knowledge_base_ia \n'.encode('utf-8'))
+    os.write(1, '🥏 Executing gemini_knowledge_base_ia \n'.encode('utf-8'))
     generation_config = {
       "temperature": 0.9,
       "top_p": 1,
