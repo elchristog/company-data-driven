@@ -214,8 +214,13 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
     max_id_users = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.global.users`;")[0].get('max_id')
     max_id_role_assignement = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.global.role_assignment`;")[0].get('max_id')
 
-
-    user_first_name = st.text_input("Write the user first name:")
+    if 'user_first_name_customer_creation' not in st.session_state:
+        user_first_name = st.text_input("Write the user first name:")
+        st.session_state.user_first_name_customer_creation = user_first_name
+    else:
+        user_first_name = st.text_input("Write the user first name:", st.session_state.username_customer_creation)
+        st.session_state.user_first_name_customer_creation = user_first_name
+        
     user_last_name = st.text_input("Write the user last name:")
     user_email = st.text_input("Write the user email:")
     
