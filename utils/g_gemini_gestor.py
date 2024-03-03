@@ -1,13 +1,13 @@
 import streamlit as st
 import google.generativeai as genai
-import logging
+import os
 
 
 API_KEY = st.secrets["GEMINI_API_KEY"]
 genai.configure(api_key = API_KEY)
 
 def gemini_knowledge_base_ia(project_name, model_prompt, user_question):
-    logging.debug("Executing gemini_knowledge_base_ia")
+    os.write(1,b'Executing gemini_knowledge_base_ia\n')
     generation_config = {
       "temperature": 0.9,
       "top_p": 1,
