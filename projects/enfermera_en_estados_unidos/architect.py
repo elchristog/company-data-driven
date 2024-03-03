@@ -308,6 +308,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
         if menu == "AI questions":
+            tap.title_and_paragraph("AI Questions " + project_icon, "Ask to the knowledge base", "h3", 0)
             messages = st.container(height=300)
             prompt = st.chat_input("Say something")                
             if prompt:
