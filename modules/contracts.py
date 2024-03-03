@@ -242,7 +242,7 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
         user_phone_number = st.selectbox(
                 label = "Select the user phone number",
                 options = assistant_phone_numbers,
-                index = None,
+                index = 1,
                 key= "user_phone_number"
             )
         st.session_state.user_phone_number_customer_creation = user_phone_number
