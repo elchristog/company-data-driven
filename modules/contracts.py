@@ -246,7 +246,7 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
                 key= "user_phone_number"
             )
         st.session_state.user_phone_number_customer_creation = user_phone_number
-        if st.session_state.user_phone_number_customer_creation is not None:
+        if st.session_state.user_phone_number_customer_creation is not None or len(st.session_state.user_phone_number_customer_creation) > 4:
             st.session_state.user_phone_number_customer_creation_index  = assistant_phone_numbers.index(st.session_state.user_phone_number_customer_creation)
     else:
         user_phone_number = st.selectbox(
@@ -256,7 +256,7 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
                 key= "user_phone_number"
             )
         st.session_state.user_phone_number_customer_creation = user_phone_number
-        if st.session_state.user_phone_number_customer_creation is not None:
+        if st.session_state.user_phone_number_customer_creation is not None or len(st.session_state.user_phone_number_customer_creation) > 4:
             st.session_state.user_phone_number_customer_creation_index  = assistant_phone_numbers.index(st.session_state.user_phone_number_customer_creation)
     
     
