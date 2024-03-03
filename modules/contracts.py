@@ -227,8 +227,13 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
     else:
         user_last_name = st.text_input("Write the user last name:", st.session_state.user_last_name_customer_creation )
         st.session_state.user_last_name_customer_creation = user_last_name
-        
-    user_email = st.text_input("Write the user email:")
+
+    if 'user_email_customer_creation' not in st.session_state:
+        user_email = st.text_input("Write the user email:")
+        st.session_state.user_email_customer_creation = user_email
+    else:
+        user_email = st.text_input("Write the user email:", st.session_state.user_email_customer_creation)
+        st.session_state.user_email_customer_creation = user_email
     
     rows = uc.run_query_half_day(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
     assistant_ids = []
