@@ -94,9 +94,12 @@ def bitly_groupal_session_show_metrics(project_name, bitly_groupal_session_link)
       st.session_state.dates_bitly = dates_bitly
   else:
       dates_bitly = st.session_state.dates_bitly
-    
-  dates_whatsapp_leads = uc.run_query_1_h(f"SELECT MIN(creation_date) AS min_date_wsp, MAX(creation_date) AS max_date_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
 
+  if 'dates_whatsapp_leads' not in st.session_state:
+      dates_whatsapp_leads = uc.run_query_1_h(f"SELECT MIN(creation_date) AS min_date_wsp, MAX(creation_date) AS max_date_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
+      st.session_state.dates_whatsapp_leads = dates_whatsapp_leads
+  else:
+      dates_whatsapp_leads = st.session_state.dates_whatsapp_leads
     
   if len(dates_bitly) < 1 or len(dates_whatsapp_leads) < 1:
       st.warning("Waiting for data")
