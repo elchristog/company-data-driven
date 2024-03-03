@@ -115,6 +115,8 @@ def contracts_show_metrics(project_name):
 
 
 def customer_creation_execution():
+    os.write(1, '🥏 Executing customer_creation_execution \n'.encode('utf-8'))
+    os.write(1, '- customer_creation_execution: Creating user \n'.encode('utf-8'))
     checking_username_query = uc.run_query_instant(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{st.session_state.username_customer_creation}';")
     if len(checking_username_query) < 1:
         checking_user_role = []
