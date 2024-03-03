@@ -123,11 +123,12 @@ def run_query_1_day(query):
     return rows
 
 def user_credentials(name, authentication_status, username):
+    os.write(1, '🥏 Executing user_credentials \n'.encode('utf-8'))
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
 
     rows = run_query_1_day(f"SELECT u.id AS user_id, u.username, u.status, u.project_id, r.id AS role_id, r.name AS role_name, p.icon, p.logo_url, p.name, p.title, p.web_url_clean, p.keyword   FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.roles` AS r ON ra.role_id = r.id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE username = '{username}';")
-
+    os.write(1, '- user_credentials: Get user data \n'.encode('utf-8'))
     if len(rows) == 1:
         user_id = rows[0].get('user_id')
         status = rows[0].get('status')
@@ -167,7 +168,8 @@ def user_credentials(name, authentication_status, username):
                 role_name.append(row.get('role_name'))
     
     run_query_insert_update_1_day(f"UPDATE `company-data-driven.global.users` SET last_login_date = '{today_str}' WHERE id = {user_id};")
-
+    os.write(1, '- user_credentials: Updating last user connection \n'.encode('utf-8'))
+    
     if status != 'active':
             st.error('User is inactive')
     else:
