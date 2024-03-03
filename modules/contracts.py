@@ -246,7 +246,8 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
                 key= "user_phone_number"
             )
         st.session_state.user_phone_number_customer_creation = user_phone_number
-        st.session_state.user_phone_number_customer_creation_index  = assistant_phone_numbers.index(st.session_state.user_phone_number_customer_creation)
+        if st.session_state.user_phone_number_customer_creation is not None:
+            st.session_state.user_phone_number_customer_creation_index  = assistant_phone_numbers.index(st.session_state.user_phone_number_customer_creation)
     else:
         user_phone_number = st.selectbox(
                 label = "Select the user phone number",
@@ -255,7 +256,8 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
                 key= "user_phone_number"
             )
         st.session_state.user_phone_number_customer_creation = user_phone_number
-        st.session_state.user_phone_number_customer_creation_index  = assistant_phone_numbers.index(st.session_state.user_phone_number_customer_creation)
+        if st.session_state.user_phone_number_customer_creation is not None:
+            st.session_state.user_phone_number_customer_creation_index  = assistant_phone_numbers.index(st.session_state.user_phone_number_customer_creation)
     
     
     checking_phone_query = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE CONCAT(phone_indicator,phone_number) LIKE '{user_phone_number}' ")
