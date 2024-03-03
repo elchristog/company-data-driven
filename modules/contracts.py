@@ -231,7 +231,7 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
         user_email = st.text_input("Write the user email:", st.session_state.user_email_customer_creation)
         st.session_state.user_email_customer_creation = user_email
     
-    rows = uc.run_query_half_day(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE phone_number IS NOT NULL;")
+    rows = uc.run_query_half_day(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE phone_number IS NOT NULL OR LEN(phone_number) > 4;")
     assistant_ids = []
     assistant_phone_numbers = []
     for row in rows:
