@@ -1,6 +1,7 @@
 import streamlit as st
 import streamlit_authenticator as stauth
 import yaml
+import os
 
 from yaml.loader import SafeLoader
 import utils.user_credentials as uc
