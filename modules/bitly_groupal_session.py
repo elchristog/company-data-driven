@@ -86,8 +86,17 @@ def plot_echarts_bgs(df_grouped):
 
 
 def bitly_groupal_session_show_metrics(project_name, bitly_groupal_session_link):
-  dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
+  os.write(1, '🥏 Executing bitly_groupal_session_show_metrics \n'.encode('utf-8'))
+
+  if 'dates_bitly' not in st.session_state:
+      dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
+      st.session_state.dates_bitly = dates_bitly
+  else:
+      dates_bitly = st.session_state.dates_bitly
+    
   dates_whatsapp_leads = uc.run_query_1_h(f"SELECT MIN(creation_date) AS min_date_wsp, MAX(creation_date) AS max_date_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
+
+    
   if len(dates_bitly) < 1 or len(dates_whatsapp_leads) < 1:
       st.warning("Waiting for data")
   else:
@@ -101,6 +110,7 @@ def bitly_groupal_session_show_metrics(project_name, bitly_groupal_session_link)
           key = 'day_web'
       )
 
+      os.write(1, '- bitly_groupal_session_show_metrics: Getting data \n'.encode('utf-8'))
       df_conversion = pd.DataFrame(uc.run_query_1_h(f"SELECT groupal_session.date, groupal_session.num_groupal_session_clicks, whatsapp_leads.num_leads_wsp, ROUND(groupal_session.num_groupal_session_clicks/NULLIF(whatsapp_leads.num_leads_wsp, 0), 2) AS conversion FROM (SELECT date, SUM(clicks) AS num_groupal_session_clicks FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks` WHERE bitly_link = '{bitly_groupal_session_link}' GROUP BY date) AS groupal_session INNER JOIN (SELECT creation_date, COUNT(id) AS num_leads_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` WHERE creation_date >= '{day[0].strftime('%Y-%m-%d')}'  AND  creation_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY creation_date) AS whatsapp_leads ON groupal_session.date = whatsapp_leads.creation_date ORDER BY groupal_session.date ASC;"))
     
       num_leads_wsp = df_conversion['num_leads_wsp'].sum()
