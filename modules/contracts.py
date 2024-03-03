@@ -183,7 +183,9 @@ def customer_creation_execution():
 
 
 def customer_creation(user_id_customer_creation, project_id, project_name): 
-    
+    os.write(1, '🥏 Executing customer_creation \n'.encode('utf-8'))
+    os.write(1, '- customer_creation: Showing form \n'.encode('utf-8'))
+
     if 'today_str_customer_creation' not in st.session_state:
         today = datetime.date.today()
         today_str = today.strftime("%Y-%m-%d")
