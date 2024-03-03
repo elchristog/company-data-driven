@@ -191,7 +191,6 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link, 
     
     os.write(1, '- show_bitly_web_youtube_metrics: Youtube data \n'.encode('utf-8'))
     st.write("### 	:movie_camera: Bitly youtube conversion")
-    dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
     dates_yt = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_yt, MAX(date) AS max_date_yt FROM `company-data-driven.{project_name}.traffic_analytics_youtube_views`;")
     if len(dates_bitly) < 1 or len(dates_yt) < 1:
         st.warning("Waiting for data")
@@ -224,7 +223,6 @@ def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link, 
 
     os.write(1, '- show_bitly_web_youtube_metrics: Instagram data \n'.encode('utf-8'))
     st.write("### 	:frame_with_picture: Bitly instagram clicks")
-    dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
     if len(dates_bitly) < 1:
         st.warning("Waiting for data")
     else:
