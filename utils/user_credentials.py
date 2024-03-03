@@ -127,7 +127,7 @@ def user_credentials(name, authentication_status, username):
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
 
-    if 'user_id' not in st.session_state or 'status' not in st.session_state or 'project_id' not in st.session_state:
+    if 'user_id' not in st.session_state or 'status' not in st.session_state or 'project_id' not in st.session_state or 'role_id' not in st.session_state or 'role_name' not in st.session_state or 'project_icon' not in st.session_state or 'project_logo_url' not in st.session_state or 'project_name' not in st.session_state or 'project_title' not in st.session_state or 'project_url_clean' not in st.session_state or 'project_keyword' not in st.session_state:
         rows = run_query_1_day(f"SELECT u.id AS user_id, u.username, u.status, u.project_id, r.id AS role_id, r.name AS role_name, p.icon, p.logo_url, p.name, p.title, p.web_url_clean, p.keyword   FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.roles` AS r ON ra.role_id = r.id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE username = '{username}';")
         os.write(1, '- user_credentials: Get user data \n'.encode('utf-8'))
         if len(rows) == 1:
@@ -201,7 +201,6 @@ def user_credentials(name, authentication_status, username):
             st.session_state.project_title = project_title
             st.session_state.project_url_clean = project_url_clean
             st.session_state.project_keyword = project_keyword
-
 
         
     ph.project_handler(st.session_state.user_id, st.session_state.project_id, st.session_state.role_id, st.session_state.role_name, st.session_state.project_name, st.session_state.project_title, st.session_state.project_icon, st.session_state.project_logo_url, st.session_state.project_url_clean, st.session_state.project_keyword)
