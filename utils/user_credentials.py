@@ -127,68 +127,80 @@ def user_credentials(name, authentication_status, username):
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
 
-    rows = run_query_1_day(f"SELECT u.id AS user_id, u.username, u.status, u.project_id, r.id AS role_id, r.name AS role_name, p.icon, p.logo_url, p.name, p.title, p.web_url_clean, p.keyword   FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.roles` AS r ON ra.role_id = r.id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE username = '{username}';")
-    os.write(1, '- user_credentials: Get user data \n'.encode('utf-8'))
-    if len(rows) == 1:
-        user_id = rows[0].get('user_id')
-        status = rows[0].get('status')
-        project_id = rows[0].get('project_id')
-        role_id = rows[0].get('role_id')
-        role_name = rows[0].get('role_name')
-        project_icon = rows[0].get('icon')
-        project_logo_url = rows[0].get('logo_url')
-        project_name = rows[0].get('name')
-        project_title = rows[0].get('title')
-        project_url_clean = rows[0].get('web_url_clean')
-        project_keyword = rows[0].get('keyword')
-
-    else:
-        user_id = rows[0].get('user_id')
-        status = rows[0].get('status')
-        project_id = rows[0].get('project_id')
-        project_icon = rows[0].get('icon')
-        project_logo_url = rows[0].get('logo_url')
-        project_name = rows[0].get('name')
-        project_title = rows[0].get('title')
-        project_url_clean = rows[0].get('web_url_clean')
-        project_keyword = rows[0].get('keyword')
-
-
-        user_ids = []
-        statuses = []
-        project_ids = []
-        role_id = []
-        role_name = []
-
-        for row in rows:
-                user_ids.append(row.get('user_id'))
-                statuses.append(row.get('status'))
-                project_ids.append(row.get('project_id'))
-                role_id.append(row.get('role_id'))
-                role_name.append(row.get('role_name'))
+    if 'user_id' not in st.session_state or 'status' not in st.session_state or 'project_id' not in st.session_state:
+        rows = run_query_1_day(f"SELECT u.id AS user_id, u.username, u.status, u.project_id, r.id AS role_id, r.name AS role_name, p.icon, p.logo_url, p.name, p.title, p.web_url_clean, p.keyword   FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id INNER JOIN `company-data-driven.global.roles` AS r ON ra.role_id = r.id INNER JOIN `company-data-driven.global.projects` AS p ON u.project_id = p.id WHERE username = '{username}';")
+        os.write(1, '- user_credentials: Get user data \n'.encode('utf-8'))
+        if len(rows) == 1:
+            user_id = rows[0].get('user_id')
+            status = rows[0].get('status')
+            project_id = rows[0].get('project_id')
+            role_id = rows[0].get('role_id')
+            role_name = rows[0].get('role_name')
+            project_icon = rows[0].get('icon')
+            project_logo_url = rows[0].get('logo_url')
+            project_name = rows[0].get('name')
+            project_title = rows[0].get('title')
+            project_url_clean = rows[0].get('web_url_clean')
+            project_keyword = rows[0].get('keyword')
     
-    run_query_insert_update_1_day(f"UPDATE `company-data-driven.global.users` SET last_login_date = '{today_str}' WHERE id = {user_id};")
-    os.write(1, '- user_credentials: Updating last user connection \n'.encode('utf-8'))
+        else:
+            user_id = rows[0].get('user_id')
+            status = rows[0].get('status')
+            project_id = rows[0].get('project_id')
+            project_icon = rows[0].get('icon')
+            project_logo_url = rows[0].get('logo_url')
+            project_name = rows[0].get('name')
+            project_title = rows[0].get('title')
+            project_url_clean = rows[0].get('web_url_clean')
+            project_keyword = rows[0].get('keyword')
     
-    if status != 'active':
-            st.error('User is inactive')
-    else:
-        if len(rows) > 1:
-            if all(element == user_ids[0] for element in user_ids):
-                pass
-            else:
-                st.error('User has multiple ids')
+    
+            user_ids = []
+            statuses = []
+            project_ids = []
+            role_id = []
+            role_name = []
+    
+            for row in rows:
+                    user_ids.append(row.get('user_id'))
+                    statuses.append(row.get('status'))
+                    project_ids.append(row.get('project_id'))
+                    role_id.append(row.get('role_id'))
+                    role_name.append(row.get('role_name'))
+        
+        run_query_insert_update_1_day(f"UPDATE `company-data-driven.global.users` SET last_login_date = '{today_str}' WHERE id = {user_id};")
+        os.write(1, '- user_credentials: Updating last user connection \n'.encode('utf-8'))
+        
+        if status != 'active':
+                st.error('User is inactive')
+        else:
+            if len(rows) > 1:
+                if all(element == user_ids[0] for element in user_ids):
+                    pass
+                else:
+                    st.error('User has multiple ids')
+    
+                if all(element == statuses[0] for element in statuses):
+                    pass
+                else:
+                    st.error('User has multiple status')
+    
+                if all(element == project_ids[0] for element in project_ids):
+                    pass
+                else:
+                    st.error('User has multiple projects')
+                    
+            st.session_state.user_id = user_id
+            st.session_state.status = status
+            st.session_state.project_id = project_id
+            st.session_state.project_icon = project_icon
+            st.session_state.project_logo_url = project_logo_url
+            st.session_state.project_name = project_name
+            st.session_state.project_title = project_title
+            st.session_state.project_url_clean = project_url_clean
+            st.session_state.project_keyword = project_keyword
 
-            if all(element == statuses[0] for element in statuses):
-                pass
-            else:
-                st.error('User has multiple status')
-
-            if all(element == project_ids[0] for element in project_ids):
-                pass
-            else:
-                st.error('User has multiple projects')
-             
+        
         ph.project_handler(user_id, project_id, role_id, role_name, project_name, project_title, project_icon, project_logo_url, project_url_clean, project_keyword)
 
 
