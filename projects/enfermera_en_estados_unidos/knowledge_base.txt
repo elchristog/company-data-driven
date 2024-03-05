@@ -170,14 +170,6 @@ Alejandra:  Creo que para muchos la parte más difícil es la preparación para 
 
 Alejandra: Eso es muy individual y depende de varios factores como tu nivel de inglés actual, tu experiencia previa como enfermera y el tiempo que puedas dedicar al estudio diariamente. En promedio, te recomendaría al menos 3-6 meses de preparación intensa.
 
-17.  ¿Cuáles son las mejores herramientas de estudio para el NCLEX-RN?
-
-Alejandra: Hay muchos recursos excelentes:
-
-UWorld: Un banco de preguntas muy completo y reconocido por ser similar al examen real.
-Kaplan: Ofrece cursos de preparación y también bancos de preguntas de práctica.
-Hurst Review: Cursos de revisión intensiva.
-Grupos de estudio en redes sociales: ¡Puedes encontrar grupos en Facebook o Telegram dedicados a la preparación para el NCLEX!
 18.  Una vez que haya aprobado el NCLEX-RN, ¿cuáles serán los siguientes pasos?
 
 Alejandra: Después de aprobar el NCLEX, tendrás que:
@@ -1143,3 +1135,10 @@ P: Cuando tu pracricabas para el NCLEX que nivel de ingles tenias, tu entendias 
 P: La universidad debe diligenciar el formato de CGFNS en espaniol o en Ingles R: Idealmente en ingles dado que CGFNS solo lo vale en ingles, pero como algunas universidades no lo diligencian si no esta en espaniol, En caso de que la universidad lo llene en español, recuerda que se debe traducir a inglés e incluir los dos (original y traducido) en el sobre, esa traduccion debe ser un con traductor certificado
 
 P: Gracias no yo estoy clara me falta lo principal el título pero ya viene en camino ya lo mandé a pedir pero si tengo un problema con las notas ya hace un año la pedí y aún no me han llegado entonces para yo retirarla tengo que hacer un poder y yo no estoy en Venezuela, Si yo voy a homologar mi título tengo que tener mis notas también. R: No todos los estados piden el tema de notas, algunos estados piden mas requisitos asi que lo mejor es que en nuestra primera sesion yo pueda evaluar los requisitos y la documentacion que debemos preparar.
+
+P: Cuánto demora desde que uno solicita la visa screen hasta la llegada a Estados Unidos ? R: Depende del caso, el tramite migratorio esta a disponibilidad de las citas de la embajada de cada pais pero es un promedio de unos 8 meses a un anio, pero se puede hacer un paso para no tener que esperar y es pedir el expedite que lo acorta a un par de meses menos.
+
+P: cuanto tarda uno en prepararse para el NCLEX R: entre 6 y 8 meses
+P: el examen de NCLEX es en linea R: NO, es presencial en las sedes de pearson view de estados unidos, puerto rico, mexico o brazol, es en un computador dando cluck no frente a una persona
+P: A los de mexico se les da la visa eb3 o solo una visa de trabajo R: se les da la visa TN ya que es un acuerdo entre usa, canada y mexicvo, a los 3 anios pueden obtener la residencia
+
