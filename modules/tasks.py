@@ -148,6 +148,11 @@ def execute_task_creation():
         st.toast('Task created! (' + st.session_state.task_input + ')', icon="😎")
         st.balloons()
         time.sleep(5)
+        del st.session_state.selected_user_id
+        del st.session_state.task_input
+        del st.session_state.commitment_date_input
+        del st.session_state.project_name
+        del st.session_state.user_id
         uc.run_query_5_m.clear()
         uc.run_query_2_m.clear()
         # st.rerun()
