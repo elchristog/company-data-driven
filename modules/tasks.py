@@ -8,6 +8,7 @@ import utils.chat_gpt_gestor as cgptg
 
 
 def update_task_status():
+    os.write(1, '🥏 Executing update_task_status \n'.encode('utf-8'))
     if st.session_state.selected_task is not None:
         # selected_task_status = st.session_state.actual_statuses[st.session_state.descriptions.index(st.session_state.selected_task)]
         # if selected_task_status == 'on_execution' and st.session_state.selected_status == 'on_execution':
@@ -36,6 +37,7 @@ def update_task_status():
 
 
 def tasks_visualizer(user_id, project_name, divider):
+    os.write(1, '🥏 Executing tasks_visualizer \n'.encode('utf-8'))
     rows = uc.run_query_2_m(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed') ORDER BY commit_finish_date ASC;") #finished, canceled, unfulfilled
     if len(rows) == 0:
         st.success('Nailed it! Nothing left on your plate.', icon="😎")
@@ -82,6 +84,7 @@ def tasks_visualizer(user_id, project_name, divider):
 
 
 def tasks_achievements(user_id, project_name, divider):
+    os.write(1, '🥏 Executing tasks_achievements \n'.encode('utf-8'))
     if len(uc.run_query_1_m(f"SELECT id  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND finished_date IS NOT NULL LIMIT 1")) < 1:
         st.success("Your achievements will be available when you finish your first task")
     else:
@@ -137,6 +140,7 @@ def tips_tasks_ia(tasks, divider):
 
 
 def execute_task_creation():
+    os.write(1, '🥏 Executing execute_task_creation \n'.encode('utf-8'))
     if st.session_state.selected_user_id is None or st.session_state.task_input is None or len(st.session_state.task_input) < 10 or st.session_state.commitment_date_input is None:
         st.toast("Please fill in completely all of the required fields.")
     else:
@@ -159,6 +163,7 @@ def execute_task_creation():
 
 
 def task_creation(user_id, role_id, project_id, project_name, divider):
+    os.write(1, '🥏 Executing task_creation \n'.encode('utf-8'))
     rows = uc.run_query_1_day(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;")
     role_ids = []
     role_names = []
@@ -203,6 +208,7 @@ def task_creation(user_id, role_id, project_id, project_name, divider):
 
 
 def task_deletion_execution():
+    os.write(1, '🥏 Executing task_deletion_execution \n'.encode('utf-8'))
     if st.session_state.selected_task_description is not None:
         selected_task_id = st.session_state.user_tasks_ids[st.session_state.user_tasks_descriptions.index(st.session_state.selected_task_description)]
         today = datetime.date.today()
@@ -219,6 +225,7 @@ def task_deletion_execution():
 
 
 def task_deletion(user_id, role_id, project_id, project_name, divider):
+    os.write(1, '🥏 Executing task_deletion \n'.encode('utf-8'))
     if role_id == 1:
         rows = uc.run_query_half_day(f"SELECT id, name FROM `company-data-driven.global.roles` WHERE id >= {role_id} ORDER BY id DESC;")
     else:
