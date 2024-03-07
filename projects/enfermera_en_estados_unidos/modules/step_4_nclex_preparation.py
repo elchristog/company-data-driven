@@ -1,6 +1,8 @@
 import streamlit as st
 import os
 
+import utils.user_credentials as uc
+
 def study_plan(user_id, project_id, project_name):
   os.write(1, '🥏 Executing study_plan \n'.encode('utf-8'))
   rows = uc.run_query_half_day(f"SELECT u.username, c.id as contract_id FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN `company-data-driven.global.users` AS u ON u.id = c.user_id;")
