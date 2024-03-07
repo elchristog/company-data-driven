@@ -3,6 +3,9 @@ import os
 
 import utils.user_credentials as uc
 
+def study_plan_execution():
+  st.toast("Hola!")
+
 def study_plan(user_id, project_id, project_name):
   os.write(1, '🥏 Executing study_plan \n'.encode('utf-8'))
   os.write(1, '- study_plan: Retrieving users \n'.encode('utf-8'))
