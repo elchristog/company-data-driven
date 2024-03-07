@@ -20,6 +20,7 @@ import modules.bitly_groupal_session as bgs
 import modules.groupal_session_assistance as gsa
 import projects.enfermera_en_estados_unidos.modules.step_1_program_start as s1ps
 import projects.enfermera_en_estados_unidos.modules.step_3_nursing_board_registration as s3nbr
+import projects.enfermera_en_estados_unidos.modules.step_4_nclex_preparation as s4np
 import utils.g_gemini_gestor as ggg
 
 
@@ -291,6 +292,16 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "CGFNS guide":
                 tap.title_and_paragraph("Guia de registro" + project_icon, "Registro ante la junta de enfermeria CGFNS", "h3", 0)
                 s3nbr.cgfns_video_guide()
+
+
+        if menu == "Step4: Preparación NCLEX":
+            sub_menu_options=['Study guide']
+            if role_id == 1:
+                sub_menu_options.extend(['Something'])
+            sub_menu = st.sidebar.radio('Step3 options', options = sub_menu_options)
+            if sub_menu == "CGFNS guide":
+                tap.title_and_paragraph("Guia de registro" + project_icon, "Registro ante la junta de enfermeria CGFNS", "h3", 0)
+                s4np.study_plan(user_id, project_id, project_name)
 
 
         
