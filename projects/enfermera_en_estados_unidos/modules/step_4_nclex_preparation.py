@@ -3,7 +3,7 @@ import os
 
 import utils.user_credentials as uc
 
-def study_plan_execution(study_plan_selected_user_id, study_plan_selected_contract_id):
+def study_plan_execution(study_plan_user_id, study_plan_project_id, study_plan_project_name, study_plan_selected_user_id, study_plan_selected_contract_id):
   st.toast(study_plan_selected_user_id)
 
 def study_plan(user_id, project_id, project_name):
@@ -29,7 +29,10 @@ def study_plan(user_id, project_id, project_name):
   else:
       st.success('User confirmed!', icon = '🪬')
       if selected_username is not None:
+          study_plan_user_id = user_id
+          study_plan_project_id = project_id
+          study_plan_project_name = project_name
           study_plan_selected_user_id = ids[usernames.index(selected_username)]
           study_plan_selected_contract_id = contract_ids[usernames.index(selected_username)]
-          study_plan_button = st.button("Create Study plan", on_click = study_plan_execution, args = [study_plan_selected_user_id, study_plan_selected_contract_id])
+          study_plan_button = st.button("Create Study plan", on_click = study_plan_execution, args = [study_plan_user_id, study_plan_project_id, study_plan_project_name, study_plan_selected_user_id, study_plan_selected_contract_id])
 
