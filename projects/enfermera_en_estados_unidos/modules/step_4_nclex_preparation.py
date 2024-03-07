@@ -23,7 +23,7 @@ def study_plan(user_id, project_id, project_name):
       selected_username = st.selectbox(
               label = "Select the username",
               options = usernames,
-              index = None,
+              index = 0,
               key= "usernames"
           )
       st.session_state.study_plan_selected_username = selected_username
