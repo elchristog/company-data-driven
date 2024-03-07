@@ -56,9 +56,13 @@ def save_bitly_metrics_bulk(project_name):
     current_date = dates_in_table[0].get('current_date')
     days_last_update = dates_in_table[0].get('days_last_update')
     max_date = dates_in_table[0].get('max_date')
+    st.session_state.save_bitly_metrics_bulk_current_date = current_date
     st.session_state.save_bitly_metrics_bulk_days_last_update = days_last_update
+    st.session_state.save_bitly_metrics_bulk_max_date = max_date
   else:
+    current_date = st.session_state.save_bitly_metrics_bulk_current_date
     days_last_update = st.session_state.save_bitly_metrics_bulk_days_last_update
+    max_date = st.session_state.save_bitly_metrics_bulk_max_date
   if days_last_update is None or days_last_update is None:
     os.write(1, '- save_bitly_metrics_bulk: Saving metrics \n'.encode('utf-8'))
     st.toast("Updating bitly data", icon = "🥶")
