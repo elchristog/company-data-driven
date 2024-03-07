@@ -31,5 +31,5 @@ def study_plan(user_id, project_id, project_name):
       if selected_username is not None:
           study_plan_selected_user_id = ids[usernames.index(selected_username)]
           study_plan_selected_contract_id = contract_ids[usernames.index(selected_username)]
-          study_plan_button = st.button("Create Study plan", on_click = study_plan_execution, [study_plan_selected_user_id, study_plan_selected_contract_id])
+          study_plan_button = st.button("Create Study plan", on_click = study_plan_execution, args = [study_plan_selected_user_id, study_plan_selected_contract_id])
 
