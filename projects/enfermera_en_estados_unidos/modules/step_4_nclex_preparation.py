@@ -9,10 +9,12 @@ def study_plan_execution():
 def study_plan(user_id, project_id, project_name):
   os.write(1, '🥏 Executing study_plan \n'.encode('utf-8'))
   os.write(1, '- study_plan: Retrieving users \n'.encode('utf-8'))
-  rows = uc.run_query_half_day(f"SELECT u.username, c.id as contract_id FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN `company-data-driven.global.users` AS u ON u.id = c.user_id;")
+  rows = uc.run_query_half_day(f"SELECT u.id, u.username, c.id as contract_id FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN `company-data-driven.global.users` AS u ON u.id = c.user_id;")
+  ids = []
   usernames = []
   contract_ids = []
   for row in rows:
+      ids.append(row.get('id'))
       usernames.append(row.get('username'))
       contract_ids.append(row.get('contract_id'))
   selected_username = st.selectbox(
@@ -27,6 +29,7 @@ def study_plan(user_id, project_id, project_name):
   else:
       st.success('User confirmed!', icon = '🪬')
       if selected_username is not None:
+          selected_user_id = ids[usernames.index(selected_username)]
           selected_contract_id = contract_ids[usernames.index(selected_username)]
           study_plan_button = st.button("Create Study plan", on_click = study_plan_execution)
 
