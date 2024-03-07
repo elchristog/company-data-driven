@@ -30,6 +30,7 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
   del st.session_state['study_plan_project_name']
   del st.session_state['study_plan_selected_user_id']
   del st.session_state['study_plan_selected_contract_id']
+  uc.run_query_half_day.clear()
   
 
 
