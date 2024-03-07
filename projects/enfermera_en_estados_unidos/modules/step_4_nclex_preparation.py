@@ -4,6 +4,7 @@ import os
 import utils.user_credentials as uc
 
 def study_plan_execution(study_plan_user_id, study_plan_project_id, study_plan_project_name, study_plan_selected_user_id, study_plan_selected_contract_id):
+  os.write(1, '🥏 Executing study_plan_execution \n'.encode('utf-8'))
   st.toast(study_plan_selected_user_id)
 
 def study_plan(user_id, project_id, project_name):
@@ -17,12 +18,30 @@ def study_plan(user_id, project_id, project_name):
       ids.append(row.get('id'))
       usernames.append(row.get('username'))
       contract_ids.append(row.get('contract_id'))
-  selected_username = st.selectbox(
-          label = "Select the username",
-          options = usernames,
-          index = None,
-          key= "usernames"
-      )
+
+  if 'study_plan_selected_username' not in st.session_state:
+      selected_username = st.selectbox(
+              label = "Select the username",
+              options = usernames,
+              index = None,
+              key= "usernames"
+          )
+      st.session_state.study_plan_selected_username = selected_username
+       if st.session_state.study_plan_selected_username is not None:
+            st.session_state.study_plan_selected_username_index  = usernames.index(st.session_state.study_plan_selected_username)
+
+  else:
+      selected_username = st.selectbox(
+              label = "Select the username",
+              options = usernames,
+              index = st.session_state.study_plan_selected_username_index,
+              key= "usernames"
+          )
+      st.session_state.study_plan_selected_username = selected_username
+      if st.session_state.study_plan_selected_username is not None:
+            st.session_state.study_plan_selected_username_index  = usernames.index(st.session_state.study_plan_selected_username)
+    
+  
   checking_username = uc.run_query_30_m(f"SELECT id FROM `company-data-driven.global.users` WHERE username = '{selected_username}';")
   if len(checking_username) < 1 or checking_username is None:
       st.error('User does not exists', icon = '👻')
