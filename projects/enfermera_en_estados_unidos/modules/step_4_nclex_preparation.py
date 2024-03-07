@@ -5,7 +5,22 @@ import utils.user_credentials as uc
 
 def study_plan_execution(study_plan_user_id, study_plan_project_id, study_plan_project_name, study_plan_selected_user_id, study_plan_selected_contract_id):
   os.write(1, '🥏 Executing study_plan_execution \n'.encode('utf-8'))
+  st.toast("Updating, please wait", icon = "☺️")
+  
   st.toast(study_plan_selected_user_id)
+  
+  st.toast('Study Plan Created!', icon = '🎈')
+  st.balloons()
+  time.sleep(1)
+  del st.session_state['study_plan_user_id']
+  del st.session_state['study_plan_project_id']
+  del st.session_state['study_plan_project_name']
+  del st.session_state['study_plan_selected_user_id']
+  del st.session_state['study_plan_selected_contract_id']
+  
+
+
+
 
 def study_plan(user_id, project_id, project_name):
   os.write(1, '🥏 Executing study_plan \n'.encode('utf-8'))
