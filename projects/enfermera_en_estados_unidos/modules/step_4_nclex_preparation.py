@@ -17,7 +17,7 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
     st.toast("User has no completed any test", icon = "😵‍💫")
   else:
     st.session_state.performance_analysis = ggg.gemini_general_prompt('Actua como un asesor experto en NCLEX, analiza las respuestas usamdop estadisticas', 'Ahora soy un asesor experto en NCLEX', '[CATEGORIES]Client Needs Percentage of Items from EachCategory/SubcategorySafe and Effective Care Environment Management of Care Safety and Infection ControlHealth Promotion and Maintenance Psychosocial Integrity Physiological Integrity Basic Care and Comfort Pharmacological and Parenteral Therapies Reduction of Risk Potential Physiological Adaptation[/CATEGORIES][MY_TEST]' + str(last_user_tests) + '[/MY_TEST][INSTRUCTION]Categorizaon cada una de estas 60 preguntas [MY_TEST] en su respectiva dimension [CATEGORIES] y muestrame en una tabla para cada dimension El Numero de preguntas de esa dimension, que porcentaje preguntas acerte y en que porcentaje me equivoque, mostrando una a una cada categoria y al frente el total, el porcentaje de correctas e incorrectas únicamente, a manera de tabla, recuerda que el total debe sumar las 60 preguntas: [/INSTRUCTION]')
-    st.write(st.session.performance_analysis)
+    st.write(st.session_state.performance_analysis)
     
     
     st.toast('Study Plan Created!', icon = '🎈')
