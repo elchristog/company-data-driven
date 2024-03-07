@@ -16,9 +16,20 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
   if len(last_user_tests) < 1:
     st.toast("User has no completed any test", icon = "😵‍💫")
   else:
+    os.write(1, '- study_plan_execution: Creating performance table \n'.encode('utf-8'))
     st.session_state.performance_analysis = ggg.gemini_general_prompt('Actua como un asesor experto en NCLEX, analiza las respuestas usando estadisticas y muestra la respuesta siempre en una tabla', 'Ahora soy un asesor experto en NCLEX y muestro al respuesta siempre en una tabla', '[CATEGORIES]Client Needs Percentage of Items from EachCategory/SubcategorySafe and Effective Care Environment Management of Care Safety and Infection ControlHealth Promotion and Maintenance Psychosocial Integrity Physiological Integrity Basic Care and Comfort Pharmacological and Parenteral Therapies Reduction of Risk Potential Physiological Adaptation[/CATEGORIES][MY_TEST]' + str(last_user_tests) + '[/MY_TEST][INSTRUCTION]Categoriza cada una de estas 60 preguntas [MY_TEST] en su respectiva dimension [CATEGORIES] y muestrame en una tabla para cada dimension El Numero de preguntas de esa dimension, que porcentaje preguntas acerte y en que porcentaje me equivoque, mostrando una a una cada categoria y al frente el total, el porcentaje de correctas e incorrectas únicamente, a manera de tabla, recuerda que el total debe sumar las 60 preguntas, las filas son cada una de las dimensiones y las columnas son el nombre de la dimension, el total de preguntas, el porcentaje de aciertos y el procentaje de fallos: [/INSTRUCTION]')
     st.write('# ' + st.session_state.study_plan_selected_username)
     st.write(st.session_state.performance_analysis)
+
+    os.write(1, '- study_plan_execution: Retrieving habits and evolution \n'.encode('utf-8'))
+    user_score_evolution = uc.run_query_1_m(f"SELECT ROW_NUMBER() OVER(ORDER BY ta.id ASC) AS attempt, ta.attempt_date, LAG(ta.attempt_date, 1) OVER(ORDER BY ta.id ASC) AS last_attempt_date, DATE_DIFF(ta.attempt_date, LAG(ta.attempt_date, 1) OVER(ORDER BY ta.id ASC), DAY) AS days_between_tests, ta.success_rate AS score, EXTRACT(YEAR FROM ta.attempt_date) AS year_attempt_date, EXTRACT(MONTH FROM ta.attempt_date) AS month_attempt_date, EXTRACT(WEEK FROM ta.attempt_date) AS week_attempt_date FROM `company-data-driven.{project_name}.nclex_attempts` AS ta WHERE ta.user_id = {study_plan_selected_user_id} ORDER BY ta.id ASC;")
+    if len(user_score_evolution) < 1 or user_score_evolution is None < 0:
+                st.warning(f"You have not presented your test", icon = "🫥")
+    else:
+        user_score_evolution.sort(key=lambda x: x["attempt"])
+        user_score_evolution_df = pd.DataFrame(user_score_evolution, columns = ["attempt","attempt_date","last_attempt_date","days_between_tests","score","year_attempt_date","month_attempt_date","week_attempt_date"])
+      st.write(user_score_evolution_df)
+    
     
     
     st.toast('Study Plan Created!', icon = '🎈')
