@@ -13,11 +13,11 @@ def study_plan_execution(study_plan_user_id, study_plan_project_id, study_plan_p
   st.toast('Study Plan Created!', icon = '🎈')
   st.balloons()
   time.sleep(1)
-  # del st.session_state['study_plan_user_id']
-  # del st.session_state['study_plan_project_id']
-  # del st.session_state['study_plan_project_name']
-  # del st.session_state['study_plan_selected_user_id']
-  # del st.session_state['study_plan_selected_contract_id']
+  del st.session_state['study_plan_user_id']
+  del st.session_state['study_plan_project_id']
+  del st.session_state['study_plan_project_name']
+  del st.session_state['study_plan_selected_user_id']
+  del st.session_state['study_plan_selected_contract_id']
   
 
 
@@ -57,10 +57,11 @@ def study_plan(user_id, project_id, project_name):
             st.session_state.study_plan_selected_username_index  = usernames.index(st.session_state.study_plan_selected_username)
 
   if selected_username is not None:
-      study_plan_user_id = user_id
-      study_plan_project_id = project_id
-      study_plan_project_name = project_name
-      study_plan_selected_user_id = ids[usernames.index(selected_username)]
-      study_plan_selected_contract_id = contract_ids[usernames.index(selected_username)]
-      study_plan_button = st.button("Create Study plan", on_click = study_plan_execution, args = [study_plan_user_id, study_plan_project_id, study_plan_project_name, study_plan_selected_user_id, study_plan_selected_contract_id])
+      st.session_state.study_plan_user_id = user_id
+      st.session_state.study_plan_project_id = project_id
+      st.session_state.study_plan_project_name = project_name
+      st.session_state.study_plan_selected_user_id = ids[usernames.index(selected_username)]
+      st.session_state.study_plan_selected_contract_id = contract_ids[usernames.index(selected_username)]
+    
+      study_plan_button = st.button("Create Study plan", on_click = study_plan_execution, args = [st.session_state.study_plan_user_id, st.session_state.study_plan_project_id, st.session_state.study_plan_project_name, st.session_state.study_plan_selected_user_id, st.session_state.study_plan_selected_contract_id])
 
