@@ -13,11 +13,11 @@ def study_plan_execution(study_plan_user_id, study_plan_project_id, study_plan_p
   st.toast('Study Plan Created!', icon = '🎈')
   st.balloons()
   time.sleep(1)
-  del st.session_state['study_plan_user_id']
-  del st.session_state['study_plan_project_id']
-  del st.session_state['study_plan_project_name']
-  del st.session_state['study_plan_selected_user_id']
-  del st.session_state['study_plan_selected_contract_id']
+  # del st.session_state['study_plan_user_id']
+  # del st.session_state['study_plan_project_id']
+  # del st.session_state['study_plan_project_name']
+  # del st.session_state['study_plan_selected_user_id']
+  # del st.session_state['study_plan_selected_contract_id']
   
 
 
