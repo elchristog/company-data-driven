@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import time
+import pandas as pd
 
 import utils.user_credentials as uc
 import utils.g_gemini_gestor as ggg
