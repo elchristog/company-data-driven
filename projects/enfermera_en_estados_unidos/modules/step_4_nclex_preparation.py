@@ -3,6 +3,7 @@ import os
 import time
 
 import utils.user_credentials as uc
+import utils.g_gemini_gestor as ggg
 
 def study_plan_execution(study_plan_selected_username, study_plan_user_id, study_plan_project_id, study_plan_project_name, study_plan_selected_user_id, study_plan_selected_contract_id):
   os.write(1, '🥏 Executing study_plan_execution \n'.encode('utf-8'))
@@ -15,10 +16,13 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
   if len(last_user_tests) < 1:
     st.toast("User has no completed any test", icon = "☺️")
   else:
-    st.write(last_user_tests)
-  
-  st.toast('Study Plan Created!', icon = '🎈')
-  st.balloons()
+    st.session.performance_analysis = ggg.gemini_general_prompt('Actua como un asesor experto en NCLEX, analiza las respuestas usamdop estadisticas', 'Ahora soy un asesor experto en NCLEX', f'[CATEGORIES]Client Needs Percentage of Items from EachCategory/SubcategorySafe and Effective Care Environment Management of Care Safety and Infection ControlHealth Promotion and Maintenance Psychosocial Integrity Physiological Integrity Basic Care and Comfort Pharmacological and Parenteral Therapies Reduction of Risk Potential Physiological Adaptation[/CATEGORIES][MY_TEST] {last_user_tests} [/MY_TEST][INSTRUCTION]Categorizaon cada una de estas 60 preguntas [MY_TEST] en su respectiva dimension [CATEGORIES] y muestrame en una tabla para cada dimension El Numero de preguntas de esa dimension, que porcentaje preguntas acerte y en que porcentaje me equivoque, mostrando una a una cada categoria y al frente el total, el porcentaje de correctas e incorrectas únicamente, a manera de tabla, recuerda que el total debe sumar las 60 preguntas: [/INSTRUCTION]')
+    st.write(st.session.performance_analysis)
+    
+    
+    st.toast('Study Plan Created!', icon = '🎈')
+    st.balloons()
+    
   time.sleep(1)
   del st.session_state['study_plan_selected_username']
   del st.session_state['study_plan_user_id']
