@@ -27,9 +27,8 @@ def study_plan(user_id, project_id, project_name):
               key= "usernames"
           )
       st.session_state.study_plan_selected_username = selected_username
-       if st.session_state.study_plan_selected_username is not None:
+      if st.session_state.study_plan_selected_username is not None:
             st.session_state.study_plan_selected_username_index  = usernames.index(st.session_state.study_plan_selected_username)
-
   else:
       selected_username = st.selectbox(
               label = "Select the username",
