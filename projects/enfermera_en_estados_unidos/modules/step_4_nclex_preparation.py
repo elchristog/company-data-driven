@@ -28,7 +28,7 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
     else:
         user_score_evolution.sort(key=lambda x: x["attempt"])
         user_score_evolution_df = pd.DataFrame(user_score_evolution, columns = ["attempt","attempt_date","last_attempt_date","days_between_tests","score","year_attempt_date","month_attempt_date","week_attempt_date"])
-      st.write(user_score_evolution_df)
+        st.write(user_score_evolution_df)
     
     
     
