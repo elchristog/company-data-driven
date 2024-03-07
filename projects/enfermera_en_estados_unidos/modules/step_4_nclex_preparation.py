@@ -2,6 +2,7 @@ import streamlit as st
 import os
 import time
 import pandas as pd
+import datetime
 
 import utils.user_credentials as uc
 import utils.g_gemini_gestor as ggg
@@ -29,7 +30,18 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
     else:
         user_score_evolution.sort(key=lambda x: x["attempt"])
         user_score_evolution_df = pd.DataFrame(user_score_evolution, columns = ["attempt","attempt_date","last_attempt_date","days_between_tests","score","year_attempt_date","month_attempt_date","week_attempt_date"])
-        st.write(user_score_evolution_df)
+        today = datetime.date.today()
+        today_str = today.strftime("%Y-%m-%d")
+        user_score_evolution_df_month = user_score_evolution_df[(user_score_evolution_df["year_attempt_date"] == today.year) & (user_score_evolution_df["month_attempt_date"] == today.month)]
+        if len(user_score_evolution_df_month) < 1 or user_score_evolution_df_month is None < 0:
+                st.warning(f"You have not presented your test", icon = "🫥")
+        else:
+            month_tests = user_score_evolution_df_month.shape[0]
+            avg_score = round(user_score_evolution_df_month.score.mean(),0)
+            percentage_tests_with_score_higer_80 = str(round(100*(user_score_evolution_df_month['score'] >= 80).sum()/user_score_evolution_df_month.shape[0],1))
+            avg_days_between_tests = round(user_score_evolution_df_month.days_between_tests.mean(),1)
+            st.write(avg_days_between_tests)
+
     
     
     
