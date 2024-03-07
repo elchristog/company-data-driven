@@ -295,12 +295,12 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
         if menu == "Step4: Preparación NCLEX":
-            sub_menu_options=['Study guide']
+            sub_menu_options=['Study plan']
             if role_id == 1:
                 sub_menu_options.extend(['Something'])
             sub_menu = st.sidebar.radio('Step3 options', options = sub_menu_options)
-            if sub_menu == "CGFNS guide":
-                tap.title_and_paragraph("Guia de registro" + project_icon, "Registro ante la junta de enfermeria CGFNS", "h3", 0)
+            if sub_menu == "Study plan":
+                tap.title_and_paragraph("Plan de estudio" + project_icon, "Creacion del plan de estudio", "h3", 0)
                 s4np.study_plan(user_id, project_id, project_name)
 
 
