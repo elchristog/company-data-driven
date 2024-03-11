@@ -104,6 +104,10 @@ credentials:
       email: eva66803@gmail.com
       name: Eva Rodriguez
       password: $2b$12$PIDhj9dsWv/Bj7LUnrU5yenyqShZ/XnDPzyn2FmxyJrxli9KvC.iO
+    jacruzr:
+      email: javierandrescruz01@gmail.com
+      name: Andres Cruz
+      password: $2b$12$o5ooT1q..xhismvyF1uk.enTuEqeRMRqkgzSrcfc8sw826aJxNETa
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
