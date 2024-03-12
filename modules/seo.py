@@ -5,7 +5,7 @@ import datetime
 import re
 
 import utils.user_credentials as uc
-import utils.chat_gpt_gestor as cgptg
+import utils.g_gemini_gestor as ggg
 
 # callbacks https://discuss.streamlit.io/t/click-twice-on-button-for-changing-state/45633/2
 
@@ -194,7 +194,7 @@ def seo_ideation_execution():
     st.toast("Keyword research", icon = "☺️")
     time.sleep(5)
     all_ideas = uc.run_query_10_s(f"SELECT ideas FROM `company-data-driven.{st.session_state.project_name}.keyword_seo_ideation_log`;")  
-    answer = cgptg.prompt_ia("Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.project_keyword} [/KEYWORD] [KEYWORD_RESEARCH] {keyword_research} [/KEYWORD_RESEARCH] [LONGTAIL_QUESTIONS] {longtail_questions} [/LONGTAIL_QUESTIONS] [IDEASEXTRA] {all_ideas} [/IDEASEXTRA] [YACREADO] {created_content} [/YACREADO] [INSTRUCTION] Analiza las metricas, Dame ideas de 6 articulos que posicionen aclarando el titulo que debe tener el articulo y la keyword que quieres posicionar en cada uno, evita hablar sobre articulos que ya he creado [YACREADO], asegura que 2 de los articulos vengan de los [LONGTAIL_QUESTIONS] o de los [IDEASEXTRA]:[/INSTRUCTION]", 600)
+    answer = ggg.gemini_general_prompt("Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail [KEYWORD]" + {st.session_state.project_keyword} +  "[/KEYWORD]" , "Ahora soy un experto generando ideas de contenido que se posicionen rapidamente", "Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail [KEYWORD]" + st.session_state.project_keyword + " [/KEYWORD] [KEYWORD_RESEARCH]" + keyword_research +  "[/KEYWORD_RESEARCH] [LONGTAIL_QUESTIONS]" +longtail_questions + "[/LONGTAIL_QUESTIONS] [IDEASEXTRA]" + all_ideas + "[/IDEASEXTRA] [YACREADO]" + created_content + "[/YACREADO] [INSTRUCTION] Analiza las metricas, Dame ideas de 6 articulos que posicionen aclarando el titulo que debe tener el articulo y la keyword que quieres posicionar en cada uno, evita hablar sobre articulos que ya he creado [YACREADO], asegura que 2 de los articulos vengan de los [LONGTAIL_QUESTIONS] o de los [IDEASEXTRA]:[/INSTRUCTION]")
     st.toast("IA working", icon = "☺️")
     st.session_state.answer = answer
     st.write(answer)
