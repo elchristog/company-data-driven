@@ -215,7 +215,8 @@ def seo_ideation(project_name, project_keyword, user_id, role_id):
             label_visibility = 'visible',
             disabled = False,
             placeholder = 'pasos para ser enfermera latina en usa, comparacion de agencias de enfermeria, cuanto gana una enfermera en texas',
-            help = 'This ideas will be saved an priorized with the time'
+            help = 'This ideas will be saved an priorized with the time',
+            key = 'text_input_1'
         )
 
         submitted = st.form_submit_button("Generate ideas", on_click = seo_ideation_execution, args = [project_name, project_keyword, user_id, role_id, text_input_1])
