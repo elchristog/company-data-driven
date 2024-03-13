@@ -3,6 +3,7 @@ import pandas as pd
 import time
 import datetime
 import re
+import ast
 
 import utils.user_credentials as uc
 import utils.g_gemini_gestor as ggg
