@@ -188,8 +188,8 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
 def seo_ideation_execution():
     st.toast('Generating Ideas:', icon="🤖")  
     uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.keyword_seo_ideation_log` (id, creation_date, creator_user_id, ideas) VALUES (GENERATE_UUID(), CURRENT_DATE(), {st.session_state.user_id}, '{st.session_state.text_input_1}')")  
-    keyword_research = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{st.session_state.project_name}.keywords`;")        
-    longtail_questions = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{st.session_state.project_name}.keyword_common_questions`;")        
+    keyword_research = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{st.session_state.project_name}.keywords` ORDER BY RAND() LIMIT 50;")        
+    longtail_questions = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{st.session_state.project_name}.keyword_common_questions` ORDER BY RAND() LIMIT 50;")        
     created_content = uc.run_query_10_s(f"SELECT page AS page, SUM(clicks) AS clicks, SUM(impressions) AS impressions, AVG(ctr) AS ctr  FROM `company-data-driven.{st.session_state.project_name}.traffic_analytics_web_pages` GROUP BY page;")  
     st.toast("Keyword research", icon = "☺️")
     time.sleep(5)
