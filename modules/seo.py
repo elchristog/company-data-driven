@@ -202,6 +202,9 @@ def seo_ideation_execution(project_name, project_keyword, user_id, role_id, text
         st.toast("IA working", icon = "☺️")
         st.session_state.answer = answer
         st.write(answer)
+        answer_array = ast.literal_eval(answer)
+        st.write(answer_array)
+        
     
 
 
