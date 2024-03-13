@@ -187,20 +187,20 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
 
 def seo_ideation_execution(project_name, project_keyword, user_id, role_id, text_input_1):
     st.toast('Generating Ideas:', icon="🤖")  
-    st.write(text_input_1)
-    st.write(str(text_input_1))
-    
-    # uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.keyword_seo_ideation_log` (id, creation_date, creator_user_id, ideas) VALUES (GENERATE_UUID(), CURRENT_DATE(), {user_id}, '{text_input_1}')")  
-    # keyword_research = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{project_name}.keywords` ORDER BY RAND() LIMIT 50;")        
-    # longtail_questions = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{project_name}.keyword_common_questions` ORDER BY RAND() LIMIT 50;")        
-    # created_content = uc.run_query_10_s(f"SELECT page AS page, SUM(clicks) AS clicks, SUM(impressions) AS impressions, AVG(ctr) AS ctr  FROM `company-data-driven.{project_name}.traffic_analytics_web_pages` GROUP BY page;")  
-    # st.toast("Keyword research", icon = "☺️")
-    # time.sleep(5)
-    # all_ideas = uc.run_query_10_s(f"SELECT ideas FROM `company-data-driven.{project_name}.keyword_seo_ideation_log`;")  
-    # answer = ggg.gemini_general_prompt("Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail [KEYWORD]" + str(project_keyword) +  "[/KEYWORD]" , "Ahora soy un experto generando ideas de contenido que se posicionen rapidamente, ideo nuevos articulos y no repito los anteriores", "Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail [KEYWORD]" + str(project_keyword) + " [/KEYWORD] [KEYWORD_RESEARCH]" + str(keyword_research) +  "[/KEYWORD_RESEARCH] [LONGTAIL_QUESTIONS]" +str(longtail_questions) + "[/LONGTAIL_QUESTIONS] [IDEASEXTRA]" + str(all_ideas) + "[/IDEASEXTRA] [YACREADO]" + str(created_content) + "[/YACREADO] [INSTRUCTION] Analiza las metricas, Dame ideas de 6 articulos que posicionen aclarando el titulo que debe tener el articulo, la keyword que quieres posicionar en cada uno y una descripcion de que debe tratar el articulo, evita estrictamente hablar sobre articulos que ya he creado ya que quiero oportunidades nuevas [YACREADO], que ninguna de las nuevas ideas exista previamente en [YACREADO], asegura que 3 de los articulos vengan de los [LONGTAIL_QUESTIONS] o de los [IDEASEXTRA]:[/INSTRUCTION]")
-    # st.toast("IA working", icon = "☺️")
-    # st.session_state.answer = answer
-    # st.write(answer)
+    if len(text_input_1) < 10:
+        st.toast("Ideas extras is to short!", icon = "💣")
+    else:
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.keyword_seo_ideation_log` (id, creation_date, creator_user_id, ideas) VALUES (GENERATE_UUID(), CURRENT_DATE(), {user_id}, '{text_input_1}')")  
+        keyword_research = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{project_name}.keywords` ORDER BY RAND() LIMIT 50;")        
+        longtail_questions = uc.run_query_10_s(f"SELECT * FROM `company-data-driven.{project_name}.keyword_common_questions` ORDER BY RAND() LIMIT 50;")        
+        created_content = uc.run_query_10_s(f"SELECT page AS page, SUM(clicks) AS clicks, SUM(impressions) AS impressions, AVG(ctr) AS ctr  FROM `company-data-driven.{project_name}.traffic_analytics_web_pages` GROUP BY page;")  
+        st.toast("Keyword research", icon = "☺️")
+        time.sleep(5)
+        all_ideas = uc.run_query_10_s(f"SELECT ideas FROM `company-data-driven.{project_name}.keyword_seo_ideation_log`;")  
+        answer = ggg.gemini_general_prompt("Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail [KEYWORD]" + str(project_keyword) +  "[/KEYWORD]" , "Ahora soy un experto generando ideas de contenido que se posicionen rapidamente, ideo nuevos articulos y no repito los anteriores", "Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail [KEYWORD]" + str(project_keyword) + " [/KEYWORD] [KEYWORD_RESEARCH]" + str(keyword_research) +  "[/KEYWORD_RESEARCH] [LONGTAIL_QUESTIONS]" +str(longtail_questions) + "[/LONGTAIL_QUESTIONS] [IDEASEXTRA]" + str(all_ideas) + "[/IDEASEXTRA] [YACREADO]" + str(created_content) + "[/YACREADO] [INSTRUCTION] Analiza las metricas, Dame ideas de 6 articulos que posicionen aclarando el titulo que debe tener el articulo, la keyword que quieres posicionar en cada uno y una descripcion de que debe tratar el articulo, evita estrictamente hablar sobre articulos que ya he creado ya que quiero oportunidades nuevas [YACREADO], que ninguna de las nuevas ideas exista previamente en [YACREADO], asegura que 3 de los articulos vengan de los [LONGTAIL_QUESTIONS] o de los [IDEASEXTRA]:[/INSTRUCTION]")
+        st.toast("IA working", icon = "☺️")
+        st.session_state.answer = answer
+        st.write(answer)
     
 
 
