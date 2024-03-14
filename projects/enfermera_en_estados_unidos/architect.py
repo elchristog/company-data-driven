@@ -103,7 +103,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
             if sub_menu == "Video creation":
                 tap.title_and_paragraph("Creacion de video" + project_icon, "gg", "h3", 0)
-                # seo.content_creation_guide_effective_communication_storytelling(user_id, project_name)
+                seo.video_creation(user_id, project_name)
 
             if sub_menu == "SEO writting":
                 tap.title_and_paragraph("SEO writting" + project_icon, "Estimated time: 20 minutes", "h3", 0)
