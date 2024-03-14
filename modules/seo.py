@@ -10,34 +10,6 @@ import utils.g_gemini_gestor as ggg
 
 # callbacks https://discuss.streamlit.io/t/click-twice-on-button-for-changing-state/45633/2
 
-def video_creation_execution(project_name, user_id):
-    st.session_state.text_input_1 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_1)
-    
-    st.toast("Please wait", icon = "☺️")
-    # uc.run_query_insert_update(f"")
-    st.toast("Content saved!", icon = "👾")
-    st.balloons()
-    time.sleep(5)
-    uc.run_query_30_m.clear()
-
-
-def video_creation(user_id, project_name):
-    st.warning("Do not use line breaks, double or single quotes, to prevent errors write your answers in a local text editor and copy here without any line breaks, double or single quotes", icon = "🙈")
-    with st.form("comm_eff_storytelling_form", clear_on_submit = True):
-        text_input_1 = st.text_area(
-            "Keyword del articulo",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Obtener la licencia de enfermería en Estados Unidos',
-            help = 'No se debe poner cualquier cosa, debe ser lo que entrego el ideador',
-            key = 'text_input_1'
-        )
-        
-        submitted = st.form_submit_button("I finished this video!", on_click = video_creation_execution, args = [project_name, user_id])
-
-
-
-
 
 def seo_ideation_execution(project_name, project_keyword, user_id, role_id, text_input_1):
     st.toast('Generating Ideas:', icon="🤖")  
@@ -65,11 +37,6 @@ def seo_ideation_execution(project_name, project_keyword, user_id, role_id, text
         
     
 
-
-
-
-
-
 def seo_ideation(project_name, project_keyword, user_id, role_id):
     available_contents = uc.run_query_30_m(f"SELECT COUNT(*) AS available_contents FROM `company-data-driven.{project_name}.content_creation` WHERE created_video IS NULL OR created_video = 0;")[0].get('available_contents') 
     if available_contents < 10:
@@ -96,6 +63,34 @@ def seo_ideation(project_name, project_keyword, user_id, role_id):
         st.write("---")
         st.header("Keyword research steps")
         st.write("Keywords Everywere suscripcion anual con el plan bronce, son 15 dolares al anio mantener la extension apagada y solo prenderla una vez por cada proyecto busco mi keyword en google  creo un google sheets en la carpeta del emprendimiento con columnas(keyword, volume, cpc, cpm) se llama keywords creo un segundo google sheets llamado keyword_common_questions con la columna question y ahi voy poniendo las pregunats que buscan 1- descargo las related keywords y las  pongo en el archivo, asegurarse de respetar las columnas 2- lo mismo con las Long-Tail Keywords y si hay ams pues a todas  3- le doy click a find long tail keywords, espero que se genere y las descargo todas  4- copio cada una de las preguntas que la gente suele hacer , luego las abro todas y copio todas las nuevas 4- copio los titulos de las 3 primeras paginas a las questions antepongo (que, como, donde, por que, quien, cuanto, comprar, contratar, el mejor, cual es, y todo el funnel del usuario) a la keyword, repito la busqueda eligiendo la primera apcion que google me ofrece (llevandome esa opcion a las questions, si no ofrece nada pues buscar asi) , a descarga de los 3 archivos y la copiada de todas las preguntas al final eliminar duplicados de ambos archivos, y del de keywords mantener todo ordenando de mayor a menor cpc leer en bigquery como tablas con los nombres cambiados: keywords_res y  keyword_common_questions_res, recordar ponerlas como desde drive y luego google sheets, el nombre de la tabla, schema auto detect,  y en ehaders row to skip poner 1 luego hacer un query para leer la tabla, darle a save results, bigquery table, ahi si ponerle el nombre que es y eliminar la primera tabla ")
+
+
+
+
+def video_creation_execution(project_name, user_id):
+    st.session_state.text_input_1 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_1)
+    
+    st.toast("Please wait", icon = "☺️")
+    # uc.run_query_insert_update(f"")
+    st.toast("Content saved!", icon = "👾")
+    st.balloons()
+    time.sleep(5)
+    uc.run_query_30_m.clear()
+
+
+def video_creation(user_id, project_name):
+    st.warning("Do not use line breaks, double or single quotes, to prevent errors write your answers in a local text editor and copy here without any line breaks, double or single quotes", icon = "🙈")
+    with st.form("comm_eff_storytelling_form", clear_on_submit = True):
+        text_input_1 = st.text_area(
+            "Keyword del articulo",
+            label_visibility = 'visible',
+            disabled = False,
+            placeholder = 'Obtener la licencia de enfermería en Estados Unidos',
+            help = 'No se debe poner cualquier cosa, debe ser lo que entrego el ideador',
+            key = 'text_input_1'
+        )
+        
+        submitted = st.form_submit_button("I finished this video!", on_click = video_creation_execution, args = [project_name, user_id])
 
 
 
