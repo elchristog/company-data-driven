@@ -102,8 +102,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 seo.seo_ideation(project_name, project_keyword, user_id, role_id)
 
             if sub_menu == "Video creation":
-                tap.title_and_paragraph("Creacion de contenido" + project_icon, "Usa un editor externo primero, pasa cada bloque de texto por https://www.text-utils.com/remove-special-characters/ antes de ponerlo aca, con la opcion Keep alphanumeric only", "h3", 0)
-                seo.content_creation_guide_effective_communication_storytelling(user_id, project_name)
+                tap.title_and_paragraph("Creacion de video" + project_icon, "gg", "h3", 0)
+                # seo.content_creation_guide_effective_communication_storytelling(user_id, project_name)
 
             if sub_menu == "SEO writting":
                 tap.title_and_paragraph("SEO writting" + project_icon, "Estimated time: 20 minutes", "h3", 0)
