@@ -207,6 +207,7 @@ def seo_ideation_execution(project_name, project_keyword, user_id, role_id, text
         st.write(answer)
         st.session_state.answer = answer
         time.sleep(1)
+        uc.run_query_30_m.clear()
         
         
     
