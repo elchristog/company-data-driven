@@ -10,47 +10,18 @@ import utils.g_gemini_gestor as ggg
 
 # callbacks https://discuss.streamlit.io/t/click-twice-on-button-for-changing-state/45633/2
 
-def save_new_content(project_name, user_id):
+def video_creation_execution(project_name, user_id):
     st.session_state.text_input_1 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_1)
-    st.session_state.text_input_2 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_2)
-    st.session_state.text_input_3 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_3)
-    st.session_state.text_input_4 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_4)
-    st.session_state.text_input_5 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_5)
-    st.session_state.text_input_6 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_6)
-    st.session_state.text_input_7 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_7)
-    st.session_state.text_input_8 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_8)
-    st.session_state.text_input_9 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_9)
-    st.session_state.text_input_10 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_10)
-    st.session_state.text_input_11 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_11)
-    st.session_state.text_input_12 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_12)
-    st.session_state.text_input_13 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_13)
-    st.session_state.text_input_14 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_14)
-
-    st.session_state.text_input_1 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_1)
-    st.session_state.text_input_2 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_2)
-    st.session_state.text_input_3 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_3)
-    st.session_state.text_input_4 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_4)
-    st.session_state.text_input_5 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_5)
-    st.session_state.text_input_6 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_6)
-    st.session_state.text_input_7 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_7)
-    st.session_state.text_input_8 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_8)
-    st.session_state.text_input_9 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_9)
-    st.session_state.text_input_10 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_10)
-    st.session_state.text_input_11 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_11)
-    st.session_state.text_input_12 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_12)
-    st.session_state.text_input_13 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_13)
-    st.session_state.text_input_14 = re.sub(r"[\\\'\"']", " ", st.session_state.text_input_14)
-    
     
     st.toast("Please wait", icon = "☺️")
-    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.effective_communication_content` (id, creation_date, creator_user_id, keyword, main_idea, why_1, why_2, why_3, how_1, how_2, how_3, experiment_1, experiment_2, experiment_3, relevant_content, checklist, call_to_action, created_content) VALUES (GENERATE_UUID(), CURRENT_DATE(), {user_id}, '{st.session_state.text_input_1}', '{st.session_state.text_input_2}', '{st.session_state.text_input_3}', '{st.session_state.text_input_4}', '{st.session_state.text_input_5}', '{st.session_state.text_input_6}', '{st.session_state.text_input_7}', '{st.session_state.text_input_8}', '{st.session_state.text_input_9}', '{st.session_state.text_input_10}', '{st.session_state.text_input_11}', '{st.session_state.text_input_12}', '{st.session_state.text_input_13}', '{st.session_state.text_input_14}' ,0);")
+    # uc.run_query_insert_update(f"")
     st.toast("Content saved!", icon = "👾")
     st.balloons()
     time.sleep(5)
     uc.run_query_30_m.clear()
 
 
-def content_creation_guide_effective_communication_storytelling(user_id, project_name):
+def video_creation(user_id, project_name):
     st.warning("Do not use line breaks, double or single quotes, to prevent errors write your answers in a local text editor and copy here without any line breaks, double or single quotes", icon = "🙈")
     with st.form("comm_eff_storytelling_form", clear_on_submit = True):
         text_input_1 = st.text_area(
@@ -61,126 +32,8 @@ def content_creation_guide_effective_communication_storytelling(user_id, project
             help = 'No se debe poner cualquier cosa, debe ser lo que entrego el ideador',
             key = 'text_input_1'
         )
-
-        text_input_2 = st.text_area(
-            "Idea principal",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Si quieren obtener la licencia en USA deben aplicar los 10 pasos: Trámite de documentos CGFNS, Inscripción ante la Junta de Enfermería, Preparación NCLEX, 	Preparación de inglés y Visa Screen. Aplicar el modelo incrementara los ingresos en 13%',
-            help = 'Es una frase que persuada a la persona para que haga lo que quiero que haga, esta orientada al verbo hacer y al beneficio de hacerlo.',
-            key = 'text_input_2'
-        )
-
-        text_input_3 = st.text_area(
-            "Por que de la primer parte de la idea principal",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Por que aplicar 10 pasos? Por que son los mismos pasos que yo tuve que vivir cuando me converti en enfermera en este pais y son los que requiere el gobierno de los estados unidos, pueden revisarse en esta web:',
-            help = 'Parte la idea principal en 3 partes y contesta por que de cada una, de forma completa y detallada',
-            key = 'text_input_3'
-        )
-
-        text_input_4 = st.text_area(
-            "Por que de la segunda parte de la idea principal",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'por que Trámite de documentos CGFNS, Inscripción ante la Junta de Enfermería, Preparación NCLEX? Porque los estados unidos requieren que cualquier enfermero extranjero que quiera trabajar en los estados unidos debe demostrar que sus estudios equivalen a una enfermera registrada que estudio en el pais, y para eso se deben legalizar y comprobar una serie de documentos y pruebas que demuestren que si es asi',
-            help = 'Parte la idea principal en 3 partes y contesta por que de cada una, de forma completa y detallada',
-            key = 'text_input_4'
-        )
-
-        text_input_5 = st.text_area(
-            "Por que de la tercera parte de la idea principal",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'por que Preparación de inglés y Visa Screen? porque ese documento es el que expide EU diciendo que efectivamente tu cumples con todos los requisitos de valides de tus estudios, conocimientos en salud y por suepuesto el ingles, y sin ese documento no te dejan tramitar la visa',
-            help = 'Parte la idea principal en 3 partes y contesta por que de cada una, de forma completa y detallada',
-            key = 'text_input_5'
-        )
-
-        text_input_6 = st.text_area(
-            "Como de la primera parte de la idea principal",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Como se aplican los 10 pasos? Con asesoria, nosotros asesoramos a enfermeros que se quieren ir a estados unidos durante todo el proceso hasta que lleguen al pais y se adapten a la vida, se hace entrando al link de whatsapp y me escriben y citamos la primera reunion',
-            help = 'explica como se hace',
-            key = 'text_input_6'
-        )
-
-        text_input_7 = st.text_area(
-            "Como de la segunda parte de la idea principal",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'como se hace Trámite de documentos CGFNS, Inscripción ante la Junta de Enfermería, Preparación NCLEX? para la aprte de cgfns pueden entrar a la pagina web de ellos y este es el link, aca explican como se hace por ejemplo vean que aca dice que se necesita esto y esto otro, para la parte del nclex les recomiendo el libro de archer y el de pearson y tambien nuestra asesoria porque los rpeparamos y probamos',
-            help = 'Explica como se hace',
-            key = 'text_input_7'
-        )
-
-        text_input_8 = st.text_area(
-            "Como de la tercera parte de la idea principal",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Como se hace Preparación de inglés y Visa Screen? hay tres examenes posibles ielts, toefl y el pti primero deben pensar muy bien cual elegir porque aunque hay unos ams faciles que otros no totdos son validos en todos los estados por ejemplo para una maestria que muchas veces las pagan les exigen esto y esto',
-            help = 'Explica como se hace',
-            key = 'text_input_8'
-        )
-
-        text_input_9 = st.text_area(
-            "Haga experimentos y tablas comparativas 1",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Comparemos obtener la licencia por nuestra cuenta contra una agencia, miren la agencia los obliga a quedarse en ciertos estados no dodne quiera, ademas tatatta',
-            help = 'Debe ser la parte mas larga y detallada: Probemos opcion1 y opcion2, miren lo que da cuando hacemos 1 y lo que da cuando hacemos 2, en una tabla comparativa se ve asi',
-            key = 'text_input_9'
-        )
-
-        text_input_10 = st.text_area(
-            "Haga experimentos y tablas comparativas 2",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Comparemos obtener la licencia por nuestra cuenta contra una agencia, miren la agencia los obliga a quedarse en ciertos estados no dodne quiera, ademas tatatta',
-            help = 'Debe ser la parte mas larga y detallada: Probemos opcion1 y opcion2, miren lo que da cuando hacemos 1 y lo que da cuando hacemos 2, en una tabla comparativa se ve asi',
-            key = 'text_input_10'
-        )
-
-        text_input_11 = st.text_area(
-            "Haga experimentos y tablas comparativas 3",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Comparemos obtener la licencia por nuestra cuenta contra una agencia, miren la agencia los obliga a quedarse en ciertos estados no dodne quiera, ademas tatatta',
-            help = 'Debe ser la parte mas larga y detallada: Probemos opcion1 y opcion2, miren lo que da cuando hacemos 1 y lo que da cuando hacemos 2, en una tabla comparativa se ve asi',
-            key = 'text_input_11'
-        )
-
-        text_input_12 = st.text_area(
-            "Copia y pega lo mas relevante de lo que escriben los top 3 competidores de esto",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Para trabajar de manera legal en Estados Unidos, además de contar con un título académico de tu país de origen, necesitarás aprobar el examen que realiza la Licenciatura del Consejo Nacional (NCLEX). Una vez que apruebes este examen obtendrás una licencia que te permitirá ejercer la profesión de enfermera',
-            help = 'Solo trae lo relevante',
-            key = 'text_input_12'
-        )
-
-        text_input_13 = st.text_area(
-            "Checklist",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'por eso recuerda 1, buscar un programa de acompanamiento, 2 hacer el Trámite de documentos, 3 inscripción ante la Junta de Enfermería...',
-            help = 'Resume en un checklists los mensajes principales',
-            key = 'text_input_13'
-        )
-
-        text_input_14 = st.text_area(
-            "llamado a la accion con pasos a seguir",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Suscribete para seguir aprendiendo conmigo y si quieres iniciar el programa dale al enlace de whatsapp',
-            help = '',
-            key = 'text_input_14'
-        )
-
-
-        submitted = st.form_submit_button("Submit", on_click = save_new_content, args = [project_name, user_id])
+        
+        submitted = st.form_submit_button("I finished this video!", on_click = video_creation_execution, args = [project_name, user_id])
 
 
 
