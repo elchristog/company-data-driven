@@ -217,7 +217,7 @@ def seo_ideation_execution(project_name, project_keyword, user_id, role_id, text
 
 
 def seo_ideation(project_name, project_keyword, user_id, role_id):
-    available_contents = uc.run_query_30_m (f"SELECT COUNT(*) AS available_contents FROM `company-data-driven.{project_name}.content_creation` WHERE created_video IS NULL OR created_video = 0;")[0].get('available_contents') 
+    available_contents = uc.run_query_30_m(f"SELECT COUNT(*) AS available_contents FROM `company-data-driven.{project_name}.content_creation` WHERE created_video IS NULL OR created_video = 0;")[0].get('available_contents') 
     if available_contents < 10:
         st.error(f"I need more contents! I just have: {available_contents}", icon = "🤬")
     else:
