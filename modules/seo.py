@@ -197,12 +197,16 @@ def seo_ideation_execution(project_name, project_keyword, user_id, role_id, text
         created_content = uc.run_query_10_s(f"SELECT page AS page, SUM(clicks) AS clicks, SUM(impressions) AS impressions, AVG(ctr) AS ctr  FROM `company-data-driven.{project_name}.traffic_analytics_web_pages` GROUP BY page;")  
         st.toast("Keyword research", icon = "☺️")
         time.sleep(1)
+        st.toast("IA working", icon = "☺️")
         all_ideas = uc.run_query_10_s(f"SELECT ideas FROM `company-data-driven.{project_name}.keyword_seo_ideation_log`;")  
         answer = ggg.gemini_general_prompt("Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail [KEYWORD]" + str(project_keyword) +  "[/KEYWORD], siempre muestras tus respuestas en forma de array de python donde cada articulo es un elemento del array y no contiene diccionarios dentro ni comentarios, solo strings" , "Ahora soy un experto generando ideas de contenido que se posicionen rapidamente, ideo nuevos articulos y no repito los anteriores, siempre muestro mis respuestas en forma de array de python donde cada articulo es un elemento del array  y no contiene diccionarios dentro  ni comentarios, solo strings", "Eres un experto en SEO, especialmente en ideacion de articulos web que posicionen rapido con palabras clave long tail [KEYWORD]" + str(project_keyword) + " [/KEYWORD] [KEYWORD_RESEARCH]" + str(keyword_research) +  "[/KEYWORD_RESEARCH] [LONGTAIL_QUESTIONS]" +str(longtail_questions) + "[/LONGTAIL_QUESTIONS] [IDEASEXTRA]" + str(all_ideas) + "[/IDEASEXTRA] [YACREADO]" + str(created_content) + "[/YACREADO] [INSTRUCTION] Analiza las metricas, Dame ideas de 6 articulos que posicionen aclarando la keyword que quieres posicionar en cada uno y una descripcion de que debe tratar el articulo, evita estrictamente hablar sobre articulos que ya he creado ya que quiero oportunidades nuevas [YACREADO], que ninguna de las nuevas ideas exista previamente en [YACREADO], asegura que 4 de los articulos vengan de los [LONGTAIL_QUESTIONS] o de los [IDEASEXTRA] y muestra cuales fueron, recuerda que cada articulo ideado se muestra como un elemento de un array de python y no contiene diccionarios dentro  ni comentarios, solo strings:[/INSTRUCTION]")
-        st.toast("IA working", icon = "☺️")
-        st.session_state.answer = answer
         answer_array = ast.literal_eval(answer)
-        st.write(answer_array)
+        for idea in answer_array:
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.content_creation` (id, creation_date, creator_user_id, idea) VALUES (GENERATE_UUID(), CURRENT_DATE(), {user_id}, '{idea}');")  
+        st.write(answer)
+        st.session_state.answer = answer
+        time.sleep(1)
+        
         
     
 
