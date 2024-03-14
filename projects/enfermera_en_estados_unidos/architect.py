@@ -85,9 +85,9 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         
         if menu == "Traffic":
-            sub_menu_options=['Traffic', 'Content creation guide']
+            sub_menu_options=['Traffic', 'SEO ideation', 'Video creation']
             if role_id == 1:
-                sub_menu_options.extend(['SEO ideation', 'SEO writting', 'Web creation guide', 'Post content prompt'])
+                sub_menu_options.extend(['SEO writting', 'Web creation guide', 'Post content prompt'])
             sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
             if sub_menu == "Traffic":
                 tap.title_and_paragraph("Trafico" + project_icon, "Seguimiento del trafico y los contenidos generados", "h3", 0)
@@ -97,13 +97,13 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 seoty.get_youtube_data_save_to_bq(role_id, project_name, project_url_clean)
                 seoty.show_youtube_metrics(project_name)
 
-            if sub_menu == "Content creation guide":
-                tap.title_and_paragraph("Creacion de contenido" + project_icon, "Usa un editor externo primero, pasa cada bloque de texto por https://www.text-utils.com/remove-special-characters/ antes de ponerlo aca, con la opcion Keep alphanumeric only", "h3", 0)
-                seo.content_creation_guide_effective_communication_storytelling(user_id, project_name)
-
             if sub_menu == "SEO ideation":
                 tap.title_and_paragraph("SEO Ideation" + project_icon, "Generation of 6 long tail ideas based on Keyword research", "h3", 0)
                 seo.seo_ideation(project_name, project_keyword, user_id, role_id)
+
+            if sub_menu == "Video creation":
+                tap.title_and_paragraph("Creacion de contenido" + project_icon, "Usa un editor externo primero, pasa cada bloque de texto por https://www.text-utils.com/remove-special-characters/ antes de ponerlo aca, con la opcion Keep alphanumeric only", "h3", 0)
+                seo.content_creation_guide_effective_communication_storytelling(user_id, project_name)
 
             if sub_menu == "SEO writting":
                 tap.title_and_paragraph("SEO writting" + project_icon, "Estimated time: 20 minutes", "h3", 0)
