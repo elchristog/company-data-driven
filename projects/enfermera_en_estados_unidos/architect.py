@@ -102,7 +102,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 seo.seo_ideation(project_name, project_keyword, user_id, role_id)
 
             if sub_menu == "Video creation":
-                tap.title_and_paragraph("Creacion de video" + project_icon, "Marcar videos que ya he grabado", "h3", 0)
+                tap.title_and_paragraph("Creacion de video" + project_icon, "Marcar videos que ya he grabado, subido a la carpeta de drive (https://drive.google.com/drive/folders/1cokJTOqm9O8O0AUWa1H7C7ws4-OoCtB-?usp=sharing) y he notificado en el grupo de Whatsapp que ya esta para editar", "h3", 0)
                 seo.video_creation(user_id, project_name)
 
             if sub_menu == "SEO writting":
