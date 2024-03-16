@@ -209,6 +209,7 @@ def video_uploading(user_id, project_name):
         uploading_video_button = st.button("I already uploaded this video", on_click = video_uploading_execution)
     if 'video_title_description_generation' in st.session_state:
         st.write(st.session_state.video_title_description_generation )
+        st.download_button('Download Texts', st.session_state.video_title_description_generation, file_name = 'video_title_description_generation.txt')
         
     
     
