@@ -13,6 +13,8 @@ import utils.g_gemini_gestor as ggg
 
 
 def seo_ideation_execution(project_name, project_keyword, user_id, role_id, text_input_1):
+    os.write(1, '🥏 Executing seo_ideation_execution \n'.encode('utf-8'))
+    os.write(1, '- seo_ideation_execution: Generating Ideas\n'.encode('utf-8'))
     st.toast('Generating Ideas:', icon="🤖")  
     if len(text_input_1) < 10:
         st.toast("Ideas extras is to short!", icon = "💣")
@@ -39,6 +41,8 @@ def seo_ideation_execution(project_name, project_keyword, user_id, role_id, text
     
 
 def seo_ideation(project_name, project_keyword, user_id, role_id):
+    os.write(1, '🥏 Executing seo_ideation \n'.encode('utf-8'))
+    os.write(1, '- seo_ideation: Counting previuos ideas\n'.encode('utf-8'))
     available_contents = uc.run_query_30_m(f"SELECT COUNT(*) AS available_contents FROM `company-data-driven.{project_name}.content_creation` WHERE created_video IS NULL OR created_video = 0;")[0].get('available_contents') 
     if available_contents < 10:
         st.error(f"I need more contents! I just have: {available_contents}", icon = "🤬")
@@ -253,6 +257,8 @@ def seo_writing(project_name, user_id, role_id):
 
 
 def days_since_last_content(project_name):
+    os.write(1, '🥏 Executing days_since_last_content \n'.encode('utf-8'))
+    os.write(1, '- days_since_last_content: Counting days since last content\n'.encode('utf-8'))
     days_since_last_content_created = uc.run_query_1_h(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(created_video_date), DAY) AS days_since_last_content FROM `company-data-driven.{project_name}.content_creation`;")
     if len(days_since_last_content_created) < 1:
         st.warning("Waiting for data", icon = "😴")
