@@ -75,10 +75,6 @@ def video_creation_execution(project_name, user_id):
     time.sleep(5)
     uc.run_query_30_m.clear()
 
-def selected_idea_session_creation(selected_idea):
-    st.session_state.video_creation_selected_idea = selected_idea
-    st.toast(st.session_state.video_creation_selected_idea)
-
 def video_creation(user_id, project_name):
     rows = uc.run_query_half_day(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE created_video IS NULL OR created_video = 0 ORDER BY creation_date;")
     ideas = []
@@ -90,11 +86,11 @@ def video_creation(user_id, project_name):
             label = "Select the idea",
             options = ideas,
             index = None,
-            key= "ideas",
-            on_change = selected_idea_session_creation(selected_idea)
+            key= "video_creation_selected_idea"
         )
     if selected_idea is not None:
         selected_idea_id = ids[ideas.index(selected_idea)]
+        st.write(st.session_state.video_creation_selected_idea)
     
     
 
