@@ -68,15 +68,19 @@ def seo_ideation(project_name, project_keyword, user_id, role_id):
 
 
 
-def video_creation_execution(project_name, user_id):
+def video_creation_execution():
     os.write(1, '🥏 Executing video_creation_execution \n'.encode('utf-8'))
     os.write(1, '- video_creation_execution: Saving created idea\n'.encode('utf-8'))
     st.toast("Please wait", icon = "☺️")
+    st.toast(st.session_state.video_creation_selected_idea)
+    st.toast(st.session_state.video_creation_selected_idea_id)
     # uc.run_query_insert_update(f"")
     st.toast("Content saved!", icon = "👾")
     st.balloons()
     time.sleep(5)
-    uc.run_query_30_m.clear()
+    del st.session_state.video_creation_selected_idea_id
+    del st.session_state.video_creation_selected_idea
+    uc.run_query_half_day.clear()
 
 
 
@@ -97,8 +101,12 @@ def video_creation(user_id, project_name):
         )
     if selected_idea is not None:
         st.session_state.video_creation_selected_idea_id = ids[ideas.index(selected_idea)]
-        st.toast(st.session_state.video_creation_selected_idea)
-        st.toast(st.session_state.video_creation_selected_idea_id)
+        st.session_state.user_id
+        st.session_state.project_name
+        created_video_button = st.button("I already created this video", on_click = video_creation_execution)
+
+
+
         
     
     
