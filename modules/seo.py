@@ -253,7 +253,7 @@ def seo_writing(project_name, user_id, role_id):
 
 
 def days_since_last_content(project_name):
-    days_since_last_content_created = uc.run_query_1_h(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(creation_date), DAY) AS days_since_last_content FROM `company-data-driven.{project_name}.effective_communication_content`;")
+    days_since_last_content_created = uc.run_query_1_h(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(created_video_date), DAY) AS days_since_last_content FROM `company-data-driven.{project_name}.content_creation`;")
     if len(days_since_last_content_created) < 1:
         st.warning("Waiting for data", icon = "😴")
     else:
