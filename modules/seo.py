@@ -78,11 +78,12 @@ def video_creation_execution():
     st.toast("Info saved!", icon = "👾")
     st.balloons()
     time.sleep(1)
+    uc.run_query_half_day.clear()
     del st.session_state.video_creation_user_id
     del st.session_state.video_creation_project_name
     del st.session_state.video_creation_selected_idea_id
     del st.session_state.video_creation_selected_idea
-    uc.run_query_half_day.clear()
+    
 
 
 
