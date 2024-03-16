@@ -157,6 +157,52 @@ def video_edition(user_id, project_name):
         st.session_state.video_edition_user_id = user_id
         st.session_state.video_edition_project_name = project_name
         edited_video_button = st.button("I already edited this video", on_click = video_edition_execution)
+
+
+
+
+
+
+
+def video_uploading_execution():
+    os.write(1, '🥏 Executing video_uploading_execution \n'.encode('utf-8'))
+    os.write(1, '- video_uploading_execution: Saving created idea\n'.encode('utf-8'))
+    st.toast("Please wait", icon = "☺️")
+    
+    uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.video_edition_project_name}.content_creation` SET video_uploaded = 1, video_uploaded_date = CURRENT_DATE(), video_uploaded_user_id = {st.session_state.video_edition_user_id} WHERE id = '{st.session_state.video_edition_selected_idea_id}';")
+    
+    st.toast("Info saved!", icon = "👾")
+    st.balloons()
+    time.sleep(1)
+    uc.run_query_half_day.clear()
+    del st.session_state.video_uploading_user_id
+    del st.session_state.video_uploading_project_name
+    del st.session_state.video_uploading_selected_idea_id
+    del st.session_state.video_uploading_selected_idea
+    
+
+
+
+def video_uploading(user_id, project_name):
+    os.write(1, '🥏 Executing video_uploading \n'.encode('utf-8'))
+    os.write(1, '- video_uploading: Listing ideas \n'.encode('utf-8'))
+    rows = uc.run_query_half_day(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NOT NULL OR edited_video != 0) AND (video_uploaded IS NULL OR video_uploaded = 0) ORDER BY creation_date;")
+    ideas = []
+    ids = []
+    for row in rows:
+        ideas.append(row.get('idea'))
+        ids.append(row.get('id'))
+    selected_idea = st.selectbox(
+            label = "Select the idea",
+            options = ideas,
+            index = None,
+            key= "video_uploading_selected_idea"
+        )
+    if selected_idea is not None:
+        st.session_state.video_uploading_selected_idea_id = ids[ideas.index(selected_idea)]
+        st.session_state.video_uploading_user_id = user_id
+        st.session_state.video_uploading_project_name = project_name
+        uploading_video_button = st.button("I already uploaded this video", on_click = video_uploading_execution)
         
     
     
