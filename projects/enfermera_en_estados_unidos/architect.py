@@ -85,7 +85,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         
         if menu == "Traffic":
-            sub_menu_options=['Traffic', 'SEO ideation', 'Video creation', 'Video edition']
+            sub_menu_options=['Traffic', 'SEO ideation', 'Video creation', 'Video edition', 'Video uploading']
             if role_id == 1:
                 sub_menu_options.extend(['SEO writting', 'Web creation guide', 'Post content prompt'])
             sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
@@ -108,6 +108,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Video edition":
                 tap.title_and_paragraph("Edicion de video" + project_icon, "Marcar videos que ya he Editado, subido a la carpeta de drive (https://drive.google.com/drive/folders/1oIbnhPISgGNG80TNQCqFA_1lm46Dxu2e?usp=drive_link) y he notificado en el grupo de Whatsapp que ya esta fue editado", "h3", 0)
                 seo.video_edition(user_id, project_name)
+
+            if sub_menu == "Video uploading":
+                tap.title_and_paragraph("Carga de video" + project_icon, "Marcar videos que ya he Cargado a Youtube y Facebook usando correctamente el titulo generado, descripcion y etiquetas generadas, Agregado a su lista de reproduccion, agregadas tarjetas y videos finales, agregado el comentario fijado", "h3", 0)
+                seo.video_uploading(user_id, project_name)
 
             if sub_menu == "SEO writting":
                 tap.title_and_paragraph("SEO writting" + project_icon, "Estimated time: 20 minutes", "h3", 0)
