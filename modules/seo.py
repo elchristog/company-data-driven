@@ -200,7 +200,7 @@ def video_uploading(user_id, project_name):
             options = ideas,
             index = None,
             key= "video_uploading_selected_idea",
-            on=change = video_title_description_generation
+            on_change = video_title_description_generation
         )
     if selected_idea is not None:
         st.session_state.video_uploading_selected_idea_id = ids[ideas.index(selected_idea)]
