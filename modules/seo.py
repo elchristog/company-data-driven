@@ -79,19 +79,22 @@ def video_creation_execution(project_name, user_id):
 
 
 def video_creation(user_id, project_name):
-    st.warning("Do not use line breaks, double or single quotes, to prevent errors write your answers in a local text editor and copy here without any line breaks, double or single quotes", icon = "🙈")
-    with st.form("comm_eff_storytelling_form", clear_on_submit = True):
-        text_input_1 = st.text_area(
-            "Keyword del articulo",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'Obtener la licencia de enfermería en Estados Unidos',
-            help = 'No se debe poner cualquier cosa, debe ser lo que entrego el ideador',
-            key = 'text_input_1'
+    rows = uc.run_query_half_day(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE created_video IS NULL OR created_video = 0 ORDER BY creation_date;")
+    ideas = []
+    ids = []
+    for row in rows:
+        ideas.append(row.get('idea'))
+        ids.append(row.get('id'))
+    selected_idea = st.selectbox(
+            label = "Select the idea",
+            options = ideas,
+            index = None,
+            key= "ideas"
         )
-        
-        submitted = st.form_submit_button("I finished this video!", on_click = video_creation_execution, args = [project_name, user_id])
-
+    if selected_idea is not None:
+        selected_idea_id = ids[ideas.index(selected_idea)]
+    
+    
 
 
 
