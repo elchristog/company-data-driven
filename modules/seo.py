@@ -68,6 +68,8 @@ def seo_ideation(project_name, project_keyword, user_id, role_id):
 
 
 def video_creation_execution(project_name, user_id):
+    os.write(1, '🥏 Executing video_creation_execution \n'.encode('utf-8'))
+    os.write(1, '- video_creation_execution: Saving created idea\n'.encode('utf-8'))
     st.toast("Please wait", icon = "☺️")
     # uc.run_query_insert_update(f"")
     st.toast("Content saved!", icon = "👾")
@@ -78,6 +80,8 @@ def video_creation_execution(project_name, user_id):
 
 
 def video_creation(user_id, project_name):
+    os.write(1, '🥏 Executing video_creation \n'.encode('utf-8'))
+    os.write(1, '- video_creation: Listing ideas \n'.encode('utf-8'))
     rows = uc.run_query_half_day(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE created_video IS NULL OR created_video = 0 ORDER BY creation_date;")
     ideas = []
     ids = []
