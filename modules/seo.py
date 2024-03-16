@@ -103,8 +103,8 @@ def video_creation(user_id, project_name):
         )
     if selected_idea is not None:
         st.session_state.video_creation_selected_idea_id = ids[ideas.index(selected_idea)]
-        st.session_state.video_creation_user_id
-        st.session_state.video_creation_project_name
+        st.session_state.video_creation_user_id = user_id
+        st.session_state.video_creation_project_name = project_name
         created_video_button = st.button("I already created this video", on_click = video_creation_execution)
 
 
