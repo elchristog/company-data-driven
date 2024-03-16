@@ -91,7 +91,7 @@ def video_creation(user_id, project_name):
             options = ideas,
             index = None,
             key= "ideas",
-            on_change = selected_idea_session_creation
+            on_change = selected_idea_session_creation(selected_idea)
         )
     if selected_idea is not None:
         selected_idea_id = ids[ideas.index(selected_idea)]
