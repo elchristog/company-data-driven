@@ -211,7 +211,50 @@ def video_uploading(user_id, project_name):
         st.write(st.session_state.video_title_description_generation )
         st.download_button('Download Texts', st.session_state.video_title_description_generation, file_name = 'video_title_description_generation.txt')
         
+
+
+
+
+
+
+
+def video_to_shorts_execution():
+    os.write(1, '🥏 Executing video_to_shorts_execution \n'.encode('utf-8'))
+    os.write(1, '- video_to_shorts_execution: Updating\n'.encode('utf-8'))
+    st.toast("Please wait", icon = "☺️")
     
+    uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.video_to_shorts_project_name}.content_creation` SET video_shorts_created = 1, video_shorts_creation_date = CURRENT_DATE(), video_shorts_creator_user_id = {st.session_state.video_to_shorts_user_id} WHERE id = '{st.session_state.video_to_shorts_selected_idea_id}';")
+    
+    st.toast("Info saved!", icon = "👾")
+    st.balloons()
+    time.sleep(1)
+    uc.run_query_half_day.clear()
+    del st.session_state.video_to_shorts_user_id
+    del st.session_state.video_to_shorts_project_name
+    del st.session_state.video_to_shorts_selected_idea_id
+    del st.session_state.video_to_shorts_selected_idea
+    
+
+def video_to_shorts(user_id, project_name):
+    os.write(1, '🥏 Executing video_to_shorts \n'.encode('utf-8'))
+    os.write(1, '- video_to_shorts: Listing ideas \n'.encode('utf-8'))
+    rows = uc.run_query_half_day(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NOT NULL OR edited_video != 0) AND (video_uploaded IS NOT NULL OR video_uploaded != 0) AND (video_shorts_created IS NULL OR video_shorts_created = 0) ORDER BY creation_date;")
+    ideas = []
+    ids = []
+    for row in rows:
+        ideas.append(row.get('idea'))
+        ids.append(row.get('id'))
+    selected_idea = st.selectbox(
+            label = "Select the idea",
+            options = ideas,
+            index = None,
+            key= "video_to_shorts_selected_idea"
+        )
+    if selected_idea is not None:
+        st.session_state.video_to_shorts_selected_idea_id = ids[ideas.index(selected_idea)]
+        st.session_state.video_to_shorts_user_id = user_id
+        st.session_state.video_to_shorts_project_name = project_name
+        video_to_shorts_button = st.button("I already created shorts", on_click = video_to_shorts_execution)
     
 
 
