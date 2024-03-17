@@ -113,6 +113,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph("Carga de video" + project_icon, "Marcar videos que: 1- ya he Cargado a Youtube 2- ya cargue a Facebook 3- he usando correctamente el titulo generado, descripcion y etiquetas generadas, 4- Agregado a su lista de reproduccion, agregadas tarjetas y videos finales, 5- agregado el comentario fijado", "h3", 0)
                 seo.video_uploading(user_id, project_name)
 
+            if sub_menu == "Video to shorts":
+                tap.title_and_paragraph("Creacion de shorts y carga" + project_icon, "Marcar videos que: 1- He creado los shorts usando Capcut 2- he subido cada short usando correctamente el titulo, descripcion y etiquetas 3- los he subido todos a youtube, instagram, facebook, Whatsapp", "h3", 0)
+                seo.video_to_shorts(user_id, project_name)
+
             if sub_menu == "SEO writting":
                 tap.title_and_paragraph("SEO writting" + project_icon, "Estimated time: 20 minutes", "h3", 0)
                 seo.seo_writing(project_name, user_id, role_id)
