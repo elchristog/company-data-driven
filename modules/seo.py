@@ -169,7 +169,7 @@ def video_uploading_execution():
     os.write(1, '- video_uploading_execution: Saving created idea\n'.encode('utf-8'))
     st.toast("Please wait", icon = "☺️")
     
-    uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.video_edition_project_name}.content_creation` SET video_uploaded = 1, video_uploaded_date = CURRENT_DATE(), video_uploaded_user_id = {st.session_state.video_edition_user_id} WHERE id = '{st.session_state.video_edition_selected_idea_id}';")
+    uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.video_uploading_project_name}.content_creation` SET video_uploaded = 1, video_uploaded_date = CURRENT_DATE(), video_uploaded_user_id = {st.session_state.video_uploading_user_id} WHERE id = '{st.session_state.video_uploading_selected_idea_id}';")
     
     st.toast("Info saved!", icon = "👾")
     st.balloons()
