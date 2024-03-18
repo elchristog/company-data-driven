@@ -445,7 +445,7 @@ def add_new_contract_payment(user_id, project_id, project_name):
            SELECT 
                 CAST(ROUND(CAST(c.contract_total_value AS NUMERIC)) AS INT64) AS contract_total_value, 
                 CAST(ROUND(CAST(total_payments.total_paid AS NUMERIC)) AS INT64) AS total_paid, 
-                CAST(ROUND(CAST(c.contract_total_value - total_payments.total_paid  AS NUMERIC)) AS INT64) AS current_debt, 
+                (CAST(ROUND(CAST(c.contract_total_value AS NUMERIC)) AS INT64) - CAST(ROUND(CAST(total_payments.total_paid AS NUMERIC)) AS INT64)) AS current_debt, 
                 total_payments.last_payment_date 
             FROM `company-data-driven.{project_name}.contracts` AS c 
             LEFT JOIN (
