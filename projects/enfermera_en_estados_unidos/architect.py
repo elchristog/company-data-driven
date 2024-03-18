@@ -85,9 +85,9 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         
         if menu == "Traffic":
-            sub_menu_options=['Traffic', 'SEO ideation', 'Video creation', 'Video edition', 'Video uploading', 'Video to shorts']
+            sub_menu_options=['Traffic', 'SEO ideation', 'Video creation', 'Video edition', 'Video uploading', 'Video to shorts', 'Web creation']
             if role_id == 1:
-                sub_menu_options.extend(['SEO writting', 'Web creation guide', 'Post content prompt'])
+                sub_menu_options.extend(['Web creation guide', 'Post content prompt'])
             sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
             if sub_menu == "Traffic":
                 tap.title_and_paragraph("Trafico" + project_icon, "Seguimiento del trafico y los contenidos generados", "h3", 0)
@@ -117,8 +117,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph("Creacion de shorts y carga" + project_icon, "Marcar videos que: 1- He creado los shorts usando Capcut 2- he subido cada short usando correctamente el titulo, descripcion y etiquetas 3- los he subido todos a youtube, instagram, facebook, Whatsapp", "h3", 0)
                 seo.video_to_shorts(user_id, project_name)
 
-            if sub_menu == "SEO writting":
-                tap.title_and_paragraph("SEO writting" + project_icon, "Estimated time: 20 minutes", "h3", 0)
+            if sub_menu == "Web creation":
+                tap.title_and_paragraph("Web creation" + project_icon, "Estimated time: 20 minutes", "h3", 0)
                 # seo.seo_writing(project_name, user_id, role_id)
 
             if sub_menu == "Web creation guide":
