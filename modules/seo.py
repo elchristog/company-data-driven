@@ -215,9 +215,6 @@ def video_uploading(user_id, project_name):
 
 
 
-
-
-
 def video_to_shorts_execution():
     os.write(1, '🥏 Executing video_to_shorts_execution \n'.encode('utf-8'))
     os.write(1, '- video_to_shorts_execution: Updating\n'.encode('utf-8'))
@@ -233,6 +230,10 @@ def video_to_shorts_execution():
     del st.session_state.video_to_shorts_project_name
     del st.session_state.video_to_shorts_selected_idea_id
     del st.session_state.video_to_shorts_selected_idea
+
+
+def short_title_description_generation():
+    st.session_state.short_title_description_generation = ggg.gemini_general_prompt("Eres un redactor SEO experto en posicionar keywords y generar contenidos que llaman la atencion", "Ahora soy un redactor SEO experto", "[KEYWORD] "+str(st.session_state.short_description)+" [/KEYWORD][EXTRA_KEYWORDS] enfermera, estados unidos, registered nurse, enfermeriamigracionnclex, nclex rnielts, ¿Cómo convertirme en enfermera en Estados Unidos?, Pasos para ser enfermera en Estados Unidos., ¿Cómo puedo ser enfermera en USA?, Guía para ser enfermera en Estados Unidos., ¿Qué necesito para ser enfermera en Estados Unidos?, Consejos para ser enfermera en USA., Proceso para convertirse en enfermera en Estados Unidos., enfermeriamigracionnclexieltssalariohomologacionusa, enfermero, trabajo, como ser enfermera en estados unidos, enfermero en estados unidos, salario enfermera usasalario de enfermerasalario de enfermeria, Cómo ser enfermera en USA, Pasos para ser enfermera en Estados Unidos, Requisitos para ejercer enfermería en USA, Guía para convertirse en enfermera en Estados Unidos, trabajo enfermera, NCLEX, IELTS, Salario, Homologación, USA, Trabajo, Requisitos, #enfermeriaenestadosunidos, #enfermeraestadosunidos, #registerednurse, #enfermeriamigracionnclex, #nclexrnielts [/EXTRA_KEYWORDS][DESCRIPTION] [Descripcion corta que contenga la [KEYWORD] ]luego mostrar Este texto:Agenda una asesoría conmigo:- Whatsapp: https://bit.ly/45SidF6Mis redes: - Web: https://enfermeraenestadosunidos.com/- Instagram: https://www.instagram.com/enfermeraenestadosunidos- TikTok: https://www.tiktok.com/@enfermeraenestadosunidos[Descripción extensa que diga de que se trata el video basandose en la [KEYWORD] y contenga 2 mil palabras] [/DESCRIPTION][INSTRUCTION] Crea el título de un video de YouTube que contenga la [KEYWORD] que contenga menos de 8 palabras, llama la atención usando mayusculas selectivas y emojis. Luego Crea Una descripción que cumpla con todos los requisitos de [DESCRIPTION]. y por último Crea 60 tags exactamente, jugando con la [KEYWORD] y las [EXTRA_KEYWORDS] que ayuden a posicionar el video, Asegúrate de mostrar Este listado de tags en un solo parrafo y separado por comas  y no usar hashtags[/INSTRUCTION]")
     
 
 def video_to_shorts(user_id, project_name):
@@ -254,7 +255,14 @@ def video_to_shorts(user_id, project_name):
         st.session_state.video_to_shorts_selected_idea_id = ids[ideas.index(selected_idea)]
         st.session_state.video_to_shorts_user_id = user_id
         st.session_state.video_to_shorts_project_name = project_name
+
+        short_description = st.text_input('Short description', 'Como pasar el NCLEX', help = 'Debe ser una keyword que describa de que trata el short', key = 'short_description', on_change = short_title_description_generation)
+        
         video_to_shorts_button = st.button("I already created shorts", on_click = video_to_shorts_execution)
+
+        if 'short_title_description_generation' in st.session_state:
+                st.write(st.session_state.short_title_description_generation )
+                st.download_button('Download Texts', st.session_state.short_title_description_generation, file_name = 'short_title_description_generation.txt')
     
 
 
