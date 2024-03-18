@@ -257,7 +257,7 @@ def video_to_shorts(user_id, project_name):
         st.session_state.video_to_shorts_user_id = user_id
         st.session_state.video_to_shorts_project_name = project_name
 
-        short_description = st.text_input('Short description', 'Como pasar el NCLEX', help = 'Debe ser una keyword que describa de que trata el short', key = 'short_description', on_change = short_title_description_generation)
+        short_description = st.text_input('Short description', placeholder = 'Como pasar el NCLEX', help = 'Debe ser una keyword que describa de que trata el short', key = 'short_description', on_change = short_title_description_generation)
         
         video_to_shorts_button = st.button("I already created shorts", on_click = video_to_shorts_execution)
 
