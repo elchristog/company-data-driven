@@ -313,7 +313,7 @@ def web_writing(user_id, project_name):
         
         web_writing_button = st.button("I already created the Web", on_click = web_writing_execution)
 
-        if 'web_writting_generation' in st.session_state:
+        if 'web_writing_generation' in st.session_state:
                 st.write(st.session_state.web_writing_generation)
                 st.download_button('Download Texts', st.session_state.web_writing_generation, file_name = 'web_writing_generation.txt')
 
