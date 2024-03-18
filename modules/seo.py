@@ -286,6 +286,7 @@ def web_writing_execution():
         del st.session_state.web_writing_project_name
         del st.session_state.web_writing_selected_idea_id
         del st.session_state.web_writing_selected_idea
+        del st.session_state.web_writing_agree
     else:
         st.toast("If you are sure you have finished, mark the checkbox")
 
