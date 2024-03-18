@@ -223,7 +223,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 c.add_new_crm_contact(user_id, project_name)
             if sub_menu == "Add new contract":
                 tap.title_and_paragraph("Contracts" + project_icon, "Actualizacion de nuevos contratos y creacion del usuario correspondiente", "h3", 0)
-                st.success("Al crear el contrato debe crearse el hashing, el usuario y clave, verificar que si tenga acceso, y crear el pago")
+                st.success("Al crear el contrato debe crearse el hashing, el usuario y clave, verificar que si tenga acceso, crear el pago y darle acceso a los cursos")
                 c.customer_creation(user_id, project_id, project_name)
             if sub_menu == "Contact guide":
                 tap.title_and_paragraph("Whatsapp" + project_icon, "Guia de conversacion en whatsapp", "h3", 0)
