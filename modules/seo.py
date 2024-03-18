@@ -311,7 +311,7 @@ def web_writing(user_id, project_name):
         st.session_state.web_writing_user_id = user_id
         st.session_state.web_writing_project_name = project_name
 
-        web_writing_transcript = st.text_input('Video transcript', 'Para pasar el nclex debes...', help = 'Asegurarse de no dar caracteres extranios', key = 'web_writing_transcript', on_change = web_writing_generation)
+        web_writing_transcript = st.text_input('Video transcript', placeholder = 'Para pasar el nclex debes...', help = 'Asegurarse de no dar caracteres extranios', key = 'web_writing_transcript', on_change = web_writing_generation)
         
         web_writing_button = st.button("I already created the Web", on_click = web_writing_execution)
 
