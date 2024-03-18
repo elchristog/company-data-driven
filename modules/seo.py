@@ -288,7 +288,7 @@ def web_writing_execution():
 
 
 def web_writing_generation():
-    st.session_state.web_writing_generation = ggg.gemini_general_prompt("Eres un redactor SEO experto en posicionar keywords y generar contenidos que llaman la atencion y vas a incluir la palabra clave" + st.session_state.web_writing_selected_idea  + " 5 veces en el articulo", "Ahora soy un redactor SEO experto, voy a redactar un texto extenso y a incluir la palabra clave " + st.session_state.web_writing_selected_idea  + " 5 veces en el articulo", "Redacta un articulo asegurandote que hable estrictamente de esto, solo que mas organizado y coherente" + st.session_state.web_writing_transcript)
+    st.session_state.web_writing_generation = ggg.gemini_general_prompt("Eres un experto reescribiendo articulos, vas a recibir un articulo y a volverlo a  redactar de forma perfecta sin inventar anda nuevo, usando unicamente la informacion que te voy a entregar", "Ahora soy un experto redactor", "escribe un articulo de minimo 4 mil palabras sobre 'practicando para el examen nclex de enfermeria en estados unidos' (Asegurate que la palabra clave 'practicando para el examen nclex de enfermeria en estados unidos' aparezca 5 veces en el articulo), que todo se explique en detalle y que hable sobre: " + st.session_state.web_writing_transcript)
     
 
 def web_writing(user_id, project_name):
