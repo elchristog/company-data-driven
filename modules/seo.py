@@ -288,7 +288,15 @@ def web_writing_execution():
 
 
 def web_writing_generation():
-    st.session_state.web_writing_generation = ggg.gemini_general_prompt("Eres un experto reescribiendo articulos, vas a recibir un articulo y a volverlo a  redactar de forma perfecta sin inventar anda nuevo, usando unicamente la informacion que te voy a entregar", "Ahora soy un experto redactor", f"escribe un articulo de minimo 4 mil palabras sobre '{st.session_state.web_writing_selected_idea}' (Asegurate que la palabra clave '{st.session_state.web_writing_selected_idea}' aparezca 5 veces en el articulo), que todo se explique en detalle y que hable sobre: " + st.session_state.web_writing_transcript)
+    length = len(st.session_state.web_writing_transcript)
+    half_length = length // 2
+    first_half = st.session_state.web_writing_transcript[:half_length]
+    second_half = st.session_state.web_writing_transcript[half_length:]
+    
+    st.session_state.web_writing_generation_part_1 = ggg.gemini_general_prompt("Eres un experto reescribiendo articulos, vas a recibir un articulo y a volverlo a  redactar de forma perfecta sin inventar anda nuevo, usando unicamente la informacion que te voy a entregar", "Ahora soy un experto redactor", f"escribe un articulo de minimo 4 mil palabras sobre '{st.session_state.web_writing_selected_idea}' (Asegurate que la palabra clave '{st.session_state.web_writing_selected_idea}' aparezca 5 veces en el articulo), que todo se explique en detalle y que hable sobre: " + first_half)
+    st.session_state.web_writing_generation_part_2 = ggg.gemini_general_prompt("Eres un experto reescribiendo articulos, vas a recibir un articulo y a volverlo a  redactar de forma perfecta sin inventar anda nuevo, usando unicamente la informacion que te voy a entregar", "Ahora soy un experto redactor", f"escribe un articulo de minimo 4 mil palabras sobre '{st.session_state.web_writing_selected_idea}' (Asegurate que la palabra clave '{st.session_state.web_writing_selected_idea}' aparezca 5 veces en el articulo), que todo se explique en detalle y que hable sobre: " + second_half)
+
+    st.session_state.web_writing_generation = st.session_state.web_writing_generation_part_1 + st.session_state.web_writing_generation_part_2
     
 
 def web_writing(user_id, project_name):
