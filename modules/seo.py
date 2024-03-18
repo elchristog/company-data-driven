@@ -288,7 +288,7 @@ def web_writing_execution():
 
 
 def web_writing_generation():
-    st.session_state.web_writing_generation = ggg.gemini_general_prompt("Eres un redactor SEO experto en posicionar keywords y generar contenidos que llaman la atencion", "Ahora soy un redactor SEO experto", "Escribe un articulo de minimo 4 mil palabras muy detallado sobre, no inventes nuevas cosas en lugar de eso detalla y estructura mejor esto:" + st.session_state.web_writing_transcript)
+    st.session_state.web_writing_generation = ggg.gemini_general_prompt("Eres un redactor SEO experto en posicionar keywords y generar contenidos que llaman la atencion", "Ahora soy un redactor SEO experto", "Estructura y detalla mejor este articulo:" + st.session_state.web_writing_transcript)
     
 
 def web_writing(user_id, project_name):
