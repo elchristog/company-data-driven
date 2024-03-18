@@ -272,19 +272,22 @@ def video_to_shorts(user_id, project_name):
 
 def web_writing_execution():
     os.write(1, '🥏 Executing web_writing_execution \n'.encode('utf-8'))
-    os.write(1, '- web_writing_execution: Updating\n'.encode('utf-8'))
-    st.toast("Please wait", icon = "☺️")
-    
-    uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.web_writing_project_name}.content_creation` SET web_created = 1, web_creation_date = CURRENT_DATE(), web_creator_user_id = {st.session_state.web_writing_user_id} WHERE id = '{st.session_state.web_writing_selected_idea_id}';")
-    
-    st.toast("Info saved!", icon = "👾")
-    st.balloons()
-    time.sleep(1)
-    uc.run_query_half_day.clear()
-    del st.session_state.web_writing_user_id
-    del st.session_state.web_writing_project_name
-    del st.session_state.web_writing_selected_idea_id
-    del st.session_state.web_writing_selected_idea
+    if 'web_writing_agree' in st.session_state:
+        os.write(1, '- web_writing_execution: Updating\n'.encode('utf-8'))
+        st.toast("Please wait", icon = "☺️")
+        
+        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.web_writing_project_name}.content_creation` SET web_created = 1, web_creation_date = CURRENT_DATE(), web_creator_user_id = {st.session_state.web_writing_user_id} WHERE id = '{st.session_state.web_writing_selected_idea_id}';")
+        
+        st.toast("Info saved!", icon = "👾")
+        st.balloons()
+        time.sleep(1)
+        uc.run_query_half_day.clear()
+        del st.session_state.web_writing_user_id
+        del st.session_state.web_writing_project_name
+        del st.session_state.web_writing_selected_idea_id
+        del st.session_state.web_writing_selected_idea
+    else:
+        st.toast("If you are sure you have finished, mark the checkbox")
 
 
 def web_writing_generation():
@@ -320,7 +323,8 @@ def web_writing(user_id, project_name):
         st.session_state.web_writing_project_name = project_name
 
         web_writing_transcript = st.text_input('Video transcript', placeholder = 'Para pasar el nclex debes...', help = 'Asegurarse de no dar caracteres extranios', key = 'web_writing_transcript', on_change = web_writing_generation)
-        
+
+        agree = st.checkbox('I finished', key = 'web_writing_agree')
         web_writing_button = st.button("I already created the Web", on_click = web_writing_execution)
 
         if 'web_writing_generation' in st.session_state:
