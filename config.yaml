@@ -108,6 +108,10 @@ credentials:
       email: javierandrescruz01@gmail.com
       name: Andres Cruz
       password: $2b$12$o5ooT1q..xhismvyF1uk.enTuEqeRMRqkgzSrcfc8sw826aJxNETa
+    tmosoresf:
+      email: tatianaosoresfdez@gmail.com
+      name: Tatiana Osores
+      password: $2b$12$Ole9WkshxBxrxD3gCS2zaO/cx7Iw0/CJ1FpCpW3WQw0W7ZlYFJkn2
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
