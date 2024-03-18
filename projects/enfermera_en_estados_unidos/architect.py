@@ -119,7 +119,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
             if sub_menu == "Web creation":
                 tap.title_and_paragraph("Web creation" + project_icon, "Estimated time: 20 minutes", "h3", 0)
-                # seo.‎web_writing(project_name, user_id, role_id)
+                seo.web_writing(project_name, user_id, role_id)
 
             if sub_menu == "Web creation guide":
                 tap.title_and_paragraph("Web creation guide" + project_icon, "Sigue estos pasos", "h3", 0)
