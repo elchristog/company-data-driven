@@ -285,7 +285,7 @@ def video_to_shorts(user_id, project_name):
 #     del st.session_state.web_writing_selected_idea
 
 
-def web_writing_execution():
+def web_writing_generation():
     st.session_state.web_writing_generation = ggg.gemini_general_prompt("Eres un redactor SEO experto en posicionar keywords y generar contenidos que llaman la atencion", "Ahora soy un redactor SEO experto", "escribe un articulo de minimo 4 mil palabras sobre '"+st.session_state.web_writing_selected_idea+"' (Asegurate que la palabra clave '"+st.session_state.web_writing_selected_idea+"' aparezca 5 veces en el articulo), que todo se explique en detalle y que hable sobre:" + st.session_state.web_writing_transcript)
     
 
