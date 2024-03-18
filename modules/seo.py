@@ -267,6 +267,60 @@ def video_to_shorts(user_id, project_name):
 
 
 
+
+def web_writting_execution():
+    os.write(1, '🥏 Executing web_writting_execution \n'.encode('utf-8'))
+    os.write(1, '- web_writting_execution: Updating\n'.encode('utf-8'))
+    st.toast("Please wait", icon = "☺️")
+    
+    uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.web_writting_project_name}.content_creation` SET web_created = 1, web_creation_date = CURRENT_DATE(), web_creator_user_id = {st.session_state.web_writting_user_id} WHERE id = '{st.session_state.web_writting_selected_idea_id}';")
+    
+    st.toast("Info saved!", icon = "👾")
+    st.balloons()
+    time.sleep(1)
+    uc.run_query_half_day.clear()
+    del st.session_state.web_writting_user_id
+    del st.session_state.web_writting_project_name
+    del st.session_state.web_writting_selected_idea_id
+    del st.session_state.web_writting_selected_idea
+
+
+def web_writting_generation():
+    st.session_state.web_writting_generation = ggg.gemini_general_prompt("Eres un redactor SEO experto en posicionar keywords y generar contenidos que llaman la atencion", "Ahora soy un redactor SEO experto", "[KEYWORD] "+str(st.session_state.web_writting_transcript)+" [/KEYWORD][EXTRA_KEYWORDS] enfermera, estados unidos, registered nurse, enfermeriamigracionnclex, nclex rnielts, ¿Cómo convertirme en enfermera en Estados Unidos?, Pasos para ser enfermera en Estados Unidos., ¿Cómo puedo ser enfermera en USA?, Guía para ser enfermera en Estados Unidos., ¿Qué necesito para ser enfermera en Estados Unidos?, Consejos para ser enfermera en USA., Proceso para convertirse en enfermera en Estados Unidos., enfermeriamigracionnclexieltssalariohomologacionusa, enfermero, trabajo, como ser enfermera en estados unidos, enfermero en estados unidos, salario enfermera usasalario de enfermerasalario de enfermeria, Cómo ser enfermera en USA, Pasos para ser enfermera en Estados Unidos, Requisitos para ejercer enfermería en USA, Guía para convertirse en enfermera en Estados Unidos, trabajo enfermera, NCLEX, IELTS, Salario, Homologación, USA, Trabajo, Requisitos, #enfermeriaenestadosunidos, #enfermeraestadosunidos, #registerednurse, #enfermeriamigracionnclex, #nclexrnielts [/EXTRA_KEYWORDS][DESCRIPTION] [Descripcion corta que contenga la [KEYWORD] ]luego mostrar Este texto:Agenda una asesoría conmigo:- Whatsapp: https://bit.ly/45SidF6Mis redes: - Web: https://enfermeraenestadosunidos.com/- Instagram: https://www.instagram.com/enfermeraenestadosunidos- TikTok: https://www.tiktok.com/@enfermeraenestadosunidos[Descripción extensa que diga de que se trata el video basandose en la [KEYWORD] y contenga 2 mil palabras] [/DESCRIPTION][INSTRUCTION] Crea el título de un video de YouTube que contenga la [KEYWORD] que contenga menos de 8 palabras, llama la atención usando mayusculas selectivas y emojis. Luego Crea Una descripción que cumpla con todos los requisitos de [DESCRIPTION]. y por último Crea 60 tags exactamente, jugando con la [KEYWORD] y las [EXTRA_KEYWORDS] que ayuden a posicionar el video, Asegúrate de mostrar Este listado de tags en un solo parrafo y separado por comas  y no usar hashtags[/INSTRUCTION]")
+    
+
+def web_writting(user_id, project_name):
+    os.write(1, '🥏 Executing web_writting \n'.encode('utf-8'))
+    os.write(1, '- web_writting: Listing ideas \n'.encode('utf-8'))
+    rows = uc.run_query_half_day(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NOT NULL OR edited_video != 0) AND (video_uploaded IS NOT NULL OR video_uploaded != 0) AND (video_shorts_created IS NOT NULL OR video_shorts_created != 0) AND (web_created IS NULL OR web_created = 0) ORDER BY creation_date;")
+    ideas = []
+    ids = []
+    for row in rows:
+        ideas.append(row.get('idea'))
+        ids.append(row.get('id'))
+    selected_idea = st.selectbox(
+            label = "Select the idea",
+            options = ideas,
+            index = None,
+            key= "web_writting_selected_idea"
+        )
+    if selected_idea is not None:
+        st.session_state.web_writting_selected_idea_id = ids[ideas.index(selected_idea)]
+        st.session_state.web_writting_user_id = user_id
+        st.session_state.web_writting_project_name = project_name
+
+        web_writting_transcript = st.text_input('Video transcript', 'Para pasar el nclex debes...', help = 'Asegurarse de no dar caracteres extranios', key = 'web_writting_transcript', on_change = web_writting_generation)
+        
+        web_writting_button = st.button("I already created the Web", on_click = web_writting_execution)
+
+        if 'web_writting_generation' in st.session_state:
+                st.write(st.session_state.web_writting_generation )
+                st.download_button('Download Texts', st.session_state.web_writting_generation, file_name = 'web_writting_generation.txt')
+
+
+
+
+
 def web_creation_guide():
     st.markdown('''duplicate page Easy Updates Manager, 
                 imagify (e158d9b22db474a52c9ef7fa81afb14571d2fe7d)
@@ -280,54 +334,6 @@ def web_creation_guide():
                 google bard/chatgpt necesito el 4 para el seo 
                 clipdrop 
                 adobe color wheel recuerda subir todas las imagenes en formato webp seguir este video: https://www.youtube.com/watch?v=QCNEeVyRxBk&feature=youtu.be&fbclid=IwAR0mmAFlnZU3_VACC5OQaMOJKTCXiXi9KQNUiuxOwfmRlQMllqAbSJljHhs&ab_channel=OVDIVI tambien lo tengo descargado en mis archivos trabajo/startups/hosting instalar todo lo de arriba agregarle el ssl entrando al cpanel, a mi producto, buscando ssl y ahi agregarselo configurar uno por uno cada plugin hacer el video SEO y optimizar funnel a lo que marca revisar aca que mi pagina ande re bien: https://pagespeed.web.dev/ sobretodo me va a pedir que suba las imagenes en webp y que el wprocket haga lo de cache optimizar todo lo del hosting cpanel pillando que no se me dañe la web pero que puntue mejor en pagespeed la imagen del logito que sea 90x90 ----- en wp rocket no activar el lazy laod de las imagenes. luego ya aparece para agregarle el ssl y para instalarle el wordpress para agregarle la verificacion dns en search console, copiar el txt que me da search console y en el hosting ir al cpanel, a dominios seleccionar mi dominio, ir al dns y agregar un registro tipo txt donde el nombre es @ y el valor es lo que copie de search engine para encontrar mi sitemap y darselo al search engine, https://enfermeraenestadosunidos.com/page-sitemap.xml''')
-
-
-
-
-def seo_writing_execution():
-    st.toast("IA working!", icon = "🍩")
-    selected_content_id = st.session_state.ids[st.session_state.keywords.index(st.session_state.selected_keyword)]
-    selected_content_main_idea = st.session_state.main_ideas[st.session_state.keywords.index(st.session_state.selected_keyword)]
-    selected_content_why_1 = st.session_state.why_1s[st.session_state.keywords.index(st.session_state.selected_keyword)]
-    selected_content_why_2 = st.session_state.why_2s[st.session_state.keywords.index(st.session_state.selected_keyword)]
-    selected_content_why_3 = st.session_state.why_3s[st.session_state.keywords.index(st.session_state.selected_keyword)]
-    selected_content_how_1 = st.session_state.how_1s[st.session_state.keywords.index(st.session_state.selected_keyword)]
-    selected_content_how_2 = st.session_state.how_2s[st.session_state.keywords.index(st.session_state.selected_keyword)]
-    selected_content_how_3 = st.session_state.how_3s[st.session_state.keywords.index(st.session_state.selected_keyword)]
-    selected_content_experiment_1 = st.session_state.experiment_1s[st.session_state.keywords.index(st.session_state.selected_keyword)]
-    selected_content_experiment_2 = st.session_state.experiment_2s[st.session_state.keywords.index(st.session_state.selected_keyword)]
-    selected_content_experiment_3 = st.session_state.experiment_3s[st.session_state.keywords.index(st.session_state.selected_keyword)]
-    selected_content_relevant_content = st.session_state.relevant_contents[st.session_state.keywords.index(st.session_state.selected_keyword)]
-    selected_content_checklist = st.session_state.checklists[st.session_state.keywords.index(st.session_state.selected_keyword)]
-    selected_content_call_to_action = st.session_state.call_to_actions[st.session_state.keywords.index(st.session_state.selected_keyword)]
-
-    article_part_1 = cgptg.prompt_ia("Eres un experto en SEO, especialmente en generacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.selected_keyword} [/KEYWORD] [ARTICLE] {selected_content_checklist} {selected_content_main_idea} [/ARTICLE] [INSTRUCTION] Reescribe este articulo de una forma mas extensa y detallada posible, no omitas ni una parte de lo escrito, como eres un experto SEO vas a posicionar el articulo incluyendo la keyword y todas las distintas formas (keywords longtail) que una persona puede buscar este contenido, asi como de multiples ejemplos y tablas comparativas, no entregues conclusiones ni explicaciones de lo que hiciste, unicamente el articulo usando las etiquetas <h1> <h2> <h3> <p style='text-align: justify;'> <strong> <ul>  <li> <a> <table> <tr> segun corresponda[/INSTRUCTION]", 4000)
-
-    article_part_1_extras = cgptg.prompt_ia("Eres un experto en SEO, especialmente en generacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.selected_keyword} [/KEYWORD] [ARTICLE] {selected_content_checklist} {selected_content_main_idea} [/ARTICLE] [INSTRUCTION] Genera 2 ejemplos que en lugar de resumir logren aclarar dudas especificas y muy utiles que pueden surgir al leer esto. tambien genera 1 tabla comparativa en HTML que aclare y resuma todo, como eres un experto SEO vas a posicionar el articulo incluyendo la keyword y todas las distintas formas (keywords longtail) que una persona puede buscar este contenido, no entregues conclusiones ni explicaciones de lo que hiciste, unicamente el articulo usando las etiquetas <h1> <h2> <h3> <p style='text-align: justify;'> <strong> <ul>  <li> <a> <table> <tr> segun corresponda[/INSTRUCTION]", 4000)
-
-    article_part_2 = cgptg.prompt_ia("Eres un experto en SEO, especialmente en generacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.selected_keyword} [/KEYWORD] [ARTICLE] {selected_content_why_1} {selected_content_how_1} {selected_content_why_2} {selected_content_how_2} {selected_content_why_3} {selected_content_how_3} [/ARTICLE] [INSTRUCTION] Reescribe este articulo de una forma mas extensa y detallada posible, no omitas ni una parte de lo escrito, como eres un experto SEO vas a posicionar el articulo incluyendo la keyword y todas las distintas formas (keywords longtail) que una persona puede buscar este contenido, asi como de multiples ejemplos y tablas comparativas, no entregues conclusiones ni explicaciones de lo que hiciste, unicamente el articulo usando las etiquetas <h1> <h2> <h3> <p style='text-align: justify;'> <strong> <ul>  <li> <a> <table> <tr> segun corresponda[/INSTRUCTION]", 4000)
-
-    article_part_2_extras = cgptg.prompt_ia("Eres un experto en SEO, especialmente en generacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.selected_keyword} [/KEYWORD] [ARTICLE] {selected_content_why_1} {selected_content_how_1} {selected_content_why_2} {selected_content_how_2} {selected_content_why_3} {selected_content_how_3} [/ARTICLE] [INSTRUCTION] Genera 2 ejemplos que en lugar de resumir logren aclarar dudas especificas y muy utiles que pueden surgir al leer esto. tambien genera 1 tabla comparativa en HTML que aclare y resuma todo, como eres un experto SEO vas a posicionar el articulo incluyendo la keyword y todas las distintas formas (keywords longtail) que una persona puede buscar este contenido, no entregues conclusiones ni explicaciones de lo que hiciste, unicamente el articulo usando las etiquetas <h1> <h2> <h3> <p style='text-align: justify;'> <strong> <ul>  <li> <a> <table> <tr> segun corresponda[/INSTRUCTION]", 4000)
-
-    article_part_3 = cgptg.prompt_ia("Eres un experto en SEO, especialmente en generacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.selected_keyword} [/KEYWORD] [ARTICLE] {selected_content_relevant_content} {selected_content_experiment_1} {selected_content_experiment_2} {selected_content_experiment_1} CONCLUSION {selected_content_main_idea} {selected_content_checklist} {selected_content_call_to_action} [/ARTICLE] [INSTRUCTION] Reescribe este articulo de una forma mas extensa y detallada posible, no omitas ni una parte de lo escrito, como eres un experto SEO vas a posicionar el articulo incluyendo la keyword y todas las distintas formas (keywords longtail) que una persona puede buscar este contenido, asi como de multiples ejemplos y tablas comparativas, no entregues conclusiones ni explicaciones de lo que hiciste, unicamente el articulo usando las etiquetas <h1> <h2> <h3> <p style='text-align: justify;'> <strong> <ul>  <li> <a> <table> <tr> segun corresponda[/INSTRUCTION]", 4000)
-
-    article_part_3_extras = cgptg.prompt_ia("Eres un experto en SEO, especialmente en generacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.selected_keyword} [/KEYWORD] [ARTICLE] {selected_content_relevant_content} {selected_content_experiment_1} {selected_content_experiment_2} {selected_content_experiment_1} CONCLUSION {selected_content_main_idea} {selected_content_checklist} {selected_content_call_to_action} [/ARTICLE] [INSTRUCTION] Genera 2 ejemplos que en lugar de resumir logren aclarar dudas especificas y muy utiles que pueden surgir al leer esto. tambien genera 1 tabla comparativa en HTML que aclare y resuma todo, como eres un experto SEO vas a posicionar el articulo incluyendo la keyword y todas las distintas formas (keywords longtail) que una persona puede buscar este contenido, no entregues conclusiones ni explicaciones de lo que hiciste, unicamente el articulo usando las etiquetas <h1> <h2> <h3> <p style='text-align: justify;'> <strong> <ul>  <li> <a> <table> <tr> segun corresponda[/INSTRUCTION]", 4000)
-
-    article_attributes = cgptg.prompt_ia("Eres un experto en SEO, especialmente en generacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.selected_keyword} [/KEYWORD] [ARTICLE] [SEARCH INTENTION] {selected_content_checklist} [/SEARCH INTENTION] {selected_content_main_idea} {selected_content_why_1} {selected_content_how_1} {selected_content_why_2} {selected_content_how_2} {selected_content_why_3} {selected_content_how_3} {selected_content_relevant_content} {selected_content_experiment_1} {selected_content_experiment_2} {selected_content_experiment_1} [/ARTICLE]  [INSTRUCTION] Genera los siguientes contenidos sobre el articulo y presentalos de esa misma forma anteponiendo la etiqueta: [WEB TITLE] titulo del articulo, debe contener la palabra clave, debe generar interes de leer mas y usar mayusculas selectivas y emojis, debe tener maximo 57 caracteres. [WEB META DESCRIPTION] Debe resumir en menos de 140 caracteres lo mas importante de la [SEARCH INTENTION] e incluir la palabra clave, asegurate de que no sea algo al estilo de (descubre como lograr...) lo que quiero es algo al estilo de (La respuesta es .. y ....). [IMAGE NAME] el nombre que debe tener el archivo de la imagen del articulo, debe incluir la palabra clave [IMAGE ALTERNATIVE TEXT] Un texto alternativo para la imagen, debe incluir la palabra clave [IMAGE CAPTION] un caption para la imagen, debe incluir la palabra clave [IMAGE DESCRIPTION] UNA DESCRIPCION PARA LA IMAGEN, debe incluir la palabra clave [YOUTUBE TITLE] titulo del video, debe contener la palabra clave, debe generar interes de leer mas y usar mayusculas selectivas y emojis, debe tener maximo 57 caracteres. [YOUTUBE DESCRIPTION] Una descripcion extensa de 2000 caracteres que incluiya la palabra clave y resuma el articulo [YOUTUBE TAGS] 20 tags cortos basados en palabras clave y presentados en forma de palabra clave sin usar #, y 10 tags largos basados en keywords longtail del articulo presentados de la misma forma, todos estos tags presentados como separados por comas [/INSTRUCTION]", 4000)
-
-    article_insights = cgptg.prompt_ia("Eres un experto en SEO, especialmente en generacion de articulos web que posicionen rapido con palabras clave long tail", f"[KEYWORD] {st.session_state.selected_keyword} [/KEYWORD] [ARTICLE] [SEARCH INTENTION] {selected_content_checklist} [/SEARCH INTENTION] {selected_content_main_idea} {selected_content_why_1} {selected_content_how_1} {selected_content_why_2} {selected_content_how_2} {selected_content_why_3} {selected_content_how_3} {selected_content_relevant_content} {selected_content_experiment_1} {selected_content_experiment_2} {selected_content_experiment_1} [/ARTICLE]  [INSTRUCTION] Escribe los 5 principales insights del articulo de forma detallada, bien explicada, resolutiva y que llame la atencion, expresalos en forma de ideas y no de resumen ya que no quiero algo por el estilo de (El artículo destaca...) lo que si quiero es algo al estilo de (Yo creo que lo mejor es..., o algo como: Yo publico y publico pendejadas útiles (contenido de valor) todos los días para luego agarrar a toda esa gente que interactuó con él y mostrarle anuncios de mis talleres. Así de simple llevo viviendo de esto desde el 2018 y si usted dejara esa mentalidad de empleado podría hacer lo mismo con lo que debe hacer market o al estilo de: Es muy triste cuando alguien me pregunta si al tomar mis talleres recibirá un certificado. No, campeón, mis talleres no se hicieron para crear más subordinados.Son para aprender y emprender, no para que te suban el sueldo…  #startup o al estilo de Ganarse la vida a través de Internet es algo sin sentido para las personas que fueron educadas creyendo que la única forma de vivir es yendo todos los días a meterse en un cubículo a fingir estar ocupada. #startup o al estilo de Cuando arranca su emprendimiento o está creando uno nuevo habrá muchos días en los que tendrá que pasar la prueba de ver a todo el mundo de rumba o de vacaciones, mientras usted solo trabaja. o al estilo de Aléjese de las personas que culpan a los demás de su propio fracaso o usted terminará siendo igual…). [/INSTRUCTION]", 4000)
-
-    uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.project_name}.effective_communication_content` SET created_content = 1 WHERE id = '{selected_content_id}'")
-
-    
-    st.toast("Saving article", icon = "☺️")
-    st.session_state.article = f"[KEYWORD] {st.session_state.selected_keyword}" + " ----Recuerda agregar 3 links internos, 3 links externos, anclar el video a la web, agregar comentario fijado al video, comaprtir el video en redes, indexar la web en search console, publicar los contenidos y compartir el pantallazo en otras redes---- [ARTICLE] First add here the [WEB META DESCRIPTION] as the first text. Asegurate que el titulo, meta description, descripcion de youtubecontengan la keyword" + article_part_1 + article_part_1_extras + article_part_2 + article_part_2_extras + article_part_3 + article_part_3_extras + " [EXTRAS] " + article_attributes + " [POSTS] " + article_insights
-
-    st.write(st.session_state.article)
-    st.balloons()
-    time.sleep(5)
-    uc.run_query_30_m.clear()
-
 
 
 
