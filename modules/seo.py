@@ -208,6 +208,7 @@ def video_uploading(user_id, project_name):
         st.session_state.video_uploading_project_name = project_name
         uploading_video_button = st.button("I already uploaded this video", on_click = video_uploading_execution)
     if 'video_title_description_generation' in st.session_state:
+        st.write("---")
         st.write(st.session_state.video_title_description_generation )
         st.download_button('Download Texts', st.session_state.video_title_description_generation, file_name = 'video_title_description_generation.txt')
         
@@ -261,6 +262,7 @@ def video_to_shorts(user_id, project_name):
         video_to_shorts_button = st.button("I already created shorts", on_click = video_to_shorts_execution)
 
         if 'short_title_description_generation' in st.session_state:
+                st.write("---")
                 st.write(st.session_state.short_title_description_generation )
                 st.download_button('Download Texts', st.session_state.short_title_description_generation, file_name = 'short_title_description_generation.txt')
     
@@ -314,6 +316,7 @@ def web_writing(user_id, project_name):
         web_writing_button = st.button("I already created the Web", on_click = web_writing_execution)
 
         if 'web_writing_generation' in st.session_state:
+                st.write("---")
                 st.write(st.session_state.web_writing_generation)
                 st.download_button('Download Texts', st.session_state.web_writing_generation, file_name = 'web_writing_generation.txt')
 
