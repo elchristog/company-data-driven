@@ -285,8 +285,8 @@ def video_to_shorts(user_id, project_name):
 #     del st.session_state.web_writing_selected_idea
 
 
-def web_writing_generation():
-    st.session_state.web_writing_generation = ggg.gemini_general_prompt("Eres un redactor SEO experto en posicionar keywords y generar contenidos que llaman la atencion", "Ahora soy un redactor SEO experto", "[KEYWORD] "+str(st.session_state.web_writing_transcript)+" [/KEYWORD][EXTRA_KEYWORDS] enfermera, estados unidos, registered nurse, enfermeriamigracionnclex, nclex rnielts, ¿Cómo convertirme en enfermera en Estados Unidos?, Pasos para ser enfermera en Estados Unidos., ¿Cómo puedo ser enfermera en USA?, Guía para ser enfermera en Estados Unidos., ¿Qué necesito para ser enfermera en Estados Unidos?, Consejos para ser enfermera en USA., Proceso para convertirse en enfermera en Estados Unidos., enfermeriamigracionnclexieltssalariohomologacionusa, enfermero, trabajo, como ser enfermera en estados unidos, enfermero en estados unidos, salario enfermera usasalario de enfermerasalario de enfermeria, Cómo ser enfermera en USA, Pasos para ser enfermera en Estados Unidos, Requisitos para ejercer enfermería en USA, Guía para convertirse en enfermera en Estados Unidos, trabajo enfermera, NCLEX, IELTS, Salario, Homologación, USA, Trabajo, Requisitos, #enfermeriaenestadosunidos, #enfermeraestadosunidos, #registerednurse, #enfermeriamigracionnclex, #nclexrnielts [/EXTRA_KEYWORDS][DESCRIPTION] [Descripcion corta que contenga la [KEYWORD] ]luego mostrar Este texto:Agenda una asesoría conmigo:- Whatsapp: https://bit.ly/45SidF6Mis redes: - Web: https://enfermeraenestadosunidos.com/- Instagram: https://www.instagram.com/enfermeraenestadosunidos- TikTok: https://www.tiktok.com/@enfermeraenestadosunidos[Descripción extensa que diga de que se trata el video basandose en la [KEYWORD] y contenga 2 mil palabras] [/DESCRIPTION][INSTRUCTION] Crea el título de un video de YouTube que contenga la [KEYWORD] que contenga menos de 8 palabras, llama la atención usando mayusculas selectivas y emojis. Luego Crea Una descripción que cumpla con todos los requisitos de [DESCRIPTION]. y por último Crea 60 tags exactamente, jugando con la [KEYWORD] y las [EXTRA_KEYWORDS] que ayuden a posicionar el video, Asegúrate de mostrar Este listado de tags en un solo parrafo y separado por comas  y no usar hashtags[/INSTRUCTION]")
+def web_writing_execution():
+    st.session_state.web_writing_generation = ggg.gemini_general_prompt("Eres un redactor SEO experto en posicionar keywords y generar contenidos que llaman la atencion", "Ahora soy un redactor SEO experto", "escribe un articulo de minimo 4 mil palabras sobre '"+st.session_state.web_writing_selected_idea+"' (Asegurate que la palabra clave '"+st.session_state.web_writing_selected_idea+"' aparezca 5 veces en el articulo), que todo se explique en detalle y que hable sobre:" + st.session_state.web_writing_transcript)
     
 
 def web_writing(user_id, project_name):
@@ -314,7 +314,7 @@ def web_writing(user_id, project_name):
         web_writing_button = st.button("I already created the Web", on_click = web_writing_execution)
 
         if 'web_writting_generation' in st.session_state:
-                st.write(st.session_state.web_writing_generation )
+                st.write(st.session_state.web_writing_generation)
                 st.download_button('Download Texts', st.session_state.web_writing_generation, file_name = 'web_writing_generation.txt')
 
 
