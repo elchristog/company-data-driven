@@ -364,8 +364,8 @@ def post_idea_creation(user_id, project_name):
             placeholder = "Cuando llega el momento de estudiar para el NCLEX, muchas personas lo primero que hacen es comprar tres libros y prometerse que se los van a leer todos para estar listos para el examen. A los quince días ya están cansados y no quieren volver a saber de los libros, sin saber qué hacer. Hay que tener un plan de estudios y saber que ya tenemos fortalezas previas. Hay que recordar que se está preparando para un examen y la mejor forma es practicando de forma estratégica."
         )
     if post_idea is not None:
-        st.session_state.post_idea_creation_user_id
-        st.session_state.post_idea_creation_project_name
+        st.session_state.post_idea_creation_user_id = user_id
+        st.session_state.post_idea_creation_project_name = project_name
         save_post_idea_button = st.button("Save idea", on_click = post_idea_creation_execution)
 
 
