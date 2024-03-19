@@ -126,7 +126,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 seo.post_idea_creation(user_id, project_name)
 
             if sub_menu == "Posting posts":
-                tap.title_and_paragraph("Posting posts" + project_icon, "1- Publicar coo texto en facebook y youtube 2- tomar la imagen de facebook y publicar la imagen en instagram y whatsapp", "h3", 0)
+                tap.title_and_paragraph("Posting posts" + project_icon, "1- Publicar como texto en facebook y youtube 2- tomar la imagen de facebook y publicar la imagen en instagram y whatsapp", "h3", 0)
                 seo.posting_posts(user_id, project_name)
 
             if sub_menu == "Web creation guide":
