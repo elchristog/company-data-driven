@@ -112,6 +112,10 @@ credentials:
       email: tatianaosoresfdez@gmail.com
       name: Tatiana Osores
       password: $2b$12$Ole9WkshxBxrxD3gCS2zaO/cx7Iw0/CJ1FpCpW3WQw0W7ZlYFJkn2
+    lnoguera:
+      email: lavaju1982@gmail.com
+      name: Lady Noguera
+      password: $2b$12$5vYxizZ/q6O8veH13cB48uf05kjoBi0zlJ2s.XMZHZAm3xyUKHfpK
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
