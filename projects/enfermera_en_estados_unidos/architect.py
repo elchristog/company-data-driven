@@ -85,7 +85,13 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         
         if menu == "Traffic":
-            sub_menu_options=['Traffic', 'SEO ideation', 'Video creation', 'Video edition', 'Video uploading', 'Video to shorts', 'Web creation', 'Post idea creation', 'Posting posts', 'Post to web']
+            #------ Sub Menu according to each user-----------
+            if user_id == 1: #chris
+                sub_menu_options=['Traffic', 'SEO ideation', 'Video creation', 'Video edition', 'Video uploading', 'Video to shorts', 'Web creation', 'Post idea creation', 'Posting posts', 'Post to web']
+            if user_id == 2: #flaca
+                sub_menu_options=['Traffic', 'Video creation', 'Post idea creation']
+           #------ Sub Menu according to each user-----------
+            
             if role_id == 1:
                 sub_menu_options.extend(['Web creation guide', 'Post content prompt'])
             sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
