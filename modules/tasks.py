@@ -5,7 +5,7 @@ import pandas as pd
 import os
 
 import utils.user_credentials as uc
-import utils.chat_gpt_gestor as cgptg
+import utils.g_gemini_gestor as ggg
 
 
 def update_task_status():
@@ -132,8 +132,9 @@ def tips_tasks_ia(tasks, divider):
     if len(tasks) > 2:
         ia_tips_button = st.button("🤖 Help me to prioritize!")     
         if ia_tips_button:       
-            st.success('Tips to prioritize your tasks using the Eisenhower method:', icon="🤖")            
-            answer = cgptg.prompt_ia("You are an expert in project management and tasks priorization", f"Help me to priorize my tasks using the Eisenhower Matrix methodology, find yourself the urgency and importance and give me just the results, solve it and give me the tasks priorized with tips, be specific, return just the list of the task prioritized and one tip of each one, use less than 200 tokens: “ {tasks} ”:", 200)
+            st.success('Tips to prioritize your tasks using the Eisenhower method:', icon="🤖")   
+            answer = ggg.gemini_general_prompt("You are an expert in project management and tasks priorization", "I am an expert in the Eisenhower Matrix methodology", f"Help me to priorize my tasks using the Eisenhower Matrix methodology, find yourself the urgency and importance and give me just the results, solve it and give me the tasks priorized with tips, be specific, return just the list of the task prioritized and one tip of each one, use less than 200 tokens: “ {tasks} ”:")
+
             st.write(answer)
     if divider == 1:
         st.write("---") 
