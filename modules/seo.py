@@ -394,7 +394,9 @@ def posting_posts_execution():
         del st.session_state.posting_posts_post_idea
         del st.session_state.posting_posts_selected_idea_id 
 
-
+def post_redaction_generation():
+    st.session_state.post_redaction_generation = ggg.gemini_general_prompt("Eres un experto en correccion de ortografia y redaccion", "Ahora soy un experto en redaccion y correccion de ortografia", f"Corrige la ortografia y muestrame unicamente el texto corregido: {st.session_state.posting_posts_selected_idea}")
+    
 
 def posting_posts(user_id, project_name):
     os.write(1, '🥏 Executing posting_posts \n'.encode('utf-8'))
@@ -416,7 +418,8 @@ def posting_posts(user_id, project_name):
             label = "Select the idea",
             options = ideas,
             index = None,
-            key= "posting_posts_selected_idea"
+            key= "posting_posts_selected_idea",
+            on_change = post_redaction_generation
         )
 
     if selected_idea is not None:
@@ -424,6 +427,10 @@ def posting_posts(user_id, project_name):
         st.session_state.posting_posts_project_name = project_name
         st.session_state.posting_posts_selected_idea_id = ids[ideas.index(selected_idea)]
         posting_posts_button = st.button("Post published", on_click = posting_posts_execution)
+        
+    if 'post_redaction_generation' in st.session_state:
+                st.write("---")
+                st.write(st.session_state.post_redaction_generation + " #enfermeraenestadosunidos #enfermeriaenusa #enfermerosenestadosunidos")
 
 
 
