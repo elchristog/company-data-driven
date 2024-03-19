@@ -456,7 +456,7 @@ def post_to_web_generation():
     st.session_state.post_to_web_generation = ggg.gemini_general_prompt("Eres un experto en redaccion de contenidos extensos, hablas de forma informal", "Ahora soy un experto en redaccion extensa y detallada, hablo de forma informal", f"Redacta esto de una forma muy extensa: enfermero en estados unidos: {st.session_state.post_to_web_selected_idea} #enfermeraenestadosunidos #enfermeriaenusa #enfermerosenestadosunidos")
     
 
-def post_to_web(user_id, project_name):
+def post_to_web(user_id, project_name, project_keyword):
     os.write(1, '🥏 Executing post_to_web \n'.encode('utf-8'))
     os.write(1, '- post_to_web: Listing ideas \n'.encode('utf-8'))
     rows = uc.run_query_half_day(f"SELECT id, idea FROM `company-data-driven.{project_name}.daily_post_creation` WHERE (posted IS NOT NULL OR posted != 0) AND (web_created IS NULL OR web_created = 0)  ORDER BY creation_date;")
