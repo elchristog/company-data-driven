@@ -391,7 +391,7 @@ def posting_posts_execution():
         uc.run_query_half_day.clear()
         del st.session_state.posting_posts_user_id
         del st.session_state.posting_posts_project_name
-        del st.session_state.posting_posts_post_idea
+        del st.session_state.posting_posts_selected_idea
         del st.session_state.posting_posts_selected_idea_id 
 
 def post_redaction_generation():
