@@ -357,9 +357,9 @@ def contract_payments_show_metrics(project_name):
       )
 
 
-      df_sales = pd.DataFrame(uc.run_query_1_h(f"SELECT SUM(CAST(c.contract_total_value AS FLOAT64)) AS total_sales FROM `company-data-driven.{project_name}.contracts` AS c WHERE c.contract_date >= '{day[0].strftime('%Y-%m-%d')}' AND c.contract_date <= '{day[1].strftime('%Y-%m-%d')}';"))
+      df_sales = pd.DataFrame(uc.run_query_1_h(f"SELECT COALESCE(SUM(CAST(c.contract_total_value AS FLOAT64)), 0) AS total_sales FROM `company-data-driven.{project_name}.contracts` AS c WHERE c.contract_date >= '{day[0].strftime('%Y-%m-%d')}' AND c.contract_date <= '{day[1].strftime('%Y-%m-%d')}';"))
 
-      df_payments = pd.DataFrame(uc.run_query_1_h(f"SELECT SUM(CAST(cp.payment_value AS FLOAT64)) AS total_paid FROM `company-data-driven.{project_name}.contracts_payments` AS cp WHERE cp.payment_date >= '{day[0].strftime('%Y-%m-%d')}' AND cp.payment_date <= '{day[1].strftime('%Y-%m-%d')}';"))
+      df_payments = pd.DataFrame(uc.run_query_1_h(f"SELECT COALESCE(SUM(CAST(cp.payment_value AS FLOAT64)), 0) AS total_paid FROM `company-data-driven.{project_name}.contracts_payments` AS cp WHERE cp.payment_date >= '{day[0].strftime('%Y-%m-%d')}' AND cp.payment_date <= '{day[1].strftime('%Y-%m-%d')}';"))
       
       total_sales = df_sales['total_sales'].sum()
       total_paid = df_payments['total_paid'].sum()
@@ -443,9 +443,9 @@ def add_new_contract_payment(user_id, project_id, project_name):
             selected_contract_id = contract_ids[usernames.index(selected_username)]
             user_debt = uc.run_query_instant(f'''
            SELECT 
-                CAST(ROUND(CAST(c.contract_total_value AS NUMERIC)) AS INT64) AS contract_total_value, 
-                CAST(ROUND(CAST(total_payments.total_paid AS NUMERIC)) AS INT64) AS total_paid, 
-                (CAST(ROUND(CAST(c.contract_total_value AS NUMERIC)) AS INT64) - CAST(ROUND(CAST(total_payments.total_paid AS NUMERIC)) AS INT64)) AS current_debt, 
+                COALESCE(CAST(ROUND(CAST(c.contract_total_value AS NUMERIC)) AS INT64), 0) AS contract_total_value, 
+                COALESCE(CAST(ROUND(CAST(total_payments.total_paid AS NUMERIC)) AS INT64), 0) AS total_paid, 
+                (COALESCE(CAST(ROUND(CAST(c.contract_total_value AS NUMERIC)) AS INT64), 0) - COALESCE(CAST(ROUND(CAST(total_payments.total_paid AS NUMERIC)) AS INT64), 0)) AS current_debt, 
                 total_payments.last_payment_date 
             FROM `company-data-driven.{project_name}.contracts` AS c 
             LEFT JOIN (
