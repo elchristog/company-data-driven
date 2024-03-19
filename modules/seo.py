@@ -384,7 +384,7 @@ def posting_posts_execution():
     if 'posting_posts_selected_idea' in st.session_state:
         os.write(1, '- posting_posts_execution: Saving posted idea\n'.encode('utf-8'))
         st.toast("Please wait", icon = "☺️")
-        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.posting_posts_project_name}.daily_post_creation` SET posted = 1, posted_date = CURRENT_DATE(), poster_user_id = {st.session_state.posting_posts_user_id} WHERE id 0 '{st.session_state.posting_posts_selected_idea_id}'")
+        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.posting_posts_project_name}.daily_post_creation` SET posted = 1, posted_date = CURRENT_DATE(), poster_user_id = {st.session_state.posting_posts_user_id} WHERE id = '{st.session_state.posting_posts_selected_idea_id}'")
         st.toast("Info saved!", icon = "👾")
         st.balloons()
         time.sleep(1)
