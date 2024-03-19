@@ -453,7 +453,7 @@ def post_to_web_execution():
         del st.session_state.post_to_web_selected_idea_id 
 
 def post_to_web_generation():
-    st.session_state.post_to_web_generation = ggg.gemini_general_prompt("Eres un experto en redaccion de contenidos extensos", "Ahora soy un experto en redaccion extensa y detallada", f"Redacta esto de una forma muy extensa: {st.session_state.post_to_web_selected_idea} #enfermeraenestadosunidos #enfermeriaenusa #enfermerosenestadosunidos")
+    st.session_state.post_to_web_generation = ggg.gemini_general_prompt("Eres un experto en redaccion de contenidos extensos, hablas de forma informal", "Ahora soy un experto en redaccion extensa y detallada, hablo de forma informal", f"Redacta esto de una forma muy extensa: enfermero en estados unidos: {st.session_state.post_to_web_selected_idea} #enfermeraenestadosunidos #enfermeriaenusa #enfermerosenestadosunidos")
     
 
 def post_to_web(user_id, project_name):
