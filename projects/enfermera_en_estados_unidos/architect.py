@@ -123,7 +123,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
             if sub_menu == "Post idea creation":
                 tap.title_and_paragraph("Post idea creation" + project_icon, "1- Escribir el post completo y guardarlo", "h3", 0)
-                seo. ‎post_idea_creation(user_id, project_name)
+                seo.post_idea_creation(user_id, project_name)
 
             if sub_menu == "Web creation guide":
                 tap.title_and_paragraph("Web creation guide" + project_icon, "Sigue estos pasos", "h3", 0)
