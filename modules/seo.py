@@ -49,17 +49,16 @@ def seo_ideation(project_name, project_keyword, user_id, role_id):
     else:
         st.success(f"Available contents: {available_contents}", icon = "😇")
         
-    with st.form("seo_ideation_form", clear_on_submit = True):
-        text_input_1 = st.text_area(
-            "Ideas extras de keywords",
-            label_visibility = 'visible',
-            disabled = False,
-            placeholder = 'pasos para ser enfermera latina en usa, comparacion de agencias de enfermeria, cuanto gana una enfermera en texas',
-            help = 'This ideas will be saved an priorized with the time',
-            key = 'text_input_1'
-        )
+    text_input_1 = st.text_input(
+        "Ideas extras de keywords",
+        label_visibility = 'visible',
+        disabled = False,
+        placeholder = 'pasos para ser enfermera latina en usa, comparacion de agencias de enfermeria, cuanto gana una enfermera en texas',
+        help = 'This ideas will be saved an priorized with the time',
+        key = 'text_input_1'
+    )
 
-        submitted = st.form_submit_button("Generate ideas", on_click = seo_ideation_execution, args = [project_name, project_keyword, user_id, role_id, text_input_1])
+    submitted = st.button("Generate ideas", on_click = seo_ideation_execution, args = [project_name, project_keyword, user_id, role_id, text_input_1])
     if 'answer' in st.session_state:
         st.download_button('Download answer', st.session_state.answer, file_name = 'content_ideas.txt')
 
