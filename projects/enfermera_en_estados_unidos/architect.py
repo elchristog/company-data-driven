@@ -85,7 +85,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         
         if menu == "Traffic":
-            sub_menu_options=['Traffic', 'SEO ideation', 'Video creation', 'Video edition', 'Video uploading', 'Video to shorts', 'Web creation']
+            sub_menu_options=['Traffic', 'SEO ideation', 'Video creation', 'Video edition', 'Video uploading', 'Video to shorts', 'Web creation', 'Post idea creation']
             if role_id == 1:
                 sub_menu_options.extend(['Web creation guide', 'Post content prompt'])
             sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
@@ -120,6 +120,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Web creation":
                 tap.title_and_paragraph("Web creation" + project_icon, "1- Traer el transcript del video 2- clonar una pagina existente 3- Edicion rapida y nombrar 4- crear titulo, focus keyphrase, seo title, meta descripcion 5- edita en la pagina el titulo, meta descripcion, convierte a html agregando el resto cuidando de no volver a agregar ningun H1, aseguando que incluya 3 tablas comparativas y 3 estadisticas convincentes, justifica el texto 6- agrega el video asociado y repite el paso anterior con la segunda parte del articulo sin nuevos H1, nunca incluir las partes de body ni html 7- publicar 8- escribir en el grupo solicitando indexar y medir velocidad", "h3", 0)
                 seo.web_writing(user_id, project_name)
+
+            if sub_menu == "Post idea creation":
+                tap.title_and_paragraph("Post idea creation" + project_icon, "1- Escribir el post completo y guardarlo", "h3", 0)
+                seo. ‎post_idea_creation(user_id, project_name)
 
             if sub_menu == "Web creation guide":
                 tap.title_and_paragraph("Web creation guide" + project_icon, "Sigue estos pasos", "h3", 0)
