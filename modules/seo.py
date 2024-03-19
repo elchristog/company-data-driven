@@ -360,7 +360,12 @@ def post_idea_creation(user_id, project_name):
     os.write(1, '🥏 Executing post_idea_creation \n'.encode('utf-8'))
     os.write(1, '- post_idea_creation: Showing form \n'.encode('utf-8'))
     count_active_ideas = uc.run_query_half_day(f"SELECT COUNT(*) AS count_active_ideas FROM `company-data-driven.{project_name}.daily_post_creation` WHERE posted IS NULL OR posted = 0;")[0].get("count_active_ideas")
-   
+
+    if count_active_ideas < 10:
+        st.error(f"I need more ideas! I just have: {count_active_ideas}", icon = "🤬")
+    else:
+        st.success(f"Available ideas: {count_active_ideas}", icon = "😇")
+    
     post_idea = st.text_input(
             label = "Add new post idea",
             key= "post_idea_creation_post_idea",
