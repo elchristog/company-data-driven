@@ -470,7 +470,7 @@ def post_to_web(user_id, project_name):
             options = ideas,
             index = None,
             key= "post_to_web_selected_idea",
-            on_change = post_redaction_generation
+            on_change = post_to_web_generation
         )
 
     if selected_idea is not None:
