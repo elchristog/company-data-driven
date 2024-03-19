@@ -337,6 +337,41 @@ def web_writing(user_id, project_name):
 
 
 
+
+def post_idea_creation_execution():
+    os.write(1, '🥏 Executing video_creation_execution \n'.encode('utf-8'))
+    os.write(1, '- video_creation_execution: Saving created idea\n'.encode('utf-8'))
+    st.toast("Please wait", icon = "☺️")
+    # uc.run_query_insert_update(f"")
+    st.toast("Info saved!", icon = "👾")
+    st.balloons()
+    time.sleep(1)
+    uc.run_query_half_day.clear()
+    del st.session_state.post_idea_creation_user_id
+    del st.session_state.post_idea_creation_project_name
+    del st.session_state.post_idea_creation_post_idea
+
+
+
+def post_idea_creation(user_id, project_name):
+    os.write(1, '🥏 Executing post_idea_creation \n'.encode('utf-8'))
+    os.write(1, '- post_idea_creation: Showing form \n'.encode('utf-8'))
+    count_active_ideas = uc.run_query_half_day(f"SELECT COUNT(*) AS count_active_ideas FROM `company-data-driven.{project_name}.daily_post_creation` WHERE posted IS NULL OR posted = 0;")[0].get("count_active_ideas")
+   
+    post_idea = st.text_input(
+            label = "Add new post idea",
+            key= "post_idea_creation_post_idea",
+            placeholder = "Cuando llega el momento de estudiar para el NCLEX, muchas personas lo primero que hacen es comprar tres libros y prometerse que se los van a leer todos para estar listos para el examen. A los quince días ya están cansados y no quieren volver a saber de los libros, sin saber qué hacer. Hay que tener un plan de estudios y saber que ya tenemos fortalezas previas. Hay que recordar que se está preparando para un examen y la mejor forma es practicando de forma estratégica."
+        )
+    if post_idea is not None:
+        st.session_state.post_idea_creation_user_id
+        st.session_state.post_idea_creation_project_name
+        save_post_idea_button = st.button("Save idea", on_click = post_idea_creation_execution)
+
+
+
+
+
 def web_creation_guide():
     st.markdown('''duplicate page Easy Updates Manager, 
                 imagify (e158d9b22db474a52c9ef7fa81afb14571d2fe7d)
