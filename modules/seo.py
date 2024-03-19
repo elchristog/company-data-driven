@@ -458,6 +458,7 @@ def post_to_web_generation():
     
 
 def post_to_web(user_id, project_name, project_keyword):
+    st.session_state.post_to_web_project_keyword = project_keyword
     os.write(1, '🥏 Executing post_to_web \n'.encode('utf-8'))
     os.write(1, '- post_to_web: Listing ideas \n'.encode('utf-8'))
     rows = uc.run_query_half_day(f"SELECT id, idea FROM `company-data-driven.{project_name}.daily_post_creation` WHERE (posted IS NOT NULL OR posted != 0) AND (web_created IS NULL OR web_created = 0)  ORDER BY creation_date;")
@@ -477,7 +478,6 @@ def post_to_web(user_id, project_name, project_keyword):
     if selected_idea is not None:
         st.session_state.post_to_web_user_id = user_id
         st.session_state.post_to_web_project_name = project_name
-        st.session_state.post_to_web_project_keyword = project_keyword
         st.session_state.post_to_web_selected_idea_id = ids[ideas.index(selected_idea)]
         post_to_web_button = st.button("Post web created", on_click = post_to_web_execution)
         
