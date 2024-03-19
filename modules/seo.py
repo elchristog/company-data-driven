@@ -436,6 +436,57 @@ def posting_posts(user_id, project_name):
 
 
 
+
+def post_to_web_execution():
+    os.write(1, '🥏 Executing post_to_web_execution \n'.encode('utf-8'))
+    if 'post_to_web_selected_idea' in st.session_state:
+        os.write(1, '- post_to_web_execution: Updating post\n'.encode('utf-8'))
+        st.toast("Please wait", icon = "☺️")
+        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.post_to_web_project_name}.daily_post_creation` SET posted = 1, posted_date = CURRENT_DATE(), poster_user_id = {st.session_state.post_to_web_user_id} WHERE id = '{st.session_state.post_to_web_selected_idea_id}'")
+        st.toast("Info saved!", icon = "👾")
+        st.balloons()
+        time.sleep(1)
+        uc.run_query_half_day.clear()
+        del st.session_state.post_to_web_user_id
+        del st.session_state.post_to_web_project_name
+        del st.session_state.post_to_web_selected_idea
+        del st.session_state.post_to_web_selected_idea_id 
+
+def post_to_web_generation():
+    st.session_state.post_to_web_generation = ggg.gemini_general_prompt("Eres un experto en redaccion de contenidos extensos", "Ahora soy un experto en redaccion extensa y detallada", f"Redacta esto de una forma muy extensa: {st.session_state.post_to_web_selected_idea} #enfermeraenestadosunidos #enfermeriaenusa #enfermerosenestadosunidos")
+    
+
+def post_to_web(user_id, project_name):
+    os.write(1, '🥏 Executing post_to_web \n'.encode('utf-8'))
+    os.write(1, '- post_to_web: Listing ideas \n'.encode('utf-8'))
+    rows = uc.run_query_half_day(f"SELECT id, idea FROM `company-data-driven.{project_name}.daily_post_creation` WHERE (posted IS NOT NULL OR posted != 0) AND (web_created IS NULL OR web_created = 0)  ORDER BY creation_date;")
+    ideas = []
+    ids = []
+    for row in rows:
+        ideas.append(row.get('idea'))
+        ids.append(row.get('id'))
+    selected_idea = st.selectbox(
+            label = "Select the idea",
+            options = ideas,
+            index = None,
+            key= "post_to_web_selected_idea",
+            on_change = post_redaction_generation
+        )
+
+    if selected_idea is not None:
+        st.session_state.post_to_web_user_id = user_id
+        st.session_state.post_to_web_project_name = project_name
+        st.session_state.post_to_web_selected_idea_id = ids[ideas.index(selected_idea)]
+        post_to_web_button = st.button("Post web created", on_click = post_to_web_execution)
+        
+    if 'post_to_web_generation' in st.session_state:
+                st.write("---")
+                st.write(st.session_state.post_to_web_generation)
+
+
+
+
+
 def web_creation_guide():
     st.markdown('''duplicate page Easy Updates Manager, 
                 imagify (e158d9b22db474a52c9ef7fa81afb14571d2fe7d)
