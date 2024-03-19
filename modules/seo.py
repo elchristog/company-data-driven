@@ -442,7 +442,7 @@ def post_to_web_execution():
     if 'post_to_web_selected_idea' in st.session_state:
         os.write(1, '- post_to_web_execution: Updating post\n'.encode('utf-8'))
         st.toast("Please wait", icon = "☺️")
-        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.post_to_web_project_name}.daily_post_creation` SET posted = 1, posted_date = CURRENT_DATE(), poster_user_id = {st.session_state.post_to_web_user_id} WHERE id = '{st.session_state.post_to_web_selected_idea_id}'")
+        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.post_to_web_project_name}.daily_post_creation` SET web_created = 1, web_created_date = CURRENT_DATE(), web_creator_user_id = {st.session_state.post_to_web_user_id} WHERE id = '{st.session_state.post_to_web_selected_idea_id}'")
         st.toast("Info saved!", icon = "👾")
         st.balloons()
         time.sleep(1)
