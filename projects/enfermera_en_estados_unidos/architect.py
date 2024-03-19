@@ -137,7 +137,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
             if sub_menu == "Post to web":
                 tap.title_and_paragraph("Post to web" + project_icon, "1- Traer el transcript del video 2- clonar una pagina existente 3- Edicion rapida y nombrar 4- crear titulo, focus keyphrase, seo title, meta descripcion 5- edita en la pagina el titulo, meta descripcion, convierte a html agregando el resto cuidando de no volver a agregar ningun H1, aseguando que incluya 3 tablas comparativas y 3 estadisticas convincentes, justifica el texto 6- agrega el video asociado y repite el paso anterior con la segunda parte del articulo sin nuevos H1, nunca incluir las partes de body ni html 7- publicar 8- escribir en el grupo solicitando indexar y medir velocidad", "h3", 0)
-                seo.post_to_web(user_id, project_name)
+                seo.post_to_web(user_id, project_name, project_keyword)
 
             if sub_menu == "Web creation guide":
                 tap.title_and_paragraph("Web creation guide" + project_icon, "Sigue estos pasos", "h3", 0)
