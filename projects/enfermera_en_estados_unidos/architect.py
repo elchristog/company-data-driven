@@ -85,7 +85,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         
         if menu == "Traffic":
-            sub_menu_options=['Traffic', 'SEO ideation', 'Video creation', 'Video edition', 'Video uploading', 'Video to shorts', 'Web creation', 'Post idea creation']
+            sub_menu_options=['Traffic', 'SEO ideation', 'Video creation', 'Video edition', 'Video uploading', 'Video to shorts', 'Web creation', 'Post idea creation', 'Posting posts']
             if role_id == 1:
                 sub_menu_options.extend(['Web creation guide', 'Post content prompt'])
             sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
@@ -124,6 +124,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Post idea creation":
                 tap.title_and_paragraph("Post idea creation" + project_icon, "1- Escribir el post completo y guardarlo", "h3", 0)
                 seo.post_idea_creation(user_id, project_name)
+
+            if sub_menu == "Posting posts":
+                tap.title_and_paragraph("Posting posts" + project_icon, "1- Publicar coo texto en facebook y youtube 2- tomar la imagen de facebook y publicar la imagen en instagram y whatsapp", "h3", 0)
+                seo.posting_posts(user_id, project_name)
 
             if sub_menu == "Web creation guide":
                 tap.title_and_paragraph("Web creation guide" + project_icon, "Sigue estos pasos", "h3", 0)
