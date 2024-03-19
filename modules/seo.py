@@ -340,16 +340,20 @@ def web_writing(user_id, project_name):
 
 def post_idea_creation_execution():
     os.write(1, '🥏 Executing video_creation_execution \n'.encode('utf-8'))
-    os.write(1, '- video_creation_execution: Saving created idea\n'.encode('utf-8'))
-    st.toast("Please wait", icon = "☺️")
-    # uc.run_query_insert_update(f"")
-    st.toast("Info saved!", icon = "👾")
-    st.balloons()
-    time.sleep(1)
-    uc.run_query_half_day.clear()
-    del st.session_state.post_idea_creation_user_id
-    del st.session_state.post_idea_creation_project_name
-    del st.session_state.post_idea_creation_post_idea
+    if 'post_idea_creation_post_idea' in st.session_state:
+        if len(st.session_state.post_idea_creation_post_idea) < 20:
+            st.toast("To short!", icon = "🤡")
+        else:
+            os.write(1, '- video_creation_execution: Saving created idea\n'.encode('utf-8'))
+            st.toast("Please wait", icon = "☺️")
+            # uc.run_query_insert_update(f"")
+            st.toast("Info saved!", icon = "👾")
+            st.balloons()
+            time.sleep(1)
+            uc.run_query_half_day.clear()
+            del st.session_state.post_idea_creation_user_id
+            del st.session_state.post_idea_creation_project_name
+            del st.session_state.post_idea_creation_post_idea
 
 
 
