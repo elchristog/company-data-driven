@@ -451,9 +451,10 @@ def post_to_web_execution():
         del st.session_state.post_to_web_project_name
         del st.session_state.post_to_web_selected_idea
         del st.session_state.post_to_web_selected_idea_id 
+        del st.session_state.post_to_web_project_keyword
 
 def post_to_web_generation():
-    st.session_state.post_to_web_generation = ggg.gemini_general_prompt("Eres un experto en redaccion de contenidos extensos, hablas de forma informal", "Ahora soy un experto en redaccion extensa y detallada, hablo de forma informal", f"Redacta esto de una forma muy extensa: enfermero en estados unidos: {st.session_state.post_to_web_selected_idea} #enfermeraenestadosunidos #enfermeriaenusa #enfermerosenestadosunidos")
+    st.session_state.post_to_web_generation = ggg.gemini_general_prompt("Eres un experto en redaccion de contenidos extensos, hablas de forma informal", "Ahora soy un experto en redaccion extensa y detallada, hablo de forma informal", f"Redacta esto de una forma muy extensa: {st.session_state.post_to_web_project_keyword}: {st.session_state.post_to_web_selected_idea}")
     
 
 def post_to_web(user_id, project_name, project_keyword):
@@ -476,6 +477,7 @@ def post_to_web(user_id, project_name, project_keyword):
     if selected_idea is not None:
         st.session_state.post_to_web_user_id = user_id
         st.session_state.post_to_web_project_name = project_name
+        st.session_state.post_to_web_project_keyword = project_keyword
         st.session_state.post_to_web_selected_idea_id = ids[ideas.index(selected_idea)]
         post_to_web_button = st.button("Post web created", on_click = post_to_web_execution)
         
