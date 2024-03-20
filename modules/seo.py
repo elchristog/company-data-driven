@@ -517,11 +517,11 @@ def days_since_last_content(project_name):
     else:
         days_since = days_since_last_content_created[0].get("days_since_last_content")
         if days_since < 4:
-            st.success(f"Days since last content: {days_since}", icon = "😎")
+            st.success(f"Days since last content (Video-web): {days_since}", icon = "😎")
         if days_since >= 4 and days_since < 6:
-            st.warning(f"Days since last content: {days_since} (Video, YT banner, Content creation guide)", icon = "🤨")
+            st.warning(f"Days since last content (Video-web): {days_since}", icon = "🤨")
         if days_since >= 6:
-            st.error(f"Days since last content: {days_since} (Video, YT banner, Content creation guide)", icon = "🤬")
+            st.error(f"Days since last content (Video-web): {days_since}", icon = "🤬")
 
     os.write(1, '- days_since_last_content: Counting days since last post\n'.encode('utf-8'))
     days_since_last_post_created = uc.run_query_1_h(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(posted_date), DAY) AS days_since_last_post  FROM `company-data-driven.{project_name}.daily_post_creation`;")
