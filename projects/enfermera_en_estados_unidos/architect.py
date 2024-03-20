@@ -102,6 +102,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 seotw.show_web_metrics(project_name)
                 seoty.get_youtube_data_save_to_bq(role_id, project_name, project_url_clean)
                 seoty.show_youtube_metrics(project_name)
+                st.write("---")
+                st.video("https://youtu.be/pgjEzfiF8X4")
 
             if sub_menu == "SEO ideation":
                 tap.title_and_paragraph("SEO Ideation" + project_icon, "1- Agregar las preguntas de una busqueda en google 2- Asegurar que estan separadas por coma y sin espacios", "h3", 0)
