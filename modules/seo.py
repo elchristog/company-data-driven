@@ -516,12 +516,25 @@ def days_since_last_content(project_name):
         st.warning("Waiting for data", icon = "😴")
     else:
         days_since = days_since_last_content_created[0].get("days_since_last_content")
-        if days_since < 5:
+        if days_since < 4:
             st.success(f"Days since last content: {days_since}", icon = "😎")
-        if days_since >= 5 and days_since < 8:
+        if days_since >= 4 and days_since < 6:
             st.warning(f"Days since last content: {days_since} (Video, YT banner, Content creation guide)", icon = "🤨")
-        if days_since >= 8:
+        if days_since >= 6:
             st.error(f"Days since last content: {days_since} (Video, YT banner, Content creation guide)", icon = "🤬")
+
+    os.write(1, '- days_since_last_content: Counting days since last post\n'.encode('utf-8'))
+    days_since_last_post_created = uc.run_query_1_h(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(posted_date), DAY) AS days_since_last_post  FROM `company-data-driven.{project_name}.daily_post_creation`;")
+    if len(days_since_last_post_created) < 1:
+        st.warning("Waiting for data", icon = "😴")
+    else:
+        days_since_post = days_since_last_post_created[0].get("days_since_last_post")
+        if days_since_post < 2:
+            st.success(f"Days since last post: {days_since_post}", icon = "😎")
+        if days_since_post >= 2 and days_since < 3:
+            st.warning(f"Days since last post: {days_since_post}", icon = "🤨")
+        if days_since_post >= 3:
+            st.error(f"Days since last post: {days_since_post}", icon = "🤬")
         
         
         
