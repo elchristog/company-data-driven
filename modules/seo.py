@@ -529,10 +529,9 @@ def days_since_last_content(project_name):
         st.warning("Waiting for data", icon = "😴")
     else:
         days_since_post = days_since_last_post_created[0].get("days_since_last_post")
-        st.wrtite(days_since_last_post_created)
         if days_since_post < 2:
             st.success(f"Days since last post: {days_since_post}", icon = "😎")
-        if days_since_post >= 2 and days_since < 3:
+        if days_since_post >= 2 and days_since_post < 3:
             st.warning(f"Days since last post: {days_since_post}", icon = "🤨")
         if days_since_post >= 3:
             st.error(f"Days since last post: {days_since_post}", icon = "🤬")
