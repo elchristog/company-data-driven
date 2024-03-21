@@ -525,6 +525,7 @@ def days_since_last_content(project_name):
 
     os.write(1, '- days_since_last_content: Counting days since last post\n'.encode('utf-8'))
     days_since_last_post_created = uc.run_query_1_h(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(posted_date), DAY) AS days_since_last_post  FROM `company-data-driven.{project_name}.daily_post_creation`;")
+    st.write("test")
     st.write(days_since_last_post_created)
     if len(days_since_last_post_created) < 1:
         st.warning("Waiting for data", icon = "😴")
