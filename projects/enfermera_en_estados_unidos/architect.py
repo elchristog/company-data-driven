@@ -149,6 +149,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Post idea creation":
                 tap.title_and_paragraph("Post idea creation" + project_icon, "1- Escribir el post completo y guardarlo", "h3", 0)
                 seo.post_idea_creation(user_id, project_name)
+                st.write("---")
+                st.video("https://www.youtube.com/watch?v=GFBIdxpwOvA&ab_channel=EnfermeraenEstadosUnidos")
 
             if sub_menu == "Posting posts":
                 tap.title_and_paragraph("Posting posts" + project_icon, "1- Publicar como texto en facebook y youtube 2- tomar la imagen de facebook y publicar la imagen en instagram y whatsapp 3- publicar como historia en facebook e instagram", "h3", 0)
