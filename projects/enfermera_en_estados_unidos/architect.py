@@ -57,6 +57,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 menu_options = ["Home", "Whatsapp", "Groupal session", "Contract", "AI questions"]
             if user_id == 9: #santiago
                 menu_options = ["Home", "Whatsapp", "Step3: Inscripción ante la Junta de Enfermería", "AI questions"]
+            if user_id == 31: #trafficker 01 - juancho
+                menu_options = ["Home", "Traffic"]
             #------ Menu according to each user-----------
 
           
