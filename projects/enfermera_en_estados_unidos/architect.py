@@ -97,7 +97,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if user_id == 31: #trafficker 01 - juancho
                 sub_menu_options = ["Traffic", "SEO ideation", 'Video uploading', 'Video to shorts', 'Web creation', 'Posting posts', 'Post to web']
             if user_id == 33: #editor_0176 - cesar
-                sub_menu_options=['Traffic', 'Video edition']
+                sub_menu_options=['Video edition']
            #------ Sub Menu according to each user-----------
             
             if role_id == 1:
