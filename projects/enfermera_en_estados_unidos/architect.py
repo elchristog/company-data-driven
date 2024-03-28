@@ -59,6 +59,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 menu_options = ["Home", "Whatsapp", "Step3: Inscripción ante la Junta de Enfermería", "AI questions"]
             if user_id == 31: #trafficker 01 - juancho
                 menu_options = ["Home", "Traffic"]
+            if user_id == 33: #editor_0176 - cesar
+                menu_options = ["Home", "Traffic"]
             #------ Menu according to each user-----------
 
           
@@ -94,6 +96,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 sub_menu_options=['Traffic', 'Video creation', 'Post idea creation']
             if user_id == 31: #trafficker 01 - juancho
                 sub_menu_options = ["Traffic", "SEO ideation", 'Video uploading', 'Video to shorts', 'Web creation', 'Posting posts', 'Post to web']
+            if user_id == 33: #editor_0176 - cesar
+                sub_menu_options=['Traffic', 'Video edition']
            #------ Sub Menu according to each user-----------
             
             if role_id == 1:
