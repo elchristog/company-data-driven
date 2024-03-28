@@ -124,6 +124,10 @@ credentials:
       email: marci.94@icloud.com
       name: Sleyter Perez
       password: $2b$12$6o4yu5IN7f7dGGVv0jpgPeEv1BJCuxqMiDT6so2u3nuGkDfTqqEju
+    editor_0176:
+      email: videoeditor@enfermeraenestadosunidos.com
+      name: editor_0176
+      password: $2b$12$.pxAEZaONqBvknuZf1lXn.Fd75vJmBvxMigA.GqjFl6mBQ21KUWmW
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
