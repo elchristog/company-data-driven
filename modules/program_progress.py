@@ -10,13 +10,14 @@ def general_progress(user_id, project_name, program_steps_table_tame, program_st
     user_progress_table = uc.run_query_15_m(f"SELECT ps.id, ps.name, ps.description, COALESCE(CAST(upsp_user.creation_date AS STRING),'pending') AS starting_date FROM `company-data-driven.{project_name}.{program_steps_table_tame}` AS ps LEFT JOIN (SELECT  * FROM `company-data-driven.{project_name}.{program_steps_user_progress_table_name}` AS upsp WHERE upsp.user_id = {user_id}) AS upsp_user ON ps.id = upsp_user.program_step_id  ORDER BY ps.id;")
     user_actual_step= uc.run_query_15_m(f"SELECT program_step_id, creation_date, DATE_DIFF(CURRENT_DATE(), creation_date, DAY) AS days_since_achievemen FROM `company-data-driven.{project_name}.{program_steps_user_progress_table_name}` WHERE user_id = {user_id} AND program_step_id = (SELECT MAX(program_step_id) AS actual_step FROM `company-data-driven.{project_name}.{program_steps_user_progress_table_name}` AS upsp WHERE upsp.user_id = {user_id});")
 
-    progress = user_actual_step[0].get("program_step_id")/len(user_progress_table)
-    if progress >= 0.9 or user_actual_step[0].get("days_since_achievemen") < 5:
-        st.balloons()
-        st.success("You are the best!", icon = "🥳")
-    st.progress(5, text = f"Global progress: **{round(100*progress)}%**")
-    st.table(user_progress_table)
-    return user_actual_step[0].get("program_step_id") 
+    if len(user_progress_table) > 0:
+        progress = user_actual_step[0].get("program_step_id")/len(user_progress_table)
+        if progress >= 0.9 or user_actual_step[0].get("days_since_achievemen") < 5:
+            st.balloons()
+            st.success("You are the best!", icon = "🥳")
+        st.progress(5, text = f"Global progress: **{round(100*progress)}%**")
+        st.table(user_progress_table)
+        return user_actual_step[0].get("program_step_id") 
 
 
 
