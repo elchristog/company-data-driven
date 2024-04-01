@@ -231,6 +231,8 @@ def video_to_shorts_execution():
         del st.session_state.video_to_shorts_project_name
         del st.session_state.video_to_shorts_selected_idea_id
         del st.session_state.video_to_shorts_selected_idea
+        del st.session_state.video_to_shorts_agree
+        
 
 
 def short_title_description_generation():
