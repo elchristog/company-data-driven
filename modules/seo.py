@@ -216,20 +216,21 @@ def video_uploading(user_id, project_name):
 
 
 def video_to_shorts_execution():
-    os.write(1, '🥏 Executing video_to_shorts_execution \n'.encode('utf-8'))
-    os.write(1, '- video_to_shorts_execution: Updating\n'.encode('utf-8'))
-    st.toast("Please wait", icon = "☺️")
-    
-    uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.video_to_shorts_project_name}.content_creation` SET video_shorts_created = 1, video_shorts_creation_date = CURRENT_DATE(), video_shorts_creator_user_id = {st.session_state.video_to_shorts_user_id} WHERE id = '{st.session_state.video_to_shorts_selected_idea_id}';")
-    
-    st.toast("Info saved!", icon = "👾")
-    st.balloons()
-    time.sleep(1)
-    uc.run_query_2_m.clear()
-    del st.session_state.video_to_shorts_user_id
-    del st.session_state.video_to_shorts_project_name
-    del st.session_state.video_to_shorts_selected_idea_id
-    del st.session_state.video_to_shorts_selected_idea
+    if 'video_to_shorts_agree' in st.session_state:
+        os.write(1, '🥏 Executing video_to_shorts_execution \n'.encode('utf-8'))
+        os.write(1, '- video_to_shorts_execution: Updating\n'.encode('utf-8'))
+        st.toast("Please wait", icon = "☺️")
+        
+        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.video_to_shorts_project_name}.content_creation` SET video_shorts_created = 1, video_shorts_creation_date = CURRENT_DATE(), video_shorts_creator_user_id = {st.session_state.video_to_shorts_user_id} WHERE id = '{st.session_state.video_to_shorts_selected_idea_id}';")
+        
+        st.toast("Info saved!", icon = "👾")
+        st.balloons()
+        time.sleep(1)
+        uc.run_query_2_m.clear()
+        del st.session_state.video_to_shorts_user_id
+        del st.session_state.video_to_shorts_project_name
+        del st.session_state.video_to_shorts_selected_idea_id
+        del st.session_state.video_to_shorts_selected_idea
 
 
 def short_title_description_generation():
@@ -257,7 +258,8 @@ def video_to_shorts(user_id, project_name):
         st.session_state.video_to_shorts_project_name = project_name
 
         short_description = st.text_input('Short description', placeholder = 'Como pasar el NCLEX', help = 'Debe ser una keyword que describa de que trata el short', key = 'short_description', on_change = short_title_description_generation)
-        
+
+        agree = st.checkbox('I finished', key = 'video_to_shorts_agree')
         video_to_shorts_button = st.button("I already created shorts", on_click = video_to_shorts_execution)
 
         if 'short_title_description_generation' in st.session_state:
