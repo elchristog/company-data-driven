@@ -133,6 +133,8 @@ def customer_success_crm_add_contact(user_id, project_name):
     date_contact = st.date_input("Select the contact date", key = "customer_success_crm_add_contact_date_contact")
     contact_description = st.text_input('Contact description', placeholder = 'Se contacta a Alejandra entregando las credenciales de CGFNS', key = 'customer_success_crm_add_contact_contact_description')
     commitment_score = st.number_input('User Commitment score', key = 'customer_success_crm_add_contact_commitment_score', min_value = 0, max_value = 10, step = 1, help = "0: El usuario no tiene compromiso. 10: El usuario esta absolutamente comprometido")
+    tasks_array = st.text_input('Array of tasks', key = 'customer_success_crm_add_contact_tasks_array', help = "Debe ser un array de tareas", placeholder = "['Confirmar la activacipon de Babbel antes de 30 dias']")
+    
 
 
 
