@@ -24,6 +24,51 @@ def general_progress(user_id, project_name, program_steps_table_tame, program_st
 
 
 
+def customer_success_add_program_step_execution():
+    os.write(1, '🥏 Executing posting_posts_execution \n'.encode('utf-8'))
+    if 'posting_posts_selected_idea' in st.session_state:
+        os.write(1, '- posting_posts_execution: Saving posted idea\n'.encode('utf-8'))
+        st.toast("Please wait", icon = "☺️")
+        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.posting_posts_project_name}.daily_post_creation` SET posted = 1, posted_date = CURRENT_DATE(), poster_user_id = {st.session_state.posting_posts_user_id} WHERE id 0 '{st.session_state.posting_posts_selected_idea_id}'")
+        st.toast("Info saved!", icon = "👾")
+        st.balloons()
+        time.sleep(1)
+        uc.run_query_half_day.clear()
+        del st.session_state.posting_posts_user_id
+        del st.session_state.posting_posts_project_name
+        del st.session_state.posting_posts_post_idea
+        del st.session_state.posting_posts_selected_idea_id 
+
+
+def customer_success_add_program_step(user_id, project_name):
+    os.write(1, '🥏 Executing customer_success_add_program_step \n'.encode('utf-8'))
+    os.write(1, '- customer_success_add_program_step: Showing form \n'.encode('utf-8'))
+  
+    rows_program_steps = uc.run_query_half_day(f"SELECT order_number, name, id FROM `company-data-driven.{project_name}.program_steps` ORDER BY order_number;")
+    step_order_numbers = []
+    step_names = []
+    step_ids = []
+    for row in rows_program_steps:
+        step_names.append(row.get('name'))
+        step_ids.append(row.get('id'))
+        step_order_numbers.append(row.get('order_number'))
+    selected_program_step = st.selectbox(
+            label = "Select the step",
+            options = step_names,
+            index = None,
+            key= "customer_success_add_program_step_step_names"
+        )
+
+    if selected_program_step is not None:
+        st.session_state.customer_success_add_program_step_user_id = user_id
+        st.session_state.customer_success_add_program_step_project_name = project_name
+        st.session_state.customer_success_add_program_step_selected_step_id = step_ids[step_names.index(selected_program_step)]
+        customer_success_add_program_step_button = st.button("Post published", on_click = customer_success_add_program_step_execution)
+        
+
+
+
+
 
 
 
