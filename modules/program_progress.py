@@ -76,6 +76,7 @@ def customer_success_crm_add_contact(user_id, project_name):
 
 
     date_contact = st.date_input("Select the contact date", key = "customer_success_crm_add_contact_date_contact")
+    contact_description = st.text_input('Contact description', placeholder = 'Se contacta a Alejandra entregando las credenciales de CGFNS', key = 'customer_success_crm_add_contact_contact_description')
 
 
     # if selected_idea is not None:
