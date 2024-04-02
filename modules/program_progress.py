@@ -25,19 +25,28 @@ def general_progress(user_id, project_name, program_steps_table_tame, program_st
 
 
 def customer_success_add_program_step_execution():
-    os.write(1, '🥏 Executing posting_posts_execution \n'.encode('utf-8'))
-    if 'posting_posts_selected_idea' in st.session_state:
-        os.write(1, '- posting_posts_execution: Saving posted idea\n'.encode('utf-8'))
+    os.write(1, '🥏 Executing customer_success_add_program_step_execution \n'.encode('utf-8'))
+    if 'customer_success_add_program_step_selected_program_step' in st.session_state:
+        os.write(1, '- customer_success_add_program_step_execution: Saving step\n'.encode('utf-8'))
         st.toast("Please wait", icon = "☺️")
-        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.posting_posts_project_name}.daily_post_creation` SET posted = 1, posted_date = CURRENT_DATE(), poster_user_id = {st.session_state.posting_posts_user_id} WHERE id 0 '{st.session_state.posting_posts_selected_idea_id}'")
+        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.posting_posts_project_name}.program_steps` SET order_number = order_number + 1 WHERE order_number > {st.session_state.customer_success_add_program_step_selected_step_order_number}")
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.posting_posts_project_name}.program_steps` (order_number, creation_date, name, description, id, creator_user_id, know_how, tasks, texts) VALUES ({st.session_state.customer_success_add_program_step_selected_step_order_number + 1}, CURRENT_DATE(), '{st.session_state.customer_success_add_program_step_step_name}', '{st.session_state.customer_success_add_program_step_step_description}', GENERATE_UUID(), st.session_state.customer_success_add_program_step_user_id, '{st.session_state.customer_success_add_program_step_know_how}', '{st.session_state.customer_success_add_program_step_tasks_array}', '{st.session_state.customer_success_add_program_step_chat_texts}')")
         st.toast("Info saved!", icon = "👾")
         st.balloons()
         time.sleep(1)
         uc.run_query_half_day.clear()
-        del st.session_state.posting_posts_user_id
-        del st.session_state.posting_posts_project_name
-        del st.session_state.posting_posts_post_idea
-        del st.session_state.posting_posts_selected_idea_id 
+        del st.session_state.customer_success_add_program_step_user_id
+        del st.session_state.customer_success_add_program_steps_project_name
+        del st.session_state.customer_success_add_program_step_step_name
+        del st.session_state.customer_success_add_program_step_selected_program_step
+        del st.session_state.customer_success_add_program_step_step_description
+        del st.session_state.customer_success_add_program_step_know_how 
+        del st.session_state.customer_success_add_program_step_tasks_array 
+        del st.session_state.customer_success_add_program_step_chat_texts 
+        del st.session_state.customer_success_add_program_step_selected_step_id 
+        del st.session_state.customer_success_add_program_step_selected_step_order_number 
+        
+        
 
 
 def customer_success_add_program_step(user_id, project_name):
@@ -64,16 +73,13 @@ def customer_success_add_program_step(user_id, project_name):
     tasks_array = st.text_input('Array of tasks', key = 'customer_success_add_program_step_tasks_array', help = "Debe ser un array de tareas", placeholder = "['Confirmar la activacion de Babbel antes de 30 dias']")
     chat_texts = st.text_input('Chat texts', key = 'customer_success_add_program_step_chat_texts', help = "Lo que se le debe escribir a la persona", placeholder = "Te recomiendo cuando crees la cuenta de Babbel y actives el producto nos avises por este medio, muchas gracias!")
     
-    
-    
-    
 
     if selected_program_step is not None:
         st.session_state.customer_success_add_program_step_user_id = user_id
         st.session_state.customer_success_add_program_step_project_name = project_name
         st.session_state.customer_success_add_program_step_selected_step_id = step_ids[step_names.index(selected_program_step)]
         st.session_state.customer_success_add_program_step_selected_step_order_number = step_order_numbers[step_names.index(selected_program_step)]
-        customer_success_add_program_step_button = st.button("Post published", on_click = customer_success_add_program_step_execution)
+        customer_success_add_program_step_button = st.button("Add step", on_click = customer_success_add_program_step_execution)
         
 
 
