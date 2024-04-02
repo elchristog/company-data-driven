@@ -304,7 +304,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
         
 
         if menu == "Web App":
-            sub_menu_options=["Customer view", 'Nclex test creation', 'Update customer progress']
+            sub_menu_options=["Customer view", 'Nclex test creation']
             if role_id < 4:
                 sub_menu_options.extend(['Team view'])
             sub_menu = st.sidebar.radio('Web tool options', options = sub_menu_options)
@@ -317,9 +317,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Nclex test creation":
                 tap.title_and_paragraph("Create a new question in the NCLEX test " + project_icon, "Remember not add the letters [A), B), C), D)] in the options", "h3", 0)
                 tst.add_question_to_test(project_name, 'nclex_questions', user_id)
-            if sub_menu == "Update customer progress":
-                tap.title_and_paragraph("Update customer progress " + project_icon, "Select carefully the actual step", "h3", 0)
-                pp.update_customer_progress(user_id, project_id, project_name, 'program_steps', 'user_program_steps_progress')
+           
 
 
 
