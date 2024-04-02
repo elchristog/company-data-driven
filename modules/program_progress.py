@@ -56,8 +56,10 @@ def customer_success_add_program_step(user_id, project_name):
             label = "Add after wich step?",
             options = step_names,
             index = None,
-            key= "customer_success_add_program_step_step_names"
+            key= "customer_success_add_program_step_selected_program_step"
         )
+    step_name = st.text_input('Step name', placeholder = 'Confirmacion de la activacipon de Babbel', key = 'customer_success_add_program_step_step_name')
+    
 
     if selected_program_step is not None:
         st.session_state.customer_success_add_program_step_user_id = user_id
