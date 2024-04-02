@@ -53,7 +53,7 @@ def customer_success_add_program_step(user_id, project_name):
         step_ids.append(row.get('id'))
         step_order_numbers.append(row.get('order_number'))
     selected_program_step = st.selectbox(
-            label = "Select the step",
+            label = "Add after wich step?",
             options = step_names,
             index = None,
             key= "customer_success_add_program_step_step_names"
@@ -63,6 +63,7 @@ def customer_success_add_program_step(user_id, project_name):
         st.session_state.customer_success_add_program_step_user_id = user_id
         st.session_state.customer_success_add_program_step_project_name = project_name
         st.session_state.customer_success_add_program_step_selected_step_id = step_ids[step_names.index(selected_program_step)]
+        st.session_state.customer_success_add_program_step_selected_step_order_number = step_order_numbers[step_names.index(selected_program_step)]
         customer_success_add_program_step_button = st.button("Post published", on_click = customer_success_add_program_step_execution)
         
 
