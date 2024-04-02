@@ -60,6 +60,20 @@ def customer_success_crm_add_contact(user_id, project_name):
             key= "customer_success_crm_add_contact_usernames"
         )
 
+
+    rows_program_steps = uc.run_query_half_day(f"SELECT name, id FROM `company-data-driven.{project_name}.program_steps` ORDER BY order_number;")
+    step_names = []
+    step_ids = []
+    for row in rows_program_steps:
+        step_names.append(row.get('name'))
+        step_ids.append(row.get('id'))
+    selected_program_step = st.selectbox(
+            label = "Select the step",
+            options = step_names,
+            index = None,
+            key= "customer_success_crm_add_contact_step_names"
+        )
+
     # if selected_idea is not None:
     #     st.session_state.posting_posts_user_id = user_id
     #     st.session_state.posting_posts_project_name = project_name
