@@ -74,6 +74,10 @@ def customer_success_crm_add_contact(user_id, project_name):
             key= "customer_success_crm_add_contact_step_names"
         )
 
+
+    date_contact = st.date_input("Fecha de contacto", key = "customer_success_crm_add_contact_date_contact")
+
+
     # if selected_idea is not None:
     #     st.session_state.posting_posts_user_id = user_id
     #     st.session_state.posting_posts_project_name = project_name
