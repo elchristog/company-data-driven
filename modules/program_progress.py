@@ -75,7 +75,7 @@ def customer_success_crm_add_contact(user_id, project_name):
         )
 
 
-    date_contact = st.date_input("Fecha de contacto", key = "customer_success_crm_add_contact_date_contact")
+    date_contact = st.date_input("Select the contact date", key = "customer_success_crm_add_contact_date_contact")
 
 
     # if selected_idea is not None:
