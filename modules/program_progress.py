@@ -61,6 +61,7 @@ def customer_success_add_program_step(user_id, project_name):
     step_name = st.text_input('Step name', placeholder = 'Confirmacion de la activacion de Babbel', key = 'customer_success_add_program_step_step_name')
     step_description = st.text_input('Step description', placeholder = 'Este paso requiere que el usuario confirme haber completado la creacion de su cuenta en los 30 dias que se requieren para no perder la compra', key = 'customer_success_add_program_step_step_description')
     know_how = st.text_input('Know how youtube video link', placeholder = 'https://...', key = 'customer_success_add_program_step_know_how', help = 'Video explicando como se ejecuta este paso')
+    tasks_array = st.text_input('Array of tasks', key = 'customer_success_add_program_step_tasks_array', help = "Debe ser un array de tareas", placeholder = "['Confirmar la activacipon de Babbel antes de 30 dias']")
     
     
     
@@ -133,7 +134,6 @@ def customer_success_crm_add_contact(user_id, project_name):
     date_contact = st.date_input("Select the contact date", key = "customer_success_crm_add_contact_date_contact")
     contact_description = st.text_input('Contact description', placeholder = 'Se contacta a Alejandra entregando las credenciales de CGFNS', key = 'customer_success_crm_add_contact_contact_description')
     commitment_score = st.number_input('User Commitment score', key = 'customer_success_crm_add_contact_commitment_score', min_value = 0, max_value = 10, step = 1, help = "0: El usuario no tiene compromiso. 10: El usuario esta absolutamente comprometido")
-    tasks_array = st.text_input('Array of tasks', key = 'customer_success_crm_add_contact_tasks_array', help = "Debe ser un array de tareas", placeholder = "['Confirmar la activacipon de Babbel antes de 30 dias']")
     
 
 
