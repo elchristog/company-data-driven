@@ -322,13 +322,13 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
         if menu == "Customer success":
-            sub_menu_options=['User welcome', 'User credentials', 'English program', 'Cv creation', 'Content creation guide']
+            sub_menu_options=['CRM']
             if role_id == 1:
                 sub_menu_options.extend(['Something'])
-            sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
-            if sub_menu == "User welcome":
-                tap.title_and_paragraph("User welcome" + project_icon, "Bienvenida al usuario y solicitud de datos", "h3", 0)
-                # s1ps.user_welcome()
+            sub_menu = st.sidebar.radio('Customer success options', options = sub_menu_options)
+            if sub_menu == "CRM":
+                tap.title_and_paragraph("CRM" + project_icon, "Seguimiento del contacto a clientes", "h3", 0)
+                pp.customer_success_crm_add_contact()
 
 
 
