@@ -59,7 +59,7 @@ def customer_success_add_program_step(user_id, project_name):
             key= "customer_success_add_program_step_selected_program_step"
         )
     step_name = st.text_input('Step name', placeholder = 'Confirmacion de la activacion de Babbel', key = 'customer_success_add_program_step_step_name')
-    step_description = st.text_input('Step description', placeholder = 'Este paso requiere que el usuario confirme haber completado la creacion de su cuenta en los 30 dias que se requieren para no perder la compra', key = 'customer_success_add_program_step_step_name')
+    step_description = st.text_input('Step description', placeholder = 'Este paso requiere que el usuario confirme haber completado la creacion de su cuenta en los 30 dias que se requieren para no perder la compra', key = 'customer_success_add_program_step_step_description')
     know_how = st.text_input('Know how youtube video link', placeholder = 'https://...', key = 'customer_success_add_program_step_know_how', help = 'Video explicando como se ejecuta este paso')
     
     
