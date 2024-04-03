@@ -31,7 +31,7 @@ def customer_success_add_program_step_execution():
         st.toast("Please wait", icon = "☺️")
         uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.customer_success_add_program_step_project_name}.program_steps` SET order_number = order_number + 1 WHERE order_number > {st.session_state.customer_success_add_program_step_selected_step_order_number}")
         
-        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.customer_success_add_program_step_project_name}.program_steps` (order_number, creation_date, name, description, id, creator_user_id, know_how, tasks, texts) VALUES ({st.session_state.customer_success_add_program_step_selected_step_order_number} + 1, CURRENT_DATE(), '{st.session_state.customer_success_add_program_step_step_name}', '{st.session_state.customer_success_add_program_step_step_description}', GENERATE_UUID(), {st.session_state.customer_success_add_program_step_user_id}, '{st.session_state.customer_success_add_program_step_know_how}', '{st.session_state.customer_success_add_program_step_tasks_array}', '{st.session_state.customer_success_add_program_step_chat_texts}')")
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.customer_success_add_program_step_project_name}.program_steps` (order_number, creation_date, name, description, id, creator_user_id, know_how, tasks, texts, days_to_complete_tasks) VALUES ({st.session_state.customer_success_add_program_step_selected_step_order_number} + 1, CURRENT_DATE(), '{st.session_state.customer_success_add_program_step_step_name}', '{st.session_state.customer_success_add_program_step_step_description}', GENERATE_UUID(), {st.session_state.customer_success_add_program_step_user_id}, '{st.session_state.customer_success_add_program_step_know_how}', '{st.session_state.customer_success_add_program_step_tasks_array}', '{st.session_state.customer_success_add_program_step_chat_texts}', {st.session_state.customer_success_add_program_step_days_to_complete_tasks})")
         st.toast("Info saved!", icon = "👾")
         st.balloons()
         time.sleep(1)
@@ -46,6 +46,8 @@ def customer_success_add_program_step_execution():
         del st.session_state.customer_success_add_program_step_chat_texts 
         del st.session_state.customer_success_add_program_step_selected_step_id 
         del st.session_state.customer_success_add_program_step_selected_step_order_number 
+        del st.session_state.customer_success_add_program_step_days_to_complete_tasks 
+        
         
         
 
@@ -73,6 +75,8 @@ def customer_success_add_program_step(user_id, project_name):
     know_how = st.text_input('Know how youtube video link', placeholder = 'https://...', key = 'customer_success_add_program_step_know_how', help = 'Video explicando como se ejecuta este paso')
     tasks_array = st.text_input('Array of tasks (NO QUOTES)', key = 'customer_success_add_program_step_tasks_array', help = "Debe ser un array de tareas SIN NINGUNA COMILLA solo separando por coma", placeholder = "[Confirmar la activacion de Babbel antes de 30 dias, segunda tarea]")
     chat_texts = st.text_input('Chat texts', key = 'customer_success_add_program_step_chat_texts', help = "Lo que se le debe escribir a la persona", placeholder = "Te recomiendo cuando crees la cuenta de Babbel y actives el producto nos avises por este medio, muchas gracias!")
+    days_to_complete_tasks = st.number_input('Days to complete tasks', 30, key = 'customer_success_add_program_step_days_to_complete_tasks', min_value = 0, max_value = 90, step = 1, help = "Dias en que la persona debe cumplir sus tareas")
+    
     
 
     if selected_program_step is not None:
