@@ -30,6 +30,7 @@ def customer_success_add_program_step_execution():
         os.write(1, '- customer_success_add_program_step_execution: Saving step\n'.encode('utf-8'))
         st.toast("Please wait", icon = "☺️")
         uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.customer_success_add_program_step_project_name}.program_steps` SET order_number = order_number + 1 WHERE order_number > {st.session_state.customer_success_add_program_step_selected_step_order_number}")
+        
         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.customer_success_add_program_step_project_name}.program_steps` (order_number, creation_date, name, description, id, creator_user_id, know_how, tasks, texts) VALUES ({st.session_state.customer_success_add_program_step_selected_step_order_number} + 1, CURRENT_DATE(), '{st.session_state.customer_success_add_program_step_step_name}', '{st.session_state.customer_success_add_program_step_step_description}', GENERATE_UUID(), st.session_state.customer_success_add_program_step_user_id, '{st.session_state.customer_success_add_program_step_know_how}', '{st.session_state.customer_success_add_program_step_tasks_array}', '{st.session_state.customer_success_add_program_step_chat_texts}')")
         st.toast("Info saved!", icon = "👾")
         st.balloons()
@@ -70,7 +71,7 @@ def customer_success_add_program_step(user_id, project_name):
     step_name = st.text_input('Step name', placeholder = 'Confirmacion de la activacion de Babbel', key = 'customer_success_add_program_step_step_name')
     step_description = st.text_input('Step description', placeholder = 'Este paso requiere que el usuario confirme haber completado la creacion de su cuenta en los 30 dias que se requieren para no perder la compra', key = 'customer_success_add_program_step_step_description')
     know_how = st.text_input('Know how youtube video link', placeholder = 'https://...', key = 'customer_success_add_program_step_know_how', help = 'Video explicando como se ejecuta este paso')
-    tasks_array = st.text_input('Array of tasks', key = 'customer_success_add_program_step_tasks_array', help = "Debe ser un array de tareas", placeholder = "['Confirmar la activacion de Babbel antes de 30 dias']")
+    tasks_array = st.text_input('Array of tasks', key = 'customer_success_add_program_step_tasks_array', help = "Debe ser un array de tareas SIN NINGUNA COMILLA solo separando por coma", placeholder = "[Confirmar la activacion de Babbel antes de 30 dias, segunda tarea]")
     chat_texts = st.text_input('Chat texts', key = 'customer_success_add_program_step_chat_texts', help = "Lo que se le debe escribir a la persona", placeholder = "Te recomiendo cuando crees la cuenta de Babbel y actives el producto nos avises por este medio, muchas gracias!")
     
 
