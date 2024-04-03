@@ -73,7 +73,7 @@ def customer_success_add_program_step(user_id, project_name):
     step_name = st.text_input('Step name', placeholder = 'Confirmacion de la activacion de Babbel', key = 'customer_success_add_program_step_step_name')
     step_description = st.text_input('Step description', placeholder = 'Este paso requiere que el usuario confirme haber completado la creacion de su cuenta en los 30 dias que se requieren para no perder la compra', key = 'customer_success_add_program_step_step_description')
     know_how = st.text_input('Know how youtube video link', placeholder = 'https://...', key = 'customer_success_add_program_step_know_how', help = 'Video explicando como se ejecuta este paso')
-    tasks_array = st.text_input('Array of tasks (NO QUOTES)', key = 'customer_success_add_program_step_tasks_array', help = "Debe ser un array de tareas SIN NINGUNA COMILLA solo separando por coma", placeholder = "[Confirmar la activacion de Babbel antes de 30 dias, segunda tarea]")
+    tasks_array = st.text_input('Tasks (NO QUOTES, just comma)', key = 'customer_success_add_program_step_tasks_array', help = "Deben ser las tareas SIN NINGUNA COMILLA solo separando por coma", placeholder = "Confirmar la activacion de Babbel antes de 30 dias, segunda tarea")
     chat_texts = st.text_input('Chat texts', key = 'customer_success_add_program_step_chat_texts', help = "Lo que se le debe escribir a la persona", placeholder = "Te recomiendo cuando crees la cuenta de Babbel y actives el producto nos avises por este medio, muchas gracias!")
     days_to_complete_tasks = st.number_input('Days to complete tasks', key = 'customer_success_add_program_step_days_to_complete_tasks', min_value = 5, max_value = 90, step = 5, help = "Dias en que la persona debe cumplir sus tareas")
     
