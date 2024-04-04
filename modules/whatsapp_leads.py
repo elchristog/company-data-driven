@@ -224,17 +224,25 @@ def wsp_answer_text(project_id):
         
         text_answer = '''
         
-        Hola [Nombre], mucho gusto!
-        
-        Cuéntame, ¿ya has podido avanzar algo en el proceso de homologación de tu título?
-        
-        Entiendo
-        
-        Si te parece, el próximo miércoles voy a realizar una sesión informativa para aclarar el proceso, la plataforma y los costos. Puedes registrarte para la sesión en este enlace:  https://bit.ly/3vtB3Wi
-        
-        Me avisas cualquier cosa que necesites. 
-        
-        Nos vemos el miércoles.
+        Hola buen dia, gracias por comunicarte.
+
+        Con quien tengo el gusto
+
+        XX Un gusto saludarte!
+
+        (Si dice que ya esta en USA): Cuentas con nacionalidad o residencia en Estados Unidos?
+
+        Ya cuentas con tu titulo profesional en enfermeria? (Si es profesional enviarle la invitacion, si es auxiliar no)
+
+        Vale, justo (Hoy, el proximo miercoles...) tendremos una sesion informativa donde explicare como realizar el proceso de homologacion de enfermeria en Estados Unidos, los pasos y los costos.
+
+        Desas que te comparta el link de inscripcion?
+
+        Vale, puedes registrarte en este enlace: https://bit.ly/3vtB3Wi
+
+        En el momento en que te inscribas te llegara un correo electronico con el enlace a la reunion en Google Meet.
+
+        Gracias!
         '''
         st.markdown(text_answer)
         st.write('**Recordar crear el lead en la plataforma, etiquetar el lead en Whatsapp, guardar el contacto con el nombre de la persona**')
