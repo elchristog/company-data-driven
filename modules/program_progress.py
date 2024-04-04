@@ -172,7 +172,7 @@ def customer_success_crm_add_contact(user_id, project_name):
             st.video(st.session_state.customer_success_crm_add_contact_know_how)
         with col2:
             st.write("#### Tasks to be created automatically")
-            st.video(st.session_state.customer_success_crm_add_contact_tasks)
+            st.write(st.session_state.customer_success_crm_add_contact_tasks)
 
 
     date_contact = st.date_input("Select the contact date", key = "customer_success_crm_add_contact_date_contact")
