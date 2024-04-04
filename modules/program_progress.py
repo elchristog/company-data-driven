@@ -109,7 +109,7 @@ def customer_success_crm_add_contact_execution():
             max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{st.session_state.customer_success_crm_add_contact_project_name}.tasks`")[0].get('max_id')
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.customer_success_crm_add_contact_project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{st.session_state.customer_success_crm_add_contact_date_contact}', '{each_task}', {st.session_state.customer_success_crm_add_contact_selected_user_id}, '{st.session_state.customer_success_crm_add_contact_date_contact + pd.Timedelta(days=st.session_state.customer_success_crm_add_contact_days_to_complete_tasks)}', 'to_start', {st.session_state.customer_success_crm_add_contact_user_id})")
             st.toast("Updating, please wait", icon = "☺️")
-            st.toast('Task created! (' + st.session_state.task_input + ')', icon="😎")
+            st.toast('Task created! (' + each_task + ')', icon="😎")
         
         st.toast("Info saved!", icon = "👾")
         st.balloons()
