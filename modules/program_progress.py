@@ -125,8 +125,16 @@ def customer_success_crm_add_contact(user_id, project_name):
             label = "Select the username",
             options = usernames,
             index = None,
-            key= "customer_success_crm_add_contact_usernames"
+            key= "customer_success_crm_add_contact_selected_username"
         )
+    if selected_username is not None:
+        st.session_state.customer_success_crm_add_contact_selected_user_id = user_ids[usernames.index(selected_username)]
+        active_tasks = uc.run_query_2_m(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {st.session_state.customer_success_crm_add_contact_selected_user_id} AND status IN ('to_start', 'on_execution', 'delayed') ORDER BY commit_finish_date ASC;") #finished, canceled, unfulfilled
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.header("Active tasks")
+            st.table(active_tasks)
+
 
 
     rows_program_steps = uc.run_query_half_day(f"SELECT name, id FROM `company-data-driven.{project_name}.program_steps` ORDER BY order_number;")
