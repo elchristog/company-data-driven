@@ -2,6 +2,7 @@ import streamlit as st
 import datetime
 import time
 import os
+import pandas as pd
 
 import utils.user_credentials as uc
 
@@ -99,14 +100,14 @@ def customer_success_crm_add_contact_execution():
         os.write(1, '- customer_success_crm_add_contact_execution: Saving CRM contact\n'.encode('utf-8'))
         st.toast("Please wait", icon = "☺️")
         
-        # uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.customer_success_crm_add_contact_project_name}.user_program_steps_progress` (creation_date, creator_user_id, id, program_step_id, crm_contact_description, commitment_score, contract_id) VALUES ('{st.session_state.customer_success_crm_add_contact_date_contact}', {st.session_state.customer_success_crm_add_contact_user_id}, GENERATE_UUID(), '{st.session_state.customer_success_crm_add_contact_step_id}', '{st.session_state.customer_success_crm_add_contact_contact_description}', {st.session_state.customer_success_crm_add_contact_commitment_score}, '{st.session_state.customer_success_crm_add_contact_contract_id}')")
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.customer_success_crm_add_contact_project_name}.user_program_steps_progress` (creation_date, creator_user_id, id, program_step_id, crm_contact_description, commitment_score, contract_id) VALUES ('{st.session_state.customer_success_crm_add_contact_date_contact}', {st.session_state.customer_success_crm_add_contact_user_id}, GENERATE_UUID(), '{st.session_state.customer_success_crm_add_contact_step_id}', '{st.session_state.customer_success_crm_add_contact_contact_description}', {st.session_state.customer_success_crm_add_contact_commitment_score}, '{st.session_state.customer_success_crm_add_contact_contract_id}')")
 
         today = datetime.date.today()
         today_str = today.strftime("%Y-%m-%d")
         all_tasks = st.session_state.customer_success_crm_add_contact_tasks.split(",")
         for each_task in all_tasks:
             max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{st.session_state.customer_success_crm_add_contact_project_name}.tasks`")[0].get('max_id')
-            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.customer_success_crm_add_contact_project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{customer_success_crm_add_contact_date_contact}', '{each_task}', {st.session_state.selected_user_id}, '{st.session_state.commitment_date_input}', 'to_start', {st.session_state.user_id})")
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.customer_success_crm_add_contact_project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{st.session_state.customer_success_crm_add_contact_date_contact}', '{each_task}', {st.session_state.customer_success_crm_add_contact_selected_user_id}, '{st.session_state.customer_success_crm_add_contact_date_contact + pd.Timedelta(days=st.session_state.customer_success_crm_add_contact_days_to_complete_tasks)}', 'to_start', {st.session_state.customer_success_crm_add_contact_user_id})")
             st.toast("Updating, please wait", icon = "☺️")
             st.toast('Task created! (' + st.session_state.task_input + ')', icon="😎")
         
@@ -156,18 +157,20 @@ def customer_success_crm_add_contact(user_id, project_name):
 
 
 
-    rows_program_steps = uc.run_query_half_day(f"SELECT name, id, know_how, tasks, texts FROM `company-data-driven.{project_name}.program_steps` ORDER BY order_number;")
+    rows_program_steps = uc.run_query_half_day(f"SELECT name, id, know_how, tasks, texts, days_to_complete_tasks FROM `company-data-driven.{project_name}.program_steps` ORDER BY order_number;")
     step_names = []
     step_ids = []
     know_hows = []
     taskss = []
     textss = []
+    days_to_complete_taskss = []
     for row in rows_program_steps:
         step_names.append(row.get('name'))
         step_ids.append(row.get('id'))
         know_hows.append(row.get('know_how'))
         taskss.append(row.get('tasks'))
         textss.append(row.get('texts'))
+        days_to_complete_taskss.append(row.get('days_to_complete_tasks'))
     selected_program_step = st.selectbox(
             label = "Select the step",
             options = step_names,
@@ -179,6 +182,7 @@ def customer_success_crm_add_contact(user_id, project_name):
         st.session_state.customer_success_crm_add_contact_know_how = know_hows[step_names.index(selected_program_step)]
         st.session_state.customer_success_crm_add_contact_tasks = taskss[step_names.index(selected_program_step)]
         st.session_state.customer_success_crm_add_contact_texts = textss[step_names.index(selected_program_step)]
+        st.session_state.customer_success_crm_add_contact_days_to_complete_tasks = days_to_complete_taskss[step_names.index(selected_program_step)]
         
         col1, col2, col3 = st.columns(3)
         with col1:
