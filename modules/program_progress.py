@@ -144,6 +144,11 @@ def customer_success_crm_add_contact(user_id, project_name):
         active_tasks = uc.run_query_2_m(f"SELECT description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {st.session_state.customer_success_crm_add_contact_selected_user_id} AND status IN ('to_start', 'on_execution', 'delayed') ORDER BY commit_finish_date ASC;") #finished, canceled, unfulfilled
         finished_tasks = uc.run_query_2_m(f"SELECT description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {st.session_state.customer_success_crm_add_contact_selected_user_id} AND status = 'finished' ORDER BY commit_finish_date DESC LIMIT 5;") #finished, canceled, unfulfilled
         unfulfilled_tasks = uc.run_query_2_m(f"SELECT description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {st.session_state.customer_success_crm_add_contact_selected_user_id} AND status = 'unfulfilled' ORDER BY commit_finish_date DESC LIMIT 5;") #finished, canceled, unfulfilled
+
+        previous_contacts = uc.run_query_half_day(f"SELECT upsp.creation_date, ps.name AS step_name, upsp.crm_contact_description, upsp.commitment_score, u.username FROM `company-data-driven.{project_name}.user_program_steps_progress` AS upsp INNER JOIN `company-data-driven.global.users` AS u ON upsp.creator_user_id = u.id INNER JOIN `company-data-driven.{project_name}.program_steps` AS ps ON upsp.program_step_id = ps.id WHERE upsp.contract_id = '{st.session_state.customer_success_crm_add_contact_contract_id}' ORDER BY creation_date DESC LIMIT 5;")
+        st.write("#### Last 5 contacts)
+        st.table(previous_contacts)
+                 
         col1, col2, col3 = st.columns(3)
         with col1:
             st.write("#### Active tasks")
