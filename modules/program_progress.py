@@ -161,7 +161,7 @@ def customer_success_crm_add_contact(user_id, project_name):
         )
     if selected_program_step is not None:
         st.session_state.customer_success_crm_add_contact_step_id = step_ids[step_names.index(selected_program_step)]
-        st.session_state.customer_success_crm_add_contact_know_how = know_how[step_names.index(selected_program_step)]
+        st.session_state.customer_success_crm_add_contact_know_how = know_hows[step_names.index(selected_program_step)]
         col1, col2, col3 = st.columns(3)
         with col1:
             st.write("#### Step Know How")
