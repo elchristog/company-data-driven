@@ -94,19 +94,17 @@ def customer_success_add_program_step(user_id, project_name):
 
 
 def customer_success_crm_add_contact_execution():
-    os.write(1, '🥏 Executing posting_posts_execution \n'.encode('utf-8'))
-    if 'posting_posts_selected_idea' in st.session_state:
-        os.write(1, '- posting_posts_execution: Saving posted idea\n'.encode('utf-8'))
+    os.write(1, '🥏 Executing customer_success_crm_add_contact_execution \n'.encode('utf-8'))
+    if 'customer_success_crm_add_contact_selected_username' in st.session_state:
+        os.write(1, '- customer_success_crm_add_contact_execution: Saving CRM contact\n'.encode('utf-8'))
         st.toast("Please wait", icon = "☺️")
-        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.posting_posts_project_name}.daily_post_creation` SET posted = 1, posted_date = CURRENT_DATE(), poster_user_id = {st.session_state.posting_posts_user_id} WHERE id 0 '{st.session_state.posting_posts_selected_idea_id}'")
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.customer_success_crm_add_contact_project_name}.user_program_steps_progress` (creation_date, creator_user_id, id, program_step_id, crm_contact_description, commitment_score, contract_id) VALUES ('{st.session_state.customer_success_crm_add_contact_date_contact}', {st.session_state.customer_success_crm_add_contact_user_id}, GENERATE_UUID(), '{st.session_state.customer_success_crm_add_contact_step_id}', '{st.session_state.customer_success_crm_add_contact_contact_description}', {st.session_state.customer_success_crm_add_contact_commitment_score}, '{st.session_state.customer_success_crm_add_contact_contract_id}')")
         st.toast("Info saved!", icon = "👾")
         st.balloons()
         time.sleep(1)
         uc.run_query_half_day.clear()
-        del st.session_state.posting_posts_user_id
-        del st.session_state.posting_posts_project_name
-        del st.session_state.posting_posts_post_idea
-        del st.session_state.posting_posts_selected_idea_id 
+        del st.session_state.customer_success_crm_add_contact_user_id
+        del st.session_state.customer_success_crm_add_contact_project_name
 
 
 def customer_success_crm_add_contact(user_id, project_name):
