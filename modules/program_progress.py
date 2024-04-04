@@ -188,7 +188,7 @@ def customer_success_crm_add_contact(user_id, project_name):
     commitment_score = st.number_input('User Commitment score', key = 'customer_success_crm_add_contact_commitment_score', min_value = 0, max_value = 10, step = 1, help = "0: El usuario no tiene compromiso. 10: El usuario esta absolutamente comprometido")
 
 
-    if selected_username is not None and selected_program_step is not None and contact_description is not None:
+    if selected_username is not None and selected_program_step is not None and contact_description is not None and len(contact_description) > 10:
         st.customer_success_crm_add_contact_user_id = user_id
         st.customer_success_crm_add_contact_project_name = project_name
         customer_success_crm_add_contact_button = st.button("Create CRM contact", on_click = customer_success_crm_add_contact_execution)
