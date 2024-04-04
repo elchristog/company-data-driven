@@ -162,7 +162,7 @@ def customer_success_crm_add_contact(user_id, project_name):
 
 
 
-    rows_program_steps = uc.run_query_half_day(f"SELECT name, id, know_how, tasks, texts, days_to_complete_tasks FROM `company-data-driven.{project_name}.program_steps` WHERE id NOT IN (SELECT program_step_id FROM `company-data-driven.{project_name}.user_program_steps_progress` WHERE contract_id = '') ORDER BY order_number;")
+    rows_program_steps = uc.run_query_half_day(f"SELECT name, id, know_how, tasks, texts, days_to_complete_tasks FROM `company-data-driven.{project_name}.program_steps` WHERE id NOT IN (SELECT program_step_id FROM `company-data-driven.{project_name}.user_program_steps_progress` WHERE contract_id = '{st.session_state.customer_success_crm_add_contact_contract_id}') ORDER BY order_number;")
     step_names = []
     step_ids = []
     know_hows = []
