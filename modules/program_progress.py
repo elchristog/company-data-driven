@@ -145,14 +145,16 @@ def customer_success_crm_add_contact(user_id, project_name):
 
 
 
-    rows_program_steps = uc.run_query_half_day(f"SELECT name, id, know_how FROM `company-data-driven.{project_name}.program_steps` ORDER BY order_number;")
+    rows_program_steps = uc.run_query_half_day(f"SELECT name, id, know_how, tasks FROM `company-data-driven.{project_name}.program_steps` ORDER BY order_number;")
     step_names = []
     step_ids = []
     know_hows = []
+    taskss = []
     for row in rows_program_steps:
         step_names.append(row.get('name'))
         step_ids.append(row.get('id'))
         know_hows.append(row.get('know_how'))
+        taskss.append(row.get('tasks'))
     selected_program_step = st.selectbox(
             label = "Select the step",
             options = step_names,
@@ -162,11 +164,15 @@ def customer_success_crm_add_contact(user_id, project_name):
     if selected_program_step is not None:
         st.session_state.customer_success_crm_add_contact_step_id = step_ids[step_names.index(selected_program_step)]
         st.session_state.customer_success_crm_add_contact_know_how = know_hows[step_names.index(selected_program_step)]
+        st.session_state.customer_success_crm_add_contact_tasks = taskss[step_names.index(selected_program_step)]
+        
         col1, col2, col3 = st.columns(3)
         with col1:
             st.write("#### Step Know How")
-            st.write(st.session_state.customer_success_crm_add_contact_know_how)
             st.video(st.session_state.customer_success_crm_add_contact_know_how)
+        with col2:
+            st.write("#### Tasks to be created automatically")
+            st.video(st.session_state.customer_success_crm_add_contact_tasks)
 
 
     date_contact = st.date_input("Select the contact date", key = "customer_success_crm_add_contact_date_contact")
