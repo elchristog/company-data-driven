@@ -129,6 +129,8 @@ def customer_success_crm_add_contact(user_id, project_name):
         )
     if selected_username is not None:
         st.session_state.customer_success_crm_add_contact_selected_user_id = user_ids[usernames.index(selected_username)]
+        st.session_state.customer_success_crm_add_contact_contract_id = contract_ids[usernames.index(selected_username)]
+        
         active_tasks = uc.run_query_2_m(f"SELECT description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {st.session_state.customer_success_crm_add_contact_selected_user_id} AND status IN ('to_start', 'on_execution', 'delayed') ORDER BY commit_finish_date ASC;") #finished, canceled, unfulfilled
         finished_tasks = uc.run_query_2_m(f"SELECT description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {st.session_state.customer_success_crm_add_contact_selected_user_id} AND status = 'finished' ORDER BY commit_finish_date DESC LIMIT 5;") #finished, canceled, unfulfilled
         unfulfilled_tasks = uc.run_query_2_m(f"SELECT description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {st.session_state.customer_success_crm_add_contact_selected_user_id} AND status = 'unfulfilled' ORDER BY commit_finish_date DESC LIMIT 5;") #finished, canceled, unfulfilled
@@ -184,19 +186,16 @@ def customer_success_crm_add_contact(user_id, project_name):
     date_contact = st.date_input("Select the contact date", key = "customer_success_crm_add_contact_date_contact")
     contact_description = st.text_input('Contact description', placeholder = 'Se contacta a Alejandra entregando las credenciales de CGFNS', key = 'customer_success_crm_add_contact_contact_description')
     commitment_score = st.number_input('User Commitment score', key = 'customer_success_crm_add_contact_commitment_score', min_value = 0, max_value = 10, step = 1, help = "0: El usuario no tiene compromiso. 10: El usuario esta absolutamente comprometido")
-    
 
 
-
-    # if selected_idea is not None:
-    #     st.session_state.posting_posts_user_id = user_id
-    #     st.session_state.posting_posts_project_name = project_name
-    #     st.session_state.posting_posts_selected_idea_id = ids[ideas.index(selected_idea)]
-    #     posting_posts_button = st.button("Post published", on_click = posting_posts_execution)
+    if selected_username is not None and selected_program_step is not None:
+        st.customer_success_crm_add_contact_user_id = user_id
+        st.customer_success_crm_add_contact_project_name = project_name
+        st.session_state.customer_success_crm_add_contact_date_contact = date_contact
+        st.session_state.customer_success_crm_add_contact_contact_description = contact_description
+        st.session_state.customer_success_crm_add_contact_commitment_score = commitment_score
+        customer_success_crm_add_contact_button = st.button("Create CRM contact", on_click = customer_success_crm_add_contact_execution)
         
-    # if 'post_redaction_generation' in st.session_state:
-    #             st.write("---")
-    #             st.write(st.session_state.post_redaction_generation + " #enfermeraenestadosunidos #enfermeriaenusa #enfermerosenestadosunidos")
 
 
     
