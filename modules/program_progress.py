@@ -98,7 +98,19 @@ def customer_success_crm_add_contact_execution():
     if 'customer_success_crm_add_contact_selected_username' in st.session_state:
         os.write(1, '- customer_success_crm_add_contact_execution: Saving CRM contact\n'.encode('utf-8'))
         st.toast("Please wait", icon = "☺️")
-        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.customer_success_crm_add_contact_project_name}.user_program_steps_progress` (creation_date, creator_user_id, id, program_step_id, crm_contact_description, commitment_score, contract_id) VALUES ('{st.session_state.customer_success_crm_add_contact_date_contact}', {st.session_state.customer_success_crm_add_contact_user_id}, GENERATE_UUID(), '{st.session_state.customer_success_crm_add_contact_step_id}', '{st.session_state.customer_success_crm_add_contact_contact_description}', {st.session_state.customer_success_crm_add_contact_commitment_score}, '{st.session_state.customer_success_crm_add_contact_contract_id}')")
+        
+        # uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.customer_success_crm_add_contact_project_name}.user_program_steps_progress` (creation_date, creator_user_id, id, program_step_id, crm_contact_description, commitment_score, contract_id) VALUES ('{st.session_state.customer_success_crm_add_contact_date_contact}', {st.session_state.customer_success_crm_add_contact_user_id}, GENERATE_UUID(), '{st.session_state.customer_success_crm_add_contact_step_id}', '{st.session_state.customer_success_crm_add_contact_contact_description}', {st.session_state.customer_success_crm_add_contact_commitment_score}, '{st.session_state.customer_success_crm_add_contact_contract_id}')")
+
+        today = datetime.date.today()
+        today_str = today.strftime("%Y-%m-%d")
+        all_tasks = st.session_state.customer_success_crm_add_contact_tasks.split(",")
+        st.toast(all_tasks)
+        
+        # max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{st.session_state.customer_success_crm_add_contact_project_name}.tasks`")[0].get('max_id')
+        # uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.customer_success_crm_add_contact_project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{today_str}', '{st.session_state.task_input}', {st.session_state.selected_user_id}, '{st.session_state.commitment_date_input}', 'to_start', {st.session_state.user_id})")
+        # st.toast("Updating, please wait", icon = "☺️")
+        # st.toast('Task created! (' + st.session_state.task_input + ')', icon="😎")
+        
         st.toast("Info saved!", icon = "👾")
         st.balloons()
         time.sleep(1)
