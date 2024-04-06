@@ -162,54 +162,54 @@ def customer_success_crm_add_contact(user_id, project_name):
 
 
 
-    rows_program_steps = uc.run_query_half_day(f"SELECT name, id, know_how, tasks, texts, days_to_complete_tasks FROM `company-data-driven.{project_name}.program_steps` WHERE id NOT IN (SELECT program_step_id FROM `company-data-driven.{project_name}.user_program_steps_progress` WHERE contract_id = '{st.session_state.customer_success_crm_add_contact_contract_id}') ORDER BY order_number;")
-    step_names = []
-    step_ids = []
-    know_hows = []
-    taskss = []
-    textss = []
-    days_to_complete_taskss = []
-    for row in rows_program_steps:
-        step_names.append(row.get('name'))
-        step_ids.append(row.get('id'))
-        know_hows.append(row.get('know_how'))
-        taskss.append(row.get('tasks'))
-        textss.append(row.get('texts'))
-        days_to_complete_taskss.append(row.get('days_to_complete_tasks'))
-    selected_program_step = st.selectbox(
-            label = "Select the step",
-            options = step_names,
-            index = None,
-            key= "customer_success_crm_add_contact_selected_program_step"
-        )
-    if selected_program_step is not None:
-        st.session_state.customer_success_crm_add_contact_step_id = step_ids[step_names.index(selected_program_step)]
-        st.session_state.customer_success_crm_add_contact_know_how = know_hows[step_names.index(selected_program_step)]
-        st.session_state.customer_success_crm_add_contact_tasks = taskss[step_names.index(selected_program_step)]
-        st.session_state.customer_success_crm_add_contact_texts = textss[step_names.index(selected_program_step)]
-        st.session_state.customer_success_crm_add_contact_days_to_complete_tasks = days_to_complete_taskss[step_names.index(selected_program_step)]
-        
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.write("#### Step Know How")
-            st.video(st.session_state.customer_success_crm_add_contact_know_how)
-        with col2:
-            st.write("#### Tasks to be created automatically")
-            st.write(st.session_state.customer_success_crm_add_contact_tasks)
-        with col3:
-            st.write("#### Text to write to the user")
-            st.write(st.session_state.customer_success_crm_add_contact_texts)
-
-
-    date_contact = st.date_input("Select the contact date", key = "customer_success_crm_add_contact_date_contact")
-    contact_description = st.text_input('Contact description', placeholder = 'Se contacta a Alejandra entregando las credenciales de CGFNS', key = 'customer_success_crm_add_contact_contact_description')
-    commitment_score = st.number_input('User Commitment score', key = 'customer_success_crm_add_contact_commitment_score', min_value = 0, max_value = 10, step = 1, help = "0: El usuario no tiene compromiso. 10: El usuario esta absolutamente comprometido")
-
-
-    if selected_username is not None and selected_program_step is not None and contact_description is not None and len(contact_description) > 10:
-        st.session_state.customer_success_crm_add_contact_user_id = user_id
-        st.session_state.customer_success_crm_add_contact_project_name = project_name
-        customer_success_crm_add_contact_button = st.button("Create CRM contact", on_click = customer_success_crm_add_contact_execution)
+        rows_program_steps = uc.run_query_half_day(f"SELECT name, id, know_how, tasks, texts, days_to_complete_tasks FROM `company-data-driven.{project_name}.program_steps` WHERE id NOT IN (SELECT program_step_id FROM `company-data-driven.{project_name}.user_program_steps_progress` WHERE contract_id = '{st.session_state.customer_success_crm_add_contact_contract_id}') ORDER BY order_number;")
+        step_names = []
+        step_ids = []
+        know_hows = []
+        taskss = []
+        textss = []
+        days_to_complete_taskss = []
+        for row in rows_program_steps:
+            step_names.append(row.get('name'))
+            step_ids.append(row.get('id'))
+            know_hows.append(row.get('know_how'))
+            taskss.append(row.get('tasks'))
+            textss.append(row.get('texts'))
+            days_to_complete_taskss.append(row.get('days_to_complete_tasks'))
+        selected_program_step = st.selectbox(
+                label = "Select the step",
+                options = step_names,
+                index = None,
+                key= "customer_success_crm_add_contact_selected_program_step"
+            )
+        if selected_program_step is not None:
+            st.session_state.customer_success_crm_add_contact_step_id = step_ids[step_names.index(selected_program_step)]
+            st.session_state.customer_success_crm_add_contact_know_how = know_hows[step_names.index(selected_program_step)]
+            st.session_state.customer_success_crm_add_contact_tasks = taskss[step_names.index(selected_program_step)]
+            st.session_state.customer_success_crm_add_contact_texts = textss[step_names.index(selected_program_step)]
+            st.session_state.customer_success_crm_add_contact_days_to_complete_tasks = days_to_complete_taskss[step_names.index(selected_program_step)]
+            
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.write("#### Step Know How")
+                st.video(st.session_state.customer_success_crm_add_contact_know_how)
+            with col2:
+                st.write("#### Tasks to be created automatically")
+                st.write(st.session_state.customer_success_crm_add_contact_tasks)
+            with col3:
+                st.write("#### Text to write to the user")
+                st.write(st.session_state.customer_success_crm_add_contact_texts)
+    
+    
+        date_contact = st.date_input("Select the contact date", key = "customer_success_crm_add_contact_date_contact")
+        contact_description = st.text_input('Contact description', placeholder = 'Se contacta a Alejandra entregando las credenciales de CGFNS', key = 'customer_success_crm_add_contact_contact_description')
+        commitment_score = st.number_input('User Commitment score', key = 'customer_success_crm_add_contact_commitment_score', min_value = 0, max_value = 10, step = 1, help = "0: El usuario no tiene compromiso. 10: El usuario esta absolutamente comprometido")
+    
+    
+        if selected_username is not None and selected_program_step is not None and contact_description is not None and len(contact_description) > 10:
+            st.session_state.customer_success_crm_add_contact_user_id = user_id
+            st.session_state.customer_success_crm_add_contact_project_name = project_name
+            customer_success_crm_add_contact_button = st.button("Create CRM contact", on_click = customer_success_crm_add_contact_execution)
         
 
 
