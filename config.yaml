@@ -128,6 +128,10 @@ credentials:
       email: videoeditor@enfermeraenestadosunidos.com
       name: editor_0176
       password: $2b$12$.pxAEZaONqBvknuZf1lXn.Fd75vJmBvxMigA.GqjFl6mBQ21KUWmW
+    amesquivelc:
+      email: esquivelamanda22@gmail.com
+      name: Amanda Esquivel
+      password: $2b$12$Ln4VA9vNMRxvbaTaX2EyTuKeAfnIbRAwaKeiaEoMC6wjJDVOhlWhi
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
