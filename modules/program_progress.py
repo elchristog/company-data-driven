@@ -137,7 +137,7 @@ def customer_success_crm_add_contact(user_id, project_name):
             index = None,
             key= "customer_success_crm_add_contact_selected_username"
         )
-    if 'customer_success_crm_add_contact_selected_username' in st.session_state:
+    if 'customer_success_crm_add_contact_selected_username' in st.session_state and st.session_state.customer_success_crm_add_contact_selected_username is not None:
         st.session_state.customer_success_crm_add_contact_selected_user_id = user_ids[usernames.index(selected_username)]
         st.session_state.customer_success_crm_add_contact_contract_id = contract_ids[usernames.index(selected_username)]
         
