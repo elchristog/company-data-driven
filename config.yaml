@@ -132,6 +132,10 @@ credentials:
       email: esquivelamanda22@gmail.com
       name: Amanda Esquivel
       password: $2b$12$Ln4VA9vNMRxvbaTaX2EyTuKeAfnIbRAwaKeiaEoMC6wjJDVOhlWhi
+    lmvergaran:
+      email: myriamverni@gmail.com
+      name: Myriam Vergara
+      password: $2b$12$Qg9ptxbIeSqhm/Ywo5BCSe5vjEw946ASfmsBg8m3eWdJy5bH9AvUO
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
