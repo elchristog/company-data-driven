@@ -40,7 +40,7 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
     os.write(1, '- study_plan_execution: Creating performance table \n'.encode('utf-8'))
     st.session_state.performance_analysis = ggg.gemini_general_prompt('Actua como un asesor experto en NCLEX, analiza las respuestas usando estadisticas y muestra la respuesta siempre en una tabla', 'Ahora soy un asesor experto en NCLEX y muestro al respuesta siempre en una tabla', '[CATEGORIES]Client Needs Percentage of Items from EachCategory/SubcategorySafe and Effective Care Environment Management of Care Safety and Infection ControlHealth Promotion and Maintenance Psychosocial Integrity Physiological Integrity Basic Care and Comfort Pharmacological and Parenteral Therapies Reduction of Risk Potential Physiological Adaptation[/CATEGORIES][MY_TEST]' + str(last_user_tests) + '[/MY_TEST][INSTRUCTION]Categoriza cada una de estas 60 preguntas [MY_TEST] en su respectiva dimension [CATEGORIES] y muestrame en una tabla para cada dimension El Numero de preguntas de esa dimension, que porcentaje preguntas acerte y en que porcentaje me equivoque, mostrando una a una cada categoria y al frente el total, el porcentaje de correctas e incorrectas únicamente, a manera de tabla, recuerda que el total debe sumar las 60 preguntas, las filas son cada una de las dimensiones y las columnas son el nombre de la dimension, el total de preguntas, el porcentaje de aciertos y el procentaje de fallos (Recuerda que la persona tiene un puntaje promedio de '+str(avg_score)+'): [/INSTRUCTION]')
     st.write("Ahora transformalo en este formato de markdown, muestramelo en formato de codigo .md y aseguirate que se sienta que habla un humano y no una maquina, que sea tuteando y de forma positiva:")
-    st.write('# ' + st.session_state.study_plan_selected_username)
+    st.write('# ' + st.session_state.study_plan_selected_name + ' ' + st.session_state.study_plan_selected_lastname)
     st.write(st.session_state.performance_analysis)
 
 
@@ -58,6 +58,9 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
   del st.session_state['study_plan_project_name']
   del st.session_state['study_plan_selected_user_id']
   del st.session_state['study_plan_selected_contract_id']
+  del st.session_state['study_plan_selected_name']
+  del st.session_state['study_plan_selected_lastname']
+  
   uc.run_query_half_day.clear()
   
 
@@ -67,13 +70,17 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
 def study_plan(user_id, project_id, project_name):
   os.write(1, '🥏 Executing study_plan \n'.encode('utf-8'))
   os.write(1, '- study_plan: Retrieving users \n'.encode('utf-8'))
-  rows = uc.run_query_half_day(f"SELECT u.id, u.username, c.id as contract_id FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN `company-data-driven.global.users` AS u ON u.id = c.user_id;")
+  rows = uc.run_query_half_day(f"SELECT u.id, u.username, u.name, u.lastname, c.id as contract_id FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN `company-data-driven.global.users` AS u ON u.id = c.user_id;")
   ids = []
   usernames = []
+  names = []
+  lastnames = []
   contract_ids = []
   for row in rows:
       ids.append(row.get('id'))
       usernames.append(row.get('username'))
+      names.append(row.get('name'))
+      lastnames.append(row.get('lastname'))
       contract_ids.append(row.get('contract_id'))
 
   if 'study_plan_selected_username' not in st.session_state:
@@ -103,6 +110,9 @@ def study_plan(user_id, project_id, project_name):
       st.session_state.study_plan_project_name = project_name
       st.session_state.study_plan_selected_user_id = ids[usernames.index(selected_username)]
       st.session_state.study_plan_selected_contract_id = contract_ids[usernames.index(selected_username)]
+      st.session_state.study_plan_selected_name = names[usernames.index(selected_username)]
+      st.session_state.study_plan_selected_lastname = lastnames[usernames.index(selected_username)]
+    
     
       study_plan_button = st.button("Create Study plan", on_click = study_plan_execution, args = [st.session_state.study_plan_selected_username, st.session_state.study_plan_user_id, st.session_state.study_plan_project_id, st.session_state.study_plan_project_name, st.session_state.study_plan_selected_user_id, st.session_state.study_plan_selected_contract_id])
 
