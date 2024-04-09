@@ -322,7 +322,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
         if menu == "Customer success":
-            sub_menu_options=['CRM']
+            sub_menu_options=['CRM', 'Study plan']
             if role_id == 1:
                 sub_menu_options.extend(['Add program step'])
             sub_menu = st.sidebar.radio('Customer success options', options = sub_menu_options)
@@ -330,9 +330,13 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph("CRM" + project_icon, "Seguimiento del contacto a clientes", "h3", 0)
                 pp.users_to_contact(project_name)
                 pp.customer_success_crm_add_contact(user_id, project_name)
+            if sub_menu == "Study plan":
+                tap.title_and_paragraph("Plan de estudio" + project_icon, "Creacion del plan de estudio", "h3", 0)
+                s4np.study_plan(user_id, project_id, project_name)
             if sub_menu == "Add program step":
                 tap.title_and_paragraph("Add program step" + project_icon, "Agregar pasos al programa", "h3", 0)
                 pp.customer_success_add_program_step(user_id, project_name)
+            
 
 
 
