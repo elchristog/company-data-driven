@@ -53,6 +53,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 menu_options = ["Home", "Traffic", "Click bitly Whatsapp", "Whatsapp", "Click bitly Groupal session", "Groupal session", "Remarketing", "Contract", "Contract Remarketing", "Contract Payments", "Web App", "Customer success", "Step1: Inicio del programa", "Step2: Trámite de documentos", "Step3: Inscripción ante la Junta de Enfermería", "Step4: Preparación NCLEX", "Step5: Preparación de inglés", "Step6: Entrevistas de trabajo", "Step7: Visa Screen", "Step8: Trámite NVC", "Step9: Trámite embajada", "Step10: Vida en estados Unidos", 'Users Admin', "AI questions"]
             if user_id == 2: #flaca
                 menu_options = ["Home", "Traffic", "AI questions"]
+            if user_id == 36: #andres
+                menu_options = ["Home", "Traffic"]
             if user_id == 19: #bingley
                 menu_options = ["Home", "Whatsapp", "Groupal session", "Contract", "AI questions"]
             if user_id == 9: #santiago
@@ -94,6 +96,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 sub_menu_options=['Traffic', 'SEO ideation', 'Video creation', 'Video edition', 'Video uploading', 'Video to shorts', 'Web creation', 'Post idea creation', 'Posting posts', 'Post to web']
             if user_id == 2: #flaca
                 sub_menu_options=['Traffic', 'Video creation', 'Post idea creation']
+            if user_id == 36: #andres
+                sub_menu_options = ['Video creation']
             if user_id == 31: #trafficker 01 - juancho
                 sub_menu_options = ["Traffic", "SEO ideation", 'Video uploading', 'Video to shorts', 'Web creation', 'Posting posts', 'Post to web']
             if user_id == 33: #editor_0176 - cesar
