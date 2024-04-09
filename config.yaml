@@ -136,6 +136,10 @@ credentials:
       email: myriamverni@gmail.com
       name: Myriam Vergara
       password: $2b$12$Qg9ptxbIeSqhm/Ywo5BCSe5vjEw946ASfmsBg8m3eWdJy5bH9AvUO
+    jacruzr_eeeu:
+      email: javierandrescruz01@gmail.com
+      name: Andres Cruz
+      password: $2b$12$o5ooT1q..xhismvyF1uk.enTuEqeRMRqkgzSrcfc8sw826aJxNETa
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
