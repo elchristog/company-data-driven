@@ -342,7 +342,17 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph("Plan de estudio" + project_icon, "Creacion del plan de estudio", "h3", 0)
                 s4np.study_plan(user_id, project_id, project_name)
                 st.write("---")
+                st.write("### Lider de customer success")
                 st.video("https://www.youtube.com/watch?v=XhRcb0eFnNI")
+                st.write("---")
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.write("#### Inicio del programa")
+                    st.video("https://www.youtube.com/watch?v=yx8Dyk68MKk")
+                with col2:
+                    st.write("#### User credentials")
+                    st.video("https://www.youtube.com/watch?v=ChAMEAnXSi8")
+                    
             if sub_menu == "Add program step":
                 tap.title_and_paragraph("Add program step" + project_icon, "Agregar pasos al programa", "h3", 0)
                 pp.customer_success_add_program_step(user_id, project_name)
