@@ -140,7 +140,7 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
     
     st.write("Ahora transformalo en este formato de markdown incluyendo las tablas, muestramelo en formato de codigo .md y aseguirate que se sienta que habla un humano y no una maquina, que sea tuteando y de forma positiva:")
     st.write('# ' + st.session_state.study_plan_selected_name + ' ' + st.session_state.study_plan_selected_lastname + ': Enfermera en Estados Unidos')
-    st.write(st.session_state.performance_analysis)
+    st.table(st.session_state.performance_analysis)
 
 
     os.write(1, '- study_plan_execution: Creating study plan \n'.encode('utf-8'))
