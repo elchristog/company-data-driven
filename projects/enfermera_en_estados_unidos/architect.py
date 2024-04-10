@@ -64,7 +64,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if user_id == 33: #editor_0176 - cesar
                 menu_options = ["Home", "Traffic"]
             if user_id == 37: #gineth
-                menu_options = ["Home", "Customer success", "AI questions"]
+                menu_options = ["Home", "Contract", "Customer success", "AI questions"]
             #------ Menu according to each user-----------
 
           
@@ -266,7 +266,15 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
         if menu == "Contract":
-            sub_menu_options=['Contracts', 'Add new CRM contact', 'Add new contract', 'Contact guide']
+            #------ Sub Menu according to each user-----------
+            if user_id == 1: #chris
+                sub_menu_options=['Contracts', 'Add new CRM contact', 'Add new contract', 'Contact guide']
+            if user_id == 19: #bingley
+                sub_menu_options = ['Contracts', 'Add new CRM contact']
+            if user_id == 37: #gineth
+                sub_menu_options = ['Add new contract']
+            #------ Sub Menu according to each user-----------
+            
             if role_id == 1:
                 sub_menu_options.extend(['Something else'])
             sub_menu = st.sidebar.radio('Contract options', options = sub_menu_options)
