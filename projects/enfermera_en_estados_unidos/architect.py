@@ -63,6 +63,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 menu_options = ["Home", "Traffic"]
             if user_id == 33: #editor_0176 - cesar
                 menu_options = ["Home", "Traffic"]
+            if user_id == 37: #gineth
+                menu_options = ["Home", "Customer success", "AI questions"]
             #------ Menu according to each user-----------
 
           
