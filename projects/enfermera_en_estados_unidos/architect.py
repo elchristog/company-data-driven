@@ -337,13 +337,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 pp.users_to_contact(project_name)
                 pp.customer_success_crm_add_contact(user_id, project_name)
                 st.write("---")
-                st.video("https://youtu.be/AUa0Mxfb4hE")
-            if sub_menu == "Study plan":
-                tap.title_and_paragraph("Plan de estudio" + project_icon, "Creacion del plan de estudio", "h3", 0)
-                s4np.study_plan(user_id, project_id, project_name)
-                st.write("---")
                 st.write("### Lider de customer success")
-                st.video("https://www.youtube.com/watch?v=XhRcb0eFnNI")
+                st.video("https://youtu.be/AUa0Mxfb4hE")
                 st.write("---")
                 col1, col2 = st.columns(2)
                 with col1:
@@ -352,6 +347,12 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 with col2:
                     st.write("#### User credentials")
                     st.video("https://www.youtube.com/watch?v=ChAMEAnXSi8")
+            if sub_menu == "Study plan":
+                tap.title_and_paragraph("Plan de estudio" + project_icon, "Creacion del plan de estudio", "h3", 0)
+                s4np.study_plan(user_id, project_id, project_name)
+                st.write("---")
+                st.video("https://www.youtube.com/watch?v=XhRcb0eFnNI")
+                
                     
             if sub_menu == "Add program step":
                 tap.title_and_paragraph("Add program step" + project_icon, "Agregar pasos al programa", "h3", 0)
