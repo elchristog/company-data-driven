@@ -336,7 +336,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
         if menu == "Customer success":
-            sub_menu_options=['CRM', 'Study plan']
+            sub_menu_options=['CRM', 'Study plan', 'Cv creation']
             if role_id == 1:
                 sub_menu_options.extend(['Add program step'])
             sub_menu = st.sidebar.radio('Customer success options', options = sub_menu_options)
@@ -360,6 +360,9 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 s4np.study_plan(user_id, project_id, project_name)
                 st.write("---")
                 st.video("https://www.youtube.com/watch?v=XhRcb0eFnNI")
+            if sub_menu == "Cv creation":
+                tap.title_and_paragraph("Cv creation" + project_icon, "Creacion del resumee", "h3", 0)
+                s1ps.cv_creation_guide()
                 
                     
             if sub_menu == "Add program step":
@@ -388,28 +391,6 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 s1ps.cv_creation_guide()
 
 
-
-
-
-
-        if menu == "Step3: Inscripción ante la Junta de Enfermería":
-            sub_menu_options=['CGFNS guide']
-            if role_id == 1:
-                sub_menu_options.extend(['Something'])
-            sub_menu = st.sidebar.radio('Step3 options', options = sub_menu_options)
-            if sub_menu == "CGFNS guide":
-                tap.title_and_paragraph("Guia de registro" + project_icon, "Registro ante la junta de enfermeria CGFNS", "h3", 0)
-                s3nbr.cgfns_video_guide()
-
-
-        if menu == "Step4: Preparación NCLEX":
-            sub_menu_options=['Study plan']
-            if role_id == 1:
-                sub_menu_options.extend(['Something'])
-            sub_menu = st.sidebar.radio('Step3 options', options = sub_menu_options)
-            if sub_menu == "Study plan":
-                tap.title_and_paragraph("Plan de estudio" + project_icon, "Creacion del plan de estudio", "h3", 0)
-                s4np.study_plan(user_id, project_id, project_name)
 
 
         
