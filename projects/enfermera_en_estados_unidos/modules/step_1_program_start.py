@@ -52,6 +52,8 @@ def babbel_english_text_guide():
 
 def cv_creation_guide():
     st.markdown('''
+    [Descargar](https://drive.google.com/uc?export=download&id=1bvoaWduRqa7EdOV5dRpOo8YMmb_LhclZ)
+    
     [RESUME]  [/RESUME]
 
     [Linkedn url]  [/Linkedn url]
