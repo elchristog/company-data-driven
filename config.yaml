@@ -144,6 +144,14 @@ credentials:
       email: sbinny1985@hotmail.com
       name: Ginneth Lovera
       password: $2b$12$oU13q6L4m5X9NYrkERONNu95HgDHCTVnMsZmV6MCXVQ7YEOtlQmiW
+    jasotog:
+      email: julianitasogo@gmail.com
+      name: Juliana Soto
+      password: $2b$12$0eFGw.5AZ6r50PDVLdDni.mzRmVwpjLUuRXnpNvJRyxlcnHA2kmPK
+    mmayangaf:
+      email: meri.mf3092@gmail.com
+      name: Merilin Mayanga
+      password: $2b$12$1S3zbFUIJ7Jd34jUPOHsieT5Zuvxox9dSlyLIYG3YPmy528t3h1k2
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
