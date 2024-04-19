@@ -347,13 +347,17 @@ def post_idea_creation_execution():
         if len(st.session_state.post_idea_creation_post_idea) < 20:
             st.toast("To short!", icon = "🤡")
         else:
-            os.write(1, '- video_creation_execution: Saving created idea\n'.encode('utf-8'))
-            st.toast("Please wait", icon = "☺️")
-            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.post_idea_creation_project_name}.daily_post_creation` (id, creation_date, creator_user_id, idea) VALUES (GENERATE_UUID(), CURRENT_DATE(), {st.session_state.post_idea_creation_user_id}, '{st.session_state.post_idea_creation_post_idea}')")
-            st.toast("Info saved!", icon = "👾")
-            st.balloons()
-            time.sleep(1)
-            uc.run_query_2_m.clear()
+            idea_already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.{st.session_state.post_idea_creation_project_name}.daily_post_creation` WHERE idea = '{st.session_state.post_idea_creation_post_idea}';")
+            if len(idea_already_created) > 0:
+                st.toast('Idea prevoiusly saved')
+            else:
+                os.write(1, '- video_creation_execution: Saving created idea\n'.encode('utf-8'))
+                st.toast("Please wait", icon = "☺️")
+                uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.post_idea_creation_project_name}.daily_post_creation` (id, creation_date, creator_user_id, idea) VALUES (GENERATE_UUID(), CURRENT_DATE(), {st.session_state.post_idea_creation_user_id}, '{st.session_state.post_idea_creation_post_idea}')")
+                st.toast("Info saved!", icon = "👾")
+                st.balloons()
+                time.sleep(1)
+                uc.run_query_2_m.clear()
             del st.session_state.post_idea_creation_user_id
             del st.session_state.post_idea_creation_project_name
             del st.session_state.post_idea_creation_post_idea
