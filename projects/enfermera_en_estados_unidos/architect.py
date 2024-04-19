@@ -218,7 +218,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 wls.wsp_answer_text(project_id)
             if sub_menu == "Fix phone number":
                 tap.title_and_paragraph("Fix phone number" + project_icon, "Corregir número de telúfono", "h3", 0)
-                st.success(En desarrollo")
+                st.success("En desarrollo")
                 wls.fix_phone_number(user_id, project_name)
 
 
