@@ -217,6 +217,55 @@ def whatsapp_leads_creation(user_id, project_name):
 
 
 
+
+def fix_phone_number_execution():
+    os.write(1, '🥏 Executing fix_phone_number_execution \n'.encode('utf-8'))
+    # if 'posting_posts_selected_idea' in st.session_state:
+    #     os.write(1, '- posting_posts_execution: Saving posted idea\n'.encode('utf-8'))
+    #     st.toast("Please wait", icon = "☺️")
+    #     uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.posting_posts_project_name}.daily_post_creation` SET posted = 1, posted_date = CURRENT_DATE(), poster_user_id = {st.session_state.posting_posts_user_id} WHERE id = '{st.session_state.posting_posts_selected_idea_id}'")
+    #     st.toast("Info saved!", icon = "👾")
+    #     st.balloons()
+    #     time.sleep(1)
+    #     uc.run_query_half_day.clear()
+    #     del st.session_state.posting_posts_user_id
+    #     del st.session_state.posting_posts_project_name
+    #     del st.session_state.posting_posts_post_idea
+    #     del st.session_state.posting_posts_selected_idea_id 
+
+def fix_phone_number(user_id, project_name):
+    os.write(1, '🥏 Executing fix_phone_number \n'.encode('utf-8'))
+    os.write(1, '- fix_phone_number: Showing form \n'.encode('utf-8'))
+    
+    os.write(1, '- fix_phone_number: Listing phones \n'.encode('utf-8'))
+    rows = uc.run_query_instant(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
+    # ids = []
+    # full_phone_numbers = []
+    # for row in rows:
+    #     ideas.append(row.get('idea'))
+    #     ids.append(row.get('id'))
+    # selected_idea = st.selectbox(
+    #         label = "Select the idea",
+    #         options = ideas,
+    #         index = None,
+    #         key= "posting_posts_selected_idea",
+    #         on_change = post_redaction_generation
+    #     )
+
+    # if selected_idea is not None:
+    #     st.session_state.posting_posts_user_id = user_id
+    #     st.session_state.posting_posts_project_name = project_name
+    #     st.session_state.posting_posts_selected_idea_id = ids[ideas.index(selected_idea)]
+    #     posting_posts_button = st.button("Post published", on_click = posting_posts_execution)
+        
+    # if 'post_redaction_generation' in st.session_state:
+    #             st.write("---")
+    #             st.write(st.session_state.post_redaction_generation + " #enfermeraenestadosunidos #enfermeriaenusa #enfermerosenestadosunidos")
+
+
+
+
+
 def wsp_answer_text(project_id):
     if project_id == 1:
         st.write('---')
