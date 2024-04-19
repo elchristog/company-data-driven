@@ -43,7 +43,7 @@ def seo_ideation_execution(project_name, project_keyword, user_id, role_id, text
 def seo_ideation(project_name, project_keyword, user_id, role_id):
     os.write(1, '🥏 Executing seo_ideation \n'.encode('utf-8'))
     os.write(1, '- seo_ideation: Counting previuos ideas\n'.encode('utf-8'))
-    available_contents = uc.run_query_30_m(f"SELECT COUNT(*) AS available_contents FROM `company-data-driven.{project_name}.content_creation` WHERE created_video IS NULL OR created_video = 0;")[0].get('available_contents') 
+    available_contents = uc.run_query_instant(f"SELECT COUNT(*) AS available_contents FROM `company-data-driven.{project_name}.content_creation` WHERE created_video IS NULL OR created_video = 0;")[0].get('available_contents') 
     if available_contents < 10:
         st.error(f"I need more contents! I just have: {available_contents}", icon = "🤬")
     else:
@@ -93,7 +93,7 @@ def video_creation_execution():
 def video_creation(user_id, project_name):
     os.write(1, '🥏 Executing video_creation \n'.encode('utf-8'))
     os.write(1, '- video_creation: Listing ideas \n'.encode('utf-8'))
-    rows = uc.run_query_2_m(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE created_video IS NULL OR created_video = 0 ORDER BY creation_date;")
+    rows = uc.run_query_instant(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE created_video IS NULL OR created_video = 0 ORDER BY creation_date;")
     ideas = []
     ids = []
     for row in rows:
@@ -139,7 +139,7 @@ def video_edition_execution():
 def video_edition(user_id, project_name):
     os.write(1, '🥏 Executing video_edition \n'.encode('utf-8'))
     os.write(1, '- video_edition: Listing ideas \n'.encode('utf-8'))
-    rows = uc.run_query_2_m(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NULL OR edited_video = 0) ORDER BY creation_date;")
+    rows = uc.run_query_instant(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NULL OR edited_video = 0) ORDER BY creation_date;")
     ideas = []
     ids = []
     for row in rows:
@@ -188,7 +188,7 @@ def video_title_description_generation():
 def video_uploading(user_id, project_name):
     os.write(1, '🥏 Executing video_uploading \n'.encode('utf-8'))
     os.write(1, '- video_uploading: Listing ideas \n'.encode('utf-8'))
-    rows = uc.run_query_2_m(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NOT NULL OR edited_video != 0) AND (video_uploaded IS NULL OR video_uploaded = 0) ORDER BY creation_date;")
+    rows = uc.run_query_instant(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NOT NULL OR edited_video != 0) AND (video_uploaded IS NULL OR video_uploaded = 0) ORDER BY creation_date;")
     ideas = []
     ids = []
     for row in rows:
@@ -242,7 +242,7 @@ def short_title_description_generation():
 def video_to_shorts(user_id, project_name):
     os.write(1, '🥏 Executing video_to_shorts \n'.encode('utf-8'))
     os.write(1, '- video_to_shorts: Listing ideas \n'.encode('utf-8'))
-    rows = uc.run_query_2_m(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NOT NULL OR edited_video != 0) AND (video_uploaded IS NOT NULL OR video_uploaded != 0) AND (video_shorts_created IS NULL OR video_shorts_created = 0) ORDER BY creation_date;")
+    rows = uc.run_query_instant(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NOT NULL OR edited_video != 0) AND (video_uploaded IS NOT NULL OR video_uploaded != 0) AND (video_shorts_created IS NULL OR video_shorts_created = 0) ORDER BY creation_date;")
     ideas = []
     ids = []
     for row in rows:
@@ -309,7 +309,7 @@ def web_writing_generation():
 def web_writing(user_id, project_name):
     os.write(1, '🥏 Executing web_writing \n'.encode('utf-8'))
     os.write(1, '- web_writing: Listing ideas \n'.encode('utf-8'))
-    rows = uc.run_query_2_m(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NOT NULL OR edited_video != 0) AND (video_uploaded IS NOT NULL OR video_uploaded != 0) AND (video_shorts_created IS NOT NULL OR video_shorts_created != 0) AND (web_created IS NULL OR web_created = 0) ORDER BY creation_date;")
+    rows = uc.run_query_instant(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NOT NULL OR edited_video != 0) AND (video_uploaded IS NOT NULL OR video_uploaded != 0) AND (video_shorts_created IS NOT NULL OR video_shorts_created != 0) AND (web_created IS NULL OR web_created = 0) ORDER BY creation_date;")
     ideas = []
     ids = []
     for row in rows:
@@ -367,7 +367,7 @@ def post_idea_creation_execution():
 def post_idea_creation(user_id, project_name):
     os.write(1, '🥏 Executing post_idea_creation \n'.encode('utf-8'))
     os.write(1, '- post_idea_creation: Showing form \n'.encode('utf-8'))
-    count_active_ideas = uc.run_query_2_m(f"SELECT COUNT(*) AS count_active_ideas FROM `company-data-driven.{project_name}.daily_post_creation` WHERE posted IS NULL OR posted = 0;")[0].get("count_active_ideas")
+    count_active_ideas = uc.run_query_instant(f"SELECT COUNT(*) AS count_active_ideas FROM `company-data-driven.{project_name}.daily_post_creation` WHERE posted IS NULL OR posted = 0;")[0].get("count_active_ideas")
     
     if count_active_ideas < 10:
         st.error(f"I need more ideas! I just have: {count_active_ideas}", icon = "🤬")
@@ -409,7 +409,7 @@ def post_redaction_generation():
 def posting_posts(user_id, project_name):
     os.write(1, '🥏 Executing posting_posts \n'.encode('utf-8'))
     os.write(1, '- posting_posts: Showing form \n'.encode('utf-8'))
-    count_active_ideas = uc.run_query_2_m(f"SELECT COUNT(*) AS count_active_ideas FROM `company-data-driven.{project_name}.daily_post_creation` WHERE posted IS NULL OR posted = 0;")[0].get("count_active_ideas")
+    count_active_ideas = uc.run_query_instant(f"SELECT COUNT(*) AS count_active_ideas FROM `company-data-driven.{project_name}.daily_post_creation` WHERE posted IS NULL OR posted = 0;")[0].get("count_active_ideas")
     if count_active_ideas < 10:
         st.error(f"I need more ideas! I just have: {count_active_ideas}", icon = "🤬")
     else:
@@ -469,7 +469,7 @@ def post_to_web(user_id, project_name, project_keyword):
     st.session_state.post_to_web_project_keyword = project_keyword
     os.write(1, '🥏 Executing post_to_web \n'.encode('utf-8'))
     os.write(1, '- post_to_web: Listing ideas \n'.encode('utf-8'))
-    rows = uc.run_query_2_m(f"SELECT id, idea FROM `company-data-driven.{project_name}.daily_post_creation` WHERE (posted IS NOT NULL OR posted != 0) AND (web_created IS NULL OR web_created = 0)  ORDER BY creation_date;")
+    rows = uc.run_query_instant(f"SELECT id, idea FROM `company-data-driven.{project_name}.daily_post_creation` WHERE (posted IS NOT NULL OR posted != 0) AND (web_created IS NULL OR web_created = 0)  ORDER BY creation_date;")
     ideas = []
     ids = []
     for row in rows:
