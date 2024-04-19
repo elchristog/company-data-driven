@@ -217,7 +217,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 st.success("Recordar crear el lead en la plataforma, etiquetar el lead en Whatsapp, guardar el contacto con el nombre de la persona")
                 wls.wsp_answer_text(project_id)
             if sub_menu == "Fix phone number":
-                tap.title_and_paragraph("Fix phone number" + project_icon, "Corregir número de telúfono", "h3", 0)
+                tap.title_and_paragraph("Fix phone number" + project_icon, "Corregir número de teléfono", "h3", 0)
                 st.success("En desarrollo")
                 wls.fix_phone_number(user_id, project_name)
 
