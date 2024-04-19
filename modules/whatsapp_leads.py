@@ -240,18 +240,17 @@ def fix_phone_number(user_id, project_name):
     
     os.write(1, '- fix_phone_number: Listing phones \n'.encode('utf-8'))
     rows = uc.run_query_instant(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
-    # ids = []
-    # full_phone_numbers = []
-    # for row in rows:
-    #     ideas.append(row.get('idea'))
-    #     ids.append(row.get('id'))
-    # selected_idea = st.selectbox(
-    #         label = "Select the idea",
-    #         options = ideas,
-    #         index = None,
-    #         key= "posting_posts_selected_idea",
-    #         on_change = post_redaction_generation
-    #     )
+    ids = []
+    full_phone_numbers = []
+    for row in rows:
+        ids.append(row.get('id'))
+        full_phone_numbers.append(row.get('full_phone_number'))
+    selected_phone_number = st.selectbox(
+            label = "Select the phone number to fix",
+            options = full_phone_numbers,
+            index = None,
+            key= "fix_phone_number_selected_phone_number"
+        )
 
     # if selected_idea is not None:
     #     st.session_state.posting_posts_user_id = user_id
