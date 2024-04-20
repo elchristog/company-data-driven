@@ -256,8 +256,8 @@ def fix_phone_number(user_id, project_name):
         st.session_state.fix_phone_number_user_id = user_id
         st.session_state.fix_phone_number_project_name = project_name
         st.session_state.fix_phone_number_selected_phone_number_id = ids[full_phone_numbers.index(selected_phone_number)]
-        
-        fix_phone_number_button = st.button("Opdate phone number", on_click = fix_phone_number_execution)
+        st.text_input('New Phone Indicator', placeholder = '51', key = 'fix_phone_number_phone_indicator')
+        fix_phone_number_button = st.button("Update phone number", on_click = fix_phone_number_execution)
         
 
 
