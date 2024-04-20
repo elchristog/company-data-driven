@@ -252,15 +252,13 @@ def fix_phone_number(user_id, project_name):
             key= "fix_phone_number_selected_phone_number"
         )
 
-    # if selected_idea is not None:
-    #     st.session_state.posting_posts_user_id = user_id
-    #     st.session_state.posting_posts_project_name = project_name
-    #     st.session_state.posting_posts_selected_idea_id = ids[ideas.index(selected_idea)]
-    #     posting_posts_button = st.button("Post published", on_click = posting_posts_execution)
+    if selected_phone_number is not None:
+        st.session_state.fix_phone_number_user_id = user_id
+        st.session_state.fix_phone_number_project_name = project_name
+        st.session_state.fix_phone_number_selected_phone_number_id = ids[full_phone_numbers.index(selected_phone_number)]
         
-    # if 'post_redaction_generation' in st.session_state:
-    #             st.write("---")
-    #             st.write(st.session_state.post_redaction_generation + " #enfermeraenestadosunidos #enfermeriaenusa #enfermerosenestadosunidos")
+        fix_phone_number_button = st.button("Opdate phone number", on_click = fix_phone_number_execution)
+        
 
 
 
