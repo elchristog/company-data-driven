@@ -221,21 +221,24 @@ def whatsapp_leads_creation(user_id, project_name):
 
 def fix_phone_number_execution():
     os.write(1, '🥏 Executing fix_phone_number_execution \n'.encode('utf-8'))
-    if 'fix_phone_number_phone_number_confirmation' in st.session_state:
-        os.write(1, '- fix_phone_number_execution: Updating phone number\n'.encode('utf-8'))
-        st.toast("Please wait", icon = "☺️")
-        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.fix_phone_number_project_name}.traffic_analytics_whatsapp_leads` SET phone_indicator = '{st.session_state.fix_phone_number_phone_indicator}', phone_number = '{st.session_state.fix_phone_number_phone_number}' WHERE id = '{st.session_state.fix_phone_number_selected_phone_number_id}';")
-        st.toast("Info saved!", icon = "👾")
-        st.balloons()
-        time.sleep(1)
-        uc.run_query_half_day.clear()
-        del st.session_state.fix_phone_number_selected_phone_number
-        del st.session_state.fix_phone_number_user_id
-        del st.session_state.fix_phone_number_project_name
-        del st.session_state.fix_phone_number_selected_phone_number_id
-        del st.session_state.fix_phone_number_phone_indicator
-        del st.session_state.fix_phone_number_phone_number 
-        del st.session_state.fix_phone_number_phone_number_confirmation 
+    if 'fix_phone_number_selected_phone_number' in st.session_state:
+        if st.session_state.fix_phone_number_selected_phone_number:
+            os.write(1, '- fix_phone_number_execution: Updating phone number\n'.encode('utf-8'))
+            st.toast("Please wait", icon = "☺️")
+            uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.fix_phone_number_project_name}.traffic_analytics_whatsapp_leads` SET phone_indicator = '{st.session_state.fix_phone_number_phone_indicator}', phone_number = '{st.session_state.fix_phone_number_phone_number}' WHERE id = '{st.session_state.fix_phone_number_selected_phone_number_id}';")
+            st.toast("Info saved!", icon = "👾")
+            st.balloons()
+            time.sleep(1)
+            uc.run_query_half_day.clear()
+            del st.session_state.fix_phone_number_selected_phone_number
+            del st.session_state.fix_phone_number_user_id
+            del st.session_state.fix_phone_number_project_name
+            del st.session_state.fix_phone_number_selected_phone_number_id
+            del st.session_state.fix_phone_number_phone_indicator
+            del st.session_state.fix_phone_number_phone_number 
+            del st.session_state.fix_phone_number_phone_number_confirmation 
+        else:
+            st.toast('Need confirmation', icon = '🧐')
         
 
 def fix_phone_number(user_id, project_name):
