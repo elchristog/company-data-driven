@@ -258,6 +258,7 @@ def fix_phone_number(user_id, project_name):
         st.session_state.fix_phone_number_selected_phone_number_id = ids[full_phone_numbers.index(selected_phone_number)]
         st.text_input('New Phone Indicator', placeholder = '51', key = 'fix_phone_number_phone_indicator', help = 'No spaces or symbols')
         st.text_input('New Phone Number', placeholder = '3138533246', key = 'fix_phone_number_phone_number', help = 'No spaces or symbols')
+        st.checkbox("The new phone number is right", key="fix_phone_number_phone_number_confirmation")
         fix_phone_number_button = st.button("Update phone number", on_click = fix_phone_number_execution)
         
 
