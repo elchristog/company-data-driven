@@ -152,6 +152,10 @@ credentials:
       email: meri.mf3092@gmail.com
       name: Merilin Mayanga
       password: $2b$12$1S3zbFUIJ7Jd34jUPOHsieT5Zuvxox9dSlyLIYG3YPmy528t3h1k2
+    eapereda:
+      email: erikprogrem@gmail.com
+      name: Erik Pereda
+      password: $2b$12$X6l5dZFQ/dawpXkuAeIbHOc1qWBnjaGky7Dj9AtuZR8afNWQ5D9MC
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
