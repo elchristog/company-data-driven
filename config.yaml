@@ -156,6 +156,10 @@ credentials:
       email: erikprogrem@gmail.com
       name: Erik Pereda
       password: $2b$12$X6l5dZFQ/dawpXkuAeIbHOc1qWBnjaGky7Dj9AtuZR8afNWQ5D9MC
+    dflefio:
+      email: df.lefio@gmail.com
+      name: Daniela Lefio
+      password: $2b$12$Umr6fMTef1pjLhQ5F8z5C.z/qJpyzhWuWlKZ0Sm98qIMHSNOY2OKO
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
