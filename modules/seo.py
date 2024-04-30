@@ -96,7 +96,7 @@ def video_creation(user_id, project_name):
     if num_videos_to_edit >= 10:
         st.error("We don't need any more videos right now.", icon="🫠")
     else:
-        st.error("We need " + 10 - num_videos_to_edit + " more videos right now.", icon="🤓")
+        st.error(f"We need {10 - num_videos_to_edit} more videos right now.", icon="🤓")
         os.write(1, '- video_creation: Listing ideas \n'.encode('utf-8'))
         rows = uc.run_query_instant(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE created_video IS NULL OR created_video = 0 ORDER BY creation_date;")
         ideas = []
