@@ -93,27 +93,28 @@ def video_creation_execution():
 def video_creation(user_id, project_name):
     os.write(1, '🥏 Executing video_creation \n'.encode('utf-8'))
     num_videos_to_edit = uc.run_query_instant(f"SELECT COUNT(id) AS queue FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NULL OR edited_video = 0);")[0].get('queue')
-    st.success(num_videos_to_edit)
-
-    
-    os.write(1, '- video_creation: Listing ideas \n'.encode('utf-8'))
-    rows = uc.run_query_instant(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE created_video IS NULL OR created_video = 0 ORDER BY creation_date;")
-    ideas = []
-    ids = []
-    for row in rows:
-        ideas.append(row.get('idea'))
-        ids.append(row.get('id'))
-    selected_idea = st.selectbox(
-            label = "Select the idea",
-            options = ideas,
-            index = None,
-            key= "video_creation_selected_idea"
-        )
-    if selected_idea is not None:
-        st.session_state.video_creation_selected_idea_id = ids[ideas.index(selected_idea)]
-        st.session_state.video_creation_user_id = user_id
-        st.session_state.video_creation_project_name = project_name
-        created_video_button = st.button("I already created this video", on_click = video_creation_execution)
+    if num_videos_to_edit >= 10:
+        st.error("We don't need any more videos right now.", icon="🫠")
+    else:
+        st.error("We need " + 10 - num_videos_to_edit + " more videos right now.", icon="🤓")
+        os.write(1, '- video_creation: Listing ideas \n'.encode('utf-8'))
+        rows = uc.run_query_instant(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE created_video IS NULL OR created_video = 0 ORDER BY creation_date;")
+        ideas = []
+        ids = []
+        for row in rows:
+            ideas.append(row.get('idea'))
+            ids.append(row.get('id'))
+        selected_idea = st.selectbox(
+                label = "Select the idea",
+                options = ideas,
+                index = None,
+                key= "video_creation_selected_idea"
+            )
+        if selected_idea is not None:
+            st.session_state.video_creation_selected_idea_id = ids[ideas.index(selected_idea)]
+            st.session_state.video_creation_user_id = user_id
+            st.session_state.video_creation_project_name = project_name
+            created_video_button = st.button("I already created this video", on_click = video_creation_execution)
 
 
 
