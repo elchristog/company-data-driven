@@ -528,7 +528,11 @@ def days_since_last_content(project_name):
     if len(days_since_last_content_created) < 1:
         st.warning("Waiting for data", icon = "😴")
     else:
-        days_since = days_since_last_content_created[0].get("days_since_last_content")
+        num_videos_to_edit = uc.run_query_instant(f"SELECT COUNT(id) AS queue FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NULL OR edited_video = 0);")[0].get('queue')
+        if num_videos_to_edit >= 10:
+            days_since = 0
+        else:
+            days_since = days_since_last_content_created[0].get("days_since_last_content")
         if days_since < 4:
             st.success(f"Days since last content (Video-web): {days_since}", icon = "😎")
         if days_since >= 4 and days_since < 6:
