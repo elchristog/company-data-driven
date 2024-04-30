@@ -129,7 +129,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
             if sub_menu == "Video creation":
                 tap.title_and_paragraph("Creacion de video" + project_icon, "Marcar videos que: 1- ya he grabado, 2- subido a la carpeta de drive (https://drive.google.com/drive/folders/1cokJTOqm9O8O0AUWa1H7C7ws4-OoCtB-?usp=sharing) y 3- he notificado en el grupo de Whatsapp que ya esta para editar", "h3", 0)
-                st.info("Requisitos: El video grabado no puede durar mas de 30 min, Debe responder la intencion de busqueda de inmediato, debe exportarse y cargarse en formato .mp4")
+                st.info("Requisitos: El video grabado no puede durar mas de 30 min, Debe responder la intencion de busqueda de inmediato, debe exportarse y cargarse en formato .mp4, En lo posible que sea solo la cara y hablando a camara y el material de apoyu subirse junto con el video")
                 seo.video_creation(user_id, project_name)
                 st.write("---")
                 st.video("https://youtu.be/qofhInXuLQY")
