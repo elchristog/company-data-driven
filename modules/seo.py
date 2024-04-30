@@ -92,6 +92,10 @@ def video_creation_execution():
 
 def video_creation(user_id, project_name):
     os.write(1, '🥏 Executing video_creation \n'.encode('utf-8'))
+    num_videos_to_edit = uc.run_query_instant(f"SELECT COUNT(id) AS queue FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NULL OR edited_video = 0);")[0].get('queue')
+    st.success(num_videos_to_edit)
+
+    
     os.write(1, '- video_creation: Listing ideas \n'.encode('utf-8'))
     rows = uc.run_query_instant(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE created_video IS NULL OR created_video = 0 ORDER BY creation_date;")
     ideas = []
