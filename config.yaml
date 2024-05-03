@@ -164,6 +164,10 @@ credentials:
       email: 1irenesanchez2011@gmail.com
       name: Irene Sanchez
       password: $2b$12$9fKPfrbZgJi0dDTcNCzFYOtIowMuNSVT47AmRZjR.EfabYkMotWrO
+    bynavam:
+      email: brenda.navamtz15@gmail.com
+      name: Brenda Nava
+      password: $2b$12$3SM7qwASrma8McYIyuiLKunL83Q5EA1IqdR6NVsUSzZZIYwgi/fbe
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
