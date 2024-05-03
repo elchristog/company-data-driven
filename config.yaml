@@ -160,6 +160,10 @@ credentials:
       email: df.lefio@gmail.com
       name: Daniela Lefio
       password: $2b$12$Umr6fMTef1pjLhQ5F8z5C.z/qJpyzhWuWlKZ0Sm98qIMHSNOY2OKO
+    isanchezc:
+      email: 1irenesanchez2011@gmail.com
+      name: Irene Sanchez
+      password: $2b$12$9fKPfrbZgJi0dDTcNCzFYOtIowMuNSVT47AmRZjR.EfabYkMotWrO
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
