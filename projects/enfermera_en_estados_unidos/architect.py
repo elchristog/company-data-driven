@@ -63,6 +63,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 menu_options = ["Home", "Traffic"]
             if user_id == 33: #editor_0176 - cesar
                 menu_options = ["Home", "Traffic"]
+            if user_id == 44: #editor_0176 - marian
+                menu_options = ["Home", "Traffic"]
             if user_id == 37: #yumi
                 menu_options = ["Home", "Traffic", "Contract", "Contract Payments", "Customer success", "AI questions"]
             #------ Menu according to each user-----------
@@ -103,6 +105,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if user_id == 31: #trafficker 01 - juancho
                 sub_menu_options = ["Traffic", "SEO ideation", 'Video uploading', 'Video to shorts', 'Web creation', 'Posting posts', 'Post to web']
             if user_id == 33: #editor_0176 - cesar
+                sub_menu_options=['Video edition']
+            if user_id == 44: #editor_0176 - marian
                 sub_menu_options=['Video edition']
             if user_id == 37: #yumi
                 sub_menu_options = ['Post idea creation']
