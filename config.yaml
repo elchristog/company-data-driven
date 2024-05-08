@@ -168,6 +168,10 @@ credentials:
       email: brenda.navamtz15@gmail.com
       name: Brenda Nava
       password: $2b$12$3SM7qwASrma8McYIyuiLKunL83Q5EA1IqdR6NVsUSzZZIYwgi/fbe
+    editor_1875:
+      email: videoeditor@enfermeraenestadosunidos.com
+      name: editor_1875
+      password: $2b$12$AJE.ncfwbfaHotx.mm9vOOpXdidpcqxsWh3qHGj4fE4oCaRgTud0y
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
