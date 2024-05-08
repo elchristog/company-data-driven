@@ -479,7 +479,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             
         if menu == "Recursos":
             tap.title_and_paragraph("Tus recursos" + project_icon, "Accede a los recursos habilitados para ti", "h2", 0)
-            r.resources(user_id, [':closed_book:', 'Saunders Book', 'https://drive.google.com/uc?export=download&id=1-eLwUvGPgXHpmhcrJzi1nlLs2oZhqgXX'], [':closed_book:','Saunders Strategies','https://drive.google.com/uc?export=download&id=1Bkr-4VGyTUOj9rhw6nqKTOItKQiL4jKU'], [':notebook:','Kaplan Book','https://drive.google.com/uc?export=download&id=1zuJ9HOSMrYWwOH-txKmD8o1asgmfVHAL'], [':ledger:','LaCharity Book','https://drive.google.com/uc?export=download&id=1E8DsdgNqXimVWMeQKD9K82-nx3dHFrfJ'])
+            r.resources(user_id, [':closed_book:', 'Saunders Book', 'https://drive.google.com/uc?export=download&id=1-eLwUvGPgXHpmhcrJzi1nlLs2oZhqgXX'], [':closed_book:','Saunders Strategies','https://drive.google.com/uc?export=download&id=1Bkr-4VGyTUOj9rhw6nqKTOItKQiL4jKU'], [':notebook:','Kaplan Book','https://drive.google.com/uc?export=download&id=1zuJ9HOSMrYWwOH-txKmD8o1asgmfVHAL'], [':ledger:','LaCharity Book','https://drive.google.com/uc?export=download&id=1E8DsdgNqXimVWMeQKD9K82-nx3dHFrfJ'], [':dna:','nclex_acronyms','https://drive.google.com/uc?export=download&id=1dBlheScjtF_LGN6bH3nU-q3Fjkmo8EKq'])
 
         if menu == "Ofertas de trabajo":
             tap.title_and_paragraph("Ofertas de trabajo" + project_icon, "Accede a ofertas de trabajo activas en USA", "h2", 0)
