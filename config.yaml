@@ -176,6 +176,10 @@ credentials:
       email: gomezcmilena@gmail.com
       name: Milena Gomez
       password: $2b$12$HzRa1aA1Nx7qOM4o1kYwVuzbgXQE60aI95NDk85Txesw2Te1.mWCW
+    paespitias:
+      email: espitiapaula01@gmail.com
+      name: Paula Espitia
+      password: $2b$12$zOz3TwbIDujNcR18um5Ih.Ebwqq/1OyclORbvyKLveTRiLcekSncW
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
