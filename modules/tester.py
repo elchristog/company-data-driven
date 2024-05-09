@@ -436,7 +436,7 @@ def test_achievements(project_name, user_id, attempts_table_name):
             if len(user_score_and_position) < 1 or user_score_and_position is None < 0:
                 st.warning(f"You have not presented your test", icon = "🫥")
             else:
-                percentile = 100 * (len(ranking)-ranking[user_score_and_position[0]].get("position"))/len(ranking)
+                percentile = round(100 * (len(ranking)-ranking[user_score_and_position[0]].get("position"))/len(ranking))
                 if percentile > 80:
                     st.success(f"You got **{ranking[user_score_and_position[0]].get('score')}%** of today's questions right", icon = "😸")
                     st.success(f"Your position today is: **{ranking[user_score_and_position[0]].get('position')}**", icon = "😸")
