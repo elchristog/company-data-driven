@@ -172,6 +172,10 @@ credentials:
       email: videoeditor@enfermeraenestadosunidos.com
       name: editor_1875
       password: $2b$12$AJE.ncfwbfaHotx.mm9vOOpXdidpcqxsWh3qHGj4fE4oCaRgTud0y
+    cmgomezm:
+      email: gomezcmilena@gmail.com
+      name: Milena Gomez
+      password: $2b$12$HzRa1aA1Nx7qOM4o1kYwVuzbgXQE60aI95NDk85Txesw2Te1.mWCW
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
