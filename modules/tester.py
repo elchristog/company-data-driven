@@ -14,6 +14,8 @@ def tester_execution():
     if st.session_state.selected_answer_q1 is None or st.session_state.selected_answer_q2 is None or st.session_state.selected_answer_q3 is None or st.session_state.selected_answer_q4 is None or st.session_state.selected_answer_q5 is None or st.session_state.selected_answer_q6 is None or st.session_state.selected_answer_q7 is None or st.session_state.selected_answer_q8 is None or st.session_state.selected_answer_q9 is None or st.session_state.selected_answer_q10 is None:
         st.toast("you forgot to answer at least one question", icon = "🤧")
     else:
+        if st.session_state.tester_user_id != st.session_state.user_id:
+            return
         correct_q_1 = 1 if st.session_state.selected_answer_q1_lower == st.session_state.questions[0].get("correct_option") else 0
         correct_q_2 = 1 if st.session_state.selected_answer_q2_lower == st.session_state.questions[1].get("correct_option") else 0
         correct_q_3 = 1 if st.session_state.selected_answer_q3_lower == st.session_state.questions[2].get("correct_option") else 0
