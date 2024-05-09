@@ -26,13 +26,13 @@ def tester_execution():
         correct_q_10 = 1 if st.session_state.selected_answer_q10_lower == st.session_state.questions[9].get("correct_option") else 0
         success_rate = 100 * ((correct_q_1 + correct_q_2 + correct_q_3 + correct_q_4 + correct_q_5 + correct_q_6 + correct_q_7 + correct_q_8 + correct_q_9 + correct_q_10)/10)
         
-        today_answer_already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.{st.session_state.project_name}.{st.session_state.attempts_table_name}` WHERE attempt_date = '{st.session_state.today_str}' AND user_id = {st.session_state.user_id};")
+        today_answer_already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.{st.session_state.tester_project_name}.{st.session_state.attempts_table_name}` WHERE attempt_date = '{st.session_state.today_str}' AND user_id = {st.session_state.tester_user_id};")
         if len(today_answer_already_created) < 1:
-            max_id = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.{st.session_state.project_name}.{st.session_state.attempts_table_name}`;")[0].get("max_id") 
-            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.{st.session_state.attempts_table_name}` VALUES({max_id},'{st.session_state.today_str}', {st.session_state.user_id},{st.session_state.questions[0].get('id')},{correct_q_1},{st.session_state.questions[1].get('id')},{correct_q_2},{st.session_state.questions[2].get('id')},{correct_q_3},{st.session_state.questions[3].get('id')},{correct_q_4},{st.session_state.questions[4].get('id')},{correct_q_5},{st.session_state.questions[5].get('id')},{correct_q_6},{st.session_state.questions[6].get('id')},{correct_q_7},{st.session_state.questions[7].get('id')},{correct_q_8},{st.session_state.questions[8].get('id')},{correct_q_9},{st.session_state.questions[9].get('id')},{correct_q_10},{success_rate}, '{st.session_state.selected_answer_q1_lower}', '{st.session_state.selected_answer_q2_lower}', '{st.session_state.selected_answer_q3_lower}', '{st.session_state.selected_answer_q4_lower}', '{st.session_state.selected_answer_q5_lower}', '{st.session_state.selected_answer_q6_lower}', '{st.session_state.selected_answer_q7_lower}', '{st.session_state.selected_answer_q8_lower}', '{st.session_state.selected_answer_q9_lower}', '{st.session_state.selected_answer_q10_lower}');")         
+            max_id = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.{st.session_state.tester_project_name}.{st.session_state.attempts_table_name}`;")[0].get("max_id") 
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.tester_project_name}.{st.session_state.attempts_table_name}` VALUES({max_id},'{st.session_state.today_str}', {st.session_state.tester_user_id},{st.session_state.questions[0].get('id')},{correct_q_1},{st.session_state.questions[1].get('id')},{correct_q_2},{st.session_state.questions[2].get('id')},{correct_q_3},{st.session_state.questions[3].get('id')},{correct_q_4},{st.session_state.questions[4].get('id')},{correct_q_5},{st.session_state.questions[5].get('id')},{correct_q_6},{st.session_state.questions[6].get('id')},{correct_q_7},{st.session_state.questions[7].get('id')},{correct_q_8},{st.session_state.questions[8].get('id')},{correct_q_9},{st.session_state.questions[9].get('id')},{correct_q_10},{success_rate}, '{st.session_state.selected_answer_q1_lower}', '{st.session_state.selected_answer_q2_lower}', '{st.session_state.selected_answer_q3_lower}', '{st.session_state.selected_answer_q4_lower}', '{st.session_state.selected_answer_q5_lower}', '{st.session_state.selected_answer_q6_lower}', '{st.session_state.selected_answer_q7_lower}', '{st.session_state.selected_answer_q8_lower}', '{st.session_state.selected_answer_q9_lower}', '{st.session_state.selected_answer_q10_lower}');")         
             st.balloons()
             st.toast("Test sent, wait for answers", icon = "☺️")
-            time.sleep(5)
+            time.sleep(2)
             
 
 
@@ -197,9 +197,9 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
                 st.session_state.selected_answer_q10_lower = selected_answer_q10_lower
                 
 
-            st.session_state.project_name = project_name
+            st.session_state.tester_project_name = project_name
             st.session_state.questions_sample_table_name = questions_sample_table_name
-            st.session_state.user_id = user_id
+            st.session_state.tester_user_id = user_id
             st.session_state.attempts_table_name = attempts_table_name
             st.session_state.group_chat_url = group_chat_url
 
