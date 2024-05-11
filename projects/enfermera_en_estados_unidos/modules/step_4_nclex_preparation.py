@@ -137,6 +137,12 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
     os.write(1, '- study_plan_execution: Creating performance table \n'.encode('utf-8'))
     st.session_state.performance_analysis = last_user_tests
 
+    df_last_user_tests = pd.DataFrame(last_user_tests, columns=['subject', 'lesson', 'total_questions', 'success_percentage'])
+    df_last_user_tests_top_strength = df.sort_values(by=['total_questions', 'success_percentage'], ascending=False).head(3)
+    st.table(df_last_user_tests_top_strength)
+
+
+
     
     st.write("Ahora transformalo en este formato de markdown incluyendo las tablas, muestramelo en formato de codigo .md y aseguirate que se sienta que habla un humano y no una maquina, que sea tuteando y de forma positiva:")
     st.write('# ' + st.session_state.study_plan_selected_name + ' ' + st.session_state.study_plan_selected_lastname + ': Enfermera en Estados Unidos')
