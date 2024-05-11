@@ -138,9 +138,9 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
     st.session_state.performance_analysis = last_user_tests
 
     df_last_user_tests = pd.DataFrame(last_user_tests, columns=['subject', 'lesson', 'total_questions', 'success_percentage'])
-    df_last_user_tests_top_strength = df_last_user_tests.sort_values(by=['total_questions', 'success_percentage'], ascending=False).head(3)
+    df_last_user_tests_top_strength = df_last_user_tests.sort_values(by=['success_percentage', 'total_questions'], ascending=False).head(3)
     st.table(df_last_user_tests_top_strength)
-    df_last_user_tests_top_weakness = df_last_user_tests.sort_values(by=['total_questions', 'success_percentage'], ascending= [False, True]).head(3)
+    df_last_user_tests_top_weakness = df_last_user_tests.sort_values(by=['success_percentage', 'total_questions'], ascending= [False, True]).head(3)
     st.table(df_last_user_tests_top_weakness)
 
 
