@@ -230,3 +230,50 @@ def study_plan(user_id, project_id, project_name):
     
       study_plan_button = st.button("Create Study plan", on_click = study_plan_execution, args = [st.session_state.study_plan_selected_username, st.session_state.study_plan_user_id, st.session_state.study_plan_project_id, st.session_state.study_plan_project_name, st.session_state.study_plan_selected_user_id, st.session_state.study_plan_selected_contract_id])
 
+
+
+
+
+
+
+
+
+
+
+def add_study_guide_execution():
+    os.write(1, '🥏 Executing add_study_guide_execution \n'.encode('utf-8'))
+    # if 'posting_posts_selected_idea' in st.session_state:
+    #     os.write(1, '- posting_posts_execution: Saving posted idea\n'.encode('utf-8'))
+    #     st.toast("Please wait", icon = "☺️")
+    #     uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.posting_posts_project_name}.daily_post_creation` SET posted = 1, posted_date = CURRENT_DATE(), poster_user_id = {st.session_state.posting_posts_user_id} WHERE id = '{st.session_state.posting_posts_selected_idea_id}'")
+    #     st.toast("Info saved!", icon = "👾")
+    #     st.balloons()
+    #     time.sleep(1)
+    #     uc.run_query_half_day.clear()
+    #     del st.session_state.posting_posts_user_id
+    #     del st.session_state.posting_posts_project_name
+    #     del st.session_state.posting_posts_post_idea
+    #     del st.session_state.posting_posts_selected_idea_id 
+
+
+def add_study_guide(user_id, project_name):
+    os.write(1, '🥏 Executing add_study_guide \n'.encode('utf-8'))
+    os.write(1, '- add_study_guide: Showing form \n'.encode('utf-8'))
+    subjects = uc.run_query_half_day(f"SELECT DISTINCT(subject) AS subject FROM `company-data-driven.{project_name}.study_guides`;").get("subject")
+    st.table(subjects)
+    # lessons = uc.run_query_half_day(f"SELECT id, idea FROM `company-data-driven.{project_name}.daily_post_creation` WHERE (posted IS NULL OR posted = 0)  ORDER BY creation_date;")
+
+    # selected_idea = st.selectbox(
+    #         label = "Select the idea",
+    #         options = ideas,
+    #         index = None,
+    #         key= "posting_posts_selected_idea",
+    #         on_change = post_redaction_generation
+    #     )
+
+    # if selected_idea is not None:
+    #     st.session_state.posting_posts_user_id = user_id
+    #     st.session_state.posting_posts_project_name = project_name
+    #     st.session_state.posting_posts_selected_idea_id = ids[ideas.index(selected_idea)]
+    #     posting_posts_button = st.button("Post published", on_click = posting_posts_execution)
+        
