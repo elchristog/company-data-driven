@@ -278,7 +278,16 @@ def add_study_guide(user_id, project_name):
         )
 
 
-    # lessons = uc.run_query_half_day(f"SELECT id, idea FROM `company-data-driven.{project_name}.daily_post_creation` WHERE (posted IS NULL OR posted = 0)  ORDER BY creation_date;")
+    lessons_rows = uc.run_query_half_day(f"SELECT DISTINCT(lesson) AS lesson FROM `company-data-driven.{project_name}.nclex_questions`;")
+    lessons = []
+    for row in lessons_rows:
+        lessons.append(row.get('lesson'))
+    selected_lesson = st.selectbox(
+            label = "Select the lesson",
+            options = lessons,
+            index = None,
+            key= "add_study_guide_selected_lesson"
+        )
 
     
 
