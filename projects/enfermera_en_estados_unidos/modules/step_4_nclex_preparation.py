@@ -261,7 +261,7 @@ def add_study_guide(user_id, project_name):
     os.write(1, '- add_study_guide: Showing form \n'.encode('utf-8'))
     selected_folder = st.selectbox(
             label = "Select the folder",
-            options = ['a', 'b'],
+            options = ['ABG  &  Acid Base Imbalances', 'Anatomy & physiology', 'Cancer & Neoplasms', 'Cardiac', 'Cardiovascular Disorders', 'Cell & Congenital Disorders', 'Cesarean Birth', 'Clinical Skills', 'Critical Care', 'EKG', 'Endocrine', 'Epidural & Pain control', 'Fetal Heart Monitoring', 'Fluid & Electrolytes', 'Fluid & Electrolytes Cheat Sheet ', 'Fundamentals  & Health assessment', 'Gastrointestinal', 'Hematological', 'Immunity', 'Infection', 'Inflammation & Healing ', 'Integumentary', 'Labor and Delivery', 'Labor Complications', 'Labs', 'Liver,Gallbladder and Pancreas', 'Maternal Pharmacology', 'Maternity Anatomy  & prenatal care', 'Mental health', 'Musculoskeletal', 'Nervous System', 'Neuro', 'Newborn', 'Oncology', 'Pediatrics', 'Pharmacology', 'Postpartum', 'Prenatal Care', 'Preterm Labor', 'Prioritization  &  Delegation', 'Renal & Urinary', 'Reproductive', 'Respiratory', 'Stress, Pain & Homeostasis', 'TPN & Internal Feeding', 'Visual & Audio'],
             index = None,
             key= "add_study_guide_selected_folder"
         )
