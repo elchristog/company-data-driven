@@ -299,11 +299,11 @@ def add_study_guide(user_id, project_name):
             key= "add_study_guide_selected_language"
         )
 
+    file_url = st.text_input("Shared file URL: ", key = "add_study_guide_file_url")
     
 
-    # if selected_idea is not None:
-    #     st.session_state.posting_posts_user_id = user_id
-    #     st.session_state.posting_posts_project_name = project_name
-    #     st.session_state.posting_posts_selected_idea_id = ids[ideas.index(selected_idea)]
-    #     posting_posts_button = st.button("Post published", on_click = posting_posts_execution)
+    if file_url is not None and guide_name is not None:
+        st.session_state.add_study_guide_user_id = user_id
+        st.session_state.add_study_guide_project_name = project_name
+        add_study_guide_button = st.button("Add new guide", on_click = add_study_guide_execution)
         
