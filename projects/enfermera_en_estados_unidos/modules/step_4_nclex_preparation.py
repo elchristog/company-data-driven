@@ -242,18 +242,21 @@ def study_plan(user_id, project_id, project_name):
 
 def add_study_guide_execution():
     os.write(1, '🥏 Executing add_study_guide_execution \n'.encode('utf-8'))
-    # if 'posting_posts_selected_idea' in st.session_state:
-    #     os.write(1, '- posting_posts_execution: Saving posted idea\n'.encode('utf-8'))
-    #     st.toast("Please wait", icon = "☺️")
-    #     uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.posting_posts_project_name}.daily_post_creation` SET posted = 1, posted_date = CURRENT_DATE(), poster_user_id = {st.session_state.posting_posts_user_id} WHERE id = '{st.session_state.posting_posts_selected_idea_id}'")
-    #     st.toast("Info saved!", icon = "👾")
-    #     st.balloons()
-    #     time.sleep(1)
-    #     uc.run_query_half_day.clear()
-    #     del st.session_state.posting_posts_user_id
-    #     del st.session_state.posting_posts_project_name
-    #     del st.session_state.posting_posts_post_idea
-    #     del st.session_state.posting_posts_selected_idea_id 
+    if 'add_study_guide_file_url' in st.session_state:
+        os.write(1, '- add_study_guide_execution: Saving guide info\n'.encode('utf-8'))
+        guide_already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.enfermera_en_estados_unidos.study_guides` WHERE file_url = '{st.session_state.add_study_guide_file_url}';")
+        if len(guide_already_created) > 0:
+          return
+        else:
+          st.toast("Please wait", icon = "☺️")
+          uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.add_study_guide_project_name}.study_guides` (id, creation_date, creator_user_id, folder_name, guide_name, subject, lesson, language, file_url) VALUES(GENERATE_UUID(), CURRENT_DATE(), {st.session_state.add_study_guide_user_id}, '{st.session_state.add_study_guide_selected_folder}', '{st.session_state.add_study_guide_guide_name}', '{st.session_state.add_study_guide_selected_subject}', '{st.session_state.add_study_guide_selected_lesson}', '{st.session_state.add_study_guide_selected_language}', '{st.session_state.add_study_guide_file_url}');")
+          st.toast("Info saved!", icon = "👾")
+          st.balloons()
+          time.sleep(1)
+          uc.run_query_half_day.clear()
+          del st.session_state.add_study_guide_user_id
+          del st.session_state.add_study_guide_project_name
+
 
 
 def add_study_guide(user_id, project_name):
