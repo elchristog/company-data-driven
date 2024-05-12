@@ -309,4 +309,7 @@ def add_study_guide(user_id, project_name):
         st.session_state.add_study_guide_user_id = user_id
         st.session_state.add_study_guide_project_name = project_name
         add_study_guide_button = st.button("Add new guide", on_click = add_study_guide_execution)
+
+    st.write('---')
+    st.write('Choose 1 subject and 1 lesson that better represents this image. subjects: (Adult Health, Child Health, Critical Care, Fundamentals, Leadership & Management, Maternal & Newborn Health, Mental Health, Pharmacology) lessons: (Cardiovascular, Gastrointestinal/Nutrition, Neurologic, Endocrine, Respiratory, Prioritization, Safety / Infection Control, Mental Health, Urinary/Renal/Fluid and Electrolytes, Antepartum, Basic Care & Comfort, Hematological/Oncological, Infectious Disease, Critical Care Concepts, Musculoskeletal, Psychiatric Medications, Management Concepts, Dosage Calculation, Ethical/Legal, Integumentary, Skills/Procedures, Newborn, Assignment/Delegation, Growth & Development, Perioperative Care, Labor/Delivery, Medication Administration, Visual/Auditory, Analgesics, Postpartum, Reproductive, Immune, Cultural, Spiritual, and Religion Concepts, Blood and Blood Products, Abuse/Neglect, Acid-Base Imbalances, Substance Abuse and other dependencies, Immunizations, Reproductive and Maternity, Environmental Emergencies) ')
         
