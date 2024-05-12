@@ -259,17 +259,21 @@ def add_study_guide_execution():
 def add_study_guide(user_id, project_name):
     os.write(1, '🥏 Executing add_study_guide \n'.encode('utf-8'))
     os.write(1, '- add_study_guide: Showing form \n'.encode('utf-8'))
-    subjects = uc.run_query_half_day(f"SELECT DISTINCT(subject) AS subject FROM `company-data-driven.{project_name}.study_guides`;").get("subject")
-    st.table(subjects)
+    subjects_rows = uc.run_query_half_day(f"SELECT DISTINCT(subject) AS subject FROM `company-data-driven.{project_name}.study_guides`;")
+    subjects = []
+    for row in subjects_rows:
+        subjects.append(row.get('subject'))
+    selected_subject = st.selectbox(
+            label = "Select the subject",
+            options = subjects,
+            index = None,
+            key= "add_study_guide_selected_subject"
+        )
+
+
     # lessons = uc.run_query_half_day(f"SELECT id, idea FROM `company-data-driven.{project_name}.daily_post_creation` WHERE (posted IS NULL OR posted = 0)  ORDER BY creation_date;")
 
-    # selected_idea = st.selectbox(
-    #         label = "Select the idea",
-    #         options = ideas,
-    #         index = None,
-    #         key= "posting_posts_selected_idea",
-    #         on_change = post_redaction_generation
-    #     )
+    
 
     # if selected_idea is not None:
     #     st.session_state.posting_posts_user_id = user_id
