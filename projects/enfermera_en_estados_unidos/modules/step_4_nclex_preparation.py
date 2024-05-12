@@ -291,6 +291,14 @@ def add_study_guide(user_id, project_name):
             key= "add_study_guide_selected_lesson"
         )
 
+
+     selected_language = st.selectbox(
+            label = "Select the language in the guide",
+            options = ['English', 'Spanish'],
+            index = None,
+            key= "add_study_guide_selected_language"
+        )
+
     
 
     # if selected_idea is not None:
