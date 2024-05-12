@@ -265,7 +265,8 @@ def add_study_guide(user_id, project_name):
             index = None,
             key= "add_study_guide_selected_folder"
         )
-    subjects_rows = uc.run_query_half_day(f"SELECT DISTINCT(subject) AS subject FROM `company-data-driven.{project_name}.study_guides`;")
+  
+    subjects_rows = uc.run_query_half_day(f"SELECT DISTINCT(subject) AS subject FROM `company-data-driven.{project_name}.nclex_questions`;")
     subjects = []
     for row in subjects_rows:
         subjects.append(row.get('subject'))
