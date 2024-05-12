@@ -265,6 +265,8 @@ def add_study_guide(user_id, project_name):
             index = None,
             key= "add_study_guide_selected_folder"
         )
+
+  guide_name = st.text_input("Guide name: ", key = "add_study_guide_guide_name")
   
     subjects_rows = uc.run_query_half_day(f"SELECT DISTINCT(subject) AS subject FROM `company-data-driven.{project_name}.nclex_questions`;")
     subjects = []
