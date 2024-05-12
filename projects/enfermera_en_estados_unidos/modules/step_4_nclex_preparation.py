@@ -259,6 +259,12 @@ def add_study_guide_execution():
 def add_study_guide(user_id, project_name):
     os.write(1, '🥏 Executing add_study_guide \n'.encode('utf-8'))
     os.write(1, '- add_study_guide: Showing form \n'.encode('utf-8'))
+    selected_folder = st.selectbox(
+            label = "Select the folder",
+            options = ['a', 'b'],
+            index = None,
+            key= "add_study_guide_selected_folder"
+        )
     subjects_rows = uc.run_query_half_day(f"SELECT DISTINCT(subject) AS subject FROM `company-data-driven.{project_name}.study_guides`;")
     subjects = []
     for row in subjects_rows:
