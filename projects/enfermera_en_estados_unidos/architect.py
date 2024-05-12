@@ -344,7 +344,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tst.add_question_to_test(project_name, 'nclex_questions', user_id)
             if sub_menu == "Add study guide":
                 tap.title_and_paragraph("Add study guide " + project_icon, ".", "h3", 0)
-                s4np.add_question_to_test(user_id, project_name)
+                s4np.add_study_guide(user_id, project_name)
            
 
 
