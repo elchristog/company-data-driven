@@ -54,7 +54,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if user_id == 2: #flaca
                 menu_options = ["Home", "Traffic", "Customer success", "AI questions"]
             if user_id == 36: #andres
-                menu_options = ["Home", "Traffic"]
+                menu_options = ["Home", "Traffic", "Contract", "Contract Payments", "Customer success", "AI questions"]
             if user_id == 19: #bingley
                 menu_options = ["Home", "Whatsapp", "Groupal session", "Contract", "AI questions"]
             if user_id == 9: #santiago
