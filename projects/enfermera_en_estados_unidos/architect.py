@@ -284,7 +284,9 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 sub_menu_options=['Contracts', 'Add new CRM contact', 'Add new contract', 'Contact guide']
             if user_id == 19: #bingley
                 sub_menu_options = ['Contracts', 'Add new CRM contact']
-            if user_id == 37: #gineth
+            if user_id == 36: #andres
+                sub_menu_options = ['Add new contract']
+            if user_id == 37: #yumi
                 sub_menu_options = ['Add new contract']
             #------ Sub Menu according to each user-----------
             
