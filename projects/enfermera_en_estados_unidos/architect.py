@@ -61,6 +61,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 menu_options = ["Home", "Whatsapp", "Step3: Inscripción ante la Junta de Enfermería", "AI questions"]
             if user_id == 31: #trafficker 01 - juancho
                 menu_options = ["Home", "Traffic"]
+            if user_id == 47: #pltaform_dev_976 - eric
+                menu_options = ["Home", "Web App"]
             if user_id == 33: #editor_0176 - cesar
                 menu_options = ["Home", "Traffic"]
             if user_id == 44: #editor_0176 - marian
