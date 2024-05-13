@@ -316,7 +316,14 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
         if menu == "Contract Payments":
-            sub_menu_options=['Contract Payments', 'Add new payment']
+            #------ Sub Menu according to each user-----------
+            if user_id == 1: #chris
+                sub_menu_options=['Contract Payments', 'Add new payment']
+            if user_id == 36: #andres
+                sub_menu_options = ['Add new payment']
+            if user_id == 37: #yumi
+                sub_menu_options = ['Add new payment']
+            #------ Sub Menu according to each user-----------
             if role_id == 1:
                 sub_menu_options.extend(['Something else'])
             sub_menu = st.sidebar.radio('Contract options', options = sub_menu_options)
