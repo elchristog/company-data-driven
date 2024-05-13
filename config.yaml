@@ -184,6 +184,10 @@ credentials:
       email: pltaform_dev_976@enfermeraenestadosunidos.com
       name: pltaform_dev_976
       password: $2b$12$o9XGPnch7uX9l/UqFEKuTOsq.aXYyapMBBotKh7HknfH0TO/7g7EW
+    meposada:
+      email: marianaestrella16@hotmail.com
+      name: Mariana Posada
+      password: $2b$12$tvhrfpgpneEjautFmUsV.OMVR/AI9MCoequ8WTY/ZwYYB8Z7S28hy
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
