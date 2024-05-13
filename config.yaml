@@ -180,6 +180,10 @@ credentials:
       email: espitiapaula01@gmail.com
       name: Paula Espitia
       password: $2b$12$zOz3TwbIDujNcR18um5Ih.Ebwqq/1OyclORbvyKLveTRiLcekSncW
+    pltaform_dev_976:
+      email: pltaform_dev_976@enfermeraenestadosunidos.com
+      name: pltaform_dev_976
+      password: $2b$12$o9XGPnch7uX9l/UqFEKuTOsq.aXYyapMBBotKh7HknfH0TO/7g7EW
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
