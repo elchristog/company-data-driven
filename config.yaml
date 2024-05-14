@@ -188,6 +188,10 @@ credentials:
       email: marianaestrella16@hotmail.com
       name: Mariana Posada
       password: $2b$12$tvhrfpgpneEjautFmUsV.OMVR/AI9MCoequ8WTY/ZwYYB8Z7S28hy
+    jsquirogac:
+      email: jhosmarqc@gmail.com
+      name: Shirley Quiroga
+      password: $2b$12$vWBMf.OAttkuEr/6nQJU4OmXhoYnvvuvWXCBn8O15oieMoBHxaCja
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
