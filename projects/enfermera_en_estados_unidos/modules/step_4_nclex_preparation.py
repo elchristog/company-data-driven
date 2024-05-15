@@ -247,6 +247,7 @@ def add_study_guide_execution():
         guide_already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.enfermera_en_estados_unidos.study_guides` WHERE file_url = '{st.session_state.add_study_guide_file_url}';")
         if len(guide_already_created) > 0:
           st.toast("Already created", icon = "☺️")
+        else:
           if st.session_state.add_study_guide_selected_folder is None or st.session_state.add_study_guide_guide_name is None or st.session_state.add_study_guide_selected_subject is None or st.session_state.add_study_guide_selected_lesson is None:
             st.toast("You miss something", icon = "🧐")
           else:
