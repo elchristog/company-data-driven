@@ -247,15 +247,17 @@ def add_study_guide_execution():
         guide_already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.enfermera_en_estados_unidos.study_guides` WHERE file_url = '{st.session_state.add_study_guide_file_url}';")
         if len(guide_already_created) > 0:
           st.toast("Already created", icon = "☺️")
-        else:
-          st.toast("Please wait", icon = "☺️")
-          uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.add_study_guide_project_name}.study_guides` (id, creation_date, creator_user_id, folder_name, guide_name, subject, lesson, language, file_url) VALUES(GENERATE_UUID(), CURRENT_DATE(), {st.session_state.add_study_guide_user_id}, '{st.session_state.add_study_guide_selected_folder}', '{st.session_state.add_study_guide_guide_name}', '{st.session_state.add_study_guide_selected_subject}', '{st.session_state.add_study_guide_selected_lesson}', '{st.session_state.add_study_guide_selected_language}', '{st.session_state.add_study_guide_file_url}');")
-          st.toast("Info saved!", icon = "👾")
-          st.balloons()
-          time.sleep(1)
-          uc.run_query_half_day.clear()
-          del st.session_state.add_study_guide_user_id
-          del st.session_state.add_study_guide_project_name
+          if st.session_state.add_study_guide_selected_folder is None or st.session_state.add_study_guide_guide_name is None or st.session_state.add_study_guide_selected_subject is None or st.session_state.add_study_guide_selected_lesson is None:
+            st.toast("You miss something", icon = "🧐")
+          else:
+            st.toast("Please wait", icon = "☺️")
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.add_study_guide_project_name}.study_guides` (id, creation_date, creator_user_id, folder_name, guide_name, subject, lesson, language, file_url) VALUES(GENERATE_UUID(), CURRENT_DATE(), {st.session_state.add_study_guide_user_id}, '{st.session_state.add_study_guide_selected_folder}', '{st.session_state.add_study_guide_guide_name}', '{st.session_state.add_study_guide_selected_subject}', '{st.session_state.add_study_guide_selected_lesson}', '{st.session_state.add_study_guide_selected_language}', '{st.session_state.add_study_guide_file_url}');")
+            st.toast("Info saved!", icon = "👾")
+            st.balloons()
+            time.sleep(1)
+            uc.run_query_half_day.clear()
+            del st.session_state.add_study_guide_user_id
+            del st.session_state.add_study_guide_project_name
 
 
 
