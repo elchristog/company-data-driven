@@ -307,7 +307,7 @@ def add_study_guide(user_id, project_name):
     file_url = st.text_input("Shared file URL: ", key = "add_study_guide_file_url")
     
 
-    if file_url is not None and guide_name is not None:
+    if file_url is not None and guide_name is not None and selected_lesson is not None and selected_subject is not None and selected_language is not None:
         st.session_state.add_study_guide_user_id = user_id
         st.session_state.add_study_guide_project_name = project_name
         add_study_guide_button = st.button("Add new guide", on_click = add_study_guide_execution)
