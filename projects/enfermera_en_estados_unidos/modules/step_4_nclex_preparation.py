@@ -149,8 +149,7 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
         
             st.write('### Top 3 fortalezas:')
             st.table(df_last_user_tests_top_strength)
-            s = ", " 
-            st.write(s.join(df_last_user_tests_top_strength.subject))
+            st.write(f"'{"', '".join([f"'{item}'" for item in df_last_user_tests_top_strength.subject])}'")
         
             st.write('### Top 3 debilidades:')
             st.table(df_last_user_tests_top_weakness)
