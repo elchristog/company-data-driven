@@ -164,7 +164,8 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
             st.table(df_subject)
             st.write('### Plan de estudios Fase 1, lectura de guias:')
             study_guides = uc.run_query_1_m(f"SELECT guide_name, file_url FROM `company-data-driven.{study_plan_project_name}.study_guides` WHERE subject IN ('{joined_subjects}') AND lesson IN ('{joined_lessons}');")
-            
+            st.table(study_guides)
+          
             st.write('### Plan de estudios Fase 2, desempeño y lectura en libro:')
             st.write(st.session_state.study_plan)
             st.write('---')
