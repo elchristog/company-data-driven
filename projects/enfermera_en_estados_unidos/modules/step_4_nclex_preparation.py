@@ -149,11 +149,13 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
         
             st.write('### Top 3 fortalezas:')
             st.table(df_last_user_tests_top_strength)
-            joined_subjects = "', '".join(df_last_user_tests_top_strength.subject)
-            st.write(f"'{joined_subjects}'")
         
             st.write('### Top 3 debilidades:')
             st.table(df_last_user_tests_top_weakness)
+            joined_subjects = "', '".join(df_last_user_tests_top_weakness.subject)
+            st.write(f"'{joined_subjects}'")
+            joined_lessons = "', '".join(df_last_user_tests_top_weakness.lesson)
+            st.write(f"'{joined_lessons}'")
         
         
             os.write(1, '- study_plan_execution: Creating study plan \n'.encode('utf-8'))
