@@ -509,6 +509,7 @@ def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, cont
             st.toast("CRM Contact saved!", icon = "👾")
             st.balloons()
             time.sleep(5)
+            st.toast(contact_description)
             uc.run_query_half_day.clear()
             uc.run_query_30_m.clear()
         else:
@@ -518,6 +519,7 @@ def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, cont
                 st.toast("CRM Contact saved!", icon = "👾")
                 st.balloons()
                 time.sleep(5)
+                st.toast(contact_description)
                 uc.run_query_half_day.clear()
                 uc.run_query_30_m.clear()
                 uc.run_query_1_h.clear()
