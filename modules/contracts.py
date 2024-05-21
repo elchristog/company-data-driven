@@ -509,7 +509,6 @@ def add_new_crm_contact_execution():
             st.toast("CRM Contact saved!", icon = "👾")
             st.balloons()
             time.sleep(1)
-            st.toast(contact_description)
             # st.toast(st.session_state.add_new_crm_contact_contact_description)
             del st.session_state.add_new_crm_contact_user_id
             del st.session_state.add_new_crm_contact_project_name
@@ -526,7 +525,6 @@ def add_new_crm_contact_execution():
                 st.toast("CRM Contact saved!", icon = "👾")
                 st.balloons()
                 time.sleep(1)
-                st.toast(contact_description)
                 # st.toast(st.session_state.add_new_crm_contact_contact_description)
                 del st.session_state.add_new_crm_contact_user_id
                 del st.session_state.add_new_crm_contact_project_name
