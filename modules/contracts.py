@@ -489,37 +489,51 @@ def add_new_contract_payment(user_id, project_id, project_name):
 
 
 
-def add_new_crm_contact_execution(user_id, project_name, selected_phone_id, contact_date, user_status, contact_description):
-    last_contact_date = uc.run_query_instant(f"SELECT MAX(contact_date) AS last_contact_date FROM `company-data-driven.{project_name}.contract_crm_log` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}';")
+def add_new_crm_contact_execution():
+    last_contact_date = uc.run_query_instant(f"SELECT MAX(contact_date) AS last_contact_date FROM `company-data-driven.{st.session_state.add_new_crm_contact_project_name}.contract_crm_log` WHERE traffic_analytics_whatsapp_leads_id = '{st.session_state.add_new_crm_contact_selected_phone_id}';")
     
-    if contact_description is None:
+    if st.session_state.add_new_crm_contact_contact_description is None:
         st.toast("contact_description can not be null", icon = "☺️")
-    if len(contact_description) < 36:
+    if len(st.session_state.add_new_crm_contact_contact_description) < 36:
         st.toast("contact_description too short", icon = "☺️")
-    if user_status is None:
+    if st.session_state.add_new_crm_contact_user_status is None:
         st.toast("user_status can not be null", icon = "☺️")
     if last_contact_date[0].get("last_contact_date") is not None:
-        if contact_date <= last_contact_date[0].get("last_contact_date"):
+        if st.session_state.add_new_crm_contact_contact_date <= last_contact_date[0].get("last_contact_date"):
             st.toast("User already contacted on that date", icon = "☺️")
-    if (contact_description is not None) and (user_status is not None) and (len(contact_description) >= 36):
+    if (st.session_state.add_new_crm_contact_contact_description is not None) and (st.session_state.add_new_crm_contact_user_status is not None) and (len(st.session_state.add_new_crm_contact_contact_description) >= 36):
         if last_contact_date[0].get("last_contact_date") is None:
             st.toast("Please wait", icon = "☺️")
-            contact_description = ''.join(i for i in contact_description if not i.isdigit())
-            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
+            contact_description = ''.join(i for i in st.session_state.add_new_crm_contact_contact_description if not i.isdigit())
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.add_new_crm_contact_project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{st.session_state.add_new_crm_contact_contact_date}', '{st.session_state.add_new_crm_contact_selected_phone_id}', {st.session_state.add_new_crm_contact_user_id}, '{st.session_state.add_new_crm_contact_user_status}', '{contact_description}');")
             st.toast("CRM Contact saved!", icon = "👾")
             st.balloons()
             time.sleep(5)
             st.toast(contact_description)
+            st.toast(st.session_state.contact_description)
+            del st.session_state.user_id
+            del st.session_state.project_name
+            del st.session_state.selected_phone_id
+            del st.session_state.contact_date
+            del st.session_state.user_status
+            del st.session_state.contact_description
             uc.run_query_half_day.clear()
             uc.run_query_30_m.clear()
         else:
-            if contact_date > last_contact_date[0].get("last_contact_date"):
+            if st.session_state.add_new_crm_contact_contact_date > last_contact_date[0].get("last_contact_date"):
                 st.toast("Please wait", icon = "☺️")
-                uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
+                uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.add_new_crm_contact_project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{st.session_state.add_new_crm_contact_contact_date}', '{st.session_state.add_new_crm_contact_selected_phone_id}', {st.session_state.add_new_crm_contact_user_id}, '{st.session_state.add_new_crm_contact_user_status}', '{st.session_state.add_new_crm_contact_contact_description}');")
                 st.toast("CRM Contact saved!", icon = "👾")
                 st.balloons()
                 time.sleep(5)
                 st.toast(contact_description)
+                st.toast(st.session_state.contact_description)
+                del st.session_state.user_id
+                del st.session_state.project_name
+                del st.session_state.selected_phone_id
+                del st.session_state.contact_date
+                del st.session_state.user_status
+                del st.session_state.contact_description
                 uc.run_query_half_day.clear()
                 uc.run_query_30_m.clear()
                 uc.run_query_1_h.clear()
@@ -540,7 +554,7 @@ def add_new_crm_contact(user_id, project_name):
             label = "Select the user phone number",
             options = assistant_phone_numbers,
             index = None,
-            key= "assistant_phone_numbers"
+            key= "add_new_crm_contact_assistant_phone_numbers"
         )
     checking_phone_query = uc.run_query_30_m(f"SELECT awl.id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS awl INNER JOIN `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` AS tagsa ON awl.id = tagsa.traffic_analytics_whatsapp_lead_id WHERE CONCAT(awl.phone_indicator,awl.phone_number) LIKE '{selected_phone}';")
     if len(checking_phone_query) < 1 or checking_phone_query is None:
@@ -549,7 +563,7 @@ def add_new_crm_contact(user_id, project_name):
         st.success('Phone number available', icon = '🪬')
         if selected_phone is not None:
             selected_phone_id = assistant_ids[assistant_phone_numbers.index(selected_phone)]
-            
+            st.session_state.add_new_crm_contact_selected_phone_id = selected_phone_id
             user_history = uc.run_query_instant(f'''
                 SELECT 'contract' AS funnel_step, contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.contract_crm_log` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}'
                 UNION ALL (
@@ -558,17 +572,19 @@ def add_new_crm_contact(user_id, project_name):
             ''')
             st.table(user_history)
 
-            contact_date = st.date_input("Contact date:", key = 'contact_date')
+            contact_date = st.date_input("Contact date:", key = 'add_new_crm_contact_contact_date')
             user_status = st.selectbox(
                 label = "Select the user status",
                 options = ['active', 'active_15_days', 'active_30_days', 'active_60_days', 'lost', 'discarted'],
                 index = None,
-                key= "user_status",
+                key= "add_new_crm_contact_user_status",
                 placeholder = "active",
                 help = "active = active oportunity, active_x_days = active oportunity, but wait x days to next contact, lost = the user reject the process, discarted = the user does not meet the requirements such as nurses from cuba or auxiliaries"
             )
-            contact_description = st.text_input("Contact description", placeholder = "Se contacta entregando enlace de pago y contrato")
-            add_contact_button = st.button("Add CRM contact", on_click = add_new_crm_contact_execution, args = [user_id, project_name, selected_phone_id, contact_date, user_status, contact_description])
+            contact_description = st.text_input("Contact description", placeholder = "Se contacta entregando enlace de pago y contrato", key = 'add_new_crm_contact_contact_description')
+            st.session_state.add_new_crm_contact_user_id = user_id
+            st.session_state.add_new_crm_contact_project_name = project_name
+            add_contact_button = st.button("Add CRM contact", on_click = add_new_crm_contact_execution)
 
 
 
