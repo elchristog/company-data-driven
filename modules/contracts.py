@@ -511,12 +511,12 @@ def add_new_crm_contact_execution():
             time.sleep(5)
             st.toast(contact_description)
             st.toast(st.session_state.contact_description)
-            del st.session_state.user_id
-            del st.session_state.project_name
-            del st.session_state.selected_phone_id
-            del st.session_state.contact_date
-            del st.session_state.user_status
-            del st.session_state.contact_description
+            del st.session_state.add_new_crm_contact_user_id
+            del st.session_state.add_new_crm_contact_project_name
+            del st.session_state.add_new_crm_contact_selected_phone_id
+            del st.session_state.add_new_crm_contact_contact_date
+            del st.session_state.add_new_crm_contact_user_status
+            del st.session_state.add_new_crm_contact_contact_description
             uc.run_query_half_day.clear()
             uc.run_query_30_m.clear()
         else:
@@ -528,12 +528,12 @@ def add_new_crm_contact_execution():
                 time.sleep(5)
                 st.toast(contact_description)
                 st.toast(st.session_state.contact_description)
-                del st.session_state.user_id
-                del st.session_state.project_name
-                del st.session_state.selected_phone_id
-                del st.session_state.contact_date
-                del st.session_state.user_status
-                del st.session_state.contact_description
+                del st.session_state.add_new_crm_contact_user_id
+                del st.session_state.add_new_crm_contact_project_name
+                del st.session_state.add_new_crm_contact_selected_phone_id
+                del st.session_state.add_new_crm_contact_contact_date
+                del st.session_state.add_new_crm_contact_user_status
+                del st.session_state.add_new_crm_contact_contact_description
                 uc.run_query_half_day.clear()
                 uc.run_query_30_m.clear()
                 uc.run_query_1_h.clear()
