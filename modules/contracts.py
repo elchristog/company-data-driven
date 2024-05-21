@@ -508,9 +508,9 @@ def add_new_crm_contact_execution():
             uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.add_new_crm_contact_project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{st.session_state.add_new_crm_contact_contact_date}', '{st.session_state.add_new_crm_contact_selected_phone_id}', {st.session_state.add_new_crm_contact_user_id}, '{st.session_state.add_new_crm_contact_user_status}', '{contact_description}');")
             st.toast("CRM Contact saved!", icon = "👾")
             st.balloons()
-            time.sleep(5)
+            time.sleep(1)
             st.toast(contact_description)
-            st.toast(st.session_state.add_new_crm_contact_contact_description)
+            # st.toast(st.session_state.add_new_crm_contact_contact_description)
             del st.session_state.add_new_crm_contact_user_id
             del st.session_state.add_new_crm_contact_project_name
             del st.session_state.add_new_crm_contact_selected_phone_id
@@ -525,9 +525,9 @@ def add_new_crm_contact_execution():
                 uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.add_new_crm_contact_project_name}.contract_crm_log` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{st.session_state.add_new_crm_contact_contact_date}', '{st.session_state.add_new_crm_contact_selected_phone_id}', {st.session_state.add_new_crm_contact_user_id}, '{st.session_state.add_new_crm_contact_user_status}', '{st.session_state.add_new_crm_contact_contact_description}');")
                 st.toast("CRM Contact saved!", icon = "👾")
                 st.balloons()
-                time.sleep(5)
+                time.sleep(1)
                 st.toast(contact_description)
-                st.toast(st.session_state.add_new_crm_contact_contact_description)
+                # st.toast(st.session_state.add_new_crm_contact_contact_description)
                 del st.session_state.add_new_crm_contact_user_id
                 del st.session_state.add_new_crm_contact_project_name
                 del st.session_state.add_new_crm_contact_selected_phone_id
