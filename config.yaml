@@ -192,6 +192,10 @@ credentials:
       email: jhosmarqc@gmail.com
       name: Shirley Quiroga
       password: $2b$12$vWBMf.OAttkuEr/6nQJU4OmXhoYnvvuvWXCBn8O15oieMoBHxaCja
+    brangelc:
+      email: joshbran02@hotmail.com
+      name: Brenda Rangel
+      password: $2b$12$h9qbyQLodJpaQH2OTlSZ.uhIdsZUgj30FQMguPBhj1jfANyPYSUWe
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
