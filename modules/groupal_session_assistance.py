@@ -271,7 +271,7 @@ def add_new_crm_groupal_session_contact_execution():
     # Main processing logic
     st.toast("Please wait", icon="☺️")
     contact_description = ''.join(i for i in st.session_state.add_new_crm_groupal_session_contact_contact_description if not i.isdigit())
-    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.add_new_crm_groupal_session_contact_project_name}.traffic_analytics_groupal_session_crm` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{st.add_new_crm_groupal_session_contact_session_state.contact_date}', '{st.add_new_crm_groupal_session_contact_session_state.selected_phone_id}', {st.session_state.add_new_crm_groupal_session_contact_user_id}, '{st.session_state.add_new_crm_groupal_session_contact_user_status}', '{st.session_state.add_new_crm_groupal_session_contact_contact_description}');")
+    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.add_new_crm_groupal_session_contact_project_name}.traffic_analytics_groupal_session_crm` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{st.session_state.add_new_crm_groupal_session_contact_contact_date}', '{st.session_state.add_new_crm_groupal_session_contact_selected_phone_id}', {st.session_state.add_new_crm_groupal_session_contact_user_id}, '{st.session_state.add_new_crm_groupal_session_contact_user_status}', '{st.session_state.add_new_crm_groupal_session_contact_contact_description}');")
     st.toast("CRM Contact saved!", icon="👾")
     st.balloons()
     time.sleep(1)
