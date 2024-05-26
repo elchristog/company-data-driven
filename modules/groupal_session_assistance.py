@@ -238,9 +238,8 @@ def groupal_session_absents_and_opportunities(project_name):
 
 
 
-def add_new_crm_groupal_session_contact_execution(user_id, project_name, selected_phone_id, contact_date, user_status, contact_description):
-    # Input validation
-    if contact_description is None or len(contact_description) < 36 or user_status is None:
+def add_new_crm_groupal_session_contact_execution():
+    if st.session_state.add_new_crm_groupal_session_contact_contact_description is None or len(st.session_state.add_new_crm_groupal_session_contact_contact_description) < 36 or st.session_state.add_new_crm_groupal_session_contact_user_status is None:
         st.toast("contact_description can not be null or too short", icon="☺️") 
         st.toast("user_status can not be null", icon="☺️")
         return
@@ -249,12 +248,12 @@ def add_new_crm_groupal_session_contact_execution(user_id, project_name, selecte
     results =  uc.run_query_instant(f"""
         SELECT 
            MAX(contact_date) AS last_contact_date,
-           (SELECT user_status FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` 
-             WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}'
+           (SELECT user_status FROM `company-data-driven.{st.session_state.add_new_crm_groupal_session_contact_project_name}.traffic_analytics_groupal_session_crm` 
+             WHERE traffic_analytics_whatsapp_leads_id = '{st.session_state.add_new_crm_groupal_session_contact_selected_phone_id}'
              ORDER BY contact_date DESC 
              LIMIT 1) AS last_user_status
-        FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm`
-        WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}'
+        FROM `company-data-driven.{st.session_state.add_new_crm_groupal_session_contact_project_name}.traffic_analytics_groupal_session_crm`
+        WHERE traffic_analytics_whatsapp_leads_id = '{st.session_state.add_new_crm_groupal_session_contact_selected_phone_id}'
     """)
 
     last_contact_date_value = results[0].get("last_contact_date") 
@@ -265,17 +264,23 @@ def add_new_crm_groupal_session_contact_execution(user_id, project_name, selecte
         st.toast("No se puede realizar la acción. El usuario ya no está activo.", icon="😔")
         return
 
-    if last_contact_date_value and contact_date <= last_contact_date_value:
+    if last_contact_date_value and st.session_state.add_new_crm_groupal_session_contact_contact_date <= last_contact_date_value:
         st.toast("User already contacted on that date", icon = "☺️")
         return 
 
     # Main processing logic
     st.toast("Please wait", icon="☺️")
-    contact_description = ''.join(i for i in contact_description if not i.isdigit())
-    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{contact_date}', '{selected_phone_id}', {user_id}, '{user_status}', '{contact_description}');")
+    contact_description = ''.join(i for i in st.session_state.add_new_crm_groupal_session_contact_contact_description if not i.isdigit())
+    uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.add_new_crm_groupal_session_contact_project_name}.traffic_analytics_groupal_session_crm` (id, contact_date, traffic_analytics_whatsapp_leads_id, creator_id, user_status, contact_description) VALUES (GENERATE_UUID(), '{st.add_new_crm_groupal_session_contact_session_state.contact_date}', '{st.add_new_crm_groupal_session_contact_session_state.selected_phone_id}', {st.session_state.add_new_crm_groupal_session_contact_user_id}, '{st.session_state.add_new_crm_groupal_session_contact_user_status}', '{st.session_state.add_new_crm_groupal_session_contact_contact_description}');")
     st.toast("CRM Contact saved!", icon="👾")
     st.balloons()
-    time.sleep(5)
+    time.sleep(1)
+    del st.session_state.add_new_crm_groupal_session_contact_user_id
+    del st.session_state.add_new_crm_groupal_session_contact_project_name
+    del st.session_state.add_new_crm_groupal_session_contact_selected_phone_id
+    del st.session_state.add_new_crm_groupal_session_contact_contact_date
+    del st.session_state.add_new_crm_groupal_session_contact_user_status
+    del st.session_state.add_new_crm_groupal_session_contact_contact_description
     uc.run_query_half_day.clear()
     uc.run_query_30_m.clear()
     uc.run_query_1_h.clear()
@@ -298,7 +303,7 @@ def add_new_crm_groupal_session_contact(user_id, project_name):
             label = "Select the user phone number",
             options = lead_phone_numbers,
             index = None,
-            key= "lead_phone_numbers"
+            key= "add_new_crm_groupal_session_contact_selected_phone"
         )
     checking_phone_query = uc.run_query_30_m(f"SELECT awl.id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS awl WHERE CONCAT(awl.phone_indicator,awl.phone_number) LIKE '{selected_phone}';")
     if len(checking_phone_query) < 1 or checking_phone_query is None:
@@ -306,27 +311,29 @@ def add_new_crm_groupal_session_contact(user_id, project_name):
     else:
         st.success('Phone number available', icon = '🪬')
         if selected_phone is not None:
-            selected_phone_id = lead_ids[lead_phone_numbers.index(selected_phone)]
+            st.session_state.add_new_crm_groupal_session_contact_selected_phone_id = lead_ids[lead_phone_numbers.index(selected_phone)]
             
             user_history = uc.run_query_instant(f'''
-                SELECT 'contract' AS funnel_step, contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.contract_crm_log` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}'
+                SELECT 'contract' AS funnel_step, contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.contract_crm_log` WHERE traffic_analytics_whatsapp_leads_id = '{st.session_state.add_new_crm_groupal_session_contact_selected_phone_id}'
                 UNION ALL (
-                  SELECT 'groupal_session' AS funnel_step, contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}'
+                  SELECT 'groupal_session' AS funnel_step, contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` WHERE traffic_analytics_whatsapp_leads_id = '{st.session_state.add_new_crm_groupal_session_contact_selected_phone_id}'
                 ) ORDER BY contact_date ASC;
             ''')
             st.table(user_history)
             
-            contact_date = st.date_input("Contact date:", key = 'contact_date')
+            contact_date = st.date_input("Contact date:", key = 'add_new_crm_groupal_session_contact_contact_date')
             user_status = st.selectbox(
                 label = "Select the user status",
                 options = ['active', 'active_15_days', 'active_30_days', 'active_60_days', 'lost', 'discarted'],
                 index = None,
-                key= "user_status",
+                key= "add_new_crm_groupal_session_contact_user_status",
                 placeholder = "active",
                 help = "active = active oportunity, active_x_days = active oportunity, but wait x days to next contact, lost = the user reject the process, discarted = the user does not meet the requirements such as nurses from cuba or auxiliaries"
             )
-            contact_description = st.text_input("Contact description", placeholder = "Se contacta invitando a asistir a la sesion grupal")
-            add_contact_button = st.button("Add CRM contact", on_click = add_new_crm_groupal_session_contact_execution, args = [user_id, project_name, selected_phone_id, contact_date, user_status, contact_description])
+            contact_description = st.text_input("Contact description", placeholder = "Se contacta invitando a asistir a la sesion grupal", key = 'add_new_crm_groupal_session_contact_contact_description')
+            st.session_state.add_new_crm_groupal_session_contact_user_id = user_id
+            st.session_state.add_new_crm_groupal_session_contact_project_name = project_name
+            add_contact_button = st.button("Add CRM contact", on_click = add_new_crm_groupal_session_contact_execution)
 
 
 
