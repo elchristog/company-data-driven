@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import pycaret
-import streamlit
+import streamlit as st
 import os
 
 import utils.user_credentials as uc
