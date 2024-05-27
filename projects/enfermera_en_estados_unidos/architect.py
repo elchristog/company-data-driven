@@ -22,6 +22,7 @@ import projects.enfermera_en_estados_unidos.modules.step_1_program_start as s1ps
 import projects.enfermera_en_estados_unidos.modules.step_3_nursing_board_registration as s3nbr
 import projects.enfermera_en_estados_unidos.modules.step_4_nclex_preparation as s4np
 import utils.g_gemini_gestor as ggg
+import modules.ml_models as mlm
 
 
 
@@ -50,7 +51,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             st.image(project_logo_url, width=50, use_column_width=False)
             #------ Menu according to each user-----------
             if user_id == 1: #chris
-                menu_options = ["Home", "Traffic", "Click bitly Whatsapp", "Whatsapp", "Click bitly Groupal session", "Groupal session", "Remarketing", "Contract", "Contract Remarketing", "Contract Payments", "Web App", "Customer success", "Step1: Inicio del programa", 'Users Admin', "AI questions"]
+                menu_options = ["Home", "Traffic", "Click bitly Whatsapp", "Whatsapp", "Click bitly Groupal session", "Groupal session", "Remarketing", "Contract", "Contract Remarketing", "Contract Payments", "Web App", "Customer success", "Step1: Inicio del programa", 'Users Admin', 'Machine learning models', "AI questions"]
             if user_id == 2: #flaca
                 menu_options = ["Home", "Traffic", "Customer success", "AI questions"]
             if user_id == 36: #andres
@@ -430,6 +431,17 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Hashing":
                 tap.title_and_paragraph("Hashing " + project_icon, "Write the password and get the hashed version", "h3", 0)
                 uh.hashing()
+
+
+
+
+
+        if menu == "Machine learning models":
+            sub_menu_options=['Create User', 'Update User', 'Hashing']
+            sub_menu = st.sidebar.radio('Users Admin options', options = sub_menu_options)
+            if sub_menu == "Create User":
+                tap.title_and_paragraph("Create User " + project_icon, "Remember at the end hash the password and add to the config", "h3", 0)
+            mlm.ml_purchase_propension(user_id, project_name)
 
 
 
