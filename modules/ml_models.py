@@ -3,6 +3,7 @@ import numpy as np
 import streamlit as st
 import os
 
+from sklearn.metrics._scorer import _SCORERS
 from pycaret.classification import *
 
 import utils.user_credentials as uc
