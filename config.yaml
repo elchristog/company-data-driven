@@ -196,6 +196,10 @@ credentials:
       email: joshbran02@hotmail.com
       name: Brenda Rangel
       password: $2b$12$h9qbyQLodJpaQH2OTlSZ.uhIdsZUgj30FQMguPBhj1jfANyPYSUWe
+    dmejia:
+      email: danielamejiaroncancio@gmail.com
+      name: Daniela Mejia
+      password: $2b$12$qanvi7DlDJg/EhfM3U9kP.vXRDrAHQsN/.nS/ErQeZcXf2XHHKaYW
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
