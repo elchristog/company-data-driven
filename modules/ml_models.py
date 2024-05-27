@@ -1,8 +1,9 @@
 import pandas as pd
 import numpy as np
-import pycaret
 import streamlit as st
 import os
+
+from pycaret.classification import *
 
 import utils.user_credentials as uc
 
