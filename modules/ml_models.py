@@ -4,7 +4,7 @@ import pycaret
 import streamlit
 import os
 
-
+import utils.user_credentials as uc
 
 # def ml_purchase_propension_execution():
 #     os.write(1, '🥏 Executing posting_posts_execution \n'.encode('utf-8'))
