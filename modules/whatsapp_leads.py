@@ -158,7 +158,7 @@ def whatsapp_leads_creation_save(project_name, user_id):
     st.session_state.text_input_2 = st.session_state.text_input_2.replace(" ", "")
 
     if st.session_state.text_input_1.isnumeric() == False:
-        st.toast("You forgot the phone indicator", icon = "🥴")
+        st.toast("You forgot the phone indicator", icon = "😡")
         return
 
     if st.session_state.text_input_2 is not None and st.session_state.text_input_3 is not None:
@@ -180,7 +180,7 @@ def whatsapp_leads_creation_save(project_name, user_id):
                     uc.run_query_1_h.clear()
                     uc.run_query_half_day.clear()
             else:
-                st.toast("The phone number does not match", icon = "🥴")
+                st.toast("The phone number does not match, Did You add spaces?", icon = "😡")
 
     
 
