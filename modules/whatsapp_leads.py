@@ -157,7 +157,7 @@ def whatsapp_leads_creation_save(project_name, user_id):
     st.session_state.text_input_1 = st.session_state.text_input_1.replace(" ", "")
     st.session_state.text_input_2 = st.session_state.text_input_2.replace(" ", "")
 
-    if st.session_state.text_input_1 is None:
+    if st.session_state.text_input_1.isnumeric() == False:
         st.toast("You forgot the phone indicator", icon = "🥴")
         return
 
