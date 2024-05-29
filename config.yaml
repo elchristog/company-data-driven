@@ -200,6 +200,10 @@ credentials:
       email: danielamejiaroncancio@gmail.com
       name: Daniela Mejia
       password: $2b$12$qanvi7DlDJg/EhfM3U9kP.vXRDrAHQsN/.nS/ErQeZcXf2XHHKaYW
+    amlemusq:
+      email: ana.maria.lemus@hotmail.com
+      name: Ana Maria Lemus
+      password: $2b$12$CRKWPqE97Sb.THSsc5Gx5e.TlmI/9BRq6h2F03b8Dnv7Ti2TBhU2u
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
