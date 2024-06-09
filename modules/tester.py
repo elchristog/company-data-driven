@@ -28,11 +28,11 @@ def tester_execution():
         correct_q_10 = 1 if st.session_state.selected_answer_q10_lower == st.session_state.questions[9].get("correct_option") else 0
         success_rate = 100 * ((correct_q_1 + correct_q_2 + correct_q_3 + correct_q_4 + correct_q_5 + correct_q_6 + correct_q_7 + correct_q_8 + correct_q_9 + correct_q_10)/10)
         
-        today_answer_already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.{st.session_state.tester_project_name}.{st.session_state.attempts_table_name}` WHERE attempt_date = '{st.session_state.today_str}' AND user_id = {st.session_state.tester_user_id};")
+        today_answer_already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.{st.session_state.tester_project_name}.{st.session_state.attempts_table_name}` WHERE attempt_date = CURRENT_DATE() AND user_id = {st.session_state.tester_user_id};")
         if len(today_answer_already_created) < 1:
             time.sleep(2)
             max_id = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.{st.session_state.tester_project_name}.{st.session_state.attempts_table_name}`;")[0].get("max_id") 
-            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.tester_project_name}.{st.session_state.attempts_table_name}` VALUES({max_id},'{st.session_state.today_str}', {st.session_state.tester_user_id},{st.session_state.questions[0].get('id')},{correct_q_1},{st.session_state.questions[1].get('id')},{correct_q_2},{st.session_state.questions[2].get('id')},{correct_q_3},{st.session_state.questions[3].get('id')},{correct_q_4},{st.session_state.questions[4].get('id')},{correct_q_5},{st.session_state.questions[5].get('id')},{correct_q_6},{st.session_state.questions[6].get('id')},{correct_q_7},{st.session_state.questions[7].get('id')},{correct_q_8},{st.session_state.questions[8].get('id')},{correct_q_9},{st.session_state.questions[9].get('id')},{correct_q_10},{success_rate}, '{st.session_state.selected_answer_q1_lower}', '{st.session_state.selected_answer_q2_lower}', '{st.session_state.selected_answer_q3_lower}', '{st.session_state.selected_answer_q4_lower}', '{st.session_state.selected_answer_q5_lower}', '{st.session_state.selected_answer_q6_lower}', '{st.session_state.selected_answer_q7_lower}', '{st.session_state.selected_answer_q8_lower}', '{st.session_state.selected_answer_q9_lower}', '{st.session_state.selected_answer_q10_lower}');")         
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.tester_project_name}.{st.session_state.attempts_table_name}` VALUES({max_id}, CURRENT_DATE(), {st.session_state.tester_user_id},{st.session_state.questions[0].get('id')},{correct_q_1},{st.session_state.questions[1].get('id')},{correct_q_2},{st.session_state.questions[2].get('id')},{correct_q_3},{st.session_state.questions[3].get('id')},{correct_q_4},{st.session_state.questions[4].get('id')},{correct_q_5},{st.session_state.questions[5].get('id')},{correct_q_6},{st.session_state.questions[6].get('id')},{correct_q_7},{st.session_state.questions[7].get('id')},{correct_q_8},{st.session_state.questions[8].get('id')},{correct_q_9},{st.session_state.questions[9].get('id')},{correct_q_10},{success_rate}, '{st.session_state.selected_answer_q1_lower}', '{st.session_state.selected_answer_q2_lower}', '{st.session_state.selected_answer_q3_lower}', '{st.session_state.selected_answer_q4_lower}', '{st.session_state.selected_answer_q5_lower}', '{st.session_state.selected_answer_q6_lower}', '{st.session_state.selected_answer_q7_lower}', '{st.session_state.selected_answer_q8_lower}', '{st.session_state.selected_answer_q9_lower}', '{st.session_state.selected_answer_q10_lower}');")         
             st.balloons()
             st.toast("Test sent, wait for answers", icon = "☺️")
             time.sleep(1)
@@ -44,10 +44,8 @@ def tester_execution():
 
 
 def tester(project_name, questions_sample_table_name, user_id, attempts_table_name, group_chat_url): 
-    today = datetime.date.today()
-    today_str = today.strftime("%Y-%m-%d")
 
-    today_results = uc.run_query_instant(f"SELECT * FROM `company-data-driven.{project_name}.{attempts_table_name}` WHERE user_id = {user_id} AND attempt_date = '{today_str}';")
+    today_results = uc.run_query_instant(f"SELECT * FROM `company-data-driven.{project_name}.{attempts_table_name}` WHERE user_id = {user_id} AND attempt_date = CURRENT_DATE();")
     if len(today_results) < 1:
         questions = uc.run_query_6_h(f"SELECT * FROM `company-data-driven.{project_name}.{questions_sample_table_name}`;")
         tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs(["Q 1", "Q 2", "Q 3", "Q 4", "Q 5", "Q 6", "Q 7", "Q 8", "Q 9", "Q 10"])
@@ -221,7 +219,6 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
             st.session_state.selected_answer_q10 = selected_answer_q10
 
             st.session_state.questions = questions
-            st.session_state.today_str = today_str
             
             send_answers = st.button("Send Answers", on_click = tester_execution)
 
