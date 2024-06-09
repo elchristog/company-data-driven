@@ -51,7 +51,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             st.image(project_logo_url, width=50, use_column_width=False)
             #------ Menu according to each user-----------
             if user_id == 1: #chris
-                menu_options = ["Home", "Traffic", "Click bitly Whatsapp", "Whatsapp", "Click bitly Groupal session", "Groupal session", "Remarketing", "Contract", "Contract Remarketing", "Contract Payments", "Web App", "Customer success", "Step1: Inicio del programa", 'Users Admin', 'Machine learning models', "AI questions"]
+                menu_options = ["Home", "Traffic", "Click bitly Whatsapp", "Whatsapp", "Click bitly Groupal session", "Groupal session", "Remarketing", "Contract", "Contract Remarketing", "Contract Payments", "Web App", "Customer success", 'Users Admin', 'Machine learning models', "AI questions"]
             if user_id == 2: #flaca
                 menu_options = ["Home", "Traffic", "Customer success", "AI questions"]
             if user_id == 36: #andres
@@ -396,27 +396,6 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph("Add program step" + project_icon, "Agregar pasos al programa", "h3", 0)
                 pp.customer_success_add_program_step(user_id, project_name)
             
-
-
-
-        if menu == "Step1: Inicio del programa":
-            sub_menu_options=['User welcome', 'User credentials', 'English program', 'Cv creation', 'Content creation guide']
-            if role_id == 1:
-                sub_menu_options.extend(['Something'])
-            sub_menu = st.sidebar.radio('Traffic options', options = sub_menu_options)
-            if sub_menu == "User welcome":
-                tap.title_and_paragraph("User welcome" + project_icon, "Bienvenida al usuario y solicitud de datos", "h3", 0)
-                s1ps.user_welcome()
-            if sub_menu == "User credentials":
-                tap.title_and_paragraph("User credentials" + project_icon, "Entrega de usuario y clave", "h3", 0)
-                s1ps.platform_user_creation_text_guide()
-            if sub_menu == "English program":
-                tap.title_and_paragraph("English program" + project_icon, "Entrega servicio de ingles", "h3", 0)
-                s1ps.babbel_english_text_guide()
-            if sub_menu == "Cv creation":
-                tap.title_and_paragraph("Cv creation" + project_icon, "Creacion del resumee", "h3", 0)
-                s1ps.cv_creation_guide()
-
 
 
 
