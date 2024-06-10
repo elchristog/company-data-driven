@@ -53,7 +53,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if user_id == 1: #chris
                 menu_options = ["Home", "Traffic", "Click bitly Whatsapp", "Whatsapp", "Click bitly Groupal session", "Groupal session", "Remarketing", "Contract", "Contract Remarketing", "Contract Payments", "Web App", "Customer success", 'Users Admin', 'Machine learning models', "AI questions"]
             if user_id == 2: #flaca
-                menu_options = ["Home", "Traffic", "Customer success", "AI questions"]
+                menu_options = ["Home", "Traffic", "AI questions"]
             if user_id == 36: #andres
                 menu_options = ["Home", "Traffic", "Contract", "Contract Payments", "Customer success", "AI questions"]
             if user_id == 19: #bingley
@@ -104,7 +104,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if user_id == 2: #flaca
                 sub_menu_options=['Traffic', 'Video creation', 'Post idea creation']
             if user_id == 36: #andres
-                sub_menu_options = ['Video creation']
+                sub_menu_options = ['Post idea creation', 'Video creation']
             if user_id == 31: #trafficker 01 - juancho
                 sub_menu_options = ["Traffic", "SEO ideation", 'Video uploading', 'Video to shorts', 'Web creation', 'Posting posts', 'Post to web']
             if user_id == 33: #editor_0176 - cesar
