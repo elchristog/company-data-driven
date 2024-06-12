@@ -208,6 +208,10 @@ credentials:
       email: natalia.rodas93@gmail.com
       name: Natalia Rodas
       password: $2b$12$PaFTE1le8cz2Bc1MG7o10eAWWdmvN6SPpOdNYD5pphLthiv2J2usi
+    oemoreirag:
+      email: elizabeth.moreira38@gmail.com
+      name: Elizabeth Moreira
+      password: $2b$12$Su0Fj4whCjViDRi4AzHSae6XrH1qCKVkxXp/XoOTpCgg.rHltZG5C
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
