@@ -226,4 +226,30 @@ def customer_success_crm_add_contact(user_id, project_name):
         
 
 
+
+
+
+
+
+def customer_success_mentor_assignation(user_id, project_name):
+    os.write(1, '🥏 Executing customer_success_mentor_assignation \n'.encode('utf-8'))
+    os.write(1, '- customer_success_mentor_assignation: Showing form \n'.encode('utf-8'))
+  
+    rows = uc.run_query_instant(f"SELECT u.username, u.id, c.id as contract_id FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN `company-data-driven.global.users` AS u ON u.id = c.user_id ORDER BY u.username;")
+    usernames = []
+    contract_ids = []
+    user_ids = []
+    for row in rows:
+        usernames.append(row.get('username'))
+        contract_ids.append(row.get('contract_id'))
+        user_ids.append(row.get('id'))
+    selected_username = st.selectbox(
+            label = "Select the username",
+            options = usernames,
+            index = None,
+            key= "customer_success_mentor_assignation_selected_username"
+        )
+    if 'customer_success_mentor_assignation_selected_username' in st.session_state and st.session_state.customer_success_mentor_assignation_selected_username is not None:
+        st.session_state.customer_success_mentor_assignation_selected_user_id = user_ids[usernames.index(selected_username)]
+        st.session_state.customer_success_mentor_assignation_contract_id = contract_ids[usernames.index(selected_username)]
     
