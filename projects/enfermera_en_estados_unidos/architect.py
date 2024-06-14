@@ -391,7 +391,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 tap.title_and_paragraph("Cv creation" + project_icon, "Creacion del resumee", "h3", 0)
                 s1ps.cv_creation_guide()
             if sub_menu == "Mentor assignation'":
-                tap.title_and_paragraph("Mentor assignation'" + project_icon, "Asignacion de mentor", "h3", 0)
+                tap.title_and_paragraph("Mentor assignation" + project_icon, "Asignacion de mentor", "h3", 0)
                 
                     
             if sub_menu == "Add program step":
