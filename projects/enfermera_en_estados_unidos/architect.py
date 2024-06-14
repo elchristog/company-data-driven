@@ -364,7 +364,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
         if menu == "Customer success":
             sub_menu_options=['CRM', 'Study plan', 'Cv creation']
             if role_id == 1:
-                sub_menu_options.extend(['Add program step'])
+                sub_menu_options.extend(['Mentor assignation'])
             sub_menu = st.sidebar.radio('Customer success options', options = sub_menu_options)
             if sub_menu == "CRM":
                 tap.title_and_paragraph("CRM" + project_icon, "Seguimiento del contacto a clientes", "h3", 0)
@@ -390,6 +390,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if sub_menu == "Cv creation":
                 tap.title_and_paragraph("Cv creation" + project_icon, "Creacion del resumee", "h3", 0)
                 s1ps.cv_creation_guide()
+            if sub_menu == "Mentor assignation'":
+                tap.title_and_paragraph("Mentor assignation'" + project_icon, "Asignacion de mentor", "h3", 0)
                 
                     
             if sub_menu == "Add program step":
