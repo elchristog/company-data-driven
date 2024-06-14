@@ -392,6 +392,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 s1ps.cv_creation_guide()
             if sub_menu == "Mentor assignation":
                 tap.title_and_paragraph("Mentor assignation" + project_icon, "Asignacion de mentor", "h3", 0)
+                pp.customer_success_mentor_assignation(user_id, project_name)
                 
                     
             if sub_menu == "Add program step":
