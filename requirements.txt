@@ -66,7 +66,7 @@ protobuf==4.25.2
 pyarrow==15.0.0
 pyasn1==0.5.1
 pyasn1-modules==0.3.0
-pycaret==3.0.0
+pycaret==3.3.0
 pydata-google-auth==1.8.2
 pydeck==0.8.0
 PyExcelerate==0.10.0
