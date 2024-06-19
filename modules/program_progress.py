@@ -252,4 +252,17 @@ def customer_success_mentor_assignation(user_id, project_name):
     if 'customer_success_mentor_assignation_selected_username' in st.session_state and st.session_state.customer_success_mentor_assignation_selected_username is not None:
         st.session_state.customer_success_mentor_assignation_selected_user_id = user_ids[usernames.index(selected_username)]
         st.session_state.customer_success_mentor_assignation_contract_id = contract_ids[usernames.index(selected_username)]
+
+    rows_team = uc.run_query_instant(f"SELECT u.id, u.username FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE u.project_id = (SELECT id FROM `company-data-driven.global.projects` WHERE name = '{project_name}') AND u.status = 'active' AND ra.role_id <= 4 ORDER BY u.username ASC;")
+    team_usernames = []
+    team_ids = []
+    for row in rows:
+        team_usernames.append(row.get('username'))
+        team_ids.append(row.get('id'))
+    selected_mentor = st.selectbox(
+            label = "Select the mentor",
+            options = usernames,
+            index = None,
+            key= "customer_success_mentor_assignation_selected_mentor"
+        )
     
