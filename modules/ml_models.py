@@ -3,7 +3,7 @@ import numpy as np
 import streamlit as st
 import os
 
-from pycaret.classification import *
+# from pycaret.classification import *
 
 import utils.user_credentials as uc
 
