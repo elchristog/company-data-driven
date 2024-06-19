@@ -231,7 +231,18 @@ def customer_success_crm_add_contact(user_id, project_name):
 
 def customer_success_mentor_assignation_execution():
     os.write(1, '🥏 Executing customer_success_mentor_assignation_execution \n'.encode('utf-8'))
-    st.toast('test')
+    if 'customer_success_mentor_assignation_confirm_choice' in st.session_state:
+        if st.session_state.customer_success_mentor_assignation_confirm_choice:
+            st.toast("Please wait", icon = "☺️")
+            uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.posting_posts_project_name}.program_customer_mentor_assignation` (id, customer_id, mentor_id, creation_date, creator_user_id) VALUES(GENERATE_UUID(), {st.session_state.customer_success_mentor_assignation_selected_user_id}, {st.session_state.customer_success_mentor_assignation_selected_mentor_id}, CURRENT_DATE(), {st.session_state.customer_success_mentor_assignation_user_id})")
+            st.toast("Info saved!", icon = "👾")
+            st.balloons()
+            time.sleep(1)
+            uc.run_query_half_day.clear()
+            del st.session_state.posting_posts_project_name
+            del st.session_state.customer_success_mentor_assignation_selected_user_id
+            del st.session_state.customer_success_mentor_assignation_selected_mentor_id}
+            del st.session_state.customer_success_mentor_assignation_user_id 
 
 
 
@@ -270,6 +281,10 @@ def customer_success_mentor_assignation(user_id, project_name):
             index = None,
             key= "customer_success_mentor_assignation_selected_mentor"
         )
+    if 'customer_success_mentor_assignation_selected_mentor' in st.session_state and st.session_state.customer_success_mentor_assignation_selected_mentor is not None:
+        st.session_state.customer_success_mentor_assignation_selected_mentor_id = team_ids[team_usernames.index(selected_mentor)]
+
+    st.session_state.customer_success_mentor_assignation_user_id = user_id
 
     st.checkbox("I confirm my choice", key = 'customer_success_mentor_assignation_confirm_choice')
     mentor_assignation_button = st.button("Assign mentor", on_click = customer_success_mentor_assignation_execution)
