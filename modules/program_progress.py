@@ -261,7 +261,7 @@ def customer_success_mentor_assignation(user_id, project_name):
         team_ids.append(row.get('id'))
     selected_mentor = st.selectbox(
             label = "Select the mentor",
-            options = usernames,
+            options = team_usernames,
             index = None,
             key= "customer_success_mentor_assignation_selected_mentor"
         )
