@@ -383,7 +383,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                     st.write("#### User credentials")
                     st.video("https://www.youtube.com/watch?v=ChAMEAnXSi8")
             if sub_menu == "Study plan":
-                tap.title_and_paragraph("Plan de estudio" + project_icon, "Creacion del plan de estudio", "h3", 0)
+                tap.title_and_paragraph("Plan de estudio" + project_icon, "Recordar revisar que el pdf exportado al final si permita dar click a los enlaces", "h3", 0)
                 s4np.study_plan(user_id, project_id, project_name)
                 st.write("---")
                 st.video("https://www.youtube.com/watch?v=XhRcb0eFnNI")
