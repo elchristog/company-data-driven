@@ -229,6 +229,11 @@ def customer_success_crm_add_contact(user_id, project_name):
 
 
 
+def customer_success_mentor_assignation_execution():
+    os.write(1, '🥏 Executing customer_success_mentor_assignation_execution \n'.encode('utf-8'))
+    st.toast('test')
+
+
 
 
 def customer_success_mentor_assignation(user_id, project_name):
@@ -265,4 +270,7 @@ def customer_success_mentor_assignation(user_id, project_name):
             index = None,
             key= "customer_success_mentor_assignation_selected_mentor"
         )
+
+    st.checkbox("I confirm my choice", key = 'customer_success_mentor_assignation_confirm_choice')
+    mentor_assignation_button = st.button("Assign mentor", on_click = customer_success_mentor_assignation_execution)
     
