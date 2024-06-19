@@ -22,12 +22,15 @@ def general_progress(user_id, project_name, program_steps_table_tame, program_st
         return user_actual_step[0].get("program_step_id") 
 
 
-def users_to_contact(project_name):
+def users_to_contact(project_name, user_id):
     os.write(1, '🥏 Executing users_to_contact \n'.encode('utf-8'))
     os.write(1, '- users_to_contact: Showing users to contact \n'.encode('utf-8'))
     st.write("#### Users to contact:")
-  
-    users_to_contact_df = uc.run_query_instant(f"SELECT u.username, COALESCE(last_contact_df.days_since_last_contact, 999999) AS days_since_last_contact FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN `company-data-driven.global.users` AS u ON c.user_id = u.id LEFT JOIN (SELECT upsp.contract_id, DATE_DIFF(CURRENT_DATE(), MAX(upsp.creation_date), DAY) AS days_since_last_contact FROM `company-data-driven.{project_name}.user_program_steps_progress` AS upsp GROUP BY upsp.contract_id) AS last_contact_df ON c.id = last_contact_df.contract_id WHERE COALESCE(last_contact_df.days_since_last_contact, 999999) > 6 ORDER BY COALESCE(last_contact_df.days_since_last_contact, 999999) DESC;")
+
+    if user_id == 1:
+        users_to_contact_df = uc.run_query_instant(f"SELECT u.username, COALESCE(last_contact_df.days_since_last_contact, 999999) AS days_since_last_contact FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN `company-data-driven.global.users` AS u ON c.user_id = u.id LEFT JOIN (SELECT upsp.contract_id, DATE_DIFF(CURRENT_DATE(), MAX(upsp.creation_date), DAY) AS days_since_last_contact FROM `company-data-driven.{project_name}.user_program_steps_progress` AS upsp GROUP BY upsp.contract_id) AS last_contact_df ON c.id = last_contact_df.contract_id WHERE COALESCE(last_contact_df.days_since_last_contact, 999999) > 6 ORDER BY COALESCE(last_contact_df.days_since_last_contact, 999999) DESC;")
+    else:
+        users_to_contact_df = uc.run_query_instant(f"SELECT u.username, COALESCE(last_contact_df.days_since_last_contact, 999999) AS days_since_last_contact FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN `company-data-driven.global.users` AS u ON c.user_id = u.id LEFT JOIN (SELECT upsp.contract_id, DATE_DIFF(CURRENT_DATE(), MAX(upsp.creation_date), DAY) AS days_since_last_contact FROM `company-data-driven.{project_name}.user_program_steps_progress` AS upsp GROUP BY upsp.contract_id) AS last_contact_df ON c.id = last_contact_df.contract_id LEFT JOIN `company-data-driven.{project_name}.program_customer_mentor_assignation` AS pcma ON c.user_id = pcma.customer_id WHERE COALESCE(last_contact_df.days_since_last_contact, 999999) > 6 AND pcma.mentor_id = {user_id} ORDER BY COALESCE(last_contact_df.days_since_last_contact, 999999) DESC;")
     if len(users_to_contact_df) < 1:
         st.success("Up to date, well done!", icon = "🫡")
     else:
