@@ -368,7 +368,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu = st.sidebar.radio('Customer success options', options = sub_menu_options)
             if sub_menu == "CRM":
                 tap.title_and_paragraph("CRM" + project_icon, "Seguimiento del contacto a clientes", "h3", 0)
-                pp.users_to_contact(project_name)
+                pp.users_to_contact(project_name, user_id)
                 pp.customer_success_crm_add_contact(user_id, project_name)
                 st.write("---")
                 st.write("### Lider de customer success")
