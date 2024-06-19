@@ -138,8 +138,12 @@ def customer_success_crm_add_contact_execution():
 def customer_success_crm_add_contact(user_id, project_name):
     os.write(1, '🥏 Executing customer_success_crm_add_contact \n'.encode('utf-8'))
     os.write(1, '- customer_success_crm_add_contact: Showing form \n'.encode('utf-8'))
-  
-    rows = uc.run_query_instant(f"SELECT u.username, u.id, c.id as contract_id FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN `company-data-driven.global.users` AS u ON u.id = c.user_id ORDER BY u.username;")
+
+    if user_id = 1:
+        rows = uc.run_query_instant(f"SELECT u.username, u.id, c.id as contract_id FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN `company-data-driven.global.users` AS u ON u.id = c.user_id ORDER BY u.username;")
+    else:
+        rows = uc.run_query_instant(f"SELECT u.username, u.id, c.id as contract_id FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN `company-data-driven.global.users` AS u ON u.id = c.user_id LEFT JOIN `company-data-driven.{project_name}.program_customer_mentor_assignation` AS pcma ON c.user_id = pcma.customer_id WHERE pcma.mentor_id = {user_id}  ORDER BY u.username;")
+        
     usernames = []
     contract_ids = []
     user_ids = []
