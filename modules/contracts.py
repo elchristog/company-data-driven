@@ -170,6 +170,11 @@ def customer_creation_execution():
         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.global.role_assignment` (id, user_id, role_id) VALUES({st.session_state.max_id_role_assignement_customer_creation}, {st.session_state.max_id_users_customer_creation}, {st.session_state.selected_role_id_customer_creation});")
         
         uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name_customer_creation}.contracts` (id, contract_date, user_id, traffic_analytics_whatsapp_leads_id, contract_total_value, contract_agreed_payments, creator_user_id) VALUES (GENERATE_UUID(), '{st.session_state.today_str_customer_creation}', {st.session_state.max_id_users_customer_creation}, '{st.session_state.selected_phone_id}','{st.session_state.contract_value_customer_creation}', '{st.session_state.contract_num_payments_customer_creation}', {st.session_state.user_id_customer_creation});")
+
+        assigned_mentor = uc.run_query_instant(f"SELECT mentor_id FROM `company-data-driven.{st.session_state.project_name_customer_creation}.program_customer_mentor_assignation` GROUP BY mentor_id ORDER BY COUNT(customer_id) ASC LIMIT 1;")[0].get('mentor_id')
+
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name_customer_creation}.program_customer_mentor_assignation` (id, customer_id, mentor_id, creation_date, creator_user_id) VALUES(GENERATE_UUID(), {st.session_state.max_id_users_customer_creation}, {assigned_mentor}, CURRENT_DATE(), {st.session_state.user_id_customer_creation})")
+
         st.toast('User Created!', icon = '🎈')
         st.balloons()
         st.warning('Remember to hash the password and add to config, and create the demo task', icon = '😶‍🌫️')
