@@ -212,6 +212,10 @@ credentials:
       email: elizabeth.moreira38@gmail.com
       name: Elizabeth Moreira
       password: $2b$12$Su0Fj4whCjViDRi4AzHSae6XrH1qCKVkxXp/XoOTpCgg.rHltZG5C
+    asariass:
+      email: aarias.92@outlook.com
+      name: Anny Arias
+      password: $2b$12$5FRQZdiQwSORBFoY7Y79Hui3koX1Ec2KnB1TipZQ1FhhVGE.ZE.IG
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
