@@ -340,4 +340,24 @@ def wsp_answer_text(project_id):
         Disculpame, lamentablemente no estamos asesorando a enfermeros de Cuba, ya que las regulaciones y el proceso difieren mucho.
         '''
         st.markdown(text_answer)
+
+
+
+        
+
+        st.write("---")
+        st.write('**Preguntas de rutina**')
+        
+        text_answer = '''
+        
+        1.	Cuentas con licenciatura en enfermería?
+        2.	Dónde obtuviste tu título de enfermería?
+        3.	Ya conoces algo del proceso de homologación de enfermería?
+        4.	En qué has avanzado en tu proceso?
+        5.	Qué tipo de apoyo estás buscando en el proceso de homologación?
+        6.	Tienes experiencia trabajando como enfermero/a? cuántos años de experiencia tienes?
+        7.	Cual es tu nivel de inglés?
+        8.	Estás al tanto de los costos asociados con el proceso de homologación?
+        '''
+        st.markdown(text_answer)
         
