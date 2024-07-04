@@ -361,6 +361,7 @@ def wsp_answer_text(project_id):
         '''
         st.markdown(text_answer)
 
+        st.write("### Flujo de atencion de clientes")
         st.write("https://drive.google.com/file/d/17W1b__6gzLy8o4gp_PErMOYfHdRjNnXg/view?usp=sharing")
         st.video("https://youtu.be/LgLSKLMBG-M")
         
