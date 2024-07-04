@@ -360,4 +360,6 @@ def wsp_answer_text(project_id):
         8.	Estás al tanto de los costos asociados con el proceso de homologación?
         '''
         st.markdown(text_answer)
+
+        st.video("https://youtu.be/LgLSKLMBG-M")
         
