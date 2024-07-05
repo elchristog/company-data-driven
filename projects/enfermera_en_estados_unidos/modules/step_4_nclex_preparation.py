@@ -113,6 +113,7 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
   ''')
 
   last_user_tests = pd.DataFrame(last_user_tests)
+  st.table(last_user_tests)
   
   if len(last_user_tests) < 1:
     st.toast("User has no completed any test", icon = "😵‍💫")
