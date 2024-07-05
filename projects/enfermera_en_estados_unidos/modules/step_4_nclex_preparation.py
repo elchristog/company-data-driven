@@ -112,7 +112,7 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
     ORDER BY subject, lesson;
   ''')
 
-  st.write(len(last_user_tests))
+  
   if len(last_user_tests) < 1:
     st.toast("User has no completed any test", icon = "😵‍💫")
   else:
