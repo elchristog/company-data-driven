@@ -220,6 +220,10 @@ credentials:
       email: damianjimenezbrenda55@gmail.com
       name: Brenda Jimenez
       password: $2b$12$tHVgpQRB3n6BHxsksWzXD.O.pInIADxmDMjb/DJvW340nefSOOPne
+    nfernandez:
+      email: nuria.fernandezga@udlap.mx
+      name: Nuria Fernandez
+      password: $2b$12$PsX3JJizFxpVDLigdSaNK.ZKPSNLgSyBYw5P533IO4mP555cJalTK
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
