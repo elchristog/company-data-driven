@@ -216,6 +216,10 @@ credentials:
       email: aarias.92@outlook.com
       name: Anny Arias
       password: $2b$12$5FRQZdiQwSORBFoY7Y79Hui3koX1Ec2KnB1TipZQ1FhhVGE.ZE.IG
+    bjimenezd:
+      email: damianjimenezbrenda55@gmail.com
+      name: Brenda Jimenez
+      password: $2b$12$tHVgpQRB3n6BHxsksWzXD.O.pInIADxmDMjb/DJvW340nefSOOPne
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
