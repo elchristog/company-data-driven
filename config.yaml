@@ -228,6 +228,10 @@ credentials:
       email: alisse.rl03@gmail.com
       name: Isabel Lopez
       password: $2b$12$SEZ3BFtft7WcA53k81dFxOo3hNIw41dNgmjf21cBNObSQuA4IK9Ru
+    jlherrerab:
+      email: jluixx@gmail.com
+      name: Jose Luis Herrera
+      password: $2b$12$/KqyNld/kk.vQUp8U/r5i.4BWqH7Em66/.WsQ2X7oAzqMW3k4PZ4q
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
