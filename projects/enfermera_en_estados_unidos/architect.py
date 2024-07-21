@@ -58,12 +58,12 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 menu_options = ["Home", "Traffic", "Contract", "Contract Payments", "Customer success", "AI questions"]
             if user_id == 19: #bingley
                 menu_options = ["Home", "Whatsapp", "Groupal session", "Contract", "AI questions"]
-            if user_id == 9: #santiago
-                menu_options = ["Home", "Whatsapp", "Step3: Inscripción ante la Junta de Enfermería", "AI questions"]
+            # if user_id == 9: #santiago
+            #     menu_options = ["Home", "Whatsapp", "Step3: Inscripción ante la Junta de Enfermería", "AI questions"]
             if user_id == 31: #trafficker 01 - juancho
                 menu_options = ["Home", "Traffic"]
             if user_id == 47: #pltaform_dev_976 - eric
-                menu_options = ["Home", "Web App"]
+                menu_options = ["Home", "Web App", "Traffic"]
             if user_id == 33: #editor_0176 - cesar
                 menu_options = ["Home", "Traffic"]
             if user_id == 44: #editor_0176 - marian
@@ -113,6 +113,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 sub_menu_options=['Video edition']
             if user_id == 37: #yumi
                 sub_menu_options = ['Post idea creation']
+            if user_id == 47: #pltaform_dev_976 - eric
+                sub_menu_options=['Video edition']
            #------ Sub Menu according to each user-----------
             
             if role_id == 1:
