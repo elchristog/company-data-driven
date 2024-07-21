@@ -64,6 +64,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 menu_options = ["Home", "Traffic"]
             if user_id == 47: #pltaform_dev_976 - eric
                 menu_options = ["Home", "Traffic"] # "Web App",
+            if user_id == 60: #pltaform_dev_538 - daniela
+                menu_options = ["Home", "Traffic"] # "Web App",
             if user_id == 33: #editor_0176 - cesar
                 menu_options = ["Home", "Traffic"]
             if user_id == 44: #editor_0176 - marian
@@ -114,6 +116,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             if user_id == 37: #yumi
                 sub_menu_options = ['Post idea creation']
             if user_id == 47: #pltaform_dev_976 - eric
+                sub_menu_options=['Video edition']
+            if user_id == 60: #pltaform_dev_538 - daniela
                 sub_menu_options=['Video edition']
            #------ Sub Menu according to each user-----------
             
