@@ -236,6 +236,10 @@ credentials:
       email: pltaform_dev_538@enfermeraenestadosunidos.com
       name: pltaform_dev_538
       password: $2b$12$WPnSVd/3BctWw4gsbK/Jq.4uIjciMmt6oER1O7TPfi3dtW/.KV8va
+    mabolivare:
+      email: alejandra77848@gmail.com
+      name: Alejandra Bolivar
+      password: $2b$12$8Kc.zdtBi39BJyOFgaUdnOvGERkE5mK8loCYfncvKa8psLhu0Bktm
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
