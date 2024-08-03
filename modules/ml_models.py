@@ -41,6 +41,27 @@ def ml_purchase_propension_try_threshold():
 
 
 
+def ml_purchase_propension_save_threshold_and_metrics():
+    os.write(1, '🥏 Executing ml_purchase_propension_save_threshold_and_metrics \n'.encode('utf-8'))
+    if 'processed_data_query' in st.session_state:
+        os.write(1, '- ml_purchase_propension_save_threshold_and_metrics: Saving metrics\n'.encode('utf-8'))
+        st.toast("Please wait", icon = "☺️")
+        
+         
+        st.session_state.confussion_matrix = uc.run_query_instant(f"SELECT * FROM ML.CONFUSION_MATRIX (MODEL `company-data-driven.{st.session_state.ml_purchase_propension_project_name}.purchase_propension_model`,   (   SELECT     *   FROM     ({st.session_state.processed_data_query })   WHERE     data_frame = 'evaluation'   ), STRUCT({st.session_state.ml_purchase_propension_threshold} AS threshold) );")
+
+        
+        st.toast("Model retrained!", icon = "👾")
+        st.balloons()
+        time.sleep(1)
+        uc.run_query_half_day.clear()
+        del st.session_state.ml_purchase_propension_user_id
+        del st.session_state.ml_purchase_propension_project_name
+
+
+
+
+
 
 def ml_purchase_propension(user_id, project_name):
     os.write(1, '🥏 Executing ml_purchase_propension \n'.encode('utf-8'))
@@ -78,6 +99,7 @@ def ml_purchase_propension(user_id, project_name):
         st.table(st.session_state.lift_chart_evaluation_data)
 
     # save threshold and save evaluation metrics
+    save_threshold_button = st.button("Save threshold and metrics", on_click = ml_purchase_propension_save_threshold_and_metrics)
 
     # auto predict weekly for all the dataset.
 
