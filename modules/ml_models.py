@@ -59,7 +59,7 @@ def ml_purchase_propension(user_id, project_name):
     re_train_model_button = st.button("Re train model", on_click = ml_purchase_propension_training)
 
     # select threshold and show confussion matrix and lift chart in evaluation sample
-    st.slider(label = "Threshold", min_value = 0, max_value = 1, value = 0.5, step = 0.001, key = 'ml_purchase_propension_threshold')
+    st.slider(label = "Threshold", min_value = 0.000, max_value = 1.000, value = 0.5, step = 0.001, key = 'ml_purchase_propension_threshold')
     try_threshold_button = st.button("Try trhreshold", on_click = ml_purchase_propension_try_threshold)
 
     # save threshold and save evaluation metrics
