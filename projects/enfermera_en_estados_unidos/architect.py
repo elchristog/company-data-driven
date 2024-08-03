@@ -423,10 +423,10 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
 
         if menu == "Machine learning models":
-            sub_menu_options=['Create User', 'Update User', 'Hashing']
+            sub_menu_options=['Purchase Propension', 'other_1', 'other_2']
             sub_menu = st.sidebar.radio('Users Admin options', options = sub_menu_options)
-            if sub_menu == "Create User":
-                tap.title_and_paragraph("Create User " + project_icon, "Remember at the end hash the password and add to the config", "h3", 0)
+            if sub_menu == "Purchase Propension":
+                tap.title_and_paragraph("Purchase Propension Model " + project_icon, "After re training give a minutes before next steps", "h3", 0)
             mlm.ml_purchase_propension(user_id, project_name)
 
 
