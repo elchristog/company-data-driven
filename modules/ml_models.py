@@ -43,20 +43,16 @@ def ml_purchase_propension_try_threshold():
 
 def ml_purchase_propension_save_threshold_and_metrics():
     os.write(1, '🥏 Executing ml_purchase_propension_save_threshold_and_metrics \n'.encode('utf-8'))
+    
     if 'processed_data_query' in st.session_state:
         os.write(1, '- ml_purchase_propension_save_threshold_and_metrics: Saving metrics\n'.encode('utf-8'))
         st.toast("Please wait", icon = "☺️")
-        
          
         st.session_state.confussion_matrix = uc.run_query_instant(f"SELECT * FROM ML.CONFUSION_MATRIX (MODEL `company-data-driven.{st.session_state.ml_purchase_propension_project_name}.purchase_propension_model`,   (   SELECT     *   FROM     ({st.session_state.processed_data_query })   WHERE     data_frame = 'evaluation'   ), STRUCT({st.session_state.ml_purchase_propension_threshold} AS threshold) );")
 
         st.session_state.evaluation_metrics = uc.run_query_instant(f"SELECT * FROM ML.EVALUATE (MODEL `company-data-driven.{st.session_state.ml_purchase_propension_project_name}.purchase_propension_model`,   (   SELECT     *   FROM     ({st.session_state.processed_data_query })   WHERE     data_frame = 'evaluation'   ), STRUCT({st.session_state.ml_purchase_propension_threshold} AS threshold) );")
 
         model_trained_today = uc.run_query_instant(f"SELECT * FROM `company-data-driven.{st.session_state.ml_purchase_propension_project_name}.purchase_propension_model_training_log` WHERE training_date = CURRENT_DATE();")
-
-        st.write(len(model_trained_today))
-
-        st.table(st.session_state.evaluation_metrics)
 
         if len(model_trained_today) > 0:
             uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.ml_purchase_propension_project_name}.purchase_propension_model_training_log` SET trained_user_id = {st.session_state.ml_purchase_propension_user_id}, training_date = CURRENT_DATE(), selected_threshold = {st.session_state.ml_purchase_propension_threshold}, evaluation_data_precision =  st.session_state.evaluation_metrics[0].get('precision'), evaluation_data_recall =  st.session_state.evaluation_metrics[0].get('recall'), evaluation_data_accuracy =  st.session_state.evaluation_metrics[0].get('accuracy'), evaluation_data_f1_score =  st.session_state.evaluation_metrics[0].get('f1_score'), evaluation_data_log_loss =  st.session_state.evaluation_metrics[0].get('log_loss'), evaluation_data_roc_auc =  st.session_state.evaluation_metrics[0].get('roc_auc'), evaluation_data_confussion_matrix_expected_0_predicted_0 = {st.session_state.confussion_matrix[0].get('_0')}, evaluation_data_confussion_matrix_expected_0_predicted_1 = {st.session_state.confussion_matrix[0].get('_1')}, evaluation_data_confussion_matrix_expected_1_predicted_0 = {st.session_state.confussion_matrix[1].get('_0')}, evaluation_data_confussion_matrix_expected_1_predicted_1 = {st.session_state.confussion_matrix[1].get('_1')} WHERE id = '{model_trained_today[0].get('id')}';")
