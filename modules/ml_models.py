@@ -50,7 +50,7 @@ def ml_purchase_propension_save_threshold_and_metrics():
          
         st.session_state.confussion_matrix = uc.run_query_instant(f"SELECT * FROM ML.CONFUSION_MATRIX (MODEL `company-data-driven.{st.session_state.ml_purchase_propension_project_name}.purchase_propension_model`,   (   SELECT     *   FROM     ({st.session_state.processed_data_query })   WHERE     data_frame = 'evaluation'   ), STRUCT({st.session_state.ml_purchase_propension_threshold} AS threshold) );")
 
-        st.session_state.evaluation_metrics = uc.run_query_instant(f"SELECT * FROM ML.EVALUEATE (MODEL `company-data-driven.{st.session_state.ml_purchase_propension_project_name}.purchase_propension_model`,   (   SELECT     *   FROM     ({st.session_state.processed_data_query })   WHERE     data_frame = 'evaluation'   ), STRUCT({st.session_state.ml_purchase_propension_threshold} AS threshold) );")
+        st.session_state.evaluation_metrics = uc.run_query_instant(f"SELECT * FROM ML.EVALUATE (MODEL `company-data-driven.{st.session_state.ml_purchase_propension_project_name}.purchase_propension_model`,   (   SELECT     *   FROM     ({st.session_state.processed_data_query })   WHERE     data_frame = 'evaluation'   ), STRUCT({st.session_state.ml_purchase_propension_threshold} AS threshold) );")
 
         model_trained_today = uc.run_query_instant(f"SELECT * FROM `company-data-driven.{st.session_state.ml_purchase_propension_project_name}.purchase_propension_model_training_log` WHERE training_date = CURRENT_DATE();")
 
