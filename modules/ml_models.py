@@ -8,6 +8,7 @@ import time
 
 import utils.user_credentials as uc
 
+
 def ml_purchase_propension_training():
     os.write(1, '🥏 Executing ml_purchase_propension_training \n'.encode('utf-8'))
     if 'processed_data_query' in st.session_state:
@@ -20,6 +21,23 @@ def ml_purchase_propension_training():
         uc.run_query_half_day.clear()
         del st.session_state.ml_purchase_propension_user_id
         del st.session_state.ml_purchase_propension_project_name
+
+
+
+def ml_purchase_propension_try_threshold():
+    os.write(1, '🥏 Executing ml_purchase_propension_try_threshold \n'.encode('utf-8'))
+    if 'processed_data_query' in st.session_state:
+        os.write(1, '- ml_purchase_propension_try_threshold: Evaluating model\n'.encode('utf-8'))
+        st.toast("Please wait", icon = "☺️")
+        evaluation_data = uc.run_query_instant(f"CREATE OR REPLACE MODEL `company-data-driven.{st.session_state.ml_purchase_propension_project_name}.purchase_propension_model` OPTIONS ( model_type='LOGISTIC_REG',   auto_class_weights=TRUE, enable_global_explain=TRUE,  data_split_method='NO_SPLIT',   input_label_cols=['target_contract'],   max_iterations=15) AS SELECT * EXCEPT(data_frame) FROM( {st.session_state.processed_data_query }  ) WHERE data_frame = 'training';")
+        st.toast("Model retrained!", icon = "👾")
+        st.balloons()
+        time.sleep(1)
+        uc.run_query_half_day.clear()
+        del st.session_state.ml_purchase_propension_user_id
+        del st.session_state.ml_purchase_propension_project_name
+
+
 
 
 def ml_purchase_propension(user_id, project_name):
@@ -35,13 +53,16 @@ def ml_purchase_propension(user_id, project_name):
     rows = pd.DataFrame(uc.run_query_half_day(st.session_state.processed_data_query))
     st.table(rows.head(2))
 
-    # showing confussion matrix in last prediction data
-    
+    # Showing confussion matrix and lift chart in whole dataset
+
+    # Re train model
     re_train_model_button = st.button("Re train model", on_click = ml_purchase_propension_training)
 
-    # select threshold and looking confussion matrix and lift chart in evaluation sample
+    # select threshold and show confussion matrix and lift chart in evaluation sample
 
-    # save threshold
+    # save threshold and save evaluation metrics
+    evaluate_model_button = st.button("Evaluate model", on_click = ml_purchase_propension_try_threshold)
+    
 
     # auto predict weekly for all the dataset.
 
