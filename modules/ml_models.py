@@ -74,7 +74,7 @@ def ml_purchase_propension(user_id, project_name):
         st.table(st.session_state.confussion_matrix)
         
     if 'lift_chart_evaluation_data' in st.session_state:
-        st.write('##### Lift Chart in Evaluation Data'')
+        st.write('##### Lift Chart in Evaluation Data')
         st.table(st.session_state.lift_chart_evaluation_data)
 
     # save threshold and save evaluation metrics
