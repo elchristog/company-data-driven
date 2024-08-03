@@ -29,11 +29,10 @@ def ml_purchase_propension_try_threshold():
     if 'processed_data_query' in st.session_state:
         os.write(1, '- ml_purchase_propension_try_threshold: trying threshold\n'.encode('utf-8'))
         st.toast("Please wait", icon = "☺️")
-        confussion_matrix = uc.run_query_instant(f"SELECT * FROM ML.CONFUSION_MATRIX (MODEL `company-data-driven.enfermera_en_estados_unidos.purchase_propension_model`,   (   SELECT     *   FROM     ({st.session_state.processed_data_query })   WHERE     data_frame = 'evaluation'   ), STRUCT(0.2794 AS threshold) );")
+        st.session_state.confussion_matrix = uc.run_query_instant(f"SELECT * FROM ML.CONFUSION_MATRIX (MODEL `company-data-driven.enfermera_en_estados_unidos.purchase_propension_model`,   (   SELECT     *   FROM     ({st.session_state.processed_data_query })   WHERE     data_frame = 'evaluation'   ), STRUCT(0.2794 AS threshold) );")
         st.toast("Model retrained!", icon = "👾")
         st.balloons()
         time.sleep(1)
-        st.write(confussion_matrix)
         # uc.run_query_half_day.clear()
         # del st.session_state.ml_purchase_propension_user_id
         # del st.session_state.ml_purchase_propension_project_name
@@ -67,6 +66,9 @@ def ml_purchase_propension(user_id, project_name):
     st.slider(label = "Threshold", min_value = 0.000, max_value = 1.000, value = 0.5, step = 0.001, key = 'ml_purchase_propension_threshold')
     
     try_threshold_button = st.button("Try trhreshold", on_click = ml_purchase_propension_try_threshold)
+    
+    if 'confussion_matrix' in st.session_state:
+        st.table(st.session_state.confussion_matrix)
 
     # save threshold and save evaluation metrics
 
