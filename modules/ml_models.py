@@ -27,15 +27,16 @@ def ml_purchase_propension_training():
 def ml_purchase_propension_try_threshold():
     os.write(1, '🥏 Executing ml_purchase_propension_try_threshold \n'.encode('utf-8'))
     if 'processed_data_query' in st.session_state:
-        os.write(1, '- ml_purchase_propension_try_threshold: Evaluating model\n'.encode('utf-8'))
+        os.write(1, '- ml_purchase_propension_try_threshold: trying threshold\n'.encode('utf-8'))
         st.toast("Please wait", icon = "☺️")
-        evaluation_data = uc.run_query_instant(f"CREATE OR REPLACE MODEL `company-data-driven.{st.session_state.ml_purchase_propension_project_name}.purchase_propension_model` OPTIONS ( model_type='LOGISTIC_REG',   auto_class_weights=TRUE, enable_global_explain=TRUE,  data_split_method='NO_SPLIT',   input_label_cols=['target_contract'],   max_iterations=15) AS SELECT * EXCEPT(data_frame) FROM( {st.session_state.processed_data_query }  ) WHERE data_frame = 'training';")
+        confussion_matrix = uc.run_query_instant(f"SELECT * FROM ML.CONFUSION_MATRIX (MODEL `company-data-driven.enfermera_en_estados_unidos.purchase_propension_model`,   (   SELECT     *   FROM     ({st.session_state.processed_data_query })   WHERE     data_frame = 'evaluation'   ), STRUCT(0.2794 AS threshold) );")
         st.toast("Model retrained!", icon = "👾")
         st.balloons()
         time.sleep(1)
-        uc.run_query_half_day.clear()
-        del st.session_state.ml_purchase_propension_user_id
-        del st.session_state.ml_purchase_propension_project_name
+        st.write(confussion_matrix)
+        # uc.run_query_half_day.clear()
+        # del st.session_state.ml_purchase_propension_user_id
+        # del st.session_state.ml_purchase_propension_project_name
 
 
 
@@ -56,11 +57,15 @@ def ml_purchase_propension(user_id, project_name):
     # Showing confussion matrix and lift chart in whole dataset
 
     # Re train model
+    st.write('### Re train model')
     re_train_model_button = st.button("Re train model", on_click = ml_purchase_propension_training)
 
     st.write('---')
+    st.write('### Try Threshold in Evaluation Data')
+    
     # select threshold and show confussion matrix and lift chart in evaluation sample
     st.slider(label = "Threshold", min_value = 0.000, max_value = 1.000, value = 0.5, step = 0.001, key = 'ml_purchase_propension_threshold')
+    
     try_threshold_button = st.button("Try trhreshold", on_click = ml_purchase_propension_try_threshold)
 
     # save threshold and save evaluation metrics
