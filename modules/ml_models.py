@@ -29,13 +29,15 @@ def ml_purchase_propension_try_threshold():
     if 'processed_data_query' in st.session_state:
         os.write(1, '- ml_purchase_propension_try_threshold: trying threshold\n'.encode('utf-8'))
         st.toast("Please wait", icon = "☺️")
+        
         st.session_state.confussion_matrix = uc.run_query_instant(f"SELECT * FROM ML.CONFUSION_MATRIX (MODEL `company-data-driven.{st.session_state.ml_purchase_propension_project_name}.purchase_propension_model`,   (   SELECT     *   FROM     ({st.session_state.processed_data_query })   WHERE     data_frame = 'evaluation'   ), STRUCT({st.session_state.ml_purchase_propension_threshold} AS threshold) );")
-        st.toast("Model retrained!", icon = "👾")
+
+        st.session_state.lift_chart_evaluation_data = uc.run_query_instant(f"WITH ranked_predictions AS ( SELECT id, predicted_target_contract, predicted_target_contract_probs[0].prob, NTILE(10) OVER (ORDER BY predicted_target_contract_probs[0].prob DESC) as decile, target_contract FROM ML.PREDICT (MODEL `company-data-driven.{st.session_state.ml_purchase_propension_project_name}.purchase_propension_model`,   (   SELECT     *   FROM     ( )   WHERE     data_frame = 'evaluation'   ), STRUCT({st.session_state.ml_purchase_propension_threshold} AS threshold) ) ), decile_stats AS (     SELECT         decile,         COUNT(DISTINCT id) AS num_users,         AVG(prob) AS avg_predicted_probability,    COUNT(DISTINCT id) * AVG(prob) AS expected_events,      SUM(CASE WHEN target_contract = 1 THEN 1 ELSE 0 END) AS num_realized_events,         (SUM(CASE WHEN target_contract = 1 THEN 1 ELSE 0 END) / COUNT(DISTINCT id)) AS realized_event_rate     FROM ranked_predictions     GROUP BY decile ), global_stats AS (     SELECT         AVG(target_contract) as global_event_rate     FROM ranked_predictions ) SELECT     ds.decile,     ds.num_users,     ds.avg_predicted_probability, ds.expected_events,    ds.num_realized_events,     ds.realized_event_rate,     gs.global_event_rate,     (ds.realized_event_rate / gs.global_event_rate) AS lift FROM decile_stats ds CROSS JOIN global_stats gs ORDER BY ds.decile DESC;")
+        
+        st.toast("Test completed in validation data!", icon = "👾")
         st.balloons()
         time.sleep(1)
-        # uc.run_query_half_day.clear()
-        # del st.session_state.ml_purchase_propension_user_id
-        # del st.session_state.ml_purchase_propension_project_name
+
 
 
 
@@ -68,8 +70,12 @@ def ml_purchase_propension(user_id, project_name):
     try_threshold_button = st.button("Try threshold", on_click = ml_purchase_propension_try_threshold)
     
     if 'confussion_matrix' in st.session_state:
-        st.write('##### Confussion Matrix')
+        st.write('##### Confussion Matrix in Evaluation Data')
         st.table(st.session_state.confussion_matrix)
+        
+    if 'lift_chart_evaluation_data' in st.session_state:
+        st.write('##### Lift Chart in Evaluation Data'')
+        st.table(st.session_state.lift_chart_evaluation_data)
 
     # save threshold and save evaluation metrics
 
