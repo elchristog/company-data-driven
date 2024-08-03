@@ -29,7 +29,7 @@ def ml_purchase_propension_try_threshold():
     if 'processed_data_query' in st.session_state:
         os.write(1, '- ml_purchase_propension_try_threshold: trying threshold\n'.encode('utf-8'))
         st.toast("Please wait", icon = "☺️")
-        st.session_state.confussion_matrix = uc.run_query_instant(f"SELECT * FROM ML.CONFUSION_MATRIX (MODEL `company-data-driven.enfermera_en_estados_unidos.purchase_propension_model`,   (   SELECT     *   FROM     ({st.session_state.processed_data_query })   WHERE     data_frame = 'evaluation'   ), STRUCT({st.session_state.ml_purchase_propension_threshold} AS threshold) );")
+        st.session_state.confussion_matrix = uc.run_query_instant(f"SELECT * FROM ML.CONFUSION_MATRIX (MODEL `company-data-driven.enfermera_en_estados_unidos.purchase_propension_model`,   (   SELECT     *   FROM     ({st.session_state.processed_data_query })   WHERE     data_frame = 'evaluation'   ), STRUCT(0.5 AS threshold) );")
         st.toast("Model retrained!", icon = "👾")
         st.balloons()
         time.sleep(1)
