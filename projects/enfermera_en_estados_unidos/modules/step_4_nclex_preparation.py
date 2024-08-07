@@ -7,6 +7,7 @@ import datetime
 import utils.user_credentials as uc
 import utils.g_gemini_gestor as ggg
 
+@st.fragment
 def study_plan_execution(study_plan_selected_username, study_plan_user_id, study_plan_project_id, study_plan_project_name, study_plan_selected_user_id, study_plan_selected_contract_id):
   os.write(1, '🥏 Executing study_plan_execution \n'.encode('utf-8'))
   st.toast("Updating, please wait", icon = "☺️")
@@ -186,7 +187,7 @@ def study_plan_execution(study_plan_selected_username, study_plan_user_id, study
 
 
 
-
+@st.fragment
 def study_plan(user_id, project_id, project_name):
   os.write(1, '🥏 Executing study_plan \n'.encode('utf-8'))
   os.write(1, '- study_plan: Retrieving users \n'.encode('utf-8'))
@@ -245,7 +246,7 @@ def study_plan(user_id, project_id, project_name):
 
 
 
-
+@st.fragment
 def add_study_guide_execution():
     os.write(1, '🥏 Executing add_study_guide_execution \n'.encode('utf-8'))
     if 'add_study_guide_file_url' in st.session_state:
@@ -267,7 +268,7 @@ def add_study_guide_execution():
             del st.session_state.add_study_guide_project_name
 
 
-
+@st.fragment
 def add_study_guide(user_id, project_name):
     os.write(1, '🥏 Executing add_study_guide \n'.encode('utf-8'))
     os.write(1, '- add_study_guide: Showing form \n'.encode('utf-8'))
