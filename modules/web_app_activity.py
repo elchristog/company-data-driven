@@ -3,6 +3,7 @@ import datetime
 
 import utils.user_credentials as uc
 
+@st.fragment
 def login_activity(team_or_customer):
     if team_or_customer == 'customer':
         st.header("Top 5 customers without login")
