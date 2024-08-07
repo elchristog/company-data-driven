@@ -14,7 +14,7 @@ import utils.user_credentials as uc
 
 
 
-
+@st.fragment
 def plot_echarts_btl_web_yt(df_grouped, channel_name):
     if channel_name == 'web':
       interaction_variable_name = 'web_clicks'
@@ -92,7 +92,7 @@ def plot_echarts_btl_web_yt(df_grouped, channel_name):
 
 
 
-
+@st.fragment
 def plot_echarts_btl_networks(df_grouped):
     df_grouped['date'] = df_grouped['date'].astype(str)
 
@@ -146,7 +146,7 @@ def plot_echarts_btl_networks(df_grouped):
 
 
 
-
+@st.fragment
 def show_bitly_web_youtube_metrics(project_name, bitly_web_link, bitly_yt_link, bitly_inst_link):
     os.write(1, '🥏 Executing show_bitly_web_youtube_metrics \n'.encode('utf-8'))
     os.write(1, '- show_bitly_web_youtube_metrics: Web data \n'.encode('utf-8'))
