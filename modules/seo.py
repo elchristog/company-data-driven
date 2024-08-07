@@ -11,7 +11,7 @@ import utils.g_gemini_gestor as ggg
 
 # callbacks https://discuss.streamlit.io/t/click-twice-on-button-for-changing-state/45633/2
 
-
+@st.fragment
 def seo_ideation_execution(project_name, project_keyword, user_id, role_id, text_input_1):
     os.write(1, '🥏 Executing seo_ideation_execution \n'.encode('utf-8'))
     os.write(1, '- seo_ideation_execution: Generating Ideas\n'.encode('utf-8'))
@@ -39,7 +39,7 @@ def seo_ideation_execution(project_name, project_keyword, user_id, role_id, text
         
         
     
-
+@st.fragment
 def seo_ideation(project_name, project_keyword, user_id, role_id):
     os.write(1, '🥏 Executing seo_ideation \n'.encode('utf-8'))
     os.write(1, '- seo_ideation: Counting previuos ideas\n'.encode('utf-8'))
@@ -70,7 +70,7 @@ def seo_ideation(project_name, project_keyword, user_id, role_id):
 
 
 
-
+@st.fragment
 def video_creation_execution():
     os.write(1, '🥏 Executing video_creation_execution \n'.encode('utf-8'))
     os.write(1, '- video_creation_execution: Saving created idea\n'.encode('utf-8'))
@@ -89,7 +89,7 @@ def video_creation_execution():
     
 
 
-
+@st.fragment
 def video_creation(user_id, project_name):
     os.write(1, '🥏 Executing video_creation \n'.encode('utf-8'))
     num_videos_to_edit = uc.run_query_instant(f"SELECT COUNT(id) AS queue FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NULL OR edited_video = 0);")[0].get('queue')
@@ -121,7 +121,7 @@ def video_creation(user_id, project_name):
 
 
 
-
+@st.fragment
 def video_edition_execution():
     os.write(1, '🥏 Executing video_edition_execution \n'.encode('utf-8'))
     os.write(1, '- video_edition_execution: Saving created idea\n'.encode('utf-8'))
@@ -140,7 +140,7 @@ def video_edition_execution():
     
 
 
-
+@st.fragment
 def video_edition(user_id, project_name):
     os.write(1, '🥏 Executing video_edition \n'.encode('utf-8'))
     os.write(1, '- video_edition: Listing ideas \n'.encode('utf-8'))
@@ -167,7 +167,7 @@ def video_edition(user_id, project_name):
 
 
 
-
+@st.fragment
 def video_uploading_execution():
     os.write(1, '🥏 Executing video_uploading_execution \n'.encode('utf-8'))
     os.write(1, '- video_uploading_execution: Saving created idea\n'.encode('utf-8'))
@@ -184,12 +184,12 @@ def video_uploading_execution():
     del st.session_state.video_uploading_selected_idea_id
     del st.session_state.video_uploading_selected_idea
     
-
+@st.fragment
 def video_title_description_generation():
     st.session_state.video_title_description_generation = ggg.gemini_general_prompt("Eres un redactor SEO experto en posicionar keywords y generar contenidos que llaman la atencion", "Ahora soy un redactor SEO experto", "[KEYWORD] "+str(st.session_state.video_uploading_selected_idea)+" [/KEYWORD][EXTRA_KEYWORDS] enfermera, estados unidos, registered nurse, enfermeriamigracionnclex, nclex rnielts, ¿Cómo convertirme en enfermera en Estados Unidos?, Pasos para ser enfermera en Estados Unidos., ¿Cómo puedo ser enfermera en USA?, Guía para ser enfermera en Estados Unidos., ¿Qué necesito para ser enfermera en Estados Unidos?, Consejos para ser enfermera en USA., Proceso para convertirse en enfermera en Estados Unidos., enfermeriamigracionnclexieltssalariohomologacionusa, enfermero, trabajo, como ser enfermera en estados unidos, enfermero en estados unidos, salario enfermera usasalario de enfermerasalario de enfermeria, Cómo ser enfermera en USA, Pasos para ser enfermera en Estados Unidos, Requisitos para ejercer enfermería en USA, Guía para convertirse en enfermera en Estados Unidos, trabajo enfermera, NCLEX, IELTS, Salario, Homologación, USA, Trabajo, Requisitos, #enfermeriaenestadosunidos, #enfermeraestadosunidos, #registerednurse, #enfermeriamigracionnclex, #nclexrnielts [/EXTRA_KEYWORDS][DESCRIPTION] [Descripcion corta que contenga la [KEYWORD] ]luego mostrar Este texto:Agenda una asesoría conmigo:- Whatsapp: https://bit.ly/45SidF6Mis redes: - Web: https://enfermeraenestadosunidos.com/- Instagram: https://www.instagram.com/enfermeraenestadosunidos- TikTok: https://www.tiktok.com/@enfermeraenestadosunidos[Descripción extensa que diga de que se trata el video basandose en la [KEYWORD] y contenga 2 mil palabras] [/DESCRIPTION][INSTRUCTION] Crea el título de un video de YouTube que contenga la [KEYWORD] que contenga menos de 8 palabras, llama la atención usando mayusculas selectivas y emojis. Luego Crea Una descripción que cumpla con todos los requisitos de [DESCRIPTION]. Crea 60 tags exactamente, jugando con la [KEYWORD] y las [EXTRA_KEYWORDS] que ayuden a posicionar el video, Asegúrate de mostrar Este listado de tags en un solo parrafo y separado por comas  y no usar hashtags, por ultimo agrega 20 formas distintas en que una persona podria buscar en google esto: "+str(st.session_state.video_uploading_selected_idea)+"[/INSTRUCTION]")
     
     
-
+@st.fragment
 def video_uploading(user_id, project_name):
     os.write(1, '🥏 Executing video_uploading \n'.encode('utf-8'))
     os.write(1, '- video_uploading: Listing ideas \n'.encode('utf-8'))
@@ -219,7 +219,7 @@ def video_uploading(user_id, project_name):
 
 
 
-
+@st.fragment
 def video_to_shorts_execution():
     if 'video_to_shorts_agree' in st.session_state:
         os.write(1, '🥏 Executing video_to_shorts_execution \n'.encode('utf-8'))
@@ -239,11 +239,11 @@ def video_to_shorts_execution():
         del st.session_state.video_to_shorts_agree
         
 
-
+@st.fragment
 def short_title_description_generation():
     st.session_state.short_title_description_generation = ggg.gemini_general_prompt("Eres un redactor SEO experto en posicionar keywords y generar contenidos que llaman la atencion", "Ahora soy un redactor SEO experto", "[KEYWORD] "+str(st.session_state.short_description)+" [/KEYWORD][EXTRA_KEYWORDS] enfermera, estados unidos, registered nurse, enfermeriamigracionnclex, nclex rnielts, ¿Cómo convertirme en enfermera en Estados Unidos?, Pasos para ser enfermera en Estados Unidos., ¿Cómo puedo ser enfermera en USA?, Guía para ser enfermera en Estados Unidos., ¿Qué necesito para ser enfermera en Estados Unidos?, Consejos para ser enfermera en USA., Proceso para convertirse en enfermera en Estados Unidos., enfermeriamigracionnclexieltssalariohomologacionusa, enfermero, trabajo, como ser enfermera en estados unidos, enfermero en estados unidos, salario enfermera usasalario de enfermerasalario de enfermeria, Cómo ser enfermera en USA, Pasos para ser enfermera en Estados Unidos, Requisitos para ejercer enfermería en USA, Guía para convertirse en enfermera en Estados Unidos, trabajo enfermera, NCLEX, IELTS, Salario, Homologación, USA, Trabajo, Requisitos, #enfermeriaenestadosunidos, #enfermeraestadosunidos, #registerednurse, #enfermeriamigracionnclex, #nclexrnielts [/EXTRA_KEYWORDS][DESCRIPTION] [Descripcion corta que contenga la [KEYWORD] ]luego mostrar Este texto:Agenda una asesoría conmigo:- Whatsapp: https://bit.ly/45SidF6Mis redes: - Web: https://enfermeraenestadosunidos.com/- Instagram: https://www.instagram.com/enfermeraenestadosunidos- TikTok: https://www.tiktok.com/@enfermeraenestadosunidos[Descripción extensa que diga de que se trata el video basandose en la [KEYWORD] y contenga 2 mil palabras] [/DESCRIPTION][INSTRUCTION] Crea el título de un video de YouTube que contenga la [KEYWORD] que contenga menos de 8 palabras, llama la atención usando mayusculas selectivas y emojis. Luego Crea Una descripción que cumpla con todos los requisitos de [DESCRIPTION]. y por último Crea 60 tags exactamente, jugando con la [KEYWORD] y las [EXTRA_KEYWORDS] que ayuden a posicionar el video, Asegúrate de mostrar Este listado de tags en un solo parrafo y separado por comas  y no usar hashtags[/INSTRUCTION]")
     
-
+@st.fragment
 def video_to_shorts(user_id, project_name):
     os.write(1, '🥏 Executing video_to_shorts \n'.encode('utf-8'))
     os.write(1, '- video_to_shorts: Listing ideas \n'.encode('utf-8'))
@@ -277,7 +277,7 @@ def video_to_shorts(user_id, project_name):
 
 
 
-
+@st.fragment
 def web_writing_execution():
     os.write(1, '🥏 Executing web_writing_execution \n'.encode('utf-8'))
     if 'web_writing_agree' in st.session_state:
@@ -298,7 +298,7 @@ def web_writing_execution():
     else:
         st.toast("If you are sure you have finished, mark the checkbox")
 
-
+@st.fragment
 def web_writing_generation():
     length = len(st.session_state.web_writing_transcript)
     half_length = length // 2
@@ -310,7 +310,7 @@ def web_writing_generation():
 
     st.session_state.web_writing_generation = st.session_state.web_writing_generation_part_1 + st.session_state.web_writing_generation_part_2
     
-
+@st.fragment
 def web_writing(user_id, project_name):
     os.write(1, '🥏 Executing web_writing \n'.encode('utf-8'))
     os.write(1, '- web_writing: Listing ideas \n'.encode('utf-8'))
@@ -345,7 +345,7 @@ def web_writing(user_id, project_name):
 
 
 
-
+@st.fragment
 def post_idea_creation_execution():
     os.write(1, '🥏 Executing video_creation_execution \n'.encode('utf-8'))
     if 'post_idea_creation_post_idea' in st.session_state:
@@ -368,7 +368,7 @@ def post_idea_creation_execution():
             del st.session_state.post_idea_creation_post_idea
 
 
-
+@st.fragment
 def post_idea_creation(user_id, project_name):
     os.write(1, '🥏 Executing post_idea_creation \n'.encode('utf-8'))
     os.write(1, '- post_idea_creation: Showing form \n'.encode('utf-8'))
@@ -391,7 +391,7 @@ def post_idea_creation(user_id, project_name):
 
 
 
-
+@st.fragment
 def posting_posts_execution():
     os.write(1, '🥏 Executing posting_posts_execution \n'.encode('utf-8'))
     if 'posting_posts_selected_idea' in st.session_state:
@@ -407,10 +407,11 @@ def posting_posts_execution():
         del st.session_state.posting_posts_selected_idea
         del st.session_state.posting_posts_selected_idea_id 
 
+@st.fragment
 def post_redaction_generation():
     st.session_state.post_redaction_generation = ggg.gemini_general_prompt("Eres un experto en correccion de ortografia y redaccion", "Ahora soy un experto en redaccion y correccion de ortografia", f"Corrige la ortografia y muestrame unicamente el texto corregido: {st.session_state.posting_posts_selected_idea}")
     
-
+@st.fragment
 def posting_posts(user_id, project_name):
     os.write(1, '🥏 Executing posting_posts \n'.encode('utf-8'))
     os.write(1, '- posting_posts: Showing form \n'.encode('utf-8'))
@@ -449,7 +450,7 @@ def posting_posts(user_id, project_name):
 
 
 
-
+@st.fragment
 def post_to_web_execution():
     os.write(1, '🥏 Executing post_to_web_execution \n'.encode('utf-8'))
     if 'post_to_web_selected_idea' in st.session_state:
@@ -466,10 +467,11 @@ def post_to_web_execution():
         del st.session_state.post_to_web_selected_idea_id 
         del st.session_state.post_to_web_project_keyword
 
+@st.fragment
 def post_to_web_generation():
     st.session_state.post_to_web_generation = ggg.gemini_general_prompt("Eres un experto en redaccion de contenidos extensos, hablas de forma informal desde una perspectiva personal, diciendo yo.. y le creas un titulo a al contenido generado", "Ahora soy un experto en redaccion extensa y detallada, hablo de forma informal desde una perspectiva personal, diciendo yo.. y le creo un titulo a al contenido generado", f"Redacta esto de una forma muy extensa: {st.session_state.post_to_web_project_keyword}: {st.session_state.post_to_web_selected_idea}")
     
-
+@st.fragment
 def post_to_web(user_id, project_name, project_keyword):
     st.session_state.post_to_web_project_keyword = project_keyword
     os.write(1, '🥏 Executing post_to_web \n'.encode('utf-8'))
@@ -501,7 +503,7 @@ def post_to_web(user_id, project_name, project_keyword):
 
 
 
-
+@st.fragment
 def web_creation_guide():
     st.markdown('''duplicate page Easy Updates Manager, 
                 imagify (e158d9b22db474a52c9ef7fa81afb14571d2fe7d)
@@ -520,7 +522,7 @@ def web_creation_guide():
 
 
 
-
+@st.fragment
 def days_since_last_content(project_name):
     os.write(1, '🥏 Executing days_since_last_content \n'.encode('utf-8'))
     os.write(1, '- days_since_last_content: Counting days since last content\n'.encode('utf-8'))
@@ -558,7 +560,7 @@ def days_since_last_content(project_name):
 
 
 
-
+@st.fragment
 def post_content_prompt():
     st.markdown('''
     Actua como IA, Continua la conversacion manteniendo un estilo de respuesta directo, en un texto corto de menos de 300 palabras, incisivo como un regaño y en un solo parrafo.
