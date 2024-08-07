@@ -9,7 +9,7 @@ import utils.user_credentials as uc
 
 # https://docs.streamlit.io/library/api-reference/status
 
-
+@st.fragment
 def tester_execution():
     if st.session_state.selected_answer_q1 is None or st.session_state.selected_answer_q2 is None or st.session_state.selected_answer_q3 is None or st.session_state.selected_answer_q4 is None or st.session_state.selected_answer_q5 is None or st.session_state.selected_answer_q6 is None or st.session_state.selected_answer_q7 is None or st.session_state.selected_answer_q8 is None or st.session_state.selected_answer_q9 is None or st.session_state.selected_answer_q10 is None:
         st.toast("you forgot to answer at least one question", icon = "🤧")
@@ -42,7 +42,7 @@ def tester_execution():
             
 
 
-
+@st.fragment
 def tester(project_name, questions_sample_table_name, user_id, attempts_table_name, group_chat_url): 
 
     today_results = uc.run_query_instant(f"SELECT * FROM `company-data-driven.{project_name}.{attempts_table_name}` WHERE user_id = {user_id} AND attempt_date = CURRENT_DATE();")
@@ -349,7 +349,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
         
             
 
-
+@st.fragment
 def add_question_to_test_execution():
     if st.session_state.question is None or st.session_state.option_a is None or st.session_state.option_b is None or st.session_state.option_c is None or st.session_state.option_d is None or st.session_state.letter_correct_answer is None or st.session_state.explanation is None or len(st.session_state.question) < 1 or len(st.session_state.option_a) < 1 or len(st.session_state.option_b) < 1 or len(st.session_state.option_c) < 1 or len(st.session_state.option_d) < 1 or len(st.session_state.letter_correct_answer) < 1 or len(st.session_state.explanation) < 1:
         st.toast("Please fill in completely all of the required fields.")
@@ -363,7 +363,7 @@ def add_question_to_test_execution():
 
 
 
-
+@st.fragment
 def add_question_to_test(project_name, questions_table_name, user_id):
     today = datetime.date.today()
     today_str = today.strftime("%Y-%m-%d")
@@ -419,7 +419,7 @@ def add_question_to_test(project_name, questions_table_name, user_id):
 
 
 
-
+@st.fragment
 def test_achievements(project_name, user_id, attempts_table_name): 
     # today's ranking
     today = datetime.date.today()
