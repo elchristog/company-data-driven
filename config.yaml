@@ -240,6 +240,10 @@ credentials:
       email: alejandra77848@gmail.com
       name: Alejandra Bolivar
       password: $2b$12$8Kc.zdtBi39BJyOFgaUdnOvGERkE5mK8loCYfncvKa8psLhu0Bktm
+    ldcarbajalo:
+      email: lui.d.carorb1612@outlook.com
+      name: Luis Carbajal
+      password: $2b$12$7AginrpM7q6ZESxemhRBB.xbD303ECpZwbxadzbfNyvB.k9Bl6BkW
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
