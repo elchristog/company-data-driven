@@ -13,7 +13,7 @@ import utils.user_credentials as uc
 
 
 
-
+@st.fragment
 def plot_echarts_wsp(df_grouped):
     df_grouped['conversion'] = df_grouped['conversion'].apply(lambda conversion: f"{conversion:.2f}")
     df_grouped['date'] = df_grouped['date'].astype(str)
@@ -101,7 +101,7 @@ def plot_echarts_wsp(df_grouped):
 
 
 
-
+@st.fragment
 def whatsapp_leads_show_metrics(project_name, bitly_web_link, bitly_yt_link):
   dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
   dates_whatsapp_leads = uc.run_query_1_h(f"SELECT MIN(creation_date) AS min_date_wsp, MAX(creation_date) AS max_date_wsp FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
@@ -144,7 +144,7 @@ def whatsapp_leads_show_metrics(project_name, bitly_web_link, bitly_yt_link):
 
 
 
-
+@st.fragment
 def whatsapp_leads_creation_save(project_name, user_id):
     st.session_state.text_input_1 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_1)
     st.session_state.text_input_2 = re.sub('[^a-zA-Z0-9 \n\.]', ' ', st.session_state.text_input_2)
@@ -184,7 +184,7 @@ def whatsapp_leads_creation_save(project_name, user_id):
 
     
 
-
+@st.fragment
 def whatsapp_leads_creation(user_id, project_name):
     st.warning("Do not use line breaks, symbols, double or single quotes", icon = "🙈")
     with st.form("whatsapp_leads_creation_form", clear_on_submit = True):
@@ -225,7 +225,7 @@ def whatsapp_leads_creation(user_id, project_name):
 
 
 
-
+@st.fragment
 def fix_phone_number_execution():
     os.write(1, '🥏 Executing fix_phone_number_execution \n'.encode('utf-8'))
     if 'fix_phone_number_selected_phone_number' in st.session_state:
@@ -247,7 +247,7 @@ def fix_phone_number_execution():
         else:
             st.toast('Need confirmation', icon = '🧐')
         
-
+@st.fragment
 def fix_phone_number(user_id, project_name):
     os.write(1, '🥏 Executing fix_phone_number \n'.encode('utf-8'))
     os.write(1, '- fix_phone_number: Showing form \n'.encode('utf-8'))
@@ -279,7 +279,7 @@ def fix_phone_number(user_id, project_name):
 
 
 
-
+@st.fragment
 def wsp_answer_text(project_id):
     if project_id == 1:
         st.write('---')
