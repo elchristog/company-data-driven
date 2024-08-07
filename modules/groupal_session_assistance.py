@@ -12,7 +12,7 @@ import utils.user_credentials as uc
 
 
 
-
+@st.fragment
 def plot_echarts_gsa(df_grouped):
     df_grouped['date'] = df_grouped['date'].astype(str)
 
@@ -72,7 +72,7 @@ def plot_echarts_gsa(df_grouped):
 
 
 
-
+@st.fragment
 def groupal_session_show_metrics(project_name, bitly_groupal_session_link):
   dates_bitly = uc.run_query_1_h(f"SELECT MIN(date) AS min_date_bitly, MAX(date) AS max_date_bitly FROM `company-data-driven.{project_name}.traffic_analytics_bitly_clicks`;")
   if len(dates_bitly) < 1:
@@ -108,7 +108,7 @@ def groupal_session_show_metrics(project_name, bitly_groupal_session_link):
 
 
 
-
+@st.fragment
 def add_new_assistant_execution(user_id, project_name, selected_phone_id, meeting_date):
     already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` WHERE traffic_analytics_whatsapp_lead_id = '{selected_phone_id}' AND meeting_date = '{meeting_date}'")
     if len(already_created) > 0:
@@ -125,7 +125,7 @@ def add_new_assistant_execution(user_id, project_name, selected_phone_id, meetin
 
 
 
-
+@st.fragment
 def add_new_assistant(user_id, project_name):
     rows = uc.run_query_half_day(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
     assistant_ids = []
@@ -157,7 +157,7 @@ def add_new_assistant(user_id, project_name):
 
 
 
-
+@st.fragment
 def add_new_absent_execution(user_id, project_name, selected_phone_id, meeting_date):
     already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` WHERE traffic_analytics_whatsapp_lead_id = '{selected_phone_id}' AND meeting_date = '{meeting_date}'")
     already_assisted = uc.run_query_instant(f"SELECT id FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` WHERE traffic_analytics_whatsapp_lead_id = '{selected_phone_id}' AND status = 'assistant'")
@@ -175,7 +175,7 @@ def add_new_absent_execution(user_id, project_name, selected_phone_id, meeting_d
 
 
 
-
+@st.fragment
 def add_new_absent(user_id, project_name):
     rows = uc.run_query_half_day(f"SELECT id, CONCAT(phone_indicator,phone_number) AS full_phone_number FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads`;")
     assistant_ids = []
@@ -204,7 +204,7 @@ def add_new_absent(user_id, project_name):
 
 
 
-
+@st.fragment
 def groupal_session_absents_and_opportunities(project_name):
     col1, col2 = st.columns(2)
     with col1:
@@ -237,7 +237,7 @@ def groupal_session_absents_and_opportunities(project_name):
 
 
 
-
+@st.fragment
 def add_new_crm_groupal_session_contact_execution():
     if st.session_state.add_new_crm_groupal_session_contact_contact_description is None or len(st.session_state.add_new_crm_groupal_session_contact_contact_description) < 36 or st.session_state.add_new_crm_groupal_session_contact_user_status is None:
         st.toast("contact_description can not be null or too short", icon="☺️") 
@@ -291,7 +291,7 @@ def add_new_crm_groupal_session_contact_execution():
 
 
 
-
+@st.fragment
 def add_new_crm_groupal_session_contact(user_id, project_name):
     rows = uc.run_query_half_day(f"SELECT DISTINCT tawl.id, CONCAT(tawl.phone_indicator,tawl.phone_number) AS full_phone_number, COALESCE(DATE_DIFF(CURRENT_DATE(), last_crm_status.last_contact_date, DAY), 99999) AS days_since_last_contact FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS tawl LEFT OUTER JOIN (SELECT tagsc.traffic_analytics_whatsapp_leads_id, LAST_VALUE(tagsc.user_status) OVER(PARTITION BY tagsc.traffic_analytics_whatsapp_leads_id ORDER BY tagsc.contact_date) AS last_user_status, LAST_VALUE(tagsc.contact_date) OVER(PARTITION BY tagsc.traffic_analytics_whatsapp_leads_id ORDER BY tagsc.contact_date) AS last_contact_date FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` AS tagsc) AS last_crm_status ON tawl.id = last_crm_status.traffic_analytics_whatsapp_leads_id ORDER BY days_since_last_contact DESC;")
     lead_ids = []
@@ -339,7 +339,7 @@ def add_new_crm_groupal_session_contact(user_id, project_name):
 
 
 
-
+@st.fragment
 def groupal_session_team_member_performance(user_id, project_name):
     team_member_contacts = uc.run_query_half_day(f"SELECT tagsc.contact_date, EXTRACT(YEAR FROM tagsc.contact_date) AS year_contact, EXTRACT(MONTH FROM tagsc.contact_date) AS month_contact, EXTRACT(WEEK FROM tagsc.contact_date) AS week_contact, tagsc.user_status FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_crm` AS tagsc WHERE tagsc.creator_id = {user_id} AND EXTRACT(YEAR FROM tagsc.contact_date) = EXTRACT(YEAR FROM CURRENT_DATE());")
     team_member_contacts_df = pd.DataFrame(team_member_contacts, columns = ["contact_date","year_contact","month_contact","week_contact","user_status"])
@@ -400,7 +400,7 @@ def groupal_session_team_member_performance(user_id, project_name):
 
 
 
-
+@st.fragment
 def groupal_session_contact_text(project_id):
     if project_id == 1:
         st.write("---")
