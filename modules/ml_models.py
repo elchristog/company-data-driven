@@ -4,11 +4,10 @@ import streamlit as st
 import os
 import time
 
-# from pycaret.classification import *
 
 import utils.user_credentials as uc
 
-
+@st.fragment
 def ml_purchase_propension_training():
     os.write(1, '🥏 Executing ml_purchase_propension_training \n'.encode('utf-8'))
     if 'processed_data_query' in st.session_state:
@@ -23,7 +22,7 @@ def ml_purchase_propension_training():
         del st.session_state.ml_purchase_propension_project_name
 
 
-
+@st.fragment
 def ml_purchase_propension_try_threshold():
     os.write(1, '🥏 Executing ml_purchase_propension_try_threshold \n'.encode('utf-8'))
     if 'processed_data_query' in st.session_state:
@@ -40,7 +39,7 @@ def ml_purchase_propension_try_threshold():
 
 
 
-
+@st.fragment
 def ml_purchase_propension_save_threshold_and_metrics():
     os.write(1, '🥏 Executing ml_purchase_propension_save_threshold_and_metrics \n'.encode('utf-8'))
     
@@ -70,7 +69,7 @@ def ml_purchase_propension_save_threshold_and_metrics():
 
 
 
-
+@st.fragment
 def ml_purchase_propension(user_id, project_name):
     os.write(1, '🥏 Executing ml_purchase_propension \n'.encode('utf-8'))
     os.write(1, '- ml_purchase_propension: Showing form \n'.encode('utf-8'))
