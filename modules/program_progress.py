@@ -6,7 +6,7 @@ import pandas as pd
 
 import utils.user_credentials as uc
 
-
+@st.fragment
 def general_progress(user_id, project_name, program_steps_table_tame, program_steps_user_progress_table_name):
     st.header('Program progress and steps')
     user_progress_table = uc.run_query_15_m(f"SELECT ps.id, ps.name, ps.description, COALESCE(CAST(upsp_user.creation_date AS STRING),'pending') AS starting_date FROM `company-data-driven.{project_name}.{program_steps_table_tame}` AS ps LEFT JOIN (SELECT  * FROM `company-data-driven.{project_name}.{program_steps_user_progress_table_name}` AS upsp WHERE upsp.user_id = {user_id}) AS upsp_user ON ps.id = upsp_user.program_step_id  ORDER BY ps.id;")
@@ -21,7 +21,7 @@ def general_progress(user_id, project_name, program_steps_table_tame, program_st
         st.table(user_progress_table)
         return user_actual_step[0].get("program_step_id") 
 
-
+@st.fragment
 def users_to_contact(project_name, user_id):
     os.write(1, '🥏 Executing users_to_contact \n'.encode('utf-8'))
     os.write(1, '- users_to_contact: Showing users to contact \n'.encode('utf-8'))
@@ -39,7 +39,7 @@ def users_to_contact(project_name, user_id):
     
     
 
-
+@st.fragment
 def customer_success_add_program_step_execution():
     os.write(1, '🥏 Executing customer_success_add_program_step_execution \n'.encode('utf-8'))
     if 'customer_success_add_program_step_selected_program_step' in st.session_state:
@@ -67,7 +67,7 @@ def customer_success_add_program_step_execution():
         
         
 
-
+@st.fragment
 def customer_success_add_program_step(user_id, project_name):
     os.write(1, '🥏 Executing customer_success_add_program_step \n'.encode('utf-8'))
     os.write(1, '- customer_success_add_program_step: Showing form \n'.encode('utf-8'))
@@ -108,7 +108,7 @@ def customer_success_add_program_step(user_id, project_name):
 
 
 
-
+@st.fragment
 def customer_success_crm_add_contact_execution():
     os.write(1, '🥏 Executing customer_success_crm_add_contact_execution \n'.encode('utf-8'))
     if 'customer_success_crm_add_contact_selected_username' in st.session_state:
@@ -138,7 +138,7 @@ def customer_success_crm_add_contact_execution():
         del st.session_state.customer_success_crm_add_contact_user_id
         del st.session_state.customer_success_crm_add_contact_project_name
 
-
+@st.fragment
 def customer_success_crm_add_contact(user_id, project_name):
     os.write(1, '🥏 Executing customer_success_crm_add_contact \n'.encode('utf-8'))
     os.write(1, '- customer_success_crm_add_contact: Showing form \n'.encode('utf-8'))
@@ -239,7 +239,7 @@ def customer_success_crm_add_contact(user_id, project_name):
 
 
 
-
+@st.fragment
 def customer_success_mentor_assignation_execution():
     os.write(1, '🥏 Executing customer_success_mentor_assignation_execution \n'.encode('utf-8'))
     if 'customer_success_mentor_assignation_confirm_choice' in st.session_state:
@@ -257,7 +257,7 @@ def customer_success_mentor_assignation_execution():
 
 
 
-
+@st.fragment
 def customer_success_mentor_assignation(user_id, project_name):
     os.write(1, '🥏 Executing customer_success_mentor_assignation \n'.encode('utf-8'))
     os.write(1, '- customer_success_mentor_assignation: Showing form \n'.encode('utf-8'))
