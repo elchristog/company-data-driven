@@ -13,7 +13,7 @@ import utils.user_credentials as uc
 
 
 
-
+@st.fragment
 def plot_echarts_bgs(df_grouped):
     df_grouped['conversion'] = df_grouped['conversion'].apply(lambda conversion: f"{conversion:.2f}")
     df_grouped['date'] = df_grouped['date'].astype(str)
@@ -85,7 +85,7 @@ def plot_echarts_bgs(df_grouped):
 
 
 
-
+@st.fragment
 def bitly_groupal_session_show_metrics(project_name, bitly_groupal_session_link):
   os.write(1, '🥏 Executing bitly_groupal_session_show_metrics \n'.encode('utf-8'))
 
