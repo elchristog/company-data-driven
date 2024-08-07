@@ -5,6 +5,7 @@ import utils.user_credentials as uc
 
 # https://streamlit-emoji-shortcodes-streamlit-app-gwckff.streamlit.app/
 
+@st.fragment
 def resources(user_id, r_1 = [], r_2 = [], r_3 = [], r_4 = [], r_5 = [], r_6 = [], r_7 = [], r_8 = [], r_9 = [], r_10 = [], r_11 = []):
     # Each resource must be: [':selfie:', 'name', 'link_url'] [icon, button_name, link_url]
 
