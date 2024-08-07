@@ -44,7 +44,7 @@ flow = Flow.from_client_config(
 auth_url, _ = flow.authorization_url(prompt="consent")
     
 
-
+@st.fragment
 def button_callback():
     try:
         st.session_state.my_token_received = True
@@ -54,7 +54,7 @@ def button_callback():
         st.error("⚠️ The parameter 'code' was not found in the URL. Please log in.")
 
 
-
+@st.fragment
 def check_input_url(input_url):
     if "https://" in input_url or "http://" in input_url:
         return input_url
@@ -76,6 +76,7 @@ def get_webproperty(token):
 
 
 # @st.cache_data(experimental_allow_widgets=True, show_spinner=False)
+@st.fragment
 def plot_echarts(df_grouped):
     df_grouped['ctr'] = df_grouped['ctr'].apply(lambda ctr: f"{ctr * 100:.2f}")
     df_grouped['position'] = df_grouped['position'].apply(lambda pos: round(pos, 2))
@@ -159,6 +160,7 @@ def plot_echarts(df_grouped):
     
 
 # @st.cache_data(show_spinner=False)
+@st.fragment
 def get_data(property_url, dimensions, startDate, endDate, url_filter=None, url_operator=None,
             palavra_filter=None, palavra_operator=None):
     service = get_webproperty(st.session_state.my_token_input)
@@ -251,6 +253,7 @@ def get_data(property_url, dimensions, startDate, endDate, url_filter=None, url_
 
 
 # @st.cache_data(show_spinner=False)
+@st.fragment
 def get_data_date(property_url, startDate, endDate, url_filter=None, url_operator=None,
                 palavra_filter=None, palavra_operator=None):
         service = get_webproperty(st.session_state.my_token_input)
@@ -307,7 +310,7 @@ def get_data_date(property_url, startDate, endDate, url_filter=None, url_operato
         return df_clicks
 
 
-
+@st.fragment
 def get_data_save_to_bq_execution():
     url = st.session_state.project_url_clean
     property_url = check_input_url(url)
@@ -347,7 +350,7 @@ def get_data_save_to_bq_execution():
 
 
 
-
+@st.fragment
 def get_data_save_to_bq(role_id, project_name, project_url_clean):
     if role_id == 1:
         dates_in_table = uc.run_query_instant(f"SELECT DATE_DIFF(CURRENT_DATE(), MAX(date), DAY) - 3 AS days_last_update, DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY) AS min_date_first_query, DATE_ADD(MAX(date), INTERVAL 1 DAY) AS min_date_next_query, DATE_SUB(CURRENT_DATE(), INTERVAL 3 DAY) AS max_date_next_query FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
@@ -429,7 +432,7 @@ def get_data_save_to_bq(role_id, project_name, project_url_clean):
 
 
 
-
+@st.fragment
 def show_web_metrics(project_name):
     st.write("### 	:earth_americas: Web traffic")
     min_max_dates_range = uc.run_query_1_h(f"SELECT MIN(date) AS min_date, MAX(date) as max_date FROM `company-data-driven.{project_name}.traffic_analytics_web_clicks`;")
