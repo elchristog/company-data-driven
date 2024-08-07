@@ -14,7 +14,7 @@ import utils.user_credentials as uc
 
 
 
-
+@st.fragment
 def plot_echarts_c(df_grouped):
     df_grouped['date'] = df_grouped['date'].astype(str)
 
@@ -74,7 +74,7 @@ def plot_echarts_c(df_grouped):
 
 
 
-
+@st.fragment
 def contracts_show_metrics(project_name):
   os.write(1, '🥏 Executing contracts_show_metrics \n'.encode('utf-8'))
   os.write(1, '- contracts_show_metrics: Getting data \n'.encode('utf-8'))
@@ -113,7 +113,7 @@ def contracts_show_metrics(project_name):
 
 
 
-
+@st.fragment
 def customer_creation_execution():
     os.write(1, '🥏 Executing customer_creation_execution \n'.encode('utf-8'))
     os.write(1, '- customer_creation_execution: Creating user \n'.encode('utf-8'))
@@ -206,7 +206,7 @@ def customer_creation_execution():
 
 
 
-
+@st.fragment
 def customer_creation(user_id_customer_creation, project_id, project_name): 
     os.write(1, '🥏 Executing customer_creation \n'.encode('utf-8'))
     os.write(1, '- customer_creation: Showing form \n'.encode('utf-8'))
@@ -345,7 +345,7 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
 
 
 
-
+@st.fragment
 def contract_payments_show_metrics(project_name):
   dates_payments = uc.run_query_1_h(f"SELECT MIN(payment_date) AS min_payment_date, CURRENT_DATE() AS max_payment_date FROM `company-data-driven.{project_name}.contracts_payments` AS cp;")
   if len(dates_payments) < 1:
@@ -392,7 +392,7 @@ def contract_payments_show_metrics(project_name):
 
 
 
-
+@st.fragment
 def add_new_contract_payment_execution(user_id, project_name, selected_contract_id, payment_date, payment_value, contract_total_value, total_paid, current_debt, last_payment_date):
   if payment_value is None:
     st.toast("payment_value can not be null", icon="🤨")
@@ -425,7 +425,7 @@ def add_new_contract_payment_execution(user_id, project_name, selected_contract_
 
 
 
-
+@st.fragment
 def add_new_contract_payment(user_id, project_id, project_name):
     rows = uc.run_query_half_day(f"SELECT u.username, c.id as contract_id FROM `company-data-driven.{project_name}.contracts` AS c INNER JOIN `company-data-driven.global.users` AS u ON u.id = c.user_id;")
     usernames = []
@@ -493,7 +493,7 @@ def add_new_contract_payment(user_id, project_id, project_name):
 
 
 
-
+@st.fragment
 def add_new_crm_contact_execution():
     last_contact_date = uc.run_query_instant(f"SELECT MAX(contact_date) AS last_contact_date FROM `company-data-driven.{st.session_state.add_new_crm_contact_project_name}.contract_crm_log` WHERE traffic_analytics_whatsapp_leads_id = '{st.session_state.add_new_crm_contact_selected_phone_id}';")
     
@@ -545,7 +545,7 @@ def add_new_crm_contact_execution():
 
 
 
-
+@st.fragment
 def add_new_crm_contact(user_id, project_name):
     rows = uc.run_query_half_day(f"SELECT DISTINCT tawl.id, CONCAT(tawl.phone_indicator,tawl.phone_number) AS full_phone_number, last_user_status_df.last_user_status FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS tawl INNER JOIN `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` AS tagsa ON tawl.id = tagsa.traffic_analytics_whatsapp_lead_id LEFT OUTER JOIN (SELECT traffic_analytics_whatsapp_leads_id, LAST_VALUE(user_status) OVER(PARTITION BY traffic_analytics_whatsapp_leads_id ORDER BY contact_date) AS last_user_status FROM `company-data-driven.{project_name}.contract_crm_log`) AS last_user_status_df ON tawl.id = last_user_status_df.traffic_analytics_whatsapp_leads_id WHERE tagsa.status = 'assistant' AND tawl.id NOT IN (SELECT traffic_analytics_whatsapp_leads_id FROM `company-data-driven.{project_name}.contracts`) AND (last_user_status_df.last_user_status LIKE '%active%' OR last_user_status_df.last_user_status IS NULL);")
     assistant_ids = []
@@ -595,7 +595,7 @@ def add_new_crm_contact(user_id, project_name):
 
 
 
-
+@st.fragment
 def contracts_crm_show_metrics(project_name):
     os.write(1, '🥏 Executing contracts_crm_show_metrics \n'.encode('utf-8'))
     os.write(1, '- contracts_crm_show_metrics: Getting data \n'.encode('utf-8'))
@@ -614,7 +614,7 @@ def contracts_crm_show_metrics(project_name):
 
 
 
-
+@st.fragment
 def contract_team_member_performance(user_id, project_name):
     os.write(1, '🥏 Executing contract_team_member_performance \n'.encode('utf-8'))
     os.write(1, '- contract_team_member_performance: Getting data \n'.encode('utf-8'))
@@ -663,7 +663,7 @@ def contract_team_member_performance(user_id, project_name):
 
 
 
-
+@st.fragment
 def contract_contact_text(project_id):
     if project_id == 1:
         text_answer = '''
