@@ -244,6 +244,10 @@ credentials:
       email: lui.d.carorb1612@outlook.com
       name: Luis Carbajal
       password: $2b$12$7AginrpM7q6ZESxemhRBB.xbD303ECpZwbxadzbfNyvB.k9Bl6BkW
+    lmoralesc:
+      email: alizinha1@hotmail.com
+      name: Luiza Morales
+      password: $2b$12$Kpb.rZGKHGBRcue/wJ9atOJYyq.DM30kIOlJ1gVhJwlqkIzLBZoZW
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
