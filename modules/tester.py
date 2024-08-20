@@ -28,7 +28,7 @@ def tester_execution():
         correct_q_10 = 1 if st.session_state.selected_answer_q10_lower == st.session_state.questions[9].get("correct_option") else 0
         success_rate = 100 * ((correct_q_1 + correct_q_2 + correct_q_3 + correct_q_4 + correct_q_5 + correct_q_6 + correct_q_7 + correct_q_8 + correct_q_9 + correct_q_10)/10)
         
-        today_answer_already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.{st.session_state.tester_project_name}.{st.session_state.attempts_table_name}` WHERE attempt_date = CURRENT_DATE() AND user_id = {st.session_state.tester_user_id};")
+        today_answer_already_created = uc.run_query_instant(f"SELECT id FROM `company-data-driven.{st.session_state.tester_project_name}.{st.session_state.attempts_table_name}` WHERE attempt_date = CURRENT_DATE() AND user_id = {st.session_state.tester_user_id} AND q1_id = {st.session_state.questions[0].get('id')} AND q2_id = {st.session_state.questions[1].get('id')} AND q3_id = {st.session_state.questions[2].get('id')};")
         if len(today_answer_already_created) < 1:
             time.sleep(2)
             max_id = uc.run_query_instant(f"SELECT 1 + MAX(id) AS max_id FROM `company-data-driven.{st.session_state.tester_project_name}.{st.session_state.attempts_table_name}`;")[0].get("max_id") 
