@@ -47,7 +47,7 @@ def tester(project_name, questions_sample_table_name, user_id, attempts_table_na
 
     questions = uc.run_query_6_h(f"SELECT * FROM `company-data-driven.{project_name}.{questions_sample_table_name}`;")
     st.session_state.questions = questions
-    today_results = uc.run_query_instant(f"SELECT * FROM `company-data-driven.{project_name}.{attempts_table_name}` WHERE user_id = {user_id} AND attempt_date = CURRENT_DATE();")
+    today_results = uc.run_query_instant(f"SELECT * FROM `company-data-driven.{project_name}.{attempts_table_name}` WHERE user_id = {user_id} AND attempt_date = CURRENT_DATE() AND q1_id = {st.session_state.questions[0].get('id')} AND q2_id = {st.session_state.questions[1].get('id')} AND q3_id = {st.session_state.questions[2].get('id')};")
 
     if len(today_results) < 1:
         
