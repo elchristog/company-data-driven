@@ -248,6 +248,10 @@ credentials:
       email: alizinha1@hotmail.com
       name: Luiza Morales
       password: $2b$12$Kpb.rZGKHGBRcue/wJ9atOJYyq.DM30kIOlJ1gVhJwlqkIzLBZoZW
+    jfrodriguezm:
+      email: yfrm240595@gmail.com
+      name: Jessica Rodriguez
+      password: $2b$12$5d2R95zZ0gNyzEjPCkE.YO.HWDBL8gGlWzvoxXJei4R6.ExWM4zrK
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
