@@ -252,6 +252,10 @@ credentials:
       email: yfrm240595@gmail.com
       name: Jessica Rodriguez
       password: $2b$12$5d2R95zZ0gNyzEjPCkE.YO.HWDBL8gGlWzvoxXJei4R6.ExWM4zrK
+    smlunar:
+      email: samuelxixx@gmail.com
+      name: Samuel Luna
+      password: $2b$12$CpOK7pXdnL.8pHbre98YsOplS2cYdeSzyw.qFzH/XFXTriUQqQeZ2
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
