@@ -568,9 +568,9 @@ def add_new_crm_contact(user_id, project_name):
             selected_phone_id = assistant_ids[assistant_phone_numbers.index(selected_phone)]
             st.session_state.add_new_crm_contact_selected_phone_id = selected_phone_id
 
-            get_purchase_propension = uc.run_query_30_m(f"SELECT predicted_target_contract_thresholded, prob FROM `company-data-driven.{project_name}.purchase_propension_model_predictions` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}';")
+            get_purchase_propension = uc.run_query_instant(f"SELECT predicted_target_contract_thresholded, prob FROM `company-data-driven.{project_name}.purchase_propension_model_predictions` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}';")
 
-            if get_purchase_propension[0].get('predicted_target_contract_thresholded') ==1:
+            if get_purchase_propension[0].get('predicted_target_contract_thresholded') == 1:
                 st.success(f"Purchase propension: {get_purchase_propension[0].get('prob') }")
             else:
                 st.error(f"Purchase propension: {get_purchase_propension[0].get('prob') }")
