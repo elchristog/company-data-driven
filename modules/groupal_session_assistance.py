@@ -312,6 +312,13 @@ def add_new_crm_groupal_session_contact(user_id, project_name):
         st.success('Phone number available', icon = '🪬')
         if selected_phone is not None:
             st.session_state.add_new_crm_groupal_session_contact_selected_phone_id = lead_ids[lead_phone_numbers.index(selected_phone)]
+
+            get_purchase_propension = uc.run_query_instant(f"SELECT predicted_target_contract_thresholded, prob FROM `company-data-driven.{project_name}.purchase_propension_model_predictions` WHERE traffic_analytics_whatsapp_leads_id = '{st.session_state.add_new_crm_groupal_session_contact_selected_phone_id}';")
+
+            if get_purchase_propension[0].get('predicted_target_contract_thresholded') == 1:
+                st.success(f"Purchase propension: {get_purchase_propension[0].get('prob') }")
+            else:
+                st.error(f"Purchase propension: {get_purchase_propension[0].get('prob') }")
             
             user_history = uc.run_query_instant(f'''
                 SELECT 'contract' AS funnel_step, contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.contract_crm_log` WHERE traffic_analytics_whatsapp_leads_id = '{st.session_state.add_new_crm_groupal_session_contact_selected_phone_id}'
