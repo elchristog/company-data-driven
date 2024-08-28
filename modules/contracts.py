@@ -567,6 +567,14 @@ def add_new_crm_contact(user_id, project_name):
         if selected_phone is not None:
             selected_phone_id = assistant_ids[assistant_phone_numbers.index(selected_phone)]
             st.session_state.add_new_crm_contact_selected_phone_id = selected_phone_id
+
+            get_purchase_propension = uc.run_query_30_m(f"SELECT predicted_target_contract_thresholded, prob FROM `company-data-driven.{project_name}.purchase_propension_model_predictions` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}';")
+
+            if get_purchase_propension.get('predicted_target_contract_thresholded')[0] ==1:
+                st.success(f"Purchase propension: {get_purchase_propension.get('prob')[0] }")
+            else:
+                st.error(f"Purchase propension: {get_purchase_propension.get('prob')[0] }")
+            
             user_history = uc.run_query_instant(f'''
                 SELECT 'contract' AS funnel_step, contact_date, user_status, contact_description FROM `company-data-driven.{project_name}.contract_crm_log` WHERE traffic_analytics_whatsapp_leads_id = '{selected_phone_id}'
                 UNION ALL (
