@@ -10,7 +10,7 @@ import utils.g_gemini_gestor as ggg
 
 @st.cache_data
 def calculate_priority(deadline):
-    today = datetime.datetime.now().date()
+    today = date.today()
     days_until_deadline = (deadline - today).days
     if days_until_deadline <= 3:
         return "Alta"
@@ -21,7 +21,7 @@ def calculate_priority(deadline):
 
 @st.fragment
 def update_task_status(task_id, project_name):
-    today = datetime.date.today()
+    today = date.today()
     today_str = today.strftime("%Y-%m-%d")
     
     uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = 'finished', finished_date = '{today_str}' WHERE id = {task_id}")
