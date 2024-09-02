@@ -54,15 +54,17 @@ def tasks_visualizer(user_id, project_name, divider):
     os.write(1, '🥏 Executing tasks_visualizer \n'.encode('utf-8'))
     rows = uc.run_query_2_m(f"SELECT id, creation_date, description, commit_finish_date, status FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed') ORDER BY commit_finish_date ASC;")
     
-    # Custom CSS to reduce font size
+    # Custom CSS to reduce font size and make text less dark
     st.markdown("""
     <style>
     .small-font {
         font-size:0.8rem !important;
+        color: #666666 !important;
     }
     .header {
         font-weight: bold;
         font-size:0.9rem !important;
+        color: #444444 !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -96,7 +98,7 @@ def tasks_visualizer(user_id, project_name, divider):
             with col3:
                 st.markdown(f'<p class="small-font">📅 {task["commit_finish_date"].strftime("%d %b %Y")}</p>', unsafe_allow_html=True)
             
-            st.markdown('<hr style="margin: 5px 0;">', unsafe_allow_html=True)
+            st.markdown('<hr style="margin: 5px 0; border-color: #dddddd;">', unsafe_allow_html=True)
 
         descriptions = []
         ids = []
