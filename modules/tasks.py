@@ -44,16 +44,7 @@ def tasks_visualizer(user_id, project_name, divider):
     
     rows = uc.run_query_2_m(query)
     
-    st.markdown("""
-    <style>
-    .small-font { color: #666666 !important; }
-    .header { font-weight: bold; color: #444444 !important; }
-    .stContainer { background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .task-row { display: flex; align-items: center; margin-bottom: 10px; }
-    .task-description { flex-grow: 1; }
-    .finish-button { margin-left: 10px; }
-    </style>
-    """, unsafe_allow_html=True)
+    
 
     if len(rows) == 0:
         st.success('Nailed it! Nothing left on your plate.', icon="😎")
@@ -68,6 +59,17 @@ def tasks_visualizer(user_id, project_name, divider):
         col4.markdown('<p class="header">Acción</p>', unsafe_allow_html=True)
 
         for _, task in tasks_df.iterrows():
+            st.markdown("""
+            <style>
+            .small-font { color: #666666 !important; }
+            .header { font-weight: bold; color: #444444 !important; }
+            .stContainer { background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+            .task-row { display: flex; align-items: center; margin-bottom: 10px; }
+            .task-description { flex-grow: 1; }
+            .finish-button { margin-left: 10px; }
+            </style>
+            """, unsafe_allow_html=True)
+                    
             col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
             
             with col1:
