@@ -63,7 +63,7 @@ def tasks_visualizer(user_id, project_name, divider):
             <style>
             .small-font { color: #666666 !important; }
             .header { font-weight: bold; color: #444444 !important; }
-            .stContainer { background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+            .stContainer { background-color: #f0f8ff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
             .task-row { display: flex; align-items: center; margin-bottom: 10px; }
             .task-description { flex-grow: 1; }
             .finish-button { margin-left: 10px; }
