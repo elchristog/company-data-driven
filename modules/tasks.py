@@ -46,14 +46,6 @@ def tasks_visualizer(user_id, project_name, divider):
         tasks_df = pd.DataFrame(rows)
         st.table(tasks_df[['description', 'commit_finish_date']])
 
-        for row in rows:
-            with st.container():
-                col1 = st.columns([1, 1, 1])
-                
-                with col1:
-                    st.markdown(f"**{row['description']}**")
-                
-
         descriptions = []
         ids = []
         actual_statuses = []
