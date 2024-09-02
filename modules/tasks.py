@@ -46,6 +46,16 @@ def tasks_visualizer(user_id, project_name, divider):
         tasks_df = pd.DataFrame(rows)
         st.table(tasks_df[['description', 'commit_finish_date']])
 
+        # Style the DataFrame for a visually appealing presentation
+        styled_df = tasks_df.style.set_properties(**{
+            'border': '1px solid #ddd',  # Add borders to cells
+            'text-align': 'left',         # Align text to the left
+            'padding': '8px',             # Add padding to cells
+        })
+
+        # Display the styled DataFrame
+        st.dataframe(styled_df)
+
         descriptions = []
         ids = []
         actual_statuses = []
