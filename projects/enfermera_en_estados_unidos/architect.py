@@ -137,7 +137,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 with st.container(border=True):
                     seoty.show_youtube_metrics(project_name)
                 st.write("---")
-                st.video("https://youtu.be/pgjEzfiF8X4")
+                with st.popover("Trafficker"):
+                    st.video("https://youtu.be/pgjEzfiF8X4")
 
             if sub_menu == "SEO ideation":
                 tap.title_and_paragraph("SEO Ideation" + project_icon, "1- Agregar las preguntas de una busqueda en google 2- Asegurar que estan separadas por coma y sin espacios", "h3", 0)
