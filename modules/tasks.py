@@ -46,16 +46,6 @@ def tasks_visualizer(user_id, project_name, divider):
         tasks_df = pd.DataFrame(rows)
         st.table(tasks_df[['description', 'commit_finish_date']])
 
-        for _, task in tasks_df.iterrows():
-            with st.expander(task['description']):
-                col1, col2, col3 = st.columns(3)
-                col1.write(f"**Status:** {task['status']}")
-                col2.write(f"**Due Date:** {task['commit_finish_date']}")
-                col3.button("Finish Task", key=f"finish_{task['id']}")
-
-        for _, row in tasks_df.iterrows():
-                st.write(f"- {row['description']} (Due: {row['commit_finish_date']})")
-        
         descriptions = []
         ids = []
         actual_statuses = []
