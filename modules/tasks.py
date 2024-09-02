@@ -144,7 +144,17 @@ def tasks_achievements(user_id, project_name, divider):
                 st.write("#### Completed tasks")
                 number_tasks_to_show = st.slider('Select number of tasks to be shown', 0, 30, 5)
                 completed_tasks_table = uc.run_query_1_m(f"SELECT t.description, t.commit_finish_date, t.finished_date  FROM `company-data-driven.{project_name}.tasks` AS t WHERE responsible_user_id = {user_id} AND t.status = 'finished' ORDER BY t.finished_date DESC, t.id DESC LIMIT {number_tasks_to_show};")
-                st.table(completed_tasks_table)
+                for task in completed_tasks:
+                    with st.container():
+                        st.markdown(f"""
+                        <div style="background-color: #f0f8ff; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                            <p style="margin: 0;"><strong>{task['description']}</strong></p>
+                            <p style="margin: 0; color: #666666; font-size: 0.9em;">
+                                📅 Due: {task['commit_finish_date'].strftime('%d %b %Y')} | 
+                                ✅ Completed: {task['finished_date'].strftime('%d %b %Y')}
+                            </p>
+                        </div>
+                        """, unsafe_allow_html=True)
                     
     if divider == 1:
         st.write("---") 
