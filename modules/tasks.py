@@ -119,18 +119,19 @@ def tasks_achievements(user_id, project_name, divider):
                     col3.metric(label="Week fulfillment (%)", value = round(week_fulfillment[0].get('fulfillment')), delta= 0)
                 else:
                     col3.metric(label="Week fulfillment (%)", value = round(week_fulfillment[0].get('fulfillment')), delta= round(week_fulfillment[0].get('fulfillment') - week_fulfillment[1].get('fulfillment')))
-            
-            st.write("#### Unfulfilled tasks last 3 months")
-            unfulfilled_tasks_table = uc.run_query_1_m(f"SELECT t.description, t.commit_finish_date, t.unfulfilled_date  FROM `company-data-driven.{project_name}.tasks` AS t WHERE responsible_user_id = {user_id} AND t.status = 'unfulfilled' AND t.unfulfilled_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH) AND EXTRACT(YEAR FROM t.creation_date) = EXTRACT(YEAR FROM CURRENT_DATE()) ORDER BY t.unfulfilled_date DESC;")
-            if len(unfulfilled_tasks_table) < 1:
-                st.success("You killed it! I knew you could do it!", icon = "😎")
-            else:
-                st.table(unfulfilled_tasks_table)
 
-            st.write("#### Completed tasks")
-            number_tasks_to_show = st.slider('Select number of tasks to be shown', 0, 30, 5)
-            completed_tasks_table = uc.run_query_1_m(f"SELECT t.description, t.commit_finish_date, t.finished_date  FROM `company-data-driven.{project_name}.tasks` AS t WHERE responsible_user_id = {user_id} AND t.status = 'finished' ORDER BY t.finished_date DESC, t.id DESC LIMIT {number_tasks_to_show};")
-            st.table(completed_tasks_table)
+        
+        st.write("#### Unfulfilled tasks last 3 months")
+        unfulfilled_tasks_table = uc.run_query_1_m(f"SELECT t.description, t.commit_finish_date, t.unfulfilled_date  FROM `company-data-driven.{project_name}.tasks` AS t WHERE responsible_user_id = {user_id} AND t.status = 'unfulfilled' AND t.unfulfilled_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH) AND EXTRACT(YEAR FROM t.creation_date) = EXTRACT(YEAR FROM CURRENT_DATE()) ORDER BY t.unfulfilled_date DESC;")
+        if len(unfulfilled_tasks_table) < 1:
+            st.success("You killed it! I knew you could do it!", icon = "😎")
+        else:
+            st.table(unfulfilled_tasks_table)
+
+        st.write("#### Completed tasks")
+        number_tasks_to_show = st.slider('Select number of tasks to be shown', 0, 30, 5)
+        completed_tasks_table = uc.run_query_1_m(f"SELECT t.description, t.commit_finish_date, t.finished_date  FROM `company-data-driven.{project_name}.tasks` AS t WHERE responsible_user_id = {user_id} AND t.status = 'finished' ORDER BY t.finished_date DESC, t.id DESC LIMIT {number_tasks_to_show};")
+        st.table(completed_tasks_table)
             
     if divider == 1:
         st.write("---") 
