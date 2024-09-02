@@ -39,8 +39,8 @@ def tasks_visualizer(user_id, project_name, divider):
     
     st.markdown("""
     <style>
-    .small-font { font-size:0.8rem !important; color: #666666 !important; }
-    .header { font-weight: bold; font-size:0.9rem !important; color: #444444 !important; }
+    .small-font { color: #666666 !important; }
+    .header { font-weight: bold; color: #444444 !important; }
     .stContainer { background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
     .task-row { display: flex; align-items: center; margin-bottom: 10px; }
     .task-description { flex-grow: 1; }
