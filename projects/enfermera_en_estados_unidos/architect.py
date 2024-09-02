@@ -384,11 +384,13 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 col1, col2 = st.columns(2)
                 with col1:
                     st.write("#### Inicio del programa")
-                    st.video("https://www.youtube.com/watch?v=yx8Dyk68MKk")
+                    with st.popover("Inicio del programa"):
+                        st.video("https://www.youtube.com/watch?v=yx8Dyk68MKk")
                     st.write(" Queremos darte la bienvenida al programa de homologación de enfermería en Estados Unidos.    Vamos a iniciar con los 2 pasos iniciales: El primero de ellos es que programes tu reunión inicial en el momento que mejor se te ajuste. Aquí vamos a evaluar tu caso y a definir las primeras tareas: https://calendly.com/enfermeraenestadosunidos/reunion-inicial-1    Y el segundo paso es que puedas ir completando este formulario con la información que usaremos para crearte tus credenciales en las distintas plataformas: https://forms.gle/Qn6tMTay9KmGDx8k6 Muchas gracias y quedamos atentos a cualquier duda que tengas. ")
                 with col2:
                     st.write("#### User credentials")
-                    st.video("https://www.youtube.com/watch?v=ChAMEAnXSi8")
+                    with st.popover("User credentials"):
+                        st.video("https://www.youtube.com/watch?v=ChAMEAnXSi8")
             if sub_menu == "Study plan":
                 tap.title_and_paragraph("Plan de estudio" + project_icon, "Recordar revisar que el pdf exportado al final si permita dar click a los enlaces", "h3", 0)
                 s4np.study_plan(user_id, project_id, project_name)
