@@ -52,7 +52,21 @@ def calculate_priority(deadline):
 @st.fragment
 def tasks_visualizer(user_id, project_name, divider):
     os.write(1, '🥏 Executing tasks_visualizer \n'.encode('utf-8'))
-    rows = uc.run_query_2_m(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed') ORDER BY commit_finish_date ASC;") #finished, canceled, unfulfilled
+    rows = uc.run_query_2_m(f"SELECT id, creation_date, description, commit_finish_date, status FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed') ORDER BY commit_finish_date ASC;")
+    
+    # Custom CSS to reduce font size
+    st.markdown("""
+    <style>
+    .small-font {
+        font-size:0.8rem !important;
+    }
+    .header {
+        font-weight: bold;
+        font-size:0.9rem !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     if len(rows) == 0:
         st.success('Nailed it! Nothing left on your plate.', icon="😎")
     else:
@@ -61,22 +75,28 @@ def tasks_visualizer(user_id, project_name, divider):
         tasks_df['commit_finish_date'] = pd.to_datetime(tasks_df['commit_finish_date']).dt.date
         tasks_df['priority'] = tasks_df['commit_finish_date'].apply(calculate_priority)
 
+        # Add headers
+        col1, col2, col3 = st.columns([3, 1, 1])
+        col1.markdown('<p class="header">Tarea</p>', unsafe_allow_html=True)
+        col2.markdown('<p class="header">Prioridad</p>', unsafe_allow_html=True)
+        col3.markdown('<p class="header">Fecha límite</p>', unsafe_allow_html=True)
+
         for _, task in tasks_df.iterrows():
             col1, col2, col3 = st.columns([3, 1, 1])
             
             with col1:
-                st.markdown(f"**{task['description']}**")
+                st.markdown(f'<p class="small-font"><strong>{task["description"]}</strong></p>', unsafe_allow_html=True)
             with col2:
                 priority_color = {
                     "Alta": "🔴",
                     "Media": "🟠",
                     "Baja": "🟢"
                 }
-                st.markdown(f"{priority_color[task['priority']]} {task['priority']}")
+                st.markdown(f'<p class="small-font">{priority_color[task["priority"]]} {task["priority"]}</p>', unsafe_allow_html=True)
             with col3:
-                st.markdown(f"📅 {task['commit_finish_date'].strftime('%d %b %Y')}")
+                st.markdown(f'<p class="small-font">📅 {task["commit_finish_date"].strftime("%d %b %Y")}</p>', unsafe_allow_html=True)
             
-            st.markdown("---")
+            st.markdown('<hr style="margin: 5px 0;">', unsafe_allow_html=True)
 
         descriptions = []
         ids = []
@@ -101,12 +121,6 @@ def tasks_visualizer(user_id, project_name, divider):
                 index = None,
                 key = 'selected_task'
             )
-            # selected_status = st.selectbox(
-            #         label="Select the new status",
-            #         options= ['on_execution', 'finished'],
-            #         index=None,
-            #         key = 'selected_status'
-            #     )
            
             update_task_status_button = st.form_submit_button("Finish task", on_click = update_task_status)
             
