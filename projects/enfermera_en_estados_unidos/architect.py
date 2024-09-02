@@ -82,8 +82,9 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             sub_menu_options=['Tareas', 'Asignar', 'Eliminar']
             sub_menu = st.sidebar.radio('Home options', options = sub_menu_options)
             if sub_menu == "Tareas":
-                tap.title_and_paragraph("Tus tareas" + project_icon, "Gestiona tus tareas (Delayed tasks will be labeled as unfulfilled after 15 days of the commitment date)", "h2", 0)
-                tasks = t.tasks_visualizer(user_id, project_name, 0)
+                with st.container(border=True):
+                    tap.title_and_paragraph("Tus tareas" + project_icon, "Gestiona tus tareas (Delayed tasks will be labeled as unfulfilled after 15 days of the commitment date)", "h2", 0)
+                    tasks = t.tasks_visualizer(user_id, project_name, 0)
                 t.tips_tasks_ia(tasks, 0)
                 st.write("---")
                 tap.title_and_paragraph("Cumplimiento de tus tareas" + project_icon, "Visualiza tu crecimiento", "h2", 0)
