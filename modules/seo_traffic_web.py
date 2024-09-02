@@ -470,5 +470,5 @@ def show_web_metrics(project_name):
         with st.container():
             plot_echarts(df_grouped)
         st.write(f"#### Visits per page")
-        pages_visits = uc.run_query_1_h(f"SELECT DISTINCT page, SUM(clicks) AS clicks, SUM(impressions) AS impressions, AVG(ctr) AS ctr, AVG(position) AS position FROM `company-data-driven.{project_name}.traffic_analytics_web_pages` WHERE start_query_date >= '{day[0].strftime('%Y-%m-%d')}' AND end_query_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY page  ORDER BY ctr DESC;")
+        pages_visits = uc.run_query_1_h(f"SELECT DISTINCT page, SUM(clicks) AS clicks, SUM(impressions) AS impressions, AVG(ctr) AS ctr, AVG(position) AS position FROM `company-data-driven.{project_name}.traffic_analytics_web_pages` WHERE start_query_date >= '{day[0].strftime('%Y-%m-%d')}' AND end_query_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY page  ORDER BY SUM(clicks) DESC;")
         st.table(pages_visits)
