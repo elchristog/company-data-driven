@@ -48,17 +48,11 @@ def tasks_visualizer(user_id, project_name, divider):
 
         for row in rows:
             with st.container():
-                col1, col2 = st.columns([2, 1, 1])
+                col1 = st.columns([1, 1, 1])
                 
                 with col1:
                     st.markdown(f"**{row['description']}**")
                 
-                with col2:
-                    commit_date = row['commit_finish_date']
-                    st.markdown(f"<span style='color:gray;'>{commit_date}</span>", unsafe_allow_html=True)
-                
-                if st.button("Finish task", key=f"finish_{row['id']}"):
-                    update_task_status(row['id'], user_id, project_name)
 
         descriptions = []
         ids = []
