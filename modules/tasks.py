@@ -18,6 +18,7 @@ def update_task_status(task_id, project_name):
     uc.run_query_2_m.clear()
     uc.run_query_1_m.clear()
 
+
 @st.fragment
 def tasks_visualizer(user_id, project_name, divider):
     os.write(1, '🥏 Executing tasks_visualizer \n'.encode('utf-8'))
@@ -48,7 +49,9 @@ def tasks_visualizer(user_id, project_name, divider):
     .small-font { color: #666666 !important; }
     .header { font-weight: bold; color: #444444 !important; }
     .stContainer { background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .task-row { display: flex; align-items: center; margin-bottom: 10px; }
+    .task-row { display: flex; align-items: center; margin-bottom: 10px; padding: 10px; border-radius: 5px; }
+    .task-row-green { background-color: #e6f3e6; }
+    .task-row-white { background-color: #ffffff; }
     .task-description { flex-grow: 1; }
     .finish-button { margin-left: 10px; }
     </style>
@@ -60,13 +63,18 @@ def tasks_visualizer(user_id, project_name, divider):
         tasks_df = pd.DataFrame(rows)
         tasks_df['commit_finish_date'] = pd.to_datetime(tasks_df['commit_finish_date']).dt.date
 
+        st.markdown('<div class="stContainer">', unsafe_allow_html=True)
+        
         col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
         col1.markdown('<p class="header">Tarea</p>', unsafe_allow_html=True)
         col2.markdown('<p class="header">Prioridad</p>', unsafe_allow_html=True)
         col3.markdown('<p class="header">Fecha límite</p>', unsafe_allow_html=True)
         col4.markdown('<p class="header">Acción</p>', unsafe_allow_html=True)
 
-        for _, task in tasks_df.iterrows():
+        for index, task in tasks_df.iterrows():
+            row_class = "task-row-green" if index % 2 == 0 else "task-row-white"
+            st.markdown(f'<div class="task-row {row_class}">', unsafe_allow_html=True)
+            
             col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
             
             with col1:
@@ -81,7 +89,9 @@ def tasks_visualizer(user_id, project_name, divider):
                     update_task_status(task['id'], project_name)
                     st.rerun()
             
-            st.markdown('<hr style="margin: 5px 0; border-color: #dddddd;">', unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+        
+        st.markdown('</div>', unsafe_allow_html=True)
 
     if divider == 1:
         st.write("---") 
