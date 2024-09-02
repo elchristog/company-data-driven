@@ -378,7 +378,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 pp.customer_success_crm_add_contact(user_id, project_name)
                 st.write("---")
                 st.write("### Lider de customer success")
-                st.video("https://youtu.be/AUa0Mxfb4hE")
+                with st.popover("Lider de customer success"):
+                    st.video("https://youtu.be/AUa0Mxfb4hE")
                 st.write("---")
                 col1, col2 = st.columns(2)
                 with col1:
