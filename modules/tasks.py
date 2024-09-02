@@ -60,29 +60,28 @@ def tasks_visualizer(user_id, project_name, divider):
         tasks_df = pd.DataFrame(rows)
         tasks_df['commit_finish_date'] = pd.to_datetime(tasks_df['commit_finish_date']).dt.date
 
-        with st.container(border=True):
-            col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
-            col1.markdown('<p class="header">Tarea</p>', unsafe_allow_html=True)
-            col2.markdown('<p class="header">Prioridad</p>', unsafe_allow_html=True)
-            col3.markdown('<p class="header">Fecha límite</p>', unsafe_allow_html=True)
-            col4.markdown('<p class="header">Acción</p>', unsafe_allow_html=True)
+        col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
+        col1.markdown('<p class="header">Tarea</p>', unsafe_allow_html=True)
+        col2.markdown('<p class="header">Prioridad</p>', unsafe_allow_html=True)
+        col3.markdown('<p class="header">Fecha límite</p>', unsafe_allow_html=True)
+        col4.markdown('<p class="header">Acción</p>', unsafe_allow_html=True)
 
-            for _, task in tasks_df.iterrows():
-                col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
-                
-                with col1:
-                    st.markdown(f'<p class="small-font"><strong>{task["description"]}</strong></p>', unsafe_allow_html=True)
-                with col2:
-                    priority_color = {"Alta": "🔴", "Media": "🟠", "Baja": "🟢"}
-                    st.markdown(f'<p class="small-font">{priority_color[task["priority"]]} {task["priority"]}</p>', unsafe_allow_html=True)
-                with col3:
-                    st.markdown(f'<p class="small-font">📅 {task["commit_finish_date"].strftime("%d %b %Y")}</p>', unsafe_allow_html=True)
-                with col4:
-                    if st.button("Finish", key=f"finish_{task['id']}", use_container_width=True):
-                        update_task_status(task['id'], project_name)
-                        st.rerun()
-                
-                st.markdown('<hr style="margin: 5px 0; border-color: #dddddd;">', unsafe_allow_html=True)
+        for _, task in tasks_df.iterrows():
+            col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
+            
+            with col1:
+                st.markdown(f'<p class="small-font"><strong>{task["description"]}</strong></p>', unsafe_allow_html=True)
+            with col2:
+                priority_color = {"Alta": "🔴", "Media": "🟠", "Baja": "🟢"}
+                st.markdown(f'<p class="small-font">{priority_color[task["priority"]]} {task["priority"]}</p>', unsafe_allow_html=True)
+            with col3:
+                st.markdown(f'<p class="small-font">📅 {task["commit_finish_date"].strftime("%d %b %Y")}</p>', unsafe_allow_html=True)
+            with col4:
+                if st.button("Finish", key=f"finish_{task['id']}", use_container_width=True):
+                    update_task_status(task['id'], project_name)
+                    st.rerun()
+            
+            st.markdown('<hr style="margin: 5px 0; border-color: #dddddd;">', unsafe_allow_html=True)
 
     if divider == 1:
         st.write("---") 
