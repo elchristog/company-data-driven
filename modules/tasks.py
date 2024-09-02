@@ -3,6 +3,7 @@ import datetime
 import time
 import pandas as pd
 import os
+from datetime import datetime, date
 
 import utils.user_credentials as uc
 import utils.g_gemini_gestor as ggg
