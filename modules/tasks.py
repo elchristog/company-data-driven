@@ -84,7 +84,7 @@ def tasks_visualizer(user_id, project_name, divider):
         tasks_df['priority'] = tasks_df['commit_finish_date'].apply(calculate_priority)
 
         # Create a container for the tasks table
-        with st.container():
+        with st.container(border=True):
             # Add headers
             col1, col2, col3 = st.columns([3, 1, 1])
             col1.markdown('<p class="header">Tarea</p>', unsafe_allow_html=True)
