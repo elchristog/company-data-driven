@@ -85,8 +85,6 @@ def tasks_visualizer(user_id, project_name, divider):
 
         # Create a container for the tasks table
         with st.container():
-            st.markdown('<h3 style="text-align: center; color: #444444;">Tareas Pendientes</h3>', unsafe_allow_html=True)
-            
             # Add headers
             col1, col2, col3 = st.columns([3, 1, 1])
             col1.markdown('<p class="header">Tarea</p>', unsafe_allow_html=True)
