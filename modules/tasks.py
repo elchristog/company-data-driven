@@ -37,6 +37,18 @@ def update_task_status():
     # st.rerun()
 
 @st.fragment
+def calculate_priority(deadline):
+    today = datetime.now().date()
+    days_until_deadline = (deadline - today).days
+    if days_until_deadline <= 3:
+        return "Alta"
+    elif days_until_deadline <= 7:
+        return "Media"
+    else:
+        return "Baja"
+
+
+@st.fragment
 def tasks_visualizer(user_id, project_name, divider):
     os.write(1, '🥏 Executing tasks_visualizer \n'.encode('utf-8'))
     rows = uc.run_query_2_m(f"SELECT id, creation_date, description, commit_finish_date, status  FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed') ORDER BY commit_finish_date ASC;") #finished, canceled, unfulfilled
@@ -45,6 +57,28 @@ def tasks_visualizer(user_id, project_name, divider):
     else:
         tasks_df = pd.DataFrame(rows)
         st.table(tasks_df[['description', 'commit_finish_date']])
+
+        tasks_df['commit_finish_date'] = pd.to_datetime(tasks_df['commit_finish_date']).dt.date
+        tasks_df['priority'] = tasks_df['commit_finish_date'].apply(calculate_priority)
+        
+        st.markdown("<h2 style='text-align: center;'>Tareas Pendientes</h2>", unsafe_allow_html=True)
+        
+        for _, task in tasks_df.iterrows():
+            col1, col2, col3 = st.columns([3, 1, 1])
+            
+            with col1:
+                st.markdown(f"**{task['description']}**")
+            with col2:
+                priority_color = {
+                    "Alta": "🔴",
+                    "Media": "🟠",
+                    "Baja": "🟢"
+                }
+                st.markdown(f"{priority_color[task['priority']]} {task['priority']}")
+            with col3:
+                st.markdown(f"📅 {task['commit_finish_date'].strftime('%d %b %Y')}")
+            
+            st.markdown("---")
 
         descriptions = []
         ids = []
