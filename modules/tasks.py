@@ -20,11 +20,8 @@ def calculate_priority(deadline):
         return "Baja"
 
 @st.fragment
-def update_task_status(task_id, project_name):
-    today = date.today()
-    today_str = today.strftime("%Y-%m-%d")
-    
-    uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = 'finished', finished_date = '{today_str}' WHERE id = {task_id}")
+def update_task_status(task_id, project_name): 
+    uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = 'finished', finished_date = CURRENT_DATE() WHERE id = {task_id}")
     st.toast("Updating, please wait", icon="☺️")
     st.balloons()
     time.sleep(2)
@@ -212,9 +209,7 @@ def task_deletion_execution():
     os.write(1, '🥏 Executing task_deletion_execution \n'.encode('utf-8'))
     if st.session_state.selected_task_description is not None:
         selected_task_id = st.session_state.user_tasks_ids[st.session_state.user_tasks_descriptions.index(st.session_state.selected_task_description)]
-        today = datetime.date.today()
-        today_str = today.strftime("%Y-%m-%d")
-        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.project_name}.tasks` SET status = 'canceled', canceled_date = '{today_str}', task_cancelator_id = {st.session_state.user_id} WHERE id = {selected_task_id};")
+        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.project_name}.tasks` SET status = 'canceled', canceled_date = CURRENT_DATE(), task_cancelator_id = {st.session_state.user_id} WHERE id = {selected_task_id};")
         st.toast("Updating, please wait", icon = "☺️")
         st.error('Task deleted!', icon="😎")
         st.balloons()
