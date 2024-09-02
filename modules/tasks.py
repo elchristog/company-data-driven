@@ -8,17 +8,6 @@ from datetime import datetime, date
 import utils.user_credentials as uc
 import utils.g_gemini_gestor as ggg
 
-@st.cache_data
-def calculate_priority(deadline):
-    today = date.today()
-    days_until_deadline = (deadline - today).days
-    if days_until_deadline <= 3:
-        return "Alta"
-    elif days_until_deadline <= 7:
-        return "Media"
-    else:
-        return "Baja"
-
 @st.fragment
 def update_task_status(task_id, project_name): 
     uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = 'finished', finished_date = CURRENT_DATE() WHERE id = {task_id}")
@@ -32,7 +21,27 @@ def update_task_status(task_id, project_name):
 @st.fragment
 def tasks_visualizer(user_id, project_name, divider):
     os.write(1, '🥏 Executing tasks_visualizer \n'.encode('utf-8'))
-    rows = uc.run_query_2_m(f"SELECT id, creation_date, description, commit_finish_date, status FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed') ORDER BY commit_finish_date ASC;")
+    
+    # Modified SQL query to calculate priority directly
+    query = f"""
+    SELECT 
+        id, 
+        creation_date, 
+        description, 
+        commit_finish_date, 
+        status,
+        CASE 
+            WHEN DATE_DIFF(commit_finish_date, CURRENT_DATE(), DAY) <= 3 THEN 'Alta'
+            WHEN DATE_DIFF(commit_finish_date, CURRENT_DATE(), DAY) <= 7 THEN 'Media'
+            ELSE 'Baja'
+        END AS priority
+    FROM `company-data-driven.{project_name}.tasks` 
+    WHERE responsible_user_id = {user_id} 
+    AND status IN ('to_start', 'on_execution', 'delayed') 
+    ORDER BY commit_finish_date ASC;
+    """
+    
+    rows = uc.run_query_2_m(query)
     
     st.markdown("""
     <style>
@@ -50,7 +59,6 @@ def tasks_visualizer(user_id, project_name, divider):
     else:
         tasks_df = pd.DataFrame(rows)
         tasks_df['commit_finish_date'] = pd.to_datetime(tasks_df['commit_finish_date']).dt.date
-        tasks_df['priority'] = tasks_df['commit_finish_date'].apply(calculate_priority)
 
         with st.container(border=True):
             col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
