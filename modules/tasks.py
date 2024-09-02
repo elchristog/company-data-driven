@@ -46,15 +46,23 @@ def tasks_visualizer(user_id, project_name, divider):
         tasks_df = pd.DataFrame(rows)
         st.table(tasks_df[['description', 'commit_finish_date']])
 
-        # Style the DataFrame for a visually appealing presentation
-        styled_df = tasks_df.style.set_properties(**{
-            'border': '1px solid #ddd',  # Add borders to cells
-            'text-align': 'left',         # Align text to the left
-            'padding': '8px',             # Add padding to cells
-        })
-
-        # Display the styled DataFrame
-        st.dataframe(styled_df)
+        for row in rows:
+            with st.container():
+                col1, col2, col3 = st.columns([3, 1, 1])
+                
+                with col1:
+                    st.markdown(f"**{row['description']}**")
+                
+                with col2:
+                    priority = get_priority(row['commit_finish_date'])
+                    st.markdown(f"<span style='background-color:{priority[1]}; padding:2px 8px; border-radius:10px;'>{priority[0]}</span>", unsafe_allow_html=True)
+                
+                with col3:
+                    commit_date = datetime.strptime(row['commit_finish_date'], '%Y-%m-%d').strftime('%d %b %Y')
+                    st.markdown(f"<span style='color:gray;'>{commit_date}</span>", unsafe_allow_html=True)
+                
+                if st.button("Finish task", key=f"finish_{row['id']}"):
+                    update_task_status(row['id'], user_id, project_name)
 
         descriptions = []
         ids = []
