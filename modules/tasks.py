@@ -148,10 +148,8 @@ def execute_task_creation():
     if st.session_state.selected_user_id is None or st.session_state.task_input is None or len(st.session_state.task_input) < 10 or st.session_state.commitment_date_input is None:
         st.toast("Please fill in completely all of the required fields.")
     else:
-        today = datetime.date.today()
-        today_str = today.strftime("%Y-%m-%d")
         max_id =  uc.run_query_instant(f"SELECT MAX(id)+1 AS max_id FROM `company-data-driven.{st.session_state.project_name}.tasks`")[0].get('max_id')
-        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, '{today_str}', '{st.session_state.task_input}', {st.session_state.selected_user_id}, '{st.session_state.commitment_date_input}', 'to_start', {st.session_state.user_id})")
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.project_name}.tasks` (id, creation_date, description, responsible_user_id, commit_finish_date, status, task_creator_id) VALUES({max_id}, CURRENT_DATE(), '{st.session_state.task_input}', {st.session_state.selected_user_id}, '{st.session_state.commitment_date_input}', 'to_start', {st.session_state.user_id})")
         st.toast("Updating, please wait", icon = "☺️")
         st.toast('Task created! (' + st.session_state.task_input + ')', icon="😎")
         st.balloons()
@@ -163,7 +161,6 @@ def execute_task_creation():
         del st.session_state.user_id
         uc.run_query_5_m.clear()
         uc.run_query_2_m.clear()
-        # st.rerun()
 
 @st.fragment
 def task_creation(user_id, role_id, project_id, project_name, divider):
