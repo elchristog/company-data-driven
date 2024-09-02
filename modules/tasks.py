@@ -53,10 +53,6 @@ def tasks_visualizer(user_id, project_name, divider):
                 with col1:
                     st.markdown(f"**{row['description']}**")
                 
-                with col2:
-                    priority = get_priority(row['commit_finish_date'])
-                    st.markdown(f"<span style='background-color:{priority[1]}; padding:2px 8px; border-radius:10px;'>{priority[0]}</span>", unsafe_allow_html=True)
-                
                 with col3:
                     commit_date = datetime.strptime(row['commit_finish_date'], '%Y-%m-%d').strftime('%d %b %Y')
                     st.markdown(f"<span style='color:gray;'>{commit_date}</span>", unsafe_allow_html=True)
