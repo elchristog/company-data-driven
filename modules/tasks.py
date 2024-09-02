@@ -129,15 +129,16 @@ def tasks_achievements(user_id, project_name, divider):
                     st.success("You killed it! I knew you could do it!", icon = "😎")
                 else:
                     for task in unfulfilled_tasks:
-                        st.markdown(f"""
-                        <div style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
-                            <p style="margin: 0;"><strong>{task['description']}</strong></p>
-                            <p style="margin: 0; color: #666666; font-size: 0.9em;">
-                                📅 Due: {task['commit_finish_date'].strftime('%d %b %Y')} | 
-                                ❌ Unfulfilled: {task['unfulfilled_date'].strftime('%d %b %Y')}
-                            </p>
-                        </div>
-                        """, unsafe_allow_html=True)
+                        with st.container():
+                            st.markdown(f"""
+                            <div style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                                <p style="margin: 0;"><strong>{task['description']}</strong></p>
+                                <p style="margin: 0; color: #666666; font-size: 0.9em;">
+                                    📅 Due: {task['commit_finish_date'].strftime('%d %b %Y')} | 
+                                    ❌ Unfulfilled: {task['unfulfilled_date'].strftime('%d %b %Y')}
+                                </p>
+                            </div>
+                            """, unsafe_allow_html=True)
 
         with col2:
             with st.container(border=True): 
