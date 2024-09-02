@@ -57,13 +57,10 @@ def tasks_visualizer(user_id, project_name, divider):
         st.success('Nailed it! Nothing left on your plate.', icon="😎")
     else:
         tasks_df = pd.DataFrame(rows)
-        st.table(tasks_df[['description', 'commit_finish_date']])
 
         tasks_df['commit_finish_date'] = pd.to_datetime(tasks_df['commit_finish_date']).dt.date
         tasks_df['priority'] = tasks_df['commit_finish_date'].apply(calculate_priority)
-        
-        st.markdown("<h2 style='text-align: center;'>Tareas Pendientes</h2>", unsafe_allow_html=True)
-        
+
         for _, task in tasks_df.iterrows():
             col1, col2, col3 = st.columns([3, 1, 1])
             
