@@ -8,38 +8,9 @@ from datetime import datetime, date
 import utils.user_credentials as uc
 import utils.g_gemini_gestor as ggg
 
-@st.fragment
-def update_task_status():
-    os.write(1, '🥏 Executing update_task_status \n'.encode('utf-8'))
-    if st.session_state.selected_task is not None:
-        # selected_task_status = st.session_state.actual_statuses[st.session_state.descriptions.index(st.session_state.selected_task)]
-        # if selected_task_status == 'on_execution' and st.session_state.selected_status == 'on_execution':
-        #     st.toast("Task was already on execution", icon = "😝")
-        # if selected_task_status == 'to_start' and st.session_state.selected_status == 'finished':
-        #     st.toast("First must be on execution", icon = "😝")
-        # if selected_task_status == 'delayed' and st.session_state.selected_status == 'finished':
-        #     st.toast("First must be on execution", icon = "😝")
-        # if (selected_task_status == 'to_start' and st.session_state.selected_status == 'on_execution') or (selected_task_status == 'on_execution' and st.session_state.selected_status == 'finished') or (selected_task_status == 'delayed' and st.session_state.selected_status == 'on_execution'):
-        today = datetime.date.today()
-        today_str = today.strftime("%Y-%m-%d")
-        selected_task_id = st.session_state.ids[st.session_state.descriptions.index(st.session_state.selected_task)]
-        # if st.session_state.selected_status == 'on_execution':
-        #     uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.project_name}.tasks` SET status = '{st.session_state.selected_status}', on_execution_date = '{today_str}' WHERE id = {selected_task_id}")
-        #     st.toast("Updating, please wait", icon = "☺️")
-        #     time.sleep(5)
-        # if st.session_state.selected_status == 'finished':
-        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.project_name}.tasks` SET status = 'finished', finished_date = '{today_str}' WHERE id = {selected_task_id}")
-        st.toast("Updating, please wait", icon = "☺️")
-        st.balloons()
-        time.sleep(5)
-    st.toast("Task status updated!", icon = "😎")
-    uc.run_query_2_m.clear()
-    uc.run_query_1_m.clear()
-    # st.rerun()
-
-@st.fragment
+@st.cache_data
 def calculate_priority(deadline):
-    today = datetime.now().date()
+    today = datetime.datetime.now().date()
     days_until_deadline = (deadline - today).days
     if days_until_deadline <= 3:
         return "Alta"
@@ -48,30 +19,32 @@ def calculate_priority(deadline):
     else:
         return "Baja"
 
+@st.fragment
+def update_task_status(task_id, project_name):
+    today = datetime.date.today()
+    today_str = today.strftime("%Y-%m-%d")
+    
+    uc.run_query_insert_update(f"UPDATE `company-data-driven.{project_name}.tasks` SET status = 'finished', finished_date = '{today_str}' WHERE id = {task_id}")
+    st.toast("Updating, please wait", icon="☺️")
+    st.balloons()
+    time.sleep(2)
+    st.toast("Task status updated!", icon="😎")
+    uc.run_query_2_m.clear()
+    uc.run_query_1_m.clear()
 
 @st.fragment
 def tasks_visualizer(user_id, project_name, divider):
     os.write(1, '🥏 Executing tasks_visualizer \n'.encode('utf-8'))
     rows = uc.run_query_2_m(f"SELECT id, creation_date, description, commit_finish_date, status FROM `company-data-driven.{project_name}.tasks` WHERE responsible_user_id = {user_id} AND status IN ('to_start', 'on_execution', 'delayed') ORDER BY commit_finish_date ASC;")
     
-    # Custom CSS to reduce font size, make text less dark, and style the container
     st.markdown("""
     <style>
-    .small-font {
-        font-size:0.8rem !important;
-        color: #666666 !important;
-    }
-    .header {
-        font-weight: bold;
-        font-size:0.9rem !important;
-        color: #444444 !important;
-    }
-    .stContainer {
-        background-color: #f8f9fa;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
+    .small-font { font-size:0.8rem !important; color: #666666 !important; }
+    .header { font-weight: bold; font-size:0.9rem !important; color: #444444 !important; }
+    .stContainer { background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .task-row { display: flex; align-items: center; margin-bottom: 10px; }
+    .task-description { flex-grow: 1; }
+    .finish-button { margin-left: 10px; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -79,62 +52,33 @@ def tasks_visualizer(user_id, project_name, divider):
         st.success('Nailed it! Nothing left on your plate.', icon="😎")
     else:
         tasks_df = pd.DataFrame(rows)
-
         tasks_df['commit_finish_date'] = pd.to_datetime(tasks_df['commit_finish_date']).dt.date
         tasks_df['priority'] = tasks_df['commit_finish_date'].apply(calculate_priority)
 
-        # Create a container for the tasks table
         with st.container(border=True):
-            # Add headers
-            col1, col2, col3 = st.columns([3, 1, 1])
+            col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
             col1.markdown('<p class="header">Tarea</p>', unsafe_allow_html=True)
             col2.markdown('<p class="header">Prioridad</p>', unsafe_allow_html=True)
             col3.markdown('<p class="header">Fecha límite</p>', unsafe_allow_html=True)
+            col4.markdown('<p class="header">Acción</p>', unsafe_allow_html=True)
 
             for _, task in tasks_df.iterrows():
-                col1, col2, col3 = st.columns([3, 1, 1])
+                col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
                 
                 with col1:
                     st.markdown(f'<p class="small-font"><strong>{task["description"]}</strong></p>', unsafe_allow_html=True)
                 with col2:
-                    priority_color = {
-                        "Alta": "🔴",
-                        "Media": "🟠",
-                        "Baja": "🟢"
-                    }
+                    priority_color = {"Alta": "🔴", "Media": "🟠", "Baja": "🟢"}
                     st.markdown(f'<p class="small-font">{priority_color[task["priority"]]} {task["priority"]}</p>', unsafe_allow_html=True)
                 with col3:
                     st.markdown(f'<p class="small-font">📅 {task["commit_finish_date"].strftime("%d %b %Y")}</p>', unsafe_allow_html=True)
+                with col4:
+                    if st.button("Finish", key=f"finish_{task['id']}", use_container_width=True):
+                        update_task_status(task['id'], project_name)
+                        st.rerun()
                 
                 st.markdown('<hr style="margin: 5px 0; border-color: #dddddd;">', unsafe_allow_html=True)
 
-        descriptions = []
-        ids = []
-        actual_statuses = []
-        for row in rows:
-            description = row.get('description')
-            id = row.get('id')
-            actual_status = row.get('status')
-            if description is not None:
-                descriptions.append(description)
-                ids.append(id)
-                actual_statuses.append(actual_status)
-        st.session_state.actual_statuses = actual_statuses
-        st.session_state.descriptions = descriptions
-        st.session_state.ids = ids
-        st.session_state.user_id = user_id
-        st.session_state.project_name = project_name
-        
-        with st.form("task_update_form", clear_on_submit = True):
-            selected_task = st.selectbox(
-                label = "Select one task",
-                options = descriptions,
-                index = None,
-                key = 'selected_task'
-            )
-           
-            update_task_status_button = st.form_submit_button("Finish task", on_click = update_task_status)
-            
     if divider == 1:
         st.write("---") 
     return rows
