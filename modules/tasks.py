@@ -128,7 +128,7 @@ def tasks_achievements(user_id, project_name, divider):
                 if len(unfulfilled_tasks_table) < 1:
                     st.success("You killed it! I knew you could do it!", icon = "😎")
                 else:
-                    for task in unfulfilled_tasks:
+                    for task in unfulfilled_tasks_table:
                         with st.container():
                             st.markdown(f"""
                             <div style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
