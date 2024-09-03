@@ -256,6 +256,10 @@ credentials:
       email: samuelxixx@gmail.com
       name: Samuel Luna
       password: $2b$12$CpOK7pXdnL.8pHbre98YsOplS2cYdeSzyw.qFzH/XFXTriUQqQeZ2
+    arodriguezm:
+      email: angie76roma@icloud.com
+      name: Angelina Rodriguez
+      password: $2b$12$Qdq6fvH9lxS/BE20smTbGOytCLMqG7HxQfaZTB6c.AW37il8wCDT.
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
