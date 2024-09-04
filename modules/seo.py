@@ -171,9 +171,41 @@ def video_edition_execution():
     
 
 
+@st.cache_data
+def get_edited_videos_and_earnings(user_id, project_name):
+    query = f"""
+    SELECT COUNT(id) as video_count
+    FROM `company-data-driven.{project_name}.content_creation`
+    WHERE edited_video = 1
+    AND video_editor_user_id = {user_id}
+    AND EXTRACT(MONTH FROM edition_date) = EXTRACT(MONTH FROM CURRENT_DATE())
+    AND EXTRACT(YEAR FROM edition_date) = EXTRACT(YEAR FROM CURRENT_DATE())
+    """
+    result = uc.run_query_instant(query)[0]
+    video_count = result.get('video_count', 0)
+    earnings = video_count * 40
+    return video_count, earnings
+
 @st.fragment
 def video_edition(user_id, project_name):
     os.write(1, '🥏 Executing video_edition \n'.encode('utf-8'))
+    
+    # Get videos edited this month and earnings
+    video_count, earnings = get_edited_videos_and_earnings(user_id, project_name)
+    
+    # Display metrics
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric(
+            label="Videos Edited This Month",
+            value=video_count
+        )
+    with col2:
+        st.metric(
+            label="Earnings This Month",
+            value=f"${earnings}"
+        )
+    
     os.write(1, '- video_edition: Listing ideas \n'.encode('utf-8'))
     rows = uc.run_query_instant(f"SELECT id, idea FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NULL OR edited_video = 0) ORDER BY creation_date;")
     ideas = []
