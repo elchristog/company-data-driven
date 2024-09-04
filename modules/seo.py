@@ -89,9 +89,43 @@ def video_creation_execution():
     
 
 
+@st.cache_data
+def get_videos_and_earnings(user_id, project_name):
+    query = f"""
+    SELECT COUNT(id) as video_count
+    FROM `company-data-driven.{project_name}.content_creation`
+    WHERE created_video = 1
+    AND video_creator_user_id = {user_id}
+    AND EXTRACT(MONTH FROM creation_date) = EXTRACT(MONTH FROM CURRENT_DATE())
+    AND EXTRACT(YEAR FROM creation_date) = EXTRACT(YEAR FROM CURRENT_DATE())
+    """
+    result = uc.run_query_instant(query)[0]
+    video_count = result.get('video_count', 0)
+    earnings = video_count * 40
+    return video_count, earnings
+
 @st.fragment
 def video_creation(user_id, project_name):
     os.write(1, '🥏 Executing video_creation \n'.encode('utf-8'))
+    
+    # Get videos created this month and earnings
+    video_count, earnings = get_videos_and_earnings(user_id, project_name)
+    
+    # Display cards
+    col1, col2 = st.columns(2)
+    with col1:
+        st.card(
+            title="Videos Created This Month",
+            body=f"{video_count}",
+            icon="🎥"
+        )
+    with col2:
+        st.card(
+            title="Earnings This Month",
+            body=f"${earnings}",
+            icon="💰"
+        )
+    
     num_videos_to_edit = uc.run_query_instant(f"SELECT COUNT(id) AS queue FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NULL OR edited_video = 0);")[0].get('queue')
     if num_videos_to_edit >= 10:
         st.error("We don't need any more videos right now.", icon="🫠")
