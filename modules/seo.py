@@ -116,14 +116,12 @@ def video_creation(user_id, project_name):
     with col1:
         st.metric(
             label="Videos Created This Month",
-            value=video_count,
-            icon="🎥"
+            value=video_count
         )
     with col2:
         st.metric(
             label="Earnings This Month",
-            value=f"${earnings}",
-            icon="💰"
+            value=f"${earnings}"
         )
     
     num_videos_to_edit = uc.run_query_instant(f"SELECT COUNT(id) AS queue FROM `company-data-driven.{project_name}.content_creation` WHERE (created_video IS NOT NULL OR created_video != 0) AND (edited_video IS NULL OR edited_video = 0);")[0].get('queue')
