@@ -178,8 +178,8 @@ def get_edited_videos_and_earnings(user_id, project_name):
     FROM `company-data-driven.{project_name}.content_creation`
     WHERE edited_video = 1
     AND video_editor_user_id = {user_id}
-    AND EXTRACT(MONTH FROM edition_date) = EXTRACT(MONTH FROM CURRENT_DATE())
-    AND EXTRACT(YEAR FROM edition_date) = EXTRACT(YEAR FROM CURRENT_DATE())
+    AND EXTRACT(MONTH FROM edited_date) = EXTRACT(MONTH FROM CURRENT_DATE())
+    AND EXTRACT(YEAR FROM edited_date) = EXTRACT(YEAR FROM CURRENT_DATE())
     """
     result = uc.run_query_instant(query)[0]
     video_count = result.get('video_count', 0)
