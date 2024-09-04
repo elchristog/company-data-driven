@@ -111,18 +111,18 @@ def video_creation(user_id, project_name):
     # Get videos created this month and earnings
     video_count, earnings = get_videos_and_earnings(user_id, project_name)
     
-    # Display cards
+    # Display metrics
     col1, col2 = st.columns(2)
     with col1:
-        st.card(
-            title="Videos Created This Month",
-            body=f"{video_count}",
+        st.metric(
+            label="Videos Created This Month",
+            value=video_count,
             icon="🎥"
         )
     with col2:
-        st.card(
-            title="Earnings This Month",
-            body=f"${earnings}",
+        st.metric(
+            label="Earnings This Month",
+            value=f"${earnings}",
             icon="💰"
         )
     
@@ -149,7 +149,6 @@ def video_creation(user_id, project_name):
             st.session_state.video_creation_user_id = user_id
             st.session_state.video_creation_project_name = project_name
             created_video_button = st.button("I already created this video", on_click = video_creation_execution)
-
 
 
 
