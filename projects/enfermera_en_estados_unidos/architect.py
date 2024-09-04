@@ -141,8 +141,9 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                     st.video("https://youtu.be/pgjEzfiF8X4")
 
             if sub_menu == "SEO ideation":
-                tap.title_and_paragraph("SEO Ideation" + project_icon, "1- Agregar las preguntas de una busqueda en google 2- Asegurar que estan separadas por coma y sin espacios", "h3", 0)
-                seo.seo_ideation(project_name, project_keyword, user_id, role_id)
+                with st.container(border=True):
+                    tap.title_and_paragraph("SEO Ideation" + project_icon, "1- Agregar las preguntas de una busqueda en google 2- Asegurar que estan separadas por coma y sin espacios", "h3", 0)
+                    seo.seo_ideation(project_name, project_keyword, user_id, role_id)
                 st.write("---")
                 st.video("https://youtu.be/LWi06BTL6Wg")
 
@@ -163,37 +164,42 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 st.video("https://youtu.be/rwa_VGAQ_XE")
 
             if sub_menu == "Video uploading":
-                tap.title_and_paragraph("Carga de video" + project_icon, "Marcar videos que: 1- ya he Cargado a Youtube 2- ya cargue a Facebook 3- he usando correctamente el titulo generado, descripcion y etiquetas generadas, 4- Agregado a su lista de reproduccion, agregadas tarjetas y videos finales, 5- agregado el comentario fijado", "h3", 0)
-                seo.video_uploading(user_id, project_name)
+                with st.container(border=True):
+                    tap.title_and_paragraph("Carga de video" + project_icon, "Marcar videos que: 1- ya he Cargado a Youtube 2- ya cargue a Facebook 3- he usando correctamente el titulo generado, descripcion y etiquetas generadas, 4- Agregado a su lista de reproduccion, agregadas tarjetas y videos finales, 5- agregado el comentario fijado", "h3", 0)
+                    seo.video_uploading(user_id, project_name)
                 st.write("---")
                 st.video("https://www.youtube.com/watch?v=UK_VTiCu_KQ&ab_channel=EnfermeraenEstadosUnidos")
 
             if sub_menu == "Video to shorts":
-                tap.title_and_paragraph("Creacion de shorts y carga" + project_icon, "Marcar videos que: 1- He creado los shorts usando Capcut 2- he subido cada short usando correctamente el titulo, descripcion y etiquetas 3- los he subido todos a youtube, instagram, facebook, Whatsapp", "h3", 0)
-                seo.video_to_shorts(user_id, project_name)
+                with st.container(border=True):
+                    tap.title_and_paragraph("Creacion de shorts y carga" + project_icon, "Marcar videos que: 1- He creado los shorts usando Capcut 2- he subido cada short usando correctamente el titulo, descripcion y etiquetas 3- los he subido todos a youtube, instagram, facebook, Whatsapp", "h3", 0)
+                    seo.video_to_shorts(user_id, project_name)
                 st.write("---")
                 st.video("https://www.youtube.com/watch?v=kze_LOZzVAI")
 
             if sub_menu == "Web creation":
-                tap.title_and_paragraph("Web creation" + project_icon, "1- Traer el transcript del video 2- clonar una pagina existente 3- Edicion rapida y nombrar 4- crear titulo, focus keyphrase, seo title, meta descripcion 5- edita en la pagina el titulo, meta descripcion, convierte a html agregando el resto cuidando de no volver a agregar ningun H1, aseguando que incluya 3 tablas comparativas y 3 estadisticas convincentes, justifica el texto 6- agrega el video asociado y repite el paso anterior con la segunda parte del articulo sin nuevos H1, nunca incluir las partes de body ni html 7- publicar 8- escribir en el grupo solicitando indexar y medir velocidad", "h3", 0)
-                seo.web_writing(user_id, project_name)
-                st.write("---")
-                st.video("https://www.youtube.com/watch?v=3Gfs7YGKSEU&ab_channel=EnfermeraenEstadosUnidos")
-                st.write("convierte a html, tambien agrega 3 tablas comparativas y 3 estadisticas convincentes, agregalas de forma amigable en distintas partes del contenido en lugar de todo junto:")
-                st.write("resume el articulo en 2 consejos en un solo parrafo muy corto de maximo 140 caracteres, pero en un solo parrafo,  además Asegúrate que incluye la frase de forma natural: como ser enfermero en estados unidos")
+                with st.container(border=True):
+                    tap.title_and_paragraph("Web creation" + project_icon, "1- Traer el transcript del video 2- clonar una pagina existente 3- Edicion rapida y nombrar 4- crear titulo, focus keyphrase, seo title, meta descripcion 5- edita en la pagina el titulo, meta descripcion, convierte a html agregando el resto cuidando de no volver a agregar ningun H1, aseguando que incluya 3 tablas comparativas y 3 estadisticas convincentes, justifica el texto 6- agrega el video asociado y repite el paso anterior con la segunda parte del articulo sin nuevos H1, nunca incluir las partes de body ni html 7- publicar 8- escribir en el grupo solicitando indexar y medir velocidad", "h3", 0)
+                    seo.web_writing(user_id, project_name)
+                    st.write("---")
+                    st.video("https://www.youtube.com/watch?v=3Gfs7YGKSEU&ab_channel=EnfermeraenEstadosUnidos")
+                    st.write("convierte a html, tambien agrega 3 tablas comparativas y 3 estadisticas convincentes, agregalas de forma amigable en distintas partes del contenido en lugar de todo junto:")
+                    st.write("resume el articulo en 2 consejos en un solo parrafo muy corto de maximo 140 caracteres, pero en un solo parrafo,  además Asegúrate que incluye la frase de forma natural: como ser enfermero en estados unidos")
                 
                 
                 
 
             if sub_menu == "Post idea creation":
-                tap.title_and_paragraph("Post idea creation" + project_icon, "1- Escribir el post completo y guardarlo", "h3", 0)
-                seo.post_idea_creation(user_id, project_name)
+                with st.container(border=True):
+                    tap.title_and_paragraph("Post idea creation" + project_icon, "1- Escribir el post completo y guardarlo", "h3", 0)
+                    seo.post_idea_creation(user_id, project_name)
                 st.write("---")
                 st.video("https://www.youtube.com/watch?v=GFBIdxpwOvA&ab_channel=EnfermeraenEstadosUnidos")
 
             if sub_menu == "Posting posts":
-                tap.title_and_paragraph("Posting posts" + project_icon, "1- Publicar como texto en facebook y youtube 2- tomar la imagen de facebook y publicar la imagen en instagram y whatsapp 3- publicar como historia en facebook e instagram", "h3", 0)
-                seo.posting_posts(user_id, project_name)
+                with st.container(border=True):
+                    tap.title_and_paragraph("Posting posts" + project_icon, "1- Publicar como texto en facebook y youtube 2- tomar la imagen de facebook y publicar la imagen en instagram y whatsapp 3- publicar como historia en facebook e instagram", "h3", 0)
+                    seo.posting_posts(user_id, project_name)
                 st.write("---")
                 st.video("https://youtu.be/BRVyx_UG3MU")
 
