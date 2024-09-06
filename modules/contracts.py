@@ -619,41 +619,82 @@ def contracts_crm_show_metrics(project_name):
 
 
 
-
 @st.cache_data
 def process_contact_data(team_member_contacts_df):
-    monthly_contacts = team_member_contacts_df.groupby('month_contact').size().reset_index(name='count')
-    monthly_contacts['month_name'] = monthly_contacts['month_contact'].apply(lambda x: datetime.date(1900, x, 1).strftime('%B'))
-    monthly_contacts = monthly_contacts.sort_values('month_contact')
+    # Group by year and month
+    monthly_contacts = team_member_contacts_df.groupby(['year_contact', 'month_contact']).size().reset_index(name='count')
+    
+    # Create a period column that combines year and month
+    monthly_contacts['period'] = monthly_contacts.apply(lambda row: f"{int(row['year_contact'])}-{int(row['month_contact']):02d}", axis=1)
+    
+    # Create month name for display
+    monthly_contacts['month_name'] = monthly_contacts['month_contact'].apply(lambda x: datetime.date(1900, int(x), 1).strftime('%B'))
+    
+    # Sort by the period column
+    monthly_contacts = monthly_contacts.sort_values('period')
+    
     return monthly_contacts
 
 @st.fragment
 def contract_team_member_performance(user_id, project_name):
     os.write(1, '🥏 Executing contract_team_member_performance \n'.encode('utf-8'))
     os.write(1, '- contract_team_member_performance: Getting data \n'.encode('utf-8'))
-    team_member_contacts = uc.run_query_half_day(f"SELECT tagsc.contact_date, EXTRACT(YEAR FROM tagsc.contact_date) AS year_contact, EXTRACT(MONTH FROM tagsc.contact_date) AS month_contact, EXTRACT(WEEK FROM tagsc.contact_date) AS week_contact, tagsc.user_status FROM `company-data-driven.{project_name}.contract_crm_log` AS tagsc WHERE tagsc.creator_id = {user_id} AND EXTRACT(YEAR FROM tagsc.contact_date) = EXTRACT(YEAR FROM CURRENT_DATE());")
-    team_member_contacts_df = pd.DataFrame(team_member_contacts, columns = ["contact_date","year_contact","month_contact","week_contact","user_status"])
+    
+    # Fetch data from the database
+    team_member_contacts = uc.run_query_half_day(f"""
+        SELECT 
+            tagsc.contact_date, 
+            EXTRACT(YEAR FROM tagsc.contact_date) AS year_contact, 
+            EXTRACT(MONTH FROM tagsc.contact_date) AS month_contact, 
+            EXTRACT(WEEK FROM tagsc.contact_date) AS week_contact, 
+            tagsc.user_status 
+        FROM `company-data-driven.{project_name}.contract_crm_log` AS tagsc 
+        WHERE tagsc.creator_id = {user_id} 
+        AND EXTRACT(YEAR FROM tagsc.contact_date) = EXTRACT(YEAR FROM CURRENT_DATE());
+    """)
+    
+    # Convert to DataFrame
+    team_member_contacts_df = pd.DataFrame(team_member_contacts, columns=["contact_date", "year_contact", "month_contact", "week_contact", "user_status"])
+    
     today = datetime.date.today()
     
+    # Weekly performance section
     st.header("Week evolution")
     corrected_week = (today.isocalendar()[1] + 1 if today.isocalendar()[2] == 7 else today.isocalendar()[1]) - 1
     col1, col2, col3, col4 = st.columns(4)
-    team_member_contacts_week = team_member_contacts_df[(team_member_contacts_df["year_contact"] == today.year) & (team_member_contacts_df["month_contact"] == today.month) & (team_member_contacts_df["week_contact"] == corrected_week)]
+    
+    team_member_contacts_week = team_member_contacts_df[
+        (team_member_contacts_df["year_contact"] == today.year) & 
+        (team_member_contacts_df["month_contact"] == today.month) & 
+        (team_member_contacts_df["week_contact"] == corrected_week)
+    ]
+    
     if len(team_member_contacts_week) < 1 or team_member_contacts_week is None:
-            st.warning(f"You have not added new contacts", icon = "🫥")
+        st.warning("You have not added new contacts", icon="🫥")
     else:
-        col1.metric(label="# Week Contacts", value = team_member_contacts_week.shape[0])
-        col2.metric(label="# Week Active contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'].str.contains('active')].shape[0])
-        col3.metric(label="# Week Discarted contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'] == 'discarted'].shape[0])
-        col4.metric(label="# Week Lost contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'] == 'lost'].shape[0])
+        col1.metric(label="# Week Contacts", value=team_member_contacts_week.shape[0])
+        col2.metric(label="# Week Active contacts", value=team_member_contacts_week[team_member_contacts_week['user_status'].str.contains('active')].shape[0])
+        col3.metric(label="# Week Discarted contacts", value=team_member_contacts_week[team_member_contacts_week['user_status'] == 'discarted'].shape[0])
+        col4.metric(label="# Week Lost contacts", value=team_member_contacts_week[team_member_contacts_week['user_status'] == 'lost'].shape[0])
 
-    # New section: Monthly Contacts Bar Chart
+    # Monthly Contacts section
     st.header("Monthly Contacts")
     monthly_contacts = process_contact_data(team_member_contacts_df)
+    
     if len(monthly_contacts) < 1 or monthly_contacts is None:
-        st.warning(f"No monthly contact data available", icon = "🫥")
+        st.warning("No monthly contact data available", icon="🫥")
     else:
-        st.bar_chart(monthly_contacts.set_index('month_name')['count'])
+        # Bar chart
+        chart_data = monthly_contacts.set_index('period')
+        st.bar_chart(chart_data['count'])
+        
+        # Detailed table
+        st.table(monthly_contacts[['period', 'month_name', 'count']].rename(columns={
+            'period': 'Year-Month',
+            'month_name': 'Month Name',
+            'count': 'Number of Contacts'
+        }))
+        
         st.caption("Number of contacts per month")
 
 
