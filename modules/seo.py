@@ -221,8 +221,8 @@ def video_edition(user_id, project_name):
         )
     if selected_idea is not None:
         st.session_state.video_edition_selected_idea_id = ids[ideas.index(selected_idea)]
-        st.session_state.video_edition_user_id = user_id
-        st.session_state.video_edition_project_name = project_name
+        st.session_state.video_edition_user_id = st.session_state.user_id
+        st.session_state.video_edition_project_name = st.session_state.project_name
         edited_video_button = st.button("I already edited this video", on_click = video_edition_execution)
 
 
