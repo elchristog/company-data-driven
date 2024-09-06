@@ -688,13 +688,6 @@ def contract_team_member_performance(user_id, project_name):
         chart_data = monthly_contacts.set_index('period')
         st.bar_chart(chart_data['count'])
         
-        # Detailed table
-        st.table(monthly_contacts[['period', 'month_name', 'count']].rename(columns={
-            'period': 'Year-Month',
-            'month_name': 'Month Name',
-            'count': 'Number of Contacts'
-        }))
-        
         st.caption("Number of contacts per month")
 
 
