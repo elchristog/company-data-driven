@@ -647,28 +647,6 @@ def contract_team_member_performance(user_id, project_name):
         col3.metric(label="# Week Discarted contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'] == 'discarted'].shape[0])
         col4.metric(label="# Week Lost contacts", value = team_member_contacts_week[team_member_contacts_week['user_status'] == 'lost'].shape[0])
 
-    st.header("Month evolution")
-    col1, col2, col3, col4 = st.columns(4)
-    team_member_contacts_month = team_member_contacts_df[(team_member_contacts_df["year_contact"] == today.year) & (team_member_contacts_df["month_contact"] == today.month)]
-    if len(team_member_contacts_month) < 1 or team_member_contacts_month is None:
-            st.warning(f"You have not added new contacts", icon = "🫥")
-    else:
-        col1.metric(label="# Month Contacts", value = team_member_contacts_month.shape[0])
-        col2.metric(label="# Month Active contacts", value = team_member_contacts_month[team_member_contacts_month['user_status'].str.contains('active')].shape[0])
-        col3.metric(label="# Month Discarted contacts", value = team_member_contacts_month[team_member_contacts_month['user_status'] == 'discarted'].shape[0])
-        col4.metric(label="# Month Lost contacts", value = team_member_contacts_month[team_member_contacts_month['user_status'] == 'lost'].shape[0])
-
-    st.header("Year evolution")
-    col1, col2, col3, col4 = st.columns(4)
-    team_member_contacts_year = team_member_contacts_df[(team_member_contacts_df["year_contact"] == today.year)]
-    if len(team_member_contacts_year) < 1 or team_member_contacts_year is None:
-            st.warning(f"You have not added new contacts", icon = "🫥")
-    else:
-        col1.metric(label="# Year Contacts", value = team_member_contacts_year.shape[0])
-        col2.metric(label="# Year Active contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'].str.contains('active')].shape[0])
-        col3.metric(label="# Year Discarted contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'] == 'discarted'].shape[0])
-        col4.metric(label="# Year Lost contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'] == 'lost'].shape[0])
-
     # New section: Monthly Contacts Bar Chart
     st.header("Monthly Contacts")
     monthly_contacts = process_contact_data(team_member_contacts_df)
