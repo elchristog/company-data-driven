@@ -96,8 +96,8 @@ def get_videos_and_earnings():
     FROM `company-data-driven.{st.session_state.project_name}.content_creation`
     WHERE created_video = 1
     AND video_creator_user_id = {st.session_state.user_id}
-    AND EXTRACT(MONTH FROM creation_date) = EXTRACT(MONTH FROM CURRENT_DATE())
-    AND EXTRACT(YEAR FROM creation_date) = EXTRACT(YEAR FROM CURRENT_DATE())
+    AND EXTRACT(MONTH FROM created_video_date) = EXTRACT(MONTH FROM CURRENT_DATE())
+    AND EXTRACT(YEAR FROM created_video_date) = EXTRACT(YEAR FROM CURRENT_DATE())
     """
     result = uc.run_query_instant(query)[0]
     video_count = result.get('video_count', 0)
