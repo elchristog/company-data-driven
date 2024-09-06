@@ -622,6 +622,13 @@ def contracts_crm_show_metrics(project_name):
 
 
 
+@st.cache_data
+def process_contact_data(team_member_contacts_df):
+    monthly_contacts = team_member_contacts_df.groupby('month_contact').size().reset_index(name='count')
+    monthly_contacts['month_name'] = monthly_contacts['month_contact'].apply(lambda x: datetime.date(1900, x, 1).strftime('%B'))
+    monthly_contacts = monthly_contacts.sort_values('month_contact')
+    return monthly_contacts
+
 @st.fragment
 def contract_team_member_performance(user_id, project_name):
     os.write(1, '🥏 Executing contract_team_member_performance \n'.encode('utf-8'))
@@ -663,6 +670,15 @@ def contract_team_member_performance(user_id, project_name):
         col2.metric(label="# Year Active contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'].str.contains('active')].shape[0])
         col3.metric(label="# Year Discarted contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'] == 'discarted'].shape[0])
         col4.metric(label="# Year Lost contacts", value = team_member_contacts_year[team_member_contacts_year['user_status'] == 'lost'].shape[0])
+
+    # New section: Monthly Contacts Bar Chart
+    st.header("Monthly Contacts")
+    monthly_contacts = process_contact_data(team_member_contacts_df)
+    if len(monthly_contacts) < 1 or monthly_contacts is None:
+        st.warning(f"No monthly contact data available", icon = "🫥")
+    else:
+        st.bar_chart(monthly_contacts.set_index('month_name')['count'])
+        st.caption("Number of contacts per month")
 
 
 
