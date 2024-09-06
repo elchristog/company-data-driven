@@ -13,101 +13,114 @@ from streamlit_raw_echarts import st_echarts, JsCode
 import utils.user_credentials as uc
 
 
+@st.cache_data
+def group_data_monthly(df):
+    df['date'] = pd.to_datetime(df['date'])
+    df_grouped = df.groupby(df['date'].dt.to_period('M')).agg({
+        'num_assistants_groupal_session': 'sum',
+        'num_contracts': 'sum'
+    }).reset_index()
+    df_grouped['date'] = df_grouped['date'].dt.strftime('%Y-%m')
+    return df_grouped
 
-@st.fragment
+@st.cache_data
 def plot_echarts_c(df_grouped):
-    df_grouped['date'] = df_grouped['date'].astype(str)
-
     options = {
         "xAxis": {
             "type": "category",
             "data": df_grouped['date'].tolist(),
             "axisLabel": {
-                "formatter": "{value}"
+                "formatter": "{value}",
+                "rotate": 45
             }
         },
-        "yAxis": {"type": "value", "name": ""},
+        "yAxis": {"type": "value", "name": "Count"},
         "grid": {
             "right": 20,
             "left": 65,
             "top": 45,
-            "bottom": 50,
+            "bottom": 100,
         },
         "legend": {
             "show": True,
             "top": "top",
             "align": "auto",
-            "selected": {  
-                "num_assistants_groupal_session": True,    
-                "num_contracts": True
-            }
         },
-        "tooltip": {"trigger": "axis", },
+        "tooltip": {"trigger": "axis"},
         "series": [
             {
-                "type": "line",
+                "type": "bar",
                 "name": "num_assistants_groupal_session",
                 "data": df_grouped["num_assistants_groupal_session"].tolist(),
-                "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#A6785D"},
-                "showSymbol": False,
+                "itemStyle": {"color": "#A6785D"},
             },
             {
-                "type": "line",
+                "type": "bar",
                 "name": "num_contracts",
                 "data": df_grouped['num_contracts'].tolist(),
-                "smooth": True,
-                "lineStyle": {"width": 2.4, "color": "#394A59"},
-                "showSymbol": False,
+                "itemStyle": {"color": "#394A59"},
             }
         ],
-
-        "yAxis": [
-            {"type": "value", "name": ""},
-            {"type": "value", "inverse": True, "show": False},  
-        ],
         "backgroundColor": "#ffffff",
-        "color": ["#A6785D", "#394A59"],
     }
 
-    st_echarts(option=options, theme='chalk', height=400, width='100%')
+    st_echarts(options=options, height=500, width='100%')
 
-
-
-@st.fragment
+@st.cache_data
 def contracts_show_metrics(project_name):
-  os.write(1, '🥏 Executing contracts_show_metrics \n'.encode('utf-8'))
-  os.write(1, '- contracts_show_metrics: Getting data \n'.encode('utf-8'))
-  dates_groupal_meeting = uc.run_query_1_h(f"SELECT MIN(meeting_date) AS min_date_gm, MAX(meeting_date) AS max_date_gm, CURRENT_DATE() AS todays_date FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance`;")
+    os.write(1, '🥏 Executing contracts_show_metrics \n'.encode('utf-8'))
+    os.write(1, '- contracts_show_metrics: Getting data \n'.encode('utf-8'))
+    dates_groupal_meeting = uc.run_query_1_h(f"SELECT MIN(meeting_date) AS min_date_gm, MAX(meeting_date) AS max_date_gm, CURRENT_DATE() AS todays_date FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance`;")
 
-  if len(dates_groupal_meeting) < 1:
-      st.warning("Waiting for data")
-  else:
-      day = st.date_input(
-          "Time Range:",
-          (dates_groupal_meeting[0].get('min_date_gm'), dates_groupal_meeting[0].get('todays_date')),
-          min_value=dates_groupal_meeting[0].get('min_date_gm'),
-          max_value=dates_groupal_meeting[0].get('todays_date'),
-          format="DD/MM/YYYY",
-          help='',
-          key = 'day_contract'
-      )
+    if len(dates_groupal_meeting) < 1:
+        st.warning("Waiting for data")
+    else:
+        day = st.date_input(
+            "Time Range:",
+            (dates_groupal_meeting[0].get('min_date_gm'), dates_groupal_meeting[0].get('todays_date')),
+            min_value=dates_groupal_meeting[0].get('min_date_gm'),
+            max_value=dates_groupal_meeting[0].get('todays_date'),
+            format="DD/MM/YYYY",
+            help='',
+            key='day_contract'
+        )
 
-      df_conversion = pd.DataFrame(uc.run_query_1_h(f"SELECT COALESCE(groupal_session_assistants.date, contracts_counts.date) AS date, COALESCE(num_assistants_groupal_session,0) AS num_assistants_groupal_session, COALESCE(num_contracts,0) AS num_contracts FROM (SELECT meeting_date AS date, COUNT(id) AS num_assistants_groupal_session FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` WHERE meeting_date >= '{day[0].strftime('%Y-%m-%d')}'  AND  meeting_date <= '{day[1].strftime('%Y-%m-%d')}' AND status = 'assistant' GROUP BY meeting_date) AS groupal_session_assistants FULL OUTER JOIN (SELECT contract_date AS date, COUNT(id) AS num_contracts FROM `company-data-driven.{project_name}.contracts` WHERE contract_date >= '{day[0].strftime('%Y-%m-%d')}'  AND  contract_date <= '{day[1].strftime('%Y-%m-%d')}' GROUP BY contract_date) contracts_counts ON groupal_session_assistants.date = contracts_counts.date  ORDER BY COALESCE(groupal_session_assistants.date, contracts_counts.date) ASC;"))
+        df_conversion = pd.DataFrame(uc.run_query_1_h(f"""
+            SELECT 
+                COALESCE(groupal_session_assistants.date, contracts_counts.date) AS date, 
+                COALESCE(num_assistants_groupal_session,0) AS num_assistants_groupal_session, 
+                COALESCE(num_contracts,0) AS num_contracts 
+            FROM 
+                (SELECT DATE(meeting_date) AS date, COUNT(id) AS num_assistants_groupal_session 
+                 FROM `company-data-driven.{project_name}.traffic_analytics_groupal_session_assistance` 
+                 WHERE meeting_date >= '{day[0].strftime('%Y-%m-%d')}'  AND  meeting_date <= '{day[1].strftime('%Y-%m-%d')}' 
+                 AND status = 'assistant' 
+                 GROUP BY DATE(meeting_date)) AS groupal_session_assistants 
+            FULL OUTER JOIN 
+                (SELECT DATE(contract_date) AS date, COUNT(id) AS num_contracts 
+                 FROM `company-data-driven.{project_name}.contracts` 
+                 WHERE contract_date >= '{day[0].strftime('%Y-%m-%d')}'  AND  contract_date <= '{day[1].strftime('%Y-%m-%d')}' 
+                 GROUP BY DATE(contract_date)) contracts_counts 
+            ON groupal_session_assistants.date = contracts_counts.date  
+            ORDER BY COALESCE(groupal_session_assistants.date, contracts_counts.date) ASC;
+        """))
 
-      num_assistants_groupal_session = df_conversion['num_assistants_groupal_session'].sum()
-      num_contracts = df_conversion['num_contracts'].sum()
-      conversion = num_contracts/num_assistants_groupal_session
-    
-      met1, met2, met3 = st.columns(3)
-      with met1:
-          st.metric('num_assistants_groupal_session:', f'{num_assistants_groupal_session:,}')
-      with met2:
-          st.metric('num_contracts:', f'{num_contracts:,}')
-      with met3:
-          st.metric('conversion:', f'{conversion * 100:.2f}%')
-      with st.container():
-          plot_echarts_c(df_conversion)
+        df_grouped = group_data_monthly(df_conversion)
+
+        num_assistants_groupal_session = df_grouped['num_assistants_groupal_session'].sum()
+        num_contracts = df_grouped['num_contracts'].sum()
+        conversion = num_contracts / num_assistants_groupal_session if num_assistants_groupal_session > 0 else 0
+
+        met1, met2, met3 = st.columns(3)
+        with met1:
+            st.metric('num_assistants_groupal_session:', f'{num_assistants_groupal_session:,}')
+        with met2:
+            st.metric('num_contracts:', f'{num_contracts:,}')
+        with met3:
+            st.metric('conversion:', f'{conversion * 100:.2f}%')
+        
+        with st.container():
+            plot_echarts_c(df_grouped)
 
 
 
