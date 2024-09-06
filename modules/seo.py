@@ -175,9 +175,9 @@ def video_edition_execution():
 def get_edited_videos_and_earnings():
     query = f"""
     SELECT COUNT(id) as video_count
-    FROM `company-data-driven.{st.session_state.video_edition_project_name}.content_creation`
+    FROM `company-data-driven.{st.session_state.project_name}.content_creation`
     WHERE edited_video = 1
-    AND video_editor_user_id = {st.session_state.video_edition_user_id}
+    AND video_editor_user_id = {st.session_state.user_id}
     AND EXTRACT(MONTH FROM edited_date) = EXTRACT(MONTH FROM CURRENT_DATE())
     AND EXTRACT(YEAR FROM edited_date) = EXTRACT(YEAR FROM CURRENT_DATE())
     """
