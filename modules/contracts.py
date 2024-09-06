@@ -661,7 +661,7 @@ def contract_team_member_performance(user_id, project_name):
     # Weekly performance section
     st.header("Week evolution")
     corrected_week = (today.isocalendar()[1] + 1 if today.isocalendar()[2] == 7 else today.isocalendar()[1]) - 1
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5 = st.columns(5)
     
     team_member_contacts_week = team_member_contacts_df[
         (team_member_contacts_df["year_contact"] == today.year) & 
@@ -672,10 +672,16 @@ def contract_team_member_performance(user_id, project_name):
     if len(team_member_contacts_week) < 1 or team_member_contacts_week is None:
         st.warning("You have not added new contacts", icon="🫥")
     else:
-        col1.metric(label="# Week Contacts", value=team_member_contacts_week.shape[0])
+        week_contacts = team_member_contacts_week.shape[0]
+        week_goal = 90
+        delta = week_contacts - week_goal
+        delta_color = "normal" if delta == 0 else ("off" if delta < 0 else "inverse")
+        
+        col1.metric(label="# Week Contacts", value=week_contacts, delta=delta, delta_color=delta_color)
         col2.metric(label="# Week Active contacts", value=team_member_contacts_week[team_member_contacts_week['user_status'].str.contains('active')].shape[0])
         col3.metric(label="# Week Discarted contacts", value=team_member_contacts_week[team_member_contacts_week['user_status'] == 'discarted'].shape[0])
         col4.metric(label="# Week Lost contacts", value=team_member_contacts_week[team_member_contacts_week['user_status'] == 'lost'].shape[0])
+        col5.metric(label="Week Goal", value=week_goal)
 
     # Monthly Contacts section
     st.header("Monthly Contacts")
