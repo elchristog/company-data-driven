@@ -316,15 +316,19 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 sub_menu_options.extend(['Something else'])
             sub_menu = st.sidebar.radio('Contract options', options = sub_menu_options)
             if sub_menu == "Contracts":
-                tap.title_and_paragraph("Contracts" + project_icon, "Seguimiento de los contratos acordados", "h3", 0)
-                c.contracts_show_metrics(project_name)
-                tap.title_and_paragraph("Contracts CRM opportunities" + project_icon, "Proximos contactos a realizar", "h3", 0)
-                c.contracts_crm_show_metrics(project_name)
-                tap.title_and_paragraph("Your performance" + project_icon, "Contactos realizados", "h3", 0)
-                c.contract_team_member_performance(user_id, project_name)
+                with st.container(border=True):
+                    tap.title_and_paragraph("Contracts" + project_icon, "Seguimiento de los contratos acordados", "h3", 0)
+                    c.contracts_show_metrics(project_name)
+                with st.container(border=True):
+                    tap.title_and_paragraph("Contracts CRM opportunities" + project_icon, "Proximos contactos a realizar", "h3", 0)
+                    c.contracts_crm_show_metrics(project_name)
             if sub_menu == "Add new CRM contact":
-                tap.title_and_paragraph("Add new CRM contact" + project_icon, "Seguimiento de los contactos para cerrar nuevos contratos", "h3", 0)
-                c.add_new_crm_contact(user_id, project_name)
+                with st.container(border=True):
+                    tap.title_and_paragraph("Your performance" + project_icon, "Contactos realizados", "h3", 0)
+                    c.contract_team_member_performance(user_id, project_name)
+                with st.container(border=True):
+                    tap.title_and_paragraph("Add new CRM contact" + project_icon, "Seguimiento de los contactos para cerrar nuevos contratos", "h3", 0)
+                    c.add_new_crm_contact(user_id, project_name)
             if sub_menu == "Add new contract":
                 tap.title_and_paragraph("Contracts" + project_icon, "Actualizacion de nuevos contratos y creacion del usuario correspondiente", "h3", 0)
                 st.success("Al crear el contrato debe crearse el hashing, el usuario y clave, verificar que si tenga acceso, crear el pago, darle acceso a los cursos, asignarle mentor y crearle las tareas iniciales")
