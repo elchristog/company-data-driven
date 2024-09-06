@@ -172,12 +172,12 @@ def video_edition_execution():
 
 
 @st.cache_data
-def get_edited_videos_and_earnings(user_id, project_name):
+def get_edited_videos_and_earnings():
     query = f"""
     SELECT COUNT(id) as video_count
-    FROM `company-data-driven.{project_name}.content_creation`
+    FROM `company-data-driven.{st.session_state.video_edition_project_name}.content_creation`
     WHERE edited_video = 1
-    AND video_editor_user_id = {user_id}
+    AND video_editor_user_id = {st.session_state.video_edition_user_id}
     AND EXTRACT(MONTH FROM edited_date) = EXTRACT(MONTH FROM CURRENT_DATE())
     AND EXTRACT(YEAR FROM edited_date) = EXTRACT(YEAR FROM CURRENT_DATE())
     """
@@ -191,7 +191,7 @@ def video_edition(user_id, project_name):
     os.write(1, '🥏 Executing video_edition \n'.encode('utf-8'))
     
     # Get videos edited this month and earnings
-    video_count, earnings = get_edited_videos_and_earnings(user_id, project_name)
+    video_count, earnings = get_edited_videos_and_earnings()
     
     # Display metrics
     col1, col2 = st.columns(2)
