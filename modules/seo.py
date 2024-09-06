@@ -90,12 +90,12 @@ def video_creation_execution():
 
 
 @st.cache_data
-def get_videos_and_earnings(user_id, project_name):
+def get_videos_and_earnings():
     query = f"""
     SELECT COUNT(id) as video_count
-    FROM `company-data-driven.{project_name}.content_creation`
+    FROM `company-data-driven.{st.session_state.project_name}.content_creation`
     WHERE created_video = 1
-    AND video_creator_user_id = {user_id}
+    AND video_creator_user_id = {st.session_state.user_id}
     AND EXTRACT(MONTH FROM creation_date) = EXTRACT(MONTH FROM CURRENT_DATE())
     AND EXTRACT(YEAR FROM creation_date) = EXTRACT(YEAR FROM CURRENT_DATE())
     """
@@ -109,7 +109,7 @@ def video_creation(user_id, project_name):
     os.write(1, '🥏 Executing video_creation \n'.encode('utf-8'))
     
     # Get videos created this month and earnings
-    video_count, earnings = get_videos_and_earnings(user_id, project_name)
+    video_count, earnings = get_videos_and_earnings()
     
     # Display metrics
     col1, col2 = st.columns(2)
@@ -144,8 +144,8 @@ def video_creation(user_id, project_name):
             )
         if selected_idea is not None:
             st.session_state.video_creation_selected_idea_id = ids[ideas.index(selected_idea)]
-            st.session_state.video_creation_user_id = user_id
-            st.session_state.video_creation_project_name = project_name
+            st.session_state.video_creation_user_id = st.session_state.user_id
+            st.session_state.video_creation_project_name = st.session_state.project_name
             created_video_button = st.button("I already created this video", on_click = video_creation_execution)
 
 
