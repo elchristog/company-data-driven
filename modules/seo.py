@@ -91,6 +91,7 @@ def video_creation_execution():
 
 @st.cache_data
 def get_videos_and_earnings():
+    st.write(st.session_state.user_id)
     query = f"""
     SELECT COUNT(id) as video_count
     FROM `company-data-driven.{st.session_state.project_name}.content_creation`
@@ -110,7 +111,7 @@ def video_creation(user_id, project_name):
     
     # Get videos created this month and earnings
     video_count, earnings = get_videos_and_earnings()
-    st.write(st.session_state.user_id)
+    
     # Display metrics
     col1, col2 = st.columns(2)
     with col1:
