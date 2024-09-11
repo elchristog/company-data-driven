@@ -89,9 +89,8 @@ def video_creation_execution():
     
 
 
-@st.cache_data
+@st.fragment
 def get_videos_and_earnings():
-    st.write(st.session_state.user_id)
     query = f"""
     SELECT COUNT(id) as video_count
     FROM `company-data-driven.{st.session_state.project_name}.content_creation`
