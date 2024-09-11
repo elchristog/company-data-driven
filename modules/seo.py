@@ -171,7 +171,7 @@ def video_edition_execution():
     
 
 
-@st.cache_data
+@st.fragment
 def get_edited_videos_and_earnings():
     query = f"""
     SELECT COUNT(id) as video_count
