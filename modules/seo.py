@@ -110,7 +110,7 @@ def video_creation(user_id, project_name):
     
     # Get videos created this month and earnings
     video_count, earnings = get_videos_and_earnings()
-    
+    st.write(st.session_state.user_id)
     # Display metrics
     col1, col2 = st.columns(2)
     with col1:
