@@ -299,12 +299,20 @@ def add_new_crm_groupal_session_contact(user_id, project_name):
     for row in rows:
         lead_ids.append(row.get('id'))
         lead_phone_numbers.append(row.get('full_phone_number'))
+
+    # Create a dictionary to store phone numbers and their corresponding lead IDs
+    phone_to_lead_id = {row.get('full_phone_number'): row.get('id') for row in rows}
+
+    # Extract unique phone numbers as options for the selectbox
+    unique_phone_numbers = list(phone_to_lead_id.keys())
+    
     selected_phone = st.selectbox(
             label = "Select the user phone number",
-            options = lead_phone_numbers,
+            options = unique_phone_numbers,
             index = None,
             key= "add_new_crm_groupal_session_contact_selected_phone"
         )
+    
     checking_phone_query = uc.run_query_30_m(f"SELECT awl.id FROM `company-data-driven.{project_name}.traffic_analytics_whatsapp_leads` AS awl WHERE CONCAT(awl.phone_indicator,awl.phone_number) LIKE '{selected_phone}';")
     if len(checking_phone_query) < 1 or checking_phone_query is None:
         st.error('Phone number does not exists, be sure this user was created as a Whatsapp lead', icon = '👻')
