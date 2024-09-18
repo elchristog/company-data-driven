@@ -72,7 +72,7 @@ def customer_success_add_program_step(user_id, project_name):
     os.write(1, '🥏 Executing customer_success_add_program_step \n'.encode('utf-8'))
     os.write(1, '- customer_success_add_program_step: Showing form \n'.encode('utf-8'))
   
-    rows_program_steps = uc.run_query_half_day(f"SELECT order_number, name, id FROM `company-data-driven.{project_name}.program_steps` ORDER BY order_number;")
+    rows_program_steps = uc.run_query_instant(f"SELECT order_number, name, id FROM `company-data-driven.{project_name}.program_steps` ORDER BY order_number;")
     step_order_numbers = []
     step_names = []
     step_ids = []
