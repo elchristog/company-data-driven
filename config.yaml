@@ -260,6 +260,10 @@ credentials:
       email: angie76roma@icloud.com
       name: Angelina Rodriguez
       password: $2b$12$Qdq6fvH9lxS/BE20smTbGOytCLMqG7HxQfaZTB6c.AW37il8wCDT.
+    abahenac:
+      email: acsa_dejcs@hotmail.com
+      name: Acsa Bahena Carrera
+      password: $2b$12$VQpya1sQG1x0TfoJKvAnJOjeS4yRE/4HNPbF/rdu4O6S70tGJzBam
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
