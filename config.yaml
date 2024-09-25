@@ -268,6 +268,10 @@ credentials:
       email: aacordobam@gmail.com
       name: Ana Maria Cordoba
       password: $2b$12$q8dkfNIbQLDWpv.aoHZ2tuCB73b80Ej6opHwS5yYQw9kSIvr2W012
+    eyragan:
+      email: enidyamile.ragan@gmail.com
+      name: Enid Yamile Ragan
+      password: $2b$12$TMV95.Jsby7BaUUDORnWoOdZwwvQbx5PVGfjKrM8WDbQnlJh/FWBa
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
