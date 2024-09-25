@@ -264,6 +264,10 @@ credentials:
       email: acsa_dejcs@hotmail.com
       name: Acsa Bahena Carrera
       password: $2b$12$VQpya1sQG1x0TfoJKvAnJOjeS4yRE/4HNPbF/rdu4O6S70tGJzBam
+    aacordobam:
+      email: aacordobam@gmail.com
+      name: Ana Maria Cordoba
+      password: $2b$12$q8dkfNIbQLDWpv.aoHZ2tuCB73b80Ej6opHwS5yYQw9kSIvr2W012
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
