@@ -272,6 +272,10 @@ credentials:
       email: enidyamile.ragan@gmail.com
       name: Enid Yamile Ragan
       password: $2b$12$TMV95.Jsby7BaUUDORnWoOdZwwvQbx5PVGfjKrM8WDbQnlJh/FWBa
+    maruiz:
+      email: maritzaadan122@gmail.com
+      name: Maritza Ruiz
+      password: $2b$12$e7TGRD4cmlWRLtK.KI7FAu65vlCKbN9.lVDtr7js6Q6/wmal/1LQG
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
