@@ -101,7 +101,7 @@ def get_videos_and_earnings():
     """
     result = uc.run_query_instant(query)[0]
     video_count = result.get('video_count', 0)
-    earnings = video_count * 40
+    earnings = video_count * 30
     return video_count, earnings
 
 @st.fragment
@@ -183,7 +183,7 @@ def get_edited_videos_and_earnings():
     """
     result = uc.run_query_instant(query)[0]
     video_count = result.get('video_count', 0)
-    earnings = video_count * 40
+    earnings = video_count * 30
     return video_count, earnings
 
 @st.fragment
