@@ -297,7 +297,7 @@ def customer_creation(user_id_customer_creation, project_id, project_name):
     user_birth_date = st.date_input("User birth date:", min_value = datetime.date(1970,1,1)) 
     user_country = st.selectbox(
         label = "Select user country",
-        options = ['colombia', 'united states', 'el salvador', 'mexico', 'venezuela', 'costa rica', 'chile', 'peru', 'espana', 'bolivia', 'ecuador'],
+        options = ['colombia', 'united states', 'el salvador', 'mexico', 'venezuela', 'costa rica', 'chile', 'peru', 'espana', 'bolivia', 'ecuador', 'republica dominicana'],
         index = None
     )
     user_gender = st.selectbox(
