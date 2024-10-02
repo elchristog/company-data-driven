@@ -276,6 +276,10 @@ credentials:
       email: maritzaadan122@gmail.com
       name: Maritza Ruiz
       password: $2b$12$e7TGRD4cmlWRLtK.KI7FAu65vlCKbN9.lVDtr7js6Q6/wmal/1LQG
+    ymendez:
+      email: yerimel14@gmail.comm
+      name: Yerimel Mendez
+      password: $2b$12$v0TZSaX3XV5yUSGZsoJKL.3UaVT2.eDzyzDK1Ytr1ax71wT8xTJju
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
