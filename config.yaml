@@ -284,6 +284,10 @@ credentials:
       email: almalaurapereznurse@gmail.com
       name: Alma Laura Perez
       password: $2b$12$g27tfllhqyjjZhruy1soWuFlUN/UFj9ldHwibvBqw/pG4/eGS5Fx.
+    aenavab:
+      email: ariadna.navab@gmail.com
+      name: Ariadna Nava
+      password: $2b$12$bzEG8TQf6GkowCxO2F4gLeV0eJJMzmYPMYInp0XK6btmJjUD38Eq2
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
