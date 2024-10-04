@@ -8,18 +8,18 @@ import time
 import utils.user_credentials as uc
 
 @st.fragment
-def pagos():
+def pagos(project_name):
     os.write(1, '🥏 Executing pagos \n'.encode('utf-8'))
     
     pagos_data = uc.run_query_instant(f'''
     WITH salaries AS (
-    SELECT u.id, u.name, u.lastname, es.salarie_value FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id LEFT JOIN `enfermera_en_estados_unidos.employee_salaries` AS es ON u.id = es.employee_user_id WHERE ra.role_id != 6 AND u.status = 'active'
+    SELECT u.id, u.name, u.lastname, es.salarie_value FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id LEFT JOIN `{project_name}.employee_salaries` AS es ON u.id = es.employee_user_id WHERE ra.role_id != 6 AND u.status = 'active'
     ),
     video_creation AS (
-      SELECT video_creator_user_id, COUNT(*) AS num_created_videos, 30 * COUNT(*) AS video_creation_earnings  FROM `company-data-driven.enfermera_en_estados_unidos.content_creation` WHERE EXTRACT(YEAR FROM created_video_date) = EXTRACT(YEAR FROM CURRENT_DATE()) AND EXTRACT(MONTH FROM created_video_date) = EXTRACT(MONTH FROM CURRENT_DATE()) GROUP BY video_creator_user_id
+      SELECT video_creator_user_id, COUNT(*) AS num_created_videos, 30 * COUNT(*) AS video_creation_earnings  FROM `company-data-driven.{project_name}.content_creation` WHERE EXTRACT(YEAR FROM created_video_date) = EXTRACT(YEAR FROM CURRENT_DATE()) AND EXTRACT(MONTH FROM created_video_date) = EXTRACT(MONTH FROM CURRENT_DATE()) GROUP BY video_creator_user_id
     ),
     video_edition AS (
-      SELECT video_editor_user_id, COUNT(*) AS num_edited_videos, 30 * COUNT(*) AS video_edition_earnings  FROM `company-data-driven.enfermera_en_estados_unidos.content_creation` WHERE EXTRACT(YEAR FROM edited_date) = EXTRACT(YEAR FROM CURRENT_DATE()) AND EXTRACT(MONTH FROM edited_date) = EXTRACT(MONTH FROM CURRENT_DATE()) GROUP BY video_editor_user_id
+      SELECT video_editor_user_id, COUNT(*) AS num_edited_videos, 30 * COUNT(*) AS video_edition_earnings  FROM `company-data-driven.{project_name}.content_creation` WHERE EXTRACT(YEAR FROM edited_date) = EXTRACT(YEAR FROM CURRENT_DATE()) AND EXTRACT(MONTH FROM edited_date) = EXTRACT(MONTH FROM CURRENT_DATE()) GROUP BY video_editor_user_id
     ),
     sales_bonus AS (
       SELECT 19 AS id, 
@@ -27,7 +27,7 @@ def pagos():
             (FLOOR(COUNT(*) / 5) * 200) + (FLOOR(COUNT(*) / 5) * (FLOOR(COUNT(*) / 5) - 1) * 100) AS sales_bonus
       FROM (
           SELECT contract_id, MIN(payment_date) AS first_payment_date 
-          FROM `company-data-driven.enfermera_en_estados_unidos.contracts_payments` AS cp 
+          FROM `company-data-driven.{project_name}.contracts_payments` AS cp 
           GROUP BY contract_id 
           HAVING EXTRACT(YEAR FROM first_payment_date) = EXTRACT(YEAR FROM CURRENT_DATE()) 
             AND EXTRACT(MONTH FROM first_payment_date) = EXTRACT(MONTH FROM CURRENT_DATE())
@@ -43,13 +43,13 @@ def pagos():
 
 
 @st.fragment
-def estado_de_resultados():
+def estado_de_resultados(project_name):
     os.write(1, '🥏 Executing estado_de_resultados \n'.encode('utf-8'))
     
     estado_de_resultados_data = uc.run_query_instant(f'''
     WITH earnings AS(
       SELECT EXTRACT(YEAR FROM cp.payment_date) AS year, EXTRACT(MONTH FROM cp.payment_date) AS month, SUM(CAST(payment_value AS NUMERIC)) AS earnings
-      FROM  `company-data-driven.enfermera_en_estados_unidos.contracts_payments`  AS cp GROUP BY EXTRACT(YEAR FROM cp.payment_date), EXTRACT(MONTH FROM cp.payment_date)
+      FROM  `company-data-driven.{project_name}.contracts_payments`  AS cp GROUP BY EXTRACT(YEAR FROM cp.payment_date), EXTRACT(MONTH FROM cp.payment_date)
       ),
     expenses AS(
       SELECT year, month, SUM(salarie_value) AS salaries, SUM(video_creation_earnings) AS video_creation_payments, SUM(video_edition_earnings) AS video_edition_payments, SUM(num_new_contracts) AS num_contracts, 300 * SUM(num_new_contracts) AS babbel_archer, SUM(sales_bonus) AS sales_comissions FROM `company-data-driven.enfermera_en_estados_unidos.employee_payments` GROUP BY year, month
