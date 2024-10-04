@@ -486,7 +486,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 if sub_menu == "Pagos":
                     
                     tap.title_and_paragraph("Pagos" + project_icon, "d", "h3", 0)
-                    # f.estado_de_resultados()
+                    f.pagos()
 
 
                 if sub_menu == "Estado de Resultados":
