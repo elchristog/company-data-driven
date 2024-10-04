@@ -22,4 +22,4 @@ def estado_de_resultados():
       SELECT e.year, e.month, ex.num_contracts AS num_contratos_nuevos, e.earnings AS ingresos_por_ventas, ex.sales_comissions AS descuentos_y_bonificaciones, e.earnings - ex.sales_comissions  AS ingresos_operativos_netos, ex.salaries + ex.babbel_archer AS costo_de_servicios_prestados, e.earnings - ex.sales_comissions - ex.salaries - ex.babbel_archer AS resultado_bruto, ex.video_creation_payments + ex.video_edition_payments AS publicidad_seo, 300 AS publicidad_sem, e.earnings - ex.sales_comissions - ex.salaries - ex.babbel_archer - ex.video_creation_payments - ex.video_edition_payments - 300 AS resultados_de_las_operaciones_ordinarias, (e.earnings - ex.sales_comissions - ex.salaries - ex.babbel_archer)/e.earnings AS rentabilidad_bruta FROM earnings AS e RIGHT JOIN expenses AS ex ON e.year = ex.year AND e.month = ex.month ORDER BY e.year, e.month;
     ''')
 
-    st.write(estado_de_resultados_data)
+    st.table(estado_de_resultados_data)
