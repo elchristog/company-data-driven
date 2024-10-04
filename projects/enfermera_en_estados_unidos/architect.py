@@ -23,6 +23,7 @@ import projects.enfermera_en_estados_unidos.modules.step_3_nursing_board_registr
 import projects.enfermera_en_estados_unidos.modules.step_4_nclex_preparation as s4np
 import utils.g_gemini_gestor as ggg
 import modules.ml_models as mlm
+import modules.finance as f
 
 
 
@@ -481,7 +482,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 sub_menu = st.sidebar.radio('Finance options', options = sub_menu_options)
                 if sub_menu == "Estado de Resultados":
                     tap.title_and_paragraph("Estado de Resultados " + project_icon, "Asumpciones en pago babbel/archer para todos, bingley sin comision 6 ventas (150 usd) hasta septiembre 2024, gasto siempre de 300 usd en sem", "h3", 0)
-                # mlm.ml_purchase_propension(user_id, project_name)
+                    f.estado_de_resultados()
 
 
 
