@@ -51,9 +51,9 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             st.image(project_logo_url, width=50, use_column_width=False)
             #------ Menu according to each user-----------
             if user_id == 1: #chris
-                menu_options = ["Home", "Traffic", "Click bitly Whatsapp", "Whatsapp", "Click bitly Groupal session", "Groupal session", "Remarketing", "Contract", "Contract Remarketing", "Contract Payments", "Web App", "Customer success", 'Users Admin', 'Machine learning models', "AI questions"]
+                menu_options = ["Home", "Traffic", "Click bitly Whatsapp", "Whatsapp", "Click bitly Groupal session", "Groupal session", "Remarketing", "Contract", "Contract Remarketing", "Contract Payments", "Web App", "Customer success", 'Users Admin', 'Machine learning models', "AI questions", "Finance"]
             if user_id == 2: #flaca
-                menu_options = ["Home", "Traffic", "AI questions"]
+                menu_options = ["Home", "Traffic", "AI questions", "Finance"]
             if user_id == 36: #andres
                 menu_options = ["Home", "Traffic", "Contract", "Contract Payments", "Customer success", "AI questions"]
             if user_id == 19: #bingley
