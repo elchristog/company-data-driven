@@ -479,7 +479,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         if menu == "Finance":
             
-                sub_menu_options=['Pagos', 'Estado de Resultados, 'other_2']
+                sub_menu_options=['Pagos', 'Estado de Resultados', 'other_2']
                                   
                 sub_menu = st.sidebar.radio('Finance options', options = sub_menu_options)
             
