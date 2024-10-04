@@ -480,7 +480,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                 sub_menu_options=['Estado de Resultados', 'other_1', 'other_2']
                 sub_menu = st.sidebar.radio('Finance options', options = sub_menu_options)
                 if sub_menu == "Estado de Resultados":
-                    tap.title_and_paragraph("Estado de Resultados " + project_icon, "Asumpciones en pago babbel/archer para todos, bingley comision 6 ventas hasta septiembre 2034, gasto siempre de 300 usd en sem", "h3", 0)
+                    tap.title_and_paragraph("Estado de Resultados " + project_icon, "Asumpciones en pago babbel/archer para todos, bingley sin comision 6 ventas (150 usd) hasta septiembre 2024, gasto siempre de 300 usd en sem", "h3", 0)
                 # mlm.ml_purchase_propension(user_id, project_name)
 
 
