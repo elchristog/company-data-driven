@@ -291,7 +291,7 @@ credentials:
     meauquillay:
       email: mariselaauquilla.09@outlook.com
       name: Marisela Auquilla
-      password: $2b$12$BHX4Ak3Zj2Cq9PO8O1CwzOM2XwYV62qGCKRbKVYZLxduFt3PFyE56
+      password: $2b$12$6sOeAz4wjr5cFJrCBvZvDeo4qH40VTWPYFGqT5UYN8MMcJEjSrwQG
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
