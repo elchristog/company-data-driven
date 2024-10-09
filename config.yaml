@@ -288,6 +288,10 @@ credentials:
       email: ariadna.navab@gmail.com
       name: Ariadna Nava
       password: $2b$12$bzEG8TQf6GkowCxO2F4gLeV0eJJMzmYPMYInp0XK6btmJjUD38Eq2
+    meauquillay:
+      email: mariselaauquilla.09@outlook.com
+      name: Marisela Auquilla
+      password: $2b$12$cVP1I37r5sYDoX6NvtE7v.YdvGcvFlDgkk9opG/PdkuUXVAHwR952
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
