@@ -304,6 +304,10 @@ credentials:
       email: javieratorro@gmail.com
       name: Javiera Torres
       password: $2b$12$.7UjKtyBrd9auNF9PP12P.EWlkU8DsCIjbIjrfj7uEJr5fGy8xz4e
+    lxjaramillox:
+      email: xime2730@gmail.com
+      name: Lina Jaramillo
+      password: $2b$12$S9VyJgHetc2S5grd4TApB.Et7bNFcLnXBDWh7RkWq8aoMdKCmg0g.
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
