@@ -296,6 +296,10 @@ credentials:
       email: jeescami@hotmail.com
       name: Jeymis Cabeza
       password: $2b$12$AknQgoNW7QQOqEUkXac1mOnr8niAPHffHP9fXM0nBirnUHqy/RG16
+    evrodriguezp:
+      email: elsa_rgz@hotmail.es
+      name: Elsa Rodriguez
+      password: $2b$12$FkBL9A.hmx69ACrzqLx1DO94uAN3ZU.kC8bykp03AGgnzwhaMojyi
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
