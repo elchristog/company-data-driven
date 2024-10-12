@@ -300,6 +300,10 @@ credentials:
       email: elsa_rgz@hotmail.es
       name: Elsa Rodriguez
       password: $2b$12$FkBL9A.hmx69ACrzqLx1DO94uAN3ZU.kC8bykp03AGgnzwhaMojyi
+    javieratorro:
+      email: javieratorro@gmail.com
+      name: Javiera Torres
+      password: $2b$12$.7UjKtyBrd9auNF9PP12P.EWlkU8DsCIjbIjrfj7uEJr5fGy8xz4e
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
