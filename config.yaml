@@ -292,6 +292,10 @@ credentials:
       email: mariselaauquilla.09@outlook.com
       name: Marisela Auquilla
       password: $2b$12$uyItE74GWnXZlBEsfeiZGOFDQCUtFFBT2da/kJy.5yBRDVTzcghzC
+    jeescami:
+      email: jeescami@hotmail.com
+      name: Jeymis Cabeza
+      password: $2b$12$AknQgoNW7QQOqEUkXac1mOnr8niAPHffHP9fXM0nBirnUHqy/RG16
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
