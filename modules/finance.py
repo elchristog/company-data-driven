@@ -41,6 +41,55 @@ def pagos(project_name):
 
 
 
+# @st.fragment
+# def create_employee_payment_execution():
+#     os.write(1, '🥏 Executing create_employee_payment_execution \n'.encode('utf-8'))
+#     if 'posting_posts_selected_idea' in st.session_state:
+#         os.write(1, '- posting_posts_execution: Saving posted idea\n'.encode('utf-8'))
+#         st.toast("Please wait", icon = "☺️")
+#         uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.posting_posts_project_name}.daily_post_creation` SET posted = 1, posted_date = CURRENT_DATE(), poster_user_id = {st.session_state.posting_posts_user_id} WHERE id = '{st.session_state.posting_posts_selected_idea_id}'")
+#         st.toast("Info saved!", icon = "👾")
+#         st.balloons()
+#         time.sleep(1)
+#         uc.run_query_half_day.clear()
+#         del st.session_state.posting_posts_user_id
+#         del st.session_state.posting_posts_project_name
+#         del st.session_state.posting_posts_post_idea
+#         del st.session_state.posting_posts_selected_idea_id 
+
+
+@st.fragment
+def create_employee_payment(user_id, project_name):
+    os.write(1, '🥏 Executing create_employee_payment \n'.encode('utf-8'))
+    os.write(1, '- create_employee_payment: Showing form \n'.encode('utf-8'))
+    completed_payments = uc.run_query_half_day(f"SELECT user_id AS employee_id, CONCAT(u.name, " ", u.lastname) AS employee_name, payment_creation_user_id, salarie_value + video_creation_earnings + video_edition_earnings + sales_bonus AS total_paid FROM `company-data-driven.enfermera_en_estados_unidos.employee_payments` AS ep INNER JOIN `global.users` AS u ON ep.user_id = u.id WHERE year = EXTRACT(YEAR FROM CURRENT_DATE()) AND month = EXTRACT(MONTH FROM CURRENT_DATE());")
+    if len(completed_payments) < 1:
+        st.info(f"No completed payments", icon = "😇")
+    else:
+        st.table(completed_payments)
+
+    # os.write(1, '- posting_posts: Listing ideas \n'.encode('utf-8'))
+    # rows = uc.run_query_half_day(f"SELECT id, idea FROM `company-data-driven.{project_name}.daily_post_creation` WHERE (posted IS NULL OR posted = 0)  ORDER BY creation_date;")
+    # ideas = []
+    # ids = []
+    # for row in rows:
+    #     ideas.append(row.get('idea'))
+    #     ids.append(row.get('id'))
+    # selected_idea = st.selectbox(
+    #         label = "Select the idea",
+    #         options = ideas,
+    #         index = None,
+    #         key= "posting_posts_selected_idea",
+    #         on_change = post_redaction_generation
+    #     )
+
+    # if selected_idea is not None:
+    #     st.session_state.posting_posts_user_id = user_id
+    #     st.session_state.posting_posts_project_name = project_name
+    #     st.session_state.posting_posts_selected_idea_id = ids[ideas.index(selected_idea)]
+    #     posting_posts_button = st.button("Post published", on_click = create_employee_payment_execution)
+
+
 
 @st.fragment
 def estado_de_resultados(project_name):
