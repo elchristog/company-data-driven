@@ -140,7 +140,7 @@ def create_employee_payment(user_id, project_name, project_id):
             
             st.session_state.create_employee_payment_sales_bonus = 0
 
-        if (st.session_state.create_employee_payment_selected_employee_id  is not None):
+        if (st.session_state.create_employee_payment_selected_employee_id  is not None) & (st.session_state.create_employee_payment_base_salarie_value  is not None) :
             
             create_employee_payment_button = st.button("Add payment", on_click = create_employee_payment_execution)
 
