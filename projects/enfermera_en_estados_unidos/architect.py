@@ -489,7 +489,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                     
                     f.pagos(project_name)
                     
-                    f.create_employee_payment(user_id, project_name)
+                    f.create_employee_payment(user_id, project_name, project_id)
 
 
                 if sub_menu == "Estado de Resultados":
