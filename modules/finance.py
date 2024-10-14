@@ -60,12 +60,21 @@ def pagos(project_name):
 
 @st.fragment
 def create_employee_payment(user_id, project_name):
+    
     os.write(1, '🥏 Executing create_employee_payment \n'.encode('utf-8'))
+    
     os.write(1, '- create_employee_payment: Showing form \n'.encode('utf-8'))
+    
     completed_payments = uc.run_query_half_day(f'''SELECT user_id AS employee_id, CONCAT(u.name, " ", u.lastname) AS employee_name, payment_creation_user_id, salarie_value + video_creation_earnings + video_edition_earnings + sales_bonus AS total_paid FROM `company-data-driven.enfermera_en_estados_unidos.employee_payments` AS ep INNER JOIN `global.users` AS u ON ep.user_id = u.id WHERE year = EXTRACT(YEAR FROM CURRENT_DATE()) AND month = EXTRACT(MONTH FROM CURRENT_DATE());''')
+    
     if len(completed_payments) < 1:
+        
         st.info(f"No completed payments", icon = "😇")
+        
     else:
+
+        st.write('### Payments already made')
+        
         st.table(completed_payments)
 
     # os.write(1, '- posting_posts: Listing ideas \n'.encode('utf-8'))
