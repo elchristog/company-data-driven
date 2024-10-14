@@ -45,7 +45,7 @@ def pagos(project_name):
 def create_employee_payment_execution():
     os.write(1, '🥏 Executing create_employee_payment_execution \n'.encode('utf-8'))
     
-    if 'posting_posts_selected_idea' in st.session_state:
+    if 'create_employee_payment_selected_employee_id' in st.session_state:
         
         os.write(1, '- create_employee_payment_execution: Saving payment\n'.encode('utf-8'))
         
