@@ -81,6 +81,8 @@ def create_employee_payment_execution():
 
         del st.session_state.create_employee_payment_sales_bonus
 
+        st.rerun()
+
 
 
 @st.fragment
