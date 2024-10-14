@@ -79,7 +79,7 @@ def create_employee_payment(user_id, project_name, project_id):
 
     os.write(1, '- create_employee_payment: Listing employees \n'.encode('utf-8'))
     
-    rows = uc.run_query_instant(f"SELECT u.id, CONCAT(u.name, '_', u.lastname) AS employee_name FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE project_id = {project_id} AND ra.role_id <> 6 ORDER BY u.id;")
+    rows = uc.run_query_instant(f"SELECT u.id, CONCAT(u.name, '_', u.lastname) AS employee_name FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE project_id = {project_id} AND ra.role_id <> 6 AND u.id NOT IN (SELECT user_id FROM `company-data-driven.enfermera_en_estados_unidos.employee_payments` AS ep INNER JOIN `global.users` AS u ON ep.user_id = u.id WHERE year = EXTRACT(YEAR FROM CURRENT_DATE()) AND month = EXTRACT(MONTH FROM CURRENT_DATE())) ORDER BY u.id;")
     
     ids = []
     names = []
@@ -139,8 +139,10 @@ def create_employee_payment(user_id, project_name, project_id):
             st.session_state.create_employee_payment_num_new_contracts = 0
             
             st.session_state.create_employee_payment_sales_bonus = 0
+
+        if (st.session_state.create_employee_payment_selected_employee_id  is not None):
             
-        create_employee_payment_button = st.button("Add payment", on_click = create_employee_payment_execution)
+            create_employee_payment_button = st.button("Add payment", on_click = create_employee_payment_execution)
 
 
 
