@@ -125,7 +125,7 @@ def create_employee_payment(user_id, project_name, project_id):
             "Video Edition Payment Value", value=None, placeholder="Type a number..."
         )
 
-        if st.session_state.create_employee_payment_selected_employee_id = 19: # Comision solo a bingley
+        if st.session_state.create_employee_payment_selected_employee_id == 19: # Comision solo a bingley
             
             st.session_state.create_employee_payment_num_new_contracts = st.number_input(
                 "Num New Contracts", value=None, placeholder="Type a number..."
