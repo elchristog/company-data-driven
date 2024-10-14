@@ -59,13 +59,13 @@ def pagos(project_name):
 
 
 @st.fragment
-def create_employee_payment(user_id, project_name):
+def create_employee_payment(user_id, project_name, project_id):
     
     os.write(1, '🥏 Executing create_employee_payment \n'.encode('utf-8'))
     
     os.write(1, '- create_employee_payment: Showing form \n'.encode('utf-8'))
     
-    completed_payments = uc.run_query_half_day(f'''SELECT user_id AS employee_id, CONCAT(u.name, " ", u.lastname) AS employee_name, payment_creation_user_id, salarie_value + video_creation_earnings + video_edition_earnings + sales_bonus AS total_paid FROM `company-data-driven.enfermera_en_estados_unidos.employee_payments` AS ep INNER JOIN `global.users` AS u ON ep.user_id = u.id WHERE year = EXTRACT(YEAR FROM CURRENT_DATE()) AND month = EXTRACT(MONTH FROM CURRENT_DATE());''')
+    completed_payments = uc.run_query_instant(f'''SELECT user_id AS employee_id, CONCAT(u.name, " ", u.lastname) AS employee_name, payment_creation_user_id, salarie_value + video_creation_earnings + video_edition_earnings + sales_bonus AS total_paid FROM `company-data-driven.enfermera_en_estados_unidos.employee_payments` AS ep INNER JOIN `global.users` AS u ON ep.user_id = u.id WHERE year = EXTRACT(YEAR FROM CURRENT_DATE()) AND month = EXTRACT(MONTH FROM CURRENT_DATE());''')
     
     if len(completed_payments) < 1:
         
@@ -77,20 +77,19 @@ def create_employee_payment(user_id, project_name):
         
         st.table(completed_payments)
 
-    # os.write(1, '- posting_posts: Listing ideas \n'.encode('utf-8'))
-    # rows = uc.run_query_half_day(f"SELECT id, idea FROM `company-data-driven.{project_name}.daily_post_creation` WHERE (posted IS NULL OR posted = 0)  ORDER BY creation_date;")
-    # ideas = []
-    # ids = []
-    # for row in rows:
-    #     ideas.append(row.get('idea'))
-    #     ids.append(row.get('id'))
-    # selected_idea = st.selectbox(
-    #         label = "Select the idea",
-    #         options = ideas,
-    #         index = None,
-    #         key= "posting_posts_selected_idea",
-    #         on_change = post_redaction_generation
-    #     )
+    os.write(1, '- create_employee_payment: Listing employees \n'.encode('utf-8'))
+    rows = uc.run_query_half_day(f"SELECT u.id, CONCAT(u.name, " ", u.lastname) AS employee_name FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE project_id = {project_id} AND ra.role_id <> 6 ORDER BY u.id;")
+    ids = []
+    names = []
+    for row in rows:
+        ids.append(row.get('id'))
+        names.append(row.get('employee_name'))
+    selected_employee = st.selectbox(
+            label = "Select the employee",
+            options = names,
+            index = None,
+            key= "create_employee_payment_selected_employee_name"
+        )
 
     # if selected_idea is not None:
     #     st.session_state.posting_posts_user_id = user_id
