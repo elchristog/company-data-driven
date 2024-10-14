@@ -485,8 +485,11 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             
                 if sub_menu == "Pagos":
                     
-                    tap.title_and_paragraph("Pagos" + project_icon, "d", "h3", 0)
+                    tap.title_and_paragraph("Pagos" + project_icon, "Valor a pagar este mes por empelado", "h3", 0)
+                    
                     f.pagos(project_name)
+                    
+                    f.create_employee_payment(user_id, project_name)
 
 
                 if sub_menu == "Estado de Resultados":
