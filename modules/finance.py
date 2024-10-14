@@ -44,18 +44,43 @@ def pagos(project_name):
 @st.fragment
 def create_employee_payment_execution():
     os.write(1, '🥏 Executing create_employee_payment_execution \n'.encode('utf-8'))
+    
     if 'posting_posts_selected_idea' in st.session_state:
-        os.write(1, '- posting_posts_execution: Saving posted idea\n'.encode('utf-8'))
+        
+        os.write(1, '- create_employee_payment_execution: Saving payment\n'.encode('utf-8'))
+        
         st.toast("Please wait", icon = "☺️")
-        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.posting_posts_project_name}.daily_post_creation` SET posted = 1, posted_date = CURRENT_DATE(), poster_user_id = {st.session_state.posting_posts_user_id} WHERE id = '{st.session_state.posting_posts_selected_idea_id}'")
+        
+        uc.run_query_insert_update(f"INSERT INTO `company-data-driven.{st.session_state.create_employee_payment_project_name}.employee_payments` (id, user_id, year, month, salarie_value, num_created_videos, video_creation_earnings, num_edited_videos, video_edition_earnings, num_new_contracts, sales_bonus, payment_creation_user_id) VALUES (GENERATE_UUID(), {st.session_state.create_employee_payment_selected_employee_id}, EXTRACT(YEAR FROM CURRENT_DATE()), EXTRACT(MONTH FROM CURRENT_DATE()), {st.session_state.create_employee_payment_base_salarie_value}, {st.session_state.create_employee_payment_num_created_videos}, {st.session_state.create_employee_payment_video_creation_earnings}, {st.session_state.create_employee_payment_num_edited_videos}, {st.session_state.create_employee_payment_video_edition_earnings}, {st.session_state.create_employee_payment_num_new_contracts}, {st.session_state.create_employee_payment_sales_bonus}, {st.session_state.create_employee_payment_user_id});")
+        
         st.toast("Info saved!", icon = "👾")
+        
         st.balloons()
+        
         time.sleep(1)
+        
         uc.run_query_half_day.clear()
-        del st.session_state.posting_posts_user_id
-        del st.session_state.posting_posts_project_name
-        del st.session_state.posting_posts_post_idea
-        del st.session_state.posting_posts_selected_idea_id 
+
+        del st.session_state.create_employee_payment_selected_employee_id
+        
+        del st.session_state.create_employee_payment_user_id
+        
+        del st.session_state.create_employee_payment_project_name
+
+        del st.session_state.create_employee_payment_base_salarie_value
+
+        del st.session_state.create_employee_payment_num_created_videos
+
+        del st.session_state.create_employee_payment_video_creation_earnings
+
+        del st.session_state.create_employee_payment_num_edited_videos
+
+        del st.session_state.create_employee_payment_video_edition_earnings
+
+        del st.session_state.create_employee_payment_num_new_contracts
+
+        del st.session_state.create_employee_payment_sales_bonus
+
 
 
 @st.fragment
