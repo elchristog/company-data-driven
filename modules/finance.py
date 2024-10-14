@@ -41,21 +41,21 @@ def pagos(project_name):
 
 
 
-# @st.fragment
-# def create_employee_payment_execution():
-#     os.write(1, '🥏 Executing create_employee_payment_execution \n'.encode('utf-8'))
-#     if 'posting_posts_selected_idea' in st.session_state:
-#         os.write(1, '- posting_posts_execution: Saving posted idea\n'.encode('utf-8'))
-#         st.toast("Please wait", icon = "☺️")
-#         uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.posting_posts_project_name}.daily_post_creation` SET posted = 1, posted_date = CURRENT_DATE(), poster_user_id = {st.session_state.posting_posts_user_id} WHERE id = '{st.session_state.posting_posts_selected_idea_id}'")
-#         st.toast("Info saved!", icon = "👾")
-#         st.balloons()
-#         time.sleep(1)
-#         uc.run_query_half_day.clear()
-#         del st.session_state.posting_posts_user_id
-#         del st.session_state.posting_posts_project_name
-#         del st.session_state.posting_posts_post_idea
-#         del st.session_state.posting_posts_selected_idea_id 
+@st.fragment
+def create_employee_payment_execution():
+    os.write(1, '🥏 Executing create_employee_payment_execution \n'.encode('utf-8'))
+    if 'posting_posts_selected_idea' in st.session_state:
+        os.write(1, '- posting_posts_execution: Saving posted idea\n'.encode('utf-8'))
+        st.toast("Please wait", icon = "☺️")
+        uc.run_query_insert_update(f"UPDATE `company-data-driven.{st.session_state.posting_posts_project_name}.daily_post_creation` SET posted = 1, posted_date = CURRENT_DATE(), poster_user_id = {st.session_state.posting_posts_user_id} WHERE id = '{st.session_state.posting_posts_selected_idea_id}'")
+        st.toast("Info saved!", icon = "👾")
+        st.balloons()
+        time.sleep(1)
+        uc.run_query_half_day.clear()
+        del st.session_state.posting_posts_user_id
+        del st.session_state.posting_posts_project_name
+        del st.session_state.posting_posts_post_idea
+        del st.session_state.posting_posts_selected_idea_id 
 
 
 @st.fragment
@@ -91,11 +91,11 @@ def create_employee_payment(user_id, project_name, project_id):
             key= "create_employee_payment_selected_employee_name"
         )
 
-    # if selected_idea is not None:
-    #     st.session_state.posting_posts_user_id = user_id
-    #     st.session_state.posting_posts_project_name = project_name
-    #     st.session_state.posting_posts_selected_idea_id = ids[ideas.index(selected_idea)]
-    #     posting_posts_button = st.button("Post published", on_click = create_employee_payment_execution)
+    if selected_employee is not None:
+        st.session_state.create_employee_payment_user_id = user_id
+        st.session_state.create_employee_payment_project_name = project_name
+        st.session_state.create_employee_payment_selected_employee_id = ids[names.index(selected_employee)]
+        create_employee_payment_button = st.button("Add payment", on_click = create_employee_payment_execution)
 
 
 
