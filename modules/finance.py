@@ -131,33 +131,33 @@ def create_employee_payment(user_id, project_name, project_id):
         st.session_state.create_employee_payment_selected_employee_id = ids[names.index(selected_employee)]
 
         st.session_state.create_employee_payment_base_salarie_value = st.number_input(
-            "Base Salarie Value", value=None, placeholder="Type a number..."
+            "Base Salarie Value", value=None, placeholder="Type a number...", step = 1
         )
 
         st.session_state.create_employee_payment_num_created_videos = st.number_input(
-            "Num Created Videos", value=None, placeholder="Type a number..."
+            "Num Created Videos", value=None, placeholder="Type a number...", step = 1
         )
 
         st.session_state.create_employee_payment_video_creation_earnings = st.number_input(
-            "Video Creation Payment Value", value=None, placeholder="Type a number..."
+            "Video Creation Payment Value", value=None, placeholder="Type a number...", step = 1
         )
 
         st.session_state.create_employee_payment_num_edited_videos = st.number_input(
-            "Num Edited Videos", value=None, placeholder="Type a number..."
+            "Num Edited Videos", value=None, placeholder="Type a number...", step = 1
         )
 
         st.session_state.create_employee_payment_video_edition_earnings = st.number_input(
-            "Video Edition Payment Value", value=None, placeholder="Type a number..."
+            "Video Edition Payment Value", value=None, placeholder="Type a number...", step = 1
         )
 
         if st.session_state.create_employee_payment_selected_employee_id == 19: # Comision solo a bingley
             
             st.session_state.create_employee_payment_num_new_contracts = st.number_input(
-                "Num New Contracts", value=None, placeholder="Type a number..."
+                "Num New Contracts", value=None, placeholder="Type a number...", step = 1
             )
 
             st.session_state.create_employee_payment_sales_bonus = st.number_input(
-                "Sales Bonus Value", value=None, placeholder="Type a number..."
+                "Sales Bonus Value", value=None, placeholder="Type a number...", step = 1
             )
 
         else:
