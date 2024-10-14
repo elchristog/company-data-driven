@@ -78,12 +78,18 @@ def create_employee_payment(user_id, project_name, project_id):
         st.table(completed_payments)
 
     os.write(1, '- create_employee_payment: Listing employees \n'.encode('utf-8'))
+    
     rows = uc.run_query_half_day(f"SELECT u.id, CONCAT(u.name, ' ', u.lastname) AS employee_name FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE project_id = {project_id} AND ra.role_id <> 6 ORDER BY u.id;")
+    
     ids = []
     names = []
+    
     for row in rows:
+        
         ids.append(row.get('id'))
+        
         names.append(row.get('employee_name'))
+        
     selected_employee = st.selectbox(
             label = "Select the employee",
             options = names,
@@ -92,9 +98,13 @@ def create_employee_payment(user_id, project_name, project_id):
         )
 
     if selected_employee is not None:
+        
         st.session_state.create_employee_payment_user_id = user_id
+        
         st.session_state.create_employee_payment_project_name = project_name
+        
         st.session_state.create_employee_payment_selected_employee_id = ids[names.index(selected_employee)]
+        
         create_employee_payment_button = st.button("Add payment", on_click = create_employee_payment_execution)
 
 
