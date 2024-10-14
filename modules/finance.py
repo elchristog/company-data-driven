@@ -79,7 +79,7 @@ def create_employee_payment(user_id, project_name, project_id):
 
     os.write(1, '- create_employee_payment: Listing employees \n'.encode('utf-8'))
     
-    rows = uc.run_query_half_day(f"SELECT u.id, CONCAT(u.name, ' ', u.lastname) AS employee_name FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE project_id = {project_id} AND ra.role_id <> 6 ORDER BY u.id;")
+    rows = uc.run_query_half_day(f"SELECT u.id, CONCAT(u.name, u.lastname) AS employee_name FROM `company-data-driven.global.users` AS u INNER JOIN `company-data-driven.global.role_assignment` AS ra ON u.id = ra.user_id WHERE project_id = {project_id} AND ra.role_id <> 6 ORDER BY u.id;")
     
     ids = []
     names = []
