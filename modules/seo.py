@@ -452,10 +452,19 @@ def post_idea_creation(user_id, project_name):
         st.session_state.post_idea_creation_project_name = project_name
         save_post_idea_button = st.button("Save idea", on_click = post_idea_creation_execution)
 
+    st.write('---')
     st.write('Deben ser opiniones sinceras y crudas, no ideas genericas. Ejemplos:')
     with st.expander("Idea 1"):
         st.write('''
             Cuando llega el momento de estudiar para el NCLEX, muchas personas lo primero que hacen es comprar tres libros y prometerse que se los van a leer todos para estar listos para el examen. A los quince días ya están cansados y no quieren volver a saber de los libros, sin saber qué hacer. Hay que tener un plan de estudios y saber que ya tenemos fortalezas previas. Hay que recordar que se está preparando para un examen y la mejor forma es practicando de forma estratégica.
+        ''')
+    with st.expander("Idea 2"):
+        st.write('''
+            Sí comparo mi vida acá al salir de mi casa propia en un         barrio tan seguro y bonito, manejar mi carro por 10         minutos a mi trabajo y tener 4 o 5 días libres a la         semana, puedo decir que valió la pena cada día de         esfuerzo. Cuando antes tenía que ir en autobús por dos         horas al día a un lugar donde me ponían a atender         cantidades incontables de pacientes en condiciones         laborales terribles, teniendo por mucho 1 o 2 días de         descanso a la semana. Venirse es un proceso de mucho         esfuerzo y disciplina, y con muchas frustraciones en el         camino. Aún así, lo volvería a vivir por los beneficios que         eso trae.
+        ''')
+    with st.expander("Idea 3"):
+        st.write('''
+             Nunca en Colombia podría siquiera imaginar y tener un salario y unas condiciones de vida como las que me da mi trabajo acá en Estados Unidos. No se puede contar cuántos años de vida habría tenido que trabajar para poder tener un buen salario o comprarme un buen carro. ¿Cuántos años más están dispuestos a conformarse? Es mejor luchar fuerte por uno o dos años que pasar el resto de la vida en las mismas condiciones de inseguridad y mal ambiente.
         ''')
 
 
