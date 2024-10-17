@@ -312,6 +312,10 @@ credentials:
       email: verocorredor25@gmail.com
       name: Veronica Corredor
       password: $2b$12$tOfz4UQtnOXQU1gQWtH5V.nAv6Z2nOTiSVGJOmgjSmNETD.hSGvKm
+    spalzated:
+      email: spalzated@gmail.com
+      name: Sandra Alzate
+      password: $2b$12$ggT7kP8toUTOTx6GQDO7Nu2z.EXdxKhgulhoE.qitYuwdgwxnwbtW
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
