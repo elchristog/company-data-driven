@@ -308,6 +308,10 @@ credentials:
       email: xime2730@gmail.com
       name: Lina Jaramillo
       password: $2b$12$S9VyJgHetc2S5grd4TApB.Et7bNFcLnXBDWh7RkWq8aoMdKCmg0g.
+    vmcorredors:
+      email: verocorredor25@gmail.com
+      name: Veronica Corredor
+      password: $2b$12$tOfz4UQtnOXQU1gQWtH5V.nAv6Z2nOTiSVGJOmgjSmNETD.hSGvKm
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
