@@ -571,5 +571,8 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
 
         if menu == "Afiliados":
             tap.title_and_paragraph("Afiliados" + project_icon, "Gana $100 Dólares por cada nuevo usuario que invites a Enfermera en Estados Unidos", "h2", 0)
+             col1, col2, col3 = st.columns(3)
+            with col2:
+                st.link_button("Ser Afiliado", "https://company-data-driven.thrivecart.com/enfermera-en-estados-unidos/partner/")
             st.video("https://youtu.be/hIhKtkxUXgo")
-            st.link_button("Ser Afiliado", "https://company-data-driven.thrivecart.com/enfermera-en-estados-unidos/partner/")
+           
