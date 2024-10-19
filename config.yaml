@@ -316,6 +316,10 @@ credentials:
       email: spalzated@gmail.com
       name: Sandra Alzate
       password: $2b$12$ggT7kP8toUTOTx6GQDO7Nu2z.EXdxKhgulhoE.qitYuwdgwxnwbtW
+    vlnajeral:
+      email: veronicanajera_93@outlook.com
+      name: Veronica Najera
+      password: $2b$12$YZFyLVgODtmc/qtm6KL63OhUpF8fFr3uWluVc.DsgRrSC2XQXy0BS
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
