@@ -320,6 +320,10 @@ credentials:
       email: veronicanajera_93@outlook.com
       name: Veronica Najera
       password: $2b$12$YZFyLVgODtmc/qtm6KL63OhUpF8fFr3uWluVc.DsgRrSC2XQXy0BS
+    duromanf:
+      email: romand@uabc.edu.mx
+      name: David Roman
+      password: $2b$12$Oih.HLnhClIlVcn.CuMXs.t/qr1TfOaSIJQk/Wj2sx2nkIvIJVIoG
 cookie:
   expiry_days: 30
   key: some_signature_key # Must be string
