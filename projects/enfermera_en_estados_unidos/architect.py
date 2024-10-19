@@ -52,27 +52,27 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             st.image(project_logo_url, width=50, use_column_width=False)
             #------ Menu according to each user-----------
             if user_id == 1: #chris
-                menu_options = ["Home", "Traffic", "Click bitly Whatsapp", "Whatsapp", "Click bitly Groupal session", "Groupal session", "Remarketing", "Contract", "Contract Remarketing", "Contract Payments", "Web App", "Customer success", 'Users Admin', 'Machine learning models', "AI questions", "Finance"]
+                menu_options = ["Home", "Traffic", "Click bitly Whatsapp", "Whatsapp", "Click bitly Groupal session", "Groupal session", "Remarketing", "Contract", "Contract Remarketing", "Contract Payments", "Web App", "Customer success", 'Users Admin', 'Machine learning models', "AI questions", "Finance", "Afiliados"]
             if user_id == 2: #flaca
-                menu_options = ["Home", "Traffic", "AI questions", "Finance"]
+                menu_options = ["Home", "Traffic", "AI questions", "Finance", "Afiliados"]
             if user_id == 36: #andres
-                menu_options = ["Home", "Traffic", "Contract", "Contract Payments", "Customer success", "AI questions"]
+                menu_options = ["Home", "Traffic", "Contract", "Contract Payments", "Customer success", "AI questions", "Afiliados"]
             if user_id == 19: #bingley
                 menu_options = ["Home", "Whatsapp", "Groupal session", "Contract", "AI questions"]
             # if user_id == 9: #santiago
             #     menu_options = ["Home", "Whatsapp", "Step3: Inscripción ante la Junta de Enfermería", "AI questions"]
             if user_id == 31: #trafficker 01 - juancho
-                menu_options = ["Home", "Traffic"]
+                menu_options = ["Home", "Traffic", "Afiliados"]
             if user_id == 47: #pltaform_dev_976 - eric
-                menu_options = ["Home", "Traffic"] # "Web App",
+                menu_options = ["Home", "Traffic", "Afiliados"] # "Web App",
             if user_id == 60: #pltaform_dev_538 - daniela
-                menu_options = ["Home", "Traffic"] # "Web App",
+                menu_options = ["Home", "Traffic", "Afiliados"] # "Web App",
             if user_id == 33: #editor_0176 - cesar
-                menu_options = ["Home", "Traffic"]
+                menu_options = ["Home", "Traffic", "Afiliados"]
             if user_id == 44: #editor_0176 - marian
-                menu_options = ["Home", "Traffic"]
+                menu_options = ["Home", "Traffic", "Afiliados"]
             if user_id == 37: #yumi
-                menu_options = ["Home", "Traffic", "Contract", "Contract Payments", "Customer success", "AI questions"]
+                menu_options = ["Home", "Traffic", "Contract", "Contract Payments", "Customer success", "AI questions", "Afiliados"]
             #------ Menu according to each user-----------
 
           
@@ -496,6 +496,17 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
                     
                     tap.title_and_paragraph("Estado de Resultados " + project_icon, "Asumpciones en pago babbel/archer para todos, bingley sin comision 6 ventas (150 usd) hasta septiembre 2024, gasto siempre de 300 usd en sem", "h3", 0)
                     f.estado_de_resultados(project_name)
+
+
+        
+        if menu == "Afiliados":
+            tap.title_and_paragraph("Afiliados" + project_icon, "Gana $100 Dólares por cada nuevo usuario que invites a Enfermera en Estados Unidos", "h2", 0)
+            col1, col2, col3 = st.columns(3)
+            with col2:
+                st.link_button("Ser Afiliado", "https://company-data-driven.thrivecart.com/enfermera-en-estados-unidos/partner/", type = 'primary')
+            st.write('---')
+            st.write('Regístrate como Afiliado y comparte tu enlace de afiliado en tus redes sociales, con compañeros o amigos. Tambien puedes invitar otras personas a que se conviertan en afiliados enviandoles este enlace: https://company-data-driven.thrivecart.com/enfermera-en-estados-unidos/partner/')
+            st.video("https://youtu.be/hIhKtkxUXgo")
 
 
 
