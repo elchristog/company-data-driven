@@ -521,9 +521,9 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
     if role_id == 6:
         with st.sidebar:
             st.image(project_logo_url, width=50, use_column_width=False)
-            menu_options = ["Home", "Nclex", "Recursos", "Ofertas de trabajo", "Mis cursos"]
+            menu_options = ["Home", "Nclex", "Recursos", "Ofertas de trabajo", "Mis cursos", "Afiliados"]
             if user_id == 3: #------ in develop -----------
-                menu_options.extend(['Progreso', 'Afiliados'])
+                menu_options.extend(['Progreso'])
             menu = st.sidebar.radio(project_title, menu_options)
             st.write("---") 
 
@@ -575,6 +575,6 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             with col2:
                 st.link_button("Ser Afiliado", "https://company-data-driven.thrivecart.com/enfermera-en-estados-unidos/partner/", type = 'primary')
             st.write('---')
-            st.write('Registrate como Afiliado y comparte tu enlace de afiliado en tus redes sociales, compañeros o amigos')
+            st.write('Regístrate como Afiliado y comparte tu enlace de afiliado en tus redes sociales, con compañeros o amigos.')
             st.video("https://youtu.be/hIhKtkxUXgo")
            
