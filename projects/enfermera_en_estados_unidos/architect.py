@@ -523,7 +523,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             st.image(project_logo_url, width=50, use_column_width=False)
             menu_options = ["Home", "Nclex", "Recursos", "Ofertas de trabajo", "Mis cursos"]
             if user_id == 3: #------ in develop -----------
-                menu_options.extend(['Progreso'])
+                menu_options.extend(['Progreso', 'Afiliados'])
             menu = st.sidebar.radio(project_title, menu_options)
             st.write("---") 
 
@@ -567,3 +567,7 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             tap.title_and_paragraph("Tus progreso" + project_icon, "Verifica tu progreso en el programa", "h2", 0)
             user_actual_step_id = pp.general_progress(user_id, project_name, 'program_steps', 'user_program_steps_progress')
             psg.program_steps_guide(user_actual_step_id)
+
+
+        if menu == "Afiliados":
+            tap.title_and_paragraph("Afiliados" + project_icon, "Gana 100 Dólares por cada nuevo usuario que invites", "h2", 0)
