@@ -574,5 +574,6 @@ def architect(user_id, role_id, project_id, project_name, project_title, project
             col1, col2, col3 = st.columns(3)
             with col2:
                 st.link_button("Ser Afiliado", "https://company-data-driven.thrivecart.com/enfermera-en-estados-unidos/partner/", type = 'primary')
+                st.write('---')
             st.video("https://youtu.be/hIhKtkxUXgo")
            
